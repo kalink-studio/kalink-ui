@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "kalink-ui",
   "private": true,
   "scripts": {
     "build": "turbo build",
