@@ -1,3 +1,3 @@
-# `@turbo/eslint-config`
+# `@kalink/eslint-config`
 
 Collection of internal eslint configurations.

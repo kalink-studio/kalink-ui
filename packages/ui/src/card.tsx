@@ -1,4 +1,6 @@
-import { type JSX } from "react";
+import { type JSX } from 'react';
+
+import { Button } from './button';
 
 export function Card({
   className,
@@ -18,6 +20,7 @@ export function Card({
       rel="noopener noreferrer"
       target="_blank"
     >
+      <Button appName="kalink">Click me</Button>
       <h2>
         {title} <span>-&gt;</span>
       </h2>
