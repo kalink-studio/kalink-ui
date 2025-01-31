@@ -1,0 +1,206 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Layout/Layout Components" />
+
+# Layout Components
+
+This section provides implementations of various layout components inspired by [Every Layout](https://every-layout.dev/). These components are designed to create responsive, adaptable, and minimal CSS layouts, solving common design problems with composable and flexible solutions.
+
+## The Box
+
+The Box layout provides a simple way to add padding and a border to its content, useful for creating visually distinct sections. It's a fundamental building block for creating consistent spacing and visual separation in your designs.
+
+Use cases:
+
+- Creating card-like components
+- Highlighting important content
+- Separating sections in a form
+
+[Box documentation page](?path=/docs/layout-box--docs)
+
+```jsx
+import { Box } from '@kalink-studio/ui/layout';
+
+<Box padding="md" variant="plain">
+  <p>This is a box.</p>
+</Box>;
+```
+
+## The Stack
+
+The Stack layout arranges its children vertically with a consistent gap between them. It's perfect for creating a vertical flow of elements, eliminating the need for manual margin management between elements.
+
+Use cases:
+
+- Organizing form fields
+- Creating a vertical list of articles or comments
+- Structuring content in a sidebar
+
+[Stack documentation page](?path=/docs/layout-stack--docs)
+
+```jsx
+import { Stack } from '@kalink-studio/ui/layout';
+
+<Stack spacing="md" recursive>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>
+    <div>Nested item 2.1</div>
+    <div>Nested item 2.2</div>
+  </div>
+  <div>Item 3</div>
+</Stack>;
+```
+
+## The Center
+
+The Center layout is designed to center its content both horizontally and optionally vertically. It's particularly useful for creating visually balanced layouts and focusing attention on specific content.
+
+Use cases:
+
+- Creating hero sections
+- Creating a centered column of content
+- Designing error pages or "empty state" screens
+
+[Center documentation page](?path=/docs/layout-center--docs)
+
+```jsx
+import { Center } from '@kalink-studio/ui/layout';
+
+<Center gutters="md" intrinsic>
+  <p>This content is centered.</p>
+</Center>;
+```
+
+## The Cluster
+
+The Cluster layout arranges elements in a flexible row that wraps to accommodate available space. It's ideal for layouts that need to manage many small items while maintaining consistent spacing and alignment.
+
+Use cases:
+
+- Displaying tags or categories
+- Creating a flexible navigation menu
+- Showing a group of action buttons
+
+[Cluster documentation page](?path=/docs/layout-cluster--docs)
+
+```jsx
+import { Cluster } from '@kalink-studio/ui/layout';
+
+<Cluster spacing="md" justify="center">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+</Cluster>;
+```
+
+## The Sidebar
+
+The Sidebar layout divides content into a main section and a sidebar, which can be positioned on either side and resized according to the layout requirements. It's crucial for creating responsive layouts that adapt to different screen sizes.
+
+Use cases:
+
+- Creating a layout with a navigation sidebar
+- Displaying additional information alongside main content
+- Building dashboard layouts
+
+[Sidebar documentation page](?path=/docs/layout-sidebar--docs)
+
+```jsx
+import { Sidebar } from '@kalink-studio/ui/layout';
+
+<Sidebar sideWidth="250px" contentMinWidth="300px" spacing="md" side="left">
+  <div>Sidebar content</div>
+  <div>Main content</div>
+</Sidebar>;
+```
+
+## The Switcher
+
+The Switcher layout allows elements to switch between a horizontal and vertical arrangement based on the available space. It's ideal for responsive design scenarios where content needs to adapt to different screen sizes seamlessly.
+
+Use cases:
+
+- Creating responsive navigation menus
+- Designing flexible card layouts
+- Building adaptable form layouts
+
+[Switcher documentation page](?path=/docs/layout-switcher--docs)
+
+```jsx
+import { Switcher } from '@kalink-studio/ui/layout';
+
+<Switcher threshold="300px" spacing="md">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</Switcher>;
+```
+
+## The Cover
+
+The Cover layout helps create a vertically centered layout with a header, main content, and footer, ensuring that the main content stays centered. It's particularly useful for creating full-page layouts or sections that need to utilize the full viewport height.
+
+Use cases:
+
+- Designing landing pages
+- Creating login or signup screens
+- Building "coming soon" pages
+
+[Cover documentation page](?path=/docs/layout-cover--docs)
+
+```jsx
+import { Cover } from '@kalink-studio/ui/layout';
+
+<Cover minSize="60vh" spacing="md" noPad>
+  <header>Header</header>
+  <main>Main content</main>
+  <footer>Footer</footer>
+</Cover>;
+```
+
+## The Grid
+
+The Grid layout provides a responsive grid system that adapts the number of columns based on available space, with defined gaps between columns and rows. It's perfect for creating complex, responsive layouts without the need for media queries.
+
+Use cases:
+
+- Displaying a gallery of images
+- Creating a responsive product listing
+- Organizing dashboard widgets
+
+[Grid documentation page](?path=/docs/layout-grid--docs)
+
+```jsx
+import { Grid } from '@kalink-studio/ui/layout';
+
+<Grid minSize="200px" spacing="md">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+</Grid>;
+```
+
+## The Frame
+
+The Frame layout is used to maintain aspect ratios of embedded content, such as videos or iframes, ensuring that content scales appropriately while preserving its aspect ratio. It's crucial for responsive design and preventing layout shifts.
+
+Use cases:
+
+- Embedding responsive videos
+- Displaying images with consistent aspect ratios
+- Creating responsive data visualizations
+
+[Frame documentation page](?path=/docs/layout-frame--docs)
+
+```jsx
+import { Frame } from '@kalink-studio/ui/layout';
+
+<Frame ratio="16:9">
+  <img src="...">
+</Frame>;
+```
+
+Each of these components is designed to solve specific layout challenges while promoting responsive and adaptable designs. By combining these layout primitives, you can create complex, flexible layouts that work across various screen sizes and devices, all while minimizing the amount of custom CSS required.

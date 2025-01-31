@@ -1,0 +1,98 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Styles/Styles Documentation" />
+
+# Styles Documentation
+
+This document provides an overview of two important files in our styling system: `contract.css.ts` and `seed.tsx`.
+
+## contract.css.ts
+
+The `contract.css.ts` file defines the type contract for our design system's typography. It establishes a consistent structure for different text styles across various sizes.
+
+### Structure
+
+The type contract is organized into the following categories:
+
+- `display`
+- `headline`
+- `title`
+- `label`
+- `body`
+
+Each category has three size variants:
+
+- `large`
+- `medium`
+- `small`
+
+### Usage
+
+This contract ensures that all typography in the application follows a consistent structure. It can be used to create theme variations and maintain a coherent typographic scale across the entire design system.
+
+Example of the structure:
+
+```typescript
+type: {
+  display: {
+    large: typeContract,
+    medium: typeContract,
+    small: typeContract,
+  },
+  // ... other categories
+}
+```
+
+## seed.tsx
+
+The `seed.tsx` file provides a foundation for creating flexible, polymorphic components with built-in support for design system styles.
+
+### Key Features
+
+1. **Polymorphic Components**: Allows components to change their root HTML element.
+2. **Sprinkles Integration**: Incorporates the Sprinkles CSS-in-JS solution for applying atomic styles.
+3. **Type Safety**: Ensures type safety for props and element types.
+
+### Main Functions
+
+#### `plantSeed`
+
+This function creates a base component (Seed) that can be used to build other components in the design system.
+
+Parameters:
+
+- `sprinkles`: A Sprinkles function for applying atomic styles.
+- `defaultClassName`: An optional default class name for the component.
+
+Usage:
+
+```jsx
+import { plantSeed } from './seed';
+import { sprinkles } from './your-sprinkles-file';
+
+const Sprout = plantSeed({ sprinkles });
+
+// Use Sprout as a base for other components
+const Box = (props) => <Sprout {...props} />;
+```
+
+### Types
+
+#### `SeedProps`
+
+This type combines polymorphic component props with Sprinkles props:
+
+```typescript
+type SeedProps<
+  TUse extends ElementType,
+  TSprinklesFn extends SprinklesFnBase,
+> = PolymorphicComponentProps<TUse> & GetSprinkles<TSprinklesFn>;
+```
+
+### Benefits
+
+- **Consistency**: Ensures all components built with `plantSeed` have consistent prop interfaces.
+- **Flexibility**: Allows easy creation of new components with full access to design system styles.
+- **Performance**: Leverages Sprinkles for efficient CSS generation and application.
+
+By using `contract.css.ts` and `seed.tsx` together, you can create a robust, type-safe, and flexible foundation for your design system components.

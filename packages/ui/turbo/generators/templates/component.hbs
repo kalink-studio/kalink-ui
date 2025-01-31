@@ -1,6 +1,19 @@
-export const {{ pascalCase name }} = ({ children }: { children: React.ReactNode }) => {
+import { clsx } from 'clsx';
+import { ReactNode } from 'react';
+
+import { {{ camelCase name }} } from './{{ kebabCase name }}.css';
+
+type {{ pascalCase name }}Props = {
+  children: ReactNode;
+  className?: string;
+}
+
+export function {{ pascalCase name }}({ 
+  children,
+  className,
+}: {{ pascalCase name }}Props) {
   return (
-    <div>
+    <div className={clsx({{ camelCase name }}, className)}>
       <h1>{{ pascalCase name }} Component</h1>
       {children}
     </div>

@@ -1,0 +1,36 @@
+import { createVar, globalStyle } from '@vanilla-extract/css';
+import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
+
+import { vars } from '@/styles/contract.css';
+import { mapContractVars } from '@/utils/map-contract-vars';
+
+const spacing = createVar();
+
+export const stackRecipe = recipe({
+  base: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+
+  variants: {
+    recursive: {
+      true: {},
+    },
+
+    spacing: mapContractVars(vars.spacing, (key) => ({
+      vars: {
+        [spacing]: vars.spacing[key],
+      },
+    })),
+  },
+});
+
+globalStyle(
+  `${stackRecipe.classNames.base} > * + *, ${stackRecipe.classNames.variants.recursive.true} * + *`,
+  {
+    marginBlockStart: spacing,
+  },
+);
+
+export type StackVariants = NonNullable<RecipeVariants<typeof stackRecipe>>;

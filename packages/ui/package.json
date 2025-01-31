@@ -4,21 +4,19 @@
   "sideEffects": false,
   "license": "MIT",
   "exports": {
-    "./button": {
-      "types": "./src/button.tsx",
-      "import": "./dist/button.mjs",
-      "require": "./dist/button.js"
-    },
-    "./card": {
-      "types": "./src/card.tsx",
-      "import": "./dist/card.mjs",
-      "require": "./dist/card.js"
-    },
-    "./code": {
-      "types": "./src/code.tsx",
-      "import": "./dist/code.mjs",
-      "require": "./dist/code.js"
-    }
+    "./box": "./src/components/box/index.ts",
+    "./button": "./src/components/button/index.ts",
+    "./center": "./src/components/center/index.ts",
+    "./cluster": "./src/components/cluster/index.ts",
+    "./cover": "./src/components/cover/index.ts",
+    "./frame": "./src/components/frame/index.ts",
+    "./grid": "./src/components/grid/index.ts",
+    "./sidebar": "./src/components/sidebar/index.ts",
+    "./stack": "./src/components/stack/index.ts",
+    "./switcher": "./src/components/switcher/index.ts",
+    "./styles": "./src/styles/index.ts",
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -33,16 +31,32 @@
     "@types/node": "^22.10.10",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
+    "@vanilla-extract/css": "^1.17.1",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "@vanilla-extract/vite-plugin": "^5.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tsup": "^8.3.6",
+    "type-fest": "^4.33.0",
     "typescript": "5.7.3"
   },
   "peerDependencies": {
+    "@vanilla-extract/css": "^1.17.1",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/sprinkles": "^1.6.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1"
   }
 }
