@@ -1,22 +1,20 @@
-import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
+import js from '@eslint/js';
+// @ts-expect-error
+import { flatConfigs as importConfigs } from 'eslint-plugin-import';
 import turboPlugin from 'eslint-plugin-turbo';
 import {
   configs as tseslintConfigs,
   config as tseslintConfig,
 } from 'typescript-eslint';
 
-export const base = tseslintConfig(
+export const baseEslintConfig = tseslintConfig(
   js.configs.recommended,
   tseslintConfigs.recommended,
   tseslintConfigs.stylistic,
   eslintConfigPrettier,
   {
-    extends: [
-      importPlugin.flatConfigs.recommended,
-      importPlugin.flatConfigs.typescript,
-    ],
+    extends: [importConfigs.recommended, importConfigs.typescript],
     settings: {
       'import/parsers': {
         '@typescript-eslint/parser': ['.ts', '.tsx'],

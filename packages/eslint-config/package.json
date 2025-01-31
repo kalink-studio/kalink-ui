@@ -1,16 +1,15 @@
 {
   "name": "@kalink/eslint-config",
   "version": "0.0.0",
-  "type": "module",
   "exports": {
-    "./base": "./base.js",
-    "./next-js": "./next.js",
-    "./react": "./react.js"
+    "./base-eslint-config": "./base-eslint-config.ts",
+    "./next-eslint-config": "./next-eslint-config.ts",
+    "./react-eslint-config": "./react-eslint-config.ts"
   },
-  "types": "./eslint-config.d.ts",
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@next/eslint-plugin-next": "^15.1.6",
+    "@types/eslint-config-prettier": "^6.11.3",
     "@typescript-eslint/parser": "^8.22.0",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",

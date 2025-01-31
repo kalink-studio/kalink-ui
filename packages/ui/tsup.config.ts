@@ -1,9 +1,18 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig((options) => ({
-  entryPoints: ['src/button.tsx'],
-  format: ['cjs', 'esm'],
+  // entry: ['src/**/!(*.(style|css|test|spec|stories)).(ts|tsx)'],
+  entry: ['src/types/utils.types.ts'],
+  format: ['esm', 'cjs'],
   dts: true,
-  external: ['react'],
+  sourcemap: true,
+  external: [
+    'react',
+    '@vanilla-extract/css',
+    '@vanilla-extract/recipes',
+    '@vanilla-extract/sprinkles',
+    '@vanilla-extract/css-utils',
+  ],
+  clean: true,
   ...options,
 }));

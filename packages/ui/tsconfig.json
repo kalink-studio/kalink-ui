@@ -1,5 +1,10 @@
 {
   "extends": "@kalink/typescript-config/react-library.json",
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["**/*.ts", "**/*.tsx", "eslint.config.mts", "tsup.config.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }
