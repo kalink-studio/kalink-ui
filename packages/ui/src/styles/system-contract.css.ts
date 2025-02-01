@@ -1,4 +1,4 @@
-import { createThemeContract } from "@vanilla-extract/css";
+import { createThemeContract } from '@vanilla-extract/css';
 
 const typeContract = {
   font: null,
@@ -12,12 +12,6 @@ export const sys = createThemeContract({
   layout: {
     direction: null,
     measure: null,
-  },
-
-  fluidity: {
-    min: null,
-    max: null,
-    interpolation: null,
   },
 
   color: {
@@ -51,6 +45,7 @@ export const sys = createThemeContract({
   },
 
   elevation: {
+    none: null,
     minimal: null,
     low: null,
     moderate: null,
@@ -101,6 +96,12 @@ export const sys = createThemeContract({
     },
 
     headline: {
+      large: typeContract,
+      medium: typeContract,
+      small: typeContract,
+    },
+
+    title: {
       large: typeContract,
       medium: typeContract,
       small: typeContract,

@@ -1,6 +1,6 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { vars } from '@/styles/contract.css';
+import { sys } from '@/styles/system-contract.css';
 import { mapContractVars } from '@/utils/map-contract-vars';
 
 export const centerRecipe = recipe({
@@ -8,7 +8,7 @@ export const centerRecipe = recipe({
     display: 'block',
     boxSizing: 'content-box',
     marginInline: 'auto',
-    maxInlineSize: vars.measure,
+    maxInlineSize: sys.layout.measure,
   },
 
   variants: {
@@ -26,8 +26,8 @@ export const centerRecipe = recipe({
       },
     },
 
-    gutters: mapContractVars(vars.spacing, (key) => ({
-      paddingInline: vars.spacing[key],
+    gutters: mapContractVars(sys.spacing, (key) => ({
+      paddingInline: sys.spacing[key],
     })),
   },
 });

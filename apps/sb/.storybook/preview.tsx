@@ -1,3 +1,4 @@
+import '../theme/ref.css';
 import '../theme/theme.css';
 
 import { type Preview } from '@storybook/react';
@@ -11,6 +12,12 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+
+    options: {
+      storySort: {
+        order: ['Styles', 'Layout', 'Components'],
       },
     },
   },

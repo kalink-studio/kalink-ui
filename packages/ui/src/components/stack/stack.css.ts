@@ -1,7 +1,7 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { vars } from '@/styles/contract.css';
+import { sys } from '@/styles/system-contract.css';
 import { mapContractVars } from '@/utils/map-contract-vars';
 
 const spacing = createVar();
@@ -18,9 +18,9 @@ export const stackRecipe = recipe({
       true: {},
     },
 
-    spacing: mapContractVars(vars.spacing, (key) => ({
+    spacing: mapContractVars(sys.spacing, (key) => ({
       vars: {
-        [spacing]: vars.spacing[key],
+        [spacing]: sys.spacing[key],
       },
     })),
   },

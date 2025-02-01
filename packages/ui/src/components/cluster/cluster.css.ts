@@ -1,6 +1,6 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { vars } from '@/styles/contract.css';
+import { sys } from '@/styles/system-contract.css';
 import { mapContractVars } from '@/utils/map-contract-vars';
 
 export const clusterRecipe = recipe({
@@ -12,8 +12,8 @@ export const clusterRecipe = recipe({
   },
 
   variants: {
-    spacing: mapContractVars(vars.spacing, (key) => ({
-      gap: vars.spacing[key],
+    spacing: mapContractVars(sys.spacing, (key) => ({
+      gap: sys.spacing[key],
     })),
 
     justify: {
