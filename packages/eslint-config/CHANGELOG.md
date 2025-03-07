@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.3.0
+
+### Minor Changes
+
+- 293d796: Correctly specify peer dependencies
+
 ## 0.2.0
 
 ### Minor Changes

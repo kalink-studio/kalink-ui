@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.4.0
+
+### Minor Changes
+
+- 293d796: Correctly specify peer dependencies
+
 ## 0.3.0
 
 ### Minor Changes

@@ -1,31 +1,45 @@
 {
   "name": "@kalink-ui/eslint-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "exports": {
     "./base-eslint-config": "./base-eslint-config.ts",
     "./next-eslint-config": "./next-eslint-config.ts",
     "./react-eslint-config": "./react-eslint-config.ts"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "@next/eslint-plugin-next": "^15.1.6",
+    "@eslint/js": "^9.21.0",
+    "@next/eslint-plugin-next": "^15.2.1",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@typescript-eslint/parser": "^8.22.0",
-    "eslint": "^9.19.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-import-resolver-typescript": "^3.7.0",
+    "@typescript-eslint/parser": "^8.26.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-turbo": "^2.3.4",
-    "globals": "^15.14.0",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.22.0"
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-turbo": "^2.4.4",
+    "globals": "^16.0.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0"
   },
   "peerDependencies": {
-    "jiti": "^2.4.2",
-    "eslint": "^9.19.0"
+    "jiti": "^2",
+    "@eslint/js": "^9",
+    "@next/eslint-plugin-next": "^15",
+    "@types/eslint-config-prettier": "^6",
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "eslint-config-prettier": "^10",
+    "eslint-import-resolver-typescript": "^3",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-only-warn": "^1",
+    "eslint-plugin-react": "^7",
+    "eslint-plugin-react-hooks": "^5",
+    "eslint-plugin-turbo": "^2",
+    "globals": "^16",
+    "typescript": "^5",
+    "typescript-eslint": "^8"
   },
   "publishConfig": {
     "access": "public"
