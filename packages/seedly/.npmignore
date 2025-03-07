@@ -3,5 +3,12 @@
 **/*.test.ts
 **/*.mdx
 **/arg-types/**/*
+**/*config.*
+
+.storybook
+.turbo
+dist
+turbo
+
 
 .DS_Store
