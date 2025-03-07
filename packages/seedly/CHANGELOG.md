@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.1.2
+
+### Patch Changes
+
+- Correctly place the npmignore file so it override the package.json config
+
 ## 0.1.1
 
 ### Patch Changes
