@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.2.0
+
+### Minor Changes
+
+- Update dependencies and correctly include files in package bundle
+
 ## 0.1.2
 
 ### Patch Changes

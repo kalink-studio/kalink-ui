@@ -1,6 +1,6 @@
 {
   "name": "@kalink-ui/eslint-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "exports": {
     "./base-eslint-config": "./base-eslint-config.ts",
     "./next-eslint-config": "./next-eslint-config.ts",
