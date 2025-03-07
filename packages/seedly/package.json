@@ -1,0 +1,78 @@
+{
+  "name": "@kalink-ui/seedly",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "license": "MIT",
+  "exports": {
+    "./box": "./src/components/box/index.ts",
+    "./button": "./src/components/button/index.ts",
+    "./center": "./src/components/center/index.ts",
+    "./cluster": "./src/components/cluster/index.ts",
+    "./cover": "./src/components/cover/index.ts",
+    "./frame": "./src/components/frame/index.ts",
+    "./grid": "./src/components/grid/index.ts",
+    "./sidebar": "./src/components/sidebar/index.ts",
+    "./stack": "./src/components/stack/index.ts",
+    "./switcher": "./src/components/switcher/index.ts",
+    "./styles": "./src/styles/index.ts",
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "build-storybook": "storybook build",
+    "dev": "storybook dev -p 6006 --no-open",
+    "tsc": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.4",
+    "@kalink-ui/eslint-config": "workspace:*",
+    "@kalink-ui/typescript-config": "workspace:*",
+    "@storybook/addon-docs": "^8.6.4",
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/addon-interactions": "^8.6.4",
+    "@storybook/addon-onboarding": "^8.6.4",
+    "@storybook/blocks": "^8.6.4",
+    "@storybook/react": "^8.6.4",
+    "@storybook/react-vite": "^8.6.4",
+    "@storybook/test": "^8.6.4",
+    "@turbo/gen": "^2.3.4",
+    "@types/node": "^22.10.10",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "@vanilla-extract/css": "^1.17.1",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "@vanilla-extract/vite-plugin": "^5.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^8.6.4",
+    "tsup": "^8.3.6",
+    "type-fest": "^4.33.0",
+    "typescript": "5.7.3",
+    "vite": "^6.0.11",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.4"
+  },
+  "peerDependencies": {
+    "@vanilla-extract/css": "^1.17.1",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "./src/**/*"
+  ],
+  "dependencies": {
+    "clsx": "^2.1.1"
+  }
+}

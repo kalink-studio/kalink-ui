@@ -11,14 +11,14 @@
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@kalink/ui": "workspace:*",
+    "@kalink-ui/seedly": "workspace:*",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@kalink/eslint-config": "workspace:*",
-    "@kalink/typescript-config": "workspace:*",
+    "@kalink-ui/eslint-config": "workspace:*",
+    "@kalink-ui/typescript-config": "workspace:*",
     "@types/node": "^22",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",

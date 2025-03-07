@@ -1,0 +1,14 @@
+{
+  "extends": "@kalink-ui/typescript-config/react-library.json",
+  "include": ["**/*.ts", "**/*.tsx", "eslint.config.mts", "tsup.config.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "paths": {
+      "@/storybook/*": ["./.storybook/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/styles/*": ["./src/styles/*"],
+    }
+  }
+}

@@ -1,3 +1,3 @@
 {
-  "references": [{ "path": "./apps/sb" }, { "path": "./packages/ui" }]
+  "references": [{ "path": "./apps/sb" }, { "path": "./packages/seedly" }]
 }
