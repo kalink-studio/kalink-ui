@@ -1,0 +1,7 @@
+**/*.stories.tsx
+**/*.test.tsx
+**/*.test.ts
+**/*.mdx
+**/arg-types/**/*
+
+.DS_Store
