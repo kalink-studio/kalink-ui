@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.3.0
+
+### Minor Changes
+
+- Remove config files and tools folders from published package bundle
+
 ## 0.2.0
 
 ### Minor Changes
