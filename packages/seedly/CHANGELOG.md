@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.5.0
+
+### Minor Changes
+
+- 73cbf48: Remove alias usage in source files
+
 ## 0.4.0
 
 ### Minor Changes
