@@ -1,12 +1,12 @@
 import { clsx } from 'clsx';
 
-import type { PolymorphicComponentProps } from '@/types/utils.types';
 import {
   extractSprinklesProps,
   type GetSprinkles,
   type SprinklesFnBase,
-} from '@/utils/extract-sprinkles-props';
+} from '../../utils/extract-sprinkles-props';
 
+import type { PolymorphicComponentProps } from '../../types/utils.types';
 import type { ElementType } from 'react';
 
 /**

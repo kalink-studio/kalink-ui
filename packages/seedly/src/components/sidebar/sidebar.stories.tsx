@@ -1,4 +1,8 @@
-import { argTypesFromRecipe, CommonArgs, commonArgs } from '@/utils/arg-types';
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
 
 import { Sidebar } from './sidebar';
 import { sidebarRecipe } from './sidebar.css';

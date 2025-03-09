@@ -1,9 +1,12 @@
-import { sprinkles, sprinklesProps } from '@/storybook/theme/sprinkles.css';
+import {
+  sprinkles,
+  sprinklesProps,
+} from '../../../.storybook/theme/sprinkles.css';
 import {
   CommonArgs,
   commonArgs,
   argTypesFromSprinkles,
-} from '@/utils/arg-types';
+} from '../../utils/arg-types';
 
 import { plantSeed } from './seed';
 

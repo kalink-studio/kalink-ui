@@ -1,4 +1,8 @@
-import { argTypesFromRecipe, CommonArgs, commonArgs } from '@/utils/arg-types';
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
 
 import { Stack } from './stack';
 import { stackRecipe } from './stack.css';

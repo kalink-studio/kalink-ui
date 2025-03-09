@@ -1,5 +1,11 @@
-import { Box, boxRecipe } from '@/components/box';
-import { argTypesFromRecipe, CommonArgs, commonArgs } from '@/utils/arg-types';
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
+
+import { Box } from './box';
+import { boxRecipe } from './box.css';
 
 import type { Meta, StoryObj } from '@storybook/react';
 

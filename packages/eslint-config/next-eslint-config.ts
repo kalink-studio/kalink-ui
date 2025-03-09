@@ -1,4 +1,3 @@
-// @ts-expect-error
 import pluginNext from '@next/eslint-plugin-next';
 
 import { baseEslintConfig } from './base-eslint-config';

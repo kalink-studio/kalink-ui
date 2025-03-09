@@ -1,4 +1,8 @@
-import { argTypesFromRecipe, CommonArgs, commonArgs } from '@/utils/arg-types';
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
 
 import { Frame } from './frame';
 import { frameRecipe } from './frame.css';

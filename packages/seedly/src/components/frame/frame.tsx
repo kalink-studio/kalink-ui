@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { PolymorphicComponentProps } from '@/types/utils.types';
+import { PolymorphicComponentProps } from '../../types/utils.types';
 
 import { frameRecipe, FrameVariants } from './frame.css';
 

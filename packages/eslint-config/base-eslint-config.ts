@@ -1,6 +1,5 @@
-import eslintConfigPrettier from 'eslint-config-prettier';
 import js from '@eslint/js';
-// @ts-expect-error
+import eslintConfigPrettier from 'eslint-config-prettier';
 import { flatConfigs as importConfigs } from 'eslint-plugin-import';
 import turboPlugin from 'eslint-plugin-turbo';
 import {

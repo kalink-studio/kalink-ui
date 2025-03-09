@@ -1,7 +1,7 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '@/styles/system-contract.css';
-import { mapContractVars } from '@/utils/map-contract-vars';
+import { sys } from '../../styles/system-contract.css';
+import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const clusterRecipe = recipe({
   base: {

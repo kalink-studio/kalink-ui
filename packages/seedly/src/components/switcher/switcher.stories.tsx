@@ -1,6 +1,10 @@
 import { ComponentPropsWithoutRef } from 'react';
 
-import { argTypesFromRecipe, CommonArgs, commonArgs } from '@/utils/arg-types';
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
 
 import { Switcher } from './switcher';
 import { switcherRecipe } from './switcher.css';

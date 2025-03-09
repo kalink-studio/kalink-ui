@@ -1,9 +1,11 @@
 import { clsx } from 'clsx';
 
-import { Box } from '@/components/box';
-import type { PolymorphicComponentProps } from '@/types/utils.types';
+import { Box } from '../box';
 
 import { buttonRecipe, type ButtonVariants } from './button.css';
+
+import type { PolymorphicComponentProps } from '../../types/utils.types';
+
 
 type ButtonProps<TUse extends React.ElementType> =
   PolymorphicComponentProps<TUse> & {

@@ -1,4 +1,8 @@
-import { argTypesFromRecipe, CommonArgs, commonArgs } from '@/utils/arg-types';
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
 
 import { Cover } from './cover';
 import { coverRecipe } from './cover.css';

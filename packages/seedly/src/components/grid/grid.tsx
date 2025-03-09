@@ -4,7 +4,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { PolymorphicComponentProps } from '@/types/utils.types';
+import { PolymorphicComponentProps } from '../../types/utils.types';
 
 import { gridRecipe, GridVariants, minSizeVar } from './grid.css';
 
