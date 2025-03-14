@@ -1,5 +1,11 @@
 # @kalink-ui/typescript-config
 
+## 0.3.0
+
+### Minor Changes
+
+- 87e2ae2: Create new Dibbly package to centralize utils and common types
+
 ## 0.2.0
 
 ### Minor Changes

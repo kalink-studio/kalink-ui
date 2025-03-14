@@ -1,6 +1,6 @@
 {
   "name": "@kalink-ui/typescript-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A set of TypeScript configs for building UIs with React and TypeScript",
   "private": false,
   "license": "MIT",
