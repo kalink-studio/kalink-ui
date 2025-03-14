@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.7.0
+
+### Minor Changes
+
+- 8b05749: Correctly ignore build and nextjs artefacts in configs
+
 ## 0.6.0
 
 ### Minor Changes
