@@ -1,6 +1,7 @@
 import type { SprinklesProperties } from '@vanilla-extract/sprinkles';
 import type { UnknownRecord } from 'type-fest';
 
+/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
 export interface SprinklesFnBase {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   (...args: any): string;

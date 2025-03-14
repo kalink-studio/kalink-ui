@@ -1,5 +1,5 @@
 {
   "extends": "@kalink-ui/typescript-config/base.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "eslint.config.mts"],
   "exclude": ["node_modules"]
 }

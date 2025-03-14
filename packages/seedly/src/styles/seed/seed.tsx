@@ -6,7 +6,7 @@ import {
   type SprinklesFnBase,
 } from '../../utils/extract-sprinkles-props';
 
-import type { PolymorphicComponentProps } from '../../types/utils.types';
+import type { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
 import type { ElementType } from 'react';
 
 /**

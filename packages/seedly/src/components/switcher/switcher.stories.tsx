@@ -31,13 +31,13 @@ const meta = {
 
     threshold: {
       table: {
-        category: 'Recipe props',
+        category: 'Styling props',
       },
     },
 
     limit: {
       table: {
-        category: 'Recipe props',
+        category: 'Styling props',
       },
     },
 

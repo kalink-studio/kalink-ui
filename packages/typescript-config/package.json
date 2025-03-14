@@ -1,11 +1,18 @@
 {
   "name": "@kalink-ui/typescript-config",
   "version": "0.2.0",
+  "description": "A set of TypeScript configs for building UIs with React and TypeScript",
+  "private": false,
   "license": "MIT",
+  "author": "Louis Gollut",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalink/kalink-ui.git"
+  },
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.8.2"
   }
 }

@@ -1,6 +1,7 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { components } from '../../styles/layers.css';
 import { sys } from '../../styles/system-contract.css';
 import { mapContractVars } from '../../utils/map-contract-vars';
 
@@ -8,9 +9,13 @@ const spacing = createVar();
 
 export const stackRecipe = recipe({
   base: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+      },
+    },
   },
 
   variants: {
@@ -19,8 +24,12 @@ export const stackRecipe = recipe({
     },
 
     spacing: mapContractVars(sys.spacing, (key) => ({
-      vars: {
-        [spacing]: sys.spacing[key],
+      '@layer': {
+        [components]: {
+          vars: {
+            [spacing]: sys.spacing[key],
+          },
+        },
       },
     })),
   },
@@ -29,7 +38,11 @@ export const stackRecipe = recipe({
 globalStyle(
   `${stackRecipe.classNames.base} > * + *, ${stackRecipe.classNames.variants.recursive.true} * + *`,
   {
-    marginBlockStart: spacing,
+    '@layer': {
+      [components]: {
+        marginBlockStart: spacing,
+      },
+    },
   },
 );
 

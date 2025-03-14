@@ -1,6 +1,14 @@
 {
   "name": "@kalink-ui/eslint-config",
   "version": "0.3.0",
+  "description": "A set of ESLint configs for building UIs with React and TypeScript",
+  "private": false,
+  "license": "MIT",
+  "author": "Louis Gollut",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalink/kalink-ui.git"
+  },
   "scripts": {
     "tsc": "tsc --noEmit"
   },
@@ -29,22 +37,22 @@
     "typescript-eslint": "^8.26.0"
   },
   "peerDependencies": {
-    "@eslint/js": "^9",
-    "@next/eslint-plugin-next": "^15",
-    "@types/eslint-config-prettier": "^6",
-    "@typescript-eslint/parser": "^8",
-    "eslint": "^9",
-    "eslint-config-prettier": "^10",
-    "eslint-import-resolver-typescript": "^3",
-    "eslint-plugin-import": "^2",
-    "eslint-plugin-only-warn": "^1",
-    "eslint-plugin-react": "^7",
-    "eslint-plugin-react-hooks": "^5",
-    "eslint-plugin-turbo": "^2",
-    "globals": "^16",
-    "jiti": "^2",
-    "typescript": "^5",
-    "typescript-eslint": "^8"
+    "@eslint/js": "^9.21.0",
+    "@next/eslint-plugin-next": "^15.2.1",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@typescript-eslint/parser": "^8.26.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-turbo": "^2.4.4",
+    "globals": "^16.0.0",
+    "jiti": "^2.4.2",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0"
   },
   "publishConfig": {
     "access": "public"

@@ -2,8 +2,7 @@ import { clsx } from 'clsx';
 
 import { boxRecipe, type BoxVariants } from './box.css';
 
-import type { PolymorphicComponentProps } from '../../types/utils.types.js';
-
+import type { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
 
 type BoxProps<TUse extends React.ElementType> =
   PolymorphicComponentProps<TUse> & {

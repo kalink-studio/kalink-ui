@@ -1,6 +1,7 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { components } from '../../styles/layers.css';
 import { sys } from '../../styles/system-contract.css';
 import { mapContractVars } from '../../utils/map-contract-vars';
 
@@ -9,22 +10,34 @@ export const contentMinWidthVar = createVar();
 
 export const sidebarRecipe = recipe({
   base: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        flexWrap: 'wrap',
 
-    vars: {
-      [contentMinWidthVar]: '50%',
+        vars: {
+          [contentMinWidthVar]: '50%',
+        },
+      },
     },
   },
 
   variants: {
     spacing: mapContractVars(sys.spacing, (key) => ({
-      gap: sys.spacing[key],
+      '@layer': {
+        [components]: {
+          gap: sys.spacing[key],
+        },
+      },
     })),
 
     noStretch: {
       true: {
-        alignItems: 'flex-start',
+        '@layer': {
+          [components]: {
+            alignItems: 'flex-start',
+          },
+        },
       },
     },
 
@@ -46,23 +59,39 @@ export const sidebarRecipe = recipe({
 });
 
 globalStyle(`${sidebarRecipe.classNames.base} > *`, {
-  flexGrow: 1,
+  '@layer': {
+    [components]: {
+      flexGrow: 1,
+    },
+  },
 });
 
 globalStyle(`${sidebarRecipe.classNames.variants.sideWidth.true} > *`, {
-  flexBasis: sideWidthVar,
+  '@layer': {
+    [components]: {
+      flexBasis: sideWidthVar,
+    },
+  },
 });
 
 globalStyle(`${sidebarRecipe.classNames.variants.side.left} > :last-child`, {
-  flexBasis: 0,
-  flexGrow: 999,
-  minInlineSize: contentMinWidthVar,
+  '@layer': {
+    [components]: {
+      flexBasis: 0,
+      flexGrow: 999,
+      minInlineSize: contentMinWidthVar,
+    },
+  },
 });
 
 globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
-  flexBasis: 0,
-  flexGrow: 999,
-  minInlineSize: contentMinWidthVar,
+  '@layer': {
+    [components]: {
+      flexBasis: 0,
+      flexGrow: 999,
+      minInlineSize: contentMinWidthVar,
+    },
+  },
 });
 
 export type SidebarVariants = NonNullable<RecipeVariants<typeof sidebarRecipe>>;

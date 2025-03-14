@@ -1,8 +1,14 @@
 {
   "name": "@kalink-ui/seedly",
   "version": "0.5.0",
+  "description": "A set of components for building UIs with React and TypeScript",
   "sideEffects": false,
   "license": "MIT",
+  "author": "Louis Gollut",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalink/kalink-ui.git"
+  },
   "exports": {
     "./box": "./src/components/box/index.ts",
     "./button": "./src/components/button/index.ts",
@@ -15,7 +21,10 @@
     "./stack": "./src/components/stack/index.ts",
     "./switcher": "./src/components/switcher/index.ts",
     "./styles": "./src/styles/index.ts",
+    "./styles/reset": "./src/styles/reset.css.ts",
+    "./styles/layers": "./src/styles/layers.css.ts",
     "./types": "./src/types/index.ts",
+    "./text": "./src/components/text/index.ts",
     "./utils": "./src/utils/index.ts"
   },
   "scripts": {
@@ -27,6 +36,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
+    "@kalink-ui/dibbly": "workspace:*",
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
     "@storybook/addon-docs": "^8.6.4",
@@ -48,10 +58,10 @@
     "@vanilla-extract/sprinkles": "^1.6.3",
     "@vanilla-extract/vite-plugin": "^5.0.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "storybook": "^8.6.4",
-    "tsup": "^8.4.0",
     "type-fest": "^4.37.0",
     "typescript": "5.8.2",
     "vite": "^6.2.1",
@@ -59,18 +69,18 @@
     "vitest": "^3.0.8"
   },
   "peerDependencies": {
-    "@vanilla-extract/css": "^1",
-    "@vanilla-extract/css-utils": "^0.1",
-    "@vanilla-extract/dynamic": "^2",
-    "@vanilla-extract/recipes": "^0.5",
-    "@vanilla-extract/sprinkles": "^1",
-    "react": "^19",
-    "react-dom": "^19"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@vanilla-extract/css": "^1.17.1",
+    "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/sprinkles": "^1.6.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

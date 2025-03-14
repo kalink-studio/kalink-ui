@@ -1,12 +1,12 @@
 import { createThemeContract } from '@vanilla-extract/css';
 
-const typeContract = {
+export const typeContract = {
   font: null,
   weight: null,
   lineHeight: null,
   tracking: null,
   size: null,
-};
+} as const;
 
 export const sys = createThemeContract({
   layout: {

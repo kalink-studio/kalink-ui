@@ -1,6 +1,7 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { components } from '../../styles/layers.css';
 import { sys } from '../../styles/system-contract.css';
 import { mapContractVars } from '../../utils/map-contract-vars';
 
@@ -9,11 +10,15 @@ export const limitVar = createVar();
 
 export const switcherRecipe = recipe({
   base: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        flexWrap: 'wrap',
 
-    vars: {
-      [thresholdVar]: sys.layout.measure,
+        vars: {
+          [thresholdVar]: sys.layout.measure,
+        },
+      },
     },
   },
 
@@ -22,7 +27,11 @@ export const switcherRecipe = recipe({
      * The space (margin) between the child elements
      */
     spacing: mapContractVars(sys.spacing, (key) => ({
-      gap: sys.spacing[key],
+      '@layer': {
+        [components]: {
+          gap: sys.spacing[key],
+        },
+      },
     })),
 
     /**
@@ -39,8 +48,12 @@ export const switcherRecipe = recipe({
 });
 
 globalStyle(`${switcherRecipe.classNames.base} > *`, {
-  flexBasis: `calc((${thresholdVar} - 100%) * 999)`,
-  flexGrow: 1,
+  '@layer': {
+    [components]: {
+      flexBasis: `calc((${thresholdVar} - 100%) * 999)`,
+      flexGrow: 1,
+    },
+  },
 });
 
 globalStyle(
@@ -48,7 +61,11 @@ globalStyle(
     switcherRecipe.classNames.variants.limit[2]
   } > :nth-last-child(n+3) ~ *`,
   {
-    flexBasis: '100%',
+    '@layer': {
+      [components]: {
+        flexBasis: '100%',
+      },
+    },
   },
 );
 
@@ -57,7 +74,11 @@ globalStyle(
     switcherRecipe.classNames.variants.limit[3]
   } > :nth-last-child(n+4) ~ *`,
   {
-    flexBasis: '100%',
+    '@layer': {
+      [components]: {
+        flexBasis: '100%',
+      },
+    },
   },
 );
 
@@ -66,7 +87,11 @@ globalStyle(
     switcherRecipe.classNames.variants.limit[4]
   } > :nth-last-child(n+5) ~ *`,
   {
-    flexBasis: '100%',
+    '@layer': {
+      [components]: {
+        flexBasis: '100%',
+      },
+    },
   },
 );
 
@@ -75,7 +100,11 @@ globalStyle(
     switcherRecipe.classNames.variants.limit[5]
   } > :nth-last-child(n+6) ~ *`,
   {
-    flexBasis: '100%',
+    '@layer': {
+      [components]: {
+        flexBasis: '100%',
+      },
+    },
   },
 );
 
@@ -84,7 +113,11 @@ globalStyle(
     switcherRecipe.classNames.variants.limit[6]
   } > :nth-last-child(n+7) ~ *`,
   {
-    flexBasis: '100%',
+    '@layer': {
+      [components]: {
+        flexBasis: '100%',
+      },
+    },
   },
 );
 

@@ -1,0 +1,41 @@
+{
+  "name": "@kalink-ui/dibbly",
+  "description": "A set of tools for building UIs with React and TypeScript",
+  "version": "0.0.0",
+  "private": false,
+  "license": "MIT",
+  "author": "Louis Gollut",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalink/kalink-ui.git"
+  },
+  "exports": {
+    ".": "./src/utils/index.ts",
+    "./types": "./src/types/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest",
+    "tsc": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@kalink-ui/eslint-config": "workspace:*",
+    "@kalink-ui/typescript-config": "workspace:*",
+    "@types/react": "19.0.10",
+    "eslint": "^9.21.0",
+    "react": "^19.0.0",
+    "typescript": "5.8.2",
+    "vite": "^6.2.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.8"
+  },
+  "dependencies": {
+    "type-fest": "^4.37.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

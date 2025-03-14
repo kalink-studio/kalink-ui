@@ -1,4 +1,4 @@
-import { isObject } from '../is-object';
+import { isObject } from '@kalink-ui/dibbly';
 
 type ArgTypesFromSprinklesProps = {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

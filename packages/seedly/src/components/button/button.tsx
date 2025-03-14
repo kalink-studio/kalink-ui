@@ -4,8 +4,7 @@ import { Box } from '../box';
 
 import { buttonRecipe, type ButtonVariants } from './button.css';
 
-import type { PolymorphicComponentProps } from '../../types/utils.types';
-
+import type { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
 
 type ButtonProps<TUse extends React.ElementType> =
   PolymorphicComponentProps<TUse> & {
@@ -16,7 +15,6 @@ type ButtonProps<TUse extends React.ElementType> =
   };
 
 export const Button = <TUse extends React.ElementType = 'button'>({
-  children,
   className,
   variant,
   ...props
@@ -24,12 +22,10 @@ export const Button = <TUse extends React.ElementType = 'button'>({
   const { use: Comp = 'button', ...rest } = props;
 
   return (
-    <Comp
-      use={Box}
+    <Box
+      use={Comp}
       className={clsx(buttonRecipe({ variant }), className)}
       {...rest}
-    >
-      {children}
-    </Comp>
+    />
   );
 };

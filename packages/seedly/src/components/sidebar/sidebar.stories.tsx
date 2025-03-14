@@ -33,14 +33,14 @@ const meta = {
 
     sideWidth: {
       table: {
-        category: 'Recipe props',
+        category: 'Styling props',
       },
       control: { type: 'range', min: 1, max: 100, step: 1 },
     },
 
     contentMinWidth: {
       table: {
-        category: 'Recipe props',
+        category: 'Styling props',
       },
       control: { type: 'range', min: 1, max: 100, step: 1 },
     },

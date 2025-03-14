@@ -1,10 +1,9 @@
 'use client';
 
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
-
-import { PolymorphicComponentProps } from '../../types/utils.types';
 
 import { switcherRecipe, SwitcherVariants, thresholdVar } from './switcher.css';
 

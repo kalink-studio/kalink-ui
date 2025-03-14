@@ -22,17 +22,11 @@ const meta = {
       CommonArgs.STYLABLE,
       CommonArgs.REFERABLE,
     ]),
-
-    ratio: {
-      table: {
-        category: 'Recipe props',
-      },
-    },
   },
   args: {
     ratio: '16:9',
 
-    children: <div>Frame element</div>,
+    children: <img src="https://picsum.photos/seed/picsum/2000/2000" />,
   },
 } satisfies Meta<typeof Frame>;
 

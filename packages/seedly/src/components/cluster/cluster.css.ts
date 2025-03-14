@@ -1,57 +1,110 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { components } from '../../styles/layers.css';
 import { sys } from '../../styles/system-contract.css';
 import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const clusterRecipe = recipe({
   base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+      },
+    },
   },
 
   variants: {
     spacing: mapContractVars(sys.spacing, (key) => ({
-      gap: sys.spacing[key],
+      '@layer': {
+        [components]: {
+          gap: sys.spacing[key],
+        },
+      },
     })),
 
     justify: {
       start: {
-        justifyContent: 'flex-start',
+        '@layer': {
+          [components]: {
+            justifyContent: 'flex-start',
+          },
+        },
       },
       end: {
-        justifyContent: 'flex-end',
+        '@layer': {
+          [components]: {
+            justifyContent: 'flex-end',
+          },
+        },
       },
       center: {
-        justifyContent: 'center',
+        '@layer': {
+          [components]: {
+            justifyContent: 'center',
+          },
+        },
       },
       spaceBetween: {
-        justifyContent: 'space-between',
+        '@layer': {
+          [components]: {
+            justifyContent: 'space-between',
+          },
+        },
       },
       spaceAround: {
-        justifyContent: 'space-around',
+        '@layer': {
+          [components]: {
+            justifyContent: 'space-around',
+          },
+        },
       },
       spaceEvenly: {
-        justifyContent: 'space-evenly',
+        '@layer': {
+          [components]: {
+            justifyContent: 'space-evenly',
+          },
+        },
       },
     },
 
     align: {
       start: {
-        alignItems: 'flex-start',
+        '@layer': {
+          [components]: {
+            alignItems: 'flex-start',
+          },
+        },
       },
       end: {
-        alignItems: 'flex-end',
+        '@layer': {
+          [components]: {
+            alignItems: 'flex-end',
+          },
+        },
       },
       center: {
-        alignItems: 'center',
+        '@layer': {
+          [components]: {
+            alignItems: 'center',
+          },
+        },
       },
       stretch: {
-        alignItems: 'stretch',
+        '@layer': {
+          [components]: {
+            alignItems: 'stretch',
+          },
+        },
       },
       baseline: {
-        alignItems: 'baseline',
+        '@layer': {
+          [components]: {
+            alignItems: 'baseline',
+          },
+        },
       },
     },
   },

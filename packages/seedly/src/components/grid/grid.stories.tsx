@@ -25,7 +25,7 @@ const meta = {
 
     minSize: {
       table: {
-        category: 'Recipe props',
+        category: 'Styling props',
       },
     },
   },

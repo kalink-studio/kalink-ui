@@ -1,7 +1,6 @@
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
-
-import { PolymorphicComponentProps } from '../../types/utils.types';
 
 import { stackRecipe, StackVariants } from './stack.css';
 
