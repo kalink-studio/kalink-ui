@@ -1,5 +1,12 @@
 # docs
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [0c7e758]
+  - @kalink-ui/seedly@0.7.0
+
 ## 0.1.8
 
 ### Patch Changes

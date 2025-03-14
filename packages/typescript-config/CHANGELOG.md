@@ -1,5 +1,11 @@
 # @kalink-ui/typescript-config
 
+## 0.4.0
+
+### Minor Changes
+
+- 0c7e758: Change eslint config export strategy
+
 ## 0.3.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.5.0
+
+### Minor Changes
+
+- 0c7e758: Change eslint config export strategy
+
 ## 0.4.0
 
 ### Minor Changes
