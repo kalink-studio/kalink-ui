@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.6.0
+
+### Minor Changes
+
+- 1a814c5: Ignore artefact directories from linting
+
 ## 0.5.0
 
 ### Minor Changes
