@@ -22,10 +22,10 @@ export type SeedProps<
   TSprinklesFn extends SprinklesFnBase,
 > = PolymorphicComponentProps<TUse> & GetSprinkles<TSprinklesFn>;
 
-export interface CreateSeedParams<SprinklesFn> {
+export type CreateSeedParams<SprinklesFn> = {
   sprinkles: SprinklesFn;
   defaultClassName?: string;
-}
+};
 
 export function plantSeed<SprinklesFn extends SprinklesFnBase>({
   sprinkles,

@@ -2,10 +2,7 @@ import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 
-import { baseEslintConfig } from './base-eslint-config';
-
 export const reactEslintConfig = [
-  ...baseEslintConfig,
   pluginReact.configs.flat.recommended,
   {
     languageOptions: {

@@ -1,11 +1,7 @@
+// @ts-expect-error Declaration file is not available for the package
 import pluginNext from '@next/eslint-plugin-next';
 
-import { baseEslintConfig } from './base-eslint-config';
-import { reactEslintConfig } from './react-eslint-config';
-
 export const nextEslintConfig = [
-  ...baseEslintConfig,
-  ...reactEslintConfig,
   {
     plugins: {
       '@next/next': pluginNext,

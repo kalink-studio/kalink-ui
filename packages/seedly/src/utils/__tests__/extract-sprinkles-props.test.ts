@@ -1,11 +1,9 @@
-import { describe, test } from '@std/testing/bdd';
-import { spy } from '@std/testing/mock';
-import { expect } from '@std/expect';
+import { describe, expect, test, vi } from 'vitest';
 
 import {
   extractSprinklesProps,
   type SprinklesFnBase,
-} from '@/utils/extract-sprinkles-props';
+} from '../extract-sprinkles-props';
 
 describe('extractSprinklesProps', () => {
   const mockSprinkles: SprinklesFnBase = {
@@ -17,7 +15,7 @@ describe('extractSprinklesProps', () => {
       color: 'red',
       fontSize: '16px',
       padding: '10px',
-      onClick: spy(),
+      onClick: vi.fn(),
       className: 'custom-class',
     };
 
@@ -40,7 +38,7 @@ describe('extractSprinklesProps', () => {
 
   test('should handle props with no sprinkles properties', () => {
     const props = {
-      onClick: spy(),
+      onClick: vi.fn(),
       className: 'custom-class',
     };
 
@@ -87,7 +85,7 @@ describe('extractSprinklesProps', () => {
 
     const props = {
       color: 'green',
-      onClick: spy(),
+      onClick: vi.fn(),
     };
 
     const [sprinkleProps, componentProps] = extractSprinklesProps(

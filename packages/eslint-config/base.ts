@@ -1,7 +1,7 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+// @ts-expect-error Declaration file is not available for the package
 import { flatConfigs as importConfigs } from 'eslint-plugin-import';
-import turboPlugin from 'eslint-plugin-turbo';
 import {
   configs as tseslintConfigs,
   config as tseslintConfig,
@@ -57,11 +57,8 @@ export const baseEslintConfig = tseslintConfig(
     },
   },
   {
-    plugins: {
-      turbo: turboPlugin,
-    },
     rules: {
-      'turbo/no-undeclared-env-vars': 'warn',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     },
   },
   {

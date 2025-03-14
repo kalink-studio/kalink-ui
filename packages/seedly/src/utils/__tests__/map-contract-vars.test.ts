@@ -1,12 +1,12 @@
-import { mapContractVars } from "@/utils/map-contract-vars.ts";
-import { describe, test } from "@std/testing/bdd";
-import { expect } from "@std/expect";
+import { describe, expect, test } from 'vitest';
 
-describe("mapContractVars", () => {
-  test("should map contract vars", () => {
+import { mapContractVars } from '../map-contract-vars';
+
+describe('mapContractVars', () => {
+  test('should map contract vars', () => {
     const contract = {
-      foo: "foo",
-      bar: "bar",
+      foo: 'foo',
+      bar: 'bar',
     };
 
     const result = mapContractVars(contract, (key) => ({
@@ -18,15 +18,15 @@ describe("mapContractVars", () => {
 
     expect(result).toEqual({
       foo: {
-        padding: "var(--foo)",
+        padding: 'var(--foo)',
         vars: {
-          "--foo": "foo",
+          '--foo': 'foo',
         },
       },
       bar: {
-        padding: "var(--bar)",
+        padding: 'var(--bar)',
         vars: {
-          "--bar": "bar",
+          '--bar': 'bar',
         },
       },
     });
