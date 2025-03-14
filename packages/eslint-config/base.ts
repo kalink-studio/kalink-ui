@@ -62,6 +62,6 @@ export const baseEslintConfig = tseslintConfig(
     },
   },
   {
-    ignores: ['dist/**'],
+    ignores: ['dist/**', 'build/**'],
   },
 );

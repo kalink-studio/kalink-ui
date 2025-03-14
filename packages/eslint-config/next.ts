@@ -6,6 +6,7 @@ export const nextEslintConfig = [
     plugins: {
       '@next/next': pluginNext,
     },
+    ignores: ['**/.next/**'],
     rules: {
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs['core-web-vitals'].rules,
