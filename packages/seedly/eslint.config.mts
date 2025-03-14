@@ -1,4 +1,3 @@
-import { baseEslintConfig } from '@kalink-ui/eslint-config/base';
-import { reactEslintConfig } from '@kalink-ui/eslint-config/react';
+import { baseEslintConfig, reactEslintConfig } from '@kalink-ui/eslint-config';
 
 export default [...baseEslintConfig, ...reactEslintConfig];

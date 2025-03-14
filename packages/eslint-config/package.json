@@ -13,10 +13,7 @@
     "tsc": "tsc --noEmit"
   },
   "exports": {
-    "./base": "./base.ts",
-    "./react": "./react.ts",
-    "./next": "./next.ts",
-    "./turbo": "./turbo.ts"
+    ".": "./index.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

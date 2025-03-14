@@ -1,3 +1,7 @@
-import { nextEslintConfig } from '@kalink-ui/eslint-config/next';
+import {
+  baseEslintConfig,
+  reactEslintConfig,
+  nextEslintConfig,
+} from '@kalink-ui/eslint-config';
 
-export default nextEslintConfig;
+export default [...baseEslintConfig, ...reactEslintConfig, ...nextEslintConfig];
