@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.8.1
+
+### Patch Changes
+
+- 6670251: Do not ignore arg-types files from npm package
+
 ## 0.8.0
 
 ### Minor Changes
