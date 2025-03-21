@@ -57,7 +57,13 @@ export const refs = createGlobalTheme(':root', {
   },
 
   typeface: {
-    brand: 'Serif',
-    plain: 'Sans Serif',
+    brand: 'serif',
+    plain: 'sans-serif',
+  },
+
+  lineHeight: {
+    md: '1',
+    lg: '1.2',
+    xl: '1.4',
   },
 });

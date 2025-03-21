@@ -20,13 +20,17 @@ createGlobalTheme(':root', sys, {
 
   state: {
     hovered: {
-      opacity: '0.08',
+      opacity: '0.1',
     },
     focused: {
       opacity: '0.12',
     },
     pressed: {
       opacity: '0.2',
+    },
+    muted: {
+      dark: '0.4',
+      light: '0.9',
     },
   },
 
@@ -90,28 +94,28 @@ createGlobalTheme(':root', sys, {
     display: {
       /* Display Large from 40px to 85px */
       large: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-display-large-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(2.5rem, calc(2.5rem + (5.3125 - 2.5) * ${refs.fluidity.interpolation}), 5.3125rem)`,
       },
 
       /* Display Medium from 34px to 65px */
       medium: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-display-medium-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(2.125rem, calc(2.125rem + (4.0625 - 2.125) * ${refs.fluidity.interpolation}), 4.0625rem)`,
       },
 
       /* Display Small from 28px to 50px */
       small: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-display-small-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1.75rem, calc(1.75rem + (3.125 - 1.75) * ${refs.fluidity.interpolation}), 3.125rem)`,
       },
     },
@@ -119,28 +123,28 @@ createGlobalTheme(':root', sys, {
     headline: {
       /* Heading Large from 32px to 68px */
       large: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-heading-large-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(2rem, calc(2rem + (4.25 - 2) * ${refs.fluidity.interpolation}), 4.25rem)`,
       },
 
       /* Heading Medium from 28px to 54px */
       medium: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-heading-medium-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1.75rem, calc(1.75rem + (3.375 - 1.75) * ${refs.fluidity.interpolation}), 3.375rem)`,
       },
 
       /* Heading Small from 24px to 44px */
       small: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-heading-small-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1.5rem, calc(1.5rem + (2.75 - 1.5) * ${refs.fluidity.interpolation}), 2.75rem)`,
       },
     },
@@ -148,28 +152,28 @@ createGlobalTheme(':root', sys, {
     /* Title Large from 24px to 36px */
     title: {
       large: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-title-large-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1.5rem, calc(1.5rem + (2.25 - 1.5) * ${refs.fluidity.interpolation}), 2.25rem)`,
       },
 
       /* Title Medium from 18px to 24px */
       medium: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-title-medium-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1.125rem, calc(1.125rem + (1.5 - 1.125) * ${refs.fluidity.interpolation}), 1.5rem)`,
       },
 
       /* Title Small from 17px to 21px */
       small: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--sys-typography-title-small-size) * 0.1)`,
+        font: refs.typeface.brand,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1.0625rem, calc(1.0625rem + (1.3125 - 1.0625) * ${refs.fluidity.interpolation}), 1.3125rem)`,
       },
     },
@@ -177,27 +181,27 @@ createGlobalTheme(':root', sys, {
     body: {
       /* Body Large from 19px to 25px */
       large: {
-        font: 'var(--ref-typeface-plain)',
-        weight: 'var(--ref-typeface-weight-regular)',
-        lineHeight: 'var(--ref-line-height-lg)',
+        font: refs.typeface.plain,
+        weight: '400',
+        lineHeight: refs.lineHeight.lg,
         tracking: 'normal',
         size: `clamp(1.1875rem, calc(1.1875rem + (1.5625 - 1.1875) * ${refs.fluidity.interpolation}), 1.5625rem)`,
       },
 
       /* Body Medium from 14px to 17px */
       medium: {
-        font: 'var(--ref-typeface-plain)',
-        weight: 'var(--ref-typeface-weight-regular)',
-        lineHeight: 'var(--ref-line-height-xl)',
+        font: refs.typeface.plain,
+        weight: '400',
+        lineHeight: refs.lineHeight.xl,
         tracking: 'normal',
         size: `clamp(0.875rem, calc(0.875rem + (1.0625 - 0.875) * ${refs.fluidity.interpolation}), 1.0625rem)`,
       },
 
       /* Body Small from 12px to 14px */
       small: {
-        font: 'var(--ref-typeface-plain)',
-        weight: 'var(--ref-typeface-weight-regular)',
-        lineHeight: 'var(--ref-line-height-md)',
+        font: refs.typeface.plain,
+        weight: '400',
+        lineHeight: refs.lineHeight.lg,
         tracking: 'normal',
         size: `clamp(0.75rem, calc(0.75rem + (0.875 - 0.75) * ${refs.fluidity.interpolation}), 0.875rem)`,
       },
@@ -206,28 +210,28 @@ createGlobalTheme(':root', sys, {
     label: {
       /* Label Large from 16px to 20px */
       large: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--ref-font-size-sm) * 0.1)`,
+        font: refs.typeface.plain,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(1rem, calc(1rem + (1.25 - 1) * ${refs.fluidity.interpolation}), 1.25rem)`,
       },
 
       /* Label Medium from 14px to 17px */
       medium: {
-        font: 'var(--ref-typeface-plain)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-xl)',
-        tracking: 'normal',
+        font: refs.typeface.plain,
+        weight: '700',
+        lineHeight: refs.lineHeight.xl,
+        tracking: '0.1',
         size: `clamp(0.875rem, calc(0.875rem + (1.0625 - 0.875) * ${refs.fluidity.interpolation}), 1.0625rem)`,
       },
 
       /* Label Small from 12px to 14px */
       small: {
-        font: 'var(--ref-typeface-brand)',
-        weight: 'var(--ref-typeface-weight-bold)',
-        lineHeight: 'var(--ref-line-height-sm)',
-        tracking: `calc(var(--ref-font-size-sm) * 0.1)`,
+        font: refs.typeface.plain,
+        weight: '700',
+        lineHeight: refs.lineHeight.md,
+        tracking: '0.1',
         size: `clamp(0.75rem, calc(0.75rem + (0.875 - 0.75) * ${refs.fluidity.interpolation}), 0.875rem)`,
       },
     },

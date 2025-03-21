@@ -1,8 +1,4 @@
-import {
-  CommonArgs,
-  commonArgs,
-  argTypesFromRecipe,
-} from '../../utils/arg-types';
+import { argTypesFromRecipe } from '../../utils/arg-types';
 
 import { Text } from './text';
 import { textRecipe } from './text.css';
@@ -14,17 +10,17 @@ const meta = {
   component: Text,
   tags: ['autodocs'],
   args: {
-    children: 'Button label',
+    children:
+      'Commodo nulla nostrud mollit veniam fugiat sunt eu qui est incididunt exercitation. Ullamco tempor nostrud pariatur nostrud ipsum nisi velit occaecat culpa officia ut. Magna dolore officia est. Qui qui sint sint elit cupidatat ea fugiat. Ut ullamco elit laborum consectetur proident. Nisi incididunt veniam amet nulla culpa ullamco tempor ut consequat voluptate consequat Lorem non. Fugiat in quis eu eu ad ad. Lorem laborum qui excepteur.',
+    variant: 'body',
+    size: 'medium',
   },
   argTypes: {
     ...argTypesFromRecipe(textRecipe),
 
-    ...commonArgs([
-      CommonArgs.COMPOSABLE,
-      CommonArgs.POLYMORPHIC,
-      CommonArgs.STYLABLE,
-      CommonArgs.REFERABLE,
-    ]),
+    use: {
+      control: false,
+    },
   },
 } satisfies Meta<typeof Text>;
 

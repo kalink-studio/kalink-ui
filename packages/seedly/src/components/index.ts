@@ -1,10 +1,13 @@
 export { Box } from './box';
 export { Center } from './center';
 export { Cluster } from './cluster';
+export { ConditionalWrapper } from "./conditional-wrapper";
 export { Cover } from './cover';
 export { Frame } from './frame';
 export { Grid } from './grid';
+export { Heading } from "./heading";
 export { plantSeed } from './seed';
 export { Sidebar } from './sidebar';
 export { Stack } from './stack';
 export { Switcher } from './switcher';
+export { Text } from './text';

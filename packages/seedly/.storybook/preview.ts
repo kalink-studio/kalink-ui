@@ -1,3 +1,5 @@
+import '../src/styles/reset.css';
+import '../src/styles/layers.css';
 import './theme/ref.css';
 import './theme/theme.css';
 

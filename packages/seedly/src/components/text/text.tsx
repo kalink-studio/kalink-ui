@@ -1,43 +1,61 @@
-import { getProp } from '@kalink-ui/dibbly';
-import { PathsOf, PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import {
+  DistributiveOmit,
+  PolymorphicComponentProps,
+  getProp,
+} from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { typography as typographyVariants } from '../../styles/typography.css';
-import { Box } from '../box';
+import { TypographySize, TypographyVariant, typography } from '../../styles';
 
-import { textRecipe, type TextVariants } from './text.css';
+import { TextVariants, textRecipe, textEllipsisWrapper } from './text.css';
 
-type TextProps<TUse extends React.ElementType> =
-  PolymorphicComponentProps<TUse> & {
+export type TextProps<TUse extends React.ElementType> = DistributiveOmit<
+  PolymorphicComponentProps<TUse>,
+  'children'
+> &
+  TextVariants & {
     /**
-     * The typography used to render the text.
+     * The size of the typography used to render the text.
      */
-    typography?: PathsOf<typeof typographyVariants>;
+    size?: TypographySize;
+
     /**
-     * If true, use an ellipsis when the text overflows the element.
+     * The typography variant used to render the text.
      */
-    ellipsis?: TextVariants['ellipsis'];
+    variant?: Extract<TypographyVariant, 'body' | 'caption' | 'label'>;
+
+    /**
+     * The text to render.
+     */
+    children: string;
   };
 
-export function Text<TUse extends ElementType>({
-  className,
-  typography,
-  ellipsis,
-  ...props
-}: TextProps<TUse>) {
-  const { use = 'span', ...rest } = props;
+export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
+  const {
+    children,
+    className,
+    ellipsis,
+    size = 'medium',
+    use: Comp = 'span',
+    variant = 'body',
+    ...rest
+  } = props;
 
   return (
-    <Box
-      // See `frontend/components/box/box.types.ts` for why the cast is required
-      use={use as TextProps<TUse>['use']}
+    <Comp
       className={clsx(
         textRecipe({ ellipsis }),
-        typography && getProp(typographyVariants, typography),
+        getProp(typography, `${variant}.${size}`),
         className,
       )}
       {...rest}
-    />
+    >
+      {ellipsis ? (
+        <span className={textEllipsisWrapper}>{children}</span>
+      ) : (
+        children
+      )}
+    </Comp>
   );
 }
