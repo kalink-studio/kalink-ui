@@ -1,5 +1,12 @@
 # @kalink-ui/seedly
 
+## 0.8.0
+
+### Minor Changes
+
+- fb11f86: Simplify package exports
+- abdbfa3: Create new Header and Button components
+
 ## 0.7.0
 
 ### Minor Changes

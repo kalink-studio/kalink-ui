@@ -1,5 +1,13 @@
 # web
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [fb11f86]
+- Updated dependencies [abdbfa3]
+  - @kalink-ui/seedly@0.8.0
+
 ## 0.1.9
 
 ### Patch Changes
