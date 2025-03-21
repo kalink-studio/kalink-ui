@@ -1,4 +1,5 @@
 import { createThemeContract } from '@vanilla-extract/css';
+import { ArrayValues } from 'type-fest';
 
 export const typeContract = {
   font: null,
@@ -7,6 +8,16 @@ export const typeContract = {
   tracking: null,
   size: null,
 } as const;
+
+const typographyVariants = [
+  'display',
+  'headline',
+  'title',
+  'label',
+  'body',
+] as const;
+
+const typographySizes = ['large', 'medium', 'small'] as const;
 
 export const sys = createThemeContract({
   layout: {
@@ -30,6 +41,10 @@ export const sys = createThemeContract({
     },
     pressed: {
       opacity: null,
+    },
+    muted: {
+      light: null,
+      dark: null,
     },
   },
 
@@ -88,37 +103,22 @@ export const sys = createThemeContract({
     },
   },
 
-  typography: {
-    display: {
-      large: typeContract,
-      medium: typeContract,
-      small: typeContract,
-    },
-
-    headline: {
-      large: typeContract,
-      medium: typeContract,
-      small: typeContract,
-    },
-
-    title: {
-      large: typeContract,
-      medium: typeContract,
-      small: typeContract,
-    },
-
-    label: {
-      large: typeContract,
-      medium: typeContract,
-      small: typeContract,
-    },
-
-    body: {
-      large: typeContract,
-      medium: typeContract,
-      small: typeContract,
-    },
-  },
+  typography: typographyVariants.reduce(
+    (acc, variant) => ({
+      ...acc,
+      [variant]: typographySizes.reduce(
+        (acc, size) => ({
+          ...acc,
+          [size]: typeContract,
+        }),
+        {} as Record<TypographySize, typeof typeContract>,
+      ),
+    }),
+    {} as Record<
+      TypographyVariant,
+      Record<TypographySize, typeof typeContract>
+    >,
+  ),
 
   spacing: {
     0: null,
@@ -142,3 +142,17 @@ export const sys = createThemeContract({
     18: null,
   },
 });
+
+export type Spacing = keyof typeof sys.spacing;
+export type TypographyVariant = ArrayValues<typeof typographyVariants>;
+export type TypographySize = ArrayValues<typeof typographySizes>;
+
+export type Duration = {
+  [K in keyof typeof sys.motion.duration]: `${K}.${Extract<keyof (typeof sys.motion.duration)[K], string | number>}`;
+}[keyof typeof sys.motion.duration];
+
+export type Easing = {
+  [K in keyof typeof sys.motion.easing]: (typeof sys.motion.easing)[K] extends string
+    ? K
+    : `${K}.${Extract<keyof (typeof sys.motion.easing)[K], string | number>}`;
+}[keyof typeof sys.motion.easing];

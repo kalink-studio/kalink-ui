@@ -1,20 +1,11 @@
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { stackRecipe, StackVariants } from './stack.css';
 
-type StackProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
-  /**
-   * Whether the stack spacing should be applied recursively
-   */
-  recursive?: StackVariants['recursive'];
-
-  /**
-   * The spacing between items
-   */
-  spacing?: StackVariants['spacing'];
-};
+type StackProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  StackVariants;
 
 /**
  * A custom element for injecting white space (margin) between flow
@@ -26,12 +17,12 @@ type StackProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
  *
  * https://every-layout.dev/layouts/stack
  */
-export const Stack = <TUse extends ElementType = 'div'>({
+export function Stack<TUse extends ElementType = 'div'>({
   recursive,
   spacing,
   className,
   ...props
-}: StackProps<TUse>) => {
+}: StackProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
@@ -40,4 +31,4 @@ export const Stack = <TUse extends ElementType = 'div'>({
       {...rest}
     />
   );
-};
+}

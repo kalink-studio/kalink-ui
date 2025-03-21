@@ -1,6 +1,6 @@
 'use client';
 
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
@@ -12,8 +12,8 @@ import {
   sideWidthVar,
 } from './sidebar.css';
 
-type SidebarProps<TUse extends ElementType> =
-  PolymorphicComponentProps<TUse> & {
+type SidebarProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  Omit<SidebarVariants, 'sideWidth'> & {
     /**
      * The size of the side element
      */
@@ -24,21 +24,6 @@ type SidebarProps<TUse extends ElementType> =
      * Should be a percentage.
      */
     contentMinWidth?: string;
-
-    /**
-     * The side of the sidebar
-     */
-    side?: SidebarVariants['side'];
-
-    /**
-     * The spacing between the sidebar and main content elements
-     */
-    spacing?: SidebarVariants['spacing'];
-
-    /**
-     * Whether the sidebar should stretch to fill the available space
-     */
-    noStretch?: SidebarVariants['noStretch'];
   };
 
 /**
@@ -49,7 +34,7 @@ type SidebarProps<TUse extends ElementType> =
  *
  * https://every-layout.dev/layouts/sidebar/
  */
-export const Sidebar = <TUse extends ElementType>({
+export function Sidebar<TUse extends ElementType>({
   side = 'left',
   sideWidth,
   contentMinWidth,
@@ -57,7 +42,7 @@ export const Sidebar = <TUse extends ElementType>({
   noStretch,
   className,
   ...props
-}: SidebarProps<TUse>) => {
+}: SidebarProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
@@ -73,4 +58,4 @@ export const Sidebar = <TUse extends ElementType>({
       {...rest}
     />
   );
-};
+}

@@ -1,4 +1,4 @@
-import { Button } from '@kalink-ui/seedly/button';
+import { Button } from '@kalink-ui/seedly';
 import Image, { type ImageProps } from 'next/image';
 
 import styles from './page.module.css';

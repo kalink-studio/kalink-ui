@@ -5,7 +5,9 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "include": [
     "**/*.ts",

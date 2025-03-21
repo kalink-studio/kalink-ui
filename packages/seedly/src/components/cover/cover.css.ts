@@ -1,9 +1,8 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { sys , mapContractVars } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 const spaceVar = createVar();
 export const minSizeVar = createVar();
@@ -16,7 +15,6 @@ export const coverRecipe = recipe({
         flexDirection: 'column',
 
         minBlockSize: minSizeVar,
-        padding: spaceVar,
 
         vars: {
           [minSizeVar]: '100vh',
@@ -26,6 +24,9 @@ export const coverRecipe = recipe({
   },
 
   variants: {
+    /**
+     * The spacing between items
+     */
     spacing: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {
@@ -35,16 +36,6 @@ export const coverRecipe = recipe({
         },
       },
     })),
-
-    noPad: {
-      true: {
-        '@layer': {
-          [components]: {
-            padding: 0,
-          },
-        },
-      },
-    },
   },
 });
 

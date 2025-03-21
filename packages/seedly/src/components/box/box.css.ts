@@ -1,15 +1,17 @@
 import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const colorForeground = createVar();
 export const colorBackground = createVar();
 
 export const boxRecipe = recipe({
   variants: {
+    /**
+     * The main variation of the box
+     */
     variant: {
       solid: {
         '@layer': {
@@ -39,6 +41,9 @@ export const boxRecipe = recipe({
       },
     },
 
+    /**
+     * The spacing between the box borders and its contents
+     */
     spacing: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {
@@ -47,6 +52,9 @@ export const boxRecipe = recipe({
       },
     })),
 
+    /**
+     * The elevation of the box
+     */
     elevation: mapContractVars(sys.elevation, (key) => ({
       '@layer': {
         [components]: {
@@ -55,6 +63,9 @@ export const boxRecipe = recipe({
       },
     })),
 
+    /**
+     * The radius of the box
+     */
     radius: mapContractVars(sys.shape.corner, (key) => ({
       '@layer': {
         [components]: {

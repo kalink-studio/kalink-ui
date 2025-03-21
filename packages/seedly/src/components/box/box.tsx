@@ -1,31 +1,11 @@
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
+import { ElementType } from 'react';
 
-import { boxRecipe, type BoxVariants } from './box.css';
+import { BoxVariants, boxRecipe } from './box.css';
 
-import type { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
-
-type BoxProps<TUse extends React.ElementType> =
-  PolymorphicComponentProps<TUse> & {
-    /**
-     * The main variation of the box
-     */
-    variant?: BoxVariants['variant'];
-
-    /**
-     * The spacing between the box borders and its contents
-     */
-    spacing?: BoxVariants['spacing'];
-
-    /**
-     * The elevation of the box
-     */
-    elevation?: BoxVariants['elevation'];
-
-    /**
-     * The radius of the box
-     */
-    radius?: BoxVariants['radius'];
-  };
+type BoxProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  BoxVariants;
 
 /**
  * A evenly spaced container for grouping related elements. Can
@@ -33,14 +13,14 @@ type BoxProps<TUse extends React.ElementType> =
  *
  * https://every-layout.dev/layouts/box
  */
-export const Box = <TUse extends React.ElementType = 'div'>({
+export function Box<TUse extends ElementType = 'div'>({
   spacing,
   radius,
   elevation,
   className,
   variant,
   ...props
-}: BoxProps<TUse>) => {
+}: BoxProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
@@ -52,4 +32,4 @@ export const Box = <TUse extends React.ElementType = 'div'>({
       {...rest}
     />
   );
-};
+}

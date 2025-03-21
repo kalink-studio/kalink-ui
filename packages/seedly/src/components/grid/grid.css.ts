@@ -1,9 +1,8 @@
 import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { sys , mapContractVars } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const minSizeVar = createVar();
 
@@ -22,6 +21,9 @@ export const gridRecipe = recipe({
   },
 
   variants: {
+    /**
+     * The spacing between the grid cell
+     */
     spacing: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {

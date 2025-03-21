@@ -142,8 +142,8 @@ importers:
         specifier: ^9.21.0
         version: 9.21.0
       '@kalink-ui/typescript-config':
-        specifier: ^0.2.0
-        version: 0.2.0(typescript@5.8.2)
+        specifier: ^0.4.0
+        version: 0.4.0(typescript@5.8.2)
       '@next/eslint-plugin-next':
         specifier: ^15.2.1
         version: 15.2.1
@@ -268,6 +268,9 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.0.0
+      react-docgen-typescript:
+        specifier: ^2.2.2
+        version: 2.2.2(typescript@5.8.2)
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
@@ -962,10 +965,10 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@kalink-ui/typescript-config@0.2.0':
-    resolution: {integrity: sha512-SDLLspvPjxqisJNIxOW9YO+WIpGDaW26qNDoES6/VwIDGi707OPy3JhPHWXVsXayhB/HEWVTMXR/f4xVXQGNiw==}
+  '@kalink-ui/typescript-config@0.4.0':
+    resolution: {integrity: sha512-Cvbu71h/0aUdJuQW/JSusR6DilvtPtNvjkvOiyGavXe9cB/OHf6Y9kkTqRhvaEttE0nkK8JzzUrCxgp0yFp/8Q==}
     peerDependencies:
-      typescript: ^5
+      typescript: ^5.8.2
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -4714,7 +4717,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kalink-ui/typescript-config@0.2.0(typescript@5.8.2)':
+  '@kalink-ui/typescript-config@0.4.0(typescript@5.8.2)':
     dependencies:
       typescript: 5.8.2
 

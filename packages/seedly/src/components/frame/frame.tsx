@@ -1,27 +1,23 @@
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { frameRecipe, FrameVariants } from './frame.css';
 
-type FrameProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
-  /**
-   * The ratio of the frame
-   */
-  ratio?: FrameVariants['ratio'];
-};
+type FrameProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  FrameVariants;
 
 /**
  * A custom element for augmenting image ratios
  *
  * https://every-layout.dev/layouts/frame
  */
-export const Frame = <TUse extends ElementType>({
+export function Frame<TUse extends ElementType>({
   ratio,
   className,
   ...props
-}: FrameProps<TUse>) => {
+}: FrameProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return <Comp className={clsx(frameRecipe({ ratio }), className)} {...rest} />;
-};
+}

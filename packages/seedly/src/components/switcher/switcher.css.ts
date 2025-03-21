@@ -1,9 +1,8 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { sys, mapContractVars } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const thresholdVar = createVar();
 export const limitVar = createVar();

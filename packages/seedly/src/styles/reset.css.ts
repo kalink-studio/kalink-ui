@@ -75,6 +75,7 @@ globalStyle('button', {
   '@layer': {
     [base]: {
       border: 'none',
+      backgroundColor: 'transparent',
 
       cursor: 'pointer',
     },

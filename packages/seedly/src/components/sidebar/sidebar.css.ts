@@ -1,9 +1,8 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { sys, mapContractVars } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const sideWidthVar = createVar();
 export const contentMinWidthVar = createVar();
@@ -23,6 +22,9 @@ export const sidebarRecipe = recipe({
   },
 
   variants: {
+    /**
+     * The spacing between the sidebar and main content elements
+     */
     spacing: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {
@@ -31,6 +33,9 @@ export const sidebarRecipe = recipe({
       },
     })),
 
+    /**
+     * Whether the sidebar should stretch to fill the available space
+     */
     noStretch: {
       true: {
         '@layer': {

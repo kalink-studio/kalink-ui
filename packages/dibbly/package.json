@@ -10,8 +10,7 @@
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "exports": {
-    ".": "./src/utils/index.ts",
-    "./types": "./src/types/index.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

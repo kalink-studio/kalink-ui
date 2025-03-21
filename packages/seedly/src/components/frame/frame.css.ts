@@ -23,6 +23,9 @@ export const frameRecipe = recipe({
   base: baseFrame,
 
   variants: {
+    /**
+     * The ratio of the frame
+     */
     ratio: {
       '1:1': {
         '@layer': {

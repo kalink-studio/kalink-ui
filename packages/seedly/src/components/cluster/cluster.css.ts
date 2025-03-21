@@ -1,8 +1,7 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { mapContractVars , sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const clusterRecipe = recipe({
   base: {
@@ -17,6 +16,9 @@ export const clusterRecipe = recipe({
   },
 
   variants: {
+    /**
+     * The spacing between items
+     */
     spacing: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {
@@ -25,6 +27,9 @@ export const clusterRecipe = recipe({
       },
     })),
 
+    /**
+     * The alignment of items along the main axis
+     */
     justify: {
       start: {
         '@layer': {
@@ -70,6 +75,9 @@ export const clusterRecipe = recipe({
       },
     },
 
+    /**
+     * The alignment of items along the cross axis
+     */
     align: {
       start: {
         '@layer': {

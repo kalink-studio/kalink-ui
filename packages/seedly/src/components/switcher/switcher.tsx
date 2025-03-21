@@ -1,28 +1,18 @@
 'use client';
 
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { switcherRecipe, SwitcherVariants, thresholdVar } from './switcher.css';
 
-type SwitcherProps<TUse extends ElementType> =
-  PolymorphicComponentProps<TUse> & {
-    /**
-     * The gap between items
-     */
-    spacing?: SwitcherVariants['spacing'];
-
+type SwitcherProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  SwitcherVariants & {
     /**
      * The threshold at which to switch between horizontal and vertical layouts
      */
     threshold?: string;
-
-    /**
-     * The maximum number of elements allowed to appear in the horizontal configuration
-     */
-    limit?: SwitcherVariants['limit'];
   };
 
 /**
@@ -31,13 +21,13 @@ type SwitcherProps<TUse extends ElementType> =
  *
  * https://every-layout.dev/layouts/switcher
  */
-export const Switcher = <TUse extends ElementType>({
+export function Switcher<TUse extends ElementType>({
   spacing,
   threshold,
   limit,
   className,
   ...props
-}: SwitcherProps<TUse>) => {
+}: SwitcherProps<TUse>) {
   const { use: Comp = 'div' } = props;
 
   return (
@@ -49,4 +39,4 @@ export const Switcher = <TUse extends ElementType>({
       {...props}
     />
   );
-};
+}

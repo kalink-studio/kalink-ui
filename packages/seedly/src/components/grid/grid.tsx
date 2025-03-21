@@ -1,23 +1,19 @@
 'use client';
 
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { gridRecipe, GridVariants, minSizeVar } from './grid.css';
 
-type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
-  /**
-   * The minimum size of a grid cell
-   */
-  minSize?: string;
-
-  /**
-   * The spacing between the grid cell
-   */
-  spacing?: GridVariants['spacing'];
-};
+type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  GridVariants & {
+    /**
+     * The minimum size of a grid cell
+     */
+    minSize?: string;
+  };
 
 /**
  * The Grid layout provides a flexible, responsive grid system that
@@ -27,12 +23,12 @@ type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
  *
  * https://every-layout.dev/layouts/grid/
  */
-export const Grid = <TUse extends ElementType>({
+export function Grid<TUse extends ElementType>({
   spacing,
   minSize,
   className,
   ...props
-}: GridProps<TUse>) => {
+}: GridProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
@@ -44,4 +40,4 @@ export const Grid = <TUse extends ElementType>({
       {...rest}
     />
   );
-};
+}

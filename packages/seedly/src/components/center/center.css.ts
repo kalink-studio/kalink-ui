@@ -1,8 +1,7 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { mapContractVars , sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { sys } from '../../styles/system-contract.css';
-import { mapContractVars } from '../../utils/map-contract-vars';
 
 export const centerRecipe = recipe({
   base: {
@@ -17,6 +16,9 @@ export const centerRecipe = recipe({
   },
 
   variants: {
+    /**
+     * Center align the text too with `text-align: center`
+     */
     andText: {
       true: {
         '@layer': {
@@ -27,6 +29,9 @@ export const centerRecipe = recipe({
       },
     },
 
+    /**
+     * Center child elements based on their content width
+     */
     intrinsic: {
       true: {
         '@layer': {
@@ -39,6 +44,9 @@ export const centerRecipe = recipe({
       },
     },
 
+    /**
+     * The minimum space on either side of the content
+     */
     gutters: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {

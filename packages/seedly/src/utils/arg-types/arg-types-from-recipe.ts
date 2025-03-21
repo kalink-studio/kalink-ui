@@ -28,7 +28,6 @@ export function argTypesFromRecipe(
         [name]: {
           control,
           options,
-          table: { category: 'Styling props' },
         },
       };
     },

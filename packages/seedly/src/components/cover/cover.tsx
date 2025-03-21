@@ -1,28 +1,19 @@
 'use client';
 
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { coverRecipe, CoverVariants, minSizeVar } from './cover.css';
 
-type CoverProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
-  /**
-   * The spacing between items
-   */
-  spacing?: CoverVariants['spacing'];
-
-  /**
-   * True if the cover should have no padding
-   */
-  noPad?: CoverVariants['noPad'];
-
-  /**
-   * The minimum height of the cover
-   */
-  minSize?: string;
-};
+type CoverProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  CoverVariants & {
+    /**
+     * The minimum height of the cover
+     */
+    minSize?: string;
+  };
 
 /**
  * A custom element for covering a block-level element horizontally,
@@ -33,22 +24,21 @@ type CoverProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
  *
  * https://every-layout.dev/layouts/cover
  */
-export const Cover = <TUse extends ElementType>({
+export function Cover<TUse extends ElementType>({
   spacing,
-  noPad,
   minSize,
   className,
   ...props
-}: CoverProps<TUse>) => {
+}: CoverProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
     <Comp
-      className={clsx(coverRecipe({ spacing, noPad }), className)}
+      className={clsx(coverRecipe({ spacing }), className)}
       style={assignInlineVars({
         ...(minSize && { [minSizeVar]: minSize }),
       })}
       {...rest}
     />
   );
-};
+}

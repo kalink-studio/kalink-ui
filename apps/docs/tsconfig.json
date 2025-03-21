@@ -5,14 +5,16 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    ".next/types/**/*.ts", 
+    ".next/types/**/*.ts",
     "eslint.config.mts"
   ],
   "exclude": [

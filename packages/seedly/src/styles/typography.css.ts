@@ -1,8 +1,6 @@
 import { styleVariants } from '@vanilla-extract/css';
 
-import { sys } from './system-contract.css';
-
-type TypographySize = 'large' | 'medium' | 'small';
+import { sys, TypographySize, TypographyVariant } from './system-contract.css';
 
 export const typography = Object.entries(sys.typography).reduce(
   (acc, [key, value]) => {
@@ -19,5 +17,5 @@ export const typography = Object.entries(sys.typography).reduce(
       }),
     };
   },
-  {} as Record<keyof typeof sys.typography, Record<TypographySize, string>>,
+  {} as Record<TypographyVariant, Record<TypographySize, string>>,
 );

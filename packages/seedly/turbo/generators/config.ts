@@ -25,10 +25,27 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         templateFile: 'templates/style.hbs',
       },
       {
-        type: 'append',
-        path: 'package.json',
-        pattern: /"exports": {(?<insertion>)/g,
-        templateFile: 'templates/export.hbs',
+        type: 'add',
+        path: 'src/components/{{kebabCase name}}/index.ts',
+        templateFile: 'templates/index.hbs',
+      },
+      {
+        type: 'modify',
+        path: 'src/components/index.ts',
+        transform: (fileContents, { name }) => {
+          const exportStatement = `export { ${plop.getHelper('pascalCase')(name)} } from "./${plop.getHelper('kebabCase')(name)}";`;
+
+          // Split lines, filter empty ones, and insert the new one
+          const lines = fileContents
+            .split('\n')
+            .filter((line) => line.trim().length > 0);
+
+          // Add new export and sort alphabetically
+          lines.push(exportStatement);
+          lines.sort((a, b) => a.localeCompare(b));
+
+          return lines.join('\n') + '\n'; // Ensure a newline at the end
+        },
       },
     ],
   });

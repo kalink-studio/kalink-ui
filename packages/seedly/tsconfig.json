@@ -1,5 +1,5 @@
 {
-  "extends": "@kalink-ui/typescript-config/react.json",
+  "extends": "@kalink-ui/typescript-config/lib-react.json",
   "include": ["**/*.ts", "**/*.tsx", "eslint.config.mts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

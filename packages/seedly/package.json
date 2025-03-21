@@ -10,22 +10,10 @@
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "exports": {
-    "./box": "./src/components/box/index.ts",
-    "./button": "./src/components/button/index.ts",
-    "./center": "./src/components/center/index.ts",
-    "./cluster": "./src/components/cluster/index.ts",
-    "./cover": "./src/components/cover/index.ts",
-    "./frame": "./src/components/frame/index.ts",
-    "./grid": "./src/components/grid/index.ts",
-    "./sidebar": "./src/components/sidebar/index.ts",
-    "./stack": "./src/components/stack/index.ts",
-    "./switcher": "./src/components/switcher/index.ts",
+    ".": "./src/index.ts",
     "./styles": "./src/styles/index.ts",
     "./styles/reset": "./src/styles/reset.css.ts",
-    "./styles/layers": "./src/styles/layers.css.ts",
-    "./types": "./src/types/index.ts",
-    "./text": "./src/components/text/index.ts",
-    "./utils": "./src/utils/index.ts"
+    "./styles/layers": "./src/styles/layers.css.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -60,6 +48,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.21.0",
     "react": "^19.0.0",
+    "react-docgen-typescript": "^2.2.2",
     "react-dom": "^19.0.0",
     "storybook": "^8.6.4",
     "type-fest": "^4.37.0",

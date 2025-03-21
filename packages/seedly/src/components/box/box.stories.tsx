@@ -1,8 +1,4 @@
-import {
-  argTypesFromRecipe,
-  CommonArgs,
-  commonArgs,
-} from '../../utils/arg-types';
+import { argTypesFromRecipe } from '../../utils';
 
 import { Box } from './box';
 import { boxRecipe } from './box.css';
@@ -18,13 +14,6 @@ const meta = {
   },
   argTypes: {
     ...argTypesFromRecipe(boxRecipe),
-
-    ...commonArgs([
-      CommonArgs.COMPOSABLE,
-      CommonArgs.POLYMORPHIC,
-      CommonArgs.STYLABLE,
-      CommonArgs.REFERABLE,
-    ]),
   },
 } satisfies Meta<typeof Box>;
 

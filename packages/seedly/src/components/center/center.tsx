@@ -1,25 +1,11 @@
-import { PolymorphicComponentProps } from '@kalink-ui/dibbly/types';
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { centerRecipe, CenterVariants } from './center.css';
 
-type CenterProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
-  /**
-   * Center align the text too with `text-align: center`
-   */
-  andText?: CenterVariants['andText'];
-
-  /**
-   * Center child elements based on their content width
-   */
-  intrinsic?: CenterVariants['intrinsic'];
-
-  /**
-   * The minimum space on either side of the content
-   */
-  gutters?: CenterVariants['gutters'];
-};
+type CenterProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
+  CenterVariants;
 
 /**
  * A custom element for centering a block-level element horizontally,
@@ -27,13 +13,13 @@ type CenterProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> & {
  *
  * https://every-layout.dev/layouts/center
  */
-export const Center = <TUse extends ElementType>({
+export function Center<TUse extends ElementType>({
   andText,
   gutters,
   intrinsic,
   className,
   ...props
-}: CenterProps<TUse>) => {
+}: CenterProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
@@ -42,4 +28,4 @@ export const Center = <TUse extends ElementType>({
       {...rest}
     />
   );
-};
+}
