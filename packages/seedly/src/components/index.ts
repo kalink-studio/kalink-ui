@@ -1,4 +1,5 @@
 export { Box } from './box';
+export { Button } from './button';
 export { Center } from './center';
 export { Cluster } from './cluster';
 export { ConditionalWrapper } from "./conditional-wrapper";
