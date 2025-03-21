@@ -2,7 +2,6 @@
 **/*.test.tsx
 **/*.test.ts
 **/*.mdx
-**/arg-types/**/*
 **/*config.*
 
 .storybook
