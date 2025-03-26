@@ -30,6 +30,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         templateFile: 'templates/index.hbs',
       },
       {
+        type: 'add',
+        path: 'src/components/{{kebabCase name}}/{{kebabCase name}}.stories.tsx',
+        templateFile: 'templates/stories.hbs',
+      },
+      {
         type: 'modify',
         path: 'src/components/index.ts',
         transform: (fileContents, { name }) => {
