@@ -1,6 +1,6 @@
 import { type PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
-import { type ElementType } from 'react';
+import { ComponentType, type ElementType } from 'react';
 
 import {
   extractSprinklesProps,
@@ -47,4 +47,41 @@ export function plantSeed<SprinklesFn extends SprinklesFnBase>({
   };
 
   return Seed;
+}
+
+/**
+ * A higher-order component that injects sprinkles and default className.
+ */
+export function withSeed<SprinklesFn extends SprinklesFnBase>({
+  sprinkles,
+  defaultClassName,
+}: CreateSeedParams<SprinklesFn>) {
+  return function wrapWithSprinkles<TProps, TUse extends ElementType>(
+    WrappedComponent: ComponentType<PolymorphicComponentProps<TUse> & TProps>,
+  ) {
+    const ComponentWithSeed = (
+      props: SeedProps<TUse, SprinklesFn> & TProps,
+    ) => {
+      const { className, ...rest } = props;
+
+      const [sprinklesProps, componentProps] = extractSprinklesProps(
+        rest,
+        sprinkles,
+      );
+
+      return (
+        // @ts-expect-error - TODO: fix this
+        <WrappedComponent
+          className={clsx(
+            sprinkles(sprinklesProps),
+            defaultClassName,
+            className,
+          )}
+          {...componentProps}
+        />
+      );
+    };
+
+    return ComponentWithSeed;
+  };
 }

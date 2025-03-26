@@ -1,1 +1,1 @@
-export { plantSeed } from './seed';
+export { plantSeed, withSeed } from './seed';
