@@ -11,11 +11,8 @@ createGlobalTheme(':root', sys, {
   },
 
   color: {
-    background: refs.colors.neutral[90],
+    background: refs.colors.neutral[100],
     foreground: refs.colors.neutral[10],
-
-    outline: refs.colors.neutral[40],
-    muted: refs.colors.neutral[20],
   },
 
   state: {
