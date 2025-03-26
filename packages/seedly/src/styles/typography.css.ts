@@ -1,5 +1,6 @@
 import { styleVariants } from '@vanilla-extract/css';
 
+import { base } from './layers.css';
 import { sys, TypographySize, TypographyVariant } from './system-contract.css';
 
 export const typography = Object.entries(sys.typography).reduce(
@@ -8,11 +9,15 @@ export const typography = Object.entries(sys.typography).reduce(
       ...acc,
       [key]: styleVariants(value, (variant) => {
         return {
-          fontFamily: variant.font,
-          fontWeight: variant.weight,
-          lineHeight: variant.lineHeight,
-          letterSpacing: variant.tracking,
-          fontSize: variant.size,
+          '@layer': {
+            [base]: {
+              fontFamily: variant.font,
+              fontWeight: variant.weight,
+              lineHeight: variant.lineHeight,
+              letterSpacing: variant.tracking,
+              fontSize: variant.size,
+            },
+          },
         };
       }),
     };
