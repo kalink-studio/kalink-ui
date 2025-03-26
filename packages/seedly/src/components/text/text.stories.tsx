@@ -6,7 +6,7 @@ import { textRecipe } from './text.css';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Component/Text',
+  title: 'Typography/Text',
   component: Text,
   tags: ['autodocs'],
   args: {
@@ -29,3 +29,29 @@ export default meta;
 type Story = StoryObj<typeof Text>;
 
 export const Default: Story = {};
+
+export const Truncate: Story = {
+  args: {
+    truncate: true,
+  },
+};
+
+export const LineClamp: Story = {
+  args: {
+    lineClamp: 2,
+  },
+};
+
+export const Wrap: Story = {
+  args: {
+    use: 'p',
+    wrap: true,
+  },
+};
+
+export const Align: Story = {
+  args: {
+    use: 'p',
+    align: 'center',
+  },
+};
