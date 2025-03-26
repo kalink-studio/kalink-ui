@@ -1,14 +1,5 @@
 {
   "extends": "@kalink-ui/typescript-config/nextjs.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "allowJs": true,
-    "esModuleInterop": true
-  },
   "include": [
     "**/*.ts",
     "**/*.tsx",
@@ -19,5 +10,9 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true
+  }
 }
