@@ -1,4 +1,4 @@
- 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
@@ -46,7 +46,7 @@ Card.Header = function CardHeader<TUse extends ElementType = 'header'>(
 ) {
   const { use: Comp = 'header', className, ...rest } = props;
 
-  return <Comp className={clsx(cardHeader, className)} {...rest} />;
+  return <Comp className={clsx(cardHeader, className)} {...(rest as any)} />;
 };
 
 Card.Body = function CardBody<TUse extends ElementType = 'div'>(
@@ -54,7 +54,7 @@ Card.Body = function CardBody<TUse extends ElementType = 'div'>(
 ) {
   const { use: Comp = 'div', className, ...rest } = props;
 
-  return <Comp className={clsx(cardBody, className)} {...rest} />;
+  return <Comp className={clsx(cardBody, className)} {...(rest as any)} />;
 };
 
 type CardFooterProps<TUse extends ElementType = 'footer'> = ClusterProps<TUse>;
@@ -68,7 +68,7 @@ Card.Footer = function CardFooter<TUse extends ElementType = 'footer'>(
     <Cluster
       use={use as CardFooterProps['use']}
       className={clsx(cardFooter, className)}
-      {...rest}
+      {...(rest as any)}
     />
   );
 };
