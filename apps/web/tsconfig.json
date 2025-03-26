@@ -8,15 +8,23 @@
     ".next/types/**/*.ts",
     "eslint.config.mts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "composite": true,
     "incremental": true,
     "rootDir": ".",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "references": [
-    { "path": "../../packages/seedly" },
-    { "path": "../../packages/dibbly" }
+    {
+      "path": "../../packages/seedly"
+    },
+    {
+      "path": "../../packages/dibbly"
+    }
   ]
 }
