@@ -28,8 +28,6 @@ export const sys = createThemeContract({
   color: {
     background: null,
     foreground: null,
-    muted: null,
-    outline: null,
   },
 
   state: {
