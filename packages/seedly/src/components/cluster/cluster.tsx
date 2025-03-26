@@ -4,8 +4,8 @@ import { ElementType } from 'react';
 
 import { clusterRecipe, ClusterVariants } from './cluster.css';
 
-type ClusterProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  ClusterVariants;
+export type ClusterProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> & ClusterVariants;
 
 /**
  * A custom element for grouping items, with control over the margin between them
