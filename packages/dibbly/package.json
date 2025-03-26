@@ -13,8 +13,10 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "test": "vitest",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "pnpm lint --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "tsc": "tsc -b"
   },
   "devDependencies": {

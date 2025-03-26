@@ -7,6 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "pnpm lint --fix",
     "tsc": "tsc -b"
   },
   "dependencies": {

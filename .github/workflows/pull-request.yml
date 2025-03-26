@@ -1,0 +1,42 @@
+name: Lint, Test, Typecheck & Validate Changesets
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }} // [!code highlight]
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }} // [!code highlight]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies with pnpm
+        run: pnpm install --frozen-lockfile
+
+      - name: Run format check
+        run: pnpm format
+
+      - name: Run Turborepo tasks
+        run: pnpm turbo run lint test tsc
+
+      - name: Validate Changesets
+        run: pnpm changeset status --since=origin/main

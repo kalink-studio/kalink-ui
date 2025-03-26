@@ -5,10 +5,15 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
     "tsc": "turbo tsc",
     "test": "turbo test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "changeset": "changeset"
+    "test:watch": "turbo test:watch",
+    "format": "prettier \"**/*.{ts,tsx,md,json,yml}\" --list-different",
+    "format:fix": "pnpm format --write",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",

@@ -8,9 +8,7 @@
     ".next/types/**/*.ts",
     "eslint.config.mts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "composite": true,
     "incremental": true,
