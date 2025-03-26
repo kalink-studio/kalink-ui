@@ -1,11 +1,7 @@
-import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-
-export const colorForeground = createVar();
-export const colorBackground = createVar();
 
 export const boxRecipe = recipe({
   variants: {
@@ -16,13 +12,8 @@ export const boxRecipe = recipe({
       solid: {
         '@layer': {
           [components]: {
-            color: colorForeground,
-            backgroundColor: colorBackground,
-          },
-
-          vars: {
-            [colorForeground]: sys.color.foreground,
-            [colorBackground]: sys.color.background,
+            color: sys.color.foreground,
+            backgroundColor: sys.color.background,
           },
         },
       },
@@ -30,10 +21,10 @@ export const boxRecipe = recipe({
       outline: {
         '@layer': {
           [components]: {
-            color: colorBackground,
+            color: sys.color.foreground,
             backgroundColor: 'transparent',
 
-            borderColor: colorBackground,
+            borderColor: sys.color.foreground,
             borderStyle: 'solid',
             borderWidth: '1px',
           },

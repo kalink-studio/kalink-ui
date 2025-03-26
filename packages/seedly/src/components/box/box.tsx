@@ -4,8 +4,8 @@ import { ElementType } from 'react';
 
 import { BoxVariants, boxRecipe } from './box.css';
 
-type BoxProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  BoxVariants;
+export type BoxProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> & BoxVariants;
 
 /**
  * A evenly spaced container for grouping related elements. Can
