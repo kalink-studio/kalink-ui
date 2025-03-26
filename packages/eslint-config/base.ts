@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import { Linter } from 'eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 // @ts-expect-error Declaration file is not available for the package
 import { flatConfigs as importConfigs } from 'eslint-plugin-import';
@@ -64,4 +65,4 @@ export const baseEslintConfig = tseslintConfig(
   {
     ignores: ['**/dist/**', '**/build/**'],
   },
-);
+) as Linter.Config[];

@@ -1,5 +1,20 @@
 {
   "extends": "@kalink-ui/typescript-config/lib-react.json",
-  "include": ["**/*.ts", "**/*.tsx", "eslint.config.mts"],
+  "include": [
+    "src",
+    ".storybook/**/*.ts",
+    "eslint.config.mts",
+    "vite.config.mts"
+  ],
   "exclude": ["node_modules"],
+  "compilerOptions": {
+    "noEmit": false,
+    "incremental": true,
+    "composite": true,
+    "types": ["react"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": ".",
+    "outDir": "dist"
+  }
 }

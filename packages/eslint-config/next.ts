@@ -1,5 +1,6 @@
 // @ts-expect-error Declaration file is not available for the package
 import pluginNext from '@next/eslint-plugin-next';
+import { Linter } from 'eslint';
 
 export const nextEslintConfig = [
   {
@@ -12,4 +13,4 @@ export const nextEslintConfig = [
       ...pluginNext.configs['core-web-vitals'].rules,
     },
   },
-];
+] as Linter.Config[];

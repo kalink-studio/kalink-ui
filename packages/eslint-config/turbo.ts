@@ -1,3 +1,4 @@
+import { Linter } from 'eslint';
 import turboPlugin from 'eslint-plugin-turbo';
 
 export const turboEslintConfig = [
@@ -9,4 +10,4 @@ export const turboEslintConfig = [
       'turbo/no-undeclared-env-vars': 'warn',
     },
   },
-];
+] as Linter.Config[];

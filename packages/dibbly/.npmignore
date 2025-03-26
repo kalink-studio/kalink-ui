@@ -1,0 +1,11 @@
+**/*.test.tsx
+**/*.test.ts
+**/*.mdx
+**/*config.*
+
+.turbo
+dist
+turbo
+
+
+.DS_Store

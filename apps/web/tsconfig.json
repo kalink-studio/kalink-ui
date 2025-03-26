@@ -4,15 +4,19 @@
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
-    "next.config.js",
+    "next.config.ts",
     ".next/types/**/*.ts",
     "eslint.config.mts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "allowJs": true,
-    "esModuleInterop": true
-  }
+    "composite": true,
+    "incremental": true,
+    "rootDir": ".",
+    "baseUrl": "."
+  },
+  "references": [
+    { "path": "../../packages/seedly" },
+    { "path": "../../packages/dibbly" }
+  ]
 }
