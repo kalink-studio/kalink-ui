@@ -9,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }} // [!code highlight]
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }} // [!code highlight]
-
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }} # [!code highlight]
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }} # [!code highlight]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
