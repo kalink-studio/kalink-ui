@@ -1,5 +1,11 @@
 # @kalink-ui/dibbly
 
+## 0.3.0
+
+### Minor Changes
+
+- 7fe5a15: Fix issues with TypeScript config and setup Github Actions
+
 ## 0.2.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # web
 
+## 0.2.0
+
+### Minor Changes
+
+- 7fe5a15: Fix issues with TypeScript config and setup Github Actions
+
+### Patch Changes
+
+- Updated dependencies [7fe5a15]
+  - @kalink-ui/seedly@0.9.0
+
 ## 0.1.11
 
 ### Patch Changes
