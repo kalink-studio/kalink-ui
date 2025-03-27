@@ -8,13 +8,19 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": []
+    },
+    "lint:fix": {
+      "dependsOn": []
     },
     "tsc": {
       "dependsOn": ["^tsc"]
     },
     "test": {
-      "dependsOn": ["^test"]
+      "dependsOn": []
+    },
+    "test:watch": {
+      "persistent": true
     },
     "dev": {
       "cache": false,

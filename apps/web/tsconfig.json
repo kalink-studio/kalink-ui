@@ -13,10 +13,16 @@
     "composite": true,
     "incremental": true,
     "rootDir": ".",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "allowJs": true,
+    "esModuleInterop": true
   },
   "references": [
-    { "path": "../../packages/seedly" },
-    { "path": "../../packages/dibbly" }
+    {
+      "path": "../../packages/seedly"
+    },
+    {
+      "path": "../../packages/dibbly"
+    }
   ]
 }

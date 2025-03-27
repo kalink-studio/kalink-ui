@@ -1,6 +1,6 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { mapContractVars , sys } from '../../styles';
+import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const centerRecipe = recipe({

@@ -4,10 +4,12 @@ import { Linter } from 'eslint';
 
 export const nextEslintConfig = [
   {
+    ignores: ['**/*.next/**'],
+  },
+  {
     plugins: {
       '@next/next': pluginNext,
     },
-    ignores: ['**/*.next/**'],
     rules: {
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs['core-web-vitals'].rules,

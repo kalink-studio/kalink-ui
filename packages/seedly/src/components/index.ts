@@ -1,6 +1,6 @@
 export { Box } from './box';
 export { Button } from './button';
-export { Card } from "./card";
+export { Card } from './card';
 export { Center } from './center';
 export { Cluster } from './cluster';
 export { ConditionalWrapper } from './conditional-wrapper';

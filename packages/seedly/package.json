@@ -16,10 +16,12 @@
     "./styles/layers": "./src/styles/layers.css.ts"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "pnpm lint --fix",
     "build-storybook": "storybook build",
     "dev": "storybook dev -p 6006 --no-open",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "tsc": "tsc -b"
   },
   "devDependencies": {
