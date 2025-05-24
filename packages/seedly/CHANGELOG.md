@@ -1,5 +1,19 @@
 # @kalink-ui/seedly
 
+## 0.10.0
+
+### Minor Changes
+
+- 84903c1: Add multiple components
+
+  - ButtonIcon
+  - TextField
+  - Select
+  - Textarea
+  - Label
+  - Loader
+  - LoaderOverly
+
 ## 0.9.0
 
 ### Minor Changes

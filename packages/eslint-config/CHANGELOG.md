@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.9.0
+
+### Minor Changes
+
+- edd6215: Fix import rules
+
 ## 0.8.0
 
 ### Minor Changes
