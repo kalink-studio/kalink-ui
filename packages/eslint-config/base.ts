@@ -3,6 +3,7 @@ import { Linter } from 'eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 // @ts-expect-error Declaration file is not available for the package
 import { flatConfigs as importConfigs } from 'eslint-plugin-import';
+import unusedImports from 'eslint-plugin-unused-imports';
 import {
   configs as tseslintConfigs,
   config as tseslintConfig,
@@ -15,6 +16,7 @@ export const baseEslintConfig = tseslintConfig(
   eslintConfigPrettier,
   {
     extends: [importConfigs.recommended, importConfigs.typescript],
+    plugins: { 'unused-imports': unusedImports },
     settings: {
       'import/parsers': {
         '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -49,17 +51,30 @@ export const baseEslintConfig = tseslintConfig(
       ],
       'import/newline-after-import': 'error',
       'import/no-duplicates': 'error',
-      'import/named': 'error',
       'import/first': 'error',
       'import/no-unresolved': 'error',
       'import/namespace': 'error',
       'import/default': 'error',
       'import/export': 'error',
+
+      'no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'error',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
     },
   },
   {
     rules: {
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
   {
