@@ -27,6 +27,6 @@ export const themeProperties = defineProperties({
 
 export type ThemeValues = keyof typeof themeProperties.styles.theme.values;
 
-export type ThemeProperties = {
+export interface ThemeProperties {
   theme?: ThemeValues;
-};
+}

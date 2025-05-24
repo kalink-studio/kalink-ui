@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@kalink-ui/web",
   "version": "0.2.0",
   "type": "module",
   "private": true,
@@ -12,13 +12,14 @@
     "tsc": "tsc -b"
   },
   "dependencies": {
-    "@kalink-ui/seedly": "workspace:*",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@kalink-ui/dibbly": "workspace:*",
     "@kalink-ui/eslint-config": "workspace:*",
+    "@kalink-ui/seedly": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
     "@types/node": "^22",
     "@types/react": "19.0.8",
