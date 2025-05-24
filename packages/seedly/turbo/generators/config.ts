@@ -38,7 +38,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: 'modify',
         path: 'src/components/index.ts',
         transform: (fileContents, { name }) => {
-          const exportStatement = `export { ${plop.getHelper('pascalCase')(name)} } from "./${plop.getHelper('kebabCase')(name)}";`;
+          const exportStatement = `export * from "./${plop.getHelper('kebabCase')(name)}";`;
 
           // Split lines, filter empty ones, and insert the new one
           const lines = fileContents
