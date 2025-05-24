@@ -1,46 +1,40 @@
-import type { SprinklesProperties } from '@vanilla-extract/sprinkles';
-import type { UnknownRecord } from 'type-fest';
+import { UnknownRecord } from 'type-fest';
 
-/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
-export interface SprinklesFnBase {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  (...args: any): string;
-  properties: Set<string>;
+export interface SprinklesFnBase<TSprinklesProps = Record<string, unknown>> {
+  (props: TSprinklesProps): string;
+  properties: Set<Extract<keyof TSprinklesProps, string>>;
 }
 
-export type GetSprinkles<T extends SprinklesFnBase> = Parameters<T>[0];
+export type GetSprinkles<T extends SprinklesFnBase> =
+  T extends SprinklesFnBase<infer TSprinklesProps> ? TSprinklesProps : never;
 
-export type SprinklesProps<TSprinklesFnBase extends SprinklesFnBase> =
-  TSprinklesFnBase['properties'] extends Set<infer T>
-    ? {
-        [KeyType in keyof T]: T[KeyType] extends SprinklesProperties
-          ? KeyType
-          : never;
-      }
-    : never;
-
-/**
- * Extracts the sprinkles properties from the given component props,
- * returning an array containing the extracted sprinkle props and
- * the remaining component props.
- */
 export const extractSprinklesProps = <
-  ComponentProps extends UnknownRecord,
-  SprinklesFn extends SprinklesFnBase,
+  TProps extends UnknownRecord,
+  TSprinkles extends SprinklesFnBase,
 >(
-  props: ComponentProps,
-  sprinkles: SprinklesFn,
-) => {
-  const sprinkleProps: Record<string, unknown> = {};
-  const componentProps: Record<string, unknown> = {};
+  props: TProps,
+  sprinkles: TSprinkles,
+): [
+  Pick<TProps, Extract<keyof TProps, keyof GetSprinkles<TSprinkles>>>,
+  Omit<TProps, Extract<keyof TProps, keyof GetSprinkles<TSprinkles>>>,
+] => {
+  const sprinkleProps = {} as Pick<
+    TProps,
+    Extract<keyof TProps, keyof GetSprinkles<TSprinkles>>
+  >;
+  const componentProps = {} as Omit<
+    TProps,
+    Extract<keyof TProps, keyof GetSprinkles<TSprinkles>>
+  >;
 
-  for (const prop of Object.keys(props)) {
-    if (sprinkles.properties.has(prop)) {
-      sprinkleProps[prop] = props[prop];
-      continue;
+  for (const key of Object.keys(props) as (keyof TProps)[]) {
+    if (sprinkles.properties.has(key as string)) {
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      (sprinkleProps as any)[key] = props[key];
+    } else {
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      (componentProps as any)[key] = props[key];
     }
-
-    componentProps[prop] = props[prop];
   }
 
   return [sprinkleProps, componentProps];
