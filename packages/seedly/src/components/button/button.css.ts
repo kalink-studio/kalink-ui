@@ -13,9 +13,6 @@ import { transition } from '../../styles/transition';
 export const buttonVars = createThemeContract({
   borderRadius: null,
   textTransform: null,
-});
-
-const vars = createThemeContract({
   color: {
     text: null,
     background: null,
@@ -42,22 +39,22 @@ export const buttonRecipe = recipe({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: vars.spacing.inner,
+        gap: buttonVars.spacing.inner,
 
-        paddingBlock: vars.spacing.block,
-        paddingInline: vars.spacing.inline,
+        paddingBlock: buttonVars.spacing.block,
+        paddingInline: buttonVars.spacing.inline,
 
-        color: vars.color.text,
+        color: buttonVars.color.text,
         textTransform: fallbackVar(buttonVars.textTransform, 'unset'),
-        backgroundColor: vars.color.background,
+        backgroundColor: buttonVars.color.background,
         borderRadius: fallbackVar(
           buttonVars.borderRadius,
           sys.shape.corner.none,
         ),
-        borderWidth: vars.border.width,
-        borderStyle: vars.border.style,
-        borderColor: vars.border.color,
-        boxShadow: vars.shadow.level,
+        borderWidth: buttonVars.border.width,
+        borderStyle: buttonVars.border.style,
+        borderColor: buttonVars.border.color,
+        boxShadow: buttonVars.shadow.level,
 
         transition: transition(
           ['background-color', 'box-shadow', 'border-color', 'color'],
@@ -81,11 +78,11 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              ...assignVars(vars.color, {
+              ...assignVars(buttonVars.color, {
                 text: sys.color.background,
                 background: sys.color.foreground,
               }),
-              ...assignVars(vars.border, {
+              ...assignVars(buttonVars.border, {
                 width: '1px',
                 style: 'solid',
                 color: 'transparent',
@@ -93,19 +90,19 @@ export const buttonRecipe = recipe({
             },
             ':hover': {
               vars: {
-                [vars.color.background]:
+                [buttonVars.color.background]:
                   `color-mix(in srgb, ${sys.color.foreground}, ${sys.color.background} calc(100% * ${sys.state.hovered.opacity}))`,
-                [vars.shadow.level]: sys.elevation.minimal,
+                [buttonVars.shadow.level]: sys.elevation.minimal,
               },
             },
             ':disabled': {
               vars: {
-                ...assignVars(vars.color, {
+                ...assignVars(buttonVars.color, {
                   text: `color-mix(in srgb, ${sys.color.background} calc(100% * ${sys.state.muted.light}), transparent)`,
                   background: `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.muted.dark}), transparent)`,
                 }),
-                [vars.shadow.level]: sys.elevation.none,
-                [vars.border.color]: `transparent`,
+                [buttonVars.shadow.level]: sys.elevation.none,
+                [buttonVars.border.color]: `transparent`,
               },
             },
           },
@@ -115,11 +112,11 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              ...assignVars(vars.color, {
+              ...assignVars(buttonVars.color, {
                 text: sys.color.foreground,
                 background: 'unset',
               }),
-              ...assignVars(vars.border, {
+              ...assignVars(buttonVars.border, {
                 width: '1px',
                 style: 'solid',
                 color: sys.color.foreground,
@@ -128,16 +125,16 @@ export const buttonRecipe = recipe({
             selectors: {
               '&:hover': {
                 vars: {
-                  [vars.color.background]:
+                  [buttonVars.color.background]:
                     `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.hovered.opacity}), transparent)`,
                 },
               },
               '&:disabled': {
                 vars: {
-                  [vars.color.background]: 'unset',
-                  [vars.color.text]:
+                  [buttonVars.color.background]: 'unset',
+                  [buttonVars.color.text]:
                     `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.muted.dark}), transparent)`,
-                  [vars.border.color]:
+                  [buttonVars.border.color]:
                     `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.muted.dark}), transparent)`,
                 },
               },
@@ -149,11 +146,11 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              ...assignVars(vars.color, {
+              ...assignVars(buttonVars.color, {
                 text: sys.color.foreground,
                 background: 'unset',
               }),
-              ...assignVars(vars.border, {
+              ...assignVars(buttonVars.border, {
                 width: '1px',
                 style: 'solid',
                 color: 'transparent',
@@ -162,14 +159,14 @@ export const buttonRecipe = recipe({
             selectors: {
               '&:hover': {
                 vars: {
-                  [vars.color.background]:
+                  [buttonVars.color.background]:
                     `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.hovered.opacity}), transparent)`,
                 },
               },
               '&:disabled': {
                 vars: {
-                  [vars.color.background]: 'unset',
-                  [vars.color.text]:
+                  [buttonVars.color.background]: 'unset',
+                  [buttonVars.color.text]:
                     `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.muted.dark}), transparent)`,
                 },
               },
@@ -185,11 +182,11 @@ export const buttonRecipe = recipe({
             textDecoration: 'none',
 
             vars: {
-              ...assignVars(vars.color, {
+              ...assignVars(buttonVars.color, {
                 text: sys.color.foreground,
                 background: 'unset',
               }),
-              ...assignVars(vars.spacing, {
+              ...assignVars(buttonVars.spacing, {
                 block: '0',
                 inline: '0',
                 inner: '0',
@@ -203,7 +200,7 @@ export const buttonRecipe = recipe({
               '&:disabled': {
                 textDecoration: 'none',
                 vars: {
-                  [vars.color.text]:
+                  [buttonVars.color.text]:
                     `color-mix(in srgb, ${sys.color.foreground} calc(100% * ${sys.state.muted.dark}), transparent)`,
                 },
               },
@@ -217,7 +214,7 @@ export const buttonRecipe = recipe({
       sm: {
         '@layer': {
           [components]: {
-            vars: assignVars(vars.spacing, {
+            vars: assignVars(buttonVars.spacing, {
               block: sys.spacing[2],
               inline: sys.spacing[3],
               inner: sys.spacing[3],
@@ -228,7 +225,7 @@ export const buttonRecipe = recipe({
       md: {
         '@layer': {
           [components]: {
-            vars: assignVars(vars.spacing, {
+            vars: assignVars(buttonVars.spacing, {
               block: sys.spacing[2],
               inline: sys.spacing[4],
               inner: sys.spacing[4],
@@ -239,7 +236,7 @@ export const buttonRecipe = recipe({
       lg: {
         '@layer': {
           [components]: {
-            vars: assignVars(vars.spacing, {
+            vars: assignVars(buttonVars.spacing, {
               block: sys.spacing[3],
               inline: sys.spacing[6],
               inner: sys.spacing[6],
@@ -260,8 +257,8 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [vars.spacing.block]: '0',
-              [vars.spacing.inline]: '0',
+              [buttonVars.spacing.block]: '0',
+              [buttonVars.spacing.inline]: '0',
             },
           },
         },
@@ -276,8 +273,8 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [vars.spacing.block]: '0',
-              [vars.spacing.inline]: '0',
+              [buttonVars.spacing.block]: '0',
+              [buttonVars.spacing.inline]: '0',
             },
           },
         },
@@ -292,8 +289,8 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [vars.spacing.block]: '0',
-              [vars.spacing.inline]: '0',
+              [buttonVars.spacing.block]: '0',
+              [buttonVars.spacing.inline]: '0',
             },
           },
         },
@@ -308,8 +305,8 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [vars.spacing.block]: '0',
-              [vars.spacing.inline]: '0',
+              [buttonVars.spacing.block]: '0',
+              [buttonVars.spacing.inline]: '0',
             },
           },
         },
@@ -324,8 +321,8 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [vars.spacing.block]: '0',
-              [vars.spacing.inline]: '0',
+              [buttonVars.spacing.block]: '0',
+              [buttonVars.spacing.inline]: '0',
             },
           },
         },
@@ -340,8 +337,8 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [vars.spacing.block]: '0',
-              [vars.spacing.inline]: '0',
+              [buttonVars.spacing.block]: '0',
+              [buttonVars.spacing.inline]: '0',
             },
           },
         },

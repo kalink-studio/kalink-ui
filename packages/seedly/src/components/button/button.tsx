@@ -11,14 +11,15 @@ import {
 } from './button.css';
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-type ButtonTypes = 'button' | 'a' | ComponentType<any>;
+export type ButtonTypes = 'button' | 'a' | ComponentType<any>;
 
-type ButtonProps<TUse extends ButtonTypes> = PolymorphicComponentProps<TUse> &
-  ButtonVariants & {
-    startSlot?: ReactNode;
-    endSlot?: ReactNode;
-    children?: string;
-  };
+export type ButtonProps<TUse extends ButtonTypes> =
+  PolymorphicComponentProps<TUse> &
+    ButtonVariants & {
+      startSlot?: ReactNode;
+      endSlot?: ReactNode;
+      children?: string;
+    };
 
 export function Button<TUse extends ButtonTypes>(props: ButtonProps<TUse>) {
   const {
@@ -39,7 +40,9 @@ export function Button<TUse extends ButtonTypes>(props: ButtonProps<TUse>) {
       {...(rest as any)}
     >
       {startSlot && <span className={clsx(buttonStartSlot)}>{startSlot}</span>}
-      <span className={clsx(buttonLabel({ size }))}>{children}</span>
+      {children && (
+        <span className={clsx(buttonLabel({ size }))}>{children}</span>
+      )}
       {endSlot && <span className={clsx(buttonEndSlot)}>{endSlot}</span>}
     </Comp>
   );
