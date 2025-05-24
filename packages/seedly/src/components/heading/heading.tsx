@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { ElementType, ReactElement } from 'react';
+import { ElementType, ReactElement, ReactNode } from 'react';
 
 import { Spacing, TypographySize, TypographyVariant } from '../../styles';
 import { ConditionalWrapper } from '../conditional-wrapper';
@@ -11,8 +11,12 @@ export type HeadingTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type HeadingProps<TUse extends ElementType = 'h2'> = Omit<
   TextProps<TUse>,
-  'variant' | 'children'
+  'variant' | 'children' | 'align'
 > & {
+  align?: Extract<
+    Pick<TextProps<TUse>, 'align'>['align'],
+    'start' | 'center' | 'end'
+  >;
   /**
    * The typography used to render the text.
    */
@@ -36,7 +40,12 @@ export type HeadingProps<TUse extends ElementType = 'h2'> = Omit<
   /**
    * The text to render.
    */
-  children: string;
+  children: ReactNode;
+
+  /**
+   * The class to pass to the root element.
+   */
+  rootClassName?: string;
 };
 
 const headingMapping: Record<
@@ -60,17 +69,21 @@ export function Heading<TUse extends HeadingTypes>({
   spacing,
   pretitle,
   subtitle,
+  rootClassName,
+  ref,
   ...rest
 }: HeadingProps<TUse>) {
   return (
     <ConditionalWrapper
+      ref={ref}
       use={'hgroup'}
       condition={!!pretitle || !!subtitle}
-      className={clsx(headingRoot({ align, spacing }))}
+      className={clsx(headingRoot({ align, spacing }), rootClassName)}
     >
       {pretitle}
 
       <Text
+        {...(!pretitle && !subtitle && { ref })}
         use={use}
         align={align}
         variant={variant ?? headingMapping[use].variant}
@@ -85,18 +98,40 @@ export function Heading<TUse extends HeadingTypes>({
   );
 }
 
+type HeadingPretitleProps = Omit<TextProps<'p'>, 'children'> & {
+  children?: string | null;
+};
+
 Heading.Pretitle = function HeadingPretitle({
   variant = 'title',
   size = 'medium',
+  children,
   ...rest
-}: TextProps<'p'>) {
-  return <Text use="p" variant={variant} size={size} {...rest} />;
+}: HeadingPretitleProps) {
+  return (
+    children && (
+      <Text use="p" variant={variant} size={size} {...rest}>
+        {children}
+      </Text>
+    )
+  );
+};
+
+type HeadingSubtitleProps = Omit<TextProps<'p'>, 'children'> & {
+  children?: string | null;
 };
 
 Heading.Subtitle = function HeadingSubtitle({
   variant = 'title',
   size = 'medium',
+  children,
   ...rest
-}: TextProps<'p'>) {
-  return <Text use="p" variant={variant} size={size} {...rest} />;
+}: HeadingSubtitleProps) {
+  return (
+    children && (
+      <Text use="p" variant={variant} size={size} {...rest}>
+        {children}
+      </Text>
+    )
+  );
 };

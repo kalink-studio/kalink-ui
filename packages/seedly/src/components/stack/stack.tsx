@@ -4,8 +4,8 @@ import { ElementType } from 'react';
 
 import { stackRecipe, StackVariants } from './stack.css';
 
-type StackProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  StackVariants;
+export type StackProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> & StackVariants;
 
 /**
  * A custom element for injecting white space (margin) between flow

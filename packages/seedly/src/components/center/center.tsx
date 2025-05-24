@@ -4,8 +4,8 @@ import { ElementType } from 'react';
 
 import { centerRecipe, CenterVariants } from './center.css';
 
-type CenterProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  CenterVariants;
+export type CenterProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> & CenterVariants;
 
 /**
  * A custom element for centering a block-level element horizontally,

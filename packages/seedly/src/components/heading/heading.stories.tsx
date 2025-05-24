@@ -27,6 +27,7 @@ export default meta;
 type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {};
+
 export const WithPretitle: Story = {
   args: {
     spacing: 4,

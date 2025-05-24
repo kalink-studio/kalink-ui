@@ -1,6 +1,6 @@
 import { type PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
-import { ComponentType, type ElementType } from 'react';
+import { type ElementType } from 'react';
 
 import {
   extractSprinklesProps,
@@ -19,10 +19,10 @@ export type SeedProps<
   TSprinklesFn extends SprinklesFnBase,
 > = PolymorphicComponentProps<TUse> & GetSprinkles<TSprinklesFn>;
 
-export type CreateSeedParams<SprinklesFn> = {
+export interface CreateSeedParams<SprinklesFn> {
   sprinkles: SprinklesFn;
   defaultClassName?: string;
-};
+}
 
 export function plantSeed<SprinklesFn extends SprinklesFnBase>({
   sprinkles,
@@ -57,7 +57,7 @@ export function withSeed<SprinklesFn extends SprinklesFnBase>({
   defaultClassName,
 }: CreateSeedParams<SprinklesFn>) {
   return function wrapWithSprinkles<TProps, TUse extends ElementType>(
-    WrappedComponent: ComponentType<PolymorphicComponentProps<TUse> & TProps>,
+    WrappedComponent: ElementType<PolymorphicComponentProps<TUse> & TProps>,
   ) {
     const ComponentWithSeed = (
       props: SeedProps<TUse, SprinklesFn> & TProps,
