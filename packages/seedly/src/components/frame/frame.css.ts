@@ -3,7 +3,7 @@ import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { components } from '../../styles/layers.css';
 
-const ratioVar = createVar();
+export const frameRatioVar = createVar();
 
 const baseFrame = style({
   '@layer': {
@@ -14,7 +14,7 @@ const baseFrame = style({
 
       overflow: 'hidden',
 
-      aspectRatio: ratioVar,
+      aspectRatio: frameRatioVar,
     },
   },
 });
@@ -31,7 +31,7 @@ export const frameRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [ratioVar]: '1 / 1',
+              [frameRatioVar]: '1 / 1',
             },
           },
         },
@@ -40,7 +40,7 @@ export const frameRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [ratioVar]: '3 / 2',
+              [frameRatioVar]: '3 / 2',
             },
           },
         },
@@ -49,7 +49,7 @@ export const frameRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [ratioVar]: '2 / 3',
+              [frameRatioVar]: '2 / 3',
             },
           },
         },
@@ -58,7 +58,7 @@ export const frameRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [ratioVar]: '4 / 3',
+              [frameRatioVar]: '4 / 3',
             },
           },
         },
@@ -67,7 +67,7 @@ export const frameRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [ratioVar]: '16 / 9',
+              [frameRatioVar]: '16 / 9',
             },
           },
         },
@@ -76,7 +76,7 @@ export const frameRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [ratioVar]: '9 / 16',
+              [frameRatioVar]: '9 / 16',
             },
           },
         },

@@ -12,12 +12,8 @@ type FrameProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
  *
  * https://every-layout.dev/layouts/frame
  */
-export function Frame<TUse extends ElementType>({
-  ratio,
-  className,
-  ...props
-}: FrameProps<TUse>) {
-  const { use: Comp = 'div', ...rest } = props;
+export function Frame<TUse extends ElementType>(props: FrameProps<TUse>) {
+  const { use: Comp = 'div', className, ratio, ...rest } = props;
 
   return <Comp className={clsx(frameRecipe({ ratio }), className)} {...rest} />;
 }

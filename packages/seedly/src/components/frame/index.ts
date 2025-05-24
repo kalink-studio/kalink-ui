@@ -1,2 +1,2 @@
 export { Frame } from './frame';
-export { frameRecipe, type FrameVariants } from './frame.css';
+export { frameRecipe, frameRatioVar, type FrameVariants } from './frame.css';

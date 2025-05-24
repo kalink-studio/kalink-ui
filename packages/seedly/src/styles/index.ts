@@ -13,3 +13,12 @@ export {
 } from './extract-sprinkles-props';
 
 export { mapContractVars } from './map-contract-vars';
+
+export {
+  defineResponsiveProperties,
+  type ResponsiveProperties,
+} from './define-responsive-properties';
+
+export { transition, type CreateTransitionFn } from './transition';
+
+export { visuallyHidden } from './visually-hidden.css';

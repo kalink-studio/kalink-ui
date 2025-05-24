@@ -115,6 +115,23 @@ export const clusterRecipe = recipe({
         },
       },
     },
+
+    direction: {
+      row: {
+        '@layer': {
+          [components]: {
+            flexDirection: 'row',
+          },
+        },
+      },
+      rowReverse: {
+        '@layer': {
+          [components]: {
+            flexDirection: 'row-reverse',
+          },
+        },
+      },
+    },
   },
 });
 

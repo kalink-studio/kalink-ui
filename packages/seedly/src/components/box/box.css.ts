@@ -1,7 +1,7 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { mapContractVars, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { mapContractVars, sys } from '@kalink-ui/seedly/styles';
+import { components } from '@kalink-ui/seedly/styles/layers';
 
 export const boxRecipe = recipe({
   variants: {

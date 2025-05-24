@@ -85,6 +85,7 @@ globalStyle('button', {
 globalStyle('a', {
   '@layer': {
     [base]: {
+      color: 'currentColor',
       textDecoration: 'none',
     },
   },

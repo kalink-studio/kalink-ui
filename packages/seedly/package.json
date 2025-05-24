@@ -54,7 +54,7 @@
     "react-dom": "^19.0.0",
     "storybook": "^8.6.9",
     "type-fest": "^4.37.0",
-    "typescript": "5.8.2",
+    "typescript": "^5.8.2",
     "vite": "^6.2.1",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.8"
@@ -66,9 +66,15 @@
     "@vanilla-extract/recipes": "^0.5.5",
     "@vanilla-extract/sprinkles": "^1.6.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.11",
+    "@radix-ui/react-popover": "^1.1.13",
+    "@radix-ui/react-scroll-area": "^1.2.6",
+    "@radix-ui/react-select": "^2.2.4",
+    "@radix-ui/react-slot": "^1.2.0",
     "clsx": "^2.1.1"
   },
   "publishConfig": {

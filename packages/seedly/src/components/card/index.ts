@@ -1,1 +1,1 @@
-export { Card } from './card';
+export { Card, type CardProps, type CardRootElement } from './card';

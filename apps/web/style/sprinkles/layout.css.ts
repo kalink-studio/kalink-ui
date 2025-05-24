@@ -47,7 +47,7 @@ export type ResponsiveValue<Value extends string | number> = ConditionalValue<
 
 export type DisplayValues = keyof typeof layoutProperties.styles.display.values;
 
-export type ResponsiveProperties = {
+export interface ResponsiveProperties {
   /** Mapped to `display` css property */
   display?: ResponsiveValue<DisplayValues>;
-};
+}

@@ -59,6 +59,19 @@ export const Link: Story = {
   },
 };
 
+export const Size: Story = {
+  args: {
+    variant: 'plain',
+  },
+  render: (args) => (
+    <Cluster spacing={4} align="center">
+      <Button size="sm" {...args} />
+      <Button size="md" {...args} />
+      <Button size="lg" {...args} />
+    </Cluster>
+  ),
+};
+
 export const Inlined: Story = {
   render: (args) => (
     <Cluster spacing={4} align="center">

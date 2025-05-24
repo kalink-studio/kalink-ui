@@ -10,11 +10,14 @@ import { ClusterProps } from '../cluster';
 
 import { card, cardBody, cardFooter, cardHeader } from './card.css';
 
-export type CardProps<TUse extends ElementType = 'article'> = BoxProps<TUse> & {
-  verticalSpacing?: Spacing;
-};
+export type CardRootElement = 'article' | 'div';
 
-export function Card<TUse extends ElementType = 'article'>(
+export type CardProps<TUse extends CardRootElement = 'article'> =
+  BoxProps<TUse> & {
+    verticalSpacing?: Spacing;
+  };
+
+export function Card<TUse extends CardRootElement = 'article'>(
   props: CardProps<TUse>,
 ) {
   const {
