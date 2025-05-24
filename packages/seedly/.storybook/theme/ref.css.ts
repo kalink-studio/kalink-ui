@@ -5,22 +5,30 @@ import {
 } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
+import { base } from '../../src/styles/layers.css';
+
 const sysFluidityMin = createVar();
 const sysFluidityMax = createVar();
 const sysFluidityInterpolation = createVar();
 
 globalStyle(':root', {
-  vars: {
-    [sysFluidityMin]: '23.5',
-    [sysFluidityMax]: '80',
-    [sysFluidityInterpolation]: calc.divide(
-      calc.subtract('100vw', calc.multiply(sysFluidityMin, '1rem')),
-      calc.subtract(sysFluidityMax, sysFluidityMin),
-    ),
+  '@layer': {
+    [base]: {
+      vars: {
+        [sysFluidityMin]: '23.5',
+        [sysFluidityMax]: '80',
+        [sysFluidityInterpolation]: calc.divide(
+          calc.subtract('100vw', calc.multiply(sysFluidityMin, '1rem')),
+          calc.subtract(sysFluidityMax, sysFluidityMin),
+        ),
+      },
+    },
   },
 });
 
 export const refs = createGlobalTheme(':root', {
+  '@layer': base,
+
   colors: {
     neutral: {
       0: '#000000',

@@ -1,10 +1,13 @@
 import { createGlobalTheme } from '@vanilla-extract/css';
 
+import { base } from '../../src/styles/layers.css';
 import { sys } from '../../src/styles/system-contract.css';
 
 import { refs } from './ref.css';
 
 createGlobalTheme(':root', sys, {
+  '@layer': base,
+
   layout: {
     measure: '75ch',
     direction: '1',
@@ -26,7 +29,7 @@ createGlobalTheme(':root', sys, {
       opacity: '0.2',
     },
     muted: {
-      dark: '0.4',
+      dark: '0.1',
       light: '0.9',
     },
   },
@@ -209,7 +212,7 @@ createGlobalTheme(':root', sys, {
       large: {
         font: refs.typeface.plain,
         weight: '700',
-        lineHeight: refs.lineHeight.md,
+        lineHeight: refs.lineHeight.xl,
         tracking: '0.1',
         size: `clamp(1rem, calc(1rem + (1.25 - 1) * ${refs.fluidity.interpolation}), 1.25rem)`,
       },
@@ -218,7 +221,7 @@ createGlobalTheme(':root', sys, {
       medium: {
         font: refs.typeface.plain,
         weight: '700',
-        lineHeight: refs.lineHeight.xl,
+        lineHeight: refs.lineHeight.lg,
         tracking: '0.1',
         size: `clamp(0.875rem, calc(0.875rem + (1.0625 - 0.875) * ${refs.fluidity.interpolation}), 1.0625rem)`,
       },
