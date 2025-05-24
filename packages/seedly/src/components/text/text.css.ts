@@ -3,7 +3,8 @@ import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { components } from '../../styles/layers.css';
 
-const lineClampNumber = createVar();
+export const lineClampNumber = createVar();
+export const textAlign = createVar();
 
 const lineClamp = style({
   '@layer': {
@@ -17,6 +18,17 @@ const lineClamp = style({
 });
 
 export const textRecipe = recipe({
+  base: {
+    '@layer': {
+      [components]: {
+        textAlign,
+
+        vars: {
+          [textAlign]: 'inherit',
+        },
+      },
+    },
+  },
   variants: {
     /**
      * Controls the wrapping of the text.
@@ -131,21 +143,36 @@ export const textRecipe = recipe({
       start: {
         '@layer': {
           [components]: {
-            textAlign: 'start',
+            vars: {
+              [textAlign]: 'start',
+            },
           },
         },
       },
       center: {
         '@layer': {
           [components]: {
-            textAlign: 'center',
+            vars: {
+              [textAlign]: 'center',
+            },
           },
         },
       },
       end: {
         '@layer': {
           [components]: {
-            textAlign: 'end',
+            vars: {
+              [textAlign]: 'end',
+            },
+          },
+        },
+      },
+      justify: {
+        '@layer': {
+          [components]: {
+            vars: {
+              [textAlign]: 'justify',
+            },
           },
         },
       },
