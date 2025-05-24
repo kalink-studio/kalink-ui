@@ -1,5 +1,11 @@
 # @kalink-ui/dibbly
 
+## 0.4.0
+
+### Minor Changes
+
+- d24c5c8: Add create-required-context and merge-refs utilities
+
 ## 0.3.0
 
 ### Minor Changes
