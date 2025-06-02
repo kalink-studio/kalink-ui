@@ -51,12 +51,16 @@ export function PopoverContent({
   portaled = true,
   scrollable = true,
   maxHeight = 'var(--radix-popover-content-available-height)',
+  elevation,
   ...props
 }: PopoverContentProps) {
   const content = (
     <Content
       align={align}
-      className={clsx(popoverContent({ width, scrollable }), className)}
+      className={clsx(
+        popoverContent({ width, scrollable, elevation }),
+        className,
+      )}
       sideOffset={0}
       asChild
       collisionPadding={16}
