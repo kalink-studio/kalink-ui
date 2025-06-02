@@ -4,7 +4,11 @@ import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { sys, mapContractVars } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-const spacing = createVar();
+const spacing = createVar({
+  syntax: '<length>',
+  initialValue: sys.spacing['0'],
+  inherits: false,
+});
 
 export const stackRecipe = recipe({
   base: {
