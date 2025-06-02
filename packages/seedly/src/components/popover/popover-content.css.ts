@@ -2,7 +2,7 @@ import { createVar, keyframes } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { mapContractVars, sys } from '../../styles';
 
 const translateX = createVar();
 const offsetX = createVar();
@@ -28,10 +28,6 @@ const leave = keyframes({
 
 export const popoverContent = recipe({
   base: {
-    padding: sys.spacing[1],
-
-    boxShadow: sys.elevation.high,
-
     animationDuration: sys.motion.duration.short[2],
     animationTimingFunction: sys.motion.easing.standard,
     animationFillMode: 'forwards',
@@ -99,6 +95,10 @@ export const popoverContent = recipe({
         overflow: 'hidden',
       },
     },
+
+    elevation: mapContractVars(sys.elevation, (key) => ({
+      boxShadow: sys.elevation[key],
+    })),
   },
 });
 

@@ -357,7 +357,12 @@ export const buttonLabel = recipe({
   },
 });
 
-export const buttonStartSlot = style({});
-export const buttonEndSlot = style({});
+const buttonSlot = style({
+  flexShrink: 0,
+});
+
+export const buttonSlotStart = style([buttonSlot]);
+
+export const buttonSlotEnd = style([buttonSlot]);
 
 export type ButtonVariants = NonNullable<RecipeVariants<typeof buttonRecipe>>;
