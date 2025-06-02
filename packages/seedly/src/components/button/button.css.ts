@@ -2,8 +2,10 @@ import {
   assignVars,
   createThemeContract,
   fallbackVar,
+  globalStyle,
   style,
 } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, typography } from '../../styles';
@@ -364,5 +366,50 @@ const buttonSlot = style({
 export const buttonSlotStart = style([buttonSlot]);
 
 export const buttonSlotEnd = style([buttonSlot]);
+
+globalStyle(`${buttonRecipe.classNames.variants.size.sm} svg`, {
+  '@layer': {
+    [components]: {
+      width: calc.multiply(
+        sys.typography.label.small.lineHeight,
+        sys.typography.label.small.size,
+      ),
+      height: calc.multiply(
+        sys.typography.label.small.lineHeight,
+        sys.typography.label.small.size,
+      ),
+    },
+  },
+});
+
+globalStyle(`${buttonRecipe.classNames.variants.size.md} svg`, {
+  '@layer': {
+    [components]: {
+      width: calc.multiply(
+        sys.typography.label.medium.lineHeight,
+        sys.typography.label.medium.size,
+      ),
+      height: calc.multiply(
+        sys.typography.label.medium.lineHeight,
+        sys.typography.label.medium.size,
+      ),
+    },
+  },
+});
+
+globalStyle(`${buttonRecipe.classNames.variants.size.lg} svg`, {
+  '@layer': {
+    [components]: {
+      width: calc.multiply(
+        sys.typography.label.large.lineHeight,
+        sys.typography.label.large.size,
+      ),
+      height: calc.multiply(
+        sys.typography.label.large.lineHeight,
+        sys.typography.label.large.size,
+      ),
+    },
+  },
+});
 
 export type ButtonVariants = NonNullable<RecipeVariants<typeof buttonRecipe>>;
