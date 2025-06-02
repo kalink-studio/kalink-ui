@@ -3,10 +3,10 @@ import { clsx } from 'clsx';
 import { ComponentType, ReactNode } from 'react';
 
 import {
-  buttonEndSlot,
   buttonLabel,
   buttonRecipe,
-  buttonStartSlot,
+  buttonSlotEnd,
+  buttonSlotStart,
   ButtonVariants,
 } from './button.css';
 
@@ -39,11 +39,11 @@ export function Button<TUse extends ButtonTypes>(props: ButtonProps<TUse>) {
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       {...(rest as any)}
     >
-      {startSlot && <span className={clsx(buttonStartSlot)}>{startSlot}</span>}
+      {startSlot && <span className={clsx(buttonSlotStart)}>{startSlot}</span>}
       {children && (
         <span className={clsx(buttonLabel({ size }))}>{children}</span>
       )}
-      {endSlot && <span className={clsx(buttonEndSlot)}>{endSlot}</span>}
+      {endSlot && <span className={clsx(buttonSlotEnd)}>{endSlot}</span>}
     </Comp>
   );
 }
