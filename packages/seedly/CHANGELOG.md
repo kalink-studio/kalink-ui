@@ -1,5 +1,14 @@
 # @kalink-ui/seedly
 
+## 0.11.0
+
+### Minor Changes
+
+- 4a6ec83: Create command component
+- ad0b4d1: [Stack] Fix inheritance of the spacing property
+- 2371dd4: [Button] Fix how slot behave in the flex context
+- 4e6b205: [Cover] Reexport `minSizeVar` custom property
+
 ## 0.10.0
 
 ### Minor Changes
