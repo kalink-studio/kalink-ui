@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.12.0
+
+### Minor Changes
+
+- 0f1ff4b: [loader] Correctly use layers to define component styles
+
 ## 0.11.0
 
 ### Minor Changes
