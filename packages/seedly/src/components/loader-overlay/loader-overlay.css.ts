@@ -1,30 +1,43 @@
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const loaderOverlay = recipe({
   base: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
 
-    height: '100%',
-    width: '100%',
+        height: '100%',
+        width: '100%',
 
-    zIndex: 1000,
+        zIndex: 1000,
 
-    backgroundColor: `color-mix(in srgb, ${sys.color.foreground} 10%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${sys.color.foreground} 10%, transparent)`,
+      },
+    },
   },
 
   variants: {
     position: {
       absolute: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
+        '@layer': {
+          [components]: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          },
+        },
       },
       relative: {
-        position: 'relative',
+        '@layer': {
+          [components]: {
+            position: 'relative',
+          },
+        },
       },
     },
   },
