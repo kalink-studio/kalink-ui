@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.13.0
+
+### Minor Changes
+
+- 89fae2d: [loader] Correctly center element with text
+
 ## 0.12.0
 
 ### Minor Changes
