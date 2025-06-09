@@ -18,7 +18,6 @@ export type StackProps<TUse extends ElementType> =
  * https://every-layout.dev/layouts/stack
  */
 export function Stack<TUse extends ElementType = 'div'>({
-  recursive,
   spacing,
   className,
   ...props
@@ -26,9 +25,6 @@ export function Stack<TUse extends ElementType = 'div'>({
   const { use: Comp = 'div', ...rest } = props;
 
   return (
-    <Comp
-      className={clsx(stackRecipe({ recursive, spacing }), className)}
-      {...rest}
-    />
+    <Comp className={clsx(stackRecipe({ spacing }), className)} {...rest} />
   );
 }
