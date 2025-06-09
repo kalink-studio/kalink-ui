@@ -211,6 +211,7 @@ export const input = style({
 
       flexGrow: 1,
       flexBasis: 1,
+      width: '100%',
 
       paddingTop: 0,
       paddingBottom: 0,
