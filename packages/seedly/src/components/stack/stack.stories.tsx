@@ -45,7 +45,6 @@ export const Default: Story = {};
 
 export const Nested: Story = {
   args: {
-    recursive: true,
     spacing: 4,
     children: (
       <>

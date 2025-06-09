@@ -61,11 +61,13 @@ export const defineResponsiveProperties = ({
       flexDirection: ['row', 'row-reverse', 'column', 'column-reverse'],
 
       justifyContent: [
+        'stretch',
         'flex-start',
         'flex-end',
         'center',
         'space-between',
         'space-around',
+        'space-evenly',
       ],
       alignItems: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       alignSelf: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
