@@ -1,6 +1,6 @@
 {
   "name": "@kalink-ui/seedly",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "A set of components for building UIs with React and TypeScript",
   "sideEffects": false,
   "license": "MIT",
