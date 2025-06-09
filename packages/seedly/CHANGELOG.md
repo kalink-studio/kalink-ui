@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.14.0
+
+### Minor Changes
+
+- 6d5d569: [Stack] Use flex-box instead of margin for spacing between elements
+
 ## 0.13.0
 
 ### Minor Changes
