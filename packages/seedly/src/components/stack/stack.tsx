@@ -20,11 +20,15 @@ export type StackProps<TUse extends ElementType> =
 export function Stack<TUse extends ElementType = 'div'>({
   spacing,
   className,
+  align,
   ...props
 }: StackProps<TUse>) {
   const { use: Comp = 'div', ...rest } = props;
 
   return (
-    <Comp className={clsx(stackRecipe({ spacing }), className)} {...rest} />
+    <Comp
+      className={clsx(stackRecipe({ spacing, align }), className)}
+      {...rest}
+    />
   );
 }
