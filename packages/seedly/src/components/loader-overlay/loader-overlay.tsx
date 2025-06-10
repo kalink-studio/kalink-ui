@@ -21,7 +21,7 @@ export function LoaderOverlay({
 }: LoaderOverlayProps) {
   return (
     <div className={clsx(loaderOverlay({ position }), className)}>
-      <Stack use={Center} spacing={spacing} intrinsic andText>
+      <Stack use={Center} align="center" spacing={spacing} intrinsic andText>
         <MoonLoader active forceMount />
         {text && <Text>{text}</Text>}
       </Stack>
