@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.15.0
+
+### Minor Changes
+
+- 7893c13: [Stack] handle items positioning
+- b1e9483: [LoaderOverlay] Correctly center elements
+- 57ca2b9: [useLocalStorage] Add new local storage management hook
+
 ## 0.14.0
 
 ### Minor Changes
