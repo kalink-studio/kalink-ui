@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.16.0
+
+### Minor Changes
+
+- 5af6427: [useLocalStorage] Move hook in the dibbly package
+
 ## 0.15.0
 
 ### Minor Changes

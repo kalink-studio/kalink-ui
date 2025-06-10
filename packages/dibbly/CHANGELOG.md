@@ -1,5 +1,11 @@
 # @kalink-ui/dibbly
 
+## 0.5.0
+
+### Minor Changes
+
+- 5af6427: [useLocalStorage] Move hook in the dibbly package
+
 ## 0.4.0
 
 ### Minor Changes
