@@ -35,6 +35,37 @@ export const stackRecipe = recipe({
         },
       },
     })),
+
+    align: {
+      start: {
+        '@layer': {
+          [components]: {
+            alignItems: 'flex-start',
+          },
+        },
+      },
+      center: {
+        '@layer': {
+          [components]: {
+            alignItems: 'center',
+          },
+        },
+      },
+      end: {
+        '@layer': {
+          [components]: {
+            alignItems: 'flex-end',
+          },
+        },
+      },
+      stretch: {
+        '@layer': {
+          [components]: {
+            alignItems: 'stretch',
+          },
+        },
+      },
+    },
   },
 });
 
