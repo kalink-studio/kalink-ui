@@ -1,5 +1,12 @@
 # @kalink-ui/seedly
 
+## 0.17.0
+
+### Minor Changes
+
+- 6d46df7: Fix styling issues after Stack component update
+- 141fc36: [Skeleton] Add new Skeleton component
+
 ## 0.16.0
 
 ### Minor Changes
