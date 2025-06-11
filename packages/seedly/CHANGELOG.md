@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.18.0
+
+### Minor Changes
+
+- a81dae0: [Skeleton] Correctly reexport component
+
 ## 0.17.0
 
 ### Minor Changes
