@@ -8,6 +8,10 @@ export const commandGroup = style([
   {
     '@layer': {
       [components]: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: sys.spacing[2],
+
         selectors: {
           '&[hidden]': {
             display: 'none',

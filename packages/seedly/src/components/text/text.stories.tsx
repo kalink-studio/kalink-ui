@@ -3,7 +3,7 @@ import { argTypesFromRecipe } from '../../utils/arg-types';
 import { Text } from './text';
 import { textRecipe } from './text.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Typography/Text',

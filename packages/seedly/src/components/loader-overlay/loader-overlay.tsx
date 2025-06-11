@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 
+import { Box } from '../box';
 import { Center } from '../center';
 import { MoonLoader } from '../loader';
 import { Stack, StackProps } from '../stack';
@@ -20,11 +21,14 @@ export function LoaderOverlay({
   spacing = 2,
 }: LoaderOverlayProps) {
   return (
-    <div className={clsx(loaderOverlay({ position }), className)}>
+    <Box
+      spacing={spacing}
+      className={clsx(loaderOverlay({ position }), className)}
+    >
       <Stack use={Center} align="center" spacing={spacing} intrinsic andText>
         <MoonLoader active forceMount />
         {text && <Text>{text}</Text>}
       </Stack>
-    </div>
+    </Box>
   );
 }

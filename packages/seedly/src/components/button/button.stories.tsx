@@ -7,7 +7,7 @@ import { Cluster } from '../cluster';
 import { Button } from './button';
 import { buttonRecipe, buttonVars } from './button.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Component/Button',

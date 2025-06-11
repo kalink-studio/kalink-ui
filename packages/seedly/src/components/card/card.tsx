@@ -38,7 +38,9 @@ export function Card<TUse extends CardRootElement = 'article'>(
       className={clsx(card, className)}
       {...rest}
     >
-      <Stack spacing={verticalSpacing ?? spacing}>{children}</Stack>
+      <Stack align="stretch" spacing={verticalSpacing ?? spacing}>
+        {children}
+      </Stack>
     </Box>
   );
 }

@@ -33,6 +33,7 @@ export const menuSeparator = recipe({
     offset: {
       true: {
         marginInline: calc.negate(sys.spacing[2]),
+        marginBlock: calc.negate(sys.spacing[2]),
       },
     },
 

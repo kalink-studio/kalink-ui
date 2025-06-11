@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { Button } from '../button';
@@ -21,12 +21,6 @@ const meta = {
     layout: 'centered',
   },
   component: SheetContent,
-  subcomponents: {
-    Sheet,
-    SheetTrigger,
-    SheetHeader,
-    SheetTitle,
-  },
   argTypes: {},
   render: (args) => <SheetStory {...args} />,
 } satisfies Meta<StoryArgs>;
@@ -64,13 +58,8 @@ const SheetStory = (props: SheetContentProps<'div'>) => {
         <SheetTrigger asChild>
           <Button variant="plain">{'Open'}</Button>
         </SheetTrigger>
-        <SheetContent
-          container={portalRoot}
-          color="surface"
-          spacing={4}
-          {...props}
-        >
-          <Stack spacing={4}>
+        <SheetContent container={portalRoot} spacing={4} {...props}>
+          <Stack spacing={4} align="stretch">
             <SheetHeader
               side={props.side}
               closeBtn={

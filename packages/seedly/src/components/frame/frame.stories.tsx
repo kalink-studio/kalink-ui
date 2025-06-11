@@ -7,7 +7,7 @@ import {
 import { Frame } from './frame';
 import { frameRecipe } from './frame.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Layout/Frame',

@@ -6,7 +6,7 @@ import { Text } from '../text';
 
 import { Card } from './card';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Component/Card',

@@ -3,7 +3,7 @@ import '../src/styles/layers.css';
 import './theme/ref.css';
 import './theme/theme.css';
 
-import { type Preview } from '@storybook/react';
+import { type Preview } from '@storybook/react-vite';
 
 const preview: Preview = {
   parameters: {
