@@ -7,7 +7,7 @@ import {
 import { Cover } from './cover';
 import { coverRecipe } from './cover.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Layout/Cover',

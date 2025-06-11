@@ -22,10 +22,10 @@ import { CommandItem } from './command-item';
 import { CommandList } from './command-list';
 import { CommandSeparator } from './command-separator';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Command',
+  title: 'Component/Command',
   parameters: {
     layout: 'centered',
   },

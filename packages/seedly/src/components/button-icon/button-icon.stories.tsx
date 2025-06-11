@@ -9,7 +9,7 @@ import { Cluster } from '../cluster';
 import { ButtonIcon } from './button-icon';
 import { buttonIcon } from './button-icon.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Component/ButtonIcon',

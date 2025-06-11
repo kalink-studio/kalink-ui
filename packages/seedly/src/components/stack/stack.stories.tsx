@@ -7,7 +7,7 @@ import {
 import { Stack } from './stack';
 import { stackRecipe } from './stack.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Layout/Stack',

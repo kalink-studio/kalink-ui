@@ -9,7 +9,7 @@ import {
 import { Switcher } from './switcher';
 import { switcherRecipe } from './switcher.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type StoryArgs = ComponentPropsWithoutRef<typeof Switcher> & {
   childCount: number;

@@ -7,7 +7,7 @@ import {
 import { Grid } from './grid';
 import { gridRecipe } from './grid.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Layout/Grid',

@@ -7,7 +7,7 @@ import {
 import { Cluster } from './cluster';
 import { clusterRecipe } from './cluster.css';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Layout/Cluster',

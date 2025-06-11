@@ -3,7 +3,7 @@ import { CommonArgs, commonArgs } from '../../utils/arg-types/common-args';
 import { Select, SelectProps } from './select';
 import { SelectItem } from './select-item';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 type StoryArgs = SelectProps & {
   withError: boolean;
