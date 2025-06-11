@@ -22,6 +22,7 @@ export * from './seed';
 export * from './select';
 export * from './sheet';
 export * from './sidebar';
+export * from './skeleton';
 export * from './stack';
 export * from './switcher';
 export * from './text';
