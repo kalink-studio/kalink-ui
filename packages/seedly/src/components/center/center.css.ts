@@ -1,7 +1,10 @@
+import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
+
+export const gutterSize = createVar();
 
 export const centerRecipe = recipe({
   base: {
@@ -11,6 +14,7 @@ export const centerRecipe = recipe({
         boxSizing: 'content-box',
         marginInline: 'auto',
         maxInlineSize: sys.layout.measure,
+        paddingInline: gutterSize,
       },
     },
   },
@@ -50,7 +54,9 @@ export const centerRecipe = recipe({
     gutters: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {
-          paddingInline: sys.spacing[key],
+          vars: {
+            [gutterSize]: sys.spacing[key],
+          },
         },
       },
     })),
