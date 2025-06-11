@@ -18,7 +18,9 @@ export function Command({
 }: CommandProps) {
   return (
     <CommandPrimitive className={clsx(className)} {...props}>
-      <Stack spacing={spacing}>{children}</Stack>
+      <Stack spacing={spacing} align="stretch">
+        {children}
+      </Stack>
     </CommandPrimitive>
   );
 }

@@ -12,17 +12,16 @@ import {
 export type CommandSeparatorProps = ComponentPropsWithRef<
   typeof CommandPrimitive.Separator
 > &
-  MenuSeparatorVariants;
+  Omit<MenuSeparatorVariants, 'spacing'>;
 
 export function CommandSeparator({
   className,
-  spacing = 4,
   offset = true,
   ...props
 }: CommandSeparatorProps) {
   return (
     <CommandPrimitive.Separator
-      className={clsx(menuSeparator({ offset, spacing }), className)}
+      className={clsx(menuSeparator({ offset }), className)}
       {...props}
     />
   );
