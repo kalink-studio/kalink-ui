@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.19.0
+
+### Minor Changes
+
+- e73d11a: [Center] Use a custom property to define gutters value
+
 ## 0.18.0
 
 ### Minor Changes
