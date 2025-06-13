@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.21.0
+
+### Minor Changes
+
+- a0f9b5c: [AlertDialog] Correctly reexport component
+
 ## 0.20.0
 
 ### Minor Changes
