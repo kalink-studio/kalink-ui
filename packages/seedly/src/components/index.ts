@@ -1,3 +1,4 @@
+export * from './alert-dialog';
 export * from './box';
 export * from './button';
 export * from './button-icon';
@@ -16,6 +17,8 @@ export * from './input';
 export * from './label';
 export * from './loader';
 export * from './loader-overlay';
+export * from './menu';
+export * from './overlay';
 export * from './popover';
 export * from './scroll-area';
 export * from './seed';
