@@ -16,13 +16,12 @@ export function SheetTitle<TUse extends HeadingTypes>(
   const { use = 'h2', className, children, variant, size, ...rest } = props;
 
   return (
-    <Title asChild>
+    <Title asChild {...rest}>
       <Heading
         use={use as HeadingProps<TUse>['use']}
         variant={variant}
         size={size}
         className={className}
-        {...rest}
       >
         {children}
       </Heading>

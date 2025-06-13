@@ -2,13 +2,13 @@
 
 import { Overlay } from '@radix-ui/react-dialog';
 import { clsx } from 'clsx';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithRef } from 'react';
 
-import { sheetOverlay } from './sheet-overlay.css';
+import { overlay } from '../overlay';
 
 export function SheetOverlay({
   className,
   ...props
-}: ComponentPropsWithoutRef<typeof Overlay>) {
-  return <Overlay className={clsx(sheetOverlay, className)} {...props} />;
+}: ComponentPropsWithRef<typeof Overlay>) {
+  return <Overlay className={clsx(overlay, className)} {...props} />;
 }

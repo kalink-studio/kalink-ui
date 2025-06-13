@@ -2,69 +2,94 @@ import { createVar, style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, transition } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const viewportMaxHeight = createVar();
 
 export const scrollArea = style({
-  overflow: 'hidden',
-  height: '100%',
+  '@layer': {
+    [components]: {
+      overflow: 'hidden',
+      height: '100%',
 
-  position: 'relative',
+      position: 'relative',
+    },
+  },
 });
 
 export const scrollAreaViewport = style({
-  height: '100%',
-  maxHeight: viewportMaxHeight,
-  width: '100%',
+  '@layer': {
+    [components]: {
+      height: '100%',
+      maxHeight: viewportMaxHeight,
+      width: '100%',
 
-  borderRadius: 'inherit',
+      borderRadius: 'inherit',
 
-  vars: {
-    [viewportMaxHeight]: 'initial',
+      vars: {
+        [viewportMaxHeight]: 'initial',
+      },
+    },
   },
 });
 
 export const scrollAreaScrollbar = recipe({
   base: {
-    display: 'flex',
+    '@layer': {
+      [components]: {
+        display: 'flex',
 
-    padding: 1,
+        padding: 1,
 
-    transition: transition(['color', 'background-color', 'border-color'], {
-      duration: 'medium.2',
-    }),
-    userSelect: 'none',
+        transition: transition(['color', 'background-color', 'border-color'], {
+          duration: 'medium.2',
+        }),
+        userSelect: 'none',
+      },
+    },
   },
 
   variants: {
     orientation: {
       vertical: {
-        height: '100%',
-        width: 10,
+        '@layer': {
+          [components]: {
+            height: '100%',
+            width: 10,
 
-        borderInlineStartWidth: 1,
-        borderInlineStartColor: 'transparent',
+            borderInlineStartWidth: 1,
+            borderInlineStartColor: 'transparent',
+          },
+        },
       },
 
       horizontal: {
-        height: 10,
-        width: '100%',
+        '@layer': {
+          [components]: {
+            height: 10,
+            width: '100%',
 
-        borderBlockStartWidth: 1,
-        borderBlockStartColor: 'transparent',
+            borderBlockStartWidth: 1,
+            borderBlockStartColor: 'transparent',
+          },
+        },
       },
     },
   },
 });
 
 export const scrollAreaThumb = style({
-  flexGrow: 1,
+  '@layer': {
+    [components]: {
+      flexGrow: 1,
 
-  position: 'relative',
+      position: 'relative',
 
-  borderRadius: sys.shape.corner.small,
+      borderRadius: sys.shape.corner.small,
 
-  backgroundColor: sys.color.foreground,
+      backgroundColor: sys.color.foreground,
+    },
+  },
 });
 
 export type ScrollAreaScrollbarVariants = NonNullable<
