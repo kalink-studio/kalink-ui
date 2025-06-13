@@ -5,8 +5,12 @@ import { components } from '../../styles/layers.css';
 
 export const headingRoot = recipe({
   base: {
-    display: 'flex',
-    flexDirection: 'column',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+    },
   },
 
   variants: {

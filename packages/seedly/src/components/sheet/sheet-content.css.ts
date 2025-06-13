@@ -2,6 +2,7 @@ import { createVar, keyframes } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 const from = createVar();
 const to = createVar();
@@ -29,29 +30,33 @@ const leave = keyframes({
 
 export const sheetContent = recipe({
   base: {
-    zIndex: 50,
-    maxWidth: '100vw',
-    maxHeight: '100vh',
+    '@layer': {
+      [components]: {
+        zIndex: 50,
+        maxWidth: '100vw',
+        maxHeight: '100vh',
 
-    position: 'fixed',
+        position: 'fixed',
 
-    boxShadow: sys.elevation.high,
+        boxShadow: sys.elevation.high,
 
-    animationDuration: sys.motion.duration.medium[2],
-    animationTimingFunction: sys.motion.easing.standard,
-    animationFillMode: 'both',
+        animationDuration: sys.motion.duration.medium[2],
+        animationTimingFunction: sys.motion.easing.standard,
+        animationFillMode: 'both',
 
-    selectors: {
-      '&[data-state="open"]': {
-        animationName: enter,
+        selectors: {
+          '&[data-state="open"]': {
+            animationName: enter,
 
-        pointerEvents: 'auto',
-      },
+            pointerEvents: 'auto',
+          },
 
-      '&[data-state="closed"]': {
-        animationName: leave,
+          '&[data-state="closed"]': {
+            animationName: leave,
 
-        pointerEvents: 'none',
+            pointerEvents: 'none',
+          },
+        },
       },
     },
   },
@@ -59,74 +64,106 @@ export const sheetContent = recipe({
   variants: {
     side: {
       top: {
-        height: size,
-        width: '100vw',
+        '@layer': {
+          [components]: {
+            height: size,
+            width: '100vw',
 
-        insetBlockStart: 0,
-        insetInline: 0,
+            insetBlockStart: 0,
+            insetInline: 0,
 
-        vars: {
-          [from]: 'translateY(-100%)',
-          [to]: 'translateY(0)',
+            vars: {
+              [from]: 'translateY(-100%)',
+              [to]: 'translateY(0)',
+            },
+          },
         },
       },
       right: {
-        height: '100vh',
-        width: size,
+        '@layer': {
+          [components]: {
+            height: '100vh',
+            width: size,
 
-        insetBlock: 0,
-        insetInlineEnd: 0,
+            insetBlock: 0,
+            insetInlineEnd: 0,
 
-        vars: {
-          [from]: 'translateX(100%)',
-          [to]: 'translateX(0)',
+            vars: {
+              [from]: 'translateX(100%)',
+              [to]: 'translateX(0)',
+            },
+          },
         },
       },
       bottom: {
-        height: size,
-        width: '100vw',
+        '@layer': {
+          [components]: {
+            height: size,
+            width: '100vw',
 
-        insetBlockEnd: 0,
-        insetInline: 0,
+            insetBlockEnd: 0,
+            insetInline: 0,
 
-        vars: {
-          [from]: 'translateY(100%)',
-          [to]: 'translateY(0)',
+            vars: {
+              [from]: 'translateY(100%)',
+              [to]: 'translateY(0)',
+            },
+          },
         },
       },
       left: {
-        height: '100vh',
-        width: size,
+        '@layer': {
+          [components]: {
+            height: '100vh',
+            width: size,
 
-        insetBlock: 0,
-        insetInlineStart: 0,
+            insetBlock: 0,
+            insetInlineStart: 0,
 
-        vars: {
-          [from]: 'translateX(-100%)',
-          [to]: 'translateX(0)',
+            vars: {
+              [from]: 'translateX(-100%)',
+              [to]: 'translateX(0)',
+            },
+          },
         },
       },
     },
 
     size: {
       sm: {
-        vars: {
-          [size]: '300px',
+        '@layer': {
+          [components]: {
+            vars: {
+              [size]: '300px',
+            },
+          },
         },
       },
       base: {
-        vars: {
-          [size]: '400px',
+        '@layer': {
+          [components]: {
+            vars: {
+              [size]: '400px',
+            },
+          },
         },
       },
       md: {
-        vars: {
-          [size]: '500px',
+        '@layer': {
+          [components]: {
+            vars: {
+              [size]: '500px',
+            },
+          },
         },
       },
       lg: {
-        vars: {
-          [size]: '600px',
+        '@layer': {
+          [components]: {
+            vars: {
+              [size]: '600px',
+            },
+          },
         },
       },
     },

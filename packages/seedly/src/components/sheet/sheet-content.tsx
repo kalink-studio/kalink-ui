@@ -2,7 +2,7 @@
 
 import { Content, Portal } from '@radix-ui/react-dialog';
 import { clsx } from 'clsx';
-import { ComponentPropsWithoutRef, ElementType } from 'react';
+import { ComponentPropsWithRef, ElementType } from 'react';
 
 import { Box, BoxProps } from '../box';
 import { ScrollArea } from '../scroll-area';
@@ -12,7 +12,7 @@ import { sheetContent, SheetContentVariants } from './sheet-content.css';
 import { SheetOverlay } from './sheet-overlay';
 
 export type SheetContentProps<TUse extends ElementType> = BoxProps<TUse> &
-  ComponentPropsWithoutRef<typeof Portal> &
+  ComponentPropsWithRef<typeof Portal> &
   SheetContentVariants;
 
 export function SheetContent<TUse extends ElementType>({

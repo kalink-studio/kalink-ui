@@ -98,7 +98,7 @@ export function Heading<TUse extends HeadingTypes>({
   );
 }
 
-type HeadingPretitleProps = Omit<TextProps<'p'>, 'children'> & {
+export type HeadingPretitleProps = Omit<TextProps<'p'>, 'children'> & {
   children?: string | null;
 };
 
@@ -117,7 +117,7 @@ Heading.Pretitle = function HeadingPretitle({
   );
 };
 
-type HeadingSubtitleProps = Omit<TextProps<'p'>, 'children'> & {
+export type HeadingSubtitleProps = Omit<TextProps<'p'>, 'children'> & {
   children?: string | null;
 };
 
