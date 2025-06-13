@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.20.0
+
+### Minor Changes
+
+- d902023: [AlertDialog] Create new AlertDialog component
+
 ## 0.19.0
 
 ### Minor Changes
