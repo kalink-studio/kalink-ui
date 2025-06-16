@@ -69,6 +69,7 @@ export const defineResponsiveProperties = ({
         'space-around',
         'space-evenly',
       ],
+      justifySelf: ['start', 'end', 'center', 'stretch'],
       alignItems: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       alignSelf: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
 
@@ -131,6 +132,8 @@ export type DisplayValues =
   keyof DefineResponsiveProperties['styles']['display']['values'];
 export type JustifyContentValues =
   keyof DefineResponsiveProperties['styles']['justifyContent']['values'];
+export type JustifySelfValues =
+  keyof DefineResponsiveProperties['styles']['justifySelf']['values'];
 export type AlignItemsValues =
   keyof DefineResponsiveProperties['styles']['alignItems']['values'];
 export type AlignSelfValues =
@@ -180,6 +183,8 @@ export interface ResponsiveProperties {
   flexDirection?: ResponsiveValue<FlexDirectionValues>;
   /** Mapped to `justify-content` css property */
   justifyContent?: ResponsiveValue<JustifyContentValues>;
+  /** Mapped to `justify-self` css property */
+  justifySelf?: ResponsiveValue<JustifySelfValues>;
   /** Mapped to `align-items` css property */
   alignItems?: ResponsiveValue<AlignItemsValues>;
   /** Mapped to `align-self` css property */
