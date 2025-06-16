@@ -15,7 +15,7 @@ export function ButtonIcon<TUse extends ButtonTypes>(
 
   return (
     <Comp
-      className={clsx(buttonIcon({ variant, size }), buttonIcon, className)}
+      className={clsx(buttonIcon({ variant, size }), className)}
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       {...(rest as any)}
     />
