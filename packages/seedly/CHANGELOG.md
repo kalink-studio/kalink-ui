@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.22.0
+
+### Minor Changes
+
+- 26816de: [Styles] Add `justifySelf` responsive property
+
 ## 0.21.0
 
 ### Minor Changes
