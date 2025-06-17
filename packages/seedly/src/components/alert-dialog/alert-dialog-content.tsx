@@ -28,6 +28,7 @@ export function AlertDialogContent({
   maxHeight = '50vh',
   elevation = 'high',
   radius,
+  spacing = 2,
   ...props
 }: AlertDialogContentProps) {
   return (
@@ -38,7 +39,12 @@ export function AlertDialogContent({
         asChild
         {...props}
       >
-        <Box spacing={2} variant="solid" elevation={elevation} radius={radius}>
+        <Box
+          variant="solid"
+          spacing={spacing}
+          elevation={elevation}
+          radius={radius}
+        >
           <ScrollArea maxHeight={maxHeight}>{children}</ScrollArea>
         </Box>
       </Content>
