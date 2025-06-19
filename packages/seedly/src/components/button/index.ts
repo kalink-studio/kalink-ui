@@ -9,4 +9,11 @@ export {
   type ButtonLabelProps,
   type ButtonSlotProps,
 } from './button';
-export { buttonRecipe, type ButtonVariants } from './button.css';
+
+export {
+  buttonRecipe,
+  buttonVars,
+  buttonSlot,
+  buttonLabel,
+  type ButtonVariants,
+} from './button.css';
