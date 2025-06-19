@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.23.0
+
+### Minor Changes
+
+- e77a3af: [AlertDialog] Correctly pass spacing prop to underlying `Box` component
+- 985fd61: [Button] Reexport all style definitions
+- a150fe7: [Button] Expose inner components to enhance composability
+
 ## 0.22.0
 
 ### Minor Changes
