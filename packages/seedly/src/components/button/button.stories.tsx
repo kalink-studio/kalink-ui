@@ -1,4 +1,5 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { Check } from 'lucide-react';
 
 import { sys } from '../../styles';
 import { argTypesFromRecipe } from '../../utils';
@@ -38,6 +39,13 @@ type Story = StoryObj<typeof Button>;
 export const Plain: Story = {
   args: {
     variant: 'plain',
+  },
+};
+
+export const WithStartSlot: Story = {
+  args: {
+    variant: 'plain',
+    startSlot: <Check />,
   },
 };
 

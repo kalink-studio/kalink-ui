@@ -3,7 +3,6 @@ import {
   createThemeContract,
   fallbackVar,
   globalStyle,
-  style,
 } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
@@ -359,13 +358,18 @@ export const buttonLabel = recipe({
   },
 });
 
-const buttonSlot = style({
-  flexShrink: 0,
+export const buttonSlot = recipe({
+  base: {
+    flexShrink: 0,
+  },
+
+  variants: {
+    position: {
+      start: {},
+      end: {},
+    },
+  },
 });
-
-export const buttonSlotStart = style([buttonSlot]);
-
-export const buttonSlotEnd = style([buttonSlot]);
 
 globalStyle(`${buttonRecipe.classNames.variants.size.sm} svg`, {
   '@layer': {
