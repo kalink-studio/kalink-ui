@@ -48,9 +48,8 @@ export const WithPretitle: Story = {
         <Heading
           variant="display"
           size="small"
-          spacing={2}
           pretitle={
-            <Heading.Pretitle>
+            <Heading.Pretitle spacing={2}>
               Incididunt proident laborum elit
             </Heading.Pretitle>
           }
@@ -75,9 +74,8 @@ export const WithSubtitle: Story = {
         <Heading
           variant="display"
           size="small"
-          spacing={2}
           subtitle={
-            <Heading.Subtitle>
+            <Heading.Subtitle spacing={2}>
               Incididunt proident laborum elit
             </Heading.Subtitle>
           }

@@ -5,7 +5,7 @@ import { Spacing, TypographySize, TypographyVariant } from '../../styles';
 import { ConditionalWrapper } from '../conditional-wrapper';
 import { Text, TextProps } from '../text';
 
-import { headingRoot } from './heading.css';
+import { headingRoot, pretitle, subtitle } from './heading.css';
 
 export type HeadingTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
@@ -31,11 +31,6 @@ export type HeadingProps<TUse extends ElementType = 'h2'> = Omit<
    * If provided, the text will be rendered after the title.
    */
   subtitle?: ReactElement<TextProps<'p'>>;
-
-  /**
-   * The spacing between the title and the pretitle or subtitle.
-   */
-  spacing?: Spacing;
 
   /**
    * The text to render.
@@ -66,7 +61,6 @@ export function Heading<TUse extends HeadingTypes>({
   size,
   variant,
   align,
-  spacing,
   pretitle,
   subtitle,
   rootClassName,
@@ -78,7 +72,7 @@ export function Heading<TUse extends HeadingTypes>({
       ref={ref}
       use={'hgroup'}
       condition={!!pretitle || !!subtitle}
-      className={clsx(headingRoot({ align, spacing }), rootClassName)}
+      className={clsx(headingRoot({ align }), rootClassName)}
     >
       {pretitle}
 
@@ -100,17 +94,26 @@ export function Heading<TUse extends HeadingTypes>({
 
 export type HeadingPretitleProps = Omit<TextProps<'p'>, 'children'> & {
   children?: string | null;
+  spacing?: Spacing;
 };
 
 Heading.Pretitle = function HeadingPretitle({
   variant = 'title',
   size = 'medium',
+  spacing,
   children,
+  className,
   ...rest
 }: HeadingPretitleProps) {
   return (
     children && (
-      <Text use="p" variant={variant} size={size} {...rest}>
+      <Text
+        use="p"
+        variant={variant}
+        size={size}
+        className={clsx(pretitle({ spacing }), className)}
+        {...rest}
+      >
         {children}
       </Text>
     )
@@ -119,17 +122,26 @@ Heading.Pretitle = function HeadingPretitle({
 
 export type HeadingSubtitleProps = Omit<TextProps<'p'>, 'children'> & {
   children?: string | null;
+  spacing?: Spacing;
 };
 
 Heading.Subtitle = function HeadingSubtitle({
   variant = 'title',
   size = 'medium',
+  spacing,
   children,
+  className,
   ...rest
 }: HeadingSubtitleProps) {
   return (
     children && (
-      <Text use="p" variant={variant} size={size} {...rest}>
+      <Text
+        use="p"
+        variant={variant}
+        size={size}
+        className={clsx(subtitle({ spacing }), className)}
+        {...rest}
+      >
         {children}
       </Text>
     )

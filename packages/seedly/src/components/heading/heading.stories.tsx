@@ -30,16 +30,14 @@ export const Default: Story = {};
 
 export const WithPretitle: Story = {
   args: {
-    spacing: 4,
     children: 'Lorem ipsum dolor sit amet',
-    pretitle: <Heading.Pretitle>Lorem ipsum</Heading.Pretitle>,
+    pretitle: <Heading.Pretitle spacing={4}>Lorem ipsum</Heading.Pretitle>,
   },
 };
 
 export const WithSubtitle: Story = {
   args: {
-    spacing: 4,
     children: 'Lorem ipsum dolor sit amet',
-    subtitle: <Heading.Subtitle>Lorem ipsum</Heading.Subtitle>,
+    subtitle: <Heading.Subtitle spacing={2}>Lorem ipsum</Heading.Subtitle>,
   },
 };
