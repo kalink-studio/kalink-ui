@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.24.0
+
+### Minor Changes
+
+- 9072db5: [Heading] Allow for different pretitle and subtitle spacing
+
 ## 0.23.0
 
 ### Minor Changes
