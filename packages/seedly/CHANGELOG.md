@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.25.0
+
+### Minor Changes
+
+- f41d4a0: [Switcher] Correctly export types
+
 ## 0.24.0
 
 ### Minor Changes
