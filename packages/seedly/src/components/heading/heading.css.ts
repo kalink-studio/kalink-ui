@@ -40,11 +40,27 @@ export const headingRoot = recipe({
         },
       },
     },
+  },
+});
 
+export const pretitle = recipe({
+  variants: {
     spacing: mapContractVars(sys.spacing, (key) => ({
       '@layer': {
         [components]: {
-          gap: sys.spacing[key],
+          marginBlockEnd: sys.spacing[key],
+        },
+      },
+    })),
+  },
+});
+
+export const subtitle = recipe({
+  variants: {
+    spacing: mapContractVars(sys.spacing, (key) => ({
+      '@layer': {
+        [components]: {
+          marginBlockStart: sys.spacing[key],
         },
       },
     })),
