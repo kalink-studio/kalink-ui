@@ -7,13 +7,14 @@ import { ElementType } from 'react';
 
 import { switcherRecipe, SwitcherVariants, thresholdVar } from './switcher.css';
 
-type SwitcherProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  SwitcherVariants & {
-    /**
-     * The threshold at which to switch between horizontal and vertical layouts
-     */
-    threshold?: string;
-  };
+export type SwitcherProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> &
+    SwitcherVariants & {
+      /**
+       * The threshold at which to switch between horizontal and vertical layouts
+       */
+      threshold?: string;
+    };
 
 /**
  * Switch directly between horizontal and vertical layouts
