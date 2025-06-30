@@ -39,6 +39,14 @@ export const headingRoot = recipe({
           },
         },
       },
+      justify: {
+        '@layer': {
+          [components]: {
+            alignItems: 'stretch',
+            textAlign: 'justify',
+          },
+        },
+      },
     },
   },
 });

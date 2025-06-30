@@ -1,47 +1,48 @@
+import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType, ReactElement, ReactNode } from 'react';
 
 import { Spacing, TypographySize, TypographyVariant } from '../../styles';
 import { ConditionalWrapper } from '../conditional-wrapper';
-import { Text, TextProps } from '../text';
+import { Text, TextProps, TextVariants } from '../text';
 
 import { headingRoot, pretitle, subtitle } from './heading.css';
 
 export type HeadingTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-export type HeadingProps<TUse extends ElementType = 'h2'> = Omit<
-  TextProps<TUse>,
-  'variant' | 'children' | 'align'
-> & {
-  align?: Extract<
-    Pick<TextProps<TUse>, 'align'>['align'],
-    'start' | 'center' | 'end'
-  >;
-  /**
-   * The typography used to render the text.
-   */
-  variant: Extract<TypographyVariant, 'display' | 'headline' | 'title'>;
+export type HeadingProps<TUse extends ElementType = 'h2'> =
+  PolymorphicComponentProps<TUse> &
+    TextVariants & {
+      /**
+       * The typography used to render the text.
+       */
+      variant: Extract<TypographyVariant, 'display' | 'headline' | 'title'>;
 
-  /**
-   * If provided, the text will be rendered before the title.
-   */
-  pretitle?: ReactElement<TextProps<'p'>>;
+      /**
+       * The size of the typography used to render the text.
+       */
+      size?: TypographySize;
 
-  /**
-   * If provided, the text will be rendered after the title.
-   */
-  subtitle?: ReactElement<TextProps<'p'>>;
+      /**
+       * If provided, the text will be rendered before the title.
+       */
+      pretitle?: ReactElement<TextProps<'p'>>;
 
-  /**
-   * The text to render.
-   */
-  children: ReactNode;
+      /**
+       * If provided, the text will be rendered after the title.
+       */
+      subtitle?: ReactElement<TextProps<'p'>>;
 
-  /**
-   * The class to pass to the root element.
-   */
-  rootClassName?: string;
-};
+      /**
+       * The text to render.
+       */
+      children: ReactNode;
+
+      /**
+       * The class to pass to the root element.
+       */
+      rootClassName?: string;
+    };
 
 const headingMapping: Record<
   HeadingTypes,
@@ -55,18 +56,20 @@ const headingMapping: Record<
   h6: { variant: 'headline', size: 'small' },
 };
 
-export function Heading<TUse extends HeadingTypes>({
-  children,
-  use = 'h2',
-  size,
-  variant,
-  align,
-  pretitle,
-  subtitle,
-  rootClassName,
-  ref,
-  ...rest
-}: HeadingProps<TUse>) {
+export function Heading<TUse extends HeadingTypes>(props: HeadingProps<TUse>) {
+  const {
+    children,
+    use = 'h2',
+    size,
+    variant,
+    align,
+    pretitle,
+    subtitle,
+    rootClassName,
+    ref,
+    ...rest
+  } = props;
+
   return (
     <ConditionalWrapper
       ref={ref}
@@ -78,7 +81,7 @@ export function Heading<TUse extends HeadingTypes>({
 
       <Text
         {...(!pretitle && !subtitle && { ref })}
-        use={use}
+        use={use as HeadingProps<TUse>['use']}
         align={align}
         variant={variant ?? headingMapping[use].variant}
         size={size ?? headingMapping[use].size}
