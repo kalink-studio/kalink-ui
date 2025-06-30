@@ -13,7 +13,18 @@ type SheetTitleProps<TUse extends HeadingTypes> = ComponentPropsWithRef<
 export function SheetTitle<TUse extends HeadingTypes>(
   props: SheetTitleProps<TUse>,
 ) {
-  const { use = 'h2', className, children, variant, size, ...rest } = props;
+  const {
+    use = 'h2',
+    className,
+    children,
+    variant,
+    size,
+    align,
+    subtitle,
+    pretitle,
+    rootClassName,
+    ...rest
+  } = props;
 
   return (
     <Title asChild {...rest}>
@@ -22,6 +33,10 @@ export function SheetTitle<TUse extends HeadingTypes>(
         variant={variant}
         size={size}
         className={className}
+        align={align}
+        pretitle={pretitle}
+        subtitle={subtitle}
+        rootClassName={rootClassName}
       >
         {children}
       </Heading>
