@@ -1,5 +1,12 @@
 # @kalink-ui/seedly
 
+## 0.25.0
+
+### Minor Changes
+
+- f41d4a0: [Switcher] Correctly export types
+- 810fdce: [Heading] Fix prop types definition
+
 ## 0.24.0
 
 ### Minor Changes
