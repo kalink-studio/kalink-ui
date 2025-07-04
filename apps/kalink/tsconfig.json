@@ -1,0 +1,33 @@
+{
+  "extends": "@kalink-ui/typescript-config/nextjs.json",
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "next-env.d.ts",
+    "next.config.ts",
+    ".next/types/**/*.ts",
+    "eslint.config.mts"
+  ],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@payload-config": ["./payload.config.ts"]
+    }
+  },
+  "references": [
+    {
+      "path": "../../packages/seedly"
+    },
+    {
+      "path": "../../packages/dibbly"
+    }
+  ]
+}

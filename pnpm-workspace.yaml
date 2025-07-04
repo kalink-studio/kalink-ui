@@ -1,8 +1,12 @@
 packages:
   - apps/*
   - packages/*
+
 onlyBuiltDependencies:
+  - bufferutil
   - core-js-pure
   - esbuild
   - msw
   - sharp
+  - unrs-resolver
+  - utf-8-validate
