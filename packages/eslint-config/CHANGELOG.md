@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.10.0
+
+### Minor Changes
+
+- 2a6e735: Add curly brace rule to enforce block scope
+
 ## 0.9.0
 
 ### Minor Changes
