@@ -29,6 +29,8 @@ export const mergeRefs: <T>(
   }
 
   return () => {
-    for (const cleanup of cleanups) cleanup();
+    for (const cleanup of cleanups) {
+      cleanup();
+    }
   };
 };

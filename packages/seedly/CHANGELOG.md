@@ -104,7 +104,6 @@
 ### Minor Changes
 
 - 84903c1: Add multiple components
-
   - ButtonIcon
   - TextField
   - Select

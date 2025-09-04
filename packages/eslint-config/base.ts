@@ -26,6 +26,8 @@ export const baseEslintConfig = tseslintConfig(
       },
     },
     rules: {
+      curly: ['error', 'all'],
+
       'import/order': [
         'error',
         {
