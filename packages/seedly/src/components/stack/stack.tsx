@@ -2,10 +2,17 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { stackRecipe, StackVariants } from './stack.css';
+import { StackVariants } from './stack.css';
+import { stackResponsive } from './stack.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 export type StackProps<TUse extends ElementType> =
-  PolymorphicComponentProps<TUse> & StackVariants;
+  PolymorphicComponentProps<TUse> &
+    Omit<StackVariants, 'spacing' | 'align'> & {
+      spacing?: Responsive<NonNullable<StackVariants['spacing']>>;
+      align?: Responsive<NonNullable<StackVariants['align']>>;
+    };
 
 /**
  * A custom element for injecting white space (margin) between flow
@@ -27,7 +34,7 @@ export function Stack<TUse extends ElementType = 'div'>({
 
   return (
     <Comp
-      className={clsx(stackRecipe({ spacing, align }), className)}
+      className={clsx(stackResponsive({ spacing, align }), className)}
       {...rest}
     />
   );
