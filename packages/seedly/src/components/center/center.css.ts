@@ -1,10 +1,26 @@
 import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { mapContractVars, sys } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  mapContractVars,
+  sys,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const gutterSize = createVar();
+
+// Shared variant style maps to support responsive overrides
+export const centerGuttersStyles = mapContractVars(sys.spacing, (key) => ({
+  '@layer': {
+    [components]: {
+      vars: {
+        [gutterSize]: sys.spacing[key],
+      },
+    },
+  },
+}));
 
 export const centerRecipe = recipe({
   base: {
@@ -51,16 +67,13 @@ export const centerRecipe = recipe({
     /**
      * The minimum space on either side of the content
      */
-    gutters: mapContractVars(sys.spacing, (key) => ({
-      '@layer': {
-        [components]: {
-          vars: {
-            [gutterSize]: sys.spacing[key],
-          },
-        },
-      },
-    })),
+    gutters: centerGuttersStyles,
   },
 });
 
 export type CenterVariants = NonNullable<RecipeVariants<typeof centerRecipe>>;
+
+export const guttersAt = createResponsiveVariants({
+  styles: centerGuttersStyles,
+  media: defaultMedia,
+});

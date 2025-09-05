@@ -2,10 +2,16 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { BoxVariants, boxRecipe } from './box.css';
+import { BoxVariants } from './box.css';
+import { boxResponsive } from './box.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 export type BoxProps<TUse extends ElementType> =
-  PolymorphicComponentProps<TUse> & BoxVariants;
+  PolymorphicComponentProps<TUse> &
+    Omit<BoxVariants, 'spacing'> & {
+      spacing?: Responsive<NonNullable<BoxVariants['spacing']>>;
+    };
 
 /**
  * A evenly spaced container for grouping related elements. Can
@@ -26,7 +32,7 @@ export function Box<TUse extends ElementType = 'div'>({
   return (
     <Comp
       className={clsx(
-        boxRecipe({ variant, spacing, radius, elevation }),
+        boxResponsive({ variant, spacing, radius, elevation }),
         className,
       )}
       {...rest}

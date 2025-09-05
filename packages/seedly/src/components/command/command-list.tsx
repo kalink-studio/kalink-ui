@@ -6,7 +6,7 @@ import { ComponentPropsWithRef } from 'react';
 
 import { StackProps } from '../stack';
 
-import { commandList } from './command-list.css';
+import { commandListResponsive } from './command-list.responsive';
 
 type CommandListProps = ComponentPropsWithRef<typeof CommandPrimitive.List> & {
   spacing?: StackProps<'div'>['spacing'];
@@ -19,7 +19,7 @@ export function CommandList({
 }: CommandListProps) {
   return (
     <CommandPrimitive.List
-      className={clsx(commandList({ spacing }), className)}
+      className={clsx(commandListResponsive({ spacing }), className)}
       asChild
       {...props}
     />

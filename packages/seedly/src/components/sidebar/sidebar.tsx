@@ -7,13 +7,15 @@ import { ElementType } from 'react';
 
 import {
   contentMinWidthVar,
-  sidebarRecipe,
   SidebarVariants,
   sideWidthVar,
 } from './sidebar.css';
+import { sidebarResponsive } from './sidebar.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 type SidebarProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  Omit<SidebarVariants, 'sideWidth'> & {
+  Omit<SidebarVariants, 'sideWidth' | 'spacing'> & {
     /**
      * The size of the side element
      */
@@ -24,6 +26,7 @@ type SidebarProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
      * Should be a percentage.
      */
     contentMinWidth?: string;
+    spacing?: Responsive<NonNullable<SidebarVariants['spacing']>>;
   };
 
 /**
@@ -48,7 +51,7 @@ export function Sidebar<TUse extends ElementType>({
   return (
     <Comp
       className={clsx(
-        sidebarRecipe({ side, sideWidth: !!sideWidth, spacing, noStretch }),
+        sidebarResponsive({ side, sideWidth: !!sideWidth, spacing, noStretch }),
         className,
       )}
       style={assignInlineVars({
