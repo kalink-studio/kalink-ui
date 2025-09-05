@@ -10,14 +10,18 @@
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "scripts": {
     "lint": "eslint --max-warnings 0",
     "lint:fix": "pnpm lint --fix",
     "test": "vitest run",
     "test:watch": "vitest",
-    "tsc": "tsc -b"
+    "tsc": "tsc -b",
+    "build": "tsc -b"
   },
   "devDependencies": {
     "@kalink-ui/eslint-config": "workspace:*",
@@ -39,5 +43,11 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
 }
