@@ -1,5 +1,22 @@
 # @kalink-ui/seedly
 
+## 0.26.0
+
+### Minor Changes
+
+- c0f588b: Enable responsive variants across layout components:
+  - Cluster: responsive `spacing`, `justify`, and `align`.
+  - Center: responsive `gutters`.
+  - Cover: responsive `spacing`.
+  - Grid: responsive `spacing`.
+  - Sidebar: responsive `spacing`.
+  - Switcher: responsive `spacing`.
+
+  These use `createResponsiveVariants` + `responsiveRecipe` to generate media-specific overrides.
+
+- e451989: Typography + layout: enable responsive `variant` and `size` for `Text` and `Heading`. Also extend responsive recipes across supporting components (Button size/variant, MenuSeparator spacing, MoonLoader size).
+- 29ce292: Stack: add responsive variants support and align with vanilla-extract recipes. Introduces responsive `spacing` and `align` props via `responsiveRecipe` utilities.
+
 ## 0.25.0
 
 ### Minor Changes
