@@ -55,3 +55,10 @@ export const Align: Story = {
     align: 'center',
   },
 };
+
+export const Responsive: Story = {
+  args: {
+    variant: { xs: 'body', lg: 'title' },
+    size: { xs: 'small', lg: 'large' },
+  },
+};

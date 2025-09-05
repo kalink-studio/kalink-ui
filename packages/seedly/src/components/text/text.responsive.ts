@@ -30,8 +30,10 @@ export function buildTypographyOverrides(opts: {
     defaultOrder,
   );
 
-  const baseVariant = varMap.xs ?? variant;
-  const baseSize = sizeMap.xs ?? size;
+  // Carry forward variant/size values across breakpoints so that
+  // a value set at md persists to lg/xl/... unless overridden again.
+  let currentVariant = varMap.xs ?? (variant as TypographyVariant | undefined);
+  let currentSize = sizeMap.xs ?? (size as TypographySize | undefined);
 
   const classes: string[] = [];
 
@@ -40,11 +42,16 @@ export function buildTypographyOverrides(opts: {
       continue;
     }
 
-    const v = varMap[bp] ?? baseVariant;
-    const s = sizeMap[bp] ?? baseSize;
+    if (varMap[bp] != null) {
+      currentVariant = varMap[bp];
+    }
 
-    if (v && s) {
-      const key = `${String(v)}.${String(s)}`;
+    if (sizeMap[bp] != null) {
+      currentSize = sizeMap[bp];
+    }
+
+    if (currentVariant && currentSize) {
+      const key = `${String(currentVariant)}.${String(currentSize)}`;
       const cls = (
         typographyAt as Record<
           Exclude<BreakpointWithBase, 'xs'>,
