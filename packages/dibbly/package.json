@@ -20,8 +20,10 @@
     "lint:fix": "pnpm lint --fix",
     "test": "vitest run",
     "test:watch": "vitest",
+    "dev": "tsc -b -w",
     "tsc": "tsc -b",
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "prepare": "pnpm run build"
   },
   "devDependencies": {
     "@kalink-ui/eslint-config": "workspace:*",
