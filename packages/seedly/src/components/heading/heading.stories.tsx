@@ -41,3 +41,10 @@ export const WithSubtitle: Story = {
     subtitle: <Heading.Subtitle spacing={2}>Lorem ipsum</Heading.Subtitle>,
   },
 };
+
+export const Responsive: Story = {
+  args: {
+    variant: { xs: 'headline', lg: 'display' },
+    size: { xs: 'small', lg: 'large' },
+  },
+};
