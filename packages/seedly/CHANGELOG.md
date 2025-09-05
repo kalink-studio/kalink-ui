@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.26.1
+
+### Patch Changes
+
+- fef7681: Text/Heading: fix responsive typography by carrying forward `variant` and `size` across breakpoints so larger viewports don't reapply base styles. Also updates Heading story to demonstrate responsive behavior.
+
 ## 0.26.0
 
 ### Minor Changes
