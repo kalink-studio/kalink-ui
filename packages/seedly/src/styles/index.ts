@@ -22,3 +22,15 @@ export {
 export { transition, type CreateTransitionFn } from './transition';
 
 export { visuallyHidden } from './visually-hidden.css';
+
+export {
+  responsiveRecipe,
+  createResponsiveVariants,
+  resolveResponsive,
+  defaultMedia,
+  defaultOrder,
+  type Responsive,
+  type BreakpointWithBase,
+} from './responsive';
+
+export { breakpoints, screen, type BreakpointKey } from './breakpoints';

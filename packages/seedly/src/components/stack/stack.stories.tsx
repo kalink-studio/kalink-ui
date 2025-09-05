@@ -73,3 +73,29 @@ export const AsList: Story = {
     ),
   },
 };
+
+export const ResponsiveSpacing: Story = {
+  args: {
+    spacing: { xs: 2, md: 6 },
+    children: (
+      <>
+        <div>Stack element one</div>
+        <div>Stack element two</div>
+        <div>Stack element three</div>
+      </>
+    ),
+  },
+};
+
+export const ResponsiveAlign: Story = {
+  args: {
+    align: { xs: 'start', md: 'center' },
+    children: (
+      <>
+        <div>Stack element one</div>
+        <div>Stack element two</div>
+        <div>Stack element three</div>
+      </>
+    ),
+  },
+};

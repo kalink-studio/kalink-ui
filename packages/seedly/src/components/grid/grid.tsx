@@ -5,14 +5,18 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { gridRecipe, GridVariants, minSizeVar } from './grid.css';
+import { GridVariants, minSizeVar } from './grid.css';
+import { gridResponsive } from './grid.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  GridVariants & {
+  Omit<GridVariants, 'spacing'> & {
     /**
      * The minimum size of a grid cell
      */
     minSize?: string;
+    spacing?: Responsive<NonNullable<GridVariants['spacing']>>;
   };
 
 /**
@@ -33,7 +37,7 @@ export function Grid<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(gridRecipe({ spacing }), className)}
+      className={clsx(gridResponsive({ spacing }), className)}
       style={assignInlineVars({
         ...(minSize && { [minSizeVar]: minSize }),
       })}

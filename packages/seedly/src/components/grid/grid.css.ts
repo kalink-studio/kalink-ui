@@ -1,10 +1,24 @@
 import { createVar } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, mapContractVars } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  mapContractVars,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const minSizeVar = createVar();
+
+// Shared variant style maps so we can reuse them for responsive overrides
+export const gridSpacingStyles = mapContractVars(sys.spacing, (key) => ({
+  '@layer': {
+    [components]: {
+      gridGap: sys.spacing[key],
+    },
+  },
+}));
 
 export const gridRecipe = recipe({
   base: {
@@ -24,14 +38,13 @@ export const gridRecipe = recipe({
     /**
      * The spacing between the grid cell
      */
-    spacing: mapContractVars(sys.spacing, (key) => ({
-      '@layer': {
-        [components]: {
-          gridGap: sys.spacing[key],
-        },
-      },
-    })),
+    spacing: gridSpacingStyles,
   },
 });
 
 export type GridVariants = NonNullable<RecipeVariants<typeof gridRecipe>>;
+
+export const spacingAt = createResponsiveVariants({
+  styles: gridSpacingStyles,
+  media: defaultMedia,
+});

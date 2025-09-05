@@ -1,11 +1,25 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, mapContractVars } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  mapContractVars,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const thresholdVar = createVar();
 export const limitVar = createVar();
+
+// Shared variant styles to support responsive overrides
+export const switcherSpacingStyles = mapContractVars(sys.spacing, (key) => ({
+  '@layer': {
+    [components]: {
+      gap: sys.spacing[key],
+    },
+  },
+}));
 
 export const switcherRecipe = recipe({
   base: {
@@ -25,13 +39,7 @@ export const switcherRecipe = recipe({
     /**
      * The space (margin) between the child elements
      */
-    spacing: mapContractVars(sys.spacing, (key) => ({
-      '@layer': {
-        [components]: {
-          gap: sys.spacing[key],
-        },
-      },
-    })),
+    spacing: switcherSpacingStyles,
 
     /**
      * The maximum number of elements allowed to appear in the horizontal configuration
@@ -123,3 +131,8 @@ globalStyle(
 export type SwitcherVariants = NonNullable<
   RecipeVariants<typeof switcherRecipe>
 >;
+
+export const spacingAt = createResponsiveVariants({
+  styles: switcherSpacingStyles,
+  media: defaultMedia,
+});

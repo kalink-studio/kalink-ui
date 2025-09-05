@@ -2,7 +2,12 @@ import { createVar, keyframes, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, transition } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  transition,
+} from '../../styles';
 
 export const loader = recipe({
   variants: {
@@ -32,6 +37,25 @@ const loaderAnimation = keyframes({
   },
 });
 
+// Shared size variant styles for responsive overrides
+const loaderWrapperSizeStyles = {
+  sm: {
+    vars: {
+      [size]: sys.spacing[4],
+    },
+  },
+  md: {
+    vars: {
+      [size]: sys.spacing[5],
+    },
+  },
+  lg: {
+    vars: {
+      [size]: sys.spacing[6],
+    },
+  },
+} as const;
+
 export const loaderWrapper = recipe({
   base: {
     overflow: 'hidden',
@@ -53,23 +77,7 @@ export const loaderWrapper = recipe({
   },
 
   variants: {
-    size: {
-      sm: {
-        vars: {
-          [size]: sys.spacing[4],
-        },
-      },
-      md: {
-        vars: {
-          [size]: sys.spacing[5],
-        },
-      },
-      lg: {
-        vars: {
-          [size]: sys.spacing[6],
-        },
-      },
-    },
+    size: loaderWrapperSizeStyles,
   },
 });
 
@@ -107,3 +115,8 @@ export type LoaderVariants = NonNullable<RecipeVariants<typeof loader>>;
 export type MoonLoaderVariants = NonNullable<
   RecipeVariants<typeof loaderWrapper>
 >;
+
+export const sizeAt = createResponsiveVariants({
+  styles: loaderWrapperSizeStyles,
+  media: defaultMedia,
+});

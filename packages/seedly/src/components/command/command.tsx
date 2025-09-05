@@ -4,10 +4,10 @@ import { clsx } from 'clsx';
 import { Command as CommandPrimitive } from 'cmdk';
 import { ComponentPropsWithRef } from 'react';
 
-import { Stack, StackVariants } from '../stack';
+import { Stack, StackProps } from '../stack';
 
 export type CommandProps = ComponentPropsWithRef<typeof CommandPrimitive> & {
-  spacing?: StackVariants['spacing'];
+  spacing?: StackProps<'div'>['spacing'];
 };
 
 export function Command({

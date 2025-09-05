@@ -2,10 +2,16 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { centerRecipe, CenterVariants } from './center.css';
+import { CenterVariants } from './center.css';
+import { centerResponsive } from './center.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 export type CenterProps<TUse extends ElementType> =
-  PolymorphicComponentProps<TUse> & CenterVariants;
+  PolymorphicComponentProps<TUse> &
+    Omit<CenterVariants, 'gutters'> & {
+      gutters?: Responsive<NonNullable<CenterVariants['gutters']>>;
+    };
 
 /**
  * A custom element for centering a block-level element horizontally,
@@ -24,7 +30,10 @@ export function Center<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(centerRecipe({ andText, gutters, intrinsic }), className)}
+      className={clsx(
+        centerResponsive({ andText, gutters, intrinsic }),
+        className,
+      )}
       {...rest}
     />
   );

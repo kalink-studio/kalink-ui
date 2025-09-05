@@ -1,0 +1,2 @@
+# Ignore Changeset markdown files from Prettier formatting
+.changeset/*.md

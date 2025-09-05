@@ -10,11 +10,13 @@ import { ClusterProps } from '../cluster';
 
 import { card, cardBody, cardFooter, cardHeader } from './card.css';
 
+import type { Responsive } from '../../styles/responsive';
+
 export type CardRootElement = 'article' | 'div';
 
 export type CardProps<TUse extends CardRootElement = 'article'> =
   BoxProps<TUse> & {
-    verticalSpacing?: Spacing;
+    verticalSpacing?: Responsive<Spacing>;
   };
 
 export function Card<TUse extends CardRootElement = 'article'>(

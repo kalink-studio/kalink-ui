@@ -1,11 +1,27 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, mapContractVars } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  mapContractVars,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 const spaceVar = createVar();
 export const minSizeVar = createVar();
+
+// Shared variant style maps so we can reuse them for responsive overrides
+export const coverSpacingStyles = mapContractVars(sys.spacing, (key) => ({
+  '@layer': {
+    [components]: {
+      vars: {
+        [spaceVar]: sys.spacing[key],
+      },
+    },
+  },
+}));
 
 export const coverRecipe = recipe({
   base: {
@@ -27,15 +43,7 @@ export const coverRecipe = recipe({
     /**
      * The spacing between items
      */
-    spacing: mapContractVars(sys.spacing, (key) => ({
-      '@layer': {
-        [components]: {
-          vars: {
-            [spaceVar]: sys.spacing[key],
-          },
-        },
-      },
-    })),
+    spacing: coverSpacingStyles,
   },
 });
 
@@ -78,3 +86,8 @@ globalStyle(`${coverRecipe.classNames.base} > [data-cover-center]`, {
 });
 
 export type CoverVariants = NonNullable<RecipeVariants<typeof coverRecipe>>;
+
+export const spacingAt = createResponsiveVariants({
+  styles: coverSpacingStyles,
+  media: defaultMedia,
+});

@@ -1,11 +1,25 @@
 import { createVar, globalStyle } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, mapContractVars } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  mapContractVars,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const sideWidthVar = createVar();
 export const contentMinWidthVar = createVar();
+
+// Shared variant styles to support responsive overrides
+export const sidebarSpacingStyles = mapContractVars(sys.spacing, (key) => ({
+  '@layer': {
+    [components]: {
+      gap: sys.spacing[key],
+    },
+  },
+}));
 
 export const sidebarRecipe = recipe({
   base: {
@@ -25,13 +39,7 @@ export const sidebarRecipe = recipe({
     /**
      * The spacing between the sidebar and main content elements
      */
-    spacing: mapContractVars(sys.spacing, (key) => ({
-      '@layer': {
-        [components]: {
-          gap: sys.spacing[key],
-        },
-      },
-    })),
+    spacing: sidebarSpacingStyles,
 
     /**
      * Whether the sidebar should stretch to fill the available space
@@ -100,3 +108,8 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
 });
 
 export type SidebarVariants = NonNullable<RecipeVariants<typeof sidebarRecipe>>;
+
+export const spacingAt = createResponsiveVariants({
+  styles: sidebarSpacingStyles,
+  media: defaultMedia,
+});

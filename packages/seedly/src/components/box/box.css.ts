@@ -1,7 +1,21 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { mapContractVars, sys } from '@kalink-ui/seedly/styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  mapContractVars,
+  sys,
+} from '@kalink-ui/seedly/styles';
 import { components } from '@kalink-ui/seedly/styles/layers';
+
+// Shared variant styles to support responsive overrides
+export const boxSpacingStyles = mapContractVars(sys.spacing, (key) => ({
+  '@layer': {
+    [components]: {
+      padding: sys.spacing[key],
+    },
+  },
+}));
 
 export const boxRecipe = recipe({
   variants: {
@@ -35,13 +49,7 @@ export const boxRecipe = recipe({
     /**
      * The spacing between the box borders and its contents
      */
-    spacing: mapContractVars(sys.spacing, (key) => ({
-      '@layer': {
-        [components]: {
-          padding: sys.spacing[key],
-        },
-      },
-    })),
+    spacing: boxSpacingStyles,
 
     /**
      * The elevation of the box
@@ -68,3 +76,8 @@ export const boxRecipe = recipe({
 });
 
 export type BoxVariants = NonNullable<RecipeVariants<typeof boxRecipe>>;
+
+export const spacingAt = createResponsiveVariants({
+  styles: boxSpacingStyles,
+  media: defaultMedia,
+});

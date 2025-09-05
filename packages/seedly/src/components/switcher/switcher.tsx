@@ -5,15 +5,19 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { switcherRecipe, SwitcherVariants, thresholdVar } from './switcher.css';
+import { SwitcherVariants, thresholdVar } from './switcher.css';
+import { switcherResponsive } from './switcher.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 export type SwitcherProps<TUse extends ElementType> =
   PolymorphicComponentProps<TUse> &
-    SwitcherVariants & {
+    Omit<SwitcherVariants, 'spacing'> & {
       /**
        * The threshold at which to switch between horizontal and vertical layouts
        */
       threshold?: string;
+      spacing?: Responsive<NonNullable<SwitcherVariants['spacing']>>;
     };
 
 /**
@@ -33,7 +37,7 @@ export function Switcher<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(switcherRecipe({ spacing, limit }), className)}
+      className={clsx(switcherResponsive({ spacing, limit }), className)}
       style={assignInlineVars({
         ...(threshold && { [thresholdVar]: threshold }),
       })}

@@ -5,14 +5,18 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { coverRecipe, CoverVariants, minSizeVar } from './cover.css';
+import { CoverVariants, minSizeVar } from './cover.css';
+import { coverResponsive } from './cover.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 type CoverProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  CoverVariants & {
+  Omit<CoverVariants, 'spacing'> & {
     /**
      * The minimum height of the cover
      */
     minSize?: string;
+    spacing?: Responsive<NonNullable<CoverVariants['spacing']>>;
   };
 
 /**
@@ -34,7 +38,7 @@ export function Cover<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(coverRecipe({ spacing }), className)}
+      className={clsx(coverResponsive({ spacing }), className)}
       style={assignInlineVars({
         ...(minSize && { [minSizeVar]: minSize }),
       })}
