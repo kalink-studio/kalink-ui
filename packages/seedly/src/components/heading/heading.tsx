@@ -6,22 +6,30 @@ import { Spacing, TypographySize, TypographyVariant } from '../../styles';
 import { ConditionalWrapper } from '../conditional-wrapper';
 import { Text, TextProps, TextVariants } from '../text';
 
-import { headingRoot, pretitle, subtitle } from './heading.css';
+import {
+  headingRootResponsive,
+  pretitleResponsive,
+  subtitleResponsive,
+} from './heading.responsive';
+
+import type { Responsive } from '../../styles/responsive';
 
 export type HeadingTypes = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type HeadingProps<TUse extends ElementType = 'h2'> =
   PolymorphicComponentProps<TUse> &
-    TextVariants & {
+    Omit<TextVariants, 'align'> & {
       /**
        * The typography used to render the text.
        */
-      variant: Extract<TypographyVariant, 'display' | 'headline' | 'title'>;
+      variant?: Responsive<
+        Extract<TypographyVariant, 'display' | 'headline' | 'title'>
+      >;
 
       /**
        * The size of the typography used to render the text.
        */
-      size?: TypographySize;
+      size?: Responsive<TypographySize>;
 
       /**
        * If provided, the text will be rendered before the title.
@@ -42,6 +50,7 @@ export type HeadingProps<TUse extends ElementType = 'h2'> =
        * The class to pass to the root element.
        */
       rootClassName?: string;
+      align?: Responsive<NonNullable<TextVariants['align']>>;
     };
 
 const headingMapping: Record<
@@ -75,7 +84,7 @@ export function Heading<TUse extends HeadingTypes>(props: HeadingProps<TUse>) {
       ref={ref}
       use={'hgroup'}
       condition={!!pretitle || !!subtitle}
-      className={clsx(headingRoot({ align }), rootClassName)}
+      className={clsx(headingRootResponsive({ align }), rootClassName)}
     >
       {pretitle}
 
@@ -97,7 +106,7 @@ export function Heading<TUse extends HeadingTypes>(props: HeadingProps<TUse>) {
 
 export type HeadingPretitleProps = Omit<TextProps<'p'>, 'children'> & {
   children?: string | null;
-  spacing?: Spacing;
+  spacing?: Responsive<Spacing>;
 };
 
 Heading.Pretitle = function HeadingPretitle({
@@ -114,7 +123,7 @@ Heading.Pretitle = function HeadingPretitle({
         use="p"
         variant={variant}
         size={size}
-        className={clsx(pretitle({ spacing }), className)}
+        className={clsx(pretitleResponsive({ spacing }), className)}
         {...rest}
       >
         {children}
@@ -125,7 +134,7 @@ Heading.Pretitle = function HeadingPretitle({
 
 export type HeadingSubtitleProps = Omit<TextProps<'p'>, 'children'> & {
   children?: string | null;
-  spacing?: Spacing;
+  spacing?: Responsive<Spacing>;
 };
 
 Heading.Subtitle = function HeadingSubtitle({
@@ -142,7 +151,7 @@ Heading.Subtitle = function HeadingSubtitle({
         use="p"
         variant={variant}
         size={size}
-        className={clsx(subtitle({ spacing }), className)}
+        className={clsx(subtitleResponsive({ spacing }), className)}
         {...rest}
       >
         {children}

@@ -1,6 +1,7 @@
-import { createVar, style } from '@vanilla-extract/css';
+import { createVar, style, type StyleRule } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
+import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const lineClampNumber = createVar();
@@ -16,6 +17,46 @@ const lineClamp = style({
     },
   },
 });
+
+// Extract align styles for responsive overrides
+export const textAlignStyles = {
+  start: {
+    '@layer': {
+      [components]: {
+        vars: {
+          [textAlign]: 'start',
+        },
+      },
+    },
+  },
+  center: {
+    '@layer': {
+      [components]: {
+        vars: {
+          [textAlign]: 'center',
+        },
+      },
+    },
+  },
+  end: {
+    '@layer': {
+      [components]: {
+        vars: {
+          [textAlign]: 'end',
+        },
+      },
+    },
+  },
+  justify: {
+    '@layer': {
+      [components]: {
+        vars: {
+          [textAlign]: 'justify',
+        },
+      },
+    },
+  },
+} as const;
 
 export const textRecipe = recipe({
   base: {
@@ -139,44 +180,7 @@ export const textRecipe = recipe({
     /**
      * Controls the alignment of the text.
      */
-    align: {
-      start: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [textAlign]: 'start',
-            },
-          },
-        },
-      },
-      center: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [textAlign]: 'center',
-            },
-          },
-        },
-      },
-      end: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [textAlign]: 'end',
-            },
-          },
-        },
-      },
-      justify: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [textAlign]: 'justify',
-            },
-          },
-        },
-      },
-    },
+    align: textAlignStyles,
   },
 });
 
@@ -189,3 +193,38 @@ export const textEllipsisWrapper = style({
 });
 
 export type TextVariants = NonNullable<RecipeVariants<typeof textRecipe>>;
+
+export const alignAt = createResponsiveVariants({
+  styles: textAlignStyles,
+  media: defaultMedia,
+});
+
+// Responsive typography overrides for variant+size combos
+const typographyComboEntries = Object.entries(sys.typography).flatMap(
+  ([variantKey, sizes]) => {
+    return Object.entries(sizes).map(([sizeKey, v]) => {
+      const k = `${variantKey}.${sizeKey}`;
+      const rule: StyleRule = {
+        '@layer': {
+          [components]: {
+            fontFamily: v.font,
+            fontWeight: v.weight,
+            lineHeight: v.lineHeight,
+            letterSpacing: v.tracking,
+            fontSize: v.size,
+          },
+        },
+      };
+
+      return [k, rule] as const;
+    });
+  },
+);
+
+export const typographyAt = createResponsiveVariants({
+  styles: Object.fromEntries(typographyComboEntries) as Record<
+    string,
+    StyleRule
+  >,
+  media: defaultMedia,
+});

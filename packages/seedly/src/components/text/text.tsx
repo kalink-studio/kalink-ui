@@ -4,20 +4,42 @@ import { ElementType } from 'react';
 
 import { TypographySize, TypographyVariant, typography } from '../../styles';
 
-import { TextVariants, textRecipe, textEllipsisWrapper } from './text.css';
+import { TextVariants, textEllipsisWrapper } from './text.css';
+import { buildTypographyOverrides, textResponsive } from './text.responsive';
+
+import type { Responsive } from '../../styles/responsive';
+
+function getBase<T extends string | number>(value: Responsive<T> | undefined) {
+  if (value == null) {
+    return undefined;
+  }
+
+  if (Array.isArray(value)) {
+    return value[0] ?? undefined;
+  }
+
+  if (typeof value === 'object') {
+    const obj = value as Partial<Record<string, T>> & { xs?: T };
+
+    return obj.xs;
+  }
+
+  return value;
+}
 
 export type TextProps<TUse extends React.ElementType> =
   PolymorphicComponentProps<TUse> &
-    TextVariants & {
+    Omit<TextVariants, 'align'> & {
       /**
        * The size of the typography used to render the text.
        */
-      size?: TypographySize;
+      size?: Responsive<TypographySize>;
 
       /**
        * The typography variant used to render the text.
        */
-      variant?: TypographyVariant;
+      variant?: Responsive<TypographyVariant>;
+      align?: Responsive<NonNullable<TextVariants['align']>>;
     };
 
 export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
@@ -26,19 +48,24 @@ export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
     className,
     truncate,
     lineClamp,
-    size = 'medium',
+    size,
     use: Comp = 'span',
-    variant = 'body',
+    variant,
     wrap,
     align,
     ...rest
   } = props;
 
+  const typographyOverrides = buildTypographyOverrides({ variant, size });
+  const baseVariant = getBase(variant) ?? 'body';
+  const baseSize = getBase(size) ?? 'medium';
+
   return (
     <Comp
       className={clsx(
-        getProp(typography, `${variant}.${size}`),
-        textRecipe({ truncate, lineClamp, align, wrap }),
+        getProp(typography, `${baseVariant}.${baseSize}`),
+        typographyOverrides,
+        textResponsive({ truncate, lineClamp, align, wrap }),
         className,
       )}
       {...rest}
