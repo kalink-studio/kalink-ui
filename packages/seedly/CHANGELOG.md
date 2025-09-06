@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.26.3
+
+### Patch Changes
+
+- 87daf77: ci(release): ensure public publishes under the `@kalink-ui` scope by configuring npm scope auth in CI and Changesets access. No runtime code changes.
+- Updated dependencies [87daf77]
+  - @kalink-ui/dibbly@0.5.2
+
 ## 0.26.2
 
 ### Patch Changes
