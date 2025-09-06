@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.26.2
+
+### Patch Changes
+
+- 9bfff1e: chore(deps): move `@kalink-ui/dibbly` to runtime dependencies and align dev workflow. Ensures consumers resolve built ESM from `dist` while developing with a watcher in Dibbly.
+- Updated dependencies [a97aad9]
+  - @kalink-ui/dibbly@0.5.1
+
 ## 0.26.1
 
 ### Patch Changes
