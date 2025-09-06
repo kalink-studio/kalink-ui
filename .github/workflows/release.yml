@@ -30,6 +30,7 @@ jobs:
           node-version: 22
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
+          scope: '@kalink-ui'
           always-auth: true
 
       - name: Install dependencies with pnpm
@@ -47,4 +48,7 @@ jobs:
           publish: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # npm picks up this token when setup-node has configured registry/scope
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # keep NPM_TOKEN for changesets compatibility
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
