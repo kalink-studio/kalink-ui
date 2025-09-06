@@ -1,7 +1,7 @@
 {
   "name": "@kalink-ui/dibbly",
   "description": "A set of tools for building UIs with React and TypeScript",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": false,
   "license": "MIT",
   "author": "Louis Gollut",
