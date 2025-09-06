@@ -2,7 +2,10 @@
   "name": "@kalink-ui/seedly",
   "version": "0.26.3",
   "description": "A set of components for building UIs with React and TypeScript",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.vanilla.css"
+  ],
   "license": "MIT",
   "author": "Louis Gollut",
   "repository": {
@@ -10,10 +13,22 @@
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "exports": {
-    ".": "./src/index.ts",
-    "./styles": "./src/styles/index.ts",
-    "./styles/reset": "./src/styles/reset.css.ts",
-    "./styles/layers": "./src/styles/layers.css.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./styles": {
+      "types": "./dist/styles/index.d.ts",
+      "default": "./dist/styles/index.mjs"
+    },
+    "./styles/reset": {
+      "types": "./dist/styles/reset.css.d.ts",
+      "default": "./dist/styles/reset.css.mjs"
+    },
+    "./styles/layers": {
+      "types": "./dist/styles/layers.css.d.ts",
+      "default": "./dist/styles/layers.css.mjs"
+    }
   },
   "scripts": {
     "lint": "eslint --max-warnings 0",
@@ -22,7 +37,9 @@
     "dev": "storybook dev -p 6006 --no-open",
     "test": "vitest run",
     "test:watch": "vitest",
-    "tsc": "tsc -b"
+    "tsc": "tsc -b",
+    "build": "pnpm run tsc && vite build",
+    "prepare": "pnpm run build"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
@@ -78,5 +95,10 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
 }

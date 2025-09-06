@@ -5,8 +5,8 @@ import {
   defaultMedia,
   mapContractVars,
   sys,
-} from '@kalink-ui/seedly/styles';
-import { components } from '@kalink-ui/seedly/styles/layers';
+} from '../../styles';
+import { components } from '../../styles/layers.css';
 
 // Shared variant styles to support responsive overrides
 export const boxSpacingStyles = mapContractVars(sys.spacing, (key) => ({

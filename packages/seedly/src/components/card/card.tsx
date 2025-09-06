@@ -2,8 +2,10 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { Box, Cluster, Stack } from '@kalink-ui/seedly';
-import { Spacing } from '@kalink-ui/seedly/styles';
+import { Box } from '../box';
+import { Cluster } from '../cluster';
+import { Stack } from '../stack';
+import { Spacing } from '../../styles';
 
 import { BoxProps } from '../box';
 import { ClusterProps } from '../cluster';
