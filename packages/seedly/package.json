@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
-    "@kalink-ui/dibbly": "workspace:*",
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
     "@storybook/addon-docs": "^9.0.8",
@@ -67,6 +66,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@kalink-ui/dibbly": "workspace:^",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-popover": "^1.1.14",

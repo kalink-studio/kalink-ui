@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:seedly": "turbo run dev --filter=@kalink-ui/seedly...",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "tsc": "turbo tsc",
