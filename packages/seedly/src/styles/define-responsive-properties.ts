@@ -72,6 +72,7 @@ export const defineResponsiveProperties = ({
       justifySelf: ['start', 'end', 'center', 'stretch'],
       alignItems: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       alignSelf: ['flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
+      alignContent: ['start', 'end', 'center', 'stretch'],
 
       position: [
         'absolute',
