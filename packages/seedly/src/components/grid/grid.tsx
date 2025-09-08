@@ -10,17 +10,20 @@ import { gridResponsive } from './grid.responsive';
 
 import type { Responsive } from '../../styles/responsive';
 
+type GridVariantResponsive = {
+  [K in keyof GridVariants]?: Responsive<NonNullable<GridVariants[K]>>;
+};
+
 type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  Omit<GridVariants, 'spacing'> & {
+  GridVariantResponsive & {
     /**
      * The minimum size of a grid cell
      */
     minSize?: string;
-    spacing?: Responsive<NonNullable<GridVariants['spacing']>>;
   };
 
 /**
- * The Grid layout provides a flexible, responsive grid system that
+ * The Grid layout provides a flexible, responsive grid system. It can also
  * arranges elements in a structured, multi-column format, automatically
  * adjusting the number of columns based on the available space and
  * predefined constraints.
@@ -28,20 +31,44 @@ type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
  * https://every-layout.dev/layouts/grid/
  */
 export function Grid<TUse extends ElementType>({
-  spacing,
   minSize,
   className,
   ...props
 }: GridProps<TUse>) {
-  const { use: Comp = 'div', ...rest } = props;
+  const {
+    use: Comp = 'div',
+    spacing,
+    columnSpacing,
+    rowSpacing,
+    columns = { xs: 4, md: 8, lg: 12 },
+    fit,
+    justifyItems,
+    alignItems,
+    justifyContent,
+    alignContent,
+    ...rest
+  } = props;
 
   return (
     <Comp
-      className={clsx(gridResponsive({ spacing }), className)}
+      className={clsx(
+        gridResponsive({
+          spacing,
+          columnSpacing,
+          rowSpacing,
+          columns,
+          fit,
+          justifyItems,
+          alignItems,
+          justifyContent,
+          alignContent,
+        }),
+        className,
+      )}
       style={assignInlineVars({
         ...(minSize && { [minSizeVar]: minSize }),
       })}
-      {...rest}
+      {...(rest as Record<string, unknown>)}
     />
   );
 }
