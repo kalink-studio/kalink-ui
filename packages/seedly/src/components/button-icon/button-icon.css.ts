@@ -1,9 +1,13 @@
 import { assignVars } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { buttonRecipe, buttonVars } from '../button/button.css';
+import {
+  buttonRecipe,
+  buttonVars,
+  buttonVariantStyles,
+} from '../button/button.css';
 
 export const buttonIcon = recipe({
   base: [buttonRecipe.classNames.base],
@@ -63,3 +67,50 @@ export const buttonIcon = recipe({
 });
 
 export type ButtonIconVariants = NonNullable<RecipeVariants<typeof buttonIcon>>;
+
+// Responsive variants
+const buttonIconSizeStyles = {
+  sm: {
+    '@layer': {
+      [components]: {
+        vars: assignVars(buttonVars.spacing, {
+          block: sys.spacing[2],
+          inline: sys.spacing[2],
+          inner: sys.spacing[2],
+        }),
+      },
+    },
+  },
+  md: {
+    '@layer': {
+      [components]: {
+        vars: assignVars(buttonVars.spacing, {
+          block: sys.spacing[2],
+          inline: sys.spacing[2],
+          inner: sys.spacing[2],
+        }),
+      },
+    },
+  },
+  lg: {
+    '@layer': {
+      [components]: {
+        vars: assignVars(buttonVars.spacing, {
+          block: sys.spacing[3],
+          inline: sys.spacing[3],
+          inner: sys.spacing[3],
+        }),
+      },
+    },
+  },
+} as const;
+
+export const sizeAt = createResponsiveVariants({
+  styles: buttonIconSizeStyles,
+  media: defaultMedia,
+});
+
+export const variantAt = createResponsiveVariants({
+  styles: buttonVariantStyles,
+  media: defaultMedia,
+});
