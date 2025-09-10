@@ -3,10 +3,19 @@ import { clsx } from 'clsx';
 
 import { ButtonTypes } from '../button/button';
 
-import { buttonIcon, ButtonIconVariants } from './button-icon.css';
+import { ButtonIconVariants } from './button-icon.css';
+import { buttonIconResponsive } from './button-icon.responsive';
+
+import type { Responsive } from '../../styles/responsive';
+
+type ButtonIconVariantResponsive = {
+  [K in keyof ButtonIconVariants]?: Responsive<
+    NonNullable<ButtonIconVariants[K]>
+  >;
+};
 
 export type ButtonIconProps<TUse extends ButtonTypes> =
-  PolymorphicComponentProps<TUse> & ButtonIconVariants;
+  PolymorphicComponentProps<TUse> & ButtonIconVariantResponsive;
 
 export function ButtonIcon<TUse extends ButtonTypes>(
   props: ButtonIconProps<TUse>,
@@ -15,9 +24,8 @@ export function ButtonIcon<TUse extends ButtonTypes>(
 
   return (
     <Comp
-      className={clsx(buttonIcon({ variant, size }), className)}
-      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-      {...(rest as any)}
+      className={clsx(buttonIconResponsive({ variant, size }), className)}
+      {...(rest as Record<string, unknown>)}
     />
   );
 }
