@@ -1,5 +1,14 @@
 # @kalink-ui/seedly
 
+## 0.28.0
+
+### Minor Changes
+
+- d38d956: feat(seedly/button-icon): add responsive variants for `size` and `variant`
+  - Introduce `buttonIconResponsive` with `sizeAt` and `variantAt`.
+  - Accept responsive values (object/array) for `size` and `variant` props.
+  - Keeps icon-only spacing consistent across breakpoints.
+
 ## 0.27.0
 
 ### Minor Changes
