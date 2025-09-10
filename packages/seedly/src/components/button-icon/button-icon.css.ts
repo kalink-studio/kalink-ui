@@ -2,7 +2,7 @@ import { assignVars } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { overrides } from '../../styles/layers.css';
 import {
   buttonRecipe,
   buttonVars,
@@ -19,7 +19,7 @@ export const buttonIcon = recipe({
         buttonRecipe.classNames.variants.size.sm,
         {
           '@layer': {
-            [components]: {
+            [overrides]: {
               vars: assignVars(buttonVars.spacing, {
                 block: sys.spacing[2],
                 inline: sys.spacing[2],
@@ -33,7 +33,7 @@ export const buttonIcon = recipe({
         buttonRecipe.classNames.variants.size.md,
         {
           '@layer': {
-            [components]: {
+            [overrides]: {
               vars: assignVars(buttonVars.spacing, {
                 block: sys.spacing[2],
                 inline: sys.spacing[2],
@@ -47,7 +47,7 @@ export const buttonIcon = recipe({
         buttonRecipe.classNames.variants.size.lg,
         {
           '@layer': {
-            [components]: {
+            [overrides]: {
               vars: assignVars(buttonVars.spacing, {
                 block: sys.spacing[3],
                 inline: sys.spacing[3],
@@ -72,7 +72,7 @@ export type ButtonIconVariants = NonNullable<RecipeVariants<typeof buttonIcon>>;
 const buttonIconSizeStyles = {
   sm: {
     '@layer': {
-      [components]: {
+      [overrides]: {
         vars: assignVars(buttonVars.spacing, {
           block: sys.spacing[2],
           inline: sys.spacing[2],
@@ -83,7 +83,7 @@ const buttonIconSizeStyles = {
   },
   md: {
     '@layer': {
-      [components]: {
+      [overrides]: {
         vars: assignVars(buttonVars.spacing, {
           block: sys.spacing[2],
           inline: sys.spacing[2],
@@ -94,7 +94,7 @@ const buttonIconSizeStyles = {
   },
   lg: {
     '@layer': {
-      [components]: {
+      [overrides]: {
         vars: assignVars(buttonVars.spacing, {
           block: sys.spacing[3],
           inline: sys.spacing[3],
