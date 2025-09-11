@@ -30,18 +30,16 @@ type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
  *
  * https://every-layout.dev/layouts/grid/
  */
-export function Grid<TUse extends ElementType>({
-  minSize,
-  className,
-  ...props
-}: GridProps<TUse>) {
+export function Grid<TUse extends ElementType>(props: GridProps<TUse>) {
   const {
     use: Comp = 'div',
+    minSize,
+    className,
     spacing,
     columnSpacing,
     rowSpacing,
     columns = { xs: 4, md: 8, lg: 12 },
-    fit,
+    autoLayout,
     justifyItems,
     alignItems,
     justifyContent,
@@ -56,8 +54,8 @@ export function Grid<TUse extends ElementType>({
           spacing,
           columnSpacing,
           rowSpacing,
-          columns,
-          fit,
+          columns: autoLayout ? undefined : columns,
+          autoLayout,
           justifyItems,
           alignItems,
           justifyContent,

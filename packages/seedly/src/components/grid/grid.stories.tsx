@@ -67,10 +67,10 @@ export const FixedColumns: Story = {
   },
 };
 
-export const AutoFitAligned: Story = {
+export const AutoLayout: Story = {
   args: {
     minSize: '200px',
-    fit: 'fit',
+    autoLayout: 'fit',
     spacing: { xs: 2, md: 6 },
     justifyContent: 'spaceBetween',
     alignContent: 'start',

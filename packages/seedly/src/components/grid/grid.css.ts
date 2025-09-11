@@ -172,7 +172,7 @@ const gridColumnsStyles = Object.fromEntries(
   { '@layer': Record<string, { gridTemplateColumns: string }> }
 >;
 
-export const gridFitStyles = {
+export const autoLayoutStyles = {
   fill: {
     '@layer': {
       [components]: {
@@ -226,7 +226,7 @@ export const gridRecipe = recipe({
     /**
      * Whether to use auto-fill (default) or auto-fit
      */
-    fit: gridFitStyles,
+    autoLayout: autoLayoutStyles,
 
     /**
      * Grid item alignment along inline axis
@@ -274,8 +274,8 @@ export const columnsAt = createResponsiveVariants({
   media: defaultMedia,
 });
 
-export const fitAt = createResponsiveVariants({
-  styles: gridFitStyles,
+export const autoLayoutAt = createResponsiveVariants({
+  styles: autoLayoutStyles,
   media: defaultMedia,
 });
 
