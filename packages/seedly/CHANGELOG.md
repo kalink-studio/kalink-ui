@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.29.1
+
+### Patch Changes
+
+- 174eb5b: Correctly apply auto layout when defined
+
 ## 0.29.0
 
 ### Minor Changes
