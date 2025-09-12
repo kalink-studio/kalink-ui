@@ -34,3 +34,13 @@ export {
 } from './responsive';
 
 export { breakpoints, screen, type BreakpointKey } from './breakpoints';
+
+export {
+  getInterpolationFor,
+  toFluidClamp,
+  toFluidClampFor,
+  type Interval,
+  type ExponentialScaleOptions,
+  type DynamicInterpolationOptions,
+  type FluidClampOptions,
+} from './scale';

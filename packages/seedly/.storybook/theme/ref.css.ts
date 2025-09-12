@@ -1,30 +1,6 @@
-import {
-  createGlobalTheme,
-  createVar,
-  globalStyle,
-} from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
+import { createGlobalTheme } from '@vanilla-extract/css';
 
 import { base } from '../../src/styles/layers.css';
-
-const sysFluidityMin = createVar();
-const sysFluidityMax = createVar();
-const sysFluidityInterpolation = createVar();
-
-globalStyle(':root', {
-  '@layer': {
-    [base]: {
-      vars: {
-        [sysFluidityMin]: '23.5',
-        [sysFluidityMax]: '80',
-        [sysFluidityInterpolation]: calc.divide(
-          calc.subtract('100vw', calc.multiply(sysFluidityMin, '1rem')),
-          calc.subtract(sysFluidityMax, sysFluidityMin),
-        ),
-      },
-    },
-  },
-});
 
 export const refs = createGlobalTheme(':root', {
   '@layer': base,
@@ -56,12 +32,6 @@ export const refs = createGlobalTheme(':root', {
       90: '#ECE8E2',
       100: '#FFFFFF',
     },
-  },
-
-  fluidity: {
-    min: sysFluidityMin,
-    max: sysFluidityMax,
-    interpolation: sysFluidityInterpolation,
   },
 
   typeface: {
