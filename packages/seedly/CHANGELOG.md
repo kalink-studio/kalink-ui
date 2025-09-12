@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.30.1
+
+### Patch Changes
+
+- 0455c00: Correctly re-export types for scale utilies
+
 ## 0.30.0
 
 ### Minor Changes
