@@ -1,9 +1,28 @@
 import { createGlobalTheme } from '@vanilla-extract/css';
 
+import { toFluidClampFor } from '../../src/styles';
 import { base } from '../../src/styles/layers.css';
 import { sys } from '../../src/styles/system-contract.css';
 
 import { refs } from './ref.css';
+
+const typoMap = {
+  lowMin: 12,
+  lowMax: 40,
+  highMin: 14,
+  highMax: 85,
+  exponent: 2 as const,
+  rounding: 'none' as const,
+};
+
+const spaceMap = {
+  lowMin: 4,
+  lowMax: 72,
+  highMin: 6,
+  highMax: 176,
+  exponent: 2 as const,
+  rounding: 'none' as const,
+};
 
 createGlobalTheme(':root', sys, {
   '@layer': base,
@@ -92,206 +111,155 @@ createGlobalTheme(':root', sys, {
 
   typography: {
     display: {
-      /* Display Large from 40px to 85px */
       large: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(2.5rem, calc(2.5rem + (5.3125 - 2.5) * ${refs.fluidity.interpolation}), 5.3125rem)`,
+        size: toFluidClampFor(40, typoMap),
       },
 
-      /* Display Medium from 34px to 65px */
       medium: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(2.125rem, calc(2.125rem + (4.0625 - 2.125) * ${refs.fluidity.interpolation}), 4.0625rem)`,
+        size: toFluidClampFor(34, typoMap),
       },
 
-      /* Display Small from 28px to 50px */
       small: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(1.75rem, calc(1.75rem + (3.125 - 1.75) * ${refs.fluidity.interpolation}), 3.125rem)`,
+        size: toFluidClampFor(28, typoMap),
       },
     },
 
     headline: {
-      /* Heading Large from 32px to 68px */
       large: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(2rem, calc(2rem + (4.25 - 2) * ${refs.fluidity.interpolation}), 4.25rem)`,
+        size: toFluidClampFor(32, typoMap),
       },
 
-      /* Heading Medium from 28px to 54px */
       medium: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(1.75rem, calc(1.75rem + (3.375 - 1.75) * ${refs.fluidity.interpolation}), 3.375rem)`,
+        size: toFluidClampFor(28, typoMap),
       },
 
-      /* Heading Small from 24px to 44px */
       small: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(1.5rem, calc(1.5rem + (2.75 - 1.5) * ${refs.fluidity.interpolation}), 2.75rem)`,
+        size: toFluidClampFor(24, typoMap),
       },
     },
 
-    /* Title Large from 24px to 36px */
     title: {
       large: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(1.5rem, calc(1.5rem + (2.25 - 1.5) * ${refs.fluidity.interpolation}), 2.25rem)`,
+        size: toFluidClampFor(24, typoMap),
       },
 
-      /* Title Medium from 18px to 24px */
       medium: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(1.125rem, calc(1.125rem + (1.5 - 1.125) * ${refs.fluidity.interpolation}), 1.5rem)`,
+        size: toFluidClampFor(18, typoMap),
       },
 
-      /* Title Small from 17px to 21px */
       small: {
         font: refs.typeface.brand,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(1.0625rem, calc(1.0625rem + (1.3125 - 1.0625) * ${refs.fluidity.interpolation}), 1.3125rem)`,
+        size: toFluidClampFor(17, typoMap),
       },
     },
 
     body: {
-      /* Body Large from 19px to 25px */
       large: {
         font: refs.typeface.plain,
         weight: '400',
         lineHeight: refs.lineHeight.lg,
         tracking: 'normal',
-        size: `clamp(1.1875rem, calc(1.1875rem + (1.5625 - 1.1875) * ${refs.fluidity.interpolation}), 1.5625rem)`,
+        size: toFluidClampFor(19, typoMap),
       },
 
-      /* Body Medium from 14px to 17px */
       medium: {
         font: refs.typeface.plain,
         weight: '400',
         lineHeight: refs.lineHeight.xl,
         tracking: 'normal',
-        size: `clamp(0.875rem, calc(0.875rem + (1.0625 - 0.875) * ${refs.fluidity.interpolation}), 1.0625rem)`,
+        size: toFluidClampFor(14, typoMap),
       },
 
-      /* Body Small from 12px to 14px */
       small: {
         font: refs.typeface.plain,
         weight: '400',
         lineHeight: refs.lineHeight.lg,
         tracking: 'normal',
-        size: `clamp(0.75rem, calc(0.75rem + (0.875 - 0.75) * ${refs.fluidity.interpolation}), 0.875rem)`,
+        size: toFluidClampFor(12, typoMap),
       },
     },
 
     label: {
-      /* Label Large from 16px to 20px */
       large: {
         font: refs.typeface.plain,
         weight: '700',
         lineHeight: refs.lineHeight.xl,
         tracking: '0.1',
-        size: `clamp(1rem, calc(1rem + (1.25 - 1) * ${refs.fluidity.interpolation}), 1.25rem)`,
+        size: toFluidClampFor(16, typoMap),
       },
 
-      /* Label Medium from 14px to 17px */
       medium: {
         font: refs.typeface.plain,
         weight: '700',
         lineHeight: refs.lineHeight.lg,
         tracking: '0.1',
-        size: `clamp(0.875rem, calc(0.875rem + (1.0625 - 0.875) * ${refs.fluidity.interpolation}), 1.0625rem)`,
+        size: toFluidClampFor(14, typoMap),
       },
 
-      /* Label Small from 12px to 14px */
       small: {
         font: refs.typeface.plain,
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: `clamp(0.75rem, calc(0.75rem + (0.875 - 0.75) * ${refs.fluidity.interpolation}), 0.875rem)`,
+        size: toFluidClampFor(12, typoMap),
       },
     },
   },
 
   spacing: {
     0: '0px',
-
-    /* from 4px to 6px */
-    1: `clamp(0.25rem, calc(0.25rem + (0.375 - 0.25) * ${refs.fluidity.interpolation}), 0.375rem)`,
-
-    /* from 8px to 13px */
-    2: `clamp(0.5rem, calc(0.5rem + (0.8125 - 0.5) * ${refs.fluidity.interpolation}), 0.8125rem)`,
-
-    /* from 12px to 21px */
-    3: `clamp(0.75rem, calc(0.75rem + (1.3125 - 0.75) * ${refs.fluidity.interpolation}), 1.3125rem)`,
-
-    /* from 16px to 29px */
-    4: `clamp(1rem, calc(1rem + (1.8125 - 1) * ${refs.fluidity.interpolation}), 1.8125rem)`,
-
-    /* from 20px to 38px */
-    5: `clamp(1.25rem, calc(1.25rem + (2.375 - 1.25) * ${refs.fluidity.interpolation}), 2.375rem)`,
-
-    /* from 24px to 47px */
-    6: `clamp(1.5rem, calc(1.5rem + (2.9375 - 1.5) * ${refs.fluidity.interpolation}), 2.9375rem)`,
-
-    /* from 28px to 57px */
-    7: `clamp(1.75rem, calc(1.75rem + (3.5625 - 1.75) * ${refs.fluidity.interpolation}), 3.5625rem)`,
-
-    /* from 32px to 66px */
-    8: `clamp(2rem, calc(2rem + (4.125 - 2) * ${refs.fluidity.interpolation}), 4.125rem)`,
-
-    /* from 36px to 76px */
-    9: `clamp(2.25rem, calc(2.25rem + (4.75 - 2.25) * ${refs.fluidity.interpolation}), 4.75rem)`,
-
-    /* from 40px to 87px */
-    10: `clamp(2.5rem, calc(2.5rem + (5.4375 - 2.5) * ${refs.fluidity.interpolation}), 5.4375rem)`,
-
-    /* from 44px to 97px */
-    11: `clamp(2.75rem, calc(2.75rem + (6.0625 - 2.75) * ${refs.fluidity.interpolation}), 6.0625rem)`,
-
-    /* from 48px to 108px */
-    12: `clamp(3rem, calc(3rem + (6.75 - 3) * ${refs.fluidity.interpolation}), 6.75rem)`,
-
-    /* from 52px to 119px */
-    13: `clamp(3.25rem, calc(3.25rem + (7.4375 - 3.25) * ${refs.fluidity.interpolation}), 7.4375rem)`,
-
-    /* from 56px to 130px */
-    14: `clamp(3.5rem, calc(3.5rem + (8.125 - 3.5) * ${refs.fluidity.interpolation}), 8.125rem)`,
-
-    /* from 60px to 141px */
-    15: `clamp(3.75rem, calc(3.75rem + (8.8125 - 3.75) * ${refs.fluidity.interpolation}), 8.8125rem)`,
-
-    /* from 64px to 153px */
-    16: `clamp(4rem, calc(4rem + (9.5625 - 4) * ${refs.fluidity.interpolation}), 9.5625rem)`,
-
-    /* from 68px to 164px */
-    17: `clamp(4.25rem, calc(4.25rem + (10.25 - 4.25) * ${refs.fluidity.interpolation}), 10.25rem)`,
-
-    /* from 72px to 176px */
-    18: `clamp(4.5rem, calc(4.5rem + (11 - 4.5) * ${refs.fluidity.interpolation}), 11rem)`,
+    1: toFluidClampFor(4, spaceMap),
+    2: toFluidClampFor(8, spaceMap),
+    3: toFluidClampFor(12, spaceMap),
+    4: toFluidClampFor(16, spaceMap),
+    5: toFluidClampFor(20, spaceMap),
+    6: toFluidClampFor(24, spaceMap),
+    7: toFluidClampFor(28, spaceMap),
+    8: toFluidClampFor(32, spaceMap),
+    9: toFluidClampFor(36, spaceMap),
+    10: toFluidClampFor(40, spaceMap),
+    11: toFluidClampFor(44, spaceMap),
+    12: toFluidClampFor(48, spaceMap),
+    13: toFluidClampFor(52, spaceMap),
+    14: toFluidClampFor(56, spaceMap),
+    15: toFluidClampFor(60, spaceMap),
+    16: toFluidClampFor(64, spaceMap),
+    17: toFluidClampFor(68, spaceMap),
+    18: toFluidClampFor(72, spaceMap),
   },
 });
