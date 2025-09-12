@@ -43,4 +43,5 @@ export {
   type ExponentialScaleOptions,
   type DynamicInterpolationOptions,
   type FluidClampOptions,
+  type FluidClampForOptions,
 } from './scale';
