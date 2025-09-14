@@ -1,6 +1,6 @@
 export { useFormFieldContext } from './form-field-context';
 export { useFormFieldItemContext } from './form-field-item-context';
-export { formFieldStyle } from './form-field.css';
+export { formFieldStyle, formFieldVars } from './form-field.css';
 export { FormFieldControl } from './form-field-control';
 export { FormFieldDescription } from './form-field-description';
 export { FormFieldError } from './form-field-error';

@@ -1,20 +1,18 @@
-import { createGlobalTheme, style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const formFieldVars = createGlobalTheme(':root', {
-  '@layer': components,
-
+export const formFieldVars = createThemeContract({
   spacing: {
-    vertical: sys.spacing[2],
+    vertical: null,
   },
 
   color: {
-    foreground: sys.color.foreground,
-    background: sys.color.background,
-    outline: sys.color.foreground,
+    foreground: null,
+    background: null,
+    outline: null,
   },
 });
 
@@ -30,6 +28,18 @@ export const formFieldStyle = recipe({
         maxWidth: '100%',
 
         color: formFieldVars.color.foreground,
+
+        vars: {
+          ...assignVars(formFieldVars.color, {
+            foreground: sys.color.foreground,
+            background: sys.color.background,
+            outline: sys.color.foreground,
+          }),
+
+          ...assignVars(formFieldVars.spacing, {
+            vertical: sys.spacing[2],
+          }),
+        },
 
         selectors: {
           '&:disabled, &:has(:disabled)': {
