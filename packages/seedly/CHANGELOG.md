@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.31.0
+
+### Minor Changes
+
+- 0afb723: feat(seedly/form-field): switch to theme contract and export vars
+  - Replace createGlobalTheme with createThemeContract + assignVars for FormField.
+  - Export formFieldVars from the FormField module's index for external theming.
+
 ## 0.30.1
 
 ### Patch Changes
