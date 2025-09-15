@@ -1,4 +1,5 @@
 import { Value } from '@radix-ui/react-select';
+import { clsx } from 'clsx';
 import { ComponentPropsWithoutRef, ComponentPropsWithRef } from 'react';
 
 import {
@@ -14,6 +15,7 @@ import { InputAppearanceVariants } from '../input';
 import { SelectContent } from './select-content';
 import { SelectRoot } from './select-root';
 import { SelectTrigger } from './select-trigger';
+import { selectStyle } from './select.css';
 
 export type SelectProps = ComponentPropsWithoutRef<typeof SelectRoot> &
   Pick<ComponentPropsWithoutRef<typeof Value>, 'placeholder'> &
@@ -29,6 +31,7 @@ export type SelectProps = ComponentPropsWithoutRef<typeof SelectRoot> &
     hideLabel?: boolean;
     errors: string;
     hideErrorMessage?: boolean;
+    className?: string;
   };
 
 export function Select({
@@ -47,6 +50,7 @@ export function Select({
   required,
   size = 'md',
   ref,
+  className,
   ...props
 }: SelectProps) {
   return (
@@ -58,7 +62,7 @@ export function Select({
       disabled={disabled}
       hideLabel={hideLabel}
     >
-      <FormFieldItem>
+      <FormFieldItem className={clsx(selectStyle, className)}>
         <FormFieldLabel required={required} disabled={disabled} size={size}>
           {label}
         </FormFieldLabel>
