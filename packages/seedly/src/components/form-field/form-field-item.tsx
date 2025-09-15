@@ -1,6 +1,7 @@
 'use client';
 
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
+import { clsx } from 'clsx';
 import { ElementType, useId } from 'react';
 
 import { useFormFieldContext } from './form-field-context';
@@ -20,7 +21,13 @@ export function FormFieldItem<TUse extends ElementType = 'div'>(
 
   return (
     <FormFieldItemContextProvider value={{ id }}>
-      <Comp className={formFieldStyle({ error: !!errors, disabled })} {...rest}>
+      <Comp
+        className={clsx(
+          formFieldStyle({ error: !!errors, disabled }),
+          className,
+        )}
+        {...rest}
+      >
         {children}
       </Comp>
     </FormFieldItemContextProvider>

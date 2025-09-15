@@ -1,5 +1,6 @@
 'use client';
 
+import { clsx } from 'clsx';
 import { TextareaHTMLAttributes } from 'react';
 
 import {
@@ -13,6 +14,7 @@ import {
 import { InputProps } from '../input';
 
 import { TextareaInput } from './textarea-input';
+import { textareaStyle } from './textarea.css';
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
   InputProps & {
@@ -46,7 +48,7 @@ export function Textarea({
       disabled={disabled}
       hideLabel={hideLabel}
     >
-      <FormFieldItem>
+      <FormFieldItem className={clsx(textareaStyle, className)}>
         <FormFieldLabel disabled={disabled} required={required} size={size}>
           {label}
         </FormFieldLabel>

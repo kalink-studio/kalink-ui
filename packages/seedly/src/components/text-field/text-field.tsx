@@ -1,5 +1,7 @@
 'use client';
 
+import { clsx } from 'clsx';
+
 import {
   FormField,
   FormFieldControl,
@@ -9,6 +11,8 @@ import {
   FormFieldLabel,
 } from '../form-field';
 import { Input, InputProps } from '../input';
+
+import { textFieldStyle } from './text-field.css';
 
 export type TextFieldProps = InputProps & {
   name: string;
@@ -30,6 +34,7 @@ export function TextField({
   required,
   hideErrorMessage = false,
   size = 'md',
+  className,
   ...rest
 }: TextFieldProps) {
   return (
@@ -41,7 +46,7 @@ export function TextField({
       disabled={disabled}
       hideLabel={hideLabel}
     >
-      <FormFieldItem>
+      <FormFieldItem className={clsx(textFieldStyle, className)}>
         <FormFieldLabel required={required} disabled={disabled} size={size}>
           {label}
         </FormFieldLabel>
