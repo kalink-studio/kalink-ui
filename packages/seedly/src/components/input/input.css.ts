@@ -1,26 +1,30 @@
-import { style, globalStyle, createGlobalTheme } from '@vanilla-extract/css';
+import {
+  style,
+  globalStyle,
+  createThemeContract,
+  assignVars,
+  fallbackVar,
+} from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, transition, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
+import { formFieldVars } from '../form-field';
 
-export const inputVars = createGlobalTheme(':root', {
-  '@layer': components,
-
+export const inputVars = createThemeContract({
   color: {
-    foreground: 'inherit',
-    background: sys.color.background,
-    outline: sys.color.foreground,
-    error: 'red',
+    foreground: null,
+    background: null,
+    outline: null,
   },
 
   spacing: {
-    block: sys.spacing[2],
-    inline: sys.spacing[4],
+    block: null,
+    inline: null,
   },
 
   shape: {
-    corner: sys.shape.corner.none,
+    corner: null,
   },
 });
 
@@ -34,7 +38,7 @@ export const inputAppearance = recipe({
 
           color: inputVars.color.foreground,
 
-          backgroundColor: 'transparent',
+          backgroundColor: inputVars.color.background,
           borderRadius: inputVars.shape.corner,
 
           cursor: 'inherit',
@@ -63,17 +67,39 @@ export const inputAppearance = recipe({
 
             '&[aria-invalid], &:has([aria-invalid])': {
               vars: {
-                [inputVars.color.foreground]: 'red',
+                [inputVars.color.foreground]: fallbackVar(
+                  formFieldVars.color.foreground,
+                  'red',
+                ),
               },
             },
           },
 
           vars: {
-            [inputVars.color.foreground]: sys.color.foreground,
-            [inputVars.color.background]: sys.color.background,
-            [inputVars.color.outline]: inputVars.color.foreground,
-            [inputVars.spacing.block]: sys.spacing[2],
-            [inputVars.spacing.inline]: sys.spacing[4],
+            ...assignVars(inputVars.color, {
+              foreground: fallbackVar(
+                formFieldVars.color.foreground,
+                sys.color.foreground,
+              ),
+              background: fallbackVar(
+                formFieldVars.color.background,
+                sys.color.background,
+                'transparent',
+              ),
+              outline: fallbackVar(
+                formFieldVars.color.outline,
+                sys.color.foreground,
+              ),
+            }),
+
+            ...assignVars(inputVars.spacing, {
+              block: sys.spacing[2],
+              inline: sys.spacing[4],
+            }),
+
+            ...assignVars(inputVars.shape, {
+              corner: sys.shape.corner.none,
+            }),
           },
         },
       },
@@ -127,8 +153,10 @@ export const inputAppearance = recipe({
               fontSize: `max(16px, ${sys.typography.body.small.size})`,
 
               vars: {
-                [inputVars.spacing.block]: sys.spacing[1],
-                [inputVars.spacing.inline]: sys.spacing[1],
+                ...assignVars(inputVars.spacing, {
+                  block: sys.spacing[1],
+                  inline: sys.spacing[1],
+                }),
               },
             },
           },
@@ -146,8 +174,10 @@ export const inputAppearance = recipe({
               fontSize: `max(16px, ${sys.typography.body.medium.size})`,
 
               vars: {
-                [inputVars.spacing.block]: sys.spacing[2],
-                [inputVars.spacing.inline]: sys.spacing[2],
+                ...assignVars(inputVars.spacing, {
+                  block: sys.spacing[2],
+                  inline: sys.spacing[2],
+                }),
               },
             },
           },
@@ -165,8 +195,10 @@ export const inputAppearance = recipe({
               fontSize: `max(16px, ${sys.typography.body.large.size})`,
 
               vars: {
-                [inputVars.spacing.block]: sys.spacing[3],
-                [inputVars.spacing.inline]: sys.spacing[3],
+                ...assignVars(inputVars.spacing, {
+                  block: sys.spacing[3],
+                  inline: sys.spacing[3],
+                }),
               },
             },
           },
@@ -217,7 +249,6 @@ export const input = style({
       paddingBottom: 0,
 
       color: 'inherit',
-
       border: 'none',
       backgroundColor: 'transparent',
       cursor: 'inherit',
