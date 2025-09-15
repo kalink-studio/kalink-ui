@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.32.1
+
+### Patch Changes
+
+- 9d3abfd: Add proper styling solution for Input component
+
 ## 0.32.0
 
 ### Minor Changes
