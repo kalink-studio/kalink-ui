@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.32.0
+
+### Minor Changes
+
+- 40a1dbe: Add proper styling solution for form field component
+
 ## 0.31.0
 
 ### Minor Changes
