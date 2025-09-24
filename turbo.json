@@ -16,6 +16,17 @@
     "tsc": {
       "dependsOn": ["^tsc"]
     },
+    "generate:types": {
+      "outputs": ["apps/**/payload-types.ts"],
+      "dependsOn": []
+    },
+    "generate:importmap": {
+      "outputs": ["apps/**/app/(payload)/admin/importMap.js"],
+      "dependsOn": []
+    },
+    "payload:prepare": {
+      "dependsOn": ["generate:importmap", "generate:types"]
+    },
     "test": {
       "dependsOn": []
     },

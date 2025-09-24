@@ -1,18 +1,44 @@
-import React from 'react';
-import './styles.css';
+import '@kalink-ui/seedly/styles/layers';
+import '@kalink-ui/seedly/styles/reset';
 
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+import { clsx } from 'clsx';
+
+import { fontClass } from '@/styles/font';
+import { themeClass } from '@/styles/theme.css';
+
+import { Footer } from './components/footer';
+import { Navigation } from './components/navigation';
+import { body, html, main, skipLink } from './layout.css';
+
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+
+export const metadata: Metadata = {
+  description: 'Studio de création KalinK — branding, web et design.',
+  title: {
+    default: 'KalinK Studio',
+    template: '%s · KalinK Studio',
+  },
 };
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props;
+interface RootLayoutProps {
+  children: ReactNode;
+}
 
+console.log(process.env.DATABASE_URL, process.env.PAYLOAD_SECRET);
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body>
-        <main>{children}</main>
+    <html lang="fr" className={clsx(html, fontClass)}>
+      <body className={clsx(body, themeClass)}>
+        <a href="#main-content" className={skipLink}>
+          Aller au contenu principal
+        </a>
+        <Navigation />
+        <main id="main-content" className={main}>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

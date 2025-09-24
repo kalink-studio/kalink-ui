@@ -1,2 +1,3 @@
 # Ignore Changeset markdown files from Prettier formatting
 .changeset/*.md
+apps/kalink/app/(payload)/**

@@ -4,4 +4,10 @@ import {
   nextEslintConfig,
 } from '@kalink-ui/eslint-config';
 
-export default [...baseEslintConfig, ...reactEslintConfig, ...nextEslintConfig];
+const config = [...baseEslintConfig, ...reactEslintConfig, ...nextEslintConfig];
+
+config.push({
+  ignores: ['app/(payload)/**', 'next-env.d.ts', 'payload-types.ts'],
+});
+
+export default config;

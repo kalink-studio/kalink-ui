@@ -4,6 +4,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
+    "**/*.d.ts",
     "next-env.d.ts",
     "next.config.ts",
     ".next/types/**/*.ts",
@@ -19,7 +20,11 @@
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./*"],
-      "@payload-config": ["./payload.config.ts"]
+      "@payload-config": ["./payload.config.ts"],
+      "@kalink-ui/seedly": ["../../packages/seedly/src/index.ts"],
+      "@kalink-ui/seedly/*": ["../../packages/seedly/src/*"],
+      "@kalink-ui/dibbly": ["../../packages/dibbly/src/index.ts"],
+      "@kalink-ui/dibbly/*": ["../../packages/dibbly/src/*"]
     }
   },
   "references": [
