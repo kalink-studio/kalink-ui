@@ -1,7 +1,7 @@
 {
-  "name": "@kalink-ui/dibbly",
-  "description": "A set of tools for building UIs with React and TypeScript",
-  "version": "0.5.2",
+  "name": "@kalink-ui/canopy",
+  "description": "A set of tools for building custom PayloadCMS experiences",
+  "version": "0.0.1",
   "private": false,
   "license": "MIT",
   "author": "Louis Gollut",
@@ -10,46 +10,32 @@
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
     "lint": "eslint --max-warnings 0",
     "lint:fix": "pnpm lint --fix",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "dev": "tsc -b -w",
-    "tsc": "tsc -b",
-    "build": "tsc -b",
-    "prepare": "pnpm run build"
+    "tsc": "tsc -b"
   },
   "devDependencies": {
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
+    "@types/node": "^24.5.2",
     "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
     "eslint": "^9.36.0",
     "react": "^19.1.1",
     "typescript": "^5.9.2",
-    "vite": "^6.3.5",
+    "vite": "^7.1.7",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
-  "dependencies": {
-    "type-fest": "^4.41.0"
-  },
   "peerDependencies": {
     "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^5.8.2"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+  }
 }

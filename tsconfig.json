@@ -3,6 +3,7 @@
   "references": [
     { "path": "./apps/web" },
     { "path": "./apps/kalink" },
+    { "path": "./packages/canopy" },
     { "path": "./packages/seedly" },
     { "path": "./packages/dibbly" }
   ]
