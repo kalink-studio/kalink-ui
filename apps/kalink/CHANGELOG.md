@@ -1,5 +1,14 @@
 # @kalink-ui/kalink
 
+## 0.2.14
+
+### Patch Changes
+
+- 6ac14d3: Provide environments to github actions
+- 57e1325: Correctly pass env vars to jobs
+- Updated dependencies [c8c98c0]
+  - @kalink-ui/seedly@0.33.0
+
 ## 0.2.13
 
 ### Patch Changes

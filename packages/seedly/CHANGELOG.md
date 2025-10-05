@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.33.0
+
+### Minor Changes
+
+- c8c98c0: Introduce the Radix-based `Collapsible` primitives and animated `CollapsibleContent`, and pull the new `@radix-ui/react-collapsible` dependency into Seedly.
+
 ## 0.32.1
 
 ### Patch Changes
