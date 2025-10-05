@@ -19,7 +19,6 @@
   "compilerOptions": {
     "composite": true,
     "incremental": true,
-    "rootDir": ".",
     "baseUrl": ".",
     "allowJs": true,
     "esModuleInterop": true,
