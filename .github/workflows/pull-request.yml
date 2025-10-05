@@ -6,6 +6,8 @@ on:
 
 jobs:
   ci:
+    environment: preview
+
     runs-on: ubuntu-latest
 
     env:
