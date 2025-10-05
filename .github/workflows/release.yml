@@ -9,6 +9,10 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
+    name: Release
+
+    environment: production
+
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,8 +28,9 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    name: Release
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
