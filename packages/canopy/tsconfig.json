@@ -1,0 +1,16 @@
+{
+  "extends": "@kalink-ui/typescript-config/lib-react.json",
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "noEmit": false,
+    "incremental": true,
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "ES2020",
+    "moduleResolution": "Bundler"
+  }
+}

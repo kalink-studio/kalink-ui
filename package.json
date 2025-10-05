@@ -17,14 +17,14 @@
     "release": "changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.5",
-    "jiti": "^2.4.2",
+    "@changesets/cli": "^2.29.7",
+    "jiti": "^2.6.1",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.5",
-    "typescript": "^5.8.3"
+    "turbo": "^2.5.8",
+    "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.18.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

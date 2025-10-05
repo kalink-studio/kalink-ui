@@ -1,2 +1,8 @@
 # Ignore Changeset markdown files from Prettier formatting
-.changeset/*.md
+.changeset
+apps/**/(payload)
+apps/**/.next
+apps/**/payload-types.ts
+apps/**/payload-generated-schema.ts
+apps/**/migrations
+

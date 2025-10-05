@@ -4,4 +4,13 @@ import {
   nextEslintConfig,
 } from '@kalink-ui/eslint-config';
 
-export default [...baseEslintConfig, ...reactEslintConfig, ...nextEslintConfig];
+import type { Linter } from 'eslint';
+
+
+const webEslintConfig: Linter.FlatConfig[] = [
+  ...baseEslintConfig,
+  ...reactEslintConfig,
+  ...nextEslintConfig,
+];
+
+export default webEslintConfig;

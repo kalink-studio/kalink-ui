@@ -4,22 +4,31 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
+    "**/*.d.ts",
     "next-env.d.ts",
     "next.config.ts",
     ".next/types/**/*.ts",
     "eslint.config.mts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "app/(payload)/**",
+    ".next/types/app/(payload)/**",
+    ".next/types/validator.ts"
+  ],
   "compilerOptions": {
     "composite": true,
     "incremental": true,
-    "rootDir": ".",
     "baseUrl": ".",
     "allowJs": true,
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./*"],
-      "@payload-config": ["./payload.config.ts"]
+      "@payload-config": ["./payload.config.ts"],
+      "@kalink-ui/seedly": ["../../packages/seedly/src/index.ts"],
+      "@kalink-ui/seedly/*": ["../../packages/seedly/src/*"],
+      "@kalink-ui/dibbly": ["../../packages/dibbly/src/index.ts"],
+      "@kalink-ui/dibbly/*": ["../../packages/dibbly/src/*"]
     }
   },
   "references": [

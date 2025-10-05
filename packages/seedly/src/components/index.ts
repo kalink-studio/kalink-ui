@@ -5,6 +5,7 @@ export * from './button-icon';
 export * from './card';
 export * from './center';
 export * from './cluster';
+export * from './collapsible';
 export * from './command';
 export * from './conditional-wrapper';
 export * from './cover';

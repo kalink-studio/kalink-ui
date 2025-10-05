@@ -1,7 +1,6 @@
 import js from '@eslint/js';
 import { Linter } from 'eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
-// @ts-expect-error Declaration file is not available for the package
 import { flatConfigs as importConfigs } from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
 import {
@@ -14,8 +13,9 @@ export const baseEslintConfig = tseslintConfig(
   tseslintConfigs.recommended,
   tseslintConfigs.stylistic,
   eslintConfigPrettier,
+  importConfigs.recommended,
+  importConfigs.typescript,
   {
-    extends: [importConfigs.recommended, importConfigs.typescript],
     plugins: { 'unused-imports': unusedImports },
     settings: {
       'import/parsers': {
@@ -23,6 +23,11 @@ export const baseEslintConfig = tseslintConfig(
       },
       'import/resolver': {
         typescript: true,
+      },
+    },
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: __dirname,
       },
     },
     rules: {
