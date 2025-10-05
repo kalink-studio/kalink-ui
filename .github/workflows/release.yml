@@ -9,6 +9,17 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NEON_PROJECT_ID: ${{ secrets.NEON_PROJECT_ID }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      RESEND_KEY: ${{ secrets.RESEND_API_KEY }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
     permissions:
       contents: write
       issues: write
@@ -46,9 +57,3 @@ jobs:
           version: pnpm changeset version
           commit: 'ci(changesets): version packages'
           publish: pnpm changeset publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # npm picks up this token when setup-node has configured registry/scope
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          # keep NPM_TOKEN for changesets compatibility
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

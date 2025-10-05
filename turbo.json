@@ -5,7 +5,18 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "env": [
+        "DATABASE_URL",
+        "GITHUB_TOKEN",
+        "NEON_PROJECT_ID",
+        "NODE_AUTH_TOKEN",
+        "NPM_TOKEN",
+        "PAYLOAD_SECRET",
+        "RESEND_KEY",
+        "TURBO_TEAM",
+        "TURBO_TOKEN"
+      ]
     },
     "lint": {
       "dependsOn": []
