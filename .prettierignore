@@ -1,3 +1,8 @@
 # Ignore Changeset markdown files from Prettier formatting
-.changeset/*.md
-apps/kalink/app/(payload)/**
+.changeset
+apps/**/(payload)
+apps/**/.next
+apps/**/payload-types.ts
+apps/**/payload-generated-schema.ts
+apps/**/migrations
+

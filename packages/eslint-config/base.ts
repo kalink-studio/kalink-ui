@@ -13,8 +13,9 @@ export const baseEslintConfig = tseslintConfig(
   tseslintConfigs.recommended,
   tseslintConfigs.stylistic,
   eslintConfigPrettier,
+  importConfigs.recommended,
+  importConfigs.typescript,
   {
-    extends: [importConfigs.recommended, importConfigs.typescript],
     plugins: { 'unused-imports': unusedImports },
     settings: {
       'import/parsers': {

@@ -10,7 +10,12 @@
     ".next/types/**/*.ts",
     "eslint.config.mts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "app/(payload)/**",
+    ".next/types/app/(payload)/**",
+    ".next/types/validator.ts"
+  ],
   "compilerOptions": {
     "composite": true,
     "incremental": true,
