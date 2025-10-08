@@ -17,6 +17,7 @@
     "payload:prepare": "pnpm run generate:importmap && pnpm run generate:types"
   },
   "dependencies": {
+    "@kalink-ui/canopy": "workspace:*",
     "@kalink-ui/dibbly": "workspace:*",
     "@kalink-ui/seedly": "workspace:*",
     "@payloadcms/db-vercel-postgres": "^3.58.0",

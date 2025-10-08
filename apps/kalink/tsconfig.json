@@ -28,7 +28,9 @@
       "@kalink-ui/seedly": ["../../packages/seedly/src/index.ts"],
       "@kalink-ui/seedly/*": ["../../packages/seedly/src/*"],
       "@kalink-ui/dibbly": ["../../packages/dibbly/src/index.ts"],
-      "@kalink-ui/dibbly/*": ["../../packages/dibbly/src/*"]
+      "@kalink-ui/dibbly/*": ["../../packages/dibbly/src/*"],
+      "@kalink-ui/canopy": ["../../packages/canopy/src/index.ts"],
+      "@kalink-ui/canopy/*": ["../../packages/canopy/src/*"]
     }
   },
   "references": [
@@ -37,6 +39,9 @@
     },
     {
       "path": "../../packages/dibbly"
+    },
+    {
+      "path": "../../packages/canopy"
     }
   ]
 }

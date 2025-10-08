@@ -179,7 +179,11 @@ export interface Media {
 export interface Page {
   id: number;
   title: string;
+  /**
+   * Generated from the title. Keep it unique to avoid routing conflicts.
+   */
   slug: string;
+  slugManualOverride?: boolean | null;
   navigationLabel?: string | null;
   tint?: ('primary' | 'secondary') | null;
   /**
@@ -205,7 +209,7 @@ export interface Page {
               root: {
                 type: string;
                 children: {
-                  type: string;
+                  type: any;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -252,7 +256,7 @@ export interface Page {
                     root: {
                       type: string;
                       children: {
-                        type: string;
+                        type: any;
                         version: number;
                         [k: string]: unknown;
                       }[];
@@ -284,7 +288,7 @@ export interface Page {
               root: {
                 type: string;
                 children: {
-                  type: string;
+                  type: any;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -406,7 +410,7 @@ export interface Page {
               root: {
                 type: string;
                 children: {
-                  type: string;
+                  type: any;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -487,7 +491,7 @@ export interface Person {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -660,6 +664,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  slugManualOverride?: T;
   navigationLabel?: T;
   tint?: T;
   isHomepage?: T;
