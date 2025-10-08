@@ -15,7 +15,7 @@ export type {
   SlugPluginCollectionOption,
   SlugPluginOptions,
   SlugifyFn,
-} from './types.js';
+} from './types';
 export { formatSlug } from './formatSlug';
 
 const isNamedField = (

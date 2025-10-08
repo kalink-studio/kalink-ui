@@ -13,6 +13,7 @@
 - Extract the slug field into a Payload plugin that registers hooks and admin components via the documented `PayloadPlugin` signature.
 - Expose a future-friendly plugin barrel (e.g., `plugins/slug`) and keep shared helpers internal to avoid duplicate admin bundles.
 - Update `apps/kalink` payload config to consume the slug plugin and drop direct field wiring in collection definitions.
+- Start a shared field library under `packages/canopy/src/fields` (e.g., the new heading group) so blocks/globals can reuse strongly-typed building blocks.
 
 ## Phase Overview
 
