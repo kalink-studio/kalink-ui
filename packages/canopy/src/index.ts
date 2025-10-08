@@ -7,3 +7,9 @@ export {
   type SlugifyFn,
   type SlugAdminCustom,
 } from './plugins/slug';
+export {
+  createHeadingField,
+  type CreateHeadingFieldOptions,
+  type HeadingField,
+  type HeadingLevel,
+} from './fields/heading';
