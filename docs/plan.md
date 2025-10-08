@@ -7,6 +7,13 @@
 - Reuse primitives, utilities, and design tokens from `@kalink-ui/seedly` and `@kalink-ui/dibbly` to avoid duplicated UI logic.
 - Adopt vanilla-extract for all local styling; keep image handling simple (single media field per asset) for this phase.
 
+## Active Work – Canopy Plugins
+
+- Align `@kalink-ui/canopy` with Payload’s plugin authoring guide so packages can ship self-contained enhancements.
+- Extract the slug field into a Payload plugin that registers hooks and admin components via the documented `PayloadPlugin` signature.
+- Expose a future-friendly plugin barrel (e.g., `plugins/slug`) and keep shared helpers internal to avoid duplicate admin bundles.
+- Update `apps/kalink` payload config to consume the slug plugin and drop direct field wiring in collection definitions.
+
 ## Phase Overview
 
 1. **Baseline & Dependencies** – Sync package versions, add vanilla-extract support to `apps/kalink`, and ensure Payload admin runs locally.

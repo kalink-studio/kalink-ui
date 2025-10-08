@@ -5,14 +5,24 @@
   "private": false,
   "license": "MIT",
   "author": "Louis Gollut",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./dist/*"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "dev": "tsc -b --watch --preserveWatchOutput",
+    "build": "tsc -b",
+    "prepare": "pnpm run build",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "pnpm lint --fix",
     "tsc": "tsc -b"
@@ -20,10 +30,12 @@
   "devDependencies": {
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
+    "@payloadcms/ui": "^3.58.0",
     "@types/node": "^24.6.2",
     "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
     "eslint": "^9.37.0",
+    "payload": "^3.58.0",
     "react": "^19.2.0",
     "typescript": "^5.9.3",
     "vite": "^7.1.9",
@@ -31,6 +43,8 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
+    "@payloadcms/ui": "^3.58.0",
+    "payload": "^3.58.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "typescript": "^5.8.2"
