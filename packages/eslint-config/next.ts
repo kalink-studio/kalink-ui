@@ -3,7 +3,7 @@ import { Linter } from 'eslint';
 
 export const nextEslintConfig = [
   {
-    ignores: ['**/*.next/**'],
+    ignores: ['**/*.next/**', '**/next-env.d.ts'],
   },
   {
     plugins: {

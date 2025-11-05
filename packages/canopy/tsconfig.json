@@ -11,6 +11,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "module": "ES2020",
-    "moduleResolution": "Bundler"
+    "moduleDetection": "force",
+    "moduleResolution": "bundler"
   }
 }

@@ -4,6 +4,7 @@ import { Title } from '@radix-ui/react-dialog';
 import { ComponentPropsWithRef } from 'react';
 
 import { Heading, HeadingProps, HeadingTypes } from '../heading';
+import { TextProps } from '../text';
 
 type SheetTitleProps<TUse extends HeadingTypes> = ComponentPropsWithRef<
   typeof Title
@@ -29,7 +30,7 @@ export function SheetTitle<TUse extends HeadingTypes>(
   return (
     <Title asChild {...rest}>
       <Heading
-        use={use as HeadingProps<TUse>['use']}
+        use={use as TextProps<TUse>['use']}
         variant={variant}
         size={size}
         className={className}

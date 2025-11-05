@@ -1,6 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { slugPlugin } from '@kalink-ui/canopy';
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
@@ -52,5 +53,19 @@ export default buildConfig({
   }),
 
   sharp,
-  plugins: [payloadCloudPlugin()],
+  plugins: [
+    payloadCloudPlugin(),
+    slugPlugin({
+      collections: [
+        {
+          slug: 'pages',
+          description:
+            'Generated from the title. Keep it unique to avoid routing conflicts.',
+          overrideDescription:
+            'Enable manual editing to detach the slug from the title. Disable to sync it automatically.',
+          sourceFieldPath: 'title',
+        },
+      ],
+    }),
+  ],
 });

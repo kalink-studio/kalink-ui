@@ -23,13 +23,6 @@ export const Pages: CollectionConfig = {
       required: true,
     },
     {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      index: true,
-    },
-    {
       name: 'navigationLabel',
       type: 'text',
       label: 'Navigation label',
