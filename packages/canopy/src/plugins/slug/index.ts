@@ -7,7 +7,7 @@ import type {
   SlugPluginCollectionOption,
   SlugPluginOptions,
 } from './types';
-import type { CollectionConfig, Config, Field } from 'payload';
+import type { CollectionConfig, CollectionSlug, Config, Field } from 'payload';
 
 export type {
   SlugAdminCustom,
@@ -88,12 +88,12 @@ export const slugPlugin =
     }
 
     const normalizedOptions = collectionOptions.map(normalizeCollectionOption);
-    const optionsBySlug = new Map(
+    const optionsBySlug = new Map<CollectionSlug, SlugPluginCollectionConfig>(
       normalizedOptions.map((option) => [option.slug, option]),
     );
 
     const nextCollections = config.collections.map((collection) => {
-      const option = optionsBySlug.get(collection.slug);
+      const option = optionsBySlug.get(collection.slug as CollectionSlug);
 
       if (!option) {
         return collection;

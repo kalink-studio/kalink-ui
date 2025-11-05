@@ -57,13 +57,21 @@ const createBeforeValidateHook = ({
   slugFieldPath,
   sourceFieldPath,
   slugify,
-}: BeforeValidateHookArgs): FieldHook<any, string | undefined, any> => {
+}: BeforeValidateHookArgs): FieldHook<
+  { id: string | number } & Record<string, unknown>,
+  string | undefined,
+  { id: string | number } & Record<string, unknown>
+> => {
   const hook = ({
     value,
     data,
     siblingData,
     originalDoc,
-  }: FieldHookArgs<any, string | undefined, any>) => {
+  }: FieldHookArgs<
+    { id: string | number } & Record<string, unknown>,
+    string | undefined,
+    { id: string | number } & Record<string, unknown>
+  >) => {
     const sources = [data, siblingData, originalDoc];
 
     const manualOverride = sources.some((source) => {
