@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.10.1
+
+### Patch Changes
+
+- 8ec0736: Fix typing issues and tooling configuration
+
 ## 0.10.0
 
 ### Minor Changes

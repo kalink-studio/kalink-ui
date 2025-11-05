@@ -1,5 +1,15 @@
 # @kalink-ui/kalink
 
+## 0.2.15
+
+### Patch Changes
+
+- 8ec0736: Fix typing issues and tooling configuration
+- Updated dependencies [8ec0736]
+  - @kalink-ui/canopy@0.0.2
+  - @kalink-ui/seedly@0.33.1
+  - @kalink-ui/dibbly@0.5.2
+
 ## 0.2.14
 
 ### Patch Changes

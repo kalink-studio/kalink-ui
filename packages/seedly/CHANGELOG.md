@@ -1,5 +1,12 @@
 # @kalink-ui/seedly
 
+## 0.33.1
+
+### Patch Changes
+
+- 8ec0736: Fix typing issues and tooling configuration
+  - @kalink-ui/dibbly@0.5.2
+
 ## 0.33.0
 
 ### Minor Changes
