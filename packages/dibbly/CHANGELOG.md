@@ -1,5 +1,11 @@
 # @kalink-ui/dibbly
 
+## 0.5.3
+
+### Patch Changes
+
+- 799c0ef: Update peer dependencies
+
 ## 0.5.2
 
 ### Patch Changes

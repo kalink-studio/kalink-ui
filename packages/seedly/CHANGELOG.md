@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.33.2
+
+### Patch Changes
+
+- 799c0ef: Update peer dependencies
+- Updated dependencies [799c0ef]
+  - @kalink-ui/dibbly@0.5.3
+
 ## 0.33.1
 
 ### Patch Changes
