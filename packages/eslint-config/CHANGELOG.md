@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.10.2
+
+### Patch Changes
+
+- 799c0ef: Update peer dependencies
+
 ## 0.10.1
 
 ### Patch Changes
