@@ -1,5 +1,11 @@
 # @kalink-ui/kalink
 
+## 0.2.17
+
+### Patch Changes
+
+- 5ce52ea: Fix React Server Components CVE vulnerabilities
+
 ## 0.2.16
 
 ### Patch Changes
