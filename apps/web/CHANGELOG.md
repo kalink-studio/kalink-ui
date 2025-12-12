@@ -1,5 +1,11 @@
 # web
 
+## 0.2.1
+
+### Patch Changes
+
+- 5ce52ea: Fix React Server Components CVE vulnerabilities
+
 ## 0.2.0
 
 ### Minor Changes
