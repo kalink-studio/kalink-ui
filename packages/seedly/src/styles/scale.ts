@@ -129,8 +129,7 @@ export function getInterpolationFor(
 }
 
 export interface FluidClampForOptions
-  extends DynamicInterpolationOptions,
-    FluidClampOptions {}
+  extends DynamicInterpolationOptions, FluidClampOptions {}
 
 /**
  * Convenience to produce a CSS clamp() for a single `value` by first computing

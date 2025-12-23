@@ -1,8 +1,12 @@
 {
   "extends": "@kalink-ui/typescript-config/base.json",
-  "include": ["**/*.ts", "eslint.config.mts"],
-  "exclude": ["node_modules"],
+  "include": ["*.mts"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node"],
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "rootDir": "."
   }
 }

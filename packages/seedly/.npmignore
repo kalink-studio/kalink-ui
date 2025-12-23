@@ -5,6 +5,7 @@
 **/*config.*
 
 .storybook
+storybook-static
 .turbo
 dist
 turbo

@@ -1,3 +1,1 @@
-import { baseEslintConfig } from './base.js';
-
-export default baseEslintConfig;
+export { default } from './typescript.mjs';

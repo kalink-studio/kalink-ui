@@ -1,20 +1,8 @@
-import {
-  baseEslintConfig,
-  nextEslintConfig,
-  reactEslintConfig,
-} from '@kalink-ui/eslint-config';
+import next from '@kalink-ui/eslint-config/next';
 
-import type { Linter } from 'eslint';
-
-
-const kalinkEslintConfig: Linter.FlatConfig[] = [
-  ...baseEslintConfig,
-  ...reactEslintConfig,
-  ...nextEslintConfig,
+export default [
+  ...next,
+  {
+    ignores: ['app/(payload)/**', 'next-env.d.ts', 'payload-types.ts'],
+  },
 ];
-
-kalinkEslintConfig.push({
-  ignores: ['app/(payload)/**', 'next-env.d.ts', 'payload-types.ts'],
-});
-
-export default kalinkEslintConfig;

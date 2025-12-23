@@ -22,8 +22,10 @@ interface BeforeValidateHookArgs {
   readonly slugify: SlugifyFn;
 }
 
-interface CreateSlugFieldsArgs
-  extends Omit<SlugPluginCollectionConfig, 'slug'> {
+interface CreateSlugFieldsArgs extends Omit<
+  SlugPluginCollectionConfig,
+  'slug'
+> {
   readonly slugify: SlugifyFn;
 }
 

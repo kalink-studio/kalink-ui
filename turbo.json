@@ -19,13 +19,14 @@
       ]
     },
     "lint": {
-      "dependsOn": []
+      "dependsOn": ["@kalink-ui/eslint-config#tsc"]
     },
     "lint:fix": {
-      "dependsOn": []
+      "dependsOn": ["@kalink-ui/eslint-config#tsc"]
     },
     "tsc": {
-      "dependsOn": ["^tsc"]
+      "dependsOn": ["^tsc"],
+      "outputs": ["dist/**/*.mjs", "dist/**/*.d.mts", "dist/**/*.map"]
     },
     "generate:types": {
       "outputs": ["apps/**/payload-types.ts"],
