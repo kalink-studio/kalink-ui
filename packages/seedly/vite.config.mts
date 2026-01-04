@@ -5,5 +5,15 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [tsconfigPaths(), react(), vanillaExtractPlugin()],
-  test: {},
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-dom/client',
+      'react/jsx-runtime',
+      'react/jsx-dev-runtime',
+      '@vanilla-extract/recipes/createRuntimeFn',
+      '@vanilla-extract/sprinkles/createRuntimeSprinkles',
+    ],
+  },
 });

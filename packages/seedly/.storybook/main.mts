@@ -6,10 +6,13 @@ import type { StorybookConfig } from '@storybook/react-vite';
 const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
-  stories: ['../**/*.mdx', '../**/*.stories.@(ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
   addons: [
     getAbsolutePath('@chromatic-com/storybook'),
+    getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-vitest'),
+    getAbsolutePath('@liip/storybook-addon-resizr'),
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
@@ -17,6 +20,11 @@ const config: StorybookConfig = {
   },
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+  },
+  tags: {
+    internal: {
+      defaultFilterSelection: 'exclude',
+    },
   },
 };
 

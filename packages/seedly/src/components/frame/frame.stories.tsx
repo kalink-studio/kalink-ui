@@ -26,7 +26,7 @@ const meta = {
   args: {
     ratio: '16:9',
 
-    children: <img src="https://picsum.photos/seed/picsum/2000/2000" />,
+    children: <img src="https://picsum.photos/seed/picsum/2000/2000" alt="" />,
   },
 } satisfies Meta<typeof Frame>;
 

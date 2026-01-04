@@ -26,7 +26,12 @@
     },
     "tsc": {
       "dependsOn": ["^tsc"],
-      "outputs": ["dist/**/*.mjs", "dist/**/*.d.mts", "dist/**/*.map"]
+      "outputs": [
+        "dist/**/*.mjs",
+        "dist/**/*.d.mts",
+        "dist/**/*.map",
+        "tsconfig.tsbuildinfo"
+      ]
     },
     "generate:types": {
       "outputs": ["apps/**/payload-types.ts"],

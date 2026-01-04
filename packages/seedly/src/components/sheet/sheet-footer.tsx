@@ -1,14 +1,19 @@
+import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { Box, BoxProps } from '../box';
+import { Cluster, ClusterProps } from '../cluster';
 
-export function SheetFooter<TUse extends ElementType>(props: BoxProps<TUse>) {
+import { sheetFooter } from './sheet-footer.css';
+
+export function SheetFooter<TUse extends ElementType>({
+  spacing = 4,
+  className,
+  ...props
+}: ClusterProps<TUse>) {
   return (
-    <Box
-      display="flex"
-      flexDirection={{ sm: 'column-reverse', md: 'row' }}
-      justifyContent={{ sm: 'flex-start', md: 'flex-end' }}
-      gap="sm"
+    <Cluster
+      spacing={spacing}
+      className={clsx(sheetFooter, className)}
       {...props}
     />
   );

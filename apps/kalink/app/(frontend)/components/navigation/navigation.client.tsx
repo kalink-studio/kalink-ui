@@ -81,7 +81,7 @@ export function NavigationClient({ entries }: NavigationClientProps) {
             <ButtonIcon
               variant="ghost"
               size="sm"
-              aria-label="Ouvrir le menu de navigation"
+              label="Ouvrir le menu de navigation"
             >
               <Menu size={20} />
             </ButtonIcon>
@@ -90,11 +90,7 @@ export function NavigationClient({ entries }: NavigationClientProps) {
             <div className={mobileMenuHeader}>
               <SheetTitle use="h3">Menu</SheetTitle>
               <SheetClose asChild>
-                <ButtonIcon
-                  variant="ghost"
-                  size="sm"
-                  aria-label="Fermer le menu"
-                >
+                <ButtonIcon variant="ghost" size="sm" label="Fermer le menu">
                   <X size={20} />
                 </ButtonIcon>
               </SheetClose>

@@ -5,7 +5,6 @@ import { clsx } from 'clsx';
 import { ComponentPropsWithRef, ElementType } from 'react';
 
 import { Box, BoxProps } from '../box';
-import { ScrollArea } from '../scroll-area';
 
 import { SheetPortal } from './sheet';
 import { sheetContent, SheetContentVariants } from './sheet-content.css';
@@ -22,6 +21,7 @@ export function SheetContent<TUse extends ElementType>({
   side,
   size,
   ref,
+  spacing = 4,
   ...props
 }: SheetContentProps<TUse>) {
   return (
@@ -31,11 +31,11 @@ export function SheetContent<TUse extends ElementType>({
         <Box
           ref={ref}
           variant="solid"
-          className={clsx(sheetContent({ side, size }), className)}
+          spacing={spacing}
+          className={clsx(sheetContent({ side, size, spacing }), className)}
+          {...props}
         >
-          <ScrollArea>
-            <Box {...props}>{children}</Box>
-          </ScrollArea>
+          {children}
         </Box>
       </Content>
     </SheetPortal>
