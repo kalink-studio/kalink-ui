@@ -1,5 +1,11 @@
 # @kalink-ui/dibbly
 
+## 0.6.1
+
+### Patch Changes
+
+- 3642627: Trigger publish with trusted publishing and Playwright setup updates.
+
 ## 0.6.0
 
 ### Minor Changes
