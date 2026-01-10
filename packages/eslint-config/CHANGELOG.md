@@ -1,5 +1,23 @@
 # @kalink-ui/eslint-config
 
+## 0.11.0
+
+### Minor Changes
+
+- ecc5d1b: Simplify ESLint config by removing unused `projectService` and `tsconfigRootDir` parser options.
+
+  Add `name` properties to config objects for better debugging with ESLint config inspector.
+
+  **Note:** If you extended this config with type-aware rules (e.g., `@typescript-eslint/no-floating-promises`),
+  you will need to add `projectService: true` to your own config's `languageOptions.parserOptions`.
+
+- 1efa841: Harden test suites (Vitest v4, Playwright, Storybook) and improve accessibility.
+
+  Breaking changes (still released as `minor` because we are in `0.x`):
+  - `@kalink-ui/seedly`: `ButtonIcon` now requires a `label` prop for accessibility.
+    - Migration: replace `aria-label="..."` with `label="..."` on `ButtonIcon`.
+    - Icon children are treated as decorative (`aria-hidden`) and the label is announced via visually-hidden text.
+
 ## 0.10.2
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "name": "@kalink-ui/canopy",
   "description": "A set of tools for building custom PayloadCMS experiences",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "private": false,
   "license": "MIT",
   "author": "Louis Gollut",

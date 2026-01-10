@@ -1,5 +1,20 @@
 # web
 
+## 0.3.0
+
+### Minor Changes
+
+- 1efa841: Harden test suites (Vitest v4, Playwright, Storybook) and improve accessibility.
+
+  Breaking changes (still released as `minor` because we are in `0.x`):
+  - `@kalink-ui/seedly`: `ButtonIcon` now requires a `label` prop for accessibility.
+    - Migration: replace `aria-label="..."` with `label="..."` on `ButtonIcon`.
+    - Icon children are treated as decorative (`aria-hidden`) and the label is announced via visually-hidden text.
+
+### Patch Changes
+
+- 5ce52ea: Fix React Server Components CVE vulnerabilities
+
 ## 0.2.0
 
 ### Minor Changes
