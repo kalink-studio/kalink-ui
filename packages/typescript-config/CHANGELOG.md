@@ -1,5 +1,11 @@
 # @kalink-ui/typescript-config
 
+## 0.4.2
+
+### Patch Changes
+
+- a9c74d3: Rebump packages to align dev with trusted publishing rollout.
+
 ## 0.4.1
 
 ### Patch Changes

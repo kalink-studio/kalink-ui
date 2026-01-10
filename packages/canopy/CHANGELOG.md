@@ -1,5 +1,11 @@
 # @kalink-ui/canopy
 
+## 0.1.3
+
+### Patch Changes
+
+- a9c74d3: Rebump packages to align dev with trusted publishing rollout.
+
 ## 0.1.2
 
 ### Patch Changes
