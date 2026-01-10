@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.34.3
+
+### Patch Changes
+
+- a9c74d3: Rebump packages to align dev with trusted publishing rollout.
+- Updated dependencies [a9c74d3]
+  - @kalink-ui/dibbly@0.6.3
+
 ## 0.34.2
 
 ### Patch Changes

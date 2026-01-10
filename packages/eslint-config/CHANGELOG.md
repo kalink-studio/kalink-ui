@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.11.3
+
+### Patch Changes
+
+- a9c74d3: Rebump packages to align dev with trusted publishing rollout.
+
 ## 0.11.2
 
 ### Patch Changes
