@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.11.2
+
+### Patch Changes
+
+- 7098356: Align package repository URLs with provenance origin for trusted publishing.
+
 ## 0.11.1
 
 ### Patch Changes
