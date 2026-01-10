@@ -8,7 +8,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kalink/kalink-ui.git"
+    "url": "https://github.com/kalink-studio/kalink-ui"
   },
   "exports": {
     ".": {
