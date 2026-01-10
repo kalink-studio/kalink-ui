@@ -10,8 +10,6 @@
         "POSTGRES_URL",
         "GITHUB_TOKEN",
         "NEON_PROJECT_ID",
-        "NODE_AUTH_TOKEN",
-        "NPM_TOKEN",
         "PAYLOAD_SECRET",
         "RESEND_KEY",
         "TURBO_TEAM",
