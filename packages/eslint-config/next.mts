@@ -57,8 +57,10 @@ export default defineConfig([
       '@next/next': pluginNext,
     } as Linter.Config['plugins'],
     rules: {
-      ...pluginNext.configs.recommended.rules,
-      ...pluginNext.configs['core-web-vitals'].rules,
+      ...(pluginNext.configs.recommended
+        .rules as unknown as Linter.RulesRecord),
+      ...(pluginNext.configs['core-web-vitals']
+        .rules as unknown as Linter.RulesRecord),
     },
   },
 ]);
