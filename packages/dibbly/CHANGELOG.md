@@ -1,5 +1,11 @@
 # @kalink-ui/dibbly
 
+## 0.6.2
+
+### Patch Changes
+
+- 7098356: Align package repository URLs with provenance origin for trusted publishing.
+
 ## 0.6.1
 
 ### Patch Changes

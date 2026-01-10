@@ -1,5 +1,11 @@
 # @kalink-ui/canopy
 
+## 0.1.2
+
+### Patch Changes
+
+- 7098356: Align package repository URLs with provenance origin for trusted publishing.
+
 ## 0.1.1
 
 ### Patch Changes

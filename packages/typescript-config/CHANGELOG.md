@@ -1,5 +1,11 @@
 # @kalink-ui/typescript-config
 
+## 0.4.1
+
+### Patch Changes
+
+- 7098356: Align package repository URLs with provenance origin for trusted publishing.
+
 ## 0.4.0
 
 ### Minor Changes

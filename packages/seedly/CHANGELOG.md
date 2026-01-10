@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.34.2
+
+### Patch Changes
+
+- 7098356: Align package repository URLs with provenance origin for trusted publishing.
+- Updated dependencies [7098356]
+  - @kalink-ui/dibbly@0.6.2
+
 ## 0.34.1
 
 ### Patch Changes
