@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies with pnpm
         run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright Chromium
+        run: pnpm --filter @kalink-ui/seedly exec playwright install chromium --with-deps
+
       - name: Run format check
         run: pnpm format
 
