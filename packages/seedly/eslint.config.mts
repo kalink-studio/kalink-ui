@@ -1,11 +1,7 @@
-import { baseEslintConfig, reactEslintConfig } from '@kalink-ui/eslint-config';
+import react from '@kalink-ui/eslint-config/react';
+import { globalIgnores } from 'eslint/config';
 
-import type { Linter } from 'eslint';
-
-
-const seedlyEslintConfig: Linter.FlatConfig[] = [
-  ...baseEslintConfig,
-  ...reactEslintConfig,
+export default [
+  globalIgnores(['storybook-static/**', 'turbo/**', '**/*.d.ts']),
+  ...react,
 ];
-
-export default seedlyEslintConfig;

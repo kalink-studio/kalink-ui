@@ -47,13 +47,13 @@ export const formFieldStyle = recipe({
 
             vars: {
               [formFieldVars.color.foreground]:
-                `color(from ${sys.color.foreground} srgb r g b / 0.38)`,
+                `color-mix(in srgb, ${sys.color.foreground} calc(${sys.state.muted.light} * 75%), transparent)`,
             },
           },
 
           '&[aria-invalid], &:has([aria-invalid])': {
             vars: {
-              [formFieldVars.color.foreground]: 'red',
+              [formFieldVars.color.foreground]: '#d80000',
             },
           },
         },
@@ -67,7 +67,7 @@ export const formFieldStyle = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [formFieldVars.color.foreground]: 'red',
+              [formFieldVars.color.foreground]: '#d80000',
             },
           },
         },

@@ -35,11 +35,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
 
       - name: Install dependencies with pnpm
         run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm --filter @kalink-ui/seedly exec playwright install chromium --with-deps
 
       - name: Run format check
         run: pnpm format

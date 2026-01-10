@@ -33,6 +33,7 @@ const meta = {
         <line x1="4" x2="20" y1="18" y2="18"></line>
       </svg>
     ),
+    label: 'Accessible label',
   },
   argTypes: {
     ...argTypesFromRecipe(buttonIcon),
@@ -85,19 +86,19 @@ export const Size: Story = {
     <Cluster spacing={4} align="center">
       <Cluster spacing={1} align="center">
         <ButtonIcon size="sm" {...args} />
-        <Button Icon size="sm" variant="plain">
+        <Button size="sm" variant="plain">
           {'Button label'}
         </Button>
       </Cluster>
       <Cluster spacing={1} align="center">
         <ButtonIcon size="md" {...args} />
-        <Button Icon size="md" variant="plain">
+        <Button size="md" variant="plain">
           {'Button label'}
         </Button>
       </Cluster>
       <Cluster spacing={1} align="center">
         <ButtonIcon size="lg" {...args} />
-        <Button Icon size="lg" variant="plain">
+        <Button size="lg" variant="plain">
           {'Button label'}
         </Button>
       </Cluster>

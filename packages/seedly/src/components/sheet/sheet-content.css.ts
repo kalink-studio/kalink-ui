@@ -1,7 +1,7 @@
 import { createVar, keyframes } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 const from = createVar();
@@ -32,6 +32,9 @@ export const sheetContent = recipe({
   base: {
     '@layer': {
       [components]: {
+        display: 'flex',
+        flexDirection: 'column',
+
         zIndex: 50,
         maxWidth: '100vw',
         maxHeight: '100vh',
@@ -167,6 +170,14 @@ export const sheetContent = recipe({
         },
       },
     },
+
+    spacing: mapContractVars(sys.spacing, (key) => ({
+      '@layer': {
+        [components]: {
+          gap: sys.spacing[key],
+        },
+      },
+    })),
   },
 
   defaultVariants: {

@@ -1,6 +1,12 @@
 {
   "name": "kalink-ui",
   "private": true,
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.7",
+      "@types/react-dom": "19.2.3"
+    }
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -9,6 +15,7 @@
     "lint:fix": "turbo lint:fix",
     "tsc": "turbo tsc",
     "test": "turbo test",
+    "test:coverage": "turbo test -- --coverage",
     "test:watch": "turbo test:watch",
     "format": "prettier \"**/*.{ts,tsx,md,json,yml}\" --list-different",
     "format:fix": "pnpm format --write",
@@ -17,14 +24,14 @@
     "release": "changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.7",
+    "@changesets/cli": "^2.29.8",
     "jiti": "^2.6.1",
-    "prettier": "^3.6.2",
-    "turbo": "^2.5.8",
+    "prettier": "^3.7.4",
+    "turbo": "^2.7.1",
     "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.18.0",
+  "packageManager": "pnpm@10.26.1",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   }
 }

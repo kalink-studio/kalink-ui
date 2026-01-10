@@ -8,7 +8,7 @@ import {
   argTypesFromSprinkles,
 } from '../../utils/arg-types';
 
-import { plantSeed } from './seed';
+import { plantSeed, withSeed } from './seed';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -52,4 +52,22 @@ export const UseElement: Story = {
   args: {
     use: 'h1',
   },
+};
+
+// Test withSeed HOC
+const BaseButton = ({
+  className,
+  ...props
+}: React.ComponentPropsWithRef<'button'>) => (
+  <button className={className} {...props} />
+);
+
+const EnhancedButton = withSeed({ sprinkles })(BaseButton);
+
+export const WithSeedHOC: Story = {
+  render: () => (
+    <EnhancedButton padding="medium" backgroundColor="blue" color="white">
+      Enhanced with withSeed
+    </EnhancedButton>
+  ),
 };

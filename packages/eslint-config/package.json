@@ -10,27 +10,42 @@
     "url": "git+https://github.com/Kalink/kalink-ui.git"
   },
   "scripts": {
-    "tsc": "tsc --noEmit"
+    "build": "tsc -b",
+    "tsc": "tsc -b"
   },
   "exports": {
-    ".": "./index.ts"
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./typescript": {
+      "types": "./dist/typescript.d.mts",
+      "default": "./dist/typescript.mjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.mts",
+      "default": "./dist/react.mjs"
+    },
+    "./next": {
+      "types": "./dist/next.d.mts",
+      "default": "./dist/next.mjs"
+    }
   },
   "dependencies": {
-    "@eslint/js": "^9.37.0",
-    "@next/eslint-plugin-next": "^15.5.4",
-    "@typescript-eslint/parser": "^8.45.0",
-    "eslint": "^9.37.0",
+    "@eslint/js": "^9.39.2",
+    "@next/eslint-plugin-next": "^15.5.9",
+    "@typescript-eslint/parser": "^8.50.1",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^6.1.1",
-    "eslint-plugin-turbo": "^2.5.8",
-    "eslint-plugin-unused-imports": "^4.2.0",
-    "globals": "^16.4.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-unused-imports": "^4.3.0",
+    "globals": "^16.5.0",
     "jiti": "^2.6.1",
-    "typescript-eslint": "^8.45.0"
+    "typescript-eslint": "^8.50.1"
   },
   "devDependencies": {
     "@kalink-ui/typescript-config": "^0.4.0",
