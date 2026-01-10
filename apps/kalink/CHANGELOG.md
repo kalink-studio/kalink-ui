@@ -1,5 +1,14 @@
 # @kalink-ui/kalink
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies [3642627]
+  - @kalink-ui/canopy@0.1.1
+  - @kalink-ui/dibbly@0.6.1
+  - @kalink-ui/seedly@0.34.1
+
 ## 0.3.0
 
 ### Minor Changes

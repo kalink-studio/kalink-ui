@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.34.1
+
+### Patch Changes
+
+- 3642627: Trigger publish with trusted publishing and Playwright setup updates.
+- Updated dependencies [3642627]
+  - @kalink-ui/dibbly@0.6.1
+
 ## 0.34.0
 
 ### Minor Changes

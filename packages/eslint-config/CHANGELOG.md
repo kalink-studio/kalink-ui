@@ -1,5 +1,11 @@
 # @kalink-ui/eslint-config
 
+## 0.11.1
+
+### Patch Changes
+
+- 3642627: Trigger publish with trusted publishing and Playwright setup updates.
+
 ## 0.11.0
 
 ### Minor Changes

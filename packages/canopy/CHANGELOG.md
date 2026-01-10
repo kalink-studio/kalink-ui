@@ -1,5 +1,11 @@
 # @kalink-ui/canopy
 
+## 0.1.1
+
+### Patch Changes
+
+- 3642627: Trigger publish with trusted publishing and Playwright setup updates.
+
 ## 0.1.0
 
 ### Minor Changes
