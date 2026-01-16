@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.34.4
+
+### Patch Changes
+
+- 3b84777: Re-export the SheetBody, SheetFooter, and SheetOverlay components from the sheet entrypoint.
+
 ## 0.34.3
 
 ### Patch Changes
