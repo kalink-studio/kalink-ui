@@ -51,6 +51,7 @@ export function Select({
   size = 'md',
   ref,
   className,
+  tone,
   ...props
 }: SelectProps) {
   return (
@@ -61,6 +62,7 @@ export function Select({
       hideErrorMessage={hideErrorMessage}
       disabled={disabled}
       hideLabel={hideLabel}
+      tone={tone}
     >
       <FormFieldItem className={clsx(selectStyle, className)}>
         <FormFieldLabel required={required} disabled={disabled} size={size}>

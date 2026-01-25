@@ -7,5 +7,5 @@ export const divider = style({
   width: '100%',
 
   border: 'none',
-  backgroundColor: sys.color.foreground,
+  backgroundColor: sys.surface.foreground,
 });

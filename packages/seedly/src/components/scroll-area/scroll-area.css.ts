@@ -87,7 +87,7 @@ export const scrollAreaThumb = style({
 
       borderRadius: sys.shape.corner.small,
 
-      backgroundColor: sys.color.foreground,
+      backgroundColor: sys.surface.foreground,
     },
   },
 });

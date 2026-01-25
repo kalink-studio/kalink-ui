@@ -16,7 +16,7 @@ export const loaderOverlay = recipe({
 
         zIndex: 1000,
 
-        backgroundColor: `color-mix(in srgb, ${sys.color.foreground} 5%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} 5%, transparent)`,
       },
     },
   },

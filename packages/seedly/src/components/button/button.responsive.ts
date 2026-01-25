@@ -1,10 +1,10 @@
 import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 
-import { buttonRecipe, sizeAt, variantAt } from './button.css';
+import { buttonRecipe, sizeAt, toneAt, variantAt } from './button.css';
 
 export const buttonResponsive = responsiveRecipe({
   recipe: buttonRecipe,
-  at: { size: sizeAt, variant: variantAt },
+  at: { size: sizeAt, tone: toneAt, variant: variantAt },
   order: defaultOrder,
 });
 

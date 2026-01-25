@@ -19,7 +19,7 @@ export function SelectTrigger({
   icon = null,
   ...props
 }: SelectTriggerProps) {
-  const { errors, label } = useFormFieldContext();
+  const { errors, label, tone } = useFormFieldContext();
   const { id } = useFormFieldItemContext();
 
   return (
@@ -35,7 +35,7 @@ export function SelectTrigger({
         <div
           // Mimic the Combobox style
           className={clsx(
-            buttonRecipe({ size: 'sm', variant: 'bare' }),
+            buttonRecipe({ size: 'sm', variant: 'bare', tone }),
             openIndicator({ fallback: !icon }),
           )}
         >

@@ -9,16 +9,16 @@ export const commandItem = recipe({
       [components]: {
         cursor: 'pointer',
 
-        color: sys.color.foreground,
+        color: sys.surface.foreground,
 
         selectors: {
           '&[data-selected=true]': {
-            backgroundColor: `color-mix(in srgb, ${sys.color.foreground} calc(${sys.state.muted.dark} * 100%), transparent)`,
+            backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.muted.surface} * 100%), transparent)`,
             outline: 'none',
           },
 
           '&:active': {
-            backgroundColor: `color-mix(in srgb, ${sys.color.foreground} calc(${sys.state.focused} * 100%), transparent)`,
+            backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.focused} * 100%), transparent)`,
             outline: 'none',
           },
         },

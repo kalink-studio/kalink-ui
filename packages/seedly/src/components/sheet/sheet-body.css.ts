@@ -25,7 +25,7 @@ export const sheetBodyScrollbar = style({
 
   selectors: {
     '&:hover': {
-      background: `color-mix(in srgb, ${sys.color.foreground} 10%, transparent)`,
+      background: `color-mix(in srgb, ${sys.surface.foreground} 10%, transparent)`,
     },
 
     '&[data-orientation="vertical"]': {
@@ -36,7 +36,7 @@ export const sheetBodyScrollbar = style({
 
 export const sheetBodyThumb = style({
   flex: 1,
-  background: `color-mix(in srgb, ${sys.color.foreground} 50%, transparent)`,
+  background: `color-mix(in srgb, ${sys.surface.foreground} 50%, transparent)`,
   borderRadius: sys.shape.corner.small,
   position: 'relative',
   opacity: 0,
@@ -45,7 +45,7 @@ export const sheetBodyThumb = style({
 
   selectors: {
     '&:hover': {
-      background: `color-mix(in srgb, ${sys.color.foreground} 75%, transparent)`,
+      background: `color-mix(in srgb, ${sys.surface.foreground} 75%, transparent)`,
     },
 
     '&::before': {

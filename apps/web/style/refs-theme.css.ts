@@ -28,6 +28,9 @@ createGlobalTheme(':root', refs, {
       0: '#000000',
       100: '#FFFFFF',
     },
+    primary: {
+      50: '#F27F1B',
+    },
   },
 
   fluidity: {

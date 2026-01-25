@@ -1,11 +1,21 @@
 import '../src/styles/reset.css';
 import '../src/styles/layers.css';
-import './theme/ref.css';
-import './theme/theme.css';
+import '../src/styles/theme/sprout-ref.css';
 
-import { type Preview } from '@storybook/react-vite';
+import { type Decorator, type Preview } from '@storybook/react-vite';
+
+import { sprout } from '../src/styles/theme/sprout.css';
+
+const withSproutTheme: Decorator = (Story) => {
+  if (typeof document !== 'undefined') {
+    document.body.classList.add(sprout);
+  }
+
+  return Story();
+};
 
 const preview: Preview = {
+  decorators: [withSproutTheme],
   parameters: {
     a11y: {
       // Fail tests on a11y violations

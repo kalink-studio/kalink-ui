@@ -6,6 +6,9 @@ export const refs = createThemeContract({
       0: null,
       100: null,
     },
+    primary: {
+      50: null,
+    },
   },
 
   fluidity: {

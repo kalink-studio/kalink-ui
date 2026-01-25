@@ -26,8 +26,8 @@ export const boxRecipe = recipe({
       solid: {
         '@layer': {
           [components]: {
-            color: sys.color.foreground,
-            backgroundColor: sys.color.background,
+            color: sys.surface.foreground,
+            backgroundColor: sys.surface.background,
           },
         },
       },
@@ -35,10 +35,10 @@ export const boxRecipe = recipe({
       outline: {
         '@layer': {
           [components]: {
-            color: sys.color.foreground,
+            color: sys.surface.foreground,
             backgroundColor: 'transparent',
 
-            borderColor: sys.color.foreground,
+            borderColor: sys.surface.foreground,
             borderStyle: 'solid',
             borderWidth: '1px',
           },

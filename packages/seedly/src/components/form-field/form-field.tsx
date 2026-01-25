@@ -4,6 +4,8 @@ import { useState, useCallback, ReactNode } from 'react';
 
 import { FormFieldContextProvider } from './form-field-context';
 
+import type { Tone } from '../../styles';
+
 export interface FormFieldProps {
   name: string;
   label: string;
@@ -12,6 +14,7 @@ export interface FormFieldProps {
   hideErrorMessage: boolean;
   hideLabel: boolean;
   disabled?: boolean;
+  tone?: Tone;
 }
 
 export function FormField({
@@ -22,6 +25,7 @@ export function FormField({
   hideErrorMessage = false,
   hideLabel = false,
   disabled,
+  tone,
 }: FormFieldProps) {
   const [messageIds, setMessageIds] = useState<string[]>([]);
 
@@ -48,6 +52,7 @@ export function FormField({
         label,
         disabled,
         hideLabel,
+        tone,
       }}
     >
       {children}

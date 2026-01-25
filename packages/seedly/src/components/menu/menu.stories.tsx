@@ -23,9 +23,7 @@ export const MenuItem: Story = {
       <div className={menuItem()} data-disabled="true">
         Disabled Item
       </div>
-      <div className={menuItem()} aria-selected="true">
-        Selected Item
-      </div>
+      <div className={menuItem()}>Selected Item</div>
     </div>
   ),
 };

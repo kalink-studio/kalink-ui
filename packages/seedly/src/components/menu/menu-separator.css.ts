@@ -42,7 +42,7 @@ export const menuSeparator = recipe({
       position: 'absolute',
       top: '50%',
 
-      backgroundColor: sys.color.foreground,
+      backgroundColor: sys.surface.foreground,
 
       transform: 'translateY(-50%)',
     },

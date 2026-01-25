@@ -29,7 +29,7 @@ export const overlay = style({
       position: 'fixed',
       inset: 0,
 
-      backgroundColor: `color(from ${sys.color.background} srgb r g b / 0.5)`,
+      backgroundColor: `color-mix(in srgb, ${sys.surface.background} 50%, transparent)`,
 
       animationDuration: sys.motion.duration.medium[2],
       animationTimingFunction: sys.motion.easing.standard,

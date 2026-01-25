@@ -20,7 +20,7 @@ export const alertDialogFooter = recipe({
               position: 'absolute',
               insetBlockStart: calc.negate(sys.spacing[2]),
 
-              backgroundImage: `linear-gradient(to bottom, transparent, ${sys.color.background})`,
+              backgroundImage: `linear-gradient(to bottom, transparent, ${sys.surface.background})`,
             },
           },
         },

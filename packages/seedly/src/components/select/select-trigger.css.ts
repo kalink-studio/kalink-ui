@@ -7,7 +7,7 @@ import { components } from '../../styles/layers.css';
 import { inputAppearance } from '../input/input.css';
 
 export const selectTrigger = style([
-  inputAppearance(),
+  inputAppearance({ tone: 'neutral' }),
   {
     '@layer': {
       [components]: {

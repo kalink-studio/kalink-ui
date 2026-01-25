@@ -3,13 +3,11 @@ import {
   globalStyle,
   createThemeContract,
   assignVars,
-  fallbackVar,
 } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, transition, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { formFieldVars } from '../form-field';
 
 export const inputVars = createThemeContract({
   color: {
@@ -26,6 +24,37 @@ export const inputVars = createThemeContract({
   shape: {
     corner: null,
   },
+});
+
+const inputToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const inputColorDefaults = assignVars(inputVars.color, {
+  foreground: sys.surface.foreground,
+  background: sys.surface.background,
+  outline: sys.surface.foreground,
+});
+
+const inputToneDefaults = assignVars(inputToneVars, {
+  base: sys.tone.neutral,
+  onBase: sys.tone.onNeutral,
+});
+
+const inputTonePrimary = assignVars(inputToneVars, {
+  base: sys.tone.primary,
+  onBase: sys.tone.onPrimary,
+});
+
+const inputToneDestructive = assignVars(inputToneVars, {
+  base: sys.tone.destructive,
+  onBase: sys.tone.onDestructive,
+});
+
+const inputToneSuccess = assignVars(inputToneVars, {
+  base: sys.tone.success,
+  onBase: sys.tone.onSuccess,
 });
 
 export const inputAppearance = recipe({
@@ -52,11 +81,13 @@ export const inputAppearance = recipe({
 
           selectors: {
             '&:disabled, &:has(:disabled)': {
-              backgroundColor: `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.dark} * 100%), transparent)`,
+              backgroundColor: `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.background} * 100%), transparent)`,
 
               vars: {
                 [inputVars.color.foreground]:
-                  `color(from ${sys.color.foreground} srgb r g b / 0.38)`,
+                  `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.text} * 100%), transparent)`,
+                [inputVars.color.outline]:
+                  `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.border} * 100%), transparent)`,
               },
             },
 
@@ -67,36 +98,23 @@ export const inputAppearance = recipe({
 
             '&[aria-invalid], &:has([aria-invalid])': {
               vars: {
-                [inputVars.color.foreground]: fallbackVar(
-                  formFieldVars.color.foreground,
-                  'red',
-                ),
+                ...inputColorDefaults,
+                [inputVars.color.foreground]: sys.tone.destructive,
+                [inputVars.color.outline]: sys.tone.destructive,
+                ...inputToneDestructive,
               },
             },
           },
 
           vars: {
-            ...assignVars(inputVars.color, {
-              foreground: fallbackVar(
-                formFieldVars.color.foreground,
-                sys.color.foreground,
-              ),
-              background: fallbackVar(
-                formFieldVars.color.background,
-                sys.color.background,
-                'transparent',
-              ),
-              outline: fallbackVar(
-                formFieldVars.color.outline,
-                sys.color.foreground,
-              ),
-            }),
-
+            ...inputColorDefaults,
+            [inputVars.color.foreground]: inputToneVars.base,
+            [inputVars.color.outline]: inputToneVars.base,
+            ...inputToneDefaults,
             ...assignVars(inputVars.spacing, {
               block: sys.spacing[2],
               inline: sys.spacing[4],
             }),
-
             ...assignVars(inputVars.shape, {
               corner: sys.shape.corner.none,
             }),
@@ -132,13 +150,64 @@ export const inputAppearance = recipe({
 
             vars: {
               [inputVars.color.background]:
-                `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.dark} * 100%), transparent)`,
+                `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.surface} * 100%), transparent)`,
             },
           },
         },
       },
 
       bare: {},
+    },
+
+    tone: {
+      neutral: {
+        '@layer': {
+          [components]: {
+            vars: {
+              ...inputColorDefaults,
+              ...inputToneDefaults,
+              [inputVars.color.foreground]: sys.tone.neutral,
+              [inputVars.color.outline]: sys.tone.neutral,
+            },
+          },
+        },
+      },
+      primary: {
+        '@layer': {
+          [components]: {
+            vars: {
+              ...inputColorDefaults,
+              [inputVars.color.foreground]: sys.tone.primary,
+              [inputVars.color.outline]: sys.tone.primary,
+              ...inputTonePrimary,
+            },
+          },
+        },
+      },
+      destructive: {
+        '@layer': {
+          [components]: {
+            vars: {
+              ...inputColorDefaults,
+              [inputVars.color.foreground]: sys.tone.destructive,
+              [inputVars.color.outline]: sys.tone.destructive,
+              ...inputToneDestructive,
+            },
+          },
+        },
+      },
+      success: {
+        '@layer': {
+          [components]: {
+            vars: {
+              ...inputColorDefaults,
+              [inputVars.color.foreground]: sys.tone.success,
+              [inputVars.color.outline]: sys.tone.success,
+              ...inputToneSuccess,
+            },
+          },
+        },
+      },
     },
 
     size: {
@@ -210,6 +279,7 @@ export const inputAppearance = recipe({
   defaultVariants: {
     variant: 'outlined',
     size: 'md',
+    tone: 'neutral',
   },
 });
 

@@ -42,8 +42,8 @@ export const Default: Story = {};
 export const WithSprinklesProps: Story = {
   args: {
     padding: 'medium',
-    backgroundColor: 'blue',
-    color: 'white',
+    backgroundColor: 'tonePrimary',
+    color: 'onPrimary',
     textAlign: 'center',
   },
 };
@@ -66,7 +66,11 @@ const EnhancedButton = withSeed({ sprinkles })(BaseButton);
 
 export const WithSeedHOC: Story = {
   render: () => (
-    <EnhancedButton padding="medium" backgroundColor="blue" color="white">
+    <EnhancedButton
+      padding="medium"
+      backgroundColor="tonePrimary"
+      color="onPrimary"
+    >
       Enhanced with withSeed
     </EnhancedButton>
   ),

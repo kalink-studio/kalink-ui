@@ -1,4 +1,4 @@
-import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, typography } from '../../styles';
@@ -16,6 +16,31 @@ export const formFieldVars = createThemeContract({
   },
 });
 
+const formFieldToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const formFieldToneDefaults = assignVars(formFieldToneVars, {
+  base: sys.tone.neutral,
+  onBase: sys.tone.onNeutral,
+});
+
+const formFieldTonePrimary = assignVars(formFieldToneVars, {
+  base: sys.tone.primary,
+  onBase: sys.tone.onPrimary,
+});
+
+const formFieldToneDestructive = assignVars(formFieldToneVars, {
+  base: sys.tone.destructive,
+  onBase: sys.tone.onDestructive,
+});
+
+const formFieldToneSuccess = assignVars(formFieldToneVars, {
+  base: sys.tone.success,
+  onBase: sys.tone.onSuccess,
+});
+
 export const formFieldStyle = recipe({
   base: {
     '@layer': {
@@ -31,11 +56,11 @@ export const formFieldStyle = recipe({
 
         vars: {
           ...assignVars(formFieldVars.color, {
-            foreground: sys.color.foreground,
-            background: sys.color.background,
-            outline: sys.color.foreground,
+            foreground: sys.surface.foreground,
+            background: sys.surface.background,
+            outline: sys.surface.foreground,
           }),
-
+          ...formFieldToneDefaults,
           ...assignVars(formFieldVars.spacing, {
             vertical: sys.spacing[2],
           }),
@@ -47,13 +72,17 @@ export const formFieldStyle = recipe({
 
             vars: {
               [formFieldVars.color.foreground]:
-                `color-mix(in srgb, ${sys.color.foreground} calc(${sys.state.muted.light} * 75%), transparent)`,
+                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.text} * 100%), transparent)`,
+              [formFieldVars.color.outline]:
+                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.border} * 100%), transparent)`,
             },
           },
 
           '&[aria-invalid], &:has([aria-invalid])': {
             vars: {
-              [formFieldVars.color.foreground]: '#d80000',
+              [formFieldVars.color.foreground]: sys.tone.destructive,
+              [formFieldVars.color.outline]: sys.tone.destructive,
+              ...formFieldToneDestructive,
             },
           },
         },
@@ -62,12 +91,61 @@ export const formFieldStyle = recipe({
   },
 
   variants: {
+    tone: {
+      neutral: {
+        '@layer': {
+          [components]: {
+            vars: {
+              [formFieldVars.color.foreground]: sys.tone.neutral,
+              [formFieldVars.color.outline]: sys.tone.neutral,
+              ...formFieldToneDefaults,
+            },
+          },
+        },
+      },
+      primary: {
+        '@layer': {
+          [components]: {
+            vars: {
+              [formFieldVars.color.foreground]: sys.tone.primary,
+              [formFieldVars.color.outline]: sys.tone.primary,
+              ...formFieldTonePrimary,
+            },
+          },
+        },
+      },
+      destructive: {
+        '@layer': {
+          [components]: {
+            vars: {
+              [formFieldVars.color.foreground]: sys.tone.destructive,
+              [formFieldVars.color.outline]: sys.tone.destructive,
+              ...formFieldToneDestructive,
+            },
+          },
+        },
+      },
+      success: {
+        '@layer': {
+          [components]: {
+            vars: {
+              [formFieldVars.color.foreground]: sys.tone.success,
+              [formFieldVars.color.outline]: sys.tone.success,
+              ...formFieldToneSuccess,
+            },
+          },
+        },
+      },
+    },
+
     error: {
       true: {
         '@layer': {
           [components]: {
             vars: {
-              [formFieldVars.color.foreground]: '#d80000',
+              [formFieldVars.color.foreground]: sys.tone.destructive,
+              [formFieldVars.color.outline]: sys.tone.destructive,
+              ...formFieldToneDestructive,
             },
           },
         },
@@ -82,26 +160,62 @@ export const formFieldStyle = recipe({
 
             vars: {
               [formFieldVars.color.foreground]:
-                `color(from ${sys.color.foreground} srgb r g b / ${sys.state.muted.light})`,
+                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.text} * 100%), transparent)`,
+              [formFieldVars.color.outline]:
+                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.border} * 100%), transparent)`,
             },
           },
         },
       },
     },
   },
+
+  defaultVariants: {
+    tone: 'neutral',
+  },
 });
 
-export const formFieldMessageStyle = style([
-  typography.body.small,
-  {
+export const formFieldMessageStyle = recipe({
+  base: {
     '@layer': {
       [components]: {
         display: 'block',
+
+        selectors: {
+          '&[data-tone="neutral"]': {
+            color: sys.tone.neutral,
+          },
+          '&[data-tone="primary"]': {
+            color: sys.tone.primary,
+          },
+          '&[data-tone="destructive"]': {
+            color: sys.tone.destructive,
+          },
+          '&[data-tone="success"]': {
+            color: sys.tone.success,
+          },
+        },
       },
     },
   },
-]);
+
+  variants: {
+    size: {
+      sm: typography.body.small,
+      md: typography.body.medium,
+      lg: typography.body.large,
+    },
+  },
+
+  defaultVariants: {
+    size: 'sm',
+  },
+});
 
 export type FormFieldVariants = NonNullable<
   RecipeVariants<typeof formFieldStyle>
+>;
+
+export type FormFieldMessageVariants = NonNullable<
+  RecipeVariants<typeof formFieldMessageStyle>
 >;

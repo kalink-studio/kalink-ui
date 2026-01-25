@@ -23,13 +23,13 @@ export const commandInputWrapper = style({
           boxShadow: 'unset',
 
           vars: {
-            [outlineColor]: sys.color.foreground,
+            [outlineColor]: sys.surface.foreground,
           },
         },
       },
 
       vars: {
-        [outlineColor]: sys.color.foreground,
+        [outlineColor]: sys.surface.foreground,
       },
     },
   },

@@ -15,7 +15,7 @@ export function FormFieldItem<TUse extends ElementType = 'div'>(
   props: FormFieldItemProps<TUse>,
 ) {
   const id = useId();
-  const { errors, disabled } = useFormFieldContext();
+  const { errors, disabled, tone } = useFormFieldContext();
 
   const { use: Comp = 'div', className, children, ...rest } = props;
 
@@ -23,7 +23,7 @@ export function FormFieldItem<TUse extends ElementType = 'div'>(
     <FormFieldItemContextProvider value={{ id }}>
       <Comp
         className={clsx(
-          formFieldStyle({ error: !!errors, disabled }),
+          formFieldStyle({ error: !!errors, disabled, tone }),
           className,
         )}
         {...rest}

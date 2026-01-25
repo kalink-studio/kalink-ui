@@ -92,7 +92,7 @@ export const ellipse = style({
   borderRadius: '100%',
   borderWidth: moonSize,
   borderStyle: 'solid',
-  borderColor: `color-mix(in srgb, ${sys.color.foreground} 30%, transparent)`,
+  borderColor: `color-mix(in srgb, ${sys.surface.foreground} 30%, transparent)`,
 });
 
 export const moon = style({
@@ -106,7 +106,7 @@ export const moon = style({
   ),
   insetInlineStart: 0,
 
-  backgroundColor: sys.color.foreground,
+  backgroundColor: sys.surface.foreground,
 
   borderRadius: '100%',
 });

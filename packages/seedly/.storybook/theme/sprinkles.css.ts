@@ -1,21 +1,29 @@
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 
+import { sys } from '../../src/styles/system-contract.css';
+
 const space = {
-  none: '0',
-  small: '4px',
-  medium: '8px',
-  large: '16px',
+  none: sys.spacing[0],
+  small: sys.spacing[2],
+  medium: sys.spacing[4],
+  large: sys.spacing[6],
 };
 
 export const sprinklesProps = {
   padding: space,
   backgroundColor: {
-    red: 'red',
-    blue: 'blue',
+    surface: sys.surface.background,
+    toneNeutral: sys.tone.neutral,
+    tonePrimary: sys.tone.primary,
+    toneDestructive: sys.tone.destructive,
+    toneSuccess: sys.tone.success,
   },
   color: {
-    white: 'white',
-    black: 'black',
+    surface: sys.surface.foreground,
+    onNeutral: sys.tone.onNeutral,
+    onPrimary: sys.tone.onPrimary,
+    onDestructive: sys.tone.onDestructive,
+    onSuccess: sys.tone.onSuccess,
   },
   textAlign: {
     center: 'center',

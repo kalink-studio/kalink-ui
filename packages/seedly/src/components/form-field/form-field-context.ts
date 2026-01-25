@@ -2,6 +2,8 @@
 
 import { createRequiredContext } from '@kalink-ui/dibbly';
 
+import type { Tone } from '../../styles';
+
 interface FormFieldContext {
   name: string;
   registerMessageId: (id: string) => void;
@@ -12,6 +14,7 @@ interface FormFieldContext {
   label: string;
   disabled?: boolean;
   hideLabel: boolean;
+  tone?: Tone;
 }
 
 export const [useFormFieldContext, FormFieldContextProvider] =
