@@ -19,16 +19,30 @@ const typographyVariants = [
 
 const typographySizes = ['large', 'medium', 'small'] as const;
 
+const toneNames = ['neutral', 'primary', 'destructive', 'success'] as const;
+
+export type Tone = ArrayValues<typeof toneNames>;
+type ToneOnName = `on${Capitalize<Tone>}`;
+
 export const sys = createThemeContract({
   layout: {
     direction: null,
     measure: null,
   },
 
-  color: {
+  surface: {
     background: null,
     foreground: null,
   },
+
+  tone: toneNames.reduce(
+    (acc, tone) => ({
+      ...acc,
+      [tone]: null,
+      [`on${tone[0]?.toUpperCase()}${tone.slice(1)}`]: null,
+    }),
+    {} as Record<Tone | ToneOnName, null>,
+  ),
 
   state: {
     hovered: {
@@ -41,8 +55,13 @@ export const sys = createThemeContract({
       opacity: null,
     },
     muted: {
-      light: null,
-      dark: null,
+      text: null,
+      surface: null,
+    },
+    disabled: {
+      text: null,
+      border: null,
+      background: null,
     },
   },
 
