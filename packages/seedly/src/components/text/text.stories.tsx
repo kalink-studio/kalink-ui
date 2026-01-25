@@ -1,4 +1,5 @@
-import { argTypesFromRecipe } from '../../utils/arg-types';
+import { sys } from '../../styles';
+import { argTypesFromRecipe, responsiveSelectArg } from '../../utils/arg-types';
 
 import { Text } from './text';
 import { textRecipe } from './text.css';
@@ -17,6 +18,14 @@ const meta = {
   },
   argTypes: {
     ...argTypesFromRecipe(textRecipe),
+    variant: responsiveSelectArg({
+      options: Object.keys(sys.typography),
+      summary: 'Responsive<TypographyVariant>',
+    }),
+    size: responsiveSelectArg({
+      options: ['small', 'medium', 'large'],
+      summary: 'Responsive<TypographySize>',
+    }),
 
     use: {
       control: false,

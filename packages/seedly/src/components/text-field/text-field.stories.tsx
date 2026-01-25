@@ -1,4 +1,7 @@
+import { responsiveSelectArg } from '../../utils';
+
 import { TextField } from './text-field';
+
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -13,6 +16,20 @@ const meta = {
     hideLabel: false,
     hideErrorMessage: false,
     disabled: false,
+  },
+  argTypes: {
+    size: responsiveSelectArg({
+      options: ['sm', 'md', 'lg'],
+      summary: 'Responsive<InputSize>',
+    }),
+    variant: responsiveSelectArg({
+      options: ['outlined', 'plain', 'bare'],
+      summary: 'Responsive<InputVariant>',
+    }),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
 } satisfies Meta<typeof TextField>;
 

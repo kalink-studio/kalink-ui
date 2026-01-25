@@ -3,4 +3,5 @@ export {
   argTypesFromSprinkles,
   commonArgs,
   CommonArgs,
+  responsiveSelectArg,
 } from './arg-types';

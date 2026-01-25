@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
 
+import { responsiveSelectArg } from '../../utils';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Card } from '../card';
@@ -9,9 +10,16 @@ import { Text } from '../text';
 
 import { Skeleton } from './skeleton';
 
+
 const meta = {
   title: 'Component/Skeleton',
   component: Skeleton,
+  argTypes: {
+    size: responsiveSelectArg({
+      options: ['sm', 'md', 'lg'],
+      summary: 'Responsive<SkeletonSize>',
+    }),
+  },
 } satisfies Meta<typeof Skeleton>;
 
 export default meta;
