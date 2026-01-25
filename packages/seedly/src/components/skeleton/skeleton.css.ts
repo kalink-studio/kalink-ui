@@ -24,7 +24,7 @@ export const skeleton = recipe({
       [components]: {
         display: 'block',
 
-        backgroundColor: `color-mix(in srgb, ${sys.color.foreground} 10%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} 10%, transparent)`,
 
         animationName: pulseKeyframe,
         animationDuration: '1500ms',
@@ -37,20 +37,17 @@ export const skeleton = recipe({
 
   variants: {
     type: {
-      text: [
-        typography.body.medium,
-        {
-          '@layer': {
-            [components]: {
-              selectors: {
-                '&:empty::before': {
-                  content: '"\\00a0"',
-                },
+      text: {
+        '@layer': {
+          [components]: {
+            selectors: {
+              '&:empty::before': {
+                content: '"\\00a0"',
               },
             },
           },
         },
-      ],
+      },
 
       field: {
         '@layer': {
@@ -79,6 +76,12 @@ export const skeleton = recipe({
           },
         },
       },
+    },
+
+    size: {
+      sm: typography.body.small,
+      md: typography.body.medium,
+      lg: typography.body.large,
     },
 
     withChildren: {
@@ -117,6 +120,10 @@ export const skeleton = recipe({
         },
       },
     },
+  },
+
+  defaultVariants: {
+    size: 'md',
   },
 });
 

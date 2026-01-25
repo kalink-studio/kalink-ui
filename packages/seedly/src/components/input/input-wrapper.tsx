@@ -9,6 +9,13 @@ import {
 } from 'react';
 
 import {
+  buildTypographyOverrides,
+  getResponsiveBase,
+  mapResponsiveSizeToTypography,
+  type Responsive,
+} from '../../styles';
+
+import {
   inputAppearance,
   InputAppearanceVariants,
   inputWrapper,
@@ -19,7 +26,9 @@ export type InputWrapperProps = ComponentPropsWithRef<'div'> & {
   className?: string;
   inputRef: RefObject<HTMLInputElement | null>;
   disabled?: boolean;
-} & InputAppearanceVariants;
+} & Omit<InputAppearanceVariants, 'size'> & {
+    size?: Responsive<NonNullable<InputAppearanceVariants['size']>>;
+  };
 
 export function InputWrapper({
   children,
@@ -28,8 +37,16 @@ export function InputWrapper({
   disabled,
   variant = 'outlined',
   size = 'md',
+  tone = 'neutral',
   ref,
 }: InputWrapperProps) {
+  const baseSize = getResponsiveBase(size) ?? 'md';
+  const typographySize = mapResponsiveSizeToTypography(size);
+  const typographyOverrides = buildTypographyOverrides({
+    variant: 'body',
+    size: typographySize,
+  });
+
   const handleInputFocus = useCallback<MouseEventHandler<HTMLElement>>(
     (e) => {
       if (disabled || !inputRef?.current || e.target === inputRef.current) {
@@ -46,7 +63,8 @@ export function InputWrapper({
     <div
       ref={ref as ForwardedRef<HTMLDivElement>}
       className={clsx(
-        inputAppearance({ variant, size }),
+        inputAppearance({ variant, size: baseSize, tone }),
+        typographyOverrides,
         inputWrapper,
         className,
       )}

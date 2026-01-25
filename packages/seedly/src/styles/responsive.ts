@@ -43,6 +43,15 @@ export function resolveResponsive<T, B extends string = BreakpointWithBase>(
   return { xs: value as T } as Partial<Record<B, T>>;
 }
 
+export function getResponsiveBase<T>(
+  value: Responsive<T> | undefined,
+  order: readonly BreakpointWithBase[] = defaultOrder,
+): T | undefined {
+  const map = resolveResponsive(value, order);
+
+  return map.xs;
+}
+
 export interface CreateResponsiveVariantsArgs<
   VariantValues extends string | number,
   Bps extends string,

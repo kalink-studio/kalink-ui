@@ -61,8 +61,8 @@ export function TextField({
           />
         </FormFieldControl>
 
-        <FormFieldDescription>{description}</FormFieldDescription>
-        <FormFieldError />
+        <FormFieldDescription size={size}>{description}</FormFieldDescription>
+        <FormFieldError size={size} />
       </FormFieldItem>
     </FormField>
   );

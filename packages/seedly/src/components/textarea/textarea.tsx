@@ -37,6 +37,8 @@ export function Textarea({
   required,
   hideErrorMessage = false,
   size = 'md',
+  variant = 'outlined',
+  tone = 'neutral',
   ...rest
 }: TextareaProps) {
   return (
@@ -59,12 +61,15 @@ export function Textarea({
             className={className}
             disabled={disabled}
             aria-label={hideLabel ? label : undefined}
+            size={size}
+            variant={variant}
+            tone={tone}
             {...rest}
           />
         </FormFieldControl>
 
-        <FormFieldDescription>{description}</FormFieldDescription>
-        <FormFieldError />
+        <FormFieldDescription size={size}>{description}</FormFieldDescription>
+        <FormFieldError size={size} />
       </FormFieldItem>
     </FormField>
   );

@@ -1,7 +1,7 @@
-import { createVar, style, type StyleRule } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import { createResponsiveVariants, defaultMedia } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const lineClampNumber = createVar();
@@ -196,35 +196,5 @@ export type TextVariants = NonNullable<RecipeVariants<typeof textRecipe>>;
 
 export const alignAt = createResponsiveVariants({
   styles: textAlignStyles,
-  media: defaultMedia,
-});
-
-// Responsive typography overrides for variant+size combos
-const typographyComboEntries = Object.entries(sys.typography).flatMap(
-  ([variantKey, sizes]) => {
-    return Object.entries(sizes).map(([sizeKey, v]) => {
-      const k = `${variantKey}.${sizeKey}`;
-      const rule: StyleRule = {
-        '@layer': {
-          [components]: {
-            fontFamily: v.font,
-            fontWeight: v.weight,
-            lineHeight: v.lineHeight,
-            letterSpacing: v.tracking,
-            fontSize: v.size,
-          },
-        },
-      };
-
-      return [k, rule] as const;
-    });
-  },
-);
-
-export const typographyAt = createResponsiveVariants({
-  styles: Object.fromEntries(typographyComboEntries) as Record<
-    string,
-    StyleRule
-  >,
   media: defaultMedia,
 });

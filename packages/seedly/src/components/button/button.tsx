@@ -2,27 +2,15 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ComponentType, ElementType, ReactNode } from 'react';
 
+import {
+  buildTypographyOverrides,
+  getResponsiveBase,
+  mapResponsiveSizeToTypography,
+  type Responsive,
+} from '../../styles';
+
 import { buttonLabel, buttonSlot, ButtonVariants } from './button.css';
 import { buttonResponsive } from './button.responsive';
-
-import type { Responsive } from '../../styles/responsive';
-
-function getBase<T extends string | number>(value: Responsive<T> | undefined) {
-  if (value == null) {
-    return undefined as T | undefined;
-  }
-
-  if (Array.isArray(value)) {
-    return (value[0] ?? undefined) as T | undefined;
-  }
-
-  if (typeof value === 'object') {
-    const obj = value as Partial<Record<string, T>> & { xs?: T };
-    return obj.xs as T | undefined;
-  }
-
-  return value as T;
-}
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export type ButtonTypes = 'button' | 'a' | ComponentType<any>;
@@ -35,20 +23,21 @@ export type ButtonProps<TUse extends ButtonTypes> =
       children?: string;
       size?: Responsive<NonNullable<ButtonVariants['size']>>;
       variant?: Responsive<NonNullable<ButtonVariants['variant']>>;
+      tone?: Responsive<NonNullable<ButtonVariants['tone']>>;
     };
 
 export function Button<TUse extends ButtonTypes>(props: ButtonProps<TUse>) {
-  const { children, startSlot, endSlot, size = 'md', ...rest } = props;
+  const { children, startSlot, endSlot, size = 'md', tone, ...rest } = props;
 
   return (
-    <ButtonRoot {...rest} size={size}>
+    <ButtonRoot {...rest} size={size} tone={tone}>
       {startSlot && (
         <ButtonSlot use="span" position="start">
           {startSlot}
         </ButtonSlot>
       )}
       {children && (
-        <ButtonLabel use="span" size={getBase(size) ?? 'md'}>
+        <ButtonLabel use="span" size={size}>
           {children}
         </ButtonLabel>
       )}
@@ -66,16 +55,24 @@ export type ButtonRootProps<TUse extends ButtonTypes> =
     Omit<ButtonVariants, 'size' | 'variant'> & {
       size?: Responsive<NonNullable<ButtonVariants['size']>>;
       variant?: Responsive<NonNullable<ButtonVariants['variant']>>;
+      tone?: Responsive<NonNullable<ButtonVariants['tone']>>;
     };
 
 export function ButtonRoot<TUse extends ButtonTypes>(
   props: ButtonRootProps<TUse>,
 ) {
-  const { use: Comp = 'button', className, variant, size, ...rest } = props;
+  const {
+    use: Comp = 'button',
+    className,
+    variant,
+    size,
+    tone,
+    ...rest
+  } = props;
 
   return (
     <Comp
-      className={clsx(buttonResponsive({ variant, size }), className)}
+      className={clsx(buttonResponsive({ variant, size, tone }), className)}
       /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       {...(rest as any)}
     />
@@ -85,16 +82,29 @@ export function ButtonRoot<TUse extends ButtonTypes>(
 export type ButtonLabelProps<TUse extends ElementType> =
   PolymorphicComponentProps<TUse> & {
     children?: ReactNode;
-    size?: ButtonVariants['size'];
+    size?: Responsive<NonNullable<ButtonVariants['size']>>;
   };
 
 export function ButtonLabel<TUse extends ElementType>(
   props: ButtonLabelProps<TUse>,
 ) {
   const { use: Comp = 'span', children, className, size, ...rest } = props;
+  const baseSize = getResponsiveBase(size) ?? 'md';
+  const typographySize = mapResponsiveSizeToTypography(size);
+  const typographyOverrides = buildTypographyOverrides({
+    variant: 'label',
+    size: typographySize,
+  });
 
   return (
-    <Comp className={clsx(buttonLabel({ size }), className)} {...rest}>
+    <Comp
+      className={clsx(
+        buttonLabel({ size: baseSize }),
+        typographyOverrides,
+        className,
+      )}
+      {...rest}
+    >
       {children}
     </Comp>
   );

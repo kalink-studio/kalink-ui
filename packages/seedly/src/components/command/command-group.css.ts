@@ -1,11 +1,11 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css';
+import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const commandGroup = style([
-  typography.label.small,
-  {
+export const commandGroup = recipe({
+  base: {
     '@layer': {
       [components]: {
         display: 'flex',
@@ -22,17 +22,33 @@ export const commandGroup = style([
       },
     },
   },
-]);
 
-globalStyle(`${commandGroup} [cmdk-group-heading]`, {
+  variants: {
+    size: {
+      sm: typography.label.small,
+      md: typography.label.medium,
+      lg: typography.label.large,
+    },
+  },
+
+  defaultVariants: {
+    size: 'sm',
+  },
+});
+
+globalStyle(`${commandGroup.classNames.base} [cmdk-group-heading]`, {
   '@layer': {
     [components]: {
       position: 'relative',
 
-      color: `color-mix(in srgb, ${sys.color.foreground} calc(${sys.state.muted.light} * 100%), transparent)`,
+      color: `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.muted.text} * 100%), transparent)`,
 
       cursor: 'default',
       userSelect: 'none',
     },
   },
 });
+
+export type CommandGroupVariants = NonNullable<
+  RecipeVariants<typeof commandGroup>
+>;

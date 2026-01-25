@@ -20,9 +20,11 @@ export function CommandSeparator({
   ...props
 }: CommandSeparatorProps) {
   return (
-    <CommandPrimitive.Separator
-      className={clsx(menuSeparator({ offset }), className)}
-      {...props}
-    />
+    <CommandPrimitive.Separator {...props} asChild>
+      <div
+        className={clsx(menuSeparator({ offset }), className)}
+        role="presentation"
+      />
+    </CommandPrimitive.Separator>
   );
 }

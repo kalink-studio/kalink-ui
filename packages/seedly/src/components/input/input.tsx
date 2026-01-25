@@ -9,11 +9,15 @@ import { useFormFieldContext } from '../form-field/form-field-context';
 import { InputWrapper } from './input-wrapper';
 import { InputAppearanceVariants, input, inputAddornment } from './input.css';
 
+import type { Responsive } from '../../styles';
+
 export type InputProps = Omit<ComponentPropsWithRef<'input'>, 'size'> & {
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
   inputRef?: RefObject<HTMLInputElement>;
-} & InputAppearanceVariants;
+} & Omit<InputAppearanceVariants, 'size'> & {
+    size?: Responsive<NonNullable<InputAppearanceVariants['size']>>;
+  };
 
 export function Input({
   className,
@@ -25,6 +29,7 @@ export function Input({
   children,
   variant,
   size,
+  tone,
   ref,
   ...props
 }: InputProps) {
@@ -38,6 +43,7 @@ export function Input({
       disabled={disabled}
       variant={variant}
       size={size}
+      tone={tone}
     >
       {startAdornment && (
         <div className={inputAddornment}>{startAdornment}</div>
