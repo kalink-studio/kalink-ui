@@ -26,7 +26,7 @@ const exitAnimation = keyframes({
   },
 });
 
-export const alertDialogContent = recipe({
+export const alertDialogContentRecipe = recipe({
   base: {
     '@layer': {
       [components]: {

@@ -1,5 +1,4 @@
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { StackVariants } from './stack.css';
@@ -34,7 +33,7 @@ export function Stack<TUse extends ElementType = 'div'>({
 
   return (
     <Comp
-      className={clsx(stackResponsive({ spacing, align }), className)}
+      className={stackResponsive({ spacing, align }, className)}
       {...rest}
     />
   );

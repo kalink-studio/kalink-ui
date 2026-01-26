@@ -1,100 +1,43 @@
+import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import {
-  createResponsiveVariants,
-  defaultMedia,
-  mapContractVars,
-  sys,
-} from '../../styles';
+import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
+import {
+  createSpacingVarStyles,
+  flexAlignItemsWithBaselineStyles,
+  flexJustifyContentStyles,
+} from '../layout-maps';
+
+export const clusterVars = createThemeContract({
+  spacing: {
+    gap: null,
+  },
+});
+
+const clusterSpacingDefaults = assignVars(clusterVars.spacing, {
+  gap: sys.spacing[0],
+});
 
 // Shared variant style maps so we can reuse them for responsive overrides
-export const clusterSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      gap: sys.spacing[key],
-    },
-  },
-}));
+export const clusterSpacingStyles = createSpacingVarStyles(clusterVars.spacing);
 
-export const clusterJustifyStyles = {
-  start: {
-    '@layer': {
-      [components]: {
-        justifyContent: 'flex-start',
-      },
-    },
-  },
-  end: {
-    '@layer': {
-      [components]: {
-        justifyContent: 'flex-end',
-      },
-    },
-  },
-  center: {
-    '@layer': {
-      [components]: {
-        justifyContent: 'center',
-      },
-    },
-  },
-  spaceBetween: {
-    '@layer': {
-      [components]: {
-        justifyContent: 'space-between',
-      },
-    },
-  },
-  spaceAround: {
-    '@layer': {
-      [components]: {
-        justifyContent: 'space-around',
-      },
-    },
-  },
-  spaceEvenly: {
-    '@layer': {
-      [components]: {
-        justifyContent: 'space-evenly',
-      },
-    },
-  },
-} as const;
+export const clusterJustifyStyles = flexJustifyContentStyles;
 
-export const clusterAlignStyles = {
-  start: {
+export const clusterAlignStyles = flexAlignItemsWithBaselineStyles;
+
+export const clusterDirectionStyles = {
+  row: {
     '@layer': {
       [components]: {
-        alignItems: 'flex-start',
+        flexDirection: 'row',
       },
     },
   },
-  end: {
+  rowReverse: {
     '@layer': {
       [components]: {
-        alignItems: 'flex-end',
-      },
-    },
-  },
-  center: {
-    '@layer': {
-      [components]: {
-        alignItems: 'center',
-      },
-    },
-  },
-  stretch: {
-    '@layer': {
-      [components]: {
-        alignItems: 'stretch',
-      },
-    },
-  },
-  baseline: {
-    '@layer': {
-      [components]: {
-        alignItems: 'baseline',
+        flexDirection: 'row-reverse',
       },
     },
   },
@@ -108,6 +51,11 @@ export const clusterRecipe = recipe({
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        gap: clusterVars.spacing.gap,
+
+        vars: {
+          ...clusterSpacingDefaults,
+        },
       },
     },
   },
@@ -128,22 +76,7 @@ export const clusterRecipe = recipe({
      */
     align: clusterAlignStyles,
 
-    direction: {
-      row: {
-        '@layer': {
-          [components]: {
-            flexDirection: 'row',
-          },
-        },
-      },
-      rowReverse: {
-        '@layer': {
-          [components]: {
-            flexDirection: 'row-reverse',
-          },
-        },
-      },
-    },
+    direction: clusterDirectionStyles,
   },
 });
 
@@ -161,5 +94,10 @@ export const justifyAt = createResponsiveVariants({
 
 export const alignAt = createResponsiveVariants({
   styles: clusterAlignStyles,
+  media: defaultMedia,
+});
+
+export const directionAt = createResponsiveVariants({
+  styles: clusterDirectionStyles,
   media: defaultMedia,
 });

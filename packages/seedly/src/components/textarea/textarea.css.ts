@@ -1,7 +1,17 @@
 import { style } from '@vanilla-extract/css';
 
-export const textareaStyle = style({});
+import { components } from '../../styles/layers.css';
+
+export const textareaStyle = style({
+  '@layer': {
+    [components]: {},
+  },
+});
 
 export const textarea = style({
-  lineHeight: 'auto',
+  '@layer': {
+    [components]: {
+      lineHeight: 'normal',
+    },
+  },
 });

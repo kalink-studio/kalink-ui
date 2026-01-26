@@ -1,2 +1,2 @@
 export { Stack, type StackProps } from './stack';
-export { stackRecipe, type StackVariants } from './stack.css';
+export { stackRecipe, stackVars, type StackVariants } from './stack.css';

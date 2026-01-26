@@ -4,7 +4,6 @@ import { responsiveSelectArg } from '../../utils';
 
 import { Heading } from './heading';
 
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {

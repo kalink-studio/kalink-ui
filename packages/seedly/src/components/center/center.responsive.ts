@@ -1,9 +1,9 @@
 import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 
-import { centerRecipe, guttersAt } from './center.css';
+import { andTextAt, centerRecipe, guttersAt, intrinsicAt } from './center.css';
 
 export const centerResponsive = responsiveRecipe({
   recipe: centerRecipe,
-  at: { gutters: guttersAt },
+  at: { gutters: guttersAt, andText: andTextAt, intrinsic: intrinsicAt },
   order: defaultOrder,
 });

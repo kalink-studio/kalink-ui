@@ -9,9 +9,10 @@ import {
   getResponsiveBase,
   mapResponsiveSizeToTypography,
   type Responsive,
+  type Tone,
 } from '../../styles';
 import { Cluster } from '../cluster';
-import { menuItem, menuItemIcon, MenuItemTone } from '../menu/menu-item.css';
+import { menuItemRecipe, menuItemIcon } from '../menu/menu-item.css';
 
 import type { MenuItemVariants } from '../menu/menu-item.css';
 
@@ -20,7 +21,7 @@ export type CommandItemProps = ComponentPropsWithRef<
 > & {
   inset?: boolean;
   icon?: ComponentType<{ className?: string }>;
-  tone?: MenuItemTone;
+  tone?: Tone;
   size?: Responsive<NonNullable<MenuItemVariants['size']>>;
 };
 
@@ -43,7 +44,7 @@ export function CommandItem({
   return (
     <CommandPrimitive.Item
       className={clsx(
-        menuItem({ inset, tone, size: baseSize }),
+        menuItemRecipe({ inset, tone, size: baseSize }),
         typographyOverrides,
         className,
       )}

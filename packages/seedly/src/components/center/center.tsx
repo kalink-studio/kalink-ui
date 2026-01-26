@@ -1,5 +1,4 @@
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { CenterVariants } from './center.css';
@@ -9,8 +8,10 @@ import type { Responsive } from '../../styles/responsive';
 
 export type CenterProps<TUse extends ElementType> =
   PolymorphicComponentProps<TUse> &
-    Omit<CenterVariants, 'gutters'> & {
+    Omit<CenterVariants, 'gutters' | 'andText' | 'intrinsic'> & {
+      andText?: Responsive<NonNullable<CenterVariants['andText']>>;
       gutters?: Responsive<NonNullable<CenterVariants['gutters']>>;
+      intrinsic?: Responsive<NonNullable<CenterVariants['intrinsic']>>;
     };
 
 /**
@@ -30,10 +31,7 @@ export function Center<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(
-        centerResponsive({ andText, gutters, intrinsic }),
-        className,
-      )}
+      className={centerResponsive({ andText, gutters, intrinsic }, className)}
       {...rest}
     />
   );

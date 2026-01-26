@@ -3,7 +3,7 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const loaderOverlay = recipe({
+export const loaderOverlayRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -44,5 +44,5 @@ export const loaderOverlay = recipe({
 });
 
 export type LoaderOverlayVariants = NonNullable<
-  RecipeVariants<typeof loaderOverlay>
+  RecipeVariants<typeof loaderOverlayRecipe>
 >;

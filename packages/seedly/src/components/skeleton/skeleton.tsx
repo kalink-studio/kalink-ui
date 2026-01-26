@@ -9,7 +9,7 @@ import {
 } from '../../styles';
 import { Box, BoxProps } from '../box';
 
-import { skeleton, SkeletonVariants } from './skeleton.css';
+import { skeletonRecipe, SkeletonVariants } from './skeleton.css';
 
 export type SkeletonProps<TUse extends ElementType> = Omit<
   SkeletonVariants,
@@ -19,14 +19,14 @@ export type SkeletonProps<TUse extends ElementType> = Omit<
     size?: Responsive<NonNullable<SkeletonVariants['size']>>;
   };
 
-export const Skeleton = <TUse extends ElementType>({
+export function Skeleton<TUse extends ElementType>({
   children,
   className,
   type = 'text',
   radius = 'small',
   size,
   ...props
-}: SkeletonProps<TUse>) => {
+}: SkeletonProps<TUse>) {
   const withChildren = Children.count(children) > 0;
   const baseSize = getResponsiveBase(size) ?? 'md';
   const typographySize = mapResponsiveSizeToTypography(size);
@@ -38,7 +38,7 @@ export const Skeleton = <TUse extends ElementType>({
   return (
     <Box
       className={clsx(
-        skeleton({ withChildren, type, size: baseSize }),
+        skeletonRecipe({ withChildren, type, size: baseSize }),
         typographyOverrides,
         className,
       )}
@@ -48,4 +48,4 @@ export const Skeleton = <TUse extends ElementType>({
       {children}
     </Box>
   );
-};
+}

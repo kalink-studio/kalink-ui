@@ -8,7 +8,7 @@ import {
   type Responsive,
 } from '../../styles';
 
-import { label, LabelVariants } from './label.css';
+import { labelRecipe, LabelVariants } from './label.css';
 
 export type LabelProps = ComponentPropsWithRef<'label'> & {
   required?: boolean;
@@ -33,7 +33,7 @@ export function Label({
   return (
     <label
       className={clsx(
-        label({ disabled, error, size: baseSize }),
+        labelRecipe({ disabled, error, size: baseSize }),
         typographyOverrides,
         className,
       )}

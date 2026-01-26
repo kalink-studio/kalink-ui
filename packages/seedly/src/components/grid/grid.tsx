@@ -2,25 +2,35 @@
 
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { GridVariants, minSizeVar } from './grid.css';
+import { defaultOrder, resolveResponsive } from '../../styles/responsive';
+
+import { gridVars, GridVariants } from './grid.css';
 import { gridResponsive } from './grid.responsive';
 
 import type { Responsive } from '../../styles/responsive';
 
-type GridVariantResponsive = {
-  [K in keyof GridVariants]?: Responsive<NonNullable<GridVariants[K]>>;
-};
+interface GridVariantResponsive {
+  spacing?: Responsive<NonNullable<GridVariants['spacing']>>;
+  columnSpacing?: Responsive<NonNullable<GridVariants['columnSpacing']>>;
+  rowSpacing?: Responsive<NonNullable<GridVariants['rowSpacing']>>;
+  columns?: Responsive<NonNullable<GridVariants['columns']>>;
+  autoLayout?: Responsive<NonNullable<GridVariants['autoLayout']>>;
+  justifyItems?: Responsive<NonNullable<GridVariants['justifyItems']>>;
+  alignItems?: Responsive<NonNullable<GridVariants['alignItems']>>;
+  justifyContent?: Responsive<NonNullable<GridVariants['justifyContent']>>;
+  alignContent?: Responsive<NonNullable<GridVariants['alignContent']>>;
+}
 
-type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  GridVariantResponsive & {
-    /**
-     * The minimum size of a grid cell
-     */
-    minSize?: string;
-  };
+export type GridProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> &
+    GridVariantResponsive & {
+      /**
+       * The minimum size of a grid cell
+       */
+      minSize?: string;
+    };
 
 /**
  * The Grid layout provides a flexible, responsive grid system. It can also
@@ -30,7 +40,7 @@ type GridProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
  *
  * https://every-layout.dev/layouts/grid/
  */
-export function Grid<TUse extends ElementType>(props: GridProps<TUse>) {
+export function Grid<TUse extends ElementType = 'div'>(props: GridProps<TUse>) {
   const {
     use: Comp = 'div',
     minSize,
@@ -47,24 +57,36 @@ export function Grid<TUse extends ElementType>(props: GridProps<TUse>) {
     ...rest
   } = props;
 
+  const autoLayoutMap = resolveResponsive(autoLayout, defaultOrder);
+  const columnsMap = resolveResponsive(columns, defaultOrder);
+  const columnsEntries = Object.entries(columnsMap).filter(
+    ([breakpoint]) =>
+      autoLayoutMap[breakpoint as keyof typeof autoLayoutMap] == null,
+  );
+  const columnsForLayout = columnsEntries.length
+    ? (Object.fromEntries(columnsEntries) as Responsive<
+        NonNullable<GridVariants['columns']>
+      >)
+    : undefined;
+
   return (
     <Comp
-      className={clsx(
-        gridResponsive({
+      className={gridResponsive(
+        {
           spacing,
           columnSpacing,
           rowSpacing,
-          columns: autoLayout ? undefined : columns,
+          columns: columnsForLayout,
           autoLayout,
           justifyItems,
           alignItems,
           justifyContent,
           alignContent,
-        }),
+        },
         className,
       )}
       style={assignInlineVars({
-        ...(minSize && { [minSizeVar]: minSize }),
+        ...(minSize && { [gridVars.layout.minCellSize]: minSize }),
       })}
       {...(rest as Record<string, unknown>)}
     />

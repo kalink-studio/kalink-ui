@@ -1,9 +1,9 @@
-import { defaultOrder, responsiveRecipe } from '../../styles';
+import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 
-import { alignAt, textRecipe } from './text.css';
+import { alignAt, lineClampAt, textRecipe, wrapAt } from './text.css';
 
 export const textResponsive = responsiveRecipe({
   recipe: textRecipe,
-  at: { align: alignAt },
+  at: { align: alignAt, wrap: wrapAt, lineClamp: lineClampAt },
   order: defaultOrder,
 });

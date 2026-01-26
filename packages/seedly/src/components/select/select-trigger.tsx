@@ -6,26 +6,36 @@ import { ComponentPropsWithRef, ReactNode } from 'react';
 
 import { buttonRecipe } from '../button/button.css';
 import { useFormFieldItemContext, useFormFieldContext } from '../form-field';
+import { inputAppearanceRecipe, type InputAppearanceVariants } from '../input';
 
-import { openIndicator, selectTrigger } from './select-trigger.css';
+import { openIndicatorRecipe, selectTrigger } from './select-trigger.css';
 
-export type SelectTriggerProps = ComponentPropsWithRef<typeof Trigger> & {
-  icon?: ReactNode;
-};
+export type SelectTriggerProps = ComponentPropsWithRef<typeof Trigger> &
+  Pick<InputAppearanceVariants, 'tone' | 'size' | 'variant'> & {
+    icon?: ReactNode;
+  };
 
 export function SelectTrigger({
   className,
   children,
   icon = null,
+  tone,
+  size,
+  variant,
   ...props
 }: SelectTriggerProps) {
-  const { errors, label, tone } = useFormFieldContext();
+  const { errors, label, tone: contextTone } = useFormFieldContext();
   const { id } = useFormFieldItemContext();
+  const resolvedTone = tone ?? contextTone;
 
   return (
     <Trigger
       id={id}
-      className={clsx(selectTrigger, className)}
+      className={clsx(
+        inputAppearanceRecipe({ tone: resolvedTone, size, variant }),
+        selectTrigger,
+        className,
+      )}
       aria-invalid={errors ? 'true' : undefined}
       aria-label={label}
       {...props}
@@ -36,7 +46,7 @@ export function SelectTrigger({
           // Mimic the Combobox style
           className={clsx(
             buttonRecipe({ size: 'sm', variant: 'bare', tone }),
-            openIndicator({ fallback: !icon }),
+            openIndicatorRecipe({ fallback: !icon }),
           )}
         >
           {icon}

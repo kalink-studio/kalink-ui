@@ -11,7 +11,10 @@ import {
   type Responsive,
 } from '../../styles';
 
-import { commandGroup, type CommandGroupVariants } from './command-group.css';
+import {
+  commandGroupRecipe,
+  type CommandGroupVariants,
+} from './command-group.css';
 
 export type CommandGroupProps = ComponentPropsWithRef<
   typeof CommandPrimitive.Group
@@ -30,7 +33,7 @@ export function CommandGroup({ className, size, ...props }: CommandGroupProps) {
   return (
     <CommandPrimitive.Group
       className={clsx(
-        commandGroup({ size: baseSize }),
+        commandGroupRecipe({ size: baseSize }),
         typographyOverrides,
         className,
       )}

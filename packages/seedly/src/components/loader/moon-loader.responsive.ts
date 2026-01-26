@@ -1,9 +1,9 @@
 import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 
-import { loaderWrapper, sizeAt } from './loader.css';
+import { loaderWrapperRecipe, sizeAt } from './loader.css';
 
 export const moonLoaderResponsive = responsiveRecipe({
-  recipe: loaderWrapper,
+  recipe: loaderWrapperRecipe,
   at: { size: sizeAt },
   order: defaultOrder,
 });

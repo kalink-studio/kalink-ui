@@ -8,11 +8,33 @@ export type BreakpointWithBase = 'xs' | BreakpointKey;
 export type ResponsiveObject<T, B extends string> = Partial<
   Record<Exclude<B, 'xs'>, T>
 > & { xs?: T };
+
 export type ResponsiveArray<T> = (T | null | undefined)[];
+
 export type Responsive<T, B extends string = BreakpointWithBase> =
   | T
   | ResponsiveObject<T, B>
   | ResponsiveArray<T>;
+
+function entriesOf<K extends string | number, V>(
+  record: Partial<Record<K, V>>,
+): [K, V][] {
+  return Object.entries(record) as [K, V][];
+}
+
+function recordFromEntries<K extends string | number, V>(
+  entries: [K, V][],
+): Record<K, V> {
+  return Object.fromEntries(entries) as Record<K, V>;
+}
+
+function styleVariantsWithArrays<
+  Variants extends Record<string | number, StyleRule | StyleRule[]>,
+>(variants: Variants): { [K in keyof Variants]: string } {
+  return styleVariants(variants as Record<string, StyleRule>) as {
+    [K in keyof Variants]: string;
+  };
+}
 
 export function resolveResponsive<T, B extends string = BreakpointWithBase>(
   value: Responsive<T, B> | undefined,
@@ -26,10 +48,10 @@ export function resolveResponsive<T, B extends string = BreakpointWithBase>(
     const out: Partial<Record<B, T>> = {};
 
     value.forEach((val, i) => {
-      const breakpoint = order[i] as B | undefined;
+      const breakpoint = order[i];
 
-      if (val != null && breakpoint) {
-        out[breakpoint] = val as T;
+      if (val != null && breakpoint != null) {
+        out[breakpoint] = val;
       }
     });
 
@@ -40,7 +62,7 @@ export function resolveResponsive<T, B extends string = BreakpointWithBase>(
     return value as Partial<Record<B, T>>;
   }
 
-  return { xs: value as T } as Partial<Record<B, T>>;
+  return { xs: value } as Partial<Record<B, T>>;
 }
 
 export function getResponsiveBase<T>(
@@ -66,23 +88,17 @@ export function createResponsiveVariants<
 >(args: CreateResponsiveVariantsArgs<VariantValues, Bps>) {
   const { styles, media } = args;
 
-  const at = Object.fromEntries(
-    Object.entries(media).map(([bp, query]) => {
-      const styleEntries = Object.entries(styles) as [
-        VariantValues,
-        StyleRule | StyleRule[],
-      ][];
+  const at = recordFromEntries(
+    entriesOf(media).map(([bp, query]) => {
+      const styleMap = recordFromEntries(
+        entriesOf<VariantValues, StyleRule | StyleRule[]>(styles).map(
+          ([val, rule]) => [val, applyMedia(query, rule)],
+        ),
+      );
 
-      const styleMap = Object.fromEntries(
-        styleEntries.map(([val, rule]) => [
-          val,
-          applyMedia(query as string, rule),
-        ]),
-      ) as Record<VariantValues, StyleRule | StyleRule[]>;
-
-      return [bp, styleVariants(styleMap)];
+      return [bp, styleVariantsWithArrays(styleMap)];
     }),
-  ) as Record<Exclude<Bps, 'xs'>, Record<VariantValues, string>>;
+  );
 
   return at;
 }
@@ -92,10 +108,10 @@ function applyMedia(
   rule: StyleRule | StyleRule[],
 ): StyleRule | StyleRule[] {
   if (Array.isArray(rule)) {
-    return rule.map((r) => ({ '@media': { [query]: r } })) as StyleRule[];
+    return rule.map((r) => ({ '@media': { [query]: r } }));
   }
 
-  return { '@media': { [query]: rule } } as StyleRule;
+  return { '@media': { [query]: rule } };
 }
 
 type MakeResponsive<V, B extends string> = {
@@ -104,9 +120,7 @@ type MakeResponsive<V, B extends string> = {
 
 export interface ResponsiveRecipeArgs<V, Bps extends string> {
   recipe: (props: V) => string;
-  at: Partial<
-    Record<keyof V, Record<Exclude<Bps, 'xs'>, Record<string, string>>>
-  >;
+  at: Partial<Record<keyof V, Partial<Record<Bps, Record<string, string>>>>>;
   order: readonly Bps[];
 }
 
@@ -115,31 +129,37 @@ export function responsiveRecipe<
   const Bps extends string,
 >(args: ResponsiveRecipeArgs<V, Bps>) {
   const { recipe, at, order } = args;
+  type ClassValue = Parameters<typeof clsx>[number];
 
-  return (props: MakeResponsive<V, Bps> & { className?: string }) => {
-    const { className, ...rest } = props as Record<string, unknown> & {
-      className?: string;
-    };
+  return (props: MakeResponsive<V, Bps>, ...classNames: ClassValue[]) => {
+    const responsiveRest = props as MakeResponsive<V, Bps>;
+    const keys = Object.keys(responsiveRest) as (keyof V)[];
 
     const baseProps: Partial<V> = {};
 
-    for (const key in rest) {
-      const value = (rest as Record<string, unknown>)[key];
-      const map = resolveResponsive(value, order);
+    for (const key of keys) {
+      const value = responsiveRest[key];
+      const map = resolveResponsive<unknown, Bps>(
+        value as Responsive<unknown, Bps> | undefined,
+        order,
+      );
 
-      (baseProps as Record<string, unknown>)[key] =
-        (map as Record<string, unknown>)['xs'] ?? value;
+      const baseValue =
+        (map as Partial<Record<BreakpointWithBase, unknown>>).xs ?? value;
+
+      baseProps[key] = baseValue as V[typeof key];
     }
 
     const base = recipe(baseProps as V);
     const overrides: string[] = [];
 
-    for (const key in rest) {
-      const value = (rest as Record<string, unknown>)[key];
-      const map = resolveResponsive(value, order);
-      const variantAt = (at as Record<string, unknown>)[key] as
-        | Record<string, Record<string, string>>
-        | undefined;
+    for (const key of keys) {
+      const value = responsiveRest[key];
+      const variantAt = at[key];
+      const map = resolveResponsive<unknown, Bps>(
+        value as Responsive<unknown, Bps> | undefined,
+        order,
+      );
 
       if (!variantAt) {
         continue;
@@ -150,13 +170,13 @@ export function responsiveRecipe<
           continue;
         }
 
-        const val = (map as Partial<Record<Bps, unknown>>)[bp];
+        const val = map[bp];
 
         if (val == null) {
           continue;
         }
 
-        const cls = variantAt[bp as string]?.[String(val)];
+        const cls = variantAt[bp]?.[String(val)];
 
         if (cls) {
           overrides.push(cls);
@@ -164,7 +184,7 @@ export function responsiveRecipe<
       }
     }
 
-    return clsx(base, ...overrides, className);
+    return clsx(base, ...overrides, ...classNames);
   };
 }
 

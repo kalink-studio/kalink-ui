@@ -1,6 +1,5 @@
 'use client';
 
-import { clsx } from 'clsx';
 import { Command as CommandPrimitive } from 'cmdk';
 import { ComponentPropsWithRef } from 'react';
 
@@ -19,7 +18,7 @@ export function CommandList({
 }: CommandListProps) {
   return (
     <CommandPrimitive.List
-      className={clsx(commandListResponsive({ spacing }), className)}
+      className={commandListResponsive({ spacing }, className)}
       asChild
       {...props}
     />

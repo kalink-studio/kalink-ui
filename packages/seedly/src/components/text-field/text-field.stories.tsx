@@ -2,7 +2,6 @@ import { responsiveSelectArg } from '../../utils';
 
 import { TextField } from './text-field';
 
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {

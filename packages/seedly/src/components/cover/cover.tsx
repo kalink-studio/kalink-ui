@@ -2,22 +2,22 @@
 
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { CoverVariants, minSizeVar } from './cover.css';
+import { coverVars, CoverVariants } from './cover.css';
 import { coverResponsive } from './cover.responsive';
 
 import type { Responsive } from '../../styles/responsive';
 
-type CoverProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
-  Omit<CoverVariants, 'spacing'> & {
-    /**
-     * The minimum height of the cover
-     */
-    minSize?: string;
-    spacing?: Responsive<NonNullable<CoverVariants['spacing']>>;
-  };
+export type CoverProps<TUse extends ElementType> =
+  PolymorphicComponentProps<TUse> &
+    Omit<CoverVariants, 'spacing'> & {
+      /**
+       * The minimum height of the cover
+       */
+      minSize?: string;
+      spacing?: Responsive<NonNullable<CoverVariants['spacing']>>;
+    };
 
 /**
  * A custom element for covering a block-level element horizontally,
@@ -28,7 +28,7 @@ type CoverProps<TUse extends ElementType> = PolymorphicComponentProps<TUse> &
  *
  * https://every-layout.dev/layouts/cover
  */
-export function Cover<TUse extends ElementType>({
+export function Cover<TUse extends ElementType = 'div'>({
   spacing,
   minSize,
   className,
@@ -38,9 +38,9 @@ export function Cover<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(coverResponsive({ spacing }), className)}
+      className={coverResponsive({ spacing }, className)}
       style={assignInlineVars({
-        ...(minSize && { [minSizeVar]: minSize }),
+        ...(minSize && { [coverVars.layout.minBlockSize]: minSize }),
       })}
       {...rest}
     />

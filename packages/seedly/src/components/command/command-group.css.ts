@@ -4,7 +4,7 @@ import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { sys, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const commandGroup = recipe({
+export const commandGroupRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -36,7 +36,7 @@ export const commandGroup = recipe({
   },
 });
 
-globalStyle(`${commandGroup.classNames.base} [cmdk-group-heading]`, {
+globalStyle(`${commandGroupRecipe.classNames.base} [cmdk-group-heading]`, {
   '@layer': {
     [components]: {
       position: 'relative',
@@ -50,5 +50,5 @@ globalStyle(`${commandGroup.classNames.base} [cmdk-group-heading]`, {
 });
 
 export type CommandGroupVariants = NonNullable<
-  RecipeVariants<typeof commandGroup>
+  RecipeVariants<typeof commandGroupRecipe>
 >;

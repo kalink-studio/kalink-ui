@@ -18,7 +18,7 @@ const pulseKeyframe = keyframes({
   },
 });
 
-export const skeleton = recipe({
+export const skeletonRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -127,8 +127,10 @@ export const skeleton = recipe({
   },
 });
 
-globalStyle(`${skeleton.classNames.variants.withChildren.true} *`, {
+globalStyle(`${skeletonRecipe.classNames.variants.withChildren.true} *`, {
   visibility: 'hidden',
 });
 
-export type SkeletonVariants = NonNullable<RecipeVariants<typeof skeleton>>;
+export type SkeletonVariants = NonNullable<
+  RecipeVariants<typeof skeletonRecipe>
+>;

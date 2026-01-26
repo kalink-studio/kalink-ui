@@ -4,7 +4,7 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const alertDialogFooter = recipe({
+export const alertDialogFooterRecipe = recipe({
   variants: {
     position: {
       sticky: {
@@ -30,5 +30,5 @@ export const alertDialogFooter = recipe({
 });
 
 export type AlertDialogFooterVariants = NonNullable<
-  RecipeVariants<typeof alertDialogFooter>
+  RecipeVariants<typeof alertDialogFooterRecipe>
 >;

@@ -3,7 +3,6 @@ import { FormField } from '../form-field';
 
 import { Input } from './input';
 
-
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {

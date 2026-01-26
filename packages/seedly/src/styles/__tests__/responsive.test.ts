@@ -107,7 +107,7 @@ describe('responsiveRecipe', () => {
       order: defaultOrder,
     });
 
-    const result = responsive({ className: 'custom-class' });
+    const result = responsive({ size: 'sm' }, 'custom-class');
 
     expect(result).toContain('base-class');
     expect(result).toContain('custom-class');

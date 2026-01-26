@@ -43,7 +43,7 @@ export const headingAlignStyles = {
   },
 } as const;
 
-export const headingRoot = recipe({
+export const headingRootRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -66,7 +66,7 @@ export const pretitleSpacingStyles = mapContractVars(sys.spacing, (key) => ({
   },
 }));
 
-export const pretitle = recipe({
+export const pretitleRecipe = recipe({
   variants: {
     spacing: pretitleSpacingStyles,
   },
@@ -80,14 +80,14 @@ export const subtitleSpacingStyles = mapContractVars(sys.spacing, (key) => ({
   },
 }));
 
-export const subtitle = recipe({
+export const subtitleRecipe = recipe({
   variants: {
     spacing: subtitleSpacingStyles,
   },
 });
 
 export type HeadingRootVariants = NonNullable<
-  RecipeVariants<typeof headingRoot>
+  RecipeVariants<typeof headingRootRecipe>
 >;
 
 export const alignAt = createResponsiveVariants({

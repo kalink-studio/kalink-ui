@@ -3,10 +3,18 @@ import {
   globalStyle,
   createThemeContract,
   assignVars,
+  type StyleRule,
 } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, transition, typography } from '../../styles';
+import {
+  createToneAssignments,
+  createToneStyles,
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  transition,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const inputVars = createThemeContract({
@@ -37,27 +45,84 @@ const inputColorDefaults = assignVars(inputVars.color, {
   outline: sys.surface.foreground,
 });
 
-const inputToneDefaults = assignVars(inputToneVars, {
-  base: sys.tone.neutral,
-  onBase: sys.tone.onNeutral,
-});
+const inputToneAssignments = createToneAssignments(inputToneVars);
+const inputToneDefaults = inputToneAssignments.neutral;
 
-const inputTonePrimary = assignVars(inputToneVars, {
-  base: sys.tone.primary,
-  onBase: sys.tone.onPrimary,
-});
+const inputToneStyles = createToneStyles(inputToneVars, ({ base }) => ({
+  ...inputColorDefaults,
+  [inputVars.color.foreground]: base,
+  [inputVars.color.outline]: base,
+}));
 
-const inputToneDestructive = assignVars(inputToneVars, {
-  base: sys.tone.destructive,
-  onBase: sys.tone.onDestructive,
-});
+const inputSizeStyles = {
+  sm: {
+    '@layer': {
+      [components]: {
+        fontFamily: sys.typography.body.small.font,
+        fontWeight: sys.typography.body.small.weight,
+        lineHeight: sys.typography.body.small.lineHeight,
+        letterSpacing: sys.typography.body.small.tracking,
+        /**
+         * Force the font size to 16px to avoid zooming on mobile
+         */
+        fontSize: `max(16px, ${sys.typography.body.small.size})`,
 
-const inputToneSuccess = assignVars(inputToneVars, {
-  base: sys.tone.success,
-  onBase: sys.tone.onSuccess,
-});
+        vars: {
+          ...assignVars(inputVars.spacing, {
+            block: sys.spacing[1],
+            inline: sys.spacing[1],
+          }),
+        },
+      },
+    },
+  },
 
-export const inputAppearance = recipe({
+  md: {
+    '@layer': {
+      [components]: {
+        fontFamily: sys.typography.body.medium.font,
+        fontWeight: sys.typography.body.medium.weight,
+        lineHeight: sys.typography.body.medium.lineHeight,
+        letterSpacing: sys.typography.body.medium.tracking,
+        /**
+         * Force the font size to 16px to avoid zooming on mobile
+         */
+        fontSize: `max(16px, ${sys.typography.body.medium.size})`,
+
+        vars: {
+          ...assignVars(inputVars.spacing, {
+            block: sys.spacing[2],
+            inline: sys.spacing[2],
+          }),
+        },
+      },
+    },
+  },
+
+  lg: {
+    '@layer': {
+      [components]: {
+        fontFamily: sys.typography.body.large.font,
+        fontWeight: sys.typography.body.large.weight,
+        lineHeight: sys.typography.body.large.lineHeight,
+        letterSpacing: sys.typography.body.large.tracking,
+        /**
+         * Force the font size to 16px to avoid zooming on mobile
+         */
+        fontSize: `max(16px, ${sys.typography.body.large.size})`,
+
+        vars: {
+          ...assignVars(inputVars.spacing, {
+            block: sys.spacing[3],
+            inline: sys.spacing[3],
+          }),
+        },
+      },
+    },
+  },
+} satisfies Record<'sm' | 'md' | 'lg', StyleRule | StyleRule[]>;
+
+export const inputAppearanceRecipe = recipe({
   base: [
     {
       '@layer': {
@@ -101,7 +166,7 @@ export const inputAppearance = recipe({
                 ...inputColorDefaults,
                 [inputVars.color.foreground]: sys.tone.destructive,
                 [inputVars.color.outline]: sys.tone.destructive,
-                ...inputToneDestructive,
+                ...inputToneAssignments.destructive,
               },
             },
           },
@@ -159,121 +224,9 @@ export const inputAppearance = recipe({
       bare: {},
     },
 
-    tone: {
-      neutral: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...inputColorDefaults,
-              ...inputToneDefaults,
-              [inputVars.color.foreground]: sys.tone.neutral,
-              [inputVars.color.outline]: sys.tone.neutral,
-            },
-          },
-        },
-      },
-      primary: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...inputColorDefaults,
-              [inputVars.color.foreground]: sys.tone.primary,
-              [inputVars.color.outline]: sys.tone.primary,
-              ...inputTonePrimary,
-            },
-          },
-        },
-      },
-      destructive: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...inputColorDefaults,
-              [inputVars.color.foreground]: sys.tone.destructive,
-              [inputVars.color.outline]: sys.tone.destructive,
-              ...inputToneDestructive,
-            },
-          },
-        },
-      },
-      success: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...inputColorDefaults,
-              [inputVars.color.foreground]: sys.tone.success,
-              [inputVars.color.outline]: sys.tone.success,
-              ...inputToneSuccess,
-            },
-          },
-        },
-      },
-    },
+    tone: inputToneStyles,
 
-    size: {
-      sm: [
-        typography.body.small,
-        {
-          '@layer': {
-            [components]: {
-              /**
-               * Force the font size to 16px to avoid zooming on mobile
-               */
-              fontSize: `max(16px, ${sys.typography.body.small.size})`,
-
-              vars: {
-                ...assignVars(inputVars.spacing, {
-                  block: sys.spacing[1],
-                  inline: sys.spacing[1],
-                }),
-              },
-            },
-          },
-        },
-      ],
-
-      md: [
-        typography.body.medium,
-        {
-          '@layer': {
-            [components]: {
-              /**
-               * Force the font size to 16px to avoid zooming on mobile
-               */
-              fontSize: `max(16px, ${sys.typography.body.medium.size})`,
-
-              vars: {
-                ...assignVars(inputVars.spacing, {
-                  block: sys.spacing[2],
-                  inline: sys.spacing[2],
-                }),
-              },
-            },
-          },
-        },
-      ],
-
-      lg: [
-        typography.body.large,
-        {
-          '@layer': {
-            [components]: {
-              /**
-               * Force the font size to 16px to avoid zooming on mobile
-               */
-              fontSize: `max(16px, ${sys.typography.body.large.size})`,
-
-              vars: {
-                ...assignVars(inputVars.spacing, {
-                  block: sys.spacing[3],
-                  inline: sys.spacing[3],
-                }),
-              },
-            },
-          },
-        },
-      ],
-    },
+    size: inputSizeStyles,
   },
 
   defaultVariants: {
@@ -337,7 +290,7 @@ export const inputAddornment = style({
 });
 
 globalStyle(
-  `${inputAppearance.classNames.base} input:is(:focus, :focus-visible)`,
+  `${inputAppearanceRecipe.classNames.base} input:is(:focus, :focus-visible)`,
   {
     '@layer': {
       [components]: {
@@ -348,5 +301,10 @@ globalStyle(
 );
 
 export type InputAppearanceVariants = NonNullable<
-  RecipeVariants<typeof inputAppearance>
+  RecipeVariants<typeof inputAppearanceRecipe>
 >;
+
+export const sizeAt = createResponsiveVariants({
+  styles: inputSizeStyles,
+  media: defaultMedia,
+});

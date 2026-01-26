@@ -13,7 +13,7 @@ export {
 export {
   buttonRecipe,
   buttonVars,
-  buttonSlot,
-  buttonLabel,
+  buttonSlotRecipe,
+  buttonLabelRecipe,
   type ButtonVariants,
 } from './button.css';

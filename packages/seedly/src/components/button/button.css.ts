@@ -7,6 +7,8 @@ import { calc } from '@vanilla-extract/css-utils';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
+  createToneAssignments,
+  createToneStyles,
   createResponsiveVariants,
   defaultMedia,
   sys,
@@ -68,59 +70,10 @@ const buttonToneOverlay = assignVars(buttonVariantVars, {
   outline: buttonToneVars.base,
 });
 
-const buttonToneDefaults = assignVars(buttonToneVars, {
-  base: sys.tone.neutral,
-  onBase: sys.tone.onNeutral,
-});
+const buttonToneAssignments = createToneAssignments(buttonToneVars);
+const buttonToneDefaults = buttonToneAssignments.neutral;
 
-const buttonTonePrimary = assignVars(buttonToneVars, {
-  base: sys.tone.primary,
-  onBase: sys.tone.onPrimary,
-});
-
-const buttonToneDestructive = assignVars(buttonToneVars, {
-  base: sys.tone.destructive,
-  onBase: sys.tone.onDestructive,
-});
-
-const buttonToneSuccess = assignVars(buttonToneVars, {
-  base: sys.tone.success,
-  onBase: sys.tone.onSuccess,
-});
-
-export const buttonToneStyles = {
-  neutral: {
-    '@layer': {
-      [components]: {
-        vars: assignVars(buttonToneVars, {
-          base: sys.tone.neutral,
-          onBase: sys.tone.onNeutral,
-        }),
-      },
-    },
-  },
-  primary: {
-    '@layer': {
-      [components]: {
-        vars: buttonTonePrimary,
-      },
-    },
-  },
-  destructive: {
-    '@layer': {
-      [components]: {
-        vars: buttonToneDestructive,
-      },
-    },
-  },
-  success: {
-    '@layer': {
-      [components]: {
-        vars: buttonToneSuccess,
-      },
-    },
-  },
-} as const;
+export const buttonToneStyles = createToneStyles(buttonToneVars);
 
 export const buttonVariantStyles = {
   /**
@@ -263,6 +216,40 @@ export const buttonVariantStyles = {
   },
 } as const;
 
+const compactSpacingStyle = {
+  '@layer': {
+    [components]: {
+      vars: {
+        [buttonVars.spacing.block]: '0',
+        [buttonVars.spacing.inline]: '0',
+      },
+    },
+  },
+};
+
+const compactSpacingVariants = (['sm', 'md', 'lg'] as const).flatMap((size) => [
+  {
+    variants: {
+      variant: 'bare',
+      size,
+    },
+    style: compactSpacingStyle,
+  },
+  {
+    variants: {
+      variant: 'link',
+      size,
+    },
+    style: compactSpacingStyle,
+  },
+]) as {
+  variants: {
+    variant: 'bare' | 'link';
+    size: 'sm' | 'md' | 'lg';
+  };
+  style: typeof compactSpacingStyle;
+}[];
+
 export const buttonSizeStyles = {
   sm: {
     '@layer': {
@@ -313,6 +300,7 @@ export const buttonRecipe = recipe({
 
         color: buttonVariantVars.foreground,
         textTransform: buttonVars.textTransform,
+
         backgroundColor: buttonVariantVars.background,
         borderRadius: buttonVars.borderRadius,
         borderWidth: buttonVars.border.width,
@@ -354,107 +342,10 @@ export const buttonRecipe = recipe({
     tone: 'neutral',
   },
 
-  compoundVariants: [
-    {
-      variants: {
-        variant: 'bare',
-        size: 'sm',
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [buttonVars.spacing.block]: '0',
-              [buttonVars.spacing.inline]: '0',
-            },
-          },
-        },
-      },
-    },
-    {
-      variants: {
-        variant: 'bare',
-        size: 'md',
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [buttonVars.spacing.block]: '0',
-              [buttonVars.spacing.inline]: '0',
-            },
-          },
-        },
-      },
-    },
-    {
-      variants: {
-        variant: 'bare',
-        size: 'lg',
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [buttonVars.spacing.block]: '0',
-              [buttonVars.spacing.inline]: '0',
-            },
-          },
-        },
-      },
-    },
-    {
-      variants: {
-        variant: 'link',
-        size: 'sm',
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [buttonVars.spacing.block]: '0',
-              [buttonVars.spacing.inline]: '0',
-            },
-          },
-        },
-      },
-    },
-    {
-      variants: {
-        variant: 'link',
-        size: 'md',
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [buttonVars.spacing.block]: '0',
-              [buttonVars.spacing.inline]: '0',
-            },
-          },
-        },
-      },
-    },
-    {
-      variants: {
-        variant: 'link',
-        size: 'lg',
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [buttonVars.spacing.block]: '0',
-              [buttonVars.spacing.inline]: '0',
-            },
-          },
-        },
-      },
-    },
-  ],
+  compoundVariants: compactSpacingVariants,
 });
 
-export const buttonLabel = recipe({
+export const buttonLabelRecipe = recipe({
   variants: {
     size: {
       sm: [typography.label.small],
@@ -464,7 +355,7 @@ export const buttonLabel = recipe({
   },
 });
 
-export const buttonSlot = recipe({
+export const buttonSlotRecipe = recipe({
   base: {
     flexShrink: 0,
   },

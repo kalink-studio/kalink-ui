@@ -8,7 +8,7 @@ import { clsx } from 'clsx';
 import { ComponentPropsWithRef } from 'react';
 
 import {
-  scrollAreaScrollbar,
+  scrollAreaScrollbarRecipe,
   ScrollAreaScrollbarVariants,
   scrollAreaThumb,
 } from './scroll-area.css';
@@ -28,7 +28,7 @@ export function ScrollBar({
     <ScrollAreaScrollbar
       ref={ref}
       orientation={orientation}
-      className={clsx(scrollAreaScrollbar({ orientation }), className)}
+      className={clsx(scrollAreaScrollbarRecipe({ orientation }), className)}
       {...props}
     >
       <ScrollAreaThumb className={scrollAreaThumb} />

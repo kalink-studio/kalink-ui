@@ -4,7 +4,7 @@ import { Portal, Content, Viewport } from '@radix-ui/react-select';
 import { clsx } from 'clsx';
 import { ComponentPropsWithRef, ReactNode } from 'react';
 
-import { popoverContent } from '../popover';
+import { popoverContentRecipe } from '../popover';
 import { ScrollArea } from '../scroll-area';
 
 import { SelectProps } from './select';
@@ -40,7 +40,7 @@ export function SelectContent({
   return (
     <SelectContentPortal container={container}>
       <Content position={position} asChild {...props}>
-        <div className={clsx(selectContent, popoverContent())}>
+        <div className={clsx(selectContent, popoverContentRecipe())}>
           <Viewport className={selectContentViewport}>
             <ScrollArea maxHeight="16rem">{children}</ScrollArea>
           </Viewport>

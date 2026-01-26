@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 import { Cluster, ClusterProps } from '../cluster';
 
 import {
-  alertDialogFooter,
+  alertDialogFooterRecipe,
   AlertDialogFooterVariants,
 } from './alert-dialog-footer.css';
 
@@ -19,7 +19,7 @@ export function AlertDialogFooter({
   return (
     <Cluster
       justify={justify}
-      className={clsx(alertDialogFooter({ position }), className)}
+      className={clsx(alertDialogFooterRecipe({ position }), className)}
       {...props}
     />
   );

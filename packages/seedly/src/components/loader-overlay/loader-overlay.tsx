@@ -6,7 +6,10 @@ import { MoonLoader } from '../loader';
 import { Stack, StackProps } from '../stack';
 import { Text } from '../text';
 
-import { loaderOverlay, LoaderOverlayVariants } from './loader-overlay.css';
+import {
+  loaderOverlayRecipe,
+  LoaderOverlayVariants,
+} from './loader-overlay.css';
 
 interface LoaderOverlayProps extends LoaderOverlayVariants {
   text?: string;
@@ -23,7 +26,7 @@ export function LoaderOverlay({
   return (
     <Box
       spacing={spacing}
-      className={clsx(loaderOverlay({ position }), className)}
+      className={clsx(loaderOverlayRecipe({ position }), className)}
     >
       <Stack use={Center} align="center" spacing={spacing} intrinsic andText>
         <MoonLoader active forceMount />

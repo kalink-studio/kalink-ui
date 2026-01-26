@@ -9,17 +9,14 @@ import {
   getResponsiveBase,
   mapResponsiveSizeToTypography,
   type Responsive,
+  type Tone,
 } from '../../styles';
-import {
-  menuItem,
-  MenuItemTone,
-  type MenuItemVariants,
-} from '../menu/menu-item.css';
+import { menuItemRecipe, type MenuItemVariants } from '../menu/menu-item.css';
 
 export type CommandEmptyProps = ComponentPropsWithoutRef<
   typeof CommandPrimitive.Empty
 > & {
-  tone?: MenuItemTone;
+  tone?: Tone;
   size?: Responsive<NonNullable<MenuItemVariants['size']>>;
 };
 
@@ -39,7 +36,7 @@ export function CommandEmpty({
   return (
     <CommandPrimitive.Empty
       className={clsx(
-        menuItem({ tone, size: baseSize }),
+        menuItemRecipe({ tone, size: baseSize }),
         typographyOverrides,
         className,
       )}

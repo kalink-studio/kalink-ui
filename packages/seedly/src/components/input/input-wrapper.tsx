@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import {
   ComponentPropsWithRef,
   ForwardedRef,
@@ -10,16 +9,12 @@ import {
 
 import {
   buildTypographyOverrides,
-  getResponsiveBase,
   mapResponsiveSizeToTypography,
   type Responsive,
 } from '../../styles';
 
-import {
-  inputAppearance,
-  InputAppearanceVariants,
-  inputWrapper,
-} from './input.css';
+import { InputAppearanceVariants, inputWrapper } from './input.css';
+import { inputAppearanceResponsive } from './input.responsive';
 
 export type InputWrapperProps = ComponentPropsWithRef<'div'> & {
   children: ReactNode;
@@ -40,7 +35,6 @@ export function InputWrapper({
   tone = 'neutral',
   ref,
 }: InputWrapperProps) {
-  const baseSize = getResponsiveBase(size) ?? 'md';
   const typographySize = mapResponsiveSizeToTypography(size);
   const typographyOverrides = buildTypographyOverrides({
     variant: 'body',
@@ -62,8 +56,8 @@ export function InputWrapper({
   return (
     <div
       ref={ref as ForwardedRef<HTMLDivElement>}
-      className={clsx(
-        inputAppearance({ variant, size: baseSize, tone }),
+      className={inputAppearanceResponsive(
+        { variant, size, tone },
         typographyOverrides,
         inputWrapper,
         className,

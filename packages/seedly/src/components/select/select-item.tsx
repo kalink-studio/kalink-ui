@@ -4,13 +4,15 @@ import { Item, ItemIndicator, ItemText } from '@radix-ui/react-select';
 import { clsx } from 'clsx';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
-import { menuItem, MenuItemTone } from '../menu';
+import { menuItemRecipe } from '../menu';
 
 import { selectItemIndicator } from './select-item.css';
 
+import type { Tone } from '../../styles';
+
 export type SelectItemProps = ComponentPropsWithoutRef<typeof Item> & {
   indicator?: ReactNode;
-  tone?: MenuItemTone;
+  tone?: Tone;
 };
 
 export function SelectItem({
@@ -20,7 +22,7 @@ export function SelectItem({
   ...props
 }: SelectItemProps) {
   return (
-    <Item className={clsx(menuItem({ inset: true, tone }))} {...props}>
+    <Item className={clsx(menuItemRecipe({ inset: true, tone }))} {...props}>
       <ItemIndicator asChild>
         {indicator || <div className={selectItemIndicator} />}
       </ItemIndicator>

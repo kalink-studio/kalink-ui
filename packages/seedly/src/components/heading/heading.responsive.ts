@@ -2,27 +2,27 @@ import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 
 import {
   alignAt,
-  headingRoot,
-  pretitle,
+  headingRootRecipe,
+  pretitleRecipe,
   pretitleSpacingAt,
-  subtitle,
+  subtitleRecipe,
   subtitleSpacingAt,
 } from './heading.css';
 
 export const headingRootResponsive = responsiveRecipe({
-  recipe: headingRoot,
+  recipe: headingRootRecipe,
   at: { align: alignAt },
   order: defaultOrder,
 });
 
 export const pretitleResponsive = responsiveRecipe({
-  recipe: pretitle,
+  recipe: pretitleRecipe,
   at: { spacing: pretitleSpacingAt },
   order: defaultOrder,
 });
 
 export const subtitleResponsive = responsiveRecipe({
-  recipe: subtitle,
+  recipe: subtitleRecipe,
   at: { spacing: subtitleSpacingAt },
   order: defaultOrder,
 });

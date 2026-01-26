@@ -9,9 +9,7 @@ export type AlertDialogActionProps = ComponentPropsWithRef<typeof Action> &
   };
 
 export function AlertDialogAction({
-  className,
   children,
-  loading,
   ...props
 }: AlertDialogActionProps) {
   return (

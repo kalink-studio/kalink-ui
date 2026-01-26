@@ -4,24 +4,6 @@ import { sys } from '../system-contract.css';
 
 import { refs } from './sprout-ref.css';
 
-const typoMap = {
-  lowMin: 12,
-  lowMax: 40,
-  highMin: 14,
-  highMax: 85,
-  exponent: 2 as const,
-  rounding: 'none' as const,
-};
-
-const spaceMap = {
-  lowMin: 4,
-  lowMax: 72,
-  highMin: 6,
-  highMax: 176,
-  exponent: 2 as const,
-  rounding: 'none' as const,
-};
-
 export const sprout = createTheme(sys, {
   layout: {
     measure: '75ch',
@@ -275,8 +257,3 @@ export const sprout = createTheme(sys, {
     18: refs.spacing[18],
   },
 });
-
-export const sproutTokens = {
-  typoMap,
-  spaceMap,
-};

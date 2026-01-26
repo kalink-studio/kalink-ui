@@ -6,18 +6,23 @@ import { ComponentPropsWithoutRef } from 'react';
 import { Box, BoxProps } from '../box';
 import { ScrollArea, ScrollAreaProps } from '../scroll-area';
 
-import { alertDialogContent } from './alert-dialog-content.css';
+import { alertDialogContentRecipe } from './alert-dialog-content.css';
 import { AlertDialogOverlay } from './alert-dialog-overlay';
 
 export type AlertDialogContentVariants = NonNullable<
-  RecipeVariants<typeof alertDialogContent>
+  RecipeVariants<typeof alertDialogContentRecipe>
 >;
 
-export type AlertDialogContentProps = ComponentPropsWithoutRef<typeof Content> &
-  AlertDialogContentVariants &
+type BoxStyleProps = Pick<
+  BoxProps<'div'>,
+  'spacing' | 'radius' | 'elevation' | 'use'
+>;
+
+export type AlertDialogContentProps = AlertDialogContentVariants &
   Pick<ScrollAreaProps, 'maxHeight'> &
   ComponentPropsWithoutRef<typeof AlertDialogPortal> &
-  BoxProps<'div'>;
+  BoxStyleProps &
+  Omit<ComponentPropsWithoutRef<typeof Content>, keyof BoxStyleProps>;
 
 export function AlertDialogContent({
   className,
@@ -29,17 +34,19 @@ export function AlertDialogContent({
   elevation = 'high',
   radius,
   spacing = 2,
+  use,
   ...props
 }: AlertDialogContentProps) {
   return (
     <AlertDialogPortal container={container} forceMount={forceMount}>
       <AlertDialogOverlay />
       <Content
-        className={clsx(alertDialogContent({ variant }), className)}
+        className={clsx(alertDialogContentRecipe({ variant }), className)}
         asChild
         {...props}
       >
         <Box
+          use={use}
           variant="solid"
           spacing={spacing}
           elevation={elevation}

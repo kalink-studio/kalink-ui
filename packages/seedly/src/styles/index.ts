@@ -7,7 +7,7 @@ export {
 } from './system-contract.css';
 export { typography } from './typography.css';
 
-export { sprout, sproutTokens } from './theme/sprout.css';
+export { sprout } from './theme/sprout.css';
 export { refs as sproutRefs } from './theme/sprout-ref.css';
 
 export {
@@ -55,3 +55,5 @@ export {
   type FluidClampOptions,
   type FluidClampForOptions,
 } from './scale';
+
+export { createToneAssignments, createToneStyles } from './tone';

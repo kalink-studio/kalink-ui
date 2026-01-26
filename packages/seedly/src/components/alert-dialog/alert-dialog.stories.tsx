@@ -1,30 +1,44 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-
+import { argTypesFromRecipe } from '../../utils';
 import { Button } from '../button';
 import { Stack } from '../stack';
 
 import { AlertDialog } from './alert-dialog';
 import { AlertDialogAction } from './alert-dialog-action';
 import { AlertDialogCancel } from './alert-dialog-cancel';
-import { AlertDialogContent } from './alert-dialog-content';
+import {
+  AlertDialogContent,
+  AlertDialogContentProps,
+} from './alert-dialog-content';
+import { alertDialogContentRecipe } from './alert-dialog-content.css';
 import { AlertDialogDescription } from './alert-dialog-description';
 import { AlertDialogFooter } from './alert-dialog-footer';
 import { AlertDialogHeader } from './alert-dialog-header';
 import { AlertDialogTitle } from './alert-dialog-title';
 import { AlertDialogTrigger } from './alert-dialog-trigger';
 
+import type { Meta, StoryObj } from '@storybook/react-vite';
+
+type StoryArgs = AlertDialogContentProps;
+
 const meta = {
   title: 'Component/AlertDialog',
-  component: AlertDialog,
+  component: AlertDialogContent,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
-  render: () => (
+  args: {
+    radius: 'small',
+  },
+  argTypes: {
+    ...argTypesFromRecipe(alertDialogContentRecipe),
+  },
+  render: (args) => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="plain">Open</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent radius="small">
+      <AlertDialogContent {...args}>
         <Stack spacing={4} align="stretch">
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -41,7 +55,7 @@ const meta = {
       </AlertDialogContent>
     </AlertDialog>
   ),
-} satisfies Meta<typeof AlertDialog>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 

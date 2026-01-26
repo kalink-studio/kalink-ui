@@ -12,7 +12,7 @@ import {
 
 import { useFormFieldContext } from './form-field-context';
 import {
-  formFieldMessageStyle,
+  formFieldMessageRecipe,
   type FormFieldMessageVariants,
 } from './form-field.css';
 
@@ -51,7 +51,7 @@ export function FormFieldMessage({
     <div
       id={id}
       className={clsx(
-        formFieldMessageStyle({ size: baseSize }),
+        formFieldMessageRecipe({ size: baseSize }),
         typographyOverrides,
         className,
       )}

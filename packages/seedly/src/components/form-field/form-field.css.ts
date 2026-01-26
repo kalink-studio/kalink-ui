@@ -1,7 +1,12 @@
 import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, typography } from '../../styles';
+import {
+  createToneAssignments,
+  createToneStyles,
+  sys,
+  typography,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const formFieldVars = createThemeContract({
@@ -21,27 +26,15 @@ const formFieldToneVars = createThemeContract({
   onBase: null,
 });
 
-const formFieldToneDefaults = assignVars(formFieldToneVars, {
-  base: sys.tone.neutral,
-  onBase: sys.tone.onNeutral,
-});
+const formFieldToneAssignments = createToneAssignments(formFieldToneVars);
+const formFieldToneDefaults = formFieldToneAssignments.neutral;
 
-const formFieldTonePrimary = assignVars(formFieldToneVars, {
-  base: sys.tone.primary,
-  onBase: sys.tone.onPrimary,
-});
+const formFieldToneStyles = createToneStyles(formFieldToneVars, ({ base }) => ({
+  [formFieldVars.color.foreground]: base,
+  [formFieldVars.color.outline]: base,
+}));
 
-const formFieldToneDestructive = assignVars(formFieldToneVars, {
-  base: sys.tone.destructive,
-  onBase: sys.tone.onDestructive,
-});
-
-const formFieldToneSuccess = assignVars(formFieldToneVars, {
-  base: sys.tone.success,
-  onBase: sys.tone.onSuccess,
-});
-
-export const formFieldStyle = recipe({
+export const formFieldRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -82,7 +75,7 @@ export const formFieldStyle = recipe({
             vars: {
               [formFieldVars.color.foreground]: sys.tone.destructive,
               [formFieldVars.color.outline]: sys.tone.destructive,
-              ...formFieldToneDestructive,
+              ...formFieldToneAssignments.destructive,
             },
           },
         },
@@ -91,52 +84,7 @@ export const formFieldStyle = recipe({
   },
 
   variants: {
-    tone: {
-      neutral: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [formFieldVars.color.foreground]: sys.tone.neutral,
-              [formFieldVars.color.outline]: sys.tone.neutral,
-              ...formFieldToneDefaults,
-            },
-          },
-        },
-      },
-      primary: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [formFieldVars.color.foreground]: sys.tone.primary,
-              [formFieldVars.color.outline]: sys.tone.primary,
-              ...formFieldTonePrimary,
-            },
-          },
-        },
-      },
-      destructive: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [formFieldVars.color.foreground]: sys.tone.destructive,
-              [formFieldVars.color.outline]: sys.tone.destructive,
-              ...formFieldToneDestructive,
-            },
-          },
-        },
-      },
-      success: {
-        '@layer': {
-          [components]: {
-            vars: {
-              [formFieldVars.color.foreground]: sys.tone.success,
-              [formFieldVars.color.outline]: sys.tone.success,
-              ...formFieldToneSuccess,
-            },
-          },
-        },
-      },
-    },
+    tone: formFieldToneStyles,
 
     error: {
       true: {
@@ -145,7 +93,7 @@ export const formFieldStyle = recipe({
             vars: {
               [formFieldVars.color.foreground]: sys.tone.destructive,
               [formFieldVars.color.outline]: sys.tone.destructive,
-              ...formFieldToneDestructive,
+              ...formFieldToneAssignments.destructive,
             },
           },
         },
@@ -175,7 +123,7 @@ export const formFieldStyle = recipe({
   },
 });
 
-export const formFieldMessageStyle = recipe({
+export const formFieldMessageRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -213,9 +161,9 @@ export const formFieldMessageStyle = recipe({
 });
 
 export type FormFieldVariants = NonNullable<
-  RecipeVariants<typeof formFieldStyle>
+  RecipeVariants<typeof formFieldRecipe>
 >;
 
 export type FormFieldMessageVariants = NonNullable<
-  RecipeVariants<typeof formFieldMessageStyle>
+  RecipeVariants<typeof formFieldMessageRecipe>
 >;

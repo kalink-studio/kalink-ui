@@ -1,14 +1,13 @@
-import { clsx } from 'clsx';
 import { TextareaHTMLAttributes } from 'react';
 
 import {
   buildTypographyOverrides,
-  getResponsiveBase,
   mapResponsiveSizeToTypography,
   type Responsive,
 } from '../../styles';
 import { useFormFieldContext } from '../form-field/form-field-context';
-import { inputAppearance, type InputAppearanceVariants } from '../input';
+import { type InputAppearanceVariants } from '../input';
+import { inputAppearanceResponsive } from '../input/input.responsive';
 import { textarea } from '../textarea/textarea.css';
 
 export type TextareaInputProps = Omit<
@@ -27,7 +26,6 @@ export function TextareaInput({
   ...props
 }: TextareaInputProps) {
   const { errors } = useFormFieldContext();
-  const baseSize = getResponsiveBase(size) ?? 'md';
   const typographySize = mapResponsiveSizeToTypography(size);
   const typographyOverrides = buildTypographyOverrides({
     variant: 'body',
@@ -36,8 +34,8 @@ export function TextareaInput({
 
   return (
     <textarea
-      className={clsx(
-        inputAppearance({ variant, size: baseSize, tone }),
+      className={inputAppearanceResponsive(
+        { variant, size, tone },
         typographyOverrides,
         textarea,
         className,

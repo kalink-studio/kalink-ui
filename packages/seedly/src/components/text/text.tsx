@@ -1,5 +1,4 @@
 import { PolymorphicComponentProps, getProp } from '@kalink-ui/dibbly';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import {
@@ -16,7 +15,7 @@ import { textResponsive } from './text.responsive';
 
 export type TextProps<TUse extends React.ElementType> =
   PolymorphicComponentProps<TUse> &
-    Omit<TextVariants, 'align'> & {
+    Omit<TextVariants, 'align' | 'wrap' | 'lineClamp'> & {
       /**
        * The size of the typography used to render the text.
        */
@@ -27,6 +26,8 @@ export type TextProps<TUse extends React.ElementType> =
        */
       variant?: Responsive<TypographyVariant>;
       align?: Responsive<NonNullable<TextVariants['align']>>;
+      wrap?: Responsive<NonNullable<TextVariants['wrap']>>;
+      lineClamp?: Responsive<NonNullable<TextVariants['lineClamp']>>;
     };
 
 export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
@@ -49,10 +50,10 @@ export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
 
   return (
     <Comp
-      className={clsx(
+      className={textResponsive(
+        { truncate, lineClamp, align, wrap },
         getProp(typography, `${baseVariant}.${baseSize}`),
         typographyOverrides,
-        textResponsive({ truncate, lineClamp, align, wrap }),
         className,
       )}
       {...rest}

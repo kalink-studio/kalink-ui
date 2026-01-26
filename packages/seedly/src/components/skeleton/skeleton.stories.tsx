@@ -10,7 +10,6 @@ import { Text } from '../text';
 
 import { Skeleton } from './skeleton';
 
-
 const meta = {
   title: 'Component/Skeleton',
   component: Skeleton,
@@ -69,7 +68,7 @@ export const LoadingCard: Story = {
         </Stack>
       </Card.Header>
       <Card.Body>
-        <Stack align="stretch">
+        <Stack spacing={2} align="stretch">
           <Skeleton type="paragraph" />
           <Skeleton />
         </Stack>

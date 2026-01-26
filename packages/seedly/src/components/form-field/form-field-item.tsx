@@ -6,7 +6,7 @@ import { ElementType, useId } from 'react';
 
 import { useFormFieldContext } from './form-field-context';
 import { FormFieldItemContextProvider } from './form-field-item-context';
-import { formFieldStyle } from './form-field.css';
+import { formFieldRecipe } from './form-field.css';
 
 export type FormFieldItemProps<TUse extends ElementType = 'div'> =
   PolymorphicComponentProps<TUse>;
@@ -23,7 +23,7 @@ export function FormFieldItem<TUse extends ElementType = 'div'>(
     <FormFieldItemContextProvider value={{ id }}>
       <Comp
         className={clsx(
-          formFieldStyle({ error: !!errors, disabled, tone }),
+          formFieldRecipe({ error: !!errors, disabled, tone }),
           className,
         )}
         {...rest}

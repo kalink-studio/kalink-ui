@@ -1,2 +1,5 @@
 export { Input, type InputProps } from './input';
-export { inputAppearance, type InputAppearanceVariants } from './input.css';
+export {
+  inputAppearanceRecipe,
+  type InputAppearanceVariants,
+} from './input.css';

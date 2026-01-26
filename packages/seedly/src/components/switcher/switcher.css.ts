@@ -1,25 +1,75 @@
-import { createVar, globalStyle } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+} from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
   createResponsiveVariants,
   defaultMedia,
-  sys,
   mapContractVars,
+  sys,
 } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const thresholdVar = createVar();
-export const limitVar = createVar();
+export const switcherVars = createThemeContract({
+  spacing: {
+    gap: null,
+  },
+  layout: {
+    threshold: null,
+  },
+});
+
+const switcherSpacingDefaults = assignVars(switcherVars.spacing, {
+  gap: sys.spacing[0],
+});
+
+const switcherLayoutDefaults = assignVars(switcherVars.layout, {
+  threshold: sys.layout.measure,
+});
 
 // Shared variant styles to support responsive overrides
 export const switcherSpacingStyles = mapContractVars(sys.spacing, (key) => ({
   '@layer': {
     [components]: {
-      gap: sys.spacing[key],
+      vars: {
+        ...assignVars(switcherVars.spacing, {
+          gap: sys.spacing[key],
+        }),
+      },
     },
   },
 }));
+
+export const switcherLimitStyles = {
+  2: {
+    '@layer': {
+      [components]: {},
+    },
+  },
+  3: {
+    '@layer': {
+      [components]: {},
+    },
+  },
+  4: {
+    '@layer': {
+      [components]: {},
+    },
+  },
+  5: {
+    '@layer': {
+      [components]: {},
+    },
+  },
+  6: {
+    '@layer': {
+      [components]: {},
+    },
+  },
+} as const;
 
 export const switcherRecipe = recipe({
   base: {
@@ -27,9 +77,11 @@ export const switcherRecipe = recipe({
       [components]: {
         display: 'flex',
         flexWrap: 'wrap',
+        gap: switcherVars.spacing.gap,
 
         vars: {
-          [thresholdVar]: sys.layout.measure,
+          ...switcherSpacingDefaults,
+          ...switcherLayoutDefaults,
         },
       },
     },
@@ -44,89 +96,35 @@ export const switcherRecipe = recipe({
     /**
      * The maximum number of elements allowed to appear in the horizontal configuration
      */
-    limit: {
-      2: {},
-      3: {},
-      4: {},
-      5: {},
-      6: {},
-    },
+    limit: switcherLimitStyles,
   },
 });
+
+const limitValues = [2, 3, 4, 5, 6] as const;
+
+const limitSelector = (limitClass: string, limit: number) =>
+  `${limitClass} > :nth-last-child(n+${limit + 1}), ${limitClass} > :nth-last-child(n+${limit + 1}) ~ *`;
 
 globalStyle(`${switcherRecipe.classNames.base} > *`, {
   '@layer': {
     [components]: {
-      flexBasis: `calc((${thresholdVar} - 100%) * 999)`,
+      flexBasis: `calc((${switcherVars.layout.threshold} - 100%) * 999)`,
       flexGrow: 1,
     },
   },
 });
 
-globalStyle(
-  `${switcherRecipe.classNames.variants.limit[2]} > :nth-last-child(n+3), ${
-    switcherRecipe.classNames.variants.limit[2]
-  } > :nth-last-child(n+3) ~ *`,
-  {
-    '@layer': {
-      [components]: {
-        flexBasis: '100%',
-      },
-    },
-  },
-);
+limitValues.forEach((limit) => {
+  const limitClass = switcherRecipe.classNames.variants.limit[limit];
 
-globalStyle(
-  `${switcherRecipe.classNames.variants.limit[3]} > :nth-last-child(n+4), ${
-    switcherRecipe.classNames.variants.limit[3]
-  } > :nth-last-child(n+4) ~ *`,
-  {
+  globalStyle(limitSelector(limitClass, limit), {
     '@layer': {
       [components]: {
         flexBasis: '100%',
       },
     },
-  },
-);
-
-globalStyle(
-  `${switcherRecipe.classNames.variants.limit[4]} > :nth-last-child(n+5), ${
-    switcherRecipe.classNames.variants.limit[4]
-  } > :nth-last-child(n+5) ~ *`,
-  {
-    '@layer': {
-      [components]: {
-        flexBasis: '100%',
-      },
-    },
-  },
-);
-
-globalStyle(
-  `${switcherRecipe.classNames.variants.limit[5]} > :nth-last-child(n+6), ${
-    switcherRecipe.classNames.variants.limit[5]
-  } > :nth-last-child(n+6) ~ *`,
-  {
-    '@layer': {
-      [components]: {
-        flexBasis: '100%',
-      },
-    },
-  },
-);
-
-globalStyle(
-  `${switcherRecipe.classNames.variants.limit[6]} > :nth-last-child(n+7), ${
-    switcherRecipe.classNames.variants.limit[6]
-  } > :nth-last-child(n+7) ~ *`,
-  {
-    '@layer': {
-      [components]: {
-        flexBasis: '100%',
-      },
-    },
-  },
-);
+  });
+});
 
 export type SwitcherVariants = NonNullable<
   RecipeVariants<typeof switcherRecipe>
@@ -135,4 +133,39 @@ export type SwitcherVariants = NonNullable<
 export const spacingAt = createResponsiveVariants({
   styles: switcherSpacingStyles,
   media: defaultMedia,
+});
+
+export const limitAt = createResponsiveVariants({
+  styles: switcherLimitStyles,
+  media: defaultMedia,
+});
+
+Object.entries(limitAt).forEach(([breakpoint, styles]) => {
+  const query = defaultMedia[breakpoint as keyof typeof defaultMedia];
+
+  if (!query) {
+    return;
+  }
+
+  const styleMap = styles as Record<number, string>;
+
+  limitValues.forEach((limit) => {
+    const limitClass = styleMap[limit];
+
+    if (!limitClass) {
+      return;
+    }
+
+    globalStyle(limitSelector(limitClass, limit), {
+      '@media': {
+        [query]: {
+          '@layer': {
+            [components]: {
+              flexBasis: '100%',
+            },
+          },
+        },
+      },
+    });
+  });
 });

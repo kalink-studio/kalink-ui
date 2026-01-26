@@ -1,22 +1,46 @@
-import { createVar, globalStyle } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+} from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
   createResponsiveVariants,
   defaultMedia,
-  sys,
   mapContractVars,
+  sys,
 } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const sideWidthVar = createVar();
-export const contentMinWidthVar = createVar();
+export const sidebarVars = createThemeContract({
+  spacing: {
+    gap: null,
+  },
+  layout: {
+    sideWidth: null,
+    contentMinWidth: null,
+  },
+});
+
+const sidebarSpacingDefaults = assignVars(sidebarVars.spacing, {
+  gap: sys.spacing[0],
+});
+
+const sidebarLayoutDefaults = assignVars(sidebarVars.layout, {
+  sideWidth: 'auto',
+  contentMinWidth: '50%',
+});
 
 // Shared variant styles to support responsive overrides
 export const sidebarSpacingStyles = mapContractVars(sys.spacing, (key) => ({
   '@layer': {
     [components]: {
-      gap: sys.spacing[key],
+      vars: {
+        ...assignVars(sidebarVars.spacing, {
+          gap: sys.spacing[key],
+        }),
+      },
     },
   },
 }));
@@ -27,9 +51,11 @@ export const sidebarRecipe = recipe({
       [components]: {
         display: 'flex',
         flexWrap: 'wrap',
+        gap: sidebarVars.spacing.gap,
 
         vars: {
-          [contentMinWidthVar]: '50%',
+          ...sidebarSpacingDefaults,
+          ...sidebarLayoutDefaults,
         },
       },
     },
@@ -82,7 +108,7 @@ globalStyle(`${sidebarRecipe.classNames.base} > *`, {
 globalStyle(`${sidebarRecipe.classNames.variants.sideWidth.true} > *`, {
   '@layer': {
     [components]: {
-      flexBasis: sideWidthVar,
+      flexBasis: sidebarVars.layout.sideWidth,
     },
   },
 });
@@ -92,7 +118,7 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.left} > :last-child`, {
     [components]: {
       flexBasis: 0,
       flexGrow: 999,
-      minInlineSize: contentMinWidthVar,
+      minInlineSize: sidebarVars.layout.contentMinWidth,
     },
   },
 });
@@ -102,7 +128,7 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
     [components]: {
       flexBasis: 0,
       flexGrow: 999,
-      minInlineSize: contentMinWidthVar,
+      minInlineSize: sidebarVars.layout.contentMinWidth,
     },
   },
 });

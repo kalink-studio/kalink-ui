@@ -9,7 +9,11 @@ import {
   type Responsive,
 } from '../../styles';
 
-import { buttonLabel, buttonSlot, ButtonVariants } from './button.css';
+import {
+  buttonLabelRecipe,
+  buttonSlotRecipe,
+  ButtonVariants,
+} from './button.css';
 import { buttonResponsive } from './button.responsive';
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -20,7 +24,7 @@ export type ButtonProps<TUse extends ButtonTypes> =
     Omit<ButtonVariants, 'size' | 'variant'> & {
       startSlot?: ReactNode;
       endSlot?: ReactNode;
-      children?: string;
+      children?: ReactNode;
       size?: Responsive<NonNullable<ButtonVariants['size']>>;
       variant?: Responsive<NonNullable<ButtonVariants['variant']>>;
       tone?: Responsive<NonNullable<ButtonVariants['tone']>>;
@@ -72,9 +76,8 @@ export function ButtonRoot<TUse extends ButtonTypes>(
 
   return (
     <Comp
-      className={clsx(buttonResponsive({ variant, size, tone }), className)}
-      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-      {...(rest as any)}
+      className={buttonResponsive({ variant, size, tone }, className)}
+      {...(rest as Record<string, unknown>)}
     />
   );
 }
@@ -99,7 +102,7 @@ export function ButtonLabel<TUse extends ElementType>(
   return (
     <Comp
       className={clsx(
-        buttonLabel({ size: baseSize }),
+        buttonLabelRecipe({ size: baseSize }),
         typographyOverrides,
         className,
       )}
@@ -128,7 +131,7 @@ export function ButtonSlot<TUse extends ElementType>(
   } = props;
 
   return (
-    <Comp className={clsx(buttonSlot({ position }), className)} {...rest}>
+    <Comp className={clsx(buttonSlotRecipe({ position }), className)} {...rest}>
       {children}
     </Comp>
   );

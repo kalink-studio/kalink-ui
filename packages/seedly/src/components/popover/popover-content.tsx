@@ -11,16 +11,24 @@ import {
 import { Box, BoxProps } from '../box';
 import { ScrollArea } from '../scroll-area';
 
-import { popoverContent, PopoverContentVariants } from './popover-content.css';
+import {
+  popoverContentRecipe,
+  PopoverContentVariants,
+} from './popover-content.css';
+
+type BoxStyleProps = Pick<
+  BoxProps<'div'>,
+  'variant' | 'spacing' | 'radius' | 'elevation' | 'use'
+>;
 
 export type PopoverContentProps = {
   portaled?: boolean;
   maxHeight?: string;
   scrollable?: boolean;
-} & ComponentPropsWithRef<typeof Content> &
-  PopoverContentVariants &
+} & PopoverContentVariants &
   ComponentPropsWithoutRef<typeof Portal> &
-  BoxProps<'div'>;
+  BoxStyleProps &
+  Omit<ComponentPropsWithRef<typeof Content>, keyof BoxStyleProps>;
 
 export interface PopoverScrollableProps {
   scrollable?: boolean;
@@ -47,6 +55,8 @@ export function PopoverContent({
   children,
   spacing = 4,
   radius = 'medium',
+  variant,
+  use,
   width,
   portaled = true,
   scrollable = true,
@@ -58,7 +68,7 @@ export function PopoverContent({
     <Content
       align={align}
       className={clsx(
-        popoverContent({ width, scrollable, elevation }),
+        popoverContentRecipe({ width, scrollable, elevation }),
         className,
       )}
       sideOffset={0}
@@ -66,7 +76,13 @@ export function PopoverContent({
       collisionPadding={16}
       {...props}
     >
-      <Box spacing={spacing} radius={radius}>
+      <Box
+        use={use}
+        variant={variant}
+        spacing={spacing}
+        radius={radius}
+        elevation={elevation}
+      >
         <PopoverScrollable scrollable={scrollable} maxHeight={maxHeight}>
           {children}
         </PopoverScrollable>

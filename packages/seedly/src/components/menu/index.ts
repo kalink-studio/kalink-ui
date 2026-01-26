@@ -1,7 +1,2 @@
-export {
-  menuItem,
-  menuItemIcon,
-  menuItemVars,
-  type MenuItemTone,
-} from './menu-item.css';
-export { menuSeparator } from './menu-separator.css';
+export { menuItemRecipe, menuItemIcon, menuItemVars } from './menu-item.css';
+export { menuSeparatorRecipe } from './menu-separator.css';

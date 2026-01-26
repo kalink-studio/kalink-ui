@@ -5,4 +5,4 @@ export {
   type HeadingSubtitleProps,
   type HeadingPretitleProps,
 } from './heading';
-export { headingRoot, type HeadingRootVariants } from './heading.css';
+export { headingRootRecipe, type HeadingRootVariants } from './heading.css';
