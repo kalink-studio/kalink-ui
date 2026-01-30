@@ -1,35 +1,21 @@
 import { PolymorphicComponentProps, getProp } from '@kalink-ui/dibbly';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { TypographySize, TypographyVariant, typography } from '../../styles';
+import {
+  TypographySize,
+  TypographyVariant,
+  buildTypographyOverrides,
+  getResponsiveBase,
+  typography,
+  type Responsive,
+} from '../../styles';
 
 import { TextVariants, textEllipsisWrapper } from './text.css';
-import { buildTypographyOverrides, textResponsive } from './text.responsive';
-
-import type { Responsive } from '../../styles/responsive';
-
-function getBase<T extends string | number>(value: Responsive<T> | undefined) {
-  if (value == null) {
-    return undefined;
-  }
-
-  if (Array.isArray(value)) {
-    return value[0] ?? undefined;
-  }
-
-  if (typeof value === 'object') {
-    const obj = value as Partial<Record<string, T>> & { xs?: T };
-
-    return obj.xs;
-  }
-
-  return value;
-}
+import { textResponsive } from './text.responsive';
 
 export type TextProps<TUse extends React.ElementType> =
   PolymorphicComponentProps<TUse> &
-    Omit<TextVariants, 'align'> & {
+    Omit<TextVariants, 'align' | 'wrap' | 'lineClamp'> & {
       /**
        * The size of the typography used to render the text.
        */
@@ -40,6 +26,8 @@ export type TextProps<TUse extends React.ElementType> =
        */
       variant?: Responsive<TypographyVariant>;
       align?: Responsive<NonNullable<TextVariants['align']>>;
+      wrap?: Responsive<NonNullable<TextVariants['wrap']>>;
+      lineClamp?: Responsive<NonNullable<TextVariants['lineClamp']>>;
     };
 
 export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
@@ -57,15 +45,15 @@ export function Text<TUse extends ElementType>(props: TextProps<TUse>) {
   } = props;
 
   const typographyOverrides = buildTypographyOverrides({ variant, size });
-  const baseVariant = getBase(variant) ?? 'body';
-  const baseSize = getBase(size) ?? 'medium';
+  const baseVariant = getResponsiveBase(variant) ?? 'body';
+  const baseSize = getResponsiveBase(size) ?? 'medium';
 
   return (
     <Comp
-      className={clsx(
+      className={textResponsive(
+        { truncate, lineClamp, align, wrap },
         getProp(typography, `${baseVariant}.${baseSize}`),
         typographyOverrides,
-        textResponsive({ truncate, lineClamp, align, wrap }),
         className,
       )}
       {...rest}

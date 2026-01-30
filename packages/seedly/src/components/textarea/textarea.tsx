@@ -17,7 +17,7 @@ import { TextareaInput } from './textarea-input';
 import { textareaStyle } from './textarea.css';
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
-  InputProps & {
+  Omit<InputProps, 'type' | 'startAdornment' | 'endAdornment' | 'inputRef'> & {
     name: string;
     label: string;
     description?: string;
@@ -37,6 +37,8 @@ export function Textarea({
   required,
   hideErrorMessage = false,
   size = 'md',
+  variant = 'outlined',
+  tone = 'neutral',
   ...rest
 }: TextareaProps) {
   return (
@@ -47,6 +49,7 @@ export function Textarea({
       hideErrorMessage={hideErrorMessage}
       disabled={disabled}
       hideLabel={hideLabel}
+      tone={tone}
     >
       <FormFieldItem className={clsx(textareaStyle, className)}>
         <FormFieldLabel disabled={disabled} required={required} size={size}>
@@ -59,12 +62,15 @@ export function Textarea({
             className={className}
             disabled={disabled}
             aria-label={hideLabel ? label : undefined}
+            size={size}
+            variant={variant}
+            tone={tone}
             {...rest}
           />
         </FormFieldControl>
 
-        <FormFieldDescription>{description}</FormFieldDescription>
-        <FormFieldError />
+        <FormFieldDescription size={size}>{description}</FormFieldDescription>
+        <FormFieldError size={size} />
       </FormFieldItem>
     </FormField>
   );

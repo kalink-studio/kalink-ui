@@ -4,7 +4,7 @@ import { recipe } from '@vanilla-extract/recipes';
 import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const sheetHeader = recipe({
+export const sheetHeaderRecipe = recipe({
   base: {
     '@layer': {
       [components]: {

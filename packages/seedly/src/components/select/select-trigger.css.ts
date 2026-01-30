@@ -4,30 +4,26 @@ import { recipe } from '@vanilla-extract/recipes';
 
 import { sys, transition } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { inputAppearance } from '../input/input.css';
 
-export const selectTrigger = style([
-  inputAppearance(),
-  {
-    '@layer': {
-      [components]: {
-        display: 'flex',
-        alignItems: 'stretch',
-        gap: sys.spacing[4],
-        justifyContent: 'flex-start',
+export const selectTrigger = style({
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      alignItems: 'stretch',
+      gap: sys.spacing[4],
+      justifyContent: 'flex-start',
 
-        ':before': {
-          content: '\x00',
-          width: 0,
-          overflow: 'hidden',
-          marginInlineEnd: calc.negate(sys.spacing[4]),
-        },
+      ':before': {
+        content: '\x00',
+        width: 0,
+        overflow: 'hidden',
+        marginInlineEnd: calc.negate(sys.spacing[4]),
       },
     },
   },
-]);
+});
 
-export const openIndicator = recipe({
+export const openIndicatorRecipe = recipe({
   base: {
     '@layer': {
       [components]: {

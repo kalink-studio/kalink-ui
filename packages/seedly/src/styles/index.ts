@@ -1,10 +1,14 @@
 export {
   sys,
   type Spacing,
+  type Tone,
   type TypographySize,
   type TypographyVariant,
 } from './system-contract.css';
 export { typography } from './typography.css';
+
+export { sprout } from './theme/sprout.css';
+export { refs as sproutRefs } from './theme/sprout-ref.css';
 
 export {
   extractSprinklesProps,
@@ -27,11 +31,17 @@ export {
   responsiveRecipe,
   createResponsiveVariants,
   resolveResponsive,
+  getResponsiveBase,
   defaultMedia,
   defaultOrder,
   type Responsive,
   type BreakpointWithBase,
 } from './responsive';
+
+export {
+  buildTypographyOverrides,
+  mapResponsiveSizeToTypography,
+} from './typography.responsive';
 
 export { breakpoints, screen, type BreakpointKey } from './breakpoints';
 
@@ -45,3 +55,5 @@ export {
   type FluidClampOptions,
   type FluidClampForOptions,
 } from './scale';
+
+export { createToneAssignments, createToneStyles } from './tone';

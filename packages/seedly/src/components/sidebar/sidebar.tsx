@@ -2,14 +2,9 @@
 
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import {
-  contentMinWidthVar,
-  SidebarVariants,
-  sideWidthVar,
-} from './sidebar.css';
+import { SidebarVariants, sidebarVars } from './sidebar.css';
 import { sidebarResponsive } from './sidebar.responsive';
 
 import type { Responsive } from '../../styles/responsive';
@@ -50,13 +45,15 @@ export function Sidebar<TUse extends ElementType>({
 
   return (
     <Comp
-      className={clsx(
-        sidebarResponsive({ side, sideWidth: !!sideWidth, spacing, noStretch }),
+      className={sidebarResponsive(
+        { side, sideWidth: !!sideWidth, spacing, noStretch },
         className,
       )}
       style={assignInlineVars({
-        ...(sideWidth && { [sideWidthVar]: sideWidth }),
-        ...(contentMinWidth && { [contentMinWidthVar]: contentMinWidth }),
+        ...(sideWidth && { [sidebarVars.layout.sideWidth]: sideWidth }),
+        ...(contentMinWidth && {
+          [sidebarVars.layout.contentMinWidth]: contentMinWidth,
+        }),
       })}
       {...rest}
     />

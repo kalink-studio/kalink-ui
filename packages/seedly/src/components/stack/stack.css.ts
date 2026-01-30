@@ -1,60 +1,28 @@
-import { createVar } from '@vanilla-extract/css';
+import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, mapContractVars } from '../../styles';
+import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 import {
   createResponsiveVariants,
   defaultMedia,
 } from '../../styles/responsive';
+import { createSpacingVarStyles, flexAlignItemsStyles } from '../layout-maps';
 
-const spacing = createVar({
-  syntax: '<length>',
-  initialValue: sys.spacing['0'],
-  inherits: false,
+export const stackVars = createThemeContract({
+  spacing: {
+    gap: null,
+  },
+});
+
+const stackSpacingDefaults = assignVars(stackVars.spacing, {
+  gap: sys.spacing[0],
 });
 
 // Shared variant style maps so we can reuse them for responsive overrides
-export const stackSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        [spacing]: sys.spacing[key],
-      },
-    },
-  },
-}));
+export const stackSpacingStyles = createSpacingVarStyles(stackVars.spacing);
 
-export const stackAlignStyles = {
-  start: {
-    '@layer': {
-      [components]: {
-        alignItems: 'flex-start',
-      },
-    },
-  },
-  center: {
-    '@layer': {
-      [components]: {
-        alignItems: 'center',
-      },
-    },
-  },
-  end: {
-    '@layer': {
-      [components]: {
-        alignItems: 'flex-end',
-      },
-    },
-  },
-  stretch: {
-    '@layer': {
-      [components]: {
-        alignItems: 'stretch',
-      },
-    },
-  },
-} as const;
+export const stackAlignStyles = flexAlignItemsStyles;
 
 export const stackRecipe = recipe({
   base: {
@@ -63,7 +31,11 @@ export const stackRecipe = recipe({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: spacing,
+        gap: stackVars.spacing.gap,
+
+        vars: {
+          ...stackSpacingDefaults,
+        },
       },
     },
   },

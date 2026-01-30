@@ -3,7 +3,7 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const loaderOverlay = recipe({
+export const loaderOverlayRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -16,7 +16,7 @@ export const loaderOverlay = recipe({
 
         zIndex: 1000,
 
-        backgroundColor: `color-mix(in srgb, ${sys.color.foreground} 5%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} 5%, transparent)`,
       },
     },
   },
@@ -44,5 +44,5 @@ export const loaderOverlay = recipe({
 });
 
 export type LoaderOverlayVariants = NonNullable<
-  RecipeVariants<typeof loaderOverlay>
+  RecipeVariants<typeof loaderOverlayRecipe>
 >;

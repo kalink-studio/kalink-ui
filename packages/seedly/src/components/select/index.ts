@@ -1,6 +1,5 @@
-export { SelectContent } from './select-content';
-export { Select } from './select';
-export { SelectItem } from './select-item';
+export { SelectContent, type SelectContentProps } from './select-content';
+export { Select, type SelectProps } from './select';
+export { SelectItem, type SelectItemProps } from './select-item';
 export { SelectRoot } from './select-root';
-export { SelectTrigger } from './select-trigger';
-export { selectStyle } from './select.css';
+export { SelectTrigger, type SelectTriggerProps } from './select-trigger';

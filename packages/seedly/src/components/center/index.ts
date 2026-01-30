@@ -1,2 +1,2 @@
 export { Center, type CenterProps } from './center';
-export { centerRecipe, gutterSize, type CenterVariants } from './center.css';
+export { centerRecipe, centerVars, type CenterVariants } from './center.css';

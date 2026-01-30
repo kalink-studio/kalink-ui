@@ -1,3 +1,5 @@
+import { responsiveSelectArg } from '../../utils';
+
 import { Label } from './label';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -11,6 +13,12 @@ const meta = {
   },
   args: {
     children: 'Field Label',
+  },
+  argTypes: {
+    size: responsiveSelectArg({
+      options: ['sm', 'md', 'lg'],
+      summary: 'Responsive<LabelSize>',
+    }),
   },
 } satisfies Meta<typeof Label>;
 

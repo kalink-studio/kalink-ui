@@ -1,2 +1,2 @@
 export { Box, type BoxProps } from './box';
-export { boxRecipe, type BoxVariants } from './box.css';
+export { boxRecipe, boxVars, type BoxVariants } from './box.css';

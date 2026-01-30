@@ -48,5 +48,8 @@ jobs:
       - name: Run Turborepo tasks
         run: pnpm turbo run lint test tsc
 
+      - name: Run Seedly Storybook tests
+        run: pnpm --filter @kalink-ui/seedly test-storybook
+
       - name: Validate Changesets
         run: pnpm changeset status --since=origin/main

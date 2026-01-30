@@ -1,12 +1,17 @@
 import { style } from '@vanilla-extract/css';
 
-import { inputAppearance } from '../input';
+import { components } from '../../styles/layers.css';
 
-export const textareaStyle = style({});
-
-export const textarea = style([
-  inputAppearance(),
-  {
-    lineHeight: 'auto',
+export const textareaStyle = style({
+  '@layer': {
+    [components]: {},
   },
-]);
+});
+
+export const textarea = style({
+  '@layer': {
+    [components]: {
+      lineHeight: 'normal',
+    },
+  },
+});

@@ -18,13 +18,13 @@ const pulseKeyframe = keyframes({
   },
 });
 
-export const skeleton = recipe({
+export const skeletonRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
         display: 'block',
 
-        backgroundColor: `color-mix(in srgb, ${sys.color.foreground} 10%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} 10%, transparent)`,
 
         animationName: pulseKeyframe,
         animationDuration: '1500ms',
@@ -37,20 +37,17 @@ export const skeleton = recipe({
 
   variants: {
     type: {
-      text: [
-        typography.body.medium,
-        {
-          '@layer': {
-            [components]: {
-              selectors: {
-                '&:empty::before': {
-                  content: '"\\00a0"',
-                },
+      text: {
+        '@layer': {
+          [components]: {
+            selectors: {
+              '&:empty::before': {
+                content: '"\\00a0"',
               },
             },
           },
         },
-      ],
+      },
 
       field: {
         '@layer': {
@@ -79,6 +76,12 @@ export const skeleton = recipe({
           },
         },
       },
+    },
+
+    size: {
+      sm: typography.body.small,
+      md: typography.body.medium,
+      lg: typography.body.large,
     },
 
     withChildren: {
@@ -118,10 +121,16 @@ export const skeleton = recipe({
       },
     },
   },
+
+  defaultVariants: {
+    size: 'md',
+  },
 });
 
-globalStyle(`${skeleton.classNames.variants.withChildren.true} *`, {
+globalStyle(`${skeletonRecipe.classNames.variants.withChildren.true} *`, {
   visibility: 'hidden',
 });
 
-export type SkeletonVariants = NonNullable<RecipeVariants<typeof skeleton>>;
+export type SkeletonVariants = NonNullable<
+  RecipeVariants<typeof skeletonRecipe>
+>;

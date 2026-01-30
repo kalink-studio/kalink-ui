@@ -23,7 +23,7 @@ export const commandListSpacingStyles = mapContractVars(sys.spacing, (key) => ({
   },
 }));
 
-export const commandList = recipe({
+export const commandListRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -48,7 +48,7 @@ export const commandList = recipe({
   },
 });
 
-globalStyle(`${commandList.classNames.base} [cmdk-list-sizer]`, {
+globalStyle(`${commandListRecipe.classNames.base} [cmdk-list-sizer]`, {
   '@layer': {
     [components]: {
       display: 'flex',

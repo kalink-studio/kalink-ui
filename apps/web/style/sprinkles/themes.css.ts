@@ -11,14 +11,14 @@ export const themeProperties = defineProperties({
     theme: {
       default: {
         vars: {
-          [sys.color.foreground]: refs.colors.neutral[0],
-          [sys.color.background]: refs.colors.neutral[100],
+          [sys.surface.foreground]: refs.colors.neutral[0],
+          [sys.surface.background]: refs.colors.neutral[100],
         },
       },
       inverted: {
         vars: {
-          [sys.color.foreground]: refs.colors.neutral[100],
-          [sys.color.background]: refs.colors.neutral[0],
+          [sys.surface.foreground]: refs.colors.neutral[100],
+          [sys.surface.background]: refs.colors.neutral[0],
         },
       },
     },

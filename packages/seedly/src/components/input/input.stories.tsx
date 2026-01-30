@@ -1,3 +1,4 @@
+import { responsiveSelectArg } from '../../utils';
 import { FormField } from '../form-field';
 
 import { Input } from './input';
@@ -28,6 +29,20 @@ const meta = {
   ],
   args: {
     placeholder: 'Enter text...',
+  },
+  argTypes: {
+    size: responsiveSelectArg({
+      options: ['sm', 'md', 'lg'],
+      summary: 'Responsive<InputSize>',
+    }),
+    variant: responsiveSelectArg({
+      options: ['outlined', 'plain', 'bare'],
+      summary: 'Responsive<InputVariant>',
+    }),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
 } satisfies Meta<typeof Input>;
 

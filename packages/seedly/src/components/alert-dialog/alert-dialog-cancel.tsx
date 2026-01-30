@@ -7,7 +7,6 @@ export type AlertDialogCancelProps = ComponentPropsWithRef<typeof Cancel> &
   ButtonProps<'button'>;
 
 export function AlertDialogCancel({
-  className,
   children,
   ...props
 }: AlertDialogCancelProps) {

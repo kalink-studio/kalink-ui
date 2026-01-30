@@ -7,7 +7,7 @@ import { buttonVars } from '../button/button.css';
 import { Cluster } from '../cluster';
 
 import { ButtonIcon } from './button-icon';
-import { buttonIcon } from './button-icon.css';
+import { buttonIconRecipe } from './button-icon.css';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -36,7 +36,7 @@ const meta = {
     label: 'Accessible label',
   },
   argTypes: {
-    ...argTypesFromRecipe(buttonIcon),
+    ...argTypesFromRecipe(buttonIconRecipe),
 
     use: {
       control: false,

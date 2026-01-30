@@ -1,2 +1,1 @@
-export { TextField } from './text-field';
-export { textFieldStyle } from './text-field.css';
+export { TextField, type TextFieldProps } from './text-field';

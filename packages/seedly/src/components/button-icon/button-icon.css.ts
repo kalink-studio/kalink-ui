@@ -9,67 +9,7 @@ import {
   buttonVariantStyles,
 } from '../button/button.css';
 
-export const buttonIcon = recipe({
-  base: [buttonRecipe.classNames.base],
-
-  variants: {
-    variant: buttonRecipe.classNames.variants.variant,
-    size: {
-      sm: [
-        buttonRecipe.classNames.variants.size.sm,
-        {
-          '@layer': {
-            [overrides]: {
-              vars: assignVars(buttonVars.spacing, {
-                block: sys.spacing[2],
-                inline: sys.spacing[2],
-                inner: sys.spacing[2],
-              }),
-            },
-          },
-        },
-      ],
-      md: [
-        buttonRecipe.classNames.variants.size.md,
-        {
-          '@layer': {
-            [overrides]: {
-              vars: assignVars(buttonVars.spacing, {
-                block: sys.spacing[2],
-                inline: sys.spacing[2],
-                inner: sys.spacing[2],
-              }),
-            },
-          },
-        },
-      ],
-      lg: [
-        buttonRecipe.classNames.variants.size.lg,
-        {
-          '@layer': {
-            [overrides]: {
-              vars: assignVars(buttonVars.spacing, {
-                block: sys.spacing[3],
-                inline: sys.spacing[3],
-                inner: sys.spacing[3],
-              }),
-            },
-          },
-        },
-      ],
-    },
-  },
-
-  defaultVariants: {
-    variant: 'ghost',
-    size: 'md',
-  },
-});
-
-export type ButtonIconVariants = NonNullable<RecipeVariants<typeof buttonIcon>>;
-
-// Responsive variants
-const buttonIconSizeStyles = {
+const buttonIconSizeOverrides = {
   sm: {
     '@layer': {
       [overrides]: {
@@ -105,8 +45,32 @@ const buttonIconSizeStyles = {
   },
 } as const;
 
+const buttonIconSizeStyles = {
+  sm: [buttonRecipe.classNames.variants.size.sm, buttonIconSizeOverrides.sm],
+  md: [buttonRecipe.classNames.variants.size.md, buttonIconSizeOverrides.md],
+  lg: [buttonRecipe.classNames.variants.size.lg, buttonIconSizeOverrides.lg],
+};
+
+export const buttonIconRecipe = recipe({
+  base: [buttonRecipe.classNames.base],
+
+  variants: {
+    variant: buttonRecipe.classNames.variants.variant,
+    size: buttonIconSizeStyles,
+  },
+
+  defaultVariants: {
+    variant: 'ghost',
+    size: 'md',
+  },
+});
+
+export type ButtonIconVariants = NonNullable<
+  RecipeVariants<typeof buttonIconRecipe>
+>;
+
 export const sizeAt = createResponsiveVariants({
-  styles: buttonIconSizeStyles,
+  styles: buttonIconSizeOverrides,
   media: defaultMedia,
 });
 

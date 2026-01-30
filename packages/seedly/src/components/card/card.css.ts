@@ -1,12 +1,8 @@
-import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { components } from '../../styles/layers.css';
 
-export const card = style({});
-export const cardHeader = style({});
-export const cardBody = style({});
-export const cardFooter = recipe({
+export const cardFooterRecipe = recipe({
   base: {
     '@layer': {
       [components]: {

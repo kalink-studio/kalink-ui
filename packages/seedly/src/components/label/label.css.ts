@@ -3,7 +3,7 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { typography } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const label = recipe({
+export const labelRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -34,4 +34,4 @@ export const label = recipe({
   },
 });
 
-export type LabelVariants = NonNullable<RecipeVariants<typeof label>>;
+export type LabelVariants = NonNullable<RecipeVariants<typeof labelRecipe>>;

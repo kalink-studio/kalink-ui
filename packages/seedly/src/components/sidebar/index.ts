@@ -1,2 +1,6 @@
 export { Sidebar } from './sidebar';
-export { sidebarRecipe, type SidebarVariants } from './sidebar.css';
+export {
+  sidebarRecipe,
+  sidebarVars,
+  type SidebarVariants,
+} from './sidebar.css';

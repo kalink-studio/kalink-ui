@@ -6,7 +6,7 @@ import { components } from '../../styles/layers.css';
 export const selectContent = style({
   '@layer': {
     [components]: {
-      backgroundColor: sys.color.background,
+      backgroundColor: sys.surface.background,
     },
   },
 });

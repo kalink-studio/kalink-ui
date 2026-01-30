@@ -1,5 +1,5 @@
-import { menuItem, menuItemIcon } from './menu-item.css';
-import { menuSeparator } from './menu-separator.css';
+import { menuItemRecipe, menuItemIcon } from './menu-item.css';
+import { menuSeparatorRecipe } from './menu-separator.css';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -18,14 +18,12 @@ type Story = StoryObj;
 export const MenuItem: Story = {
   render: () => (
     <div style={{ width: 200 }}>
-      <div className={menuItem()}>Default Item</div>
-      <div className={menuItem({ inset: true })}>Inset Item</div>
-      <div className={menuItem()} data-disabled="true">
+      <div className={menuItemRecipe()}>Default Item</div>
+      <div className={menuItemRecipe({ inset: true })}>Inset Item</div>
+      <div className={menuItemRecipe()} data-disabled="true">
         Disabled Item
       </div>
-      <div className={menuItem()} aria-selected="true">
-        Selected Item
-      </div>
+      <div className={menuItemRecipe()}>Selected Item</div>
     </div>
   ),
 };
@@ -33,7 +31,7 @@ export const MenuItem: Story = {
 export const MenuItemWithIcon: Story = {
   render: () => (
     <div style={{ width: 200 }}>
-      <div className={menuItem()}>
+      <div className={menuItemRecipe()}>
         <svg
           className={menuItemIcon}
           xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +49,7 @@ export const MenuItemWithIcon: Story = {
         </svg>
         Search
       </div>
-      <div className={menuItem()}>
+      <div className={menuItemRecipe()}>
         <svg
           className={menuItemIcon}
           xmlns="http://www.w3.org/2000/svg"
@@ -76,11 +74,11 @@ export const MenuItemWithIcon: Story = {
 export const MenuSeparator: Story = {
   render: () => (
     <div style={{ width: 200 }}>
-      <div className={menuItem()}>Item 1</div>
-      <div className={menuItem()}>Item 2</div>
-      <div className={menuSeparator({ spacing: 2 })} />
-      <div className={menuItem()}>Item 3</div>
-      <div className={menuItem()}>Item 4</div>
+      <div className={menuItemRecipe()}>Item 1</div>
+      <div className={menuItemRecipe()}>Item 2</div>
+      <div className={menuSeparatorRecipe({ spacing: 2 })} />
+      <div className={menuItemRecipe()}>Item 3</div>
+      <div className={menuItemRecipe()}>Item 4</div>
     </div>
   ),
 };
@@ -94,9 +92,9 @@ export const MenuSeparatorOffset: Story = {
         background: 'var(--sys-color-background)',
       }}
     >
-      <div className={menuItem()}>Item 1</div>
-      <div className={menuSeparator({ offset: true, spacing: 2 })} />
-      <div className={menuItem()}>Item 2</div>
+      <div className={menuItemRecipe()}>Item 1</div>
+      <div className={menuSeparatorRecipe({ offset: true, spacing: 2 })} />
+      <div className={menuItemRecipe()}>Item 2</div>
     </div>
   ),
 };

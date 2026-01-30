@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
 import { Box, BoxProps } from '../box';
@@ -6,7 +5,7 @@ import { Box, BoxProps } from '../box';
 import {
   ellipse,
   moon,
-  loader,
+  loaderRecipe,
   LoaderVariants,
   MoonLoaderVariants,
 } from './loader.css';
@@ -38,9 +37,9 @@ export function MoonLoader<TUse extends ElementType>({
 
   return (
     <Box
-      className={clsx(
-        moonLoaderResponsive({ size }),
-        loader({ active }),
+      className={moonLoaderResponsive(
+        { size },
+        loaderRecipe({ active }),
         className,
       )}
       {...props}

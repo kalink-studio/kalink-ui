@@ -6,7 +6,7 @@ import { ComponentPropsWithRef } from 'react';
 
 import {
   MenuSeparatorVariants,
-  menuSeparator,
+  menuSeparatorRecipe,
 } from '../menu/menu-separator.css';
 
 export type CommandSeparatorProps = ComponentPropsWithRef<
@@ -20,9 +20,11 @@ export function CommandSeparator({
   ...props
 }: CommandSeparatorProps) {
   return (
-    <CommandPrimitive.Separator
-      className={clsx(menuSeparator({ offset }), className)}
-      {...props}
-    />
+    <CommandPrimitive.Separator {...props} asChild>
+      <div
+        className={clsx(menuSeparatorRecipe({ offset }), className)}
+        role="presentation"
+      />
+    </CommandPrimitive.Separator>
   );
 }

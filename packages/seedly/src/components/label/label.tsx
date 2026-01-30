@@ -1,11 +1,20 @@
 import { clsx } from 'clsx';
 import { ComponentPropsWithRef } from 'react';
 
-import { label, LabelVariants } from './label.css';
+import {
+  buildTypographyOverrides,
+  getResponsiveBase,
+  mapResponsiveSizeToTypography,
+  type Responsive,
+} from '../../styles';
+
+import { labelRecipe, LabelVariants } from './label.css';
 
 export type LabelProps = ComponentPropsWithRef<'label'> & {
   required?: boolean;
-} & LabelVariants;
+} & Omit<LabelVariants, 'size'> & {
+    size?: Responsive<NonNullable<LabelVariants['size']>>;
+  };
 
 export function Label({
   className,
@@ -14,9 +23,20 @@ export function Label({
   size = 'md',
   ...props
 }: LabelProps) {
+  const baseSize = getResponsiveBase(size) ?? 'md';
+  const typographySize = mapResponsiveSizeToTypography(size);
+  const typographyOverrides = buildTypographyOverrides({
+    variant: 'label',
+    size: typographySize,
+  });
+
   return (
     <label
-      className={clsx(label({ disabled, error, size }), className)}
+      className={clsx(
+        labelRecipe({ disabled, error, size: baseSize }),
+        typographyOverrides,
+        className,
+      )}
       {...props}
     />
   );

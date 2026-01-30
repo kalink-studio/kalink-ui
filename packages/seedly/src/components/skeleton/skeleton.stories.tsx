@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
 
+import { responsiveSelectArg } from '../../utils';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Card } from '../card';
@@ -12,6 +13,12 @@ import { Skeleton } from './skeleton';
 const meta = {
   title: 'Component/Skeleton',
   component: Skeleton,
+  argTypes: {
+    size: responsiveSelectArg({
+      options: ['sm', 'md', 'lg'],
+      summary: 'Responsive<SkeletonSize>',
+    }),
+  },
 } satisfies Meta<typeof Skeleton>;
 
 export default meta;
@@ -61,7 +68,7 @@ export const LoadingCard: Story = {
         </Stack>
       </Card.Header>
       <Card.Body>
-        <Stack align="stretch">
+        <Stack spacing={2} align="stretch">
           <Skeleton type="paragraph" />
           <Skeleton />
         </Stack>

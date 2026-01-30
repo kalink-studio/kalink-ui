@@ -11,6 +11,8 @@ interface ScreenMediaQueries {
   md: `screen and (min-width: ${string}px)`;
   lg: `screen and (min-width: ${string}px)`;
   xl: `screen and (min-width: ${string}px)`;
+  '2xl': `screen and (min-width: ${string}px)`;
+  '3xl': `screen and (min-width: ${string}px)`;
 }
 
 interface DefineResponsivePropertiesArgs {
@@ -29,10 +31,12 @@ export const defineResponsiveProperties = ({
       md: { '@media': screen.md },
       lg: { '@media': screen.lg },
       xl: { '@media': screen.xl },
+      '2xl': { '@media': screen['2xl'] },
+      '3xl': { '@media': screen['3xl'] },
     },
 
     defaultCondition: 'xs',
-    responsiveArray: ['xs', 'sm', 'md', 'lg', 'xl'],
+    responsiveArray: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
 
     properties: {
       display: [

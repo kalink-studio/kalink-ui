@@ -7,32 +7,50 @@ import { ComponentPropsWithRef, ElementType } from 'react';
 import { Box, BoxProps } from '../box';
 
 import { SheetPortal } from './sheet';
-import { sheetContent, SheetContentVariants } from './sheet-content.css';
+import { sheetContentRecipe, SheetContentVariants } from './sheet-content.css';
 import { SheetOverlay } from './sheet-overlay';
 
-export type SheetContentProps<TUse extends ElementType> = BoxProps<TUse> &
-  ComponentPropsWithRef<typeof Portal> &
-  SheetContentVariants;
+type SheetPortalProps = ComponentPropsWithRef<typeof Portal>;
+type BoxStyleProps<TUse extends ElementType> = Pick<
+  BoxProps<TUse>,
+  'variant' | 'radius' | 'elevation' | 'use'
+>;
+
+export type SheetContentProps<TUse extends ElementType> = SheetContentVariants &
+  BoxStyleProps<TUse> &
+  Omit<ComponentPropsWithRef<typeof Content>, keyof BoxStyleProps<TUse>> &
+  Omit<SheetPortalProps, keyof BoxStyleProps<TUse>>;
 
 export function SheetContent<TUse extends ElementType>({
   className,
   children,
   container,
+  forceMount,
   side,
   size,
   ref,
   spacing = 4,
+  variant,
+  elevation,
+  radius,
+  use,
   ...props
 }: SheetContentProps<TUse>) {
   return (
-    <SheetPortal container={container}>
+    <SheetPortal container={container} forceMount={forceMount}>
       <SheetOverlay />
       <Content asChild>
         <Box
           ref={ref}
-          variant="solid"
+          use={use}
+          variant={variant ?? 'solid'}
           spacing={spacing}
-          className={clsx(sheetContent({ side, size, spacing }), className)}
+          elevation={elevation}
+          radius={radius}
+          className={clsx(
+            sheetContentRecipe({ side, size, spacing }),
+            className,
+          )}
           {...props}
         >
           {children}

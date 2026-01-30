@@ -9,9 +9,20 @@ createGlobalTheme(':root', sys, {
     direction: '1',
   },
 
-  color: {
+  surface: {
     background: refs.colors.neutral[100],
     foreground: refs.colors.neutral[0],
+  },
+
+  tone: {
+    neutral: refs.colors.neutral[0],
+    onNeutral: refs.colors.neutral[100],
+    primary: refs.colors.primary[50],
+    onPrimary: refs.colors.neutral[100],
+    destructive: '#d80000',
+    onDestructive: refs.colors.neutral[100],
+    success: '#2e7d32',
+    onSuccess: refs.colors.neutral[100],
   },
 
   state: {
@@ -25,8 +36,13 @@ createGlobalTheme(':root', sys, {
       opacity: '0.2',
     },
     muted: {
-      dark: '0.4',
-      light: '0.9',
+      text: '0.6',
+      surface: '0.12',
+    },
+    disabled: {
+      text: '0.38',
+      border: '0.12',
+      background: '0.12',
     },
   },
 

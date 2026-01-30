@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { responsiveSelectArg } from '../../utils';
+
 import { Heading } from './heading';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -19,6 +21,18 @@ const meta = {
     children: {
       control: false,
     },
+    variant: responsiveSelectArg({
+      options: ['display', 'headline', 'title'],
+      summary: 'Responsive<HeadingVariant>',
+    }),
+    size: responsiveSelectArg({
+      options: ['small', 'medium', 'large'],
+      summary: 'Responsive<TypographySize>',
+    }),
+    align: responsiveSelectArg({
+      options: ['start', 'center', 'end', 'justify'],
+      summary: 'Responsive<TextAlign>',
+    }),
   },
 } satisfies Meta<typeof Heading>;
 

@@ -9,3 +9,12 @@ export { AlertDialogOverlay } from './alert-dialog-overlay';
 export { AlertDialogFooter } from './alert-dialog-footer';
 export { AlertDialogPortal } from './alert-dialog-portal';
 export { AlertDialogTrigger } from './alert-dialog-trigger';
+
+export type { AlertDialogActionProps } from './alert-dialog-action';
+export type { AlertDialogCancelProps } from './alert-dialog-cancel';
+export type { AlertDialogContentProps } from './alert-dialog-content';
+export type { AlertDialogDescriptionProps } from './alert-dialog-description';
+export type { AlertDialogFooterProps } from './alert-dialog-footer';
+export type { AlertDialogHeaderProps } from './alert-dialog-header';
+export type { AlertDialogOverlayProps } from './alert-dialog-overlay';
+export type { AlertDialogTitleProps } from './alert-dialog-title';

@@ -1,40 +1,29 @@
-import { createGlobalTheme } from '@vanilla-extract/css';
+import { createTheme } from '@vanilla-extract/css';
 
-import { toFluidClampFor } from '../../src/styles';
-import { base } from '../../src/styles/layers.css';
-import { sys } from '../../src/styles/system-contract.css';
+import { sys } from '../system-contract.css';
 
-import { refs } from './ref.css';
+import { refs } from './sprout-ref.css';
 
-const typoMap = {
-  lowMin: 12,
-  lowMax: 40,
-  highMin: 14,
-  highMax: 85,
-  exponent: 2 as const,
-  rounding: 'none' as const,
-};
-
-const spaceMap = {
-  lowMin: 4,
-  lowMax: 72,
-  highMin: 6,
-  highMax: 176,
-  exponent: 2 as const,
-  rounding: 'none' as const,
-};
-
-createGlobalTheme(':root', sys, {
-  '@layer': base,
-
+export const sprout = createTheme(sys, {
   layout: {
     measure: '75ch',
     direction: '1',
   },
 
-  color: {
+  surface: {
     background: refs.colors.neutral[100],
     foreground: refs.colors.neutral[10],
+  },
+
+  tone: {
+    neutral: refs.colors.neutral[10],
+    onNeutral: refs.colors.neutral[90],
+    primary: refs.colors.primary[50],
+    onPrimary: refs.colors.primary[10],
+    destructive: '#d80000',
+    onDestructive: refs.colors.neutral[100],
+    success: '#2e7d32',
+    onSuccess: refs.colors.neutral[100],
   },
 
   state: {
@@ -48,18 +37,23 @@ createGlobalTheme(':root', sys, {
       opacity: '0.2',
     },
     muted: {
-      dark: '0.1',
-      light: '0.9',
+      text: '0.6',
+      surface: '0.12',
+    },
+    disabled: {
+      text: '0.5',
+      border: '0.12',
+      background: '0.08',
     },
   },
 
   shape: {
     corner: {
       none: '0',
-      sharp: '0.125rem', // 2px
-      small: '0.25rem', // 4px
-      medium: '0.5rem', // 8px
-      rounded: '0.75rem', // 12px
+      sharp: '0.125rem',
+      small: '0.25rem',
+      medium: '0.5rem',
+      rounded: '0.75rem',
       circle: '50%',
     },
   },
@@ -116,7 +110,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(40, typoMap),
+        size: refs.typeScale.displayLarge,
       },
 
       medium: {
@@ -124,7 +118,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(34, typoMap),
+        size: refs.typeScale.displayMedium,
       },
 
       small: {
@@ -132,7 +126,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(28, typoMap),
+        size: refs.typeScale.displaySmall,
       },
     },
 
@@ -142,7 +136,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(32, typoMap),
+        size: refs.typeScale.headlineLarge,
       },
 
       medium: {
@@ -150,7 +144,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(28, typoMap),
+        size: refs.typeScale.headlineMedium,
       },
 
       small: {
@@ -158,7 +152,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(24, typoMap),
+        size: refs.typeScale.headlineSmall,
       },
     },
 
@@ -168,7 +162,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(24, typoMap),
+        size: refs.typeScale.titleLarge,
       },
 
       medium: {
@@ -176,7 +170,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(18, typoMap),
+        size: refs.typeScale.titleMedium,
       },
 
       small: {
@@ -184,7 +178,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(17, typoMap),
+        size: refs.typeScale.titleSmall,
       },
     },
 
@@ -194,7 +188,7 @@ createGlobalTheme(':root', sys, {
         weight: '400',
         lineHeight: refs.lineHeight.lg,
         tracking: 'normal',
-        size: toFluidClampFor(19, typoMap),
+        size: refs.typeScale.bodyLarge,
       },
 
       medium: {
@@ -202,7 +196,7 @@ createGlobalTheme(':root', sys, {
         weight: '400',
         lineHeight: refs.lineHeight.xl,
         tracking: 'normal',
-        size: toFluidClampFor(14, typoMap),
+        size: refs.typeScale.bodyMedium,
       },
 
       small: {
@@ -210,7 +204,7 @@ createGlobalTheme(':root', sys, {
         weight: '400',
         lineHeight: refs.lineHeight.lg,
         tracking: 'normal',
-        size: toFluidClampFor(12, typoMap),
+        size: refs.typeScale.bodySmall,
       },
     },
 
@@ -220,7 +214,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.xl,
         tracking: '0.1',
-        size: toFluidClampFor(16, typoMap),
+        size: refs.typeScale.labelLarge,
       },
 
       medium: {
@@ -228,7 +222,7 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.lg,
         tracking: '0.1',
-        size: toFluidClampFor(14, typoMap),
+        size: refs.typeScale.labelMedium,
       },
 
       small: {
@@ -236,30 +230,30 @@ createGlobalTheme(':root', sys, {
         weight: '700',
         lineHeight: refs.lineHeight.md,
         tracking: '0.1',
-        size: toFluidClampFor(12, typoMap),
+        size: refs.typeScale.labelSmall,
       },
     },
   },
 
   spacing: {
     0: '0px',
-    1: toFluidClampFor(4, spaceMap),
-    2: toFluidClampFor(8, spaceMap),
-    3: toFluidClampFor(12, spaceMap),
-    4: toFluidClampFor(16, spaceMap),
-    5: toFluidClampFor(20, spaceMap),
-    6: toFluidClampFor(24, spaceMap),
-    7: toFluidClampFor(28, spaceMap),
-    8: toFluidClampFor(32, spaceMap),
-    9: toFluidClampFor(36, spaceMap),
-    10: toFluidClampFor(40, spaceMap),
-    11: toFluidClampFor(44, spaceMap),
-    12: toFluidClampFor(48, spaceMap),
-    13: toFluidClampFor(52, spaceMap),
-    14: toFluidClampFor(56, spaceMap),
-    15: toFluidClampFor(60, spaceMap),
-    16: toFluidClampFor(64, spaceMap),
-    17: toFluidClampFor(68, spaceMap),
-    18: toFluidClampFor(72, spaceMap),
+    1: refs.spacing[1],
+    2: refs.spacing[2],
+    3: refs.spacing[3],
+    4: refs.spacing[4],
+    5: refs.spacing[5],
+    6: refs.spacing[6],
+    7: refs.spacing[7],
+    8: refs.spacing[8],
+    9: refs.spacing[9],
+    10: refs.spacing[10],
+    11: refs.spacing[11],
+    12: refs.spacing[12],
+    13: refs.spacing[13],
+    14: refs.spacing[14],
+    15: refs.spacing[15],
+    16: refs.spacing[16],
+    17: refs.spacing[17],
+    18: refs.spacing[18],
   },
 });

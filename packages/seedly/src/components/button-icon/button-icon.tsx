@@ -1,5 +1,4 @@
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
-import { clsx } from 'clsx';
 
 import { AccessibleIcon } from '../accessible-icon';
 import { ButtonTypes } from '../button/button';
@@ -9,11 +8,10 @@ import { buttonIconResponsive } from './button-icon.responsive';
 
 import type { Responsive } from '../../styles/responsive';
 
-type ButtonIconVariantResponsive = {
-  [K in keyof ButtonIconVariants]?: Responsive<
-    NonNullable<ButtonIconVariants[K]>
-  >;
-};
+export interface ButtonIconVariantResponsive {
+  size?: Responsive<NonNullable<ButtonIconVariants['size']>>;
+  variant?: Responsive<NonNullable<ButtonIconVariants['variant']>>;
+}
 
 export type ButtonIconProps<TUse extends ButtonTypes> =
   PolymorphicComponentProps<TUse> &
@@ -36,7 +34,7 @@ export function ButtonIcon<TUse extends ButtonTypes>(
 
   return (
     <Comp
-      className={clsx(buttonIconResponsive({ variant, size }), className)}
+      className={buttonIconResponsive({ variant, size }, className)}
       {...(rest as Record<string, unknown>)}
     >
       <AccessibleIcon label={label}>{children}</AccessibleIcon>

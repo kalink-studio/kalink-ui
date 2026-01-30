@@ -2,14 +2,13 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { Box, Cluster, Stack } from '@kalink-ui/seedly';
-import { Spacing } from '@kalink-ui/seedly/styles';
+import { Box, type BoxProps } from '../box';
+import { Cluster, type ClusterProps } from '../cluster';
+import { Stack } from '../stack';
 
-import { BoxProps } from '../box';
-import { ClusterProps } from '../cluster';
+import { cardFooterRecipe } from './card.css';
 
-import { card, cardBody, cardFooter, cardHeader } from './card.css';
-
+import type { Spacing } from '../../styles';
 import type { Responsive } from '../../styles/responsive';
 
 export type CardRootElement = 'article' | 'div';
@@ -37,7 +36,7 @@ export function Card<TUse extends CardRootElement = 'article'>(
       use={use as CardProps['use']}
       variant={variant}
       spacing={spacing}
-      className={clsx(card, className)}
+      className={className}
       {...rest}
     >
       <Stack align="stretch" spacing={verticalSpacing ?? spacing}>
@@ -52,7 +51,7 @@ Card.Header = function CardHeader<TUse extends ElementType = 'header'>(
 ) {
   const { use: Comp = 'header', className, ...rest } = props;
 
-  return <Comp className={clsx(cardHeader, className)} {...rest} />;
+  return <Comp className={className} {...rest} />;
 };
 
 Card.Body = function CardBody<TUse extends ElementType = 'div'>(
@@ -60,7 +59,7 @@ Card.Body = function CardBody<TUse extends ElementType = 'div'>(
 ) {
   const { use: Comp = 'div', className, ...rest } = props;
 
-  return <Comp className={clsx(cardBody, className)} {...rest} />;
+  return <Comp className={className} {...rest} />;
 };
 
 type CardFooterProps<TUse extends ElementType = 'footer'> = ClusterProps<TUse>;
@@ -68,12 +67,13 @@ type CardFooterProps<TUse extends ElementType = 'footer'> = ClusterProps<TUse>;
 Card.Footer = function CardFooter<TUse extends ElementType = 'footer'>(
   props: CardFooterProps<TUse>,
 ) {
-  const { use = 'footer', className, ...rest } = props;
+  const { use = 'footer', spacing = 2, className, ...rest } = props;
 
   return (
     <Cluster
       use={use as CardFooterProps['use']}
-      className={clsx(cardFooter, className)}
+      className={clsx(cardFooterRecipe(), className)}
+      spacing={spacing}
       {...rest}
     />
   );

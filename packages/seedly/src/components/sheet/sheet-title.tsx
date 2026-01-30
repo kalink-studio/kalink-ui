@@ -6,7 +6,7 @@ import { ComponentPropsWithRef } from 'react';
 import { Heading, HeadingProps, HeadingTypes } from '../heading';
 import { TextProps } from '../text';
 
-type SheetTitleProps<TUse extends HeadingTypes> = ComponentPropsWithRef<
+export type SheetTitleProps<TUse extends HeadingTypes> = ComponentPropsWithRef<
   typeof Title
 > &
   HeadingProps<TUse>;

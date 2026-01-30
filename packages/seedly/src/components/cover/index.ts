@@ -1,2 +1,2 @@
-export { Cover } from './cover';
-export { coverRecipe, minSizeVar, type CoverVariants } from './cover.css';
+export { Cover, type CoverProps } from './cover';
+export { coverRecipe, coverVars, type CoverVariants } from './cover.css';

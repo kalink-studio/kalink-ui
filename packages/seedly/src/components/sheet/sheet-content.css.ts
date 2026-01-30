@@ -28,7 +28,7 @@ const leave = keyframes({
   },
 });
 
-export const sheetContent = recipe({
+export const sheetContentRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -187,5 +187,5 @@ export const sheetContent = recipe({
 });
 
 export type SheetContentVariants = NonNullable<
-  RecipeVariants<typeof sheetContent>
+  RecipeVariants<typeof sheetContentRecipe>
 >;

@@ -1,25 +1,32 @@
-import { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useState, type FunctionComponent } from 'react';
 import { expect, waitFor } from 'storybook/test';
 
+import {
+  argTypesFromRecipe,
+  CommonArgs,
+  commonArgs,
+} from '../../utils/arg-types';
 import { Button } from '../button';
 import { ButtonIcon } from '../button-icon';
 import { Stack } from '../stack';
 import { Text } from '../text';
 
-import { Sheet, SheetTrigger } from './sheet';
+import { Sheet, SheetClose, SheetTrigger } from './sheet';
 import { SheetBody } from './sheet-body';
 import { SheetContent, SheetContentProps } from './sheet-content';
+import { sheetContentRecipe } from './sheet-content.css';
 import { SheetDescription } from './sheet-description';
 import { SheetFooter } from './sheet-footer';
 import { SheetHeader } from './sheet-header';
+import { SheetOverlay } from './sheet-overlay';
 import { SheetTitle } from './sheet-title';
 
+import type { Meta, StoryObj } from '@storybook/react-vite';
+
 type StoryArgs = SheetContentProps<'div'>;
-type Story = StoryObj<StoryArgs>;
 
 /** Shared play function that tests open/close behavior */
-const sharedPlay: NonNullable<Story['play']> = async ({
+const sharedPlay: NonNullable<StoryObj<StoryArgs>['play']> = async ({
   canvas,
   userEvent,
   step,
@@ -50,12 +57,33 @@ const meta = {
     layout: 'centered',
   },
   component: SheetContent,
-  argTypes: {},
+  subcomponents: {
+    Sheet: Sheet as FunctionComponent<unknown>,
+    SheetTrigger: SheetTrigger as FunctionComponent<unknown>,
+    SheetClose: SheetClose as FunctionComponent<unknown>,
+    SheetOverlay: SheetOverlay as FunctionComponent<unknown>,
+    SheetHeader: SheetHeader as FunctionComponent<unknown>,
+    SheetBody: SheetBody as FunctionComponent<unknown>,
+    SheetFooter: SheetFooter as FunctionComponent<unknown>,
+    SheetTitle: SheetTitle as FunctionComponent<unknown>,
+    SheetDescription: SheetDescription as FunctionComponent<unknown>,
+  },
+  argTypes: {
+    ...argTypesFromRecipe(sheetContentRecipe),
+    ...commonArgs([
+      CommonArgs.COMPOSABLE,
+      CommonArgs.POLYMORPHIC,
+      CommonArgs.STYLABLE,
+      CommonArgs.REFERABLE,
+    ]),
+  },
   render: (args) => <SheetStory {...args} />,
   play: sharedPlay,
 } satisfies Meta<StoryArgs>;
 
 export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 export const Right: Story = {};
 

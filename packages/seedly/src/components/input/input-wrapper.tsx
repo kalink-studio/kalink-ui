@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import {
   ComponentPropsWithRef,
   ForwardedRef,
@@ -9,17 +8,22 @@ import {
 } from 'react';
 
 import {
-  inputAppearance,
-  InputAppearanceVariants,
-  inputWrapper,
-} from './input.css';
+  buildTypographyOverrides,
+  mapResponsiveSizeToTypography,
+  type Responsive,
+} from '../../styles';
+
+import { InputAppearanceVariants, inputWrapper } from './input.css';
+import { inputAppearanceResponsive } from './input.responsive';
 
 export type InputWrapperProps = ComponentPropsWithRef<'div'> & {
   children: ReactNode;
   className?: string;
   inputRef: RefObject<HTMLInputElement | null>;
   disabled?: boolean;
-} & InputAppearanceVariants;
+} & Omit<InputAppearanceVariants, 'size'> & {
+    size?: Responsive<NonNullable<InputAppearanceVariants['size']>>;
+  };
 
 export function InputWrapper({
   children,
@@ -28,8 +32,15 @@ export function InputWrapper({
   disabled,
   variant = 'outlined',
   size = 'md',
+  tone = 'neutral',
   ref,
 }: InputWrapperProps) {
+  const typographySize = mapResponsiveSizeToTypography(size);
+  const typographyOverrides = buildTypographyOverrides({
+    variant: 'body',
+    size: typographySize,
+  });
+
   const handleInputFocus = useCallback<MouseEventHandler<HTMLElement>>(
     (e) => {
       if (disabled || !inputRef?.current || e.target === inputRef.current) {
@@ -45,8 +56,9 @@ export function InputWrapper({
   return (
     <div
       ref={ref as ForwardedRef<HTMLDivElement>}
-      className={clsx(
-        inputAppearance({ variant, size }),
+      className={inputAppearanceResponsive(
+        { variant, size, tone },
+        typographyOverrides,
         inputWrapper,
         className,
       )}

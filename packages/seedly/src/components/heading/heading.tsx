@@ -1,5 +1,4 @@
 import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
-import { clsx } from 'clsx';
 import { ElementType, ReactElement, ReactNode } from 'react';
 
 import { Spacing, TypographySize, TypographyVariant } from '../../styles';
@@ -84,7 +83,7 @@ export function Heading<TUse extends HeadingTypes>(props: HeadingProps<TUse>) {
       ref={ref}
       use={'hgroup'}
       condition={!!pretitle || !!subtitle}
-      className={clsx(headingRootResponsive({ align }), rootClassName)}
+      className={headingRootResponsive({ align }, rootClassName)}
     >
       {pretitle}
 
@@ -123,7 +122,7 @@ Heading.Pretitle = function HeadingPretitle({
         use="p"
         variant={variant}
         size={size}
-        className={clsx(pretitleResponsive({ spacing }), className)}
+        className={pretitleResponsive({ spacing }, className)}
         {...rest}
       >
         {children}
@@ -151,7 +150,7 @@ Heading.Subtitle = function HeadingSubtitle({
         use="p"
         variant={variant}
         size={size}
-        className={clsx(subtitleResponsive({ spacing }), className)}
+        className={subtitleResponsive({ spacing }, className)}
         {...rest}
       >
         {children}

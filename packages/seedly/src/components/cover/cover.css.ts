@@ -1,23 +1,43 @@
-import { createVar, globalStyle } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+} from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
   createResponsiveVariants,
   defaultMedia,
-  sys,
   mapContractVars,
+  sys,
 } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-const spaceVar = createVar();
-export const minSizeVar = createVar();
+export const coverVars = createThemeContract({
+  spacing: {
+    block: null,
+  },
+  layout: {
+    minBlockSize: null,
+  },
+});
+
+const coverSpacingDefaults = assignVars(coverVars.spacing, {
+  block: sys.spacing[0],
+});
+
+const coverLayoutDefaults = assignVars(coverVars.layout, {
+  minBlockSize: '100vh',
+});
 
 // Shared variant style maps so we can reuse them for responsive overrides
 export const coverSpacingStyles = mapContractVars(sys.spacing, (key) => ({
   '@layer': {
     [components]: {
       vars: {
-        [spaceVar]: sys.spacing[key],
+        ...assignVars(coverVars.spacing, {
+          block: sys.spacing[key],
+        }),
       },
     },
   },
@@ -30,10 +50,11 @@ export const coverRecipe = recipe({
         display: 'flex',
         flexDirection: 'column',
 
-        minBlockSize: minSizeVar,
+        minBlockSize: coverVars.layout.minBlockSize,
 
         vars: {
-          [minSizeVar]: '100vh',
+          ...coverSpacingDefaults,
+          ...coverLayoutDefaults,
         },
       },
     },
@@ -50,7 +71,7 @@ export const coverRecipe = recipe({
 globalStyle(`${coverRecipe.classNames.base} > *`, {
   '@layer': {
     [components]: {
-      marginBlock: spaceVar,
+      marginBlock: coverVars.spacing.block,
     },
   },
 });

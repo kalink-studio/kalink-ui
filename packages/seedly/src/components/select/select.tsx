@@ -1,5 +1,4 @@
 import { Value } from '@radix-ui/react-select';
-import { clsx } from 'clsx';
 import { ComponentPropsWithoutRef, ComponentPropsWithRef } from 'react';
 
 import {
@@ -15,7 +14,6 @@ import { InputAppearanceVariants } from '../input';
 import { SelectContent } from './select-content';
 import { SelectRoot } from './select-root';
 import { SelectTrigger } from './select-trigger';
-import { selectStyle } from './select.css';
 
 export type SelectProps = ComponentPropsWithoutRef<typeof SelectRoot> &
   Pick<ComponentPropsWithoutRef<typeof Value>, 'placeholder'> &
@@ -51,6 +49,8 @@ export function Select({
   size = 'md',
   ref,
   className,
+  tone,
+  variant,
   ...props
 }: SelectProps) {
   return (
@@ -61,8 +61,9 @@ export function Select({
       hideErrorMessage={hideErrorMessage}
       disabled={disabled}
       hideLabel={hideLabel}
+      tone={tone}
     >
-      <FormFieldItem className={clsx(selectStyle, className)}>
+      <FormFieldItem className={className}>
         <FormFieldLabel required={required} disabled={disabled} size={size}>
           {label}
         </FormFieldLabel>
@@ -75,14 +76,17 @@ export function Select({
               onBlur={onBlur}
               onFocus={onFocus}
               aria-label={hideLabel ? label : undefined}
+              tone={tone}
+              size={size}
+              variant={variant}
             >
-              <Value placeholder={placeholder} className="test" />
+              <Value placeholder={placeholder} />
             </SelectTrigger>
           </FormFieldControl>
           <SelectContent container={container}>{children}</SelectContent>
         </SelectRoot>
-        <FormFieldDescription>{description}</FormFieldDescription>
-        <FormFieldError />
+        <FormFieldDescription size={size}>{description}</FormFieldDescription>
+        <FormFieldError size={size} />
       </FormFieldItem>
     </FormField>
   );

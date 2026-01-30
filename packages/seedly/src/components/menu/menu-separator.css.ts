@@ -26,33 +26,45 @@ export const menuSeparatorSpacingStyles = mapContractVars(
   }),
 );
 
-export const menuSeparator = recipe({
+export const menuSeparatorRecipe = recipe({
   base: {
-    paddingBlock: spaceVar,
-    marginInline: sys.spacing[2],
+    '@layer': {
+      [components]: {
+        paddingBlock: spaceVar,
+        marginInline: sys.spacing[2],
 
-    position: 'relative',
+        position: 'relative',
 
-    '::after': {
-      content: '""',
+        vars: {
+          [spaceVar]: sys.spacing[2],
+        },
 
-      height: '1px',
-      width: '100%',
+        '::after': {
+          content: '""',
 
-      position: 'absolute',
-      top: '50%',
+          height: '1px',
+          width: '100%',
 
-      backgroundColor: sys.color.foreground,
+          position: 'absolute',
+          top: '50%',
 
-      transform: 'translateY(-50%)',
+          backgroundColor: sys.surface.foreground,
+
+          transform: 'translateY(-50%)',
+        },
+      },
     },
   },
 
   variants: {
     offset: {
       true: {
-        marginInline: calc.negate(sys.spacing[2]),
-        marginBlock: calc.negate(sys.spacing[2]),
+        '@layer': {
+          [components]: {
+            marginInline: calc.negate(sys.spacing[2]),
+            marginBlock: calc.negate(sys.spacing[2]),
+          },
+        },
       },
     },
 
@@ -61,7 +73,7 @@ export const menuSeparator = recipe({
 });
 
 export type MenuSeparatorVariants = NonNullable<
-  RecipeVariants<typeof menuSeparator>
+  RecipeVariants<typeof menuSeparatorRecipe>
 >;
 
 export const spacingAt = createResponsiveVariants({

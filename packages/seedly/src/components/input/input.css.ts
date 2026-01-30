@@ -3,13 +3,19 @@ import {
   globalStyle,
   createThemeContract,
   assignVars,
-  fallbackVar,
+  type StyleRule,
 } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, transition, typography } from '../../styles';
+import {
+  createToneAssignments,
+  createToneStyles,
+  createResponsiveVariants,
+  defaultMedia,
+  sys,
+  transition,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
-import { formFieldVars } from '../form-field';
 
 export const inputVars = createThemeContract({
   color: {
@@ -28,7 +34,95 @@ export const inputVars = createThemeContract({
   },
 });
 
-export const inputAppearance = recipe({
+const inputToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const inputColorDefaults = assignVars(inputVars.color, {
+  foreground: sys.surface.foreground,
+  background: sys.surface.background,
+  outline: sys.surface.foreground,
+});
+
+const inputToneAssignments = createToneAssignments(inputToneVars);
+const inputToneDefaults = inputToneAssignments.neutral;
+
+const inputToneStyles = createToneStyles(inputToneVars, ({ base }) => ({
+  ...inputColorDefaults,
+  [inputVars.color.foreground]: base,
+  [inputVars.color.outline]: base,
+}));
+
+const inputSizeStyles = {
+  sm: {
+    '@layer': {
+      [components]: {
+        fontFamily: sys.typography.body.small.font,
+        fontWeight: sys.typography.body.small.weight,
+        lineHeight: sys.typography.body.small.lineHeight,
+        letterSpacing: sys.typography.body.small.tracking,
+        /**
+         * Force the font size to 16px to avoid zooming on mobile
+         */
+        fontSize: `max(16px, ${sys.typography.body.small.size})`,
+
+        vars: {
+          ...assignVars(inputVars.spacing, {
+            block: sys.spacing[1],
+            inline: sys.spacing[1],
+          }),
+        },
+      },
+    },
+  },
+
+  md: {
+    '@layer': {
+      [components]: {
+        fontFamily: sys.typography.body.medium.font,
+        fontWeight: sys.typography.body.medium.weight,
+        lineHeight: sys.typography.body.medium.lineHeight,
+        letterSpacing: sys.typography.body.medium.tracking,
+        /**
+         * Force the font size to 16px to avoid zooming on mobile
+         */
+        fontSize: `max(16px, ${sys.typography.body.medium.size})`,
+
+        vars: {
+          ...assignVars(inputVars.spacing, {
+            block: sys.spacing[2],
+            inline: sys.spacing[2],
+          }),
+        },
+      },
+    },
+  },
+
+  lg: {
+    '@layer': {
+      [components]: {
+        fontFamily: sys.typography.body.large.font,
+        fontWeight: sys.typography.body.large.weight,
+        lineHeight: sys.typography.body.large.lineHeight,
+        letterSpacing: sys.typography.body.large.tracking,
+        /**
+         * Force the font size to 16px to avoid zooming on mobile
+         */
+        fontSize: `max(16px, ${sys.typography.body.large.size})`,
+
+        vars: {
+          ...assignVars(inputVars.spacing, {
+            block: sys.spacing[3],
+            inline: sys.spacing[3],
+          }),
+        },
+      },
+    },
+  },
+} satisfies Record<'sm' | 'md' | 'lg', StyleRule | StyleRule[]>;
+
+export const inputAppearanceRecipe = recipe({
   base: [
     {
       '@layer': {
@@ -52,11 +146,13 @@ export const inputAppearance = recipe({
 
           selectors: {
             '&:disabled, &:has(:disabled)': {
-              backgroundColor: `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.dark} * 100%), transparent)`,
+              backgroundColor: `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.background} * 100%), transparent)`,
 
               vars: {
                 [inputVars.color.foreground]:
-                  `color(from ${sys.color.foreground} srgb r g b / 0.38)`,
+                  `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.text} * 100%), transparent)`,
+                [inputVars.color.outline]:
+                  `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.border} * 100%), transparent)`,
               },
             },
 
@@ -67,36 +163,23 @@ export const inputAppearance = recipe({
 
             '&[aria-invalid], &:has([aria-invalid])': {
               vars: {
-                [inputVars.color.foreground]: fallbackVar(
-                  formFieldVars.color.foreground,
-                  'red',
-                ),
+                ...inputColorDefaults,
+                [inputVars.color.foreground]: sys.tone.destructive,
+                [inputVars.color.outline]: sys.tone.destructive,
+                ...inputToneAssignments.destructive,
               },
             },
           },
 
           vars: {
-            ...assignVars(inputVars.color, {
-              foreground: fallbackVar(
-                formFieldVars.color.foreground,
-                sys.color.foreground,
-              ),
-              background: fallbackVar(
-                formFieldVars.color.background,
-                sys.color.background,
-                'transparent',
-              ),
-              outline: fallbackVar(
-                formFieldVars.color.outline,
-                sys.color.foreground,
-              ),
-            }),
-
+            ...inputColorDefaults,
+            [inputVars.color.foreground]: inputToneVars.base,
+            [inputVars.color.outline]: inputToneVars.base,
+            ...inputToneDefaults,
             ...assignVars(inputVars.spacing, {
               block: sys.spacing[2],
               inline: sys.spacing[4],
             }),
-
             ...assignVars(inputVars.shape, {
               corner: sys.shape.corner.none,
             }),
@@ -132,7 +215,7 @@ export const inputAppearance = recipe({
 
             vars: {
               [inputVars.color.background]:
-                `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.dark} * 100%), transparent)`,
+                `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.surface} * 100%), transparent)`,
             },
           },
         },
@@ -141,75 +224,15 @@ export const inputAppearance = recipe({
       bare: {},
     },
 
-    size: {
-      sm: [
-        typography.body.small,
-        {
-          '@layer': {
-            [components]: {
-              /**
-               * Force the font size to 16px to avoid zooming on mobile
-               */
-              fontSize: `max(16px, ${sys.typography.body.small.size})`,
+    tone: inputToneStyles,
 
-              vars: {
-                ...assignVars(inputVars.spacing, {
-                  block: sys.spacing[1],
-                  inline: sys.spacing[1],
-                }),
-              },
-            },
-          },
-        },
-      ],
-
-      md: [
-        typography.body.medium,
-        {
-          '@layer': {
-            [components]: {
-              /**
-               * Force the font size to 16px to avoid zooming on mobile
-               */
-              fontSize: `max(16px, ${sys.typography.body.medium.size})`,
-
-              vars: {
-                ...assignVars(inputVars.spacing, {
-                  block: sys.spacing[2],
-                  inline: sys.spacing[2],
-                }),
-              },
-            },
-          },
-        },
-      ],
-
-      lg: [
-        typography.body.large,
-        {
-          '@layer': {
-            [components]: {
-              /**
-               * Force the font size to 16px to avoid zooming on mobile
-               */
-              fontSize: `max(16px, ${sys.typography.body.large.size})`,
-
-              vars: {
-                ...assignVars(inputVars.spacing, {
-                  block: sys.spacing[3],
-                  inline: sys.spacing[3],
-                }),
-              },
-            },
-          },
-        },
-      ],
-    },
+    size: inputSizeStyles,
   },
 
   defaultVariants: {
     variant: 'outlined',
     size: 'md',
+    tone: 'neutral',
   },
 });
 
@@ -267,7 +290,7 @@ export const inputAddornment = style({
 });
 
 globalStyle(
-  `${inputAppearance.classNames.base} input:is(:focus, :focus-visible)`,
+  `${inputAppearanceRecipe.classNames.base} input:is(:focus, :focus-visible)`,
   {
     '@layer': {
       [components]: {
@@ -278,5 +301,10 @@ globalStyle(
 );
 
 export type InputAppearanceVariants = NonNullable<
-  RecipeVariants<typeof inputAppearance>
+  RecipeVariants<typeof inputAppearanceRecipe>
 >;
+
+export const sizeAt = createResponsiveVariants({
+  styles: inputSizeStyles,
+  media: defaultMedia,
+});

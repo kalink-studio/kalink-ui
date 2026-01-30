@@ -33,7 +33,7 @@ export const scrollAreaViewport = style({
   },
 });
 
-export const scrollAreaScrollbar = recipe({
+export const scrollAreaScrollbarRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
@@ -87,11 +87,11 @@ export const scrollAreaThumb = style({
 
       borderRadius: sys.shape.corner.small,
 
-      backgroundColor: sys.color.foreground,
+      backgroundColor: sys.surface.foreground,
     },
   },
 });
 
 export type ScrollAreaScrollbarVariants = NonNullable<
-  RecipeVariants<typeof scrollAreaScrollbar>
+  RecipeVariants<typeof scrollAreaScrollbarRecipe>
 >;
