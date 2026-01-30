@@ -1,5 +1,17 @@
 # @kalink-ui/seedly
 
+## 0.35.0
+
+### Minor Changes
+
+- e06ff34: Add responsive typography generation and wire it into text-bearing components.
+- 63a0911: Align theming and responsive APIs across components with shared tone helpers.
+
+### Patch Changes
+
+- 89cc8dc: Add a responsive argType helper and refine typography story controls.
+- eae06e2: Align surface and tone token usage with the updated theme contract.
+
 ## 0.34.4
 
 ### Patch Changes
