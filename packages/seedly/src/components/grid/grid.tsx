@@ -60,8 +60,7 @@ export function Grid<TUse extends ElementType = 'div'>(props: GridProps<TUse>) {
   const autoLayoutMap = resolveResponsive(autoLayout, defaultOrder);
   const columnsMap = resolveResponsive(columns, defaultOrder);
   const columnsEntries = Object.entries(columnsMap).filter(
-    ([breakpoint]) =>
-      autoLayoutMap[breakpoint as keyof typeof autoLayoutMap] == null,
+    ([breakpoint]) => !autoLayoutMap[breakpoint as keyof typeof autoLayoutMap],
   );
   const columnsForLayout = columnsEntries.length
     ? (Object.fromEntries(columnsEntries) as Responsive<
@@ -76,7 +75,7 @@ export function Grid<TUse extends ElementType = 'div'>(props: GridProps<TUse>) {
           spacing,
           columnSpacing,
           rowSpacing,
-          columns: columnsForLayout,
+          columns: autoLayout ? undefined : columnsForLayout,
           autoLayout,
           justifyItems,
           alignItems,
