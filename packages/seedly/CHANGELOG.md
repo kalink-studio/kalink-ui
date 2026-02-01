@@ -1,5 +1,13 @@
 # @kalink-ui/seedly
 
+## 0.36.0
+
+### Minor Changes
+
+- 705d275: Make tone styling opt-in across components and propagate tone support through
+  inputs, overlays, and layout primitives, with Storybook controls added for
+  tone-enabled stories.
+
 ## 0.35.0
 
 ### Minor Changes
