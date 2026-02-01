@@ -55,6 +55,7 @@ export function TextField({
             disabled={disabled}
             required={required}
             size={size}
+            tone={tone}
             {...rest}
           />
         </FormFieldControl>

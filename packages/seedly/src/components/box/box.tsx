@@ -22,6 +22,7 @@ export function Box<TUse extends ElementType = 'div'>({
   spacing,
   radius,
   elevation,
+  tone,
   className,
   variant,
   ...props
@@ -31,7 +32,7 @@ export function Box<TUse extends ElementType = 'div'>({
   return (
     <Comp
       className={boxResponsive(
-        { variant, spacing, radius, elevation },
+        { variant, spacing, radius, elevation, tone },
         className,
       )}
       {...rest}

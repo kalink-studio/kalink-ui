@@ -22,13 +22,17 @@ export function ScrollBar({
   ref,
   className,
   orientation = 'vertical',
+  tone,
   ...props
 }: ScrollAreaScrollbarProps) {
   return (
     <ScrollAreaScrollbar
       ref={ref}
       orientation={orientation}
-      className={clsx(scrollAreaScrollbarRecipe({ orientation }), className)}
+      className={clsx(
+        scrollAreaScrollbarRecipe({ orientation, tone }),
+        className,
+      )}
       {...props}
     >
       <ScrollAreaThumb className={scrollAreaThumb} />

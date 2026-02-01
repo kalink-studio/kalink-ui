@@ -34,7 +34,8 @@ export function Input({
   ...props
 }: InputProps) {
   const innerRef = useRef<HTMLInputElement>(null);
-  const { errors } = useFormFieldContext();
+  const { errors, tone: contextTone } = useFormFieldContext();
+  const resolvedTone = tone ?? contextTone;
 
   return (
     <InputWrapper
@@ -43,7 +44,7 @@ export function Input({
       disabled={disabled}
       variant={variant}
       size={size}
-      tone={tone}
+      tone={resolvedTone}
     >
       {startAdornment && (
         <div className={inputAddornment}>{startAdornment}</div>

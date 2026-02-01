@@ -23,6 +23,10 @@ export function argTypesFromRecipe(
         control = 'boolean';
       }
 
+      if (name === 'tone') {
+        control = 'select';
+      }
+
       return {
         ...acc,
         [name]: {

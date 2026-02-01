@@ -1,7 +1,19 @@
+import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { createToneStyles, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
+
+const loaderOverlayToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const loaderOverlayToneDefaults = assignVars(loaderOverlayToneVars, {
+  base: sys.surface.foreground,
+  onBase: sys.surface.foreground,
+});
+const loaderOverlayToneStyles = createToneStyles(loaderOverlayToneVars);
 
 export const loaderOverlayRecipe = recipe({
   base: {
@@ -16,7 +28,11 @@ export const loaderOverlayRecipe = recipe({
 
         zIndex: 1000,
 
-        backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} 5%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${loaderOverlayToneVars.base} 5%, transparent)`,
+
+        vars: {
+          ...loaderOverlayToneDefaults,
+        },
       },
     },
   },
@@ -40,6 +56,8 @@ export const loaderOverlayRecipe = recipe({
         },
       },
     },
+
+    tone: loaderOverlayToneStyles,
   },
 });
 

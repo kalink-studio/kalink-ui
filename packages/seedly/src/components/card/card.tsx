@@ -23,7 +23,7 @@ export function Card<TUse extends CardRootElement = 'article'>(
 ) {
   const {
     use = 'article',
-    variant = 'solid',
+    variant,
     className,
     spacing = 4,
     verticalSpacing,

@@ -1,7 +1,12 @@
-import { globalStyle, keyframes } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  keyframes,
+} from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, typography } from '../../styles';
+import { createToneStyles, sys, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 const pulseKeyframe = keyframes({
@@ -18,19 +23,34 @@ const pulseKeyframe = keyframes({
   },
 });
 
+const skeletonToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const skeletonToneDefaults = assignVars(skeletonToneVars, {
+  base: sys.surface.foreground,
+  onBase: sys.surface.foreground,
+});
+const skeletonToneStyles = createToneStyles(skeletonToneVars);
+
 export const skeletonRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
         display: 'block',
 
-        backgroundColor: `color-mix(in srgb, ${sys.surface.foreground} 10%, transparent)`,
+        backgroundColor: `color-mix(in srgb, ${skeletonToneVars.base} 10%, transparent)`,
 
         animationName: pulseKeyframe,
         animationDuration: '1500ms',
         animationIterationCount: 'infinite',
         animationTimingFunction: sys.motion.easing.standard,
         animationDelay: '500ms',
+
+        vars: {
+          ...skeletonToneDefaults,
+        },
       },
     },
   },
@@ -83,6 +103,8 @@ export const skeletonRecipe = recipe({
       md: typography.body.medium,
       lg: typography.body.large,
     },
+
+    tone: skeletonToneStyles,
 
     withChildren: {
       true: {

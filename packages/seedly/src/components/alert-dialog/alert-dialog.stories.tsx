@@ -1,4 +1,4 @@
-import { argTypesFromRecipe } from '../../utils';
+import { argTypesFromRecipe, responsiveSelectArg } from '../../utils';
 import { Button } from '../button';
 import { Stack } from '../stack';
 
@@ -32,6 +32,10 @@ const meta = {
   },
   argTypes: {
     ...argTypesFromRecipe(alertDialogContentRecipe),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
   render: (args) => (
     <AlertDialog>

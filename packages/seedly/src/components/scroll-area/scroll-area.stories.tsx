@@ -1,5 +1,6 @@
 import { expect } from 'storybook/test';
 
+import { responsiveSelectArg } from '../../utils';
 import { Text } from '../text';
 
 import { ScrollArea } from './scroll-area';
@@ -16,6 +17,12 @@ const meta = {
   args: {
     maxHeight: '200px',
     style: { width: 300 },
+  },
+  argTypes: {
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
 } satisfies Meta<typeof ScrollArea>;
 

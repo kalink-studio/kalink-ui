@@ -15,7 +15,7 @@ export type AlertDialogContentVariants = NonNullable<
 
 type BoxStyleProps = Pick<
   BoxProps<'div'>,
-  'spacing' | 'radius' | 'elevation' | 'use'
+  'spacing' | 'radius' | 'elevation' | 'use' | 'tone'
 >;
 
 export type AlertDialogContentProps = AlertDialogContentVariants &
@@ -35,11 +35,12 @@ export function AlertDialogContent({
   radius,
   spacing = 2,
   use,
+  tone,
   ...props
 }: AlertDialogContentProps) {
   return (
     <AlertDialogPortal container={container} forceMount={forceMount}>
-      <AlertDialogOverlay />
+      <AlertDialogOverlay tone={tone} />
       <Content
         className={clsx(alertDialogContentRecipe({ variant }), className)}
         asChild
@@ -51,8 +52,11 @@ export function AlertDialogContent({
           spacing={spacing}
           elevation={elevation}
           radius={radius}
+          tone={tone}
         >
-          <ScrollArea maxHeight={maxHeight}>{children}</ScrollArea>
+          <ScrollArea maxHeight={maxHeight} tone={tone}>
+            {children}
+          </ScrollArea>
         </Box>
       </Content>
     </AlertDialogPortal>

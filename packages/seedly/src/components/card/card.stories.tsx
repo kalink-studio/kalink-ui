@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { responsiveSelectArg } from '../../utils';
 import { Button } from '../button';
 import { Heading } from '../heading';
 import { Text } from '../text';
@@ -17,6 +18,12 @@ const meta = {
     'Card.Footer': Card.Footer as FunctionComponent<unknown>,
   },
   tags: ['autodocs'],
+  argTypes: {
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
+  },
 } satisfies Meta<typeof Card>;
 
 export default meta;

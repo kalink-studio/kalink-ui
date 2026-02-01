@@ -12,10 +12,13 @@ import {
 } from './scroll-area.css';
 import { ScrollBar } from './scroll-bar';
 
+import type { Tone } from '../../styles';
+
 export type ScrollAreaProps = ComponentPropsWithRef<typeof Root> & {
   maxHeight?: string;
   /** Scrollbar orientation. Use 'both' for both vertical and horizontal scrollbars. */
   orientation?: 'vertical' | 'horizontal' | 'both';
+  tone?: Tone;
 };
 
 export function ScrollArea({
@@ -24,6 +27,7 @@ export function ScrollArea({
   children,
   maxHeight = 'initial',
   orientation = 'vertical',
+  tone,
   ...props
 }: ScrollAreaProps) {
   return (
@@ -38,10 +42,10 @@ export function ScrollArea({
         {children}
       </Viewport>
       {(orientation === 'vertical' || orientation === 'both') && (
-        <ScrollBar orientation="vertical" />
+        <ScrollBar orientation="vertical" tone={tone} />
       )}
       {(orientation === 'horizontal' || orientation === 'both') && (
-        <ScrollBar orientation="horizontal" />
+        <ScrollBar orientation="horizontal" tone={tone} />
       )}
       <Corner />
     </Root>

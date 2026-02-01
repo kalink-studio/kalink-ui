@@ -39,7 +39,7 @@ export function FormFieldMessage({
     return () => unRegisterMessageId(id);
   }, [id, registerMessageId, unRegisterMessageId]);
 
-  const messageColor = error || errors ? 'destructive' : (tone ?? 'neutral');
+  const messageColor = error || errors ? 'destructive' : tone;
   const baseSize = getResponsiveBase(size) ?? 'sm';
   const typographySize = mapResponsiveSizeToTypography(size);
   const typographyOverrides = buildTypographyOverrides({

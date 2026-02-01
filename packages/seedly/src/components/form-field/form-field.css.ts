@@ -27,7 +27,6 @@ const formFieldToneVars = createThemeContract({
 });
 
 const formFieldToneAssignments = createToneAssignments(formFieldToneVars);
-const formFieldToneDefaults = formFieldToneAssignments.neutral;
 
 const formFieldToneStyles = createToneStyles(formFieldToneVars, ({ base }) => ({
   [formFieldVars.color.foreground]: base,
@@ -53,7 +52,6 @@ export const formFieldRecipe = recipe({
             background: sys.surface.background,
             outline: sys.surface.foreground,
           }),
-          ...formFieldToneDefaults,
           ...assignVars(formFieldVars.spacing, {
             vertical: sys.spacing[2],
           }),
@@ -116,10 +114,6 @@ export const formFieldRecipe = recipe({
         },
       },
     },
-  },
-
-  defaultVariants: {
-    tone: 'neutral',
   },
 });
 

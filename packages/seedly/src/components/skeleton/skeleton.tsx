@@ -25,6 +25,7 @@ export function Skeleton<TUse extends ElementType>({
   type = 'text',
   radius = 'small',
   size,
+  tone,
   ...props
 }: SkeletonProps<TUse>) {
   const withChildren = Children.count(children) > 0;
@@ -38,7 +39,7 @@ export function Skeleton<TUse extends ElementType>({
   return (
     <Box
       className={clsx(
-        skeletonRecipe({ withChildren, type, size: baseSize }),
+        skeletonRecipe({ withChildren, type, size: baseSize, tone }),
         typographyOverrides,
         className,
       )}

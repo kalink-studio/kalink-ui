@@ -26,6 +26,7 @@ export function MoonLoader<TUse extends ElementType>({
   size = 'md',
   forceMount = false,
   className,
+  tone,
   ...props
 }: LoaderProps<TUse> &
   Omit<MoonLoaderVariants, 'size'> & {
@@ -38,7 +39,7 @@ export function MoonLoader<TUse extends ElementType>({
   return (
     <Box
       className={moonLoaderResponsive(
-        { size },
+        { size, tone },
         loaderRecipe({ active }),
         className,
       )}

@@ -1,4 +1,8 @@
-import { CommonArgs, commonArgs } from '../../utils/arg-types';
+import {
+  CommonArgs,
+  commonArgs,
+  responsiveSelectArg,
+} from '../../utils/arg-types';
 
 import { Select, SelectProps } from './select';
 import { SelectContent } from './select-content';
@@ -49,6 +53,10 @@ const meta = {
     disabled: { table: { category: 'Intrinsic props' } },
     name: { table: { category: 'Intrinsic props' } },
     placeholder: { table: { category: 'Intrinsic props' } },
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
   render: ({ options, ...args }) => {
     return (

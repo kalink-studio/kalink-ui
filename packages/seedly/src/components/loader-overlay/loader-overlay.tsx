@@ -22,14 +22,16 @@ export function LoaderOverlay({
   text,
   position,
   spacing = 2,
+  tone,
 }: LoaderOverlayProps) {
   return (
     <Box
       spacing={spacing}
-      className={clsx(loaderOverlayRecipe({ position }), className)}
+      tone={tone}
+      className={clsx(loaderOverlayRecipe({ position, tone }), className)}
     >
       <Stack use={Center} align="center" spacing={spacing} intrinsic andText>
-        <MoonLoader active forceMount />
+        <MoonLoader active forceMount tone={tone} />
         {text && <Text>{text}</Text>}
       </Stack>
     </Box>

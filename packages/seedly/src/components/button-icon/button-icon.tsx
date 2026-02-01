@@ -11,6 +11,7 @@ import type { Responsive } from '../../styles/responsive';
 export interface ButtonIconVariantResponsive {
   size?: Responsive<NonNullable<ButtonIconVariants['size']>>;
   variant?: Responsive<NonNullable<ButtonIconVariants['variant']>>;
+  tone?: Responsive<NonNullable<ButtonIconVariants['tone']>>;
 }
 
 export type ButtonIconProps<TUse extends ButtonTypes> =
@@ -27,6 +28,7 @@ export function ButtonIcon<TUse extends ButtonTypes>(
     className,
     variant,
     size,
+    tone,
     children,
     label,
     ...rest
@@ -34,7 +36,7 @@ export function ButtonIcon<TUse extends ButtonTypes>(
 
   return (
     <Comp
-      className={buttonIconResponsive({ variant, size }, className)}
+      className={buttonIconResponsive({ variant, size, tone }, className)}
       {...(rest as Record<string, unknown>)}
     >
       <AccessibleIcon label={label}>{children}</AccessibleIcon>

@@ -1,37 +1,50 @@
+import { responsiveSelectArg } from '../../utils';
+
 import { menuItemRecipe, menuItemIcon } from './menu-item.css';
 import { menuSeparatorRecipe } from './menu-separator.css';
 
+import type { Tone } from '../../styles';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const meta = {
+interface StoryArgs {
+  tone?: Tone;
+}
+
+const meta: Meta<StoryArgs> = {
   title: 'Internal/Menu',
   tags: ['internal'],
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta;
+  argTypes: {
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
+  },
+};
 
 export default meta;
 
-type Story = StoryObj;
+type Story = StoryObj<StoryArgs>;
 
 export const MenuItem: Story = {
-  render: () => (
+  render: ({ tone }) => (
     <div style={{ width: 200 }}>
-      <div className={menuItemRecipe()}>Default Item</div>
-      <div className={menuItemRecipe({ inset: true })}>Inset Item</div>
-      <div className={menuItemRecipe()} data-disabled="true">
+      <div className={menuItemRecipe({ tone })}>Default Item</div>
+      <div className={menuItemRecipe({ inset: true, tone })}>Inset Item</div>
+      <div className={menuItemRecipe({ tone })} data-disabled="true">
         Disabled Item
       </div>
-      <div className={menuItemRecipe()}>Selected Item</div>
+      <div className={menuItemRecipe({ tone })}>Selected Item</div>
     </div>
   ),
 };
 
 export const MenuItemWithIcon: Story = {
-  render: () => (
+  render: ({ tone }) => (
     <div style={{ width: 200 }}>
-      <div className={menuItemRecipe()}>
+      <div className={menuItemRecipe({ tone })}>
         <svg
           className={menuItemIcon}
           xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +62,7 @@ export const MenuItemWithIcon: Story = {
         </svg>
         Search
       </div>
-      <div className={menuItemRecipe()}>
+      <div className={menuItemRecipe({ tone })}>
         <svg
           className={menuItemIcon}
           xmlns="http://www.w3.org/2000/svg"
@@ -72,19 +85,19 @@ export const MenuItemWithIcon: Story = {
 };
 
 export const MenuSeparator: Story = {
-  render: () => (
+  render: ({ tone }) => (
     <div style={{ width: 200 }}>
-      <div className={menuItemRecipe()}>Item 1</div>
-      <div className={menuItemRecipe()}>Item 2</div>
+      <div className={menuItemRecipe({ tone })}>Item 1</div>
+      <div className={menuItemRecipe({ tone })}>Item 2</div>
       <div className={menuSeparatorRecipe({ spacing: 2 })} />
-      <div className={menuItemRecipe()}>Item 3</div>
-      <div className={menuItemRecipe()}>Item 4</div>
+      <div className={menuItemRecipe({ tone })}>Item 3</div>
+      <div className={menuItemRecipe({ tone })}>Item 4</div>
     </div>
   ),
 };
 
 export const MenuSeparatorOffset: Story = {
-  render: () => (
+  render: ({ tone }) => (
     <div
       style={{
         width: 200,
@@ -92,9 +105,9 @@ export const MenuSeparatorOffset: Story = {
         background: 'var(--sys-color-background)',
       }}
     >
-      <div className={menuItemRecipe()}>Item 1</div>
+      <div className={menuItemRecipe({ tone })}>Item 1</div>
       <div className={menuSeparatorRecipe({ offset: true, spacing: 2 })} />
-      <div className={menuItemRecipe()}>Item 2</div>
+      <div className={menuItemRecipe({ tone })}>Item 2</div>
     </div>
   ),
 };

@@ -83,7 +83,9 @@ export function Select({
               <Value placeholder={placeholder} />
             </SelectTrigger>
           </FormFieldControl>
-          <SelectContent container={container}>{children}</SelectContent>
+          <SelectContent container={container} tone={tone}>
+            {children}
+          </SelectContent>
         </SelectRoot>
         <FormFieldDescription size={size}>{description}</FormFieldDescription>
         <FormFieldError size={size} />
