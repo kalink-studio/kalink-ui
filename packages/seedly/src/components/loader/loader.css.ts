@@ -1,14 +1,28 @@
-import { createVar, keyframes, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  createVar,
+  keyframes,
+  style,
+} from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
+  createToneStyles,
   createResponsiveVariants,
   defaultMedia,
   sys,
   transition,
 } from '../../styles';
 import { components } from '../../styles/layers.css';
+
+const loaderToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const loaderToneStyles = createToneStyles(loaderToneVars);
 
 export const loaderRecipe = recipe({
   variants: {
@@ -96,6 +110,10 @@ export const loaderWrapperRecipe = recipe({
 
         vars: {
           [moonSize]: calc.divide(size, 7),
+          ...assignVars(loaderToneVars, {
+            base: sys.surface.foreground,
+            onBase: sys.surface.foreground,
+          }),
         },
       },
     },
@@ -103,6 +121,7 @@ export const loaderWrapperRecipe = recipe({
 
   variants: {
     size: loaderWrapperSizeStyles,
+    tone: loaderToneStyles,
   },
 
   defaultVariants: {
@@ -123,7 +142,7 @@ export const ellipse = style({
       borderRadius: '100%',
       borderWidth: moonSize,
       borderStyle: 'solid',
-      borderColor: `color-mix(in srgb, ${sys.surface.foreground} 30%, transparent)`,
+      borderColor: `color-mix(in srgb, ${loaderToneVars.base} 30%, transparent)`,
     },
   },
 });
@@ -141,7 +160,7 @@ export const moon = style({
       ),
       insetInlineStart: 0,
 
-      backgroundColor: sys.surface.foreground,
+      backgroundColor: loaderToneVars.base,
 
       borderRadius: '100%',
     },

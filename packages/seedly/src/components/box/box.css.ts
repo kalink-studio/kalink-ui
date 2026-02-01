@@ -3,11 +3,13 @@ import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
   createResponsiveVariants,
+  createToneStyles,
   defaultMedia,
   mapContractVars,
   sys,
 } from '../../styles';
 import { components } from '../../styles/layers.css';
+import { toneTokens } from '../../styles/tone';
 
 export const boxVars = createThemeContract({
   color: {
@@ -27,11 +29,21 @@ export const boxVars = createThemeContract({
   },
 });
 
+const boxToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
 const boxColorDefaults = assignVars(boxVars.color, {
   container: 'transparent',
   content: sys.surface.foreground,
-  outline: 'transparent',
+  outline: sys.surface.foreground,
 });
+
+const boxToneStyles = createToneStyles(boxToneVars, ({ base }) => ({
+  [boxVars.color.content]: base,
+  [boxVars.color.outline]: base,
+}));
 
 const boxSpacingDefaults = assignVars(boxVars.spacing, {
   block: sys.spacing[0],
@@ -70,14 +82,33 @@ export const boxVariantStyles = {
         vars: {
           ...assignVars(boxVars.color, {
             container: 'transparent',
-            content: sys.surface.foreground,
-            outline: sys.surface.foreground,
+            content: boxVars.color.outline,
+            outline: boxVars.color.outline,
           }),
         },
       },
     },
   },
 } as const;
+
+const boxToneCompoundVariants = (
+  Object.keys(toneTokens) as (keyof typeof toneTokens)[]
+).map((tone) => ({
+  variants: { variant: 'solid' as const, tone } as const,
+  style: {
+    '@layer': {
+      [components]: {
+        vars: {
+          ...assignVars(boxVars.color, {
+            container: boxToneVars.base,
+            content: boxToneVars.onBase,
+            outline: 'transparent',
+          }),
+        },
+      },
+    },
+  },
+}));
 
 // Shared variant styles to support responsive overrides
 export const boxSpacingStyles = mapContractVars(sys.spacing, (key) => ({
@@ -160,7 +191,14 @@ export const boxRecipe = recipe({
      * The radius of the box
      */
     radius: boxRadiusStyles,
+
+    /**
+     * The color tone of the box
+     */
+    tone: boxToneStyles,
   },
+
+  compoundVariants: boxToneCompoundVariants,
 });
 
 export type BoxVariants = NonNullable<RecipeVariants<typeof boxRecipe>>;

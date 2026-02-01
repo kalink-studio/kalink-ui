@@ -1,12 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import {
-  createToneAssignments,
-  createToneStyles,
-  sys,
-  typography,
-} from '../../styles';
+import { createToneStyles, sys, typography } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const menuItemVars = createThemeContract({
@@ -25,8 +20,6 @@ const menuItemColorDefaults = assignVars(menuItemVars.color, {
   foreground: sys.surface.foreground,
   overlay: sys.surface.foreground,
 });
-
-const menuItemToneAssignments = createToneAssignments(menuItemToneVars);
 
 const menuToneStyles = createToneStyles(menuItemToneVars, ({ base }) => ({
   ...menuItemColorDefaults,
@@ -59,7 +52,6 @@ export const menuItemRecipe = recipe({
 
         vars: {
           ...menuItemColorDefaults,
-          ...menuItemToneAssignments.neutral,
         },
 
         selectors: {
@@ -121,13 +113,12 @@ export const menuItemRecipe = recipe({
   },
 
   defaultVariants: {
-    tone: 'neutral',
     size: 'md',
   },
 });
 
 export const menuItemIcon = style({
-  color: menuItemToneVars.onBase,
+  color: menuItemVars.color.foreground,
 });
 
 export type MenuItemVariants = NonNullable<

@@ -32,7 +32,7 @@ export function InputWrapper({
   disabled,
   variant = 'outlined',
   size = 'md',
-  tone = 'neutral',
+  tone,
   ref,
 }: InputWrapperProps) {
   const typographySize = mapResponsiveSizeToTypography(size);

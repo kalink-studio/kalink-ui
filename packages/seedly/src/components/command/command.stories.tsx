@@ -6,9 +6,9 @@ import {
   Search,
   Smile,
 } from 'lucide-react';
-import { useState } from 'react';
+import { ComponentPropsWithoutRef, useState } from 'react';
 
-import { CommonArgs, commonArgs } from '../../utils';
+import { CommonArgs, commonArgs, responsiveSelectArg } from '../../utils';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Cluster } from '../cluster';
@@ -22,9 +22,14 @@ import { CommandItem } from './command-item';
 import { CommandList } from './command-list';
 import { CommandSeparator } from './command-separator';
 
+import type { Tone } from '../../styles';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const meta = {
+type StoryArgs = ComponentPropsWithoutRef<typeof Command> & {
+  tone?: Tone;
+};
+
+const meta: Meta<StoryArgs> = {
   title: 'Component/Command',
   parameters: {
     layout: 'centered',
@@ -33,26 +38,30 @@ const meta = {
   args: {},
   argTypes: {
     ...commonArgs([CommonArgs.COMPOSABLE, CommonArgs.STYLABLE]),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
-} satisfies Meta<typeof Command>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<StoryArgs>;
 
 export const Default: Story = {
-  render: () => (
+  render: (args) => (
     <Box variant="outline">
-      <CommandComponent />
+      <CommandComponent tone={args.tone} />
     </Box>
   ),
 };
 
 export const InPopover: Story = {
-  render: () => <PopoverStory />,
+  render: (args) => <PopoverStory tone={args.tone} />,
 };
 
-const PopoverStory = () => {
+const PopoverStory = ({ tone }: Pick<StoryArgs, 'tone'>) => {
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
   return (
@@ -62,7 +71,7 @@ const PopoverStory = () => {
           <Button>{'Open'}</Button>
         </PopoverTrigger>
         <PopoverContent container={portalRoot}>
-          <CommandComponent />
+          <CommandComponent tone={tone} />
         </PopoverContent>
       </Popover>
 
@@ -71,31 +80,37 @@ const PopoverStory = () => {
   );
 };
 
-const CommandComponent = () => (
+const CommandComponent = ({ tone }: Pick<StoryArgs, 'tone'>) => (
   <Command>
     <CommandInput placeholder="Search for..." icon={<Search />} />
     <CommandList>
-      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandEmpty tone={tone}>No results found.</CommandEmpty>
       <CommandGroup heading="Suggestions">
-        <CommandItem icon={Calendar}>Calendar</CommandItem>
-        <CommandItem icon={Smile} disabled>
+        <CommandItem icon={Calendar} tone={tone}>
+          Calendar
+        </CommandItem>
+        <CommandItem icon={Smile} disabled tone={tone}>
           Search Emoji
         </CommandItem>
-        <CommandItem icon={Calculator}>Calculator</CommandItem>
+        <CommandItem icon={Calculator} tone={tone}>
+          Calculator
+        </CommandItem>
       </CommandGroup>
       <CommandSeparator offset={false} />
       <CommandGroup heading="Settings">
-        <CommandItem>Profile</CommandItem>
-        <CommandItem>
+        <CommandItem tone={tone}>Profile</CommandItem>
+        <CommandItem tone={tone}>
           <Cluster justify="spaceBetween">
             <span>Billing</span>
             <Check size={16} />
           </Cluster>
         </CommandItem>
-        <CommandItem>Settings</CommandItem>
+        <CommandItem tone={tone}>Settings</CommandItem>
       </CommandGroup>
       <CommandSeparator offset />
-      <CommandItem icon={Delete}>Delete</CommandItem>
+      <CommandItem icon={Delete} tone={tone}>
+        Delete
+      </CommandItem>
     </CommandList>
   </Command>
 );

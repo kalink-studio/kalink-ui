@@ -14,12 +14,13 @@ export function AlertDialogFooter({
   className,
   justify = 'end',
   position,
+  tone,
   ...props
 }: AlertDialogFooterProps) {
   return (
     <Cluster
       justify={justify}
-      className={clsx(alertDialogFooterRecipe({ position }), className)}
+      className={clsx(alertDialogFooterRecipe({ position, tone }), className)}
       {...props}
     />
   );

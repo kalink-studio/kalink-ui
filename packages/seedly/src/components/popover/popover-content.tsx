@@ -16,9 +16,11 @@ import {
   PopoverContentVariants,
 } from './popover-content.css';
 
+import type { Tone } from '../../styles';
+
 type BoxStyleProps = Pick<
   BoxProps<'div'>,
-  'variant' | 'spacing' | 'radius' | 'elevation' | 'use'
+  'variant' | 'spacing' | 'radius' | 'elevation' | 'use' | 'tone'
 >;
 
 export type PopoverContentProps = {
@@ -34,18 +36,24 @@ export interface PopoverScrollableProps {
   scrollable?: boolean;
   maxHeight?: string;
   children?: ReactNode;
+  tone?: Tone;
 }
 
 export function PopoverScrollable({
   children,
   scrollable = true,
   maxHeight,
+  tone,
 }: PopoverScrollableProps) {
   if (scrollable === false) {
     return children;
   }
 
-  return <ScrollArea maxHeight={maxHeight}>{children}</ScrollArea>;
+  return (
+    <ScrollArea maxHeight={maxHeight} tone={tone}>
+      {children}
+    </ScrollArea>
+  );
 }
 
 export function PopoverContent({
@@ -62,6 +70,7 @@ export function PopoverContent({
   scrollable = true,
   maxHeight = 'var(--radix-popover-content-available-height)',
   elevation,
+  tone,
   ...props
 }: PopoverContentProps) {
   const content = (
@@ -82,8 +91,13 @@ export function PopoverContent({
         spacing={spacing}
         radius={radius}
         elevation={elevation}
+        tone={tone}
       >
-        <PopoverScrollable scrollable={scrollable} maxHeight={maxHeight}>
+        <PopoverScrollable
+          scrollable={scrollable}
+          maxHeight={maxHeight}
+          tone={tone}
+        >
           {children}
         </PopoverScrollable>
       </Box>

@@ -1,6 +1,11 @@
-import { keyframes, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  keyframes,
+} from '@vanilla-extract/css';
+import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { createToneStyles, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 const enterAnimation = keyframes({
@@ -21,28 +26,63 @@ const exitAnimation = keyframes({
   },
 });
 
-export const overlay = style({
-  '@layer': {
-    [components]: {
-      zIndex: 50,
+const overlayVars = createThemeContract({
+  color: {
+    background: null,
+  },
+});
 
-      position: 'fixed',
-      inset: 0,
+const overlayToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
 
-      backgroundColor: `color-mix(in srgb, ${sys.surface.background} 50%, transparent)`,
+const overlayToneStyles = createToneStyles(
+  overlayToneVars,
+  ({ base }, tone) => ({
+    [overlayVars.color.background]:
+      tone === 'neutral' ? sys.surface.background : base,
+  }),
+);
 
-      animationDuration: sys.motion.duration.medium[2],
-      animationTimingFunction: sys.motion.easing.standard,
-      backdropFilter: 'blur(4px)',
+export const overlayRecipe = recipe({
+  base: {
+    '@layer': {
+      [components]: {
+        zIndex: 50,
 
-      selectors: {
-        '&[data-state="open"]': {
-          animationName: enterAnimation,
+        position: 'fixed',
+        inset: 0,
+
+        backgroundColor: `color-mix(in srgb, ${overlayVars.color.background} 50%, transparent)`,
+
+        animationDuration: sys.motion.duration.medium[2],
+        animationTimingFunction: sys.motion.easing.standard,
+        backdropFilter: 'blur(4px)',
+
+        vars: {
+          ...assignVars(overlayVars.color, {
+            background: sys.surface.background,
+          }),
         },
-        '&[data-state="closed"]': {
-          animationName: exitAnimation,
+
+        selectors: {
+          '&[data-state="open"]': {
+            animationName: enterAnimation,
+          },
+          '&[data-state="closed"]': {
+            animationName: exitAnimation,
+          },
         },
       },
     },
   },
+
+  variants: {
+    tone: overlayToneStyles,
+  },
 });
+
+export const overlay = overlayRecipe();
+
+export type OverlayVariants = NonNullable<RecipeVariants<typeof overlayRecipe>>;

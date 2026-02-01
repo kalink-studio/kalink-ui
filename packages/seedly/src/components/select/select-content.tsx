@@ -8,11 +8,16 @@ import { popoverContentRecipe } from '../popover';
 import { ScrollArea } from '../scroll-area';
 
 import { SelectProps } from './select';
-import { selectContent, selectContentViewport } from './select-content.css';
+import {
+  selectContentRecipe,
+  selectContentViewport,
+  type SelectContentVariants,
+} from './select-content.css';
 
-export type SelectContentProps = ComponentPropsWithRef<typeof Content> & {
-  container?: SelectProps['container'];
-};
+export type SelectContentProps = ComponentPropsWithRef<typeof Content> &
+  SelectContentVariants & {
+    container?: SelectProps['container'];
+  };
 
 export interface SelectContentPortalProps {
   children: ReactNode;
@@ -35,14 +40,22 @@ export function SelectContent({
   children,
   position = 'popper',
   container,
+  tone,
   ...props
 }: SelectContentProps) {
   return (
     <SelectContentPortal container={container}>
       <Content position={position} asChild {...props}>
-        <div className={clsx(selectContent, popoverContentRecipe())}>
+        <div
+          className={clsx(
+            selectContentRecipe({ tone }),
+            popoverContentRecipe(),
+          )}
+        >
           <Viewport className={selectContentViewport}>
-            <ScrollArea maxHeight="16rem">{children}</ScrollArea>
+            <ScrollArea maxHeight="16rem" tone={tone}>
+              {children}
+            </ScrollArea>
           </Viewport>
         </div>
       </Content>

@@ -57,6 +57,7 @@ export const buttonIconRecipe = recipe({
   variants: {
     variant: buttonRecipe.classNames.variants.variant,
     size: buttonIconSizeStyles,
+    tone: buttonRecipe.classNames.variants.tone,
   },
 
   defaultVariants: {

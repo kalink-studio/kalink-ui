@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { ComponentPropsWithoutRef, useState } from 'react';
 
-import { CommonArgs, commonArgs } from '../../utils';
+import { CommonArgs, commonArgs, responsiveSelectArg } from '../../utils';
 import { Button } from '../button';
 import { Heading } from '../heading';
 import { Stack } from '../stack';
@@ -9,6 +9,12 @@ import { Text } from '../text';
 
 import { Popover, PopoverTrigger } from './popover';
 import { PopoverContent } from './popover-content';
+
+import type { Tone } from '../../styles';
+
+type StoryArgs = ComponentPropsWithoutRef<typeof Popover> & {
+  tone?: Tone;
+};
 
 const meta = {
   title: 'Component/Popover',
@@ -19,27 +25,36 @@ const meta = {
   args: {},
   argTypes: {
     ...commonArgs([CommonArgs.COMPOSABLE, CommonArgs.STYLABLE]),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
-} satisfies Meta<typeof Popover>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => <PopoverStory />,
+  render: (args) => <PopoverStory {...args} />,
 };
 
-const PopoverStory = () => {
+const PopoverStory = ({ tone, ...props }: StoryArgs) => {
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
   return (
     <>
-      <Popover>
+      <Popover {...props}>
         <PopoverTrigger asChild>
           <Button>{'Open'}</Button>
         </PopoverTrigger>
-        <PopoverContent container={portalRoot} radius="medium" color="surface">
+        <PopoverContent
+          container={portalRoot}
+          radius="medium"
+          color="surface"
+          tone={tone}
+        >
           <Stack>
             <Heading variant="title" size="small">
               Nulla irure dolore occaecat aute deserunt Lorem occaecat commodo

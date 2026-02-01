@@ -13,7 +13,7 @@ import { SheetOverlay } from './sheet-overlay';
 type SheetPortalProps = ComponentPropsWithRef<typeof Portal>;
 type BoxStyleProps<TUse extends ElementType> = Pick<
   BoxProps<TUse>,
-  'variant' | 'radius' | 'elevation' | 'use'
+  'variant' | 'radius' | 'elevation' | 'use' | 'tone'
 >;
 
 export type SheetContentProps<TUse extends ElementType> = SheetContentVariants &
@@ -34,11 +34,12 @@ export function SheetContent<TUse extends ElementType>({
   elevation,
   radius,
   use,
+  tone,
   ...props
 }: SheetContentProps<TUse>) {
   return (
     <SheetPortal container={container} forceMount={forceMount}>
-      <SheetOverlay />
+      <SheetOverlay tone={tone} />
       <Content asChild>
         <Box
           ref={ref}
@@ -47,6 +48,7 @@ export function SheetContent<TUse extends ElementType>({
           spacing={spacing}
           elevation={elevation}
           radius={radius}
+          tone={tone}
           className={clsx(
             sheetContentRecipe({ side, size, spacing }),
             className,

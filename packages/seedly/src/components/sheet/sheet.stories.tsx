@@ -5,6 +5,7 @@ import {
   argTypesFromRecipe,
   CommonArgs,
   commonArgs,
+  responsiveSelectArg,
 } from '../../utils/arg-types';
 import { Button } from '../button';
 import { ButtonIcon } from '../button-icon';
@@ -76,6 +77,10 @@ const meta = {
       CommonArgs.STYLABLE,
       CommonArgs.REFERABLE,
     ]),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
   render: (args) => <SheetStory {...args} />,
   play: sharedPlay,

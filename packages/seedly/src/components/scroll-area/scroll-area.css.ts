@@ -1,10 +1,26 @@
-import { createVar, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  createVar,
+  style,
+} from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys, transition } from '../../styles';
+import { createToneStyles, sys, transition } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const viewportMaxHeight = createVar();
+
+const scrollAreaToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const scrollAreaToneDefaults = assignVars(scrollAreaToneVars, {
+  base: sys.surface.foreground,
+  onBase: sys.surface.foreground,
+});
+const scrollAreaToneStyles = createToneStyles(scrollAreaToneVars);
 
 export const scrollArea = style({
   '@layer': {
@@ -45,6 +61,10 @@ export const scrollAreaScrollbarRecipe = recipe({
           duration: 'medium.2',
         }),
         userSelect: 'none',
+
+        vars: {
+          ...scrollAreaToneDefaults,
+        },
       },
     },
   },
@@ -75,6 +95,8 @@ export const scrollAreaScrollbarRecipe = recipe({
         },
       },
     },
+
+    tone: scrollAreaToneStyles,
   },
 });
 
@@ -87,7 +109,7 @@ export const scrollAreaThumb = style({
 
       borderRadius: sys.shape.corner.small,
 
-      backgroundColor: sys.surface.foreground,
+      backgroundColor: scrollAreaToneVars.base,
     },
   },
 });

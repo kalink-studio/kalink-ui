@@ -7,7 +7,6 @@ import { calc } from '@vanilla-extract/css-utils';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
-  createToneAssignments,
   createToneStyles,
   createResponsiveVariants,
   defaultMedia,
@@ -70,8 +69,10 @@ const buttonToneOverlay = assignVars(buttonVariantVars, {
   outline: buttonToneVars.base,
 });
 
-const buttonToneAssignments = createToneAssignments(buttonToneVars);
-const buttonToneDefaults = buttonToneAssignments.neutral;
+const buttonToneDefaults = assignVars(buttonToneVars, {
+  base: sys.surface.foreground,
+  onBase: sys.surface.background,
+});
 
 export const buttonToneStyles = createToneStyles(buttonToneVars);
 
@@ -89,7 +90,6 @@ export const buttonVariantStyles = {
           [buttonVariantVars.foreground]: buttonToneVars.onBase,
           [buttonVariantVars.background]: buttonToneVars.base,
           [buttonVariantVars.outline]: 'transparent',
-          ...buttonToneDefaults,
 
           ...assignVars(buttonVars.border, {
             width: '1px',
@@ -122,7 +122,6 @@ export const buttonVariantStyles = {
           ...buttonColorDefaults,
           ...buttonToneOverlay,
           [buttonVariantVars.background]: 'unset',
-          ...buttonToneDefaults,
           ...assignVars(buttonVars.border, {
             width: '1px',
             style: 'solid',
@@ -155,7 +154,6 @@ export const buttonVariantStyles = {
           ...buttonToneOverlay,
           [buttonVariantVars.background]: 'unset',
           [buttonVariantVars.outline]: 'transparent',
-          ...buttonToneDefaults,
           ...assignVars(buttonVars.border, {
             width: '1px',
             style: 'solid',
@@ -188,7 +186,6 @@ export const buttonVariantStyles = {
           ...buttonToneOverlay,
           [buttonVariantVars.background]: 'unset',
           [buttonVariantVars.outline]: 'transparent',
-          ...buttonToneDefaults,
           ...assignVars(buttonVars.spacing, {
             block: '0',
             inline: '0',
@@ -336,10 +333,6 @@ export const buttonRecipe = recipe({
     variant: buttonVariantStyles,
     size: buttonSizeStyles,
     tone: buttonToneStyles,
-  },
-
-  defaultVariants: {
-    tone: 'neutral',
   },
 
   compoundVariants: compactSpacingVariants,

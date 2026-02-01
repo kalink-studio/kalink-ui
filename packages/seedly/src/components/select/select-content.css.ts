@@ -1,13 +1,47 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { createToneStyles, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const selectContent = style({
-  '@layer': {
-    [components]: {
-      backgroundColor: sys.surface.background,
+const selectContentVars = createThemeContract({
+  color: {
+    background: null,
+  },
+});
+
+const selectContentToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
+
+const selectContentToneStyles = createToneStyles(
+  selectContentToneVars,
+  ({ base }, tone) => ({
+    [selectContentVars.color.background]:
+      tone === 'neutral'
+        ? sys.surface.background
+        : `color-mix(in srgb, ${base} calc(${sys.state.muted.surface} * 100%), ${sys.surface.background})`,
+  }),
+);
+
+export const selectContentRecipe = recipe({
+  base: {
+    '@layer': {
+      [components]: {
+        backgroundColor: selectContentVars.color.background,
+
+        vars: {
+          ...assignVars(selectContentVars.color, {
+            background: sys.surface.background,
+          }),
+        },
+      },
     },
+  },
+
+  variants: {
+    tone: selectContentToneStyles,
   },
 });
 
@@ -20,3 +54,7 @@ export const selectContentViewport = style({
     },
   },
 });
+
+export type SelectContentVariants = NonNullable<
+  RecipeVariants<typeof selectContentRecipe>
+>;

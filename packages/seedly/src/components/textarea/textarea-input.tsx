@@ -22,10 +22,11 @@ export function TextareaInput({
   className,
   size = 'md',
   variant = 'outlined',
-  tone = 'neutral',
+  tone,
   ...props
 }: TextareaInputProps) {
-  const { errors } = useFormFieldContext();
+  const { errors, tone: contextTone } = useFormFieldContext();
+  const resolvedTone = tone ?? contextTone;
   const typographySize = mapResponsiveSizeToTypography(size);
   const typographyOverrides = buildTypographyOverrides({
     variant: 'body',
@@ -35,7 +36,7 @@ export function TextareaInput({
   return (
     <textarea
       className={inputAppearanceResponsive(
-        { variant, size, tone },
+        { variant, size, tone: resolvedTone },
         typographyOverrides,
         textarea,
         className,

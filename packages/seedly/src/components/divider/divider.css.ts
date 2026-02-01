@@ -1,16 +1,40 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract } from '@vanilla-extract/css';
+import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { createToneStyles, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-export const divider = style({
-  '@layer': {
-    [components]: {
-      height: 1,
-      width: '100%',
+const dividerToneVars = createThemeContract({
+  base: null,
+  onBase: null,
+});
 
-      border: 'none',
-      backgroundColor: sys.surface.foreground,
+const dividerToneDefaults = assignVars(dividerToneVars, {
+  base: sys.surface.foreground,
+  onBase: sys.surface.foreground,
+});
+const dividerToneStyles = createToneStyles(dividerToneVars);
+
+export const dividerRecipe = recipe({
+  base: {
+    '@layer': {
+      [components]: {
+        height: 1,
+        width: '100%',
+
+        border: 'none',
+        backgroundColor: dividerToneVars.base,
+
+        vars: {
+          ...dividerToneDefaults,
+        },
+      },
     },
   },
+
+  variants: {
+    tone: dividerToneStyles,
+  },
 });
+
+export type DividerVariants = NonNullable<RecipeVariants<typeof dividerRecipe>>;

@@ -46,10 +46,8 @@ const inputColorDefaults = assignVars(inputVars.color, {
 });
 
 const inputToneAssignments = createToneAssignments(inputToneVars);
-const inputToneDefaults = inputToneAssignments.neutral;
 
 const inputToneStyles = createToneStyles(inputToneVars, ({ base }) => ({
-  ...inputColorDefaults,
   [inputVars.color.foreground]: base,
   [inputVars.color.outline]: base,
 }));
@@ -146,13 +144,13 @@ export const inputAppearanceRecipe = recipe({
 
           selectors: {
             '&:disabled, &:has(:disabled)': {
-              backgroundColor: `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.background} * 100%), transparent)`,
+              backgroundColor: `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.disabled.background} * 100%), transparent)`,
 
               vars: {
                 [inputVars.color.foreground]:
-                  `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.text} * 100%), transparent)`,
+                  `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.disabled.text} * 100%), transparent)`,
                 [inputVars.color.outline]:
-                  `color-mix(in srgb, ${inputToneVars.base} calc(${sys.state.disabled.border} * 100%), transparent)`,
+                  `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.disabled.border} * 100%), transparent)`,
               },
             },
 
@@ -173,9 +171,6 @@ export const inputAppearanceRecipe = recipe({
 
           vars: {
             ...inputColorDefaults,
-            [inputVars.color.foreground]: inputToneVars.base,
-            [inputVars.color.outline]: inputToneVars.base,
-            ...inputToneDefaults,
             ...assignVars(inputVars.spacing, {
               block: sys.spacing[2],
               inline: sys.spacing[4],
@@ -232,7 +227,6 @@ export const inputAppearanceRecipe = recipe({
   defaultVariants: {
     variant: 'outlined',
     size: 'md',
-    tone: 'neutral',
   },
 });
 

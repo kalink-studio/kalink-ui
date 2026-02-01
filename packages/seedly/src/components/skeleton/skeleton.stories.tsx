@@ -18,6 +18,10 @@ const meta = {
       options: ['sm', 'md', 'lg'],
       summary: 'Responsive<SkeletonSize>',
     }),
+    tone: responsiveSelectArg({
+      options: ['neutral', 'primary', 'destructive', 'success'],
+      summary: 'Responsive<Tone>',
+    }),
   },
 } satisfies Meta<typeof Skeleton>;
 
