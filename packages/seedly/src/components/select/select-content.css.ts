@@ -4,7 +4,7 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { createToneStyles, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-const selectContentVars = createThemeContract({
+export const selectContentVars = createThemeContract({
   color: {
     background: null,
   },
