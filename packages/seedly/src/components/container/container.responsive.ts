@@ -1,10 +1,10 @@
 import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 import { radiusAt, spacingAt } from '../layout/layout.css';
 
-import { boxRecipe } from './box.css';
+import { containerRecipe } from './container.css';
 
-export const boxResponsive = responsiveRecipe({
-  recipe: boxRecipe,
+export const containerResponsive = responsiveRecipe({
+  recipe: containerRecipe,
   at: { spacing: spacingAt, radius: radiusAt },
   order: defaultOrder,
 });

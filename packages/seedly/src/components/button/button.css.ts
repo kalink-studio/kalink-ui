@@ -14,6 +14,7 @@ import {
   typography,
 } from '../../styles';
 import { components } from '../../styles/layers.css';
+import { toneTokens } from '../../styles/tone';
 import { transition } from '../../styles/transition';
 
 export const buttonVars = createThemeContract({
@@ -52,9 +53,9 @@ const buttonVariantVars = createThemeContract({
 });
 
 const buttonColorDefaults = assignVars(buttonVars.color, {
-  foreground: sys.surface.foreground,
+  foreground: sys.color.content.base,
   background: 'transparent',
-  outline: 'transparent',
+  outline: sys.color.content.base,
 });
 
 const buttonVariantDefaults = assignVars(buttonVariantVars, {
@@ -63,32 +64,99 @@ const buttonVariantDefaults = assignVars(buttonVariantVars, {
   outline: buttonVars.color.outline,
 });
 
-const buttonToneOverlay = assignVars(buttonVariantVars, {
-  foreground: buttonToneVars.base,
-  background: buttonToneVars.base,
-  outline: buttonToneVars.base,
-});
-
 const buttonToneDefaults = assignVars(buttonToneVars, {
-  base: sys.surface.foreground,
-  onBase: sys.surface.background,
+  base: sys.color.content.base,
+  onBase: sys.color.surface.base,
 });
 
 export const buttonToneStyles = createToneStyles(buttonToneVars);
+
+const buttonToneCompoundVariants = (
+  Object.keys(toneTokens) as (keyof typeof toneTokens)[]
+).flatMap((tone) => [
+  {
+    variants: { tone, variant: 'solid' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [buttonVariantVars.foreground]: buttonToneVars.onBase,
+            [buttonVariantVars.background]: buttonToneVars.base,
+            [buttonVariantVars.outline]: 'transparent',
+          },
+        },
+      },
+    },
+  },
+  {
+    variants: { tone, variant: 'outline' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [buttonVariantVars.foreground]: buttonToneVars.base,
+            [buttonVariantVars.background]: 'transparent',
+            [buttonVariantVars.outline]: buttonToneVars.base,
+          },
+        },
+      },
+    },
+  },
+  {
+    variants: { tone, variant: 'ghost' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [buttonVariantVars.foreground]: buttonToneVars.base,
+            [buttonVariantVars.background]: 'transparent',
+            [buttonVariantVars.outline]: 'transparent',
+          },
+        },
+      },
+    },
+  },
+  {
+    variants: { tone, variant: 'bare' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [buttonVariantVars.foreground]: buttonToneVars.base,
+            [buttonVariantVars.outline]: 'transparent',
+          },
+        },
+      },
+    },
+  },
+  {
+    variants: { tone, variant: 'link' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [buttonVariantVars.foreground]: buttonToneVars.base,
+            [buttonVariantVars.background]: 'transparent',
+            [buttonVariantVars.outline]: 'transparent',
+          },
+        },
+      },
+    },
+  },
+]);
 
 export const buttonVariantStyles = {
   /**
    * The main variation of the button
    */
   bare: {},
-  plain: {
+  solid: {
     '@layer': {
       [components]: {
         vars: {
           ...buttonColorDefaults,
-          ...buttonToneOverlay,
-          [buttonVariantVars.foreground]: buttonToneVars.onBase,
-          [buttonVariantVars.background]: buttonToneVars.base,
+          [buttonVariantVars.foreground]: sys.color.content.base,
+          [buttonVariantVars.background]: sys.color.container.base,
           [buttonVariantVars.outline]: 'transparent',
 
           ...assignVars(buttonVars.border, {
@@ -99,15 +167,15 @@ export const buttonVariantStyles = {
         },
         ':hover': {
           vars: {
-            [buttonVariantVars.background]: `color-mix(in srgb, ${buttonToneVars.base}, ${buttonToneVars.onBase} calc(100% * ${sys.state.hovered.opacity}))`,
+            [buttonVariantVars.background]: `color-mix(in srgb, ${buttonVariantVars.background}, ${buttonVariantVars.foreground} calc(100% * ${sys.state.hovered.opacity}))`,
 
             [buttonVars.shadow.level]: sys.elevation.minimal,
           },
         },
         ':disabled': {
           vars: {
-            [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.disabled.text}), transparent)`,
-            [buttonVariantVars.background]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.disabled.background}), transparent)`,
+            [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonVariantVars.background} calc(100% * ${sys.state.disabled.text}), transparent)`,
+            [buttonVariantVars.background]: `color-mix(in srgb, ${buttonVariantVars.background} calc(100% * ${sys.state.disabled.background}), transparent)`,
             [buttonVars.shadow.level]: sys.elevation.none,
             [buttonVars.border.color]: 'transparent',
           },
@@ -120,8 +188,9 @@ export const buttonVariantStyles = {
       [components]: {
         vars: {
           ...buttonColorDefaults,
-          ...buttonToneOverlay,
-          [buttonVariantVars.background]: 'unset',
+          [buttonVariantVars.foreground]: sys.color.content.base,
+          [buttonVariantVars.background]: 'transparent',
+          [buttonVariantVars.outline]: sys.color.content.base,
           ...assignVars(buttonVars.border, {
             width: '1px',
             style: 'solid',
@@ -131,15 +200,15 @@ export const buttonVariantStyles = {
         selectors: {
           '&:hover': {
             vars: {
-              [buttonVariantVars.background]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.hovered.opacity}), transparent)`,
+              [buttonVariantVars.background]: `color-mix(in srgb, ${buttonVariantVars.outline} calc(100% * ${sys.state.hovered.opacity}), transparent)`,
             },
           },
           '&:disabled': {
             vars: {
-              [buttonVariantVars.background]: 'unset',
-              [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.disabled.text}), transparent)`,
+              [buttonVariantVars.background]: 'transparent',
+              [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonVariantVars.outline} calc(100% * ${sys.state.disabled.text}), transparent)`,
               [buttonVars.border.color]:
-                `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.disabled.border}), transparent)`,
+                `color-mix(in srgb, ${buttonVariantVars.outline} calc(100% * ${sys.state.disabled.border}), transparent)`,
             },
           },
         },
@@ -151,8 +220,8 @@ export const buttonVariantStyles = {
       [components]: {
         vars: {
           ...buttonColorDefaults,
-          ...buttonToneOverlay,
-          [buttonVariantVars.background]: 'unset',
+          [buttonVariantVars.foreground]: sys.color.content.base,
+          [buttonVariantVars.background]: 'transparent',
           [buttonVariantVars.outline]: 'transparent',
           ...assignVars(buttonVars.border, {
             width: '1px',
@@ -163,13 +232,13 @@ export const buttonVariantStyles = {
         selectors: {
           '&:hover': {
             vars: {
-              [buttonVariantVars.background]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.hovered.opacity}), transparent)`,
+              [buttonVariantVars.background]: `color-mix(in srgb, ${buttonVariantVars.foreground} calc(100% * ${sys.state.hovered.opacity}), transparent)`,
             },
           },
           '&:disabled': {
             vars: {
-              [buttonVariantVars.background]: 'unset',
-              [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.disabled.text}), transparent)`,
+              [buttonVariantVars.background]: 'transparent',
+              [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonVariantVars.foreground} calc(100% * ${sys.state.disabled.text}), transparent)`,
             },
           },
         },
@@ -183,8 +252,8 @@ export const buttonVariantStyles = {
         textDecoration: 'none',
         vars: {
           ...buttonColorDefaults,
-          ...buttonToneOverlay,
-          [buttonVariantVars.background]: 'unset',
+          [buttonVariantVars.foreground]: sys.color.content.base,
+          [buttonVariantVars.background]: 'transparent',
           [buttonVariantVars.outline]: 'transparent',
           ...assignVars(buttonVars.spacing, {
             block: '0',
@@ -204,7 +273,7 @@ export const buttonVariantStyles = {
           '&:disabled': {
             textDecoration: 'none',
             vars: {
-              [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonToneVars.base} calc(100% * ${sys.state.disabled.text}), transparent)`,
+              [buttonVariantVars.foreground]: `color-mix(in srgb, ${buttonVariantVars.foreground} calc(100% * ${sys.state.disabled.text}), transparent)`,
             },
           },
         },
@@ -335,7 +404,7 @@ export const buttonRecipe = recipe({
     tone: buttonToneStyles,
   },
 
-  compoundVariants: compactSpacingVariants,
+  compoundVariants: [...compactSpacingVariants, ...buttonToneCompoundVariants],
 });
 
 export const buttonLabelRecipe = recipe({

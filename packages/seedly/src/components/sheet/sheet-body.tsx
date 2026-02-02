@@ -1,9 +1,9 @@
 import { ElementType } from 'react';
 
-import { Box, BoxProps } from '../box';
+import { Box, BoxLayoutProps } from '../box';
 import { ScrollArea } from '../scroll-area';
 
-export type SheetBodyProps<TUse extends ElementType> = BoxProps<TUse>;
+export type SheetBodyProps<TUse extends ElementType> = BoxLayoutProps<TUse>;
 
 export function SheetBody<TUse extends ElementType>(
   props: SheetBodyProps<TUse>,

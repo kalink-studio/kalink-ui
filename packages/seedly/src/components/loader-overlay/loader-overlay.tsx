@@ -27,7 +27,6 @@ export function LoaderOverlay({
   return (
     <Box
       spacing={spacing}
-      tone={tone}
       className={clsx(loaderOverlayRecipe({ position, tone }), className)}
     >
       <Stack use={Center} align="center" spacing={spacing} intrinsic andText>

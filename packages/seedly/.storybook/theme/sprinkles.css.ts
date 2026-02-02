@@ -12,18 +12,18 @@ const space = {
 export const sprinklesProps = {
   padding: space,
   backgroundColor: {
-    surface: sys.surface.background,
-    toneNeutral: sys.tone.neutral,
-    tonePrimary: sys.tone.primary,
-    toneDestructive: sys.tone.destructive,
-    toneSuccess: sys.tone.success,
+    surface: sys.color.surface.base,
+    toneNeutral: sys.color.tone.neutral,
+    tonePrimary: sys.color.tone.primary,
+    toneDestructive: sys.color.tone.destructive,
+    toneSuccess: sys.color.tone.success,
   },
   color: {
-    surface: sys.surface.foreground,
-    onNeutral: sys.tone.onNeutral,
-    onPrimary: sys.tone.onPrimary,
-    onDestructive: sys.tone.onDestructive,
-    onSuccess: sys.tone.onSuccess,
+    surface: sys.color.content.base,
+    onNeutral: sys.color.tone.onNeutral,
+    onPrimary: sys.color.tone.onPrimary,
+    onDestructive: sys.color.tone.onDestructive,
+    onSuccess: sys.color.tone.onSuccess,
   },
   textAlign: {
     center: 'center',

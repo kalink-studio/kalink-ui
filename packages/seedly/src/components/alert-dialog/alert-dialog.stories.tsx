@@ -40,7 +40,7 @@ const meta = {
   render: (args) => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="plain">Open</Button>
+        <Button variant="solid">Open</Button>
       </AlertDialogTrigger>
       <AlertDialogContent {...args}>
         <Stack spacing={4} align="stretch">
@@ -53,7 +53,7 @@ const meta = {
           </AlertDialogHeader>
           <AlertDialogFooter spacing={2}>
             <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
-            <AlertDialogAction variant="plain">Continue</AlertDialogAction>
+            <AlertDialogAction variant="solid">Continue</AlertDialogAction>
           </AlertDialogFooter>
         </Stack>
       </AlertDialogContent>

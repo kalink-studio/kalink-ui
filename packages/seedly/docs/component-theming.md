@@ -31,8 +31,15 @@ overridable.
 
 ### System tokens
 
-System tokens live in `sys` and are **semantic**: `sys.surface.background`,
+System tokens live in `sys` and are **semantic**: `sys.color.surface.base`,
 `sys.state.hovered.opacity`, `sys.shape.corner.rounded`.
+
+### Usage rules
+
+- **Surface**: page and section backgrounds (canvas-level roots).
+- **Container**: component shells (one per component, at the outer root only).
+- **Box**: layout primitive for internal composition; add `tone` only when
+  semantic color is needed.
 
 ### Component contracts
 
@@ -56,8 +63,8 @@ Variants are semantic and should only **assign vars**.
 
 ### Variant naming
 
-- Preferred: `filled`, `outlined`, `text`, `elevated`, `tonal`.
-- Allowed alternates: `ghost`, `plain`, `link` if a component requires them.
+- Preferred: `solid`, `outline`, `bare`.
+- Allowed alternates: `ghost`, `link` if a component requires them.
 - Avoid: `primary`, `secondary` (these are **tones**, not visual treatments).
 
 ### Variant rules
@@ -124,27 +131,27 @@ export const componentVars = createThemeContract({
 });
 
 export const componentVariantStyles = {
-  filled: {
+  solid: {
     '@layer': {
       [components]: {
         vars: {
           ...assignVars(componentVars.color, {
-            container: sys.surface.foreground,
-            content: sys.surface.background,
+            container: sys.color.container.base,
+            content: sys.color.content.base,
             outline: 'transparent',
           }),
         },
       },
     },
   },
-  outlined: {
+  outline: {
     '@layer': {
       [components]: {
         vars: {
           ...assignVars(componentVars.color, {
             container: 'transparent',
-            content: sys.surface.foreground,
-            outline: sys.surface.foreground,
+            content: sys.color.content.base,
+            outline: sys.color.content.base,
           }),
         },
       },
@@ -201,8 +208,8 @@ export const componentRecipe = recipe({
 
         vars: {
           ...assignVars(componentVars.color, {
-            container: sys.surface.background,
-            content: sys.surface.foreground,
+            container: sys.color.container.base,
+            content: sys.color.content.base,
             outline: 'transparent',
           }),
           ...assignVars(componentVars.spacing, {
@@ -226,7 +233,7 @@ export const componentRecipe = recipe({
     size: componentSizeStyles,
   },
   defaultVariants: {
-    variant: 'filled',
+    variant: 'solid',
     size: 'md',
   },
 });
@@ -242,18 +249,18 @@ export type ComponentVariants = NonNullable<
 
 Use semantic keys and map to system tokens by default:
 
-- `buttonVars.color.container` → `sys.surface.foreground`
-- `buttonVars.color.content` → `sys.surface.background`
-- `buttonVars.color.outline` → `sys.surface.foreground`
+- `buttonVars.color.container` → `sys.color.container.base`
+- `buttonVars.color.content` → `sys.color.content.base`
+- `buttonVars.color.outline` → `sys.color.content.base`
 - `buttonVars.spacing.block` / `inline` → `sys.spacing`
 - `buttonVars.shape.corner` → `sys.shape.corner`
 - `buttonVars.elevation.level` → `sys.elevation`
 
 ### Variant strategy
 
-- `filled`: container + content set via vars.
-- `outlined`: outline set, container transparent.
-- `text`: container transparent, no outline, hover uses state tokens.
+- `solid`: container + content set via vars.
+- `outline`: outline set, container transparent.
+- `bare`: container transparent, no outline, hover uses state tokens.
 
 ### Size strategy
 
@@ -290,6 +297,6 @@ export const marketingButton = style({
 - If a component does not need variants or slots, omit them. Do not add empty
   contracts or classes.
 - If a component needs a tone system, model it as **data** (`tone` variant), but
-  keep visual treatment in `variant` (`filled/outlined/text`).
+  keep visual treatment in `variant` (`solid/outline/bare`).
 - Structural overrides (spacing, typography, shape, elevation, motion) should be
   expressed through vars, not hard-coded values.

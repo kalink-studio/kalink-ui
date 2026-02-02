@@ -17,8 +17,8 @@ const menuItemToneVars = createThemeContract({
 });
 
 const menuItemColorDefaults = assignVars(menuItemVars.color, {
-  foreground: sys.surface.foreground,
-  overlay: sys.surface.foreground,
+  foreground: sys.color.content.base,
+  overlay: sys.color.content.base,
 });
 
 const menuToneStyles = createToneStyles(menuItemToneVars, ({ base }) => ({

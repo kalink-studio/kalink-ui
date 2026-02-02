@@ -7,7 +7,7 @@ import {
   mapResponsiveSizeToTypography,
   type Responsive,
 } from '../../styles';
-import { Box, BoxProps } from '../box';
+import { Box, BoxLayoutProps } from '../box';
 
 import { skeletonRecipe, SkeletonVariants } from './skeleton.css';
 
@@ -15,7 +15,7 @@ export type SkeletonProps<TUse extends ElementType> = Omit<
   SkeletonVariants,
   'withChildren' | 'size'
 > &
-  BoxProps<TUse> & {
+  BoxLayoutProps<TUse> & {
     size?: Responsive<NonNullable<SkeletonVariants['size']>>;
   };
 

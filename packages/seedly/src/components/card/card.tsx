@@ -2,8 +2,8 @@ import { PolymorphicComponentProps } from '@kalink-ui/dibbly';
 import { clsx } from 'clsx';
 import { ElementType } from 'react';
 
-import { Box, type BoxProps } from '../box';
 import { Cluster, type ClusterProps } from '../cluster';
+import { Container, type ContainerProps } from '../container';
 import { Stack } from '../stack';
 
 import { cardFooterRecipe } from './card.css';
@@ -14,7 +14,7 @@ import type { Responsive } from '../../styles/responsive';
 export type CardRootElement = 'article' | 'div';
 
 export type CardProps<TUse extends CardRootElement = 'article'> =
-  BoxProps<TUse> & {
+  ContainerProps<TUse> & {
     verticalSpacing?: Responsive<Spacing>;
   };
 
@@ -32,7 +32,7 @@ export function Card<TUse extends CardRootElement = 'article'>(
   } = props;
 
   return (
-    <Box
+    <Container
       use={use as CardProps['use']}
       variant={variant}
       spacing={spacing}
@@ -42,7 +42,7 @@ export function Card<TUse extends CardRootElement = 'article'>(
       <Stack align="stretch" spacing={verticalSpacing ?? spacing}>
         {children}
       </Stack>
-    </Box>
+    </Container>
   );
 }
 

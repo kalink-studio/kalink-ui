@@ -48,7 +48,7 @@ export const menuSeparatorRecipe = recipe({
           position: 'absolute',
           top: '50%',
 
-          backgroundColor: sys.surface.foreground,
+          backgroundColor: `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), transparent)`,
 
           transform: 'translateY(-50%)',
         },

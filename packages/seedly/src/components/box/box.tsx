@@ -6,11 +6,24 @@ import { boxResponsive } from './box.responsive';
 
 import type { Responsive } from '../../styles/responsive';
 
-export type BoxProps<TUse extends ElementType> =
+interface BoxLayoutOnlyProps {
+  tone?: undefined;
+  variant?: never;
+}
+
+interface BoxToneProps {
+  tone: NonNullable<BoxVariants['tone']>;
+  variant?: BoxVariants['variant'];
+}
+
+export type BoxLayoutProps<TUse extends ElementType> =
   PolymorphicComponentProps<TUse> &
-    Omit<BoxVariants, 'spacing'> & {
+    Omit<BoxVariants, 'spacing' | 'tone' | 'variant'> & {
       spacing?: Responsive<NonNullable<BoxVariants['spacing']>>;
     };
+
+export type BoxProps<TUse extends ElementType> = BoxLayoutProps<TUse> &
+  (BoxLayoutOnlyProps | BoxToneProps);
 
 /**
  * A evenly spaced container for grouping related elements. Can

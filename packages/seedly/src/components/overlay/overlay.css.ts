@@ -37,13 +37,9 @@ const overlayToneVars = createThemeContract({
   onBase: null,
 });
 
-const overlayToneStyles = createToneStyles(
-  overlayToneVars,
-  ({ base }, tone) => ({
-    [overlayVars.color.background]:
-      tone === 'neutral' ? sys.surface.background : base,
-  }),
-);
+const overlayToneStyles = createToneStyles(overlayToneVars, ({ base }) => ({
+  [overlayVars.color.background]: base,
+}));
 
 export const overlayRecipe = recipe({
   base: {
@@ -62,7 +58,7 @@ export const overlayRecipe = recipe({
 
         vars: {
           ...assignVars(overlayVars.color, {
-            background: sys.surface.background,
+            background: sys.color.content.base,
           }),
         },
 

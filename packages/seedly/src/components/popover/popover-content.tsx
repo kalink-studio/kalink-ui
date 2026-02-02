@@ -8,7 +8,7 @@ import {
   ReactNode,
 } from 'react';
 
-import { Box, BoxProps } from '../box';
+import { Container, ContainerProps } from '../container';
 import { ScrollArea } from '../scroll-area';
 
 import {
@@ -18,19 +18,20 @@ import {
 
 import type { Tone } from '../../styles';
 
-type BoxStyleProps = Pick<
-  BoxProps<'div'>,
-  'variant' | 'spacing' | 'radius' | 'elevation' | 'use' | 'tone'
+type ContainerStyleProps = Pick<
+  ContainerProps<'div'>,
+  'variant' | 'spacing' | 'radius' | 'elevation' | 'use'
 >;
 
 export type PopoverContentProps = {
   portaled?: boolean;
   maxHeight?: string;
   scrollable?: boolean;
+  tone?: Tone;
 } & PopoverContentVariants &
   ComponentPropsWithoutRef<typeof Portal> &
-  BoxStyleProps &
-  Omit<ComponentPropsWithRef<typeof Content>, keyof BoxStyleProps>;
+  ContainerStyleProps &
+  Omit<ComponentPropsWithRef<typeof Content>, keyof ContainerStyleProps>;
 
 export interface PopoverScrollableProps {
   scrollable?: boolean;
@@ -85,13 +86,12 @@ export function PopoverContent({
       collisionPadding={16}
       {...props}
     >
-      <Box
+      <Container
         use={use}
         variant={variant}
         spacing={spacing}
         radius={radius}
         elevation={elevation}
-        tone={tone}
       >
         <PopoverScrollable
           scrollable={scrollable}
@@ -100,7 +100,7 @@ export function PopoverContent({
         >
           {children}
         </PopoverScrollable>
-      </Box>
+      </Container>
     </Content>
   );
 

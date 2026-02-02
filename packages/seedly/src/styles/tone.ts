@@ -11,20 +11,20 @@ export interface ToneTokens {
 
 export const toneTokens: Record<ToneKey, ToneTokens> = {
   neutral: {
-    base: sys.tone.neutral,
-    onBase: sys.tone.onNeutral,
+    base: sys.color.tone.neutral,
+    onBase: sys.color.tone.onNeutral,
   },
   primary: {
-    base: sys.tone.primary,
-    onBase: sys.tone.onPrimary,
+    base: sys.color.tone.primary,
+    onBase: sys.color.tone.onPrimary,
   },
   destructive: {
-    base: sys.tone.destructive,
-    onBase: sys.tone.onDestructive,
+    base: sys.color.tone.destructive,
+    onBase: sys.color.tone.onDestructive,
   },
   success: {
-    base: sys.tone.success,
-    onBase: sys.tone.onSuccess,
+    base: sys.color.tone.success,
+    onBase: sys.color.tone.onSuccess,
   },
 };
 

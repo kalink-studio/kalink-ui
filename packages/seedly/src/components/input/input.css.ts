@@ -40,17 +40,59 @@ const inputToneVars = createThemeContract({
 });
 
 const inputColorDefaults = assignVars(inputVars.color, {
-  foreground: sys.surface.foreground,
-  background: sys.surface.background,
-  outline: sys.surface.foreground,
+  foreground: sys.color.content.base,
+  background: 'transparent',
+  outline: sys.color.content.base,
 });
 
 const inputToneAssignments = createToneAssignments(inputToneVars);
 
-const inputToneStyles = createToneStyles(inputToneVars, ({ base }) => ({
-  [inputVars.color.foreground]: base,
-  [inputVars.color.outline]: base,
-}));
+const inputToneStyles = createToneStyles(inputToneVars);
+
+const inputToneCompoundVariants = (
+  Object.keys(inputToneAssignments) as (keyof typeof inputToneAssignments)[]
+).flatMap((tone) => [
+  {
+    variants: { tone, variant: 'solid' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [inputVars.color.background]: inputToneVars.base,
+            [inputVars.color.foreground]: inputToneVars.onBase,
+            [inputVars.color.outline]: inputToneVars.base,
+          },
+        },
+      },
+    },
+  },
+  {
+    variants: { tone, variant: 'outline' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [inputVars.color.foreground]: inputToneVars.base,
+            [inputVars.color.outline]: inputToneVars.base,
+          },
+        },
+      },
+    },
+  },
+  {
+    variants: { tone, variant: 'bare' as const },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [inputVars.color.foreground]: inputToneVars.base,
+            [inputVars.color.outline]: inputToneVars.base,
+          },
+        },
+      },
+    },
+  },
+]);
 
 const inputSizeStyles = {
   sm: {
@@ -162,8 +204,8 @@ export const inputAppearanceRecipe = recipe({
             '&[aria-invalid], &:has([aria-invalid])': {
               vars: {
                 ...inputColorDefaults,
-                [inputVars.color.foreground]: sys.tone.destructive,
-                [inputVars.color.outline]: sys.tone.destructive,
+                [inputVars.color.foreground]: sys.color.tone.destructive,
+                [inputVars.color.outline]: sys.color.tone.destructive,
                 ...inputToneAssignments.destructive,
               },
             },
@@ -186,7 +228,7 @@ export const inputAppearanceRecipe = recipe({
 
   variants: {
     variant: {
-      outlined: {
+      outline: {
         '@layer': {
           [components]: {
             paddingInline: inputVars.spacing.inline,
@@ -199,7 +241,7 @@ export const inputAppearanceRecipe = recipe({
         },
       },
 
-      plain: {
+      solid: {
         '@layer': {
           [components]: {
             paddingInline: inputVars.spacing.inline,
@@ -209,8 +251,7 @@ export const inputAppearanceRecipe = recipe({
             borderRadius: inputVars.shape.corner,
 
             vars: {
-              [inputVars.color.background]:
-                `color-mix(in srgb, ${inputVars.color.foreground} calc(${sys.state.muted.surface} * 100%), transparent)`,
+              [inputVars.color.background]: sys.color.container.low,
             },
           },
         },
@@ -225,9 +266,11 @@ export const inputAppearanceRecipe = recipe({
   },
 
   defaultVariants: {
-    variant: 'outlined',
+    variant: 'outline',
     size: 'md',
   },
+
+  compoundVariants: inputToneCompoundVariants,
 });
 
 export const inputWrapper = style({

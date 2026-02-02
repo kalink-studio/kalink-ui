@@ -17,8 +17,8 @@ const scrollAreaToneVars = createThemeContract({
 });
 
 const scrollAreaToneDefaults = assignVars(scrollAreaToneVars, {
-  base: sys.surface.foreground,
-  onBase: sys.surface.foreground,
+  base: sys.color.content.base,
+  onBase: sys.color.content.base,
 });
 const scrollAreaToneStyles = createToneStyles(scrollAreaToneVars);
 

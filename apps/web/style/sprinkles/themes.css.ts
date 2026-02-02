@@ -11,14 +11,38 @@ export const themeProperties = defineProperties({
     theme: {
       default: {
         vars: {
-          [sys.surface.foreground]: refs.colors.neutral[0],
-          [sys.surface.background]: refs.colors.neutral[100],
+          [sys.color.surface.dim]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 92%, ${refs.colors.neutral[0]})`,
+          [sys.color.surface.base]: refs.colors.neutral[100],
+          [sys.color.surface.bright]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 98%, ${refs.colors.neutral[0]})`,
+          [sys.color.container.low]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 98%, ${refs.colors.neutral[0]})`,
+          [sys.color.container.base]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 96%, ${refs.colors.neutral[0]})`,
+          [sys.color.container.high]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 92%, ${refs.colors.neutral[0]})`,
+          [sys.color.container.top]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 88%, ${refs.colors.neutral[0]})`,
+          [sys.color.content.base]: refs.colors.neutral[0],
         },
       },
       inverted: {
         vars: {
-          [sys.surface.foreground]: refs.colors.neutral[100],
-          [sys.surface.background]: refs.colors.neutral[0],
+          [sys.color.surface.dim]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 92%, ${refs.colors.neutral[100]})`,
+          [sys.color.surface.base]: refs.colors.neutral[0],
+          [sys.color.surface.bright]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 98%, ${refs.colors.neutral[100]})`,
+          [sys.color.container.low]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 98%, ${refs.colors.neutral[100]})`,
+          [sys.color.container.base]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 96%, ${refs.colors.neutral[100]})`,
+          [sys.color.container.high]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 92%, ${refs.colors.neutral[100]})`,
+          [sys.color.container.top]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 88%, ${refs.colors.neutral[100]})`,
+          [sys.color.content.base]: refs.colors.neutral[100],
         },
       },
     },

@@ -9,20 +9,31 @@ createGlobalTheme(':root', sys, {
     direction: '1',
   },
 
-  surface: {
-    background: refs.colors.neutral[100],
-    foreground: refs.colors.neutral[0],
-  },
-
-  tone: {
-    neutral: refs.colors.neutral[0],
-    onNeutral: refs.colors.neutral[100],
-    primary: refs.colors.primary[50],
-    onPrimary: refs.colors.neutral[100],
-    destructive: '#d80000',
-    onDestructive: refs.colors.neutral[100],
-    success: '#2e7d32',
-    onSuccess: refs.colors.neutral[100],
+  color: {
+    surface: {
+      dim: `color-mix(in srgb, ${refs.colors.neutral[100]} 92%, ${refs.colors.neutral[0]})`,
+      base: refs.colors.neutral[100],
+      bright: `color-mix(in srgb, ${refs.colors.neutral[100]} 98%, ${refs.colors.neutral[0]})`,
+    },
+    container: {
+      low: `color-mix(in srgb, ${refs.colors.neutral[100]} 98%, ${refs.colors.neutral[0]})`,
+      base: `color-mix(in srgb, ${refs.colors.neutral[100]} 96%, ${refs.colors.neutral[0]})`,
+      high: `color-mix(in srgb, ${refs.colors.neutral[100]} 92%, ${refs.colors.neutral[0]})`,
+      top: `color-mix(in srgb, ${refs.colors.neutral[100]} 88%, ${refs.colors.neutral[0]})`,
+    },
+    content: {
+      base: refs.colors.neutral[0],
+    },
+    tone: {
+      neutral: refs.colors.neutral[0],
+      onNeutral: refs.colors.neutral[100],
+      primary: refs.colors.primary[50],
+      onPrimary: refs.colors.neutral[100],
+      destructive: '#d80000',
+      onDestructive: refs.colors.neutral[100],
+      success: '#2e7d32',
+      onSuccess: refs.colors.neutral[100],
+    },
   },
 
   state: {

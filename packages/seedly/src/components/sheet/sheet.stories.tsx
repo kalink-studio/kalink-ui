@@ -178,7 +178,7 @@ const SheetStory = (props: SheetContentProps<'div'>) => {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="plain">{'Open'}</Button>
+          <Button variant="solid">{'Open'}</Button>
         </SheetTrigger>
         <SheetContent container={portalRoot} spacing={4} {...props}>
           <Stack spacing={4} align="stretch">
@@ -227,7 +227,7 @@ const SheetWithFooterStory = (props: SheetContentProps<'div'>) => {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="plain">{'Open'}</Button>
+          <Button variant="solid">{'Open'}</Button>
         </SheetTrigger>
         <SheetContent container={portalRoot} spacing={4} {...props}>
           <SheetHeader
@@ -263,7 +263,7 @@ const SheetWithFooterStory = (props: SheetContentProps<'div'>) => {
           </SheetBody>
           <SheetFooter>
             <Button>Cancel</Button>
-            <Button variant="plain">Save Changes</Button>
+            <Button variant="solid">Save Changes</Button>
           </SheetFooter>
         </SheetContent>
       </Sheet>

@@ -18,11 +18,8 @@ const alertDialogFooterToneVars = createThemeContract({
 
 const alertDialogFooterToneStyles = createToneStyles(
   alertDialogFooterToneVars,
-  ({ base }, tone) => ({
-    [alertDialogFooterVars.color.background]:
-      tone === 'neutral'
-        ? sys.surface.background
-        : `color-mix(in srgb, ${base} calc(${sys.state.muted.surface} * 100%), ${sys.surface.background})`,
+  ({ base }) => ({
+    [alertDialogFooterVars.color.background]: base,
   }),
 );
 
@@ -47,7 +44,7 @@ export const alertDialogFooterRecipe = recipe({
 
             vars: {
               ...assignVars(alertDialogFooterVars.color, {
-                background: sys.surface.background,
+                background: sys.color.container.base,
               }),
             },
           },

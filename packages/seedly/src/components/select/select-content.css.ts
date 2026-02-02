@@ -17,11 +17,8 @@ const selectContentToneVars = createThemeContract({
 
 const selectContentToneStyles = createToneStyles(
   selectContentToneVars,
-  ({ base }, tone) => ({
-    [selectContentVars.color.background]:
-      tone === 'neutral'
-        ? sys.surface.background
-        : `color-mix(in srgb, ${base} calc(${sys.state.muted.surface} * 100%), ${sys.surface.background})`,
+  ({ base }) => ({
+    [selectContentVars.color.background]: base,
   }),
 );
 
@@ -33,7 +30,7 @@ export const selectContentRecipe = recipe({
 
         vars: {
           ...assignVars(selectContentVars.color, {
-            background: sys.surface.background,
+            background: sys.color.container.base,
           }),
         },
       },

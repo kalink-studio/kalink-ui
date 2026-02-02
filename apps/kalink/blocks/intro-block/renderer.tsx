@@ -14,9 +14,9 @@ type IntroCta = NonNullable<IntroBlock['ctas']>[number];
 
 const ctaVariantMap: Record<
   IntroCta['variant'],
-  'plain' | 'outline' | 'ghost' | 'bare'
+  'solid' | 'outline' | 'ghost' | 'bare'
 > = {
-  filled: 'plain',
+  filled: 'solid',
   outlined: 'outline',
   ghost: 'ghost',
   bare: 'bare',

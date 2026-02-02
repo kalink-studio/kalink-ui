@@ -36,7 +36,7 @@ const meta = {
       summary: 'Responsive<InputSize>',
     }),
     variant: responsiveSelectArg({
-      options: ['outlined', 'plain', 'bare'],
+      options: ['outline', 'solid', 'bare'],
       summary: 'Responsive<InputVariant>',
     }),
     tone: responsiveSelectArg({
@@ -52,15 +52,15 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {};
 
-export const Outlined: Story = {
+export const Outline: Story = {
   args: {
-    variant: 'outlined',
+    variant: 'outline',
   },
 };
 
-export const Plain: Story = {
+export const Solid: Story = {
   args: {
-    variant: 'plain',
+    variant: 'solid',
   },
 };
 

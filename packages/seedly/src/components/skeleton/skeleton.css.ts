@@ -29,8 +29,8 @@ const skeletonToneVars = createThemeContract({
 });
 
 const skeletonToneDefaults = assignVars(skeletonToneVars, {
-  base: sys.surface.foreground,
-  onBase: sys.surface.foreground,
+  base: sys.color.content.base,
+  onBase: sys.color.content.base,
 });
 const skeletonToneStyles = createToneStyles(skeletonToneVars);
 

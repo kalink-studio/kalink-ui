@@ -174,7 +174,7 @@ export function ContactForm({ fields, type, sessions }: ContactFormProps) {
             />
           );
         })}
-        <Button type="submit" variant="plain" disabled={isSubmitting}>
+        <Button type="submit" variant="solid" disabled={isSubmitting}>
           {isSubmitting ? 'Envoi…' : 'Envoyer'}
         </Button>
       </Stack>

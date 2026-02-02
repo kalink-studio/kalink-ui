@@ -4,22 +4,28 @@ import { Content, Portal } from '@radix-ui/react-dialog';
 import { clsx } from 'clsx';
 import { ComponentPropsWithRef, ElementType } from 'react';
 
-import { Box, BoxProps } from '../box';
+import { Container, ContainerProps } from '../container';
 
 import { SheetPortal } from './sheet';
 import { sheetContentRecipe, SheetContentVariants } from './sheet-content.css';
 import { SheetOverlay } from './sheet-overlay';
 
+import type { Tone } from '../../styles';
+
 type SheetPortalProps = ComponentPropsWithRef<typeof Portal>;
-type BoxStyleProps<TUse extends ElementType> = Pick<
-  BoxProps<TUse>,
-  'variant' | 'radius' | 'elevation' | 'use' | 'tone'
+type ContainerStyleProps<TUse extends ElementType> = Pick<
+  ContainerProps<TUse>,
+  'variant' | 'radius' | 'elevation' | 'use'
 >;
 
 export type SheetContentProps<TUse extends ElementType> = SheetContentVariants &
-  BoxStyleProps<TUse> &
-  Omit<ComponentPropsWithRef<typeof Content>, keyof BoxStyleProps<TUse>> &
-  Omit<SheetPortalProps, keyof BoxStyleProps<TUse>>;
+  ContainerStyleProps<TUse> & {
+    tone?: Tone;
+  } & Omit<
+    ComponentPropsWithRef<typeof Content>,
+    keyof ContainerStyleProps<TUse>
+  > &
+  Omit<SheetPortalProps, keyof ContainerStyleProps<TUse>>;
 
 export function SheetContent<TUse extends ElementType>({
   className,
@@ -41,14 +47,13 @@ export function SheetContent<TUse extends ElementType>({
     <SheetPortal container={container} forceMount={forceMount}>
       <SheetOverlay tone={tone} />
       <Content asChild>
-        <Box
+        <Container
           ref={ref}
           use={use}
           variant={variant ?? 'solid'}
           spacing={spacing}
           elevation={elevation}
           radius={radius}
-          tone={tone}
           className={clsx(
             sheetContentRecipe({ side, size, spacing }),
             className,
@@ -56,7 +61,7 @@ export function SheetContent<TUse extends ElementType>({
           {...props}
         >
           {children}
-        </Box>
+        </Container>
       </Content>
     </SheetPortal>
   );

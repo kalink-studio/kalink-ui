@@ -1,6 +1,6 @@
 import { ElementType } from 'react';
 
-import { Box, BoxProps } from '../box';
+import { Box, BoxLayoutProps } from '../box';
 
 import {
   ellipse,
@@ -13,7 +13,7 @@ import { moonLoaderResponsive } from './moon-loader.responsive';
 
 import type { Responsive } from '../../styles/responsive';
 
-export type LoaderProps<TUse extends ElementType> = BoxProps<TUse> & {
+export type LoaderProps<TUse extends ElementType> = BoxLayoutProps<TUse> & {
   forceMount?: boolean;
   className?: string;
 } & LoaderVariants;

@@ -48,9 +48,9 @@ export const formFieldRecipe = recipe({
 
         vars: {
           ...assignVars(formFieldVars.color, {
-            foreground: sys.surface.foreground,
-            background: sys.surface.background,
-            outline: sys.surface.foreground,
+            foreground: sys.color.content.base,
+            background: sys.color.container.base,
+            outline: `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), transparent)`,
           }),
           ...assignVars(formFieldVars.spacing, {
             vertical: sys.spacing[2],
@@ -63,16 +63,16 @@ export const formFieldRecipe = recipe({
 
             vars: {
               [formFieldVars.color.foreground]:
-                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.text} * 100%), transparent)`,
+                `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.disabled.text} * 100%), transparent)`,
               [formFieldVars.color.outline]:
-                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.border} * 100%), transparent)`,
+                `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.disabled.border} * 100%), transparent)`,
             },
           },
 
           '&[aria-invalid], &:has([aria-invalid])': {
             vars: {
-              [formFieldVars.color.foreground]: sys.tone.destructive,
-              [formFieldVars.color.outline]: sys.tone.destructive,
+              [formFieldVars.color.foreground]: sys.color.tone.destructive,
+              [formFieldVars.color.outline]: sys.color.tone.destructive,
               ...formFieldToneAssignments.destructive,
             },
           },
@@ -89,8 +89,8 @@ export const formFieldRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [formFieldVars.color.foreground]: sys.tone.destructive,
-              [formFieldVars.color.outline]: sys.tone.destructive,
+              [formFieldVars.color.foreground]: sys.color.tone.destructive,
+              [formFieldVars.color.outline]: sys.color.tone.destructive,
               ...formFieldToneAssignments.destructive,
             },
           },
@@ -106,9 +106,9 @@ export const formFieldRecipe = recipe({
 
             vars: {
               [formFieldVars.color.foreground]:
-                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.text} * 100%), transparent)`,
+                `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.disabled.text} * 100%), transparent)`,
               [formFieldVars.color.outline]:
-                `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.disabled.border} * 100%), transparent)`,
+                `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.disabled.border} * 100%), transparent)`,
             },
           },
         },
@@ -125,16 +125,16 @@ export const formFieldMessageRecipe = recipe({
 
         selectors: {
           '&[data-tone="neutral"]': {
-            color: sys.tone.neutral,
+            color: sys.color.tone.neutral,
           },
           '&[data-tone="primary"]': {
-            color: sys.tone.primary,
+            color: sys.color.tone.primary,
           },
           '&[data-tone="destructive"]': {
-            color: sys.tone.destructive,
+            color: sys.color.tone.destructive,
           },
           '&[data-tone="success"]': {
-            color: sys.tone.success,
+            color: sys.color.tone.success,
           },
         },
       },

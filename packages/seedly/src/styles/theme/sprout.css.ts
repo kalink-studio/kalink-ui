@@ -10,20 +10,31 @@ export const sprout = createTheme(sys, {
     direction: '1',
   },
 
-  surface: {
-    background: refs.colors.neutral[100],
-    foreground: refs.colors.neutral[10],
-  },
-
-  tone: {
-    neutral: refs.colors.neutral[10],
-    onNeutral: refs.colors.neutral[90],
-    primary: refs.colors.primary[50],
-    onPrimary: refs.colors.primary[10],
-    destructive: '#d80000',
-    onDestructive: refs.colors.neutral[100],
-    success: '#2e7d32',
-    onSuccess: refs.colors.neutral[100],
+  color: {
+    surface: {
+      dim: `color-mix(in srgb, ${refs.colors.neutral[100]} 92%, ${refs.colors.neutral[10]})`,
+      base: refs.colors.neutral[100],
+      bright: `color-mix(in srgb, ${refs.colors.neutral[100]} 98%, ${refs.colors.neutral[10]})`,
+    },
+    container: {
+      low: `color-mix(in srgb, ${refs.colors.neutral[100]} 98%, ${refs.colors.neutral[10]})`,
+      base: `color-mix(in srgb, ${refs.colors.neutral[100]} 96%, ${refs.colors.neutral[10]})`,
+      high: `color-mix(in srgb, ${refs.colors.neutral[100]} 92%, ${refs.colors.neutral[10]})`,
+      top: `color-mix(in srgb, ${refs.colors.neutral[100]} 88%, ${refs.colors.neutral[10]})`,
+    },
+    content: {
+      base: refs.colors.neutral[10],
+    },
+    tone: {
+      neutral: refs.colors.neutral[10],
+      onNeutral: refs.colors.neutral[90],
+      primary: refs.colors.primary[50],
+      onPrimary: refs.colors.primary[10],
+      destructive: '#d80000',
+      onDestructive: refs.colors.neutral[100],
+      success: '#2e7d32',
+      onSuccess: refs.colors.neutral[100],
+    },
   },
 
   state: {

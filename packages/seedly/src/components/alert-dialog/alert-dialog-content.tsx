@@ -3,7 +3,7 @@ import { RecipeVariants } from '@vanilla-extract/recipes';
 import { clsx } from 'clsx';
 import { ComponentPropsWithoutRef } from 'react';
 
-import { Box, BoxProps } from '../box';
+import { Container, ContainerProps } from '../container';
 import { ScrollArea, ScrollAreaProps } from '../scroll-area';
 
 import { alertDialogContentRecipe } from './alert-dialog-content.css';
@@ -13,16 +13,17 @@ export type AlertDialogContentVariants = NonNullable<
   RecipeVariants<typeof alertDialogContentRecipe>
 >;
 
-type BoxStyleProps = Pick<
-  BoxProps<'div'>,
-  'spacing' | 'radius' | 'elevation' | 'use' | 'tone'
+type ContainerStyleProps = Pick<
+  ContainerProps<'div'>,
+  'spacing' | 'radius' | 'elevation' | 'use'
 >;
 
 export type AlertDialogContentProps = AlertDialogContentVariants &
   Pick<ScrollAreaProps, 'maxHeight'> &
   ComponentPropsWithoutRef<typeof AlertDialogPortal> &
-  BoxStyleProps &
-  Omit<ComponentPropsWithoutRef<typeof Content>, keyof BoxStyleProps>;
+  ContainerStyleProps & {
+    tone?: ScrollAreaProps['tone'];
+  } & Omit<ComponentPropsWithoutRef<typeof Content>, keyof ContainerStyleProps>;
 
 export function AlertDialogContent({
   className,
@@ -46,18 +47,17 @@ export function AlertDialogContent({
         asChild
         {...props}
       >
-        <Box
+        <Container
           use={use}
           variant="solid"
           spacing={spacing}
           elevation={elevation}
           radius={radius}
-          tone={tone}
         >
           <ScrollArea maxHeight={maxHeight} tone={tone}>
             {children}
           </ScrollArea>
-        </Box>
+        </Container>
       </Content>
     </AlertDialogPortal>
   );

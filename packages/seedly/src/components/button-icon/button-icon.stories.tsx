@@ -60,9 +60,9 @@ export const Ghost: Story = {
   },
 };
 
-export const Plain: Story = {
+export const Solid: Story = {
   args: {
-    variant: 'plain',
+    variant: 'solid',
   },
 };
 
@@ -80,25 +80,25 @@ export const Link: Story = {
 
 export const Size: Story = {
   args: {
-    variant: 'plain',
+    variant: 'solid',
   },
   render: (args) => (
     <Cluster spacing={4} align="center">
       <Cluster spacing={1} align="center">
         <ButtonIcon size="sm" {...args} />
-        <Button size="sm" variant="plain">
+        <Button size="sm" variant="solid">
           {'Button label'}
         </Button>
       </Cluster>
       <Cluster spacing={1} align="center">
         <ButtonIcon size="md" {...args} />
-        <Button size="md" variant="plain">
+        <Button size="md" variant="solid">
           {'Button label'}
         </Button>
       </Cluster>
       <Cluster spacing={1} align="center">
         <ButtonIcon size="lg" {...args} />
-        <Button size="lg" variant="plain">
+        <Button size="lg" variant="solid">
           {'Button label'}
         </Button>
       </Cluster>
@@ -109,7 +109,7 @@ export const Size: Story = {
 export const Inlined: Story = {
   render: (args) => (
     <Cluster spacing={4} align="center">
-      <ButtonIcon variant="plain" {...args} />
+      <ButtonIcon variant="solid" {...args} />
       <ButtonIcon variant="outline" {...args} />
       <ButtonIcon variant="ghost" {...args} />
       <ButtonIcon variant="link" {...args} />
@@ -123,7 +123,7 @@ export const InlinedDisabled: Story = {
   },
   render: (args) => (
     <Cluster spacing={4} align="center">
-      <ButtonIcon variant="plain" {...args} />
+      <ButtonIcon variant="solid" {...args} />
       <ButtonIcon variant="outline" {...args} />
       <ButtonIcon variant="ghost" {...args} />
       <ButtonIcon variant="link" {...args} />
@@ -135,7 +135,7 @@ export const GlobalOverrides: Story = {
   render: (args) => (
     <Cluster spacing={4} align="center">
       <ButtonIcon
-        variant="plain"
+        variant="solid"
         {...args}
         style={assignInlineVars({
           [buttonVars.borderRadius]: sys.shape.corner.rounded,

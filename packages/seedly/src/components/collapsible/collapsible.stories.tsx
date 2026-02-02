@@ -54,7 +54,7 @@ function Collapsible({
     >
       <Stack align="stretch">
         <CollapsibleTrigger asChild>
-          <Button variant="plain">{'Toggle details'}</Button>
+          <Button variant="solid">{'Toggle details'}</Button>
         </CollapsibleTrigger>
         <CollapsibleContent forceMount={forceMount ? true : undefined}>
           {defaultChildren}

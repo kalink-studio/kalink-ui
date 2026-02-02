@@ -1,31 +1,21 @@
 import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import {
-  createResponsiveVariants,
-  createToneStyles,
-  defaultMedia,
-  mapContractVars,
-  sys,
-} from '../../styles';
+import { createToneStyles } from '../../styles';
 import { components } from '../../styles/layers.css';
 import { toneTokens } from '../../styles/tone';
+import {
+  layoutRecipe,
+  layoutSpacingStyles,
+  layoutElevationStyles,
+  layoutRadiusStyles,
+} from '../layout/layout.css';
 
 export const boxVars = createThemeContract({
   color: {
-    container: null,
-    content: null,
+    background: null,
+    foreground: null,
     outline: null,
-  },
-  spacing: {
-    block: null,
-    inline: null,
-  },
-  shape: {
-    corner: null,
-  },
-  elevation: {
-    level: null,
   },
 });
 
@@ -35,185 +25,109 @@ const boxToneVars = createThemeContract({
 });
 
 const boxColorDefaults = assignVars(boxVars.color, {
-  container: 'transparent',
-  content: sys.surface.foreground,
-  outline: sys.surface.foreground,
+  background: 'transparent',
+  foreground: 'inherit',
+  outline: 'transparent',
 });
 
-const boxToneStyles = createToneStyles(boxToneVars, ({ base }) => ({
-  [boxVars.color.content]: base,
-  [boxVars.color.outline]: base,
-}));
+const boxToneStyles = createToneStyles(boxToneVars);
 
-const boxSpacingDefaults = assignVars(boxVars.spacing, {
-  block: sys.spacing[0],
-  inline: sys.spacing[0],
-});
-
-const boxShapeDefaults = assignVars(boxVars.shape, {
-  corner: sys.shape.corner.none,
-});
-
-const boxElevationDefaults = assignVars(boxVars.elevation, {
-  level: sys.elevation.none,
-});
-
-export const boxVariantStyles = {
-  solid: {
-    '@layer': {
-      [components]: {
-        vars: {
-          ...assignVars(boxVars.color, {
-            container: sys.surface.background,
-            content: sys.surface.foreground,
-            outline: 'transparent',
-          }),
-        },
-      },
-    },
-  },
-  outline: {
-    '@layer': {
-      [components]: {
-        borderColor: boxVars.color.outline,
-        borderStyle: 'solid',
-        borderWidth: '1px',
-
-        vars: {
-          ...assignVars(boxVars.color, {
-            container: 'transparent',
-            content: boxVars.color.outline,
-            outline: boxVars.color.outline,
-          }),
-        },
-      },
-    },
-  },
+const boxVariantStyles = {
+  solid: {},
+  outline: {},
+  bare: {},
 } as const;
 
 const boxToneCompoundVariants = (
   Object.keys(toneTokens) as (keyof typeof toneTokens)[]
-).map((tone) => ({
-  variants: { variant: 'solid' as const, tone } as const,
-  style: {
-    '@layer': {
-      [components]: {
-        vars: {
-          ...assignVars(boxVars.color, {
-            container: boxToneVars.base,
-            content: boxToneVars.onBase,
-            outline: 'transparent',
-          }),
+).flatMap((tone) => [
+  {
+    variants: { variant: 'solid' as const, tone },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [boxVars.color.background]: boxToneVars.base,
+            [boxVars.color.foreground]: boxToneVars.onBase,
+            [boxVars.color.outline]: 'transparent',
+          },
         },
       },
     },
   },
-}));
-
-// Shared variant styles to support responsive overrides
-export const boxSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(boxVars.spacing, {
-          block: sys.spacing[key],
-          inline: sys.spacing[key],
-        }),
+  {
+    variants: { variant: 'outline' as const, tone },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [boxVars.color.background]: 'transparent',
+            [boxVars.color.foreground]: boxToneVars.base,
+            [boxVars.color.outline]: boxToneVars.base,
+          },
+        },
       },
     },
   },
-}));
-
-export const boxElevationStyles = mapContractVars(sys.elevation, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(boxVars.elevation, {
-          level: sys.elevation[key],
-        }),
+  {
+    variants: { variant: 'bare' as const, tone },
+    style: {
+      '@layer': {
+        [components]: {
+          vars: {
+            [boxVars.color.background]: 'transparent',
+            [boxVars.color.foreground]: boxToneVars.base,
+            [boxVars.color.outline]: 'transparent',
+          },
+        },
       },
     },
   },
-}));
-
-export const boxRadiusStyles = mapContractVars(sys.shape.corner, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(boxVars.shape, {
-          corner: sys.shape.corner[key],
-        }),
-      },
-    },
-  },
-}));
+]);
 
 export const boxRecipe = recipe({
-  base: {
-    '@layer': {
-      [components]: {
-        paddingBlock: boxVars.spacing.block,
-        paddingInline: boxVars.spacing.inline,
+  base: [
+    layoutRecipe.classNames.base,
+    {
+      '@layer': {
+        [components]: {
+          color: boxVars.color.foreground,
+          backgroundColor: boxVars.color.background,
 
-        color: boxVars.color.content,
+          vars: {
+            ...boxColorDefaults,
+          },
 
-        backgroundColor: boxVars.color.container,
-        borderRadius: boxVars.shape.corner,
-        boxShadow: boxVars.elevation.level,
-
-        vars: {
-          ...boxColorDefaults,
-          ...boxSpacingDefaults,
-          ...boxShapeDefaults,
-          ...boxElevationDefaults,
+          selectors: {
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              inset: 0,
+              border: '1px solid',
+              borderColor: boxVars.color.outline,
+              borderRadius: 'inherit',
+              pointerEvents: 'none',
+              boxSizing: 'border-box',
+            },
+          },
         },
       },
     },
-  },
+  ],
 
   variants: {
-    /**
-     * The main variation of the box
-     */
     variant: boxVariantStyles,
-
-    /**
-     * The spacing between the box borders and its contents
-     */
-    spacing: boxSpacingStyles,
-
-    /**
-     * The elevation of the box
-     */
-    elevation: boxElevationStyles,
-
-    /**
-     * The radius of the box
-     */
-    radius: boxRadiusStyles,
-
-    /**
-     * The color tone of the box
-     */
     tone: boxToneStyles,
+    spacing: layoutSpacingStyles,
+    elevation: layoutElevationStyles,
+    radius: layoutRadiusStyles,
+  },
+
+  defaultVariants: {
+    variant: 'solid',
   },
 
   compoundVariants: boxToneCompoundVariants,
 });
 
 export type BoxVariants = NonNullable<RecipeVariants<typeof boxRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: boxSpacingStyles,
-  media: defaultMedia,
-});
-
-export const radiusAt = createResponsiveVariants({
-  styles: boxRadiusStyles,
-  media: defaultMedia,
-});
-
-export const elevationAt = createResponsiveVariants({
-  styles: boxElevationStyles,
-  media: defaultMedia,
-});

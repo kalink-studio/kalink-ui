@@ -30,19 +30,30 @@ export const sys = createThemeContract({
     measure: null,
   },
 
-  surface: {
-    background: null,
-    foreground: null,
+  color: {
+    surface: {
+      dim: null,
+      base: null,
+      bright: null,
+    },
+    container: {
+      low: null,
+      base: null,
+      high: null,
+      top: null,
+    },
+    content: {
+      base: null,
+    },
+    tone: toneNames.reduce(
+      (acc, tone) => ({
+        ...acc,
+        [tone]: null,
+        [`on${tone[0]?.toUpperCase()}${tone.slice(1)}`]: null,
+      }),
+      {} as Record<Tone | ToneOnName, null>,
+    ),
   },
-
-  tone: toneNames.reduce(
-    (acc, tone) => ({
-      ...acc,
-      [tone]: null,
-      [`on${tone[0]?.toUpperCase()}${tone.slice(1)}`]: null,
-    }),
-    {} as Record<Tone | ToneOnName, null>,
-  ),
 
   state: {
     hovered: {

@@ -30,7 +30,7 @@ export function InputWrapper({
   className,
   inputRef,
   disabled,
-  variant = 'outlined',
+  variant = 'outline',
   size = 'md',
   tone,
   ref,

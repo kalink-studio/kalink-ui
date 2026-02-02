@@ -21,7 +21,7 @@ export type TextareaInputProps = Omit<
 export function TextareaInput({
   className,
   size = 'md',
-  variant = 'outlined',
+  variant = 'outline',
   tone,
   ...props
 }: TextareaInputProps) {

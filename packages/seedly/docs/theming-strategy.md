@@ -26,8 +26,8 @@ organizational, not technical.
 
 - `sys` represents **semantic roles**, not palettes.
 - Roles must stay neutral so Seedly is not locked to any single design language.
-- Consumers map their `refs` layer into `sys.surface`, `sys.tone`, and other
-  system roles in userland.
+- Consumers map their `refs` layer into `sys.color.surface`, `sys.color.container`,
+  `sys.color.content`, `sys.color.tone`, and other system roles in userland.
 
 ### 3) Component contracts carry the styling surface
 

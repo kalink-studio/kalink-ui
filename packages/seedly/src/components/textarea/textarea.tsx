@@ -37,7 +37,7 @@ export function Textarea({
   required,
   hideErrorMessage = false,
   size = 'md',
-  variant = 'outlined',
+  variant = 'outline',
   tone,
   ...rest
 }: TextareaProps) {

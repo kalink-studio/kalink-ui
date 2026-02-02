@@ -111,8 +111,8 @@ export const loaderWrapperRecipe = recipe({
         vars: {
           [moonSize]: calc.divide(size, 7),
           ...assignVars(loaderToneVars, {
-            base: sys.surface.foreground,
-            onBase: sys.surface.foreground,
+            base: sys.color.content.base,
+            onBase: sys.color.content.base,
           }),
         },
       },

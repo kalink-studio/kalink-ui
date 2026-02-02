@@ -10,8 +10,8 @@ const loaderOverlayToneVars = createThemeContract({
 });
 
 const loaderOverlayToneDefaults = assignVars(loaderOverlayToneVars, {
-  base: sys.surface.foreground,
-  onBase: sys.surface.foreground,
+  base: sys.color.content.base,
+  onBase: sys.color.content.base,
 });
 const loaderOverlayToneStyles = createToneStyles(loaderOverlayToneVars);
 

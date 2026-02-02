@@ -41,7 +41,7 @@ globalStyle(`${commandGroupRecipe.classNames.base} [cmdk-group-heading]`, {
     [components]: {
       position: 'relative',
 
-      color: `color-mix(in srgb, ${sys.surface.foreground} calc(${sys.state.muted.text} * 100%), transparent)`,
+      color: `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), transparent)`,
 
       cursor: 'default',
       userSelect: 'none',

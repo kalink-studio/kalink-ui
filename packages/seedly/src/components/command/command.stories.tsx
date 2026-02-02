@@ -9,9 +9,9 @@ import {
 import { ComponentPropsWithoutRef, useState } from 'react';
 
 import { CommonArgs, commonArgs, responsiveSelectArg } from '../../utils';
-import { Box } from '../box';
 import { Button } from '../button';
 import { Cluster } from '../cluster';
+import { Container } from '../container';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 
 import { Command } from './command';
@@ -51,9 +51,9 @@ type Story = StoryObj<StoryArgs>;
 
 export const Default: Story = {
   render: (args) => (
-    <Box variant="outline">
+    <Container variant="outline">
       <CommandComponent tone={args.tone} />
-    </Box>
+    </Container>
   ),
 };
 

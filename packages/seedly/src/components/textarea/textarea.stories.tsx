@@ -23,7 +23,7 @@ const meta = {
       summary: 'Responsive<InputSize>',
     }),
     variant: responsiveSelectArg({
-      options: ['outlined', 'plain', 'bare'],
+      options: ['outline', 'solid', 'bare'],
       summary: 'Responsive<InputVariant>',
     }),
     tone: responsiveSelectArg({

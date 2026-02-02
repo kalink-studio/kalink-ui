@@ -36,15 +36,15 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Plain: Story = {
+export const Solid: Story = {
   args: {
-    variant: 'plain',
+    variant: 'solid',
   },
 };
 
 export const WithStartSlot: Story = {
   args: {
-    variant: 'plain',
+    variant: 'solid',
     startSlot: <Check />,
   },
 };
@@ -69,7 +69,7 @@ export const Link: Story = {
 
 export const Size: Story = {
   args: {
-    variant: 'plain',
+    variant: 'solid',
   },
   render: (args) => (
     <Cluster spacing={4} align="center">
@@ -83,7 +83,7 @@ export const Size: Story = {
 export const Inlined: Story = {
   render: (args) => (
     <Cluster spacing={4} align="center">
-      <Button variant="plain" {...args} />
+      <Button variant="solid" {...args} />
       <Button variant="outline" {...args} />
       <Button variant="ghost" {...args} />
       <Button variant="link" {...args} />
@@ -97,7 +97,7 @@ export const InlinedDisabled: Story = {
   },
   render: (args) => (
     <Cluster spacing={4} align="center">
-      <Button variant="plain" {...args} />
+      <Button variant="solid" {...args} />
       <Button variant="outline" {...args} />
       <Button variant="ghost" {...args} />
       <Button variant="link" {...args} />
@@ -109,7 +109,7 @@ export const GlobalOverrides: Story = {
   render: (args) => (
     <Cluster spacing={4} align="center">
       <Button
-        variant="plain"
+        variant="solid"
         {...args}
         style={assignInlineVars({
           [buttonVars.borderRadius]: sys.shape.corner.rounded,
