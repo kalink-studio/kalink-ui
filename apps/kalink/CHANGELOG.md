@@ -1,5 +1,12 @@
 # @kalink-ui/kalink
 
+## 0.3.7
+
+### Patch Changes
+
+- Updated dependencies [e945f91]
+  - @kalink-ui/seedly@0.36.1
+
 ## 0.3.6
 
 ### Patch Changes
