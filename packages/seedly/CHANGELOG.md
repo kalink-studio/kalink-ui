@@ -1,5 +1,11 @@
 # @kalink-ui/seedly
 
+## 0.36.1
+
+### Patch Changes
+
+- e945f91: Reexport component theme contract vars to enable overrides.
+
 ## 0.36.0
 
 ### Minor Changes
