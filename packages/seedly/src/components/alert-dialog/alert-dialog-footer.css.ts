@@ -5,7 +5,7 @@ import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { createToneStyles, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-const alertDialogFooterVars = createThemeContract({
+export const alertDialogFooterVars = createThemeContract({
   color: {
     background: null,
   },

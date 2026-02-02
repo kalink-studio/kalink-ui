@@ -9,6 +9,7 @@ export { AlertDialogOverlay } from './alert-dialog-overlay';
 export { AlertDialogFooter } from './alert-dialog-footer';
 export { AlertDialogPortal } from './alert-dialog-portal';
 export { AlertDialogTrigger } from './alert-dialog-trigger';
+export { alertDialogFooterVars } from './alert-dialog-footer.css';
 
 export type { AlertDialogActionProps } from './alert-dialog-action';
 export type { AlertDialogCancelProps } from './alert-dialog-cancel';

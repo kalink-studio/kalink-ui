@@ -26,7 +26,7 @@ const exitAnimation = keyframes({
   },
 });
 
-const overlayVars = createThemeContract({
+export const overlayVars = createThemeContract({
   color: {
     background: null,
   },
