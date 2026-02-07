@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -68,23 +63,26 @@ export const iconButton = style({
     ...popoverColorDefaults,
     ...popoverShapeDefaults,
   },
-});
-globalStyle(`${iconButton}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: popoverVars.color.triggerHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: popoverVars.color.triggerHoverBackground,
     },
+    [`&[data-popup-open]`]: {
+      backgroundColor: popoverVars.color.triggerHoverBackground,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${popoverVars.color.triggerFocusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${iconButton}:active`, {
-  backgroundColor: popoverVars.color.triggerHoverBackground,
-});
-globalStyle(`${iconButton}[data-popup-open]`, {
-  backgroundColor: popoverVars.color.triggerHoverBackground,
-});
-globalStyle(`${iconButton}:focus-visible`, {
-  outline: `2px solid ${popoverVars.color.triggerFocusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const icon = style({
@@ -123,34 +121,40 @@ export const popup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+  },
 });
 
 export const arrow = style({
   display: 'flex',
-});
-globalStyle(`${arrow}[data-side='top']`, {
-  bottom: '-8px',
-  rotate: '180deg',
-});
-globalStyle(`${arrow}[data-side='bottom']`, {
-  top: '-8px',
-  rotate: '0deg',
-});
-globalStyle(`${arrow}[data-side='left']`, {
-  right: '-13px',
-  rotate: '90deg',
-});
-globalStyle(`${arrow}[data-side='right']`, {
-  left: '-13px',
-  rotate: '-90deg',
+
+  selectors: {
+    [`&[data-side='top']`]: {
+      bottom: '-8px',
+      rotate: '180deg',
+    },
+    [`&[data-side='bottom']`]: {
+      top: '-8px',
+      rotate: '0deg',
+    },
+    [`&[data-side='left']`]: {
+      right: '-13px',
+      rotate: '90deg',
+    },
+    [`&[data-side='right']`]: {
+      left: '-13px',
+      rotate: '-90deg',
+    },
+  },
 });
 
 export const arrowFill = style({
@@ -213,20 +217,23 @@ export const button = style({
   lineHeight: '1.5rem',
   color: popoverVars.color.triggerForeground,
   userSelect: 'none',
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: popoverVars.color.triggerHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: popoverVars.color.triggerHoverBackground,
     },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${popoverVars.color.triggerFocusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: popoverVars.color.triggerHoverBackground,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${popoverVars.color.triggerFocusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const popoverRecipe = recipe({

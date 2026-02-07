@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -78,23 +73,26 @@ export const button = style({
     ...menuColorDefaults,
     ...menuShapeDefaults,
   },
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: menuVars.color.triggerHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: menuVars.color.triggerHoverBackground,
     },
+    [`&[data-popup-open]`]: {
+      backgroundColor: menuVars.color.triggerHoverBackground,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${menuVars.color.triggerFocusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: menuVars.color.triggerHoverBackground,
-});
-globalStyle(`${button}[data-popup-open]`, {
-  backgroundColor: menuVars.color.triggerHoverBackground,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${menuVars.color.triggerFocusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const buttonIcon = style({
@@ -127,34 +125,40 @@ export const popup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+  },
 });
 
 export const arrow = style({
   display: 'flex',
-});
-globalStyle(`${arrow}[data-side='top']`, {
-  bottom: '-8px',
-  rotate: '180deg',
-});
-globalStyle(`${arrow}[data-side='bottom']`, {
-  top: '-8px',
-  rotate: '0deg',
-});
-globalStyle(`${arrow}[data-side='left']`, {
-  right: '-13px',
-  rotate: '90deg',
-});
-globalStyle(`${arrow}[data-side='right']`, {
-  left: '-13px',
-  rotate: '-90deg',
+
+  selectors: {
+    [`&[data-side='top']`]: {
+      bottom: '-8px',
+      rotate: '180deg',
+    },
+    [`&[data-side='bottom']`]: {
+      top: '-8px',
+      rotate: '0deg',
+    },
+    [`&[data-side='left']`]: {
+      right: '-13px',
+      rotate: '90deg',
+    },
+    [`&[data-side='right']`]: {
+      left: '-13px',
+      rotate: '-90deg',
+    },
+  },
 });
 
 export const arrowFill = style({
@@ -187,20 +191,23 @@ export const item = style({
   display: 'flex',
   fontSize: '0.875rem',
   lineHeight: '1rem',
-});
-globalStyle(`${item}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: menuVars.color.itemHighlightedForeground,
-});
-globalStyle(`${item}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.25rem',
-  borderRadius: menuVars.shape.itemCorner,
-  backgroundColor: menuVars.color.itemHighlightedBackground,
+
+  selectors: {
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: menuVars.color.itemHighlightedForeground,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.25rem',
+      borderRadius: menuVars.shape.itemCorner,
+      backgroundColor: menuVars.color.itemHighlightedBackground,
+    },
+  },
 });
 
 export const separator = style({

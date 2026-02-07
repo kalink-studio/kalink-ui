@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -55,33 +50,39 @@ export const radio = style({
   padding: '0',
   margin: '0',
   border: 'none',
-});
-globalStyle(`${radio}[data-unchecked]`, {
-  border: `1px solid ${radioVars.color.border}`,
-  backgroundColor: 'transparent',
-});
-globalStyle(`${radio}[data-checked]`, {
-  backgroundColor: radioVars.color.checkedBackground,
-});
-globalStyle(`${radio}:focus-visible`, {
-  outline: `2px solid ${radioVars.color.focusRing}`,
-  outlineOffset: '2px',
+
+  selectors: {
+    [`&[data-unchecked]`]: {
+      border: `1px solid ${radioVars.color.border}`,
+      backgroundColor: 'transparent',
+    },
+    [`&[data-checked]`]: {
+      backgroundColor: radioVars.color.checkedBackground,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${radioVars.color.focusRing}`,
+      outlineOffset: '2px',
+    },
+  },
 });
 
 export const indicator = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-});
-globalStyle(`${indicator}[data-unchecked]`, {
-  display: 'none',
-});
-globalStyle(`${indicator}::before`, {
-  content: "''",
-  borderRadius: '100%',
-  width: '0.5rem',
-  height: '0.5rem',
-  backgroundColor: radioVars.color.checkedForeground,
+
+  selectors: {
+    [`&[data-unchecked]`]: {
+      display: 'none',
+    },
+    [`&::before`]: {
+      content: "''",
+      borderRadius: '100%',
+      width: '0.5rem',
+      height: '0.5rem',
+      backgroundColor: radioVars.color.checkedForeground,
+    },
+  },
 });
 
 export const radioRecipe = recipe({

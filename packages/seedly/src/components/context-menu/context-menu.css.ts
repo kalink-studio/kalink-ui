@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -39,9 +39,12 @@ export const popup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
+
+  selectors: {
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+    },
+  },
 });
 
 export const item = style({
@@ -54,20 +57,23 @@ export const item = style({
   display: 'flex',
   fontSize: '0.875rem',
   lineHeight: '1rem',
-});
-globalStyle(`${item}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: sys.color.container.base,
-});
-globalStyle(`${item}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.25rem',
-  borderRadius: '0.25rem',
-  backgroundColor: sys.color.content.base,
+
+  selectors: {
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: sys.color.container.base,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.25rem',
+      borderRadius: '0.25rem',
+      backgroundColor: sys.color.content.base,
+    },
+  },
 });
 
 export const separator = style({

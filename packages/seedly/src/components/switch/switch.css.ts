@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -65,30 +60,31 @@ export const switchRoot = style({
       backgroundImage: `linear-gradient(\n      to right,\n      ${stateColor.disabledContent} 35%,\n      ${sys.color.container.high} 65%\n    )`,
     },
   },
-});
-globalStyle(`${switchRoot}:active`, {
-  backgroundColor: switchVars.color.activeBackground,
-});
-globalStyle(`${switchRoot}[data-checked]`, {
-  backgroundPositionX: '0%',
-});
-globalStyle(`${switchRoot}[data-checked]:active`, {
-  backgroundColor: switchVars.color.checkedActiveBackground,
-});
-globalStyle(`${switchRoot}[data-checked]`, {
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      boxShadow: 'none',
+
+  selectors: {
+    [`&:active`]: {
+      backgroundColor: switchVars.color.activeBackground,
+    },
+    [`&[data-checked]`]: {
+      backgroundPositionX: '0%',
+      '@media': {
+        '(prefers-color-scheme: dark)': {
+          boxShadow: 'none',
+        },
+      },
+    },
+    [`&[data-checked]:active`]: {
+      backgroundColor: switchVars.color.checkedActiveBackground,
+    },
+    [`&:focus-visible::before`]: {
+      content: "''",
+      inset: '0',
+      position: 'absolute',
+      borderRadius: 'inherit',
+      outline: `2px solid ${switchVars.color.focusRing}`,
+      outlineOffset: '2px',
     },
   },
-});
-globalStyle(`${switchRoot}:focus-visible::before`, {
-  content: "''",
-  inset: '0',
-  position: 'absolute',
-  borderRadius: 'inherit',
-  outline: `2px solid ${switchVars.color.focusRing}`,
-  outlineOffset: '2px',
 });
 
 export const thumb = style({
@@ -105,9 +101,12 @@ export const thumb = style({
       boxShadow: sys.elevation.peak,
     },
   },
-});
-globalStyle(`${thumb}[data-checked]`, {
-  translate: '1rem 0',
+
+  selectors: {
+    [`&[data-checked]`]: {
+      translate: '1rem 0',
+    },
+  },
 });
 
 export const switchRecipe = recipe({

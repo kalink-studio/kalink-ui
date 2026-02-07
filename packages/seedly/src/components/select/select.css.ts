@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -97,27 +92,36 @@ export const select = style({
   WebkitUserSelect: 'none',
   userSelect: 'none',
   minWidth: '10rem',
-});
-globalStyle(`${select}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: selectVars.color.triggerHoverBackground,
+        },
+      },
+    },
+    [`&[data-popup-open]`]: {
       backgroundColor: selectVars.color.triggerHoverBackground,
     },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${selectVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${select}[data-popup-open]`, {
-  backgroundColor: selectVars.color.triggerHoverBackground,
-});
-globalStyle(`${select}:focus-visible`, {
-  outline: `2px solid ${selectVars.color.focusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const selectIcon = style({
   display: 'flex',
 });
 
-export const value = style({});
+export const value = style({
+  selectors: {
+    [`&[data-placeholder]`]: {
+      opacity: '0.6',
+    },
+  },
+});
 
 export const positioner = style({
   outline: 'none',
@@ -148,20 +152,23 @@ export const popup = style({
       outline: `1px solid ${selectVars.color.popupOutlineDark}`,
     },
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-side='none']`, {
-  transition: 'none',
-  transform: 'none',
-  opacity: '1',
-  minWidth: 'calc(var(--anchor-width) + 1rem)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-side='none']`]: {
+      transition: 'none',
+      transform: 'none',
+      opacity: '1',
+      minWidth: 'calc(var(--anchor-width) + 1rem)',
+    },
+  },
 });
 
 export const list = style({
@@ -175,22 +182,25 @@ export const list = style({
 
 export const arrow = style({
   display: 'flex',
-});
-globalStyle(`${arrow}[data-side='top']`, {
-  bottom: '-8px',
-  rotate: '180deg',
-});
-globalStyle(`${arrow}[data-side='bottom']`, {
-  top: '-8px',
-  rotate: '0deg',
-});
-globalStyle(`${arrow}[data-side='left']`, {
-  right: '-13px',
-  rotate: '90deg',
-});
-globalStyle(`${arrow}[data-side='right']`, {
-  left: '-13px',
-  rotate: '-90deg',
+
+  selectors: {
+    [`&[data-side='top']`]: {
+      bottom: '-8px',
+      rotate: '180deg',
+    },
+    [`&[data-side='bottom']`]: {
+      top: '-8px',
+      rotate: '0deg',
+    },
+    [`&[data-side='left']`]: {
+      right: '-13px',
+      rotate: '90deg',
+    },
+    [`&[data-side='right']`]: {
+      left: '-13px',
+      rotate: '-90deg',
+    },
+  },
 });
 
 export const arrowFill = style({
@@ -234,24 +244,27 @@ export const item = style({
       fontSize: '0.925rem',
     },
   },
-});
-globalStyle(`[data-side='none'] ${item}`, {
-  fontSize: '1rem',
-  paddingRight: '3rem',
-});
-globalStyle(`${item}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: selectVars.color.itemHighlightedForeground,
-});
-globalStyle(`${item}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.25rem',
-  borderRadius: selectVars.shape.itemCorner,
-  backgroundColor: selectVars.color.itemHighlightedBackground,
+
+  selectors: {
+    [`[data-side='none'] &`]: {
+      fontSize: '1rem',
+      paddingRight: '3rem',
+    },
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: selectVars.color.itemHighlightedForeground,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.25rem',
+      borderRadius: selectVars.shape.itemCorner,
+      backgroundColor: selectVars.color.itemHighlightedBackground,
+    },
+  },
 });
 
 export const itemIndicator = style({
@@ -280,26 +293,25 @@ export const scrollArrow = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-});
-globalStyle(`${scrollArrow}::before`, {
-  content: "''",
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  left: '0',
-});
-globalStyle(`${scrollArrow}[data-direction='up'][data-side='none']::before`, {
-  top: '-100%',
-});
-globalStyle(`${scrollArrow}[data-direction='down']`, {
-  bottom: '0',
-});
-globalStyle(`${scrollArrow}[data-direction='down'][data-side='none']::before`, {
-  bottom: '-100%',
-});
 
-globalStyle(`${value}[data-placeholder]`, {
-  opacity: '0.6',
+  selectors: {
+    [`&::before`]: {
+      content: "''",
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      left: '0',
+    },
+    [`&[data-direction='up'][data-side='none']::before`]: {
+      top: '-100%',
+    },
+    [`&[data-direction='down']`]: {
+      bottom: '0',
+    },
+    [`&[data-direction='down'][data-side='none']::before`]: {
+      bottom: '-100%',
+    },
+  },
 });
 
 export const selectRecipe = recipe({

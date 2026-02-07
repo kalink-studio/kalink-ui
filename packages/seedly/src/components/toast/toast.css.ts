@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -69,20 +64,23 @@ export const button = style({
     ...toastColorDefaults,
     ...toastShapeDefaults,
   },
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: toastVars.color.buttonHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: toastVars.color.buttonHoverBackground,
     },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${toastVars.color.buttonFocusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: toastVars.color.buttonHoverBackground,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${toastVars.color.buttonFocusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const viewport = style({
@@ -139,54 +137,60 @@ export const toast = style({
     '--offset-y':
       'calc(\n    var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) +\n      var(--toast-swipe-movement-y)\n  )',
   },
-});
-globalStyle(`${toast}[data-expanded]`, {
-  transform:
-    'translateX(var(--toast-swipe-movement-x)) translateY(var(--offset-y))',
-  height: 'var(--toast-height)',
-});
-globalStyle(`${toast}[data-starting-style]`, {
-  transform: 'translateY(150%)',
-});
-globalStyle(`${toast}[data-ending-style]`, {
-  transform: 'translateY(150%)',
-  opacity: '0',
-});
-globalStyle(`${toast}[data-limited]`, {
-  opacity: '0',
-});
-globalStyle(`${toast}[data-ending-style][data-swipe-direction='up']`, {
-  transform: 'translateY(calc(var(--toast-swipe-movement-y) - 150%))',
-});
-globalStyle(`${toast}[data-ending-style][data-swipe-direction='left']`, {
-  transform:
-    'translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--offset-y))',
-});
-globalStyle(`${toast}[data-ending-style][data-swipe-direction='right']`, {
-  transform:
-    'translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--offset-y))',
-});
-globalStyle(`${toast}[data-ending-style][data-swipe-direction='down']`, {
-  transform: 'translateY(calc(var(--toast-swipe-movement-y) + 150%))',
-});
-globalStyle(`${toast}::after`, {
-  content: "''",
-  position: 'absolute',
-  top: '100%',
-  width: '100%',
-  left: '0',
-  height: 'calc(var(--gap) + 1px)',
+
+  selectors: {
+    [`&[data-expanded]`]: {
+      transform:
+        'translateX(var(--toast-swipe-movement-x)) translateY(var(--offset-y))',
+      height: 'var(--toast-height)',
+    },
+    [`&[data-starting-style]`]: {
+      transform: 'translateY(150%)',
+    },
+    [`&[data-ending-style]`]: {
+      transform: 'translateY(150%)',
+      opacity: '0',
+    },
+    [`&[data-limited]`]: {
+      opacity: '0',
+    },
+    [`&[data-ending-style][data-swipe-direction='up']`]: {
+      transform: 'translateY(calc(var(--toast-swipe-movement-y) - 150%))',
+    },
+    [`&[data-ending-style][data-swipe-direction='left']`]: {
+      transform:
+        'translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--offset-y))',
+    },
+    [`&[data-ending-style][data-swipe-direction='right']`]: {
+      transform:
+        'translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--offset-y))',
+    },
+    [`&[data-ending-style][data-swipe-direction='down']`]: {
+      transform: 'translateY(calc(var(--toast-swipe-movement-y) + 150%))',
+    },
+    [`&::after`]: {
+      content: "''",
+      position: 'absolute',
+      top: '100%',
+      width: '100%',
+      left: '0',
+      height: 'calc(var(--gap) + 1px)',
+    },
+  },
 });
 
 export const content = style({
   overflow: 'hidden',
   transition: 'opacity 0.25s',
-});
-globalStyle(`${content}[data-behind]`, {
-  opacity: '0',
-});
-globalStyle(`${content}[data-expanded]`, {
-  opacity: '1',
+
+  selectors: {
+    [`&[data-behind]`]: {
+      opacity: '0',
+    },
+    [`&[data-expanded]`]: {
+      opacity: '1',
+    },
+  },
 });
 
 export const title = style({
@@ -215,9 +219,12 @@ export const close = style({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: toastVars.shape.closeCorner,
-});
-globalStyle(`${close}:hover`, {
-  backgroundColor: toastVars.color.closeHoverBackground,
+
+  selectors: {
+    [`&:hover`]: {
+      backgroundColor: toastVars.color.closeHoverBackground,
+    },
+  },
 });
 
 export const icon = style({

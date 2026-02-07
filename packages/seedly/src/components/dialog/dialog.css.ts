@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -69,20 +64,23 @@ export const button = style({
     ...dialogColorDefaults,
     ...dialogShapeDefaults,
   },
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: dialogVars.color.triggerHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: dialogVars.color.triggerHoverBackground,
     },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${dialogVars.color.triggerFocusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: dialogVars.color.triggerHoverBackground,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${dialogVars.color.triggerFocusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const backdrop = style({
@@ -106,12 +104,15 @@ export const backdrop = style({
     ...dialogColorDefaults,
     ...dialogShapeDefaults,
   },
-});
-globalStyle(`${backdrop}[data-starting-style]`, {
-  opacity: '0',
-});
-globalStyle(`${backdrop}[data-ending-style]`, {
-  opacity: '0',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+    },
+  },
 });
 
 export const popup = style({
@@ -138,14 +139,17 @@ export const popup = style({
     ...dialogColorDefaults,
     ...dialogShapeDefaults,
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'translate(-50%, -50%) scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'translate(-50%, -50%) scale(0.9)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'translate(-50%, -50%) scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'translate(-50%, -50%) scale(0.9)',
+    },
+  },
 });
 
 export const title = style({

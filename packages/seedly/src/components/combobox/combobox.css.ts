@@ -1,26 +1,7 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
-
-export const input = style({
-  boxSizing: 'border-box',
-  paddingLeft: '0.875rem',
-  paddingRight: 'calc(0.5rem + 1.5rem)',
-  margin: '0',
-  border: `1px solid ${sys.color.container.high}`,
-  width: '16rem',
-  height: '2.5rem',
-  borderRadius: '0.375rem',
-  fontFamily: 'inherit',
-  fontSize: '1rem',
-  backgroundColor: sys.color.surface.base,
-  color: sys.color.content.base,
-});
-globalStyle(`${input}:focus`, {
-  outline: `2px solid ${sys.color.tone.primary}`,
-  outlineOffset: '-1px',
-});
 
 export const label = style({
   display: 'flex',
@@ -39,18 +20,67 @@ export const inputWrapper = style({
   display: 'inline-block',
 });
 
-export const trigger = style({});
+const actionButtonStyle = {
+  boxSizing: 'border-box',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '1.5rem',
+  height: '2.5rem',
+  color: stateColor.mutedContent,
+  border: 'none',
+  padding: '0',
+  borderRadius: '0.25rem',
+  background: 'none',
+} as const;
 
-export const clear = style({});
+const actionIconStyle = {
+  width: '1rem',
+  height: '1rem',
+} as const;
 
-export const triggerIcon = style({});
+export const trigger = style(actionButtonStyle);
 
-export const clearIcon = style({});
+export const clear = style(actionButtonStyle);
 
-export const empty = style({});
+export const input = style({
+  boxSizing: 'border-box',
+  paddingLeft: '0.875rem',
+  paddingRight: 'calc(0.5rem + 1.5rem)',
+  margin: '0',
+  border: `1px solid ${sys.color.container.high}`,
+  width: '16rem',
+  height: '2.5rem',
+  borderRadius: '0.375rem',
+  fontFamily: 'inherit',
+  fontSize: '1rem',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
 
-globalStyle(`${inputWrapper}:has(${clear}) ${input}`, {
-  paddingRight: 'calc(0.5rem + 1.5rem * 2)',
+  selectors: {
+    [`&:focus`]: {
+      outline: `2px solid ${sys.color.tone.primary}`,
+      outlineOffset: '-1px',
+    },
+    [`${inputWrapper}:has(${clear}) &`]: {
+      paddingRight: 'calc(0.5rem + 1.5rem * 2)',
+    },
+  },
+});
+
+export const triggerIcon = style(actionIconStyle);
+
+export const clearIcon = style(actionIconStyle);
+
+export const empty = style({
+  selectors: {
+    [`&:not(:empty)`]: {
+      fontSize: '0.925rem',
+      lineHeight: '1rem',
+      color: stateColor.mutedContent,
+      padding: '1rem',
+    },
+  },
 });
 
 export const actionButtons = style({
@@ -92,14 +122,17 @@ export const popup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.95)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.95)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.95)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.95)',
+    },
+  },
 });
 
 export const list = style({
@@ -110,9 +143,12 @@ export const list = style({
   scrollPaddingBlock: '0.5rem',
   outline: '0',
   maxHeight: 'min(23rem, var(--available-height))',
-});
-globalStyle(`${list}[data-empty]`, {
-  padding: '0',
+
+  selectors: {
+    [`&[data-empty]`]: {
+      padding: '0',
+    },
+  },
 });
 
 export const item = style({
@@ -129,20 +165,23 @@ export const item = style({
   gridTemplateColumns: '0.75rem 1fr',
   fontSize: '1rem',
   lineHeight: '1rem',
-});
-globalStyle(`${item}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: sys.color.container.base,
-});
-globalStyle(`${item}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.5rem',
-  borderRadius: '0.25rem',
-  backgroundColor: sys.color.content.base,
+
+  selectors: {
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: sys.color.container.base,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.5rem',
+      borderRadius: '0.25rem',
+      backgroundColor: sys.color.content.base,
+    },
+  },
 });
 
 export const itemText = style({
@@ -157,38 +196,6 @@ export const itemIndicatorIcon = style({
   display: 'block',
   width: '0.75rem',
   height: '0.75rem',
-});
-
-globalStyle(
-  `${trigger},
-${clear}`,
-  {
-    boxSizing: 'border-box',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '1.5rem',
-    height: '2.5rem',
-    color: stateColor.mutedContent,
-    border: 'none',
-    padding: '0',
-    borderRadius: '0.25rem',
-    background: 'none',
-  },
-);
-globalStyle(
-  `${clearIcon},
-${triggerIcon}`,
-  {
-    width: '1rem',
-    height: '1rem',
-  },
-);
-globalStyle(`${empty}:not(:empty)`, {
-  fontSize: '0.925rem',
-  lineHeight: '1rem',
-  color: stateColor.mutedContent,
-  padding: '1rem',
 });
 
 export const comboboxRecipe = recipe({

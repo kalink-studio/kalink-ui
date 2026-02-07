@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -10,12 +10,6 @@ export const collapsible = style({
   flexDirection: 'column',
   justifyContent: 'center',
   color: sys.color.content.base,
-});
-
-export const icon = style({
-  width: '0.75rem',
-  height: '0.75rem',
-  transition: 'transform 150ms ease-out',
 });
 
 export const trigger = style({
@@ -33,22 +27,34 @@ export const trigger = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
-});
-globalStyle(`${trigger}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: sys.color.container.high,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: sys.color.container.high,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${sys.color.tone.primary}`,
     },
   },
 });
-globalStyle(`${trigger}:active`, {
-  backgroundColor: sys.color.container.high,
-});
-globalStyle(`${trigger}:focus-visible`, {
-  outline: `2px solid ${sys.color.tone.primary}`,
-});
-globalStyle(`${trigger}[data-panel-open] ${icon}`, {
-  transform: 'rotate(90deg)',
+
+export const icon = style({
+  width: '0.75rem',
+  height: '0.75rem',
+  transition: 'transform 150ms ease-out',
+
+  selectors: {
+    [`${trigger}[data-panel-open] &`]: {
+      transform: 'rotate(90deg)',
+    },
+  },
 });
 
 export const panel = style({
@@ -60,15 +66,18 @@ export const panel = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   transition: 'all 150ms ease-out',
-});
-globalStyle(`${panel}[hidden]:not([hidden='until-found'])`, {
-  display: 'none',
-});
-globalStyle(`${panel}[data-starting-style]`, {
-  height: '0',
-});
-globalStyle(`${panel}[data-ending-style]`, {
-  height: '0',
+
+  selectors: {
+    [`&[hidden]:not([hidden='until-found'])`]: {
+      display: 'none',
+    },
+    [`&[data-starting-style]`]: {
+      height: '0',
+    },
+    [`&[data-ending-style]`]: {
+      height: '0',
+    },
+  },
 });
 
 export const content = style({

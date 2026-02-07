@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -65,25 +60,28 @@ export const button = style({
   backgroundColor: 'transparent',
   color: toggleGroupVars.color.buttonForeground,
   userSelect: 'none',
-});
-globalStyle(`${button}:focus-visible`, {
-  backgroundColor: 'transparent',
-  outline: `2px solid ${toggleGroupVars.color.focusRing}`,
-  outlineOffset: '-1px',
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
-      backgroundColor: toggleGroupVars.color.buttonHoverBackground,
+
+  selectors: {
+    [`&:focus-visible`]: {
+      backgroundColor: 'transparent',
+      outline: `2px solid ${toggleGroupVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: toggleGroupVars.color.buttonHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
+      backgroundColor: toggleGroupVars.color.buttonActiveBackground,
+    },
+    [`&[data-pressed]`]: {
+      backgroundColor: toggleGroupVars.color.buttonPressedBackground,
+      color: toggleGroupVars.color.buttonPressedForeground,
     },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: toggleGroupVars.color.buttonActiveBackground,
-});
-globalStyle(`${button}[data-pressed]`, {
-  backgroundColor: toggleGroupVars.color.buttonPressedBackground,
-  color: toggleGroupVars.color.buttonPressedForeground,
 });
 
 export const icon = style({

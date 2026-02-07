@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -50,18 +45,21 @@ export const link = style({
   textDecorationThickness: '1px',
   textDecorationLine: 'none',
   textUnderlineOffset: '2px',
-});
-globalStyle(`${link}:hover`, {
-  '@media': {
-    '(hover: hover)': {
-      textDecorationLine: 'underline',
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          textDecorationLine: 'underline',
+        },
+      },
+    },
+    [`&:focus-visible`]: {
+      borderRadius: separatorVars.shape.focusCorner,
+      outline: `2px solid ${separatorVars.color.focusRing}`,
+      textDecorationLine: 'none',
     },
   },
-});
-globalStyle(`${link}:focus-visible`, {
-  borderRadius: separatorVars.shape.focusCorner,
-  outline: `2px solid ${separatorVars.color.focusRing}`,
-  textDecorationLine: 'none',
 });
 
 export const separatorRecipe = recipe({

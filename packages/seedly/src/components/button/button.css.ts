@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -57,25 +52,28 @@ export const button = style({
       corner: '0.375rem',
     }),
   },
-});
-globalStyle(`${button}:hover:not([data-disabled])`, {
-  '@media': {
-    '(hover: hover)': {
-      backgroundColor: buttonVars.color.hoverBackground,
+
+  selectors: {
+    [`&:hover:not([data-disabled])`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: buttonVars.color.hoverBackground,
+        },
+      },
+    },
+    [`&:active:not([data-disabled])`]: {
+      backgroundColor: buttonVars.color.activeBackground,
+      boxShadow: sys.elevation.minimal,
+      borderTopColor: buttonVars.color.activeBorder,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${buttonVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
+    [`&[data-disabled]`]: {
+      color: buttonVars.color.disabledForeground,
     },
   },
-});
-globalStyle(`${button}:active:not([data-disabled])`, {
-  backgroundColor: buttonVars.color.activeBackground,
-  boxShadow: sys.elevation.minimal,
-  borderTopColor: buttonVars.color.activeBorder,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${buttonVars.color.focusRing}`,
-  outlineOffset: '-1px',
-});
-globalStyle(`${button}[data-disabled]`, {
-  color: buttonVars.color.disabledForeground,
 });
 
 export const buttonRecipe = recipe({

@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -85,10 +80,13 @@ export const input = style({
   fontSize: '1rem',
   backgroundColor: 'transparent',
   color: formVars.color.inputForeground,
-});
-globalStyle(`${input}:focus`, {
-  outline: `2px solid ${formVars.color.inputFocusRing}`,
-  outlineOffset: '-1px',
+
+  selectors: {
+    [`&:focus`]: {
+      outline: `2px solid ${formVars.color.inputFocusRing}`,
+      outlineOffset: '-1px',
+    },
+  },
 });
 
 export const error = style({
@@ -115,25 +113,28 @@ export const button = style({
   lineHeight: '1.5rem',
   color: formVars.color.buttonForeground,
   userSelect: 'none',
-});
-globalStyle(`${button}:hover:not([data-disabled])`, {
-  '@media': {
-    '(hover: hover)': {
-      backgroundColor: formVars.color.buttonHoverBackground,
+
+  selectors: {
+    [`&:hover:not([data-disabled])`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: formVars.color.buttonHoverBackground,
+        },
+      },
+    },
+    [`&:active:not([data-disabled])`]: {
+      backgroundColor: formVars.color.buttonActiveBackground,
+      boxShadow: sys.elevation.minimal,
+      borderTopColor: formVars.color.buttonActiveBorder,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${formVars.color.buttonFocusRing}`,
+      outlineOffset: '-1px',
+    },
+    [`&[data-disabled]`]: {
+      color: formVars.color.buttonDisabledForeground,
     },
   },
-});
-globalStyle(`${button}:active:not([data-disabled])`, {
-  backgroundColor: formVars.color.buttonActiveBackground,
-  boxShadow: sys.elevation.minimal,
-  borderTopColor: formVars.color.buttonActiveBorder,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${formVars.color.buttonFocusRing}`,
-  outlineOffset: '-1px',
-});
-globalStyle(`${button}[data-disabled]`, {
-  color: formVars.color.buttonDisabledForeground,
 });
 
 export const formRecipe = recipe({

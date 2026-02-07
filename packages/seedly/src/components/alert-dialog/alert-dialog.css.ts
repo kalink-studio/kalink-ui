@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -69,23 +64,26 @@ export const button = style({
     ...alertDialogColorDefaults,
     ...alertDialogShapeDefaults,
   },
-});
-globalStyle(`${button}[data-color='red']`, {
-  color: alertDialogVars.color.triggerDestructiveForeground,
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&[data-color='red']`]: {
+      color: alertDialogVars.color.triggerDestructiveForeground,
+    },
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: alertDialogVars.color.triggerHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
       backgroundColor: alertDialogVars.color.triggerHoverBackground,
     },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${alertDialogVars.color.triggerFocusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: alertDialogVars.color.triggerHoverBackground,
-});
-globalStyle(`${button}:focus-visible`, {
-  outline: `2px solid ${alertDialogVars.color.triggerFocusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const backdrop = style({
@@ -109,12 +107,15 @@ export const backdrop = style({
     ...alertDialogColorDefaults,
     ...alertDialogShapeDefaults,
   },
-});
-globalStyle(`${backdrop}[data-starting-style]`, {
-  opacity: '0',
-});
-globalStyle(`${backdrop}[data-ending-style]`, {
-  opacity: '0',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+    },
+  },
 });
 
 export const popup = style({
@@ -141,14 +142,17 @@ export const popup = style({
     ...alertDialogColorDefaults,
     ...alertDialogShapeDefaults,
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'translate(-50%, -50%) scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'translate(-50%, -50%) scale(0.9)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'translate(-50%, -50%) scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'translate(-50%, -50%) scale(0.9)',
+    },
+  },
 });
 
 export const title = style({

@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -40,17 +40,20 @@ export const trigger = style({
   border: 'none',
   outline: 'none',
   textAlign: 'left',
-});
-globalStyle(`${trigger}:hover`, {
-  '@media': {
-    '(hover: hover)': {
-      backgroundColor: sys.color.container.low,
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: sys.color.container.low,
+        },
+      },
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${sys.color.tone.primary}`,
+      zIndex: '1',
     },
   },
-});
-globalStyle(`${trigger}:focus-visible`, {
-  outline: `2px solid ${sys.color.tone.primary}`,
-  zIndex: '1',
 });
 
 export const triggerIcon = style({
@@ -60,9 +63,12 @@ export const triggerIcon = style({
   height: '0.75rem',
   marginRight: '0.5rem',
   transition: 'transform 150ms ease-out',
-});
-globalStyle(`[data-panel-open] > ${triggerIcon}`, {
-  transform: 'rotate(45deg) scale(1.1)',
+
+  selectors: {
+    [`[data-panel-open] > &`]: {
+      transform: 'rotate(45deg) scale(1.1)',
+    },
+  },
 });
 
 export const panel = style({
@@ -73,12 +79,15 @@ export const panel = style({
   fontSize: '1rem',
   lineHeight: '1.5rem',
   transition: 'height 150ms ease-out',
-});
-globalStyle(`${panel}[data-starting-style]`, {
-  height: '0',
-});
-globalStyle(`${panel}[data-ending-style]`, {
-  height: '0',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      height: '0',
+    },
+    [`&[data-ending-style]`]: {
+      height: '0',
+    },
+  },
 });
 
 export const content = style({

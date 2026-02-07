@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -21,10 +21,13 @@ export const input = style({
       width: '20rem',
     },
   },
-});
-globalStyle(`${input}:focus`, {
-  borderColor: sys.color.tone.primary,
-  outline: `1px solid ${sys.color.tone.primary}`,
+
+  selectors: {
+    [`&:focus`]: {
+      borderColor: sys.color.tone.primary,
+      outline: `1px solid ${sys.color.tone.primary}`,
+    },
+  },
 });
 
 export const label = style({
@@ -69,9 +72,12 @@ export const list = style({
   scrollPaddingBlock: '0.5rem',
   outline: '0',
   maxHeight: 'min(23rem, var(--available-height))',
-});
-globalStyle(`${list}[data-empty]`, {
-  padding: '0',
+
+  selectors: {
+    [`&[data-empty]`]: {
+      padding: '0',
+    },
+  },
 });
 
 export const item = style({
@@ -85,20 +91,23 @@ export const item = style({
   display: 'flex',
   fontSize: '1rem',
   lineHeight: '1rem',
-});
-globalStyle(`${item}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: sys.color.container.base,
-});
-globalStyle(`${item}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.5rem',
-  borderRadius: '0.25rem',
-  backgroundColor: sys.color.content.base,
+
+  selectors: {
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: sys.color.container.base,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.5rem',
+      borderRadius: '0.25rem',
+      backgroundColor: sys.color.content.base,
+    },
+  },
 });
 
 export const separator = style({
@@ -107,14 +116,16 @@ export const separator = style({
   backgroundColor: sys.color.container.high,
 });
 
-export const empty = style({});
-
-globalStyle(`${empty}:not(:empty)`, {
-  boxSizing: 'border-box',
-  padding: '1rem',
-  fontSize: '0.925rem',
-  lineHeight: '1rem',
-  color: stateColor.mutedContent,
+export const empty = style({
+  selectors: {
+    [`&:not(:empty)`]: {
+      boxSizing: 'border-box',
+      padding: '1rem',
+      fontSize: '0.925rem',
+      lineHeight: '1rem',
+      color: stateColor.mutedContent,
+    },
+  },
 });
 
 export const autocompleteRecipe = recipe({

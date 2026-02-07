@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -25,17 +25,20 @@ export const menuTrigger = style({
   fontFamily: 'inherit',
   fontSize: '0.875rem',
   fontWeight: '500',
-});
-globalStyle(`${menuTrigger}[data-pressed]`, {
-  backgroundColor: sys.color.container.low,
-  outline: 'none',
-});
-globalStyle(`${menuTrigger}:focus-visible`, {
-  backgroundColor: sys.color.container.low,
-  outline: 'none',
-});
-globalStyle(`${menuTrigger}[data-disabled]`, {
-  opacity: '0.5',
+
+  selectors: {
+    [`&[data-pressed]`]: {
+      backgroundColor: sys.color.container.low,
+      outline: 'none',
+    },
+    [`&:focus-visible`]: {
+      backgroundColor: sys.color.container.low,
+      outline: 'none',
+    },
+    [`&[data-disabled]`]: {
+      opacity: '0.5',
+    },
+  },
 });
 
 export const menuPositioner = style({
@@ -59,13 +62,16 @@ export const menuPopup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${menuPopup}[data-ending-style]`, {
-  opacity: '0',
-  transition: 'opacity 150ms',
-});
-globalStyle(`${menuPopup}[data-instant]`, {
-  transition: 'none',
+
+  selectors: {
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transition: 'opacity 150ms',
+    },
+    [`&[data-instant]`]: {
+      transition: 'none',
+    },
+  },
 });
 
 export const menuItem = style({
@@ -79,33 +85,36 @@ export const menuItem = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '1rem',
-});
-globalStyle(`${menuItem}[data-popup-open]`, {
-  zIndex: '0',
-  position: 'relative',
-});
-globalStyle(`${menuItem}[data-popup-open]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.25rem',
-  borderRadius: '0.25rem',
-  backgroundColor: sys.color.container.low,
-});
-globalStyle(`${menuItem}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: sys.color.container.base,
-});
-globalStyle(`${menuItem}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.25rem',
-  borderRadius: '0.25rem',
-  backgroundColor: sys.color.content.base,
+
+  selectors: {
+    [`&[data-popup-open]`]: {
+      zIndex: '0',
+      position: 'relative',
+    },
+    [`&[data-popup-open]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.25rem',
+      borderRadius: '0.25rem',
+      backgroundColor: sys.color.container.low,
+    },
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: sys.color.container.base,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.25rem',
+      borderRadius: '0.25rem',
+      backgroundColor: sys.color.content.base,
+    },
+  },
 });
 
 export const menuSeparator = style({

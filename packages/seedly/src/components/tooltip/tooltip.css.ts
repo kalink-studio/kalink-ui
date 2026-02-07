@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -80,24 +75,27 @@ export const button = style({
   backgroundColor: 'transparent',
   color: tooltipVars.color.buttonForeground,
   userSelect: 'none',
-});
-globalStyle(`${button}[data-popup-open]`, {
-  backgroundColor: tooltipVars.color.buttonHoverBackground,
-});
-globalStyle(`${button}:focus-visible`, {
-  backgroundColor: 'transparent',
-  outline: `2px solid ${tooltipVars.color.focusRing}`,
-  outlineOffset: '-1px',
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&[data-popup-open]`]: {
       backgroundColor: tooltipVars.color.buttonHoverBackground,
     },
+    [`&:focus-visible`]: {
+      backgroundColor: 'transparent',
+      outline: `2px solid ${tooltipVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: tooltipVars.color.buttonHoverBackground,
+        },
+      },
+    },
+    [`&:active`]: {
+      backgroundColor: tooltipVars.color.buttonActiveBackground,
+    },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: tooltipVars.color.buttonActiveBackground,
 });
 
 export const icon = style({
@@ -134,37 +132,43 @@ export const popup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-instant]`, {
-  transition: 'none',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-instant]`]: {
+      transition: 'none',
+    },
+  },
 });
 
 export const arrow = style({
   display: 'flex',
-});
-globalStyle(`${arrow}[data-side='top']`, {
-  bottom: '-8px',
-  rotate: '180deg',
-});
-globalStyle(`${arrow}[data-side='bottom']`, {
-  top: '-8px',
-  rotate: '0deg',
-});
-globalStyle(`${arrow}[data-side='left']`, {
-  right: '-13px',
-  rotate: '90deg',
-});
-globalStyle(`${arrow}[data-side='right']`, {
-  left: '-13px',
-  rotate: '-90deg',
+
+  selectors: {
+    [`&[data-side='top']`]: {
+      bottom: '-8px',
+      rotate: '180deg',
+    },
+    [`&[data-side='bottom']`]: {
+      top: '-8px',
+      rotate: '0deg',
+    },
+    [`&[data-side='left']`]: {
+      right: '-13px',
+      rotate: '90deg',
+    },
+    [`&[data-side='right']`]: {
+      left: '-13px',
+      rotate: '-90deg',
+    },
+  },
 });
 
 export const arrowFill = style({

@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -67,9 +62,12 @@ export const thumb = style({
   backgroundColor: sliderVars.color.thumbBackground,
   outline: `1px solid ${sliderVars.color.thumbOutline}`,
   userSelect: 'none',
-});
-globalStyle(`${thumb}:has(:focus-visible)`, {
-  outline: `2px solid ${sliderVars.color.thumbFocusRing}`,
+
+  selectors: {
+    [`&:has(:focus-visible)`]: {
+      outline: `2px solid ${sliderVars.color.thumbFocusRing}`,
+    },
+  },
 });
 
 export const sliderRecipe = recipe({

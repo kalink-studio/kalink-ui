@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -37,33 +37,36 @@ export const button = style({
   fontFamily: 'inherit',
   fontSize: '0.875rem',
   fontWeight: '500',
-});
-globalStyle(`${button}:focus-visible`, {
-  backgroundColor: 'transparent',
-  outline: `2px solid ${sys.color.tone.primary}`,
-  outlineOffset: '-1px',
-});
-globalStyle(`${button}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:focus-visible`]: {
+      backgroundColor: 'transparent',
+      outline: `2px solid ${sys.color.tone.primary}`,
+      outlineOffset: '-1px',
+    },
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: sys.color.container.low,
+        },
+      },
+    },
+    [`&:active`]: {
+      backgroundColor: sys.color.container.high,
+    },
+    [`&[data-pressed]`]: {
       backgroundColor: sys.color.container.low,
+      color: sys.color.content.base,
+    },
+    [`&[aria-pressed]`]: {
+      padding: '0 0.75rem',
+    },
+    [`&[role='combobox']`]: {
+      minWidth: '8rem',
+      justifyContent: 'space-between',
+      padding: '0 0.75rem',
     },
   },
-});
-globalStyle(`${button}:active`, {
-  backgroundColor: sys.color.container.high,
-});
-globalStyle(`${button}[data-pressed]`, {
-  backgroundColor: sys.color.container.low,
-  color: sys.color.content.base,
-});
-globalStyle(`${button}[aria-pressed]`, {
-  padding: '0 0.75rem',
-});
-globalStyle(`${button}[role='combobox']`, {
-  minWidth: '8rem',
-  justifyContent: 'space-between',
-  padding: '0 0.75rem',
 });
 
 export const separator = style({
@@ -81,16 +84,19 @@ export const link = style({
   alignSelf: 'center',
   flex: '0 0 auto',
   marginInline: 'auto 0.875rem',
-});
-globalStyle(`${link}:focus-visible`, {
-  outline: `2px solid ${sys.color.tone.primary}`,
-  outlineOffset: '-2px',
-  borderRadius: 'var(--radius-sm)',
-});
-globalStyle(`${link}:hover`, {
-  '@media': {
-    '(hover: hover)': {
-      color: sys.color.tone.primary,
+
+  selectors: {
+    [`&:focus-visible`]: {
+      outline: `2px solid ${sys.color.tone.primary}`,
+      outlineOffset: '-2px',
+      borderRadius: 'var(--radius-sm)',
+    },
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          color: sys.color.tone.primary,
+        },
+      },
     },
   },
 });
@@ -116,20 +122,23 @@ export const select = style({
   WebkitUserSelect: 'none',
   userSelect: 'none',
   minWidth: '9rem',
-});
-globalStyle(`${select}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: sys.color.container.low,
+        },
+      },
+    },
+    [`&[data-popup-open]`]: {
       backgroundColor: sys.color.container.low,
     },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${sys.color.tone.primary}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${select}[data-popup-open]`, {
-  backgroundColor: sys.color.container.low,
-});
-globalStyle(`${select}:focus-visible`, {
-  outline: `2px solid ${sys.color.tone.primary}`,
-  outlineOffset: '-1px',
 });
 
 export const selectIcon = style({
@@ -163,39 +172,45 @@ export const popup = style({
       outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-side='none']`, {
-  transition: 'none',
-  transform: 'none',
-  opacity: '1',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-side='none']`]: {
+      transition: 'none',
+      transform: 'none',
+      opacity: '1',
+    },
+  },
 });
 
 export const arrow = style({
   display: 'flex',
-});
-globalStyle(`${arrow}[data-side='top']`, {
-  bottom: '-8px',
-  rotate: '180deg',
-});
-globalStyle(`${arrow}[data-side='bottom']`, {
-  top: '-8px',
-  rotate: '0deg',
-});
-globalStyle(`${arrow}[data-side='left']`, {
-  right: '-13px',
-  rotate: '90deg',
-});
-globalStyle(`${arrow}[data-side='right']`, {
-  left: '-13px',
-  rotate: '-90deg',
+
+  selectors: {
+    [`&[data-side='top']`]: {
+      bottom: '-8px',
+      rotate: '180deg',
+    },
+    [`&[data-side='bottom']`]: {
+      top: '-8px',
+      rotate: '0deg',
+    },
+    [`&[data-side='left']`]: {
+      right: '-13px',
+      rotate: '90deg',
+    },
+    [`&[data-side='right']`]: {
+      left: '-13px',
+      rotate: '-90deg',
+    },
+  },
 });
 
 export const arrowFill = style({
@@ -240,24 +255,27 @@ export const item = style({
       paddingBlock: '0.625rem',
     },
   },
-});
-globalStyle(`[data-side='none'] ${item}`, {
-  paddingRight: '3rem',
-  minWidth: 'calc(var(--anchor-width) + 1rem)',
-});
-globalStyle(`${item}[data-highlighted]`, {
-  zIndex: '0',
-  position: 'relative',
-  color: sys.color.container.base,
-});
-globalStyle(`${item}[data-highlighted]::before`, {
-  content: "''",
-  zIndex: '-1',
-  position: 'absolute',
-  insetBlock: '0',
-  insetInline: '0.25rem',
-  borderRadius: '0.25rem',
-  backgroundColor: sys.color.content.base,
+
+  selectors: {
+    [`[data-side='none'] &`]: {
+      paddingRight: '3rem',
+      minWidth: 'calc(var(--anchor-width) + 1rem)',
+    },
+    [`&[data-highlighted]`]: {
+      zIndex: '0',
+      position: 'relative',
+      color: sys.color.container.base,
+    },
+    [`&[data-highlighted]::before`]: {
+      content: "''",
+      zIndex: '-1',
+      position: 'absolute',
+      insetBlock: '0',
+      insetInline: '0.25rem',
+      borderRadius: '0.25rem',
+      backgroundColor: sys.color.content.base,
+    },
+  },
 });
 
 export const itemIndicator = style({

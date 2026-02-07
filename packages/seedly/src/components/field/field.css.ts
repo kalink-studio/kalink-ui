@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -63,10 +58,13 @@ export const input = style({
   fontSize: '1rem',
   backgroundColor: 'transparent',
   color: fieldVars.color.foreground,
-});
-globalStyle(`${input}:focus`, {
-  outline: `2px solid ${fieldVars.color.focusRing}`,
-  outlineOffset: '-1px',
+
+  selectors: {
+    [`&:focus`]: {
+      outline: `2px solid ${fieldVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
+  },
 });
 
 export const error = style({

@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -56,25 +51,31 @@ export const checkbox = style({
   padding: '0',
   margin: '0',
   border: 'none',
-});
-globalStyle(`${checkbox}[data-unchecked]`, {
-  border: `1px solid ${checkboxVars.color.border}`,
-  backgroundColor: 'transparent',
-});
-globalStyle(`${checkbox}[data-checked]`, {
-  backgroundColor: checkboxVars.color.checkedBackground,
-});
-globalStyle(`${checkbox}:focus-visible`, {
-  outline: `2px solid ${checkboxVars.color.focusRing}`,
-  outlineOffset: '2px',
+
+  selectors: {
+    [`&[data-unchecked]`]: {
+      border: `1px solid ${checkboxVars.color.border}`,
+      backgroundColor: 'transparent',
+    },
+    [`&[data-checked]`]: {
+      backgroundColor: checkboxVars.color.checkedBackground,
+    },
+    [`&:focus-visible`]: {
+      outline: `2px solid ${checkboxVars.color.focusRing}`,
+      outlineOffset: '2px',
+    },
+  },
 });
 
 export const indicator = style({
   display: 'flex',
   color: checkboxVars.color.checkedForeground,
-});
-globalStyle(`${indicator}[data-unchecked]`, {
-  display: 'none',
+
+  selectors: {
+    [`&[data-unchecked]`]: {
+      display: 'none',
+    },
+  },
 });
 
 export const icon = style({

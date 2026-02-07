@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -77,27 +72,30 @@ export const tab = style({
   paddingInline: '0.5rem',
   paddingBlock: '0',
   height: '2rem',
-});
-globalStyle(`${tab}[data-active]`, {
-  color: tabsVars.color.tabActiveForeground,
-});
-globalStyle(`${tab}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&[data-active]`]: {
       color: tabsVars.color.tabActiveForeground,
     },
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          color: tabsVars.color.tabActiveForeground,
+        },
+      },
+    },
+    [`&:focus-visible`]: {
+      position: 'relative',
+    },
+    [`&:focus-visible::before`]: {
+      content: "''",
+      position: 'absolute',
+      inset: '0.25rem 0',
+      borderRadius: tabsVars.shape.indicatorCorner,
+      outline: `2px solid ${tabsVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${tab}:focus-visible`, {
-  position: 'relative',
-});
-globalStyle(`${tab}:focus-visible::before`, {
-  content: "''",
-  position: 'absolute',
-  inset: '0.25rem 0',
-  borderRadius: tabsVars.shape.indicatorCorner,
-  outline: `2px solid ${tabsVars.color.focusRing}`,
-  outlineOffset: '-1px',
 });
 
 export const indicator = style({
@@ -122,14 +120,17 @@ export const panel = style({
   justifyContent: 'center',
   height: '8rem',
   outline: '0',
-});
-globalStyle(`${panel}:focus-visible`, {
-  outline: `2px solid ${tabsVars.color.focusRing}`,
-  outlineOffset: '-1px',
-  borderRadius: tabsVars.shape.focusCorner,
-});
-globalStyle(`${panel}[hidden]`, {
-  display: 'none',
+
+  selectors: {
+    [`&:focus-visible`]: {
+      outline: `2px solid ${tabsVars.color.focusRing}`,
+      outlineOffset: '-1px',
+      borderRadius: tabsVars.shape.focusCorner,
+    },
+    [`&[hidden]`]: {
+      display: 'none',
+    },
+  },
 });
 
 export const icon = style({

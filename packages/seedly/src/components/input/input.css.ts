@@ -1,9 +1,4 @@
-import {
-  assignVars,
-  createThemeContract,
-  globalStyle,
-  style,
-} from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -55,10 +50,13 @@ export const input = style({
   fontWeight: 'normal',
   backgroundColor: 'transparent',
   color: inputVars.color.foreground,
-});
-globalStyle(`${input}:focus`, {
-  outline: `2px solid ${inputVars.color.focusRing}`,
-  outlineOffset: '-1px',
+
+  selectors: {
+    [`&:focus`]: {
+      outline: `2px solid ${inputVars.color.focusRing}`,
+      outlineOffset: '-1px',
+    },
+  },
 });
 
 export const inputRecipe = recipe({

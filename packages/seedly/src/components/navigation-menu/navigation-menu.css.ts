@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -45,28 +45,34 @@ export const trigger = style({
       padding: '0 0.5rem',
     },
   },
-});
-globalStyle(`${trigger}:hover`, {
-  '@media': {
-    '(hover: hover)': {
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: sys.color.container.low,
+        },
+      },
+    },
+    [`&[data-popup-open]`]: {
       backgroundColor: sys.color.container.low,
     },
+    [`&:focus-visible`]: {
+      position: 'relative',
+      outline: `2px solid ${sys.color.tone.primary}`,
+      outlineOffset: '-1px',
+    },
   },
-});
-globalStyle(`${trigger}[data-popup-open]`, {
-  backgroundColor: sys.color.container.low,
-});
-globalStyle(`${trigger}:focus-visible`, {
-  position: 'relative',
-  outline: `2px solid ${sys.color.tone.primary}`,
-  outlineOffset: '-1px',
 });
 
 export const icon = style({
   transition: 'transform 0.2s ease',
-});
-globalStyle(`${icon}[data-popup-open]`, {
-  transform: 'rotate(180deg)',
+
+  selectors: {
+    [`&[data-popup-open]`]: {
+      transform: 'rotate(180deg)',
+    },
+  },
 });
 
 export const positioner = style({
@@ -81,37 +87,40 @@ export const positioner = style({
     '--easing': sys.motion.easing.decelerate.emphasized,
     '--duration': sys.motion.duration.medium[4],
   },
-});
-globalStyle(`${positioner}::before`, {
-  content: "''",
-  position: 'absolute',
-});
-globalStyle(`${positioner}[data-side='top']::before`, {
-  left: '0',
-  right: '0',
-  bottom: '-10px',
-  height: '10px',
-});
-globalStyle(`${positioner}[data-side='bottom']::before`, {
-  left: '0',
-  right: '0',
-  top: '-10px',
-  height: '10px',
-});
-globalStyle(`${positioner}[data-side='left']::before`, {
-  top: '0',
-  bottom: '0',
-  right: '-10px',
-  width: '10px',
-});
-globalStyle(`${positioner}[data-side='right']::before`, {
-  top: '0',
-  bottom: '0',
-  left: '-10px',
-  width: '10px',
-});
-globalStyle(`${positioner}[data-instant]`, {
-  transition: 'none',
+
+  selectors: {
+    [`&::before`]: {
+      content: "''",
+      position: 'absolute',
+    },
+    [`&[data-side='top']::before`]: {
+      left: '0',
+      right: '0',
+      bottom: '-10px',
+      height: '10px',
+    },
+    [`&[data-side='bottom']::before`]: {
+      left: '0',
+      right: '0',
+      top: '-10px',
+      height: '10px',
+    },
+    [`&[data-side='left']::before`]: {
+      top: '0',
+      bottom: '0',
+      right: '-10px',
+      width: '10px',
+    },
+    [`&[data-side='right']::before`]: {
+      top: '0',
+      bottom: '0',
+      left: '-10px',
+      width: '10px',
+    },
+    [`&[data-instant]`]: {
+      transition: 'none',
+    },
+  },
 });
 
 export const popup = style({
@@ -126,16 +135,29 @@ export const popup = style({
   transitionTimingFunction: 'var(--easing)',
   width: 'var(--popup-width)',
   height: 'var(--popup-height)',
-});
-globalStyle(`${popup}[data-starting-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-});
-globalStyle(`${popup}[data-ending-style]`, {
-  opacity: '0',
-  transform: 'scale(0.9)',
-  transitionTimingFunction: 'ease',
-  transitionDuration: '0.15s',
+  '@media': {
+    '(prefers-color-scheme: light)': {
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
+    },
+    '(prefers-color-scheme: dark)': {
+      outline: `1px solid ${sys.color.container.top}`,
+      outlineOffset: '-1px',
+    },
+  },
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+      transform: 'scale(0.9)',
+      transitionTimingFunction: 'ease',
+      transitionDuration: '0.15s',
+    },
+  },
 });
 
 export const content = style({
@@ -151,34 +173,28 @@ export const content = style({
       minWidth: '400px',
     },
   },
-});
-globalStyle(`${content}[data-starting-style]`, {
-  opacity: '0',
-});
-globalStyle(`${content}[data-ending-style]`, {
-  opacity: '0',
-});
-globalStyle(
-  `${content}[data-starting-style][data-activation-direction='left']`,
-  {
-    transform: 'translateX(-50%)',
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+    },
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+    },
+    [`&[data-starting-style][data-activation-direction='left']`]: {
+      transform: 'translateX(-50%)',
+    },
+    [`&[data-starting-style][data-activation-direction='right']`]: {
+      transform: 'translateX(50%)',
+    },
+    [`&[data-ending-style][data-activation-direction='left']`]: {
+      transform: 'translateX(50%)',
+    },
+    [`&[data-ending-style][data-activation-direction='right']`]: {
+      transform: 'translateX(-50%)',
+    },
   },
-);
-globalStyle(
-  `${content}[data-starting-style][data-activation-direction='right']`,
-  {
-    transform: 'translateX(50%)',
-  },
-);
-globalStyle(`${content}[data-ending-style][data-activation-direction='left']`, {
-  transform: 'translateX(50%)',
 });
-globalStyle(
-  `${content}[data-ending-style][data-activation-direction='right']`,
-  {
-    transform: 'translateX(-50%)',
-  },
-);
 
 export const viewport = style({
   position: 'relative',
@@ -224,18 +240,21 @@ export const linkCard = style({
       padding: '0.75rem',
     },
   },
-});
-globalStyle(`${linkCard}:hover`, {
-  '@media': {
-    '(hover: hover)': {
-      backgroundColor: sys.color.container.low,
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: sys.color.container.low,
+        },
+      },
+    },
+    [`&:focus-visible`]: {
+      position: 'relative',
+      outline: `2px solid ${sys.color.tone.primary}`,
+      outlineOffset: '-1px',
     },
   },
-});
-globalStyle(`${linkCard}:focus-visible`, {
-  position: 'relative',
-  outline: `2px solid ${sys.color.tone.primary}`,
-  outlineOffset: '-1px',
 });
 
 export const linkTitle = style({
@@ -255,22 +274,25 @@ export const linkDescription = style({
 export const arrow = style({
   display: 'flex',
   transition: 'left calc(var(--duration)) var(--easing)',
-});
-globalStyle(`${arrow}[data-side='top']`, {
-  bottom: '-8px',
-  rotate: '180deg',
-});
-globalStyle(`${arrow}[data-side='bottom']`, {
-  top: '-8px',
-  rotate: '0deg',
-});
-globalStyle(`${arrow}[data-side='left']`, {
-  right: '-13px',
-  rotate: '90deg',
-});
-globalStyle(`${arrow}[data-side='right']`, {
-  left: '-13px',
-  rotate: '-90deg',
+
+  selectors: {
+    [`&[data-side='top']`]: {
+      bottom: '-8px',
+      rotate: '180deg',
+    },
+    [`&[data-side='bottom']`]: {
+      top: '-8px',
+      rotate: '0deg',
+    },
+    [`&[data-side='left']`]: {
+      right: '-13px',
+      rotate: '90deg',
+    },
+    [`&[data-side='right']`]: {
+      left: '-13px',
+      rotate: '-90deg',
+    },
+  },
 });
 
 export const arrowFill = style({
@@ -289,23 +311,6 @@ export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
       fill: sys.color.container.top,
-    },
-  },
-});
-
-globalStyle(`${popup}`, {
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      outline: `1px solid ${sys.color.container.high}`,
-      boxShadow: sys.elevation.moderate,
-    },
-  },
-});
-globalStyle(`${popup}`, {
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      outline: `1px solid ${sys.color.container.top}`,
-      outlineOffset: '-1px',
     },
   },
 });
