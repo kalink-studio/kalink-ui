@@ -1,0 +1,23 @@
+import { {{pascalCase name}} } from './{{kebabCase name}}';
+
+import type { Meta, StoryObj } from '@storybook/react';
+
+const meta = {
+  title: 'Component/{{pascalCase name}}',
+  component: {{pascalCase name}},
+  tags: ['autodocs'],
+  args: {
+    children: 'Ullamco in dolore cupidatat culpa',
+  },
+  argTypes: {
+    children: {
+      control: false,
+    },
+  },
+} satisfies Meta<typeof {{pascalCase name}}>;
+
+export default meta;
+
+type Story = StoryObj<typeof {{pascalCase name}}>;
+
+export const Default: Story = {};
