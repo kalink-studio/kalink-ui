@@ -1,6 +1,8 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const field = style({
   display: 'flex',
   flexDirection: 'column',
@@ -15,7 +17,7 @@ export const scrubArea = style({
 });
 
 export const scrubAreaCursor = style({
-  filter: 'drop-shadow(0 1px 1px #0008)',
+  filter: `drop-shadow(0 1px 1px ${stateColor.disabledContent})`,
 });
 
 export const label = style({
@@ -23,7 +25,7 @@ export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
 });
 
 export const group = style({
@@ -35,8 +37,8 @@ export const input = style({
   margin: '0',
   padding: '0',
   borderRadius: '0',
-  borderTop: '1px solid var(--color-gray-200)',
-  borderBottom: '1px solid var(--color-gray-200)',
+  borderTop: `1px solid ${sys.color.container.high}`,
+  borderBottom: `1px solid ${sys.color.container.high}`,
   borderLeft: 'none',
   borderRight: 'none',
   width: '6rem',
@@ -45,13 +47,13 @@ export const input = style({
   fontSize: '1rem',
   fontWeight: 'normal',
   backgroundColor: 'transparent',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   textAlign: 'center',
   fontVariantNumeric: 'tabular-nums',
 });
 globalStyle(`${input}:focus`, {
   zIndex: '1',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 
@@ -78,11 +80,11 @@ ${increment}`,
     margin: '0',
     outline: '0',
     padding: '0',
-    border: '1px solid var(--color-gray-200)',
+    border: `1px solid ${sys.color.container.high}`,
     borderRadius: '0.375rem',
-    backgroundColor: 'var(--color-gray-50)',
+    backgroundColor: sys.color.container.base,
     backgroundClip: 'padding-box',
-    color: 'var(--color-gray-900)',
+    color: sys.color.content.base,
     userSelect: 'none',
   },
 );
@@ -92,7 +94,7 @@ ${increment}:hover`,
   {
     '@media': {
       '(hover: hover)': {
-        backgroundColor: 'var(--color-gray-100)',
+        backgroundColor: sys.color.container.low,
       },
     },
   },
@@ -101,7 +103,7 @@ globalStyle(
   `${decrement},
 ${increment}:active`,
   {
-    backgroundColor: 'var(--color-gray-100)',
+    backgroundColor: sys.color.container.low,
   },
 );
 

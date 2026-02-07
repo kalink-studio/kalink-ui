@@ -1,38 +1,42 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   paddingRight: 'calc(0.5rem + 1.5rem)',
   margin: '0',
-  border: '1px solid var(--color-gray-200)',
+  border: `1px solid ${sys.color.container.high}`,
   width: '16rem',
   height: '2.5rem',
   borderRadius: '0.375rem',
   fontFamily: 'inherit',
   fontSize: '1rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
 });
 globalStyle(`${input}:focus`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 
 export const label = style({
   display: 'flex',
   flexDirection: 'column',
+  alignItems: 'start',
   gap: '0.25rem',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   position: 'relative',
 });
 
 export const inputWrapper = style({
   position: 'relative',
+  display: 'inline-block',
 });
 
 export const trigger = style({});
@@ -60,7 +64,7 @@ export const actionButtons = style({
   right: '0.5rem',
   borderRadius: '0.25rem',
   border: 'none',
-  color: 'var(--color-gray-600)',
+  color: stateColor.mutedContent,
   padding: '0',
 });
 
@@ -71,8 +75,8 @@ export const positioner = style({
 export const popup = style({
   boxSizing: 'border-box',
   borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
   width: 'var(--anchor-width)',
   maxHeight: '23rem',
   maxWidth: 'var(--available-width)',
@@ -80,12 +84,11 @@ export const popup = style({
   transformOrigin: 'var(--transform-origin)',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${sys.color.container.top}`,
       outlineOffset: '-1px',
     },
   },
@@ -130,7 +133,7 @@ export const item = style({
 globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
-  color: 'var(--color-gray-50)',
+  color: sys.color.container.base,
 });
 globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
@@ -139,7 +142,7 @@ globalStyle(`${item}[data-highlighted]::before`, {
   insetBlock: '0',
   insetInline: '0.5rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-900)',
+  backgroundColor: sys.color.content.base,
 });
 
 export const itemText = style({
@@ -166,7 +169,7 @@ ${clear}`,
     justifyContent: 'center',
     width: '1.5rem',
     height: '2.5rem',
-    color: 'var(--color-gray-600)',
+    color: stateColor.mutedContent,
     border: 'none',
     padding: '0',
     borderRadius: '0.25rem',
@@ -184,7 +187,7 @@ ${triggerIcon}`,
 globalStyle(`${empty}:not(:empty)`, {
   fontSize: '0.925rem',
   lineHeight: '1rem',
-  color: 'var(--color-gray-600)',
+  color: stateColor.mutedContent,
   padding: '1rem',
 });
 

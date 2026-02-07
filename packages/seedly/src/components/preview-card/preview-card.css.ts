@@ -1,6 +1,8 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { sys } from '../../styles';
+
 export const positioner = style({
   height: 'var(--positioner-height)',
   width: 'var(--positioner-width)',
@@ -12,17 +14,16 @@ export const popup = style({
   width: 'var(--popup-width, auto)',
   height: 'var(--popup-height, auto)',
   borderRadius: '0.5rem',
-  backgroundColor: 'canvas',
+  backgroundColor: sys.color.surface.base,
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${sys.color.container.top}`,
       outlineOffset: '-1px',
     },
   },
@@ -57,13 +58,13 @@ globalStyle(`${arrow}[data-side='right']`, {
 });
 
 export const arrowFill = style({
-  fill: 'canvas',
+  fill: sys.color.surface.base,
 });
 
 export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
-      fill: 'var(--color-gray-200)',
+      fill: sys.color.container.high,
     },
   },
 });
@@ -71,7 +72,7 @@ export const arrowOuterStroke = style({
 export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
-      fill: 'var(--color-gray-300)',
+      fill: sys.color.container.top,
     },
   },
 });
@@ -95,7 +96,7 @@ export const summary = style({
   margin: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   textWrap: 'pretty',
 });
 
@@ -111,17 +112,16 @@ export const paragraph = style({
   margin: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   textWrap: 'balance',
 });
 
 export const link = style({
   outline: '0',
-  color: 'var(--color-blue)',
+  color: sys.color.tone.primary,
   textDecorationLine: 'none',
   textDecorationThickness: '1px',
-  textDecorationColor:
-    'color-mix(in oklab, var(--color-blue), transparent 40%)',
+  textDecorationColor: `color-mix(in oklab, ${sys.color.tone.primary}, transparent 40%)`,
   textUnderlineOffset: '2px',
 });
 globalStyle(`${link}:hover`, {
@@ -136,7 +136,7 @@ globalStyle(`${link}[data-popup-open]`, {
 });
 globalStyle(`${link}:focus-visible`, {
   borderRadius: '0.125rem',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   textDecorationLine: 'none',
 });
 
@@ -156,28 +156,28 @@ export const button = style({
   padding: '0 0.875rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
+  border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
+  backgroundColor: sys.color.container.base,
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   userSelect: 'none',
 });
 globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: sys.color.container.low,
     },
   },
 });
 globalStyle(`${button}:active`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
 });
 globalStyle(`${button}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 

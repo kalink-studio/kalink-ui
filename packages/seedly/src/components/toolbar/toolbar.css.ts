@@ -1,12 +1,14 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const toolbar = style({
   display: 'flex',
   alignItems: 'center',
   gap: '1px',
-  border: '1px solid var(--color-gray-200)',
-  backgroundColor: 'var(--color-gray-50)',
+  border: `1px solid ${sys.color.container.high}`,
+  backgroundColor: sys.color.container.base,
   borderRadius: '0.375rem',
   padding: '0.125rem',
   width: '37.5rem',
@@ -30,7 +32,7 @@ export const button = style({
   border: '0',
   borderRadius: '0.25rem',
   backgroundColor: 'transparent',
-  color: 'var(--color-gray-600)',
+  color: stateColor.mutedContent,
   userSelect: 'none',
   fontFamily: 'inherit',
   fontSize: '0.875rem',
@@ -38,22 +40,22 @@ export const button = style({
 });
 globalStyle(`${button}:focus-visible`, {
   backgroundColor: 'transparent',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: sys.color.container.low,
     },
   },
 });
 globalStyle(`${button}:active`, {
-  backgroundColor: 'var(--color-gray-200)',
+  backgroundColor: sys.color.container.high,
 });
 globalStyle(`${button}[data-pressed]`, {
-  backgroundColor: 'var(--color-gray-100)',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.container.low,
+  color: sys.color.content.base,
 });
 globalStyle(`${button}[aria-pressed]`, {
   padding: '0 0.75rem',
@@ -68,11 +70,11 @@ export const separator = style({
   width: '1px',
   height: '16px',
   margin: '0.25rem',
-  backgroundColor: 'var(--color-gray-300)',
+  backgroundColor: sys.color.container.top,
 });
 
 export const link = style({
-  color: 'var(--color-gray-500)',
+  color: stateColor.disabledContent,
   fontFamily: 'inherit',
   fontSize: '0.875rem',
   textDecoration: 'none',
@@ -81,14 +83,14 @@ export const link = style({
   marginInline: 'auto 0.875rem',
 });
 globalStyle(`${link}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-2px',
   borderRadius: 'var(--radius-sm)',
 });
 globalStyle(`${link}:hover`, {
   '@media': {
     '(hover: hover)': {
-      color: 'var(--color-blue)',
+      color: sys.color.tone.primary,
     },
   },
 });
@@ -104,12 +106,12 @@ export const select = style({
   paddingRight: '0.75rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
+  border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',
   fontFamily: 'inherit',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   cursor: 'default',
   WebkitUserSelect: 'none',
   userSelect: 'none',
@@ -118,15 +120,15 @@ export const select = style({
 globalStyle(`${select}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: sys.color.container.low,
     },
   },
 });
 globalStyle(`${select}[data-popup-open]`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
 });
 globalStyle(`${select}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 
@@ -145,20 +147,19 @@ export const popup = style({
   boxSizing: 'border-box',
   paddingBlock: '0.25rem',
   borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   overflowY: 'auto',
   maxHeight: 'var(--available-height)',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${sys.color.container.top}`,
       outlineOffset: '-1px',
     },
   },
@@ -198,13 +199,13 @@ globalStyle(`${arrow}[data-side='right']`, {
 });
 
 export const arrowFill = style({
-  fill: 'canvas',
+  fill: sys.color.surface.base,
 });
 
 export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
-      fill: 'var(--color-gray-200)',
+      fill: sys.color.container.high,
     },
   },
 });
@@ -212,7 +213,7 @@ export const arrowOuterStroke = style({
 export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
-      fill: 'var(--color-gray-300)',
+      fill: sys.color.container.top,
     },
   },
 });
@@ -247,7 +248,7 @@ globalStyle(`[data-side='none'] ${item}`, {
 globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
-  color: 'var(--color-gray-50)',
+  color: sys.color.container.base,
 });
 globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
@@ -256,7 +257,7 @@ globalStyle(`${item}[data-highlighted]::before`, {
   insetBlock: '0',
   insetInline: '0.25rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-900)',
+  backgroundColor: sys.color.content.base,
 });
 
 export const itemIndicator = style({

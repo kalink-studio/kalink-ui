@@ -1,5 +1,34 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { stateColor, sys } from '../../styles';
+
+export const formVars = createThemeContract({
+  color: {
+    label: null,
+    inputForeground: null,
+    inputBorder: null,
+    inputFocusRing: null,
+    error: null,
+    buttonForeground: null,
+    buttonBackground: null,
+    buttonBorder: null,
+    buttonHoverBackground: null,
+    buttonActiveBackground: null,
+    buttonActiveBorder: null,
+    buttonFocusRing: null,
+    buttonDisabledForeground: null,
+  },
+  shape: {
+    inputCorner: null,
+    buttonCorner: null,
+  },
+});
 
 export const form = style({
   display: 'flex',
@@ -7,6 +36,27 @@ export const form = style({
   gap: '1rem',
   width: '100%',
   maxWidth: '16rem',
+  vars: {
+    ...assignVars(formVars.color, {
+      label: sys.color.content.base,
+      inputForeground: sys.color.content.base,
+      inputBorder: sys.color.container.high,
+      inputFocusRing: sys.color.tone.primary,
+      error: sys.color.tone.destructive,
+      buttonForeground: sys.color.content.base,
+      buttonBackground: sys.color.container.base,
+      buttonBorder: sys.color.container.high,
+      buttonHoverBackground: sys.color.container.low,
+      buttonActiveBackground: sys.color.container.high,
+      buttonActiveBorder: sys.color.container.top,
+      buttonFocusRing: sys.color.tone.primary,
+      buttonDisabledForeground: stateColor.disabledContent,
+    }),
+    ...assignVars(formVars.shape, {
+      inputCorner: '0.375rem',
+      buttonCorner: '0.375rem',
+    }),
+  },
 });
 
 export const field = style({
@@ -20,31 +70,31 @@ export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
-  color: 'var(--color-gray-900)',
+  color: formVars.color.label,
 });
 
 export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   margin: '0',
-  border: '1px solid var(--color-gray-200)',
+  border: `1px solid ${formVars.color.inputBorder}`,
   width: '100%',
   height: '2.5rem',
-  borderRadius: '0.375rem',
+  borderRadius: formVars.shape.inputCorner,
   fontFamily: 'inherit',
   fontSize: '1rem',
   backgroundColor: 'transparent',
-  color: 'var(--color-gray-900)',
+  color: formVars.color.inputForeground,
 });
 globalStyle(`${input}:focus`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${formVars.color.inputFocusRing}`,
   outlineOffset: '-1px',
 });
 
 export const error = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
-  color: 'var(--color-red-800)',
+  color: formVars.color.error,
 });
 
 export const button = style({
@@ -56,34 +106,34 @@ export const button = style({
   padding: '0 0.875rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
-  borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
+  border: `1px solid ${formVars.color.buttonBorder}`,
+  borderRadius: formVars.shape.buttonCorner,
+  backgroundColor: formVars.color.buttonBackground,
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: formVars.color.buttonForeground,
   userSelect: 'none',
 });
 globalStyle(`${button}:hover:not([data-disabled])`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: formVars.color.buttonHoverBackground,
     },
   },
 });
 globalStyle(`${button}:active:not([data-disabled])`, {
-  backgroundColor: 'var(--color-gray-200)',
-  boxShadow: 'inset 0 1px 3px var(--color-gray-200)',
-  borderTopColor: 'var(--color-gray-300)',
+  backgroundColor: formVars.color.buttonActiveBackground,
+  boxShadow: sys.elevation.minimal,
+  borderTopColor: formVars.color.buttonActiveBorder,
 });
 globalStyle(`${button}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${formVars.color.buttonFocusRing}`,
   outlineOffset: '-1px',
 });
 globalStyle(`${button}[data-disabled]`, {
-  color: 'var(--color-gray-500)',
+  color: formVars.color.buttonDisabledForeground,
 });
 
 export const formRecipe = recipe({

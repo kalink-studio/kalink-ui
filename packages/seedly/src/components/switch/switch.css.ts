@@ -1,5 +1,22 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { stateColor, sys } from '../../styles';
+
+export const switchVars = createThemeContract({
+  color: {
+    label: null,
+    activeBackground: null,
+    checkedActiveBackground: null,
+    focusRing: null,
+    thumbBackground: null,
+  },
+});
 
 export const label = style({
   display: 'flex',
@@ -7,7 +24,14 @@ export const label = style({
   gap: '0.5rem',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: switchVars.color.label,
+  vars: assignVars(switchVars.color, {
+    label: sys.color.content.base,
+    activeBackground: sys.color.container.low,
+    checkedActiveBackground: stateColor.disabledContent,
+    focusRing: sys.color.tone.primary,
+    thumbBackground: sys.color.surface.bright,
+  }),
 });
 
 export const switchRoot = style({
@@ -23,35 +47,33 @@ export const switchRoot = style({
   outline: '1px solid',
   outlineOffset: '-1px',
   backgroundColor: 'transparent',
-  backgroundImage:
-    'linear-gradient(to right, var(--color-gray-700) 35%, var(--color-gray-200) 65%)',
+  backgroundImage: `linear-gradient(to right, ${sys.color.content.base} 35%, ${sys.color.container.high} 65%)`,
   backgroundSize: '6.5rem 100%',
   backgroundPositionX: '100%',
   backgroundRepeat: 'no-repeat',
   transitionProperty: 'background-position, box-shadow',
-  transitionTimingFunction: 'cubic-bezier(0.26, 0.75, 0.38, 0.45)',
-  transitionDuration: '125ms',
+  transitionTimingFunction: sys.motion.easing.decelerate.emphasized,
+  transitionDuration: sys.motion.duration.short[3],
   '@media': {
     '(prefers-color-scheme: light)': {
-      boxShadow: 'var(--color-gray-200) 0 1.5px 2px inset',
-      outlineColor: 'var(--color-gray-200)',
+      boxShadow: sys.elevation.minimal,
+      outlineColor: sys.color.container.high,
     },
     '(prefers-color-scheme: dark)': {
-      boxShadow: 'rgb(0 0 0 / 75%) 0 1.5px 2px inset',
-      outlineColor: 'rgb(255 255 255 / 15%)',
-      backgroundImage:
-        'linear-gradient(\n      to right,\n      var(--color-gray-500) 35%,\n      var(--color-gray-200) 65%\n    )',
+      boxShadow: sys.elevation.minimal,
+      outlineColor: stateColor.subtleContent,
+      backgroundImage: `linear-gradient(\n      to right,\n      ${stateColor.disabledContent} 35%,\n      ${sys.color.container.high} 65%\n    )`,
     },
   },
 });
 globalStyle(`${switchRoot}:active`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: switchVars.color.activeBackground,
 });
 globalStyle(`${switchRoot}[data-checked]`, {
   backgroundPositionX: '0%',
 });
 globalStyle(`${switchRoot}[data-checked]:active`, {
-  backgroundColor: 'var(--color-gray-500)',
+  backgroundColor: switchVars.color.checkedActiveBackground,
 });
 globalStyle(`${switchRoot}[data-checked]`, {
   '@media': {
@@ -65,7 +87,7 @@ globalStyle(`${switchRoot}:focus-visible::before`, {
   inset: '0',
   position: 'absolute',
   borderRadius: 'inherit',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${switchVars.color.focusRing}`,
   outlineOffset: '2px',
 });
 
@@ -73,16 +95,14 @@ export const thumb = style({
   aspectRatio: '1 / 1',
   height: '100%',
   borderRadius: '100%',
-  backgroundColor: 'white',
+  backgroundColor: switchVars.color.thumbBackground,
   transition: 'translate 150ms ease',
   '@media': {
     '(prefers-color-scheme: light)': {
-      boxShadow:
-        '0 0 1px 1px var(--color-gray-100),\n      0 1px 1px var(--color-gray-100),\n      1px 2px 4px -1px var(--color-gray-100)',
+      boxShadow: sys.elevation.high,
     },
     '(prefers-color-scheme: dark)': {
-      boxShadow:
-        '0 0 1px 1px rgb(0 0 0 / 25%),\n      0 1px 1px rgb(0 0 0 / 25%),\n      1px 2px 4px -1px rgb(0 0 0 / 25%)',
+      boxShadow: sys.elevation.peak,
     },
   },
 });

@@ -1,11 +1,13 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const root = style({
-  backgroundColor: 'var(--color-gray-50)',
+  backgroundColor: sys.color.container.base,
   borderRadius: '0.5rem',
   padding: '0.25rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   minWidth: 'max-content',
 });
 
@@ -29,12 +31,12 @@ export const trigger = style({
   outline: '0',
   border: 'none',
   borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
+  backgroundColor: sys.color.container.base,
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   userSelect: 'none',
   textDecoration: 'none',
   '@media': {
@@ -47,16 +49,16 @@ export const trigger = style({
 globalStyle(`${trigger}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: sys.color.container.low,
     },
   },
 });
 globalStyle(`${trigger}[data-popup-open]`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
 });
 globalStyle(`${trigger}:focus-visible`, {
   position: 'relative',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 
@@ -76,8 +78,8 @@ export const positioner = style({
   height: 'var(--positioner-height)',
   maxWidth: 'var(--available-width)',
   vars: {
-    '--easing': 'cubic-bezier(0.22, 1, 0.36, 1)',
-    '--duration': '0.35s',
+    '--easing': sys.motion.easing.decelerate.emphasized,
+    '--duration': sys.motion.duration.medium[4],
   },
 });
 globalStyle(`${positioner}::before`, {
@@ -116,8 +118,8 @@ export const popup = style({
   position: 'relative',
   boxSizing: 'border-box',
   borderRadius: '0.5rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
   transformOrigin: 'var(--transform-origin)',
   transitionProperty: 'opacity, transform, width, height',
   transitionDuration: 'var(--duration)',
@@ -226,13 +228,13 @@ export const linkCard = style({
 globalStyle(`${linkCard}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: sys.color.container.low,
     },
   },
 });
 globalStyle(`${linkCard}:focus-visible`, {
   position: 'relative',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   outlineOffset: '-1px',
 });
 
@@ -247,7 +249,7 @@ export const linkDescription = style({
   margin: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
-  color: 'var(--color-gray-500)',
+  color: stateColor.disabledContent,
 });
 
 export const arrow = style({
@@ -272,13 +274,13 @@ globalStyle(`${arrow}[data-side='right']`, {
 });
 
 export const arrowFill = style({
-  fill: 'canvas',
+  fill: sys.color.surface.base,
 });
 
 export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
-      fill: 'var(--color-gray-200)',
+      fill: sys.color.container.high,
     },
   },
 });
@@ -286,7 +288,7 @@ export const arrowOuterStroke = style({
 export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
-      fill: 'var(--color-gray-300)',
+      fill: sys.color.container.top,
     },
   },
 });
@@ -294,16 +296,15 @@ export const arrowInnerStroke = style({
 globalStyle(`${popup}`, {
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
     },
   },
 });
 globalStyle(`${popup}`, {
   '@media': {
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${sys.color.container.top}`,
       outlineOffset: '-1px',
     },
   },

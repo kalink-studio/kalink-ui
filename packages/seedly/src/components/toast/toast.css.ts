@@ -1,5 +1,51 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { sys } from '../../styles';
+
+export const toastVars = createThemeContract({
+  color: {
+    buttonForeground: null,
+    buttonBackground: null,
+    buttonBorder: null,
+    buttonHoverBackground: null,
+    buttonFocusRing: null,
+    toastForeground: null,
+    toastBackground: null,
+    toastBorder: null,
+    toastShadow: null,
+    closeHoverBackground: null,
+  },
+  shape: {
+    buttonCorner: null,
+    toastCorner: null,
+    closeCorner: null,
+  },
+});
+
+const toastColorDefaults = assignVars(toastVars.color, {
+  buttonForeground: sys.color.content.base,
+  buttonBackground: sys.color.container.base,
+  buttonBorder: sys.color.container.high,
+  buttonHoverBackground: sys.color.container.low,
+  buttonFocusRing: sys.color.tone.primary,
+  toastForeground: sys.color.content.base,
+  toastBackground: sys.color.container.base,
+  toastBorder: sys.color.container.high,
+  toastShadow: sys.elevation.low,
+  closeHoverBackground: sys.color.container.low,
+});
+
+const toastShapeDefaults = assignVars(toastVars.shape, {
+  buttonCorner: '0.375rem',
+  toastCorner: '0.5rem',
+  closeCorner: '0.25rem',
+});
 
 export const button = style({
   boxSizing: 'border-box',
@@ -10,28 +56,32 @@ export const button = style({
   padding: '0 0.875rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
-  borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
+  border: `1px solid ${toastVars.color.buttonBorder}`,
+  borderRadius: toastVars.shape.buttonCorner,
+  backgroundColor: toastVars.color.buttonBackground,
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: toastVars.color.buttonForeground,
   userSelect: 'none',
+  vars: {
+    ...toastColorDefaults,
+    ...toastShapeDefaults,
+  },
 });
 globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: toastVars.color.buttonHoverBackground,
     },
   },
 });
 globalStyle(`${button}:active`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: toastVars.color.buttonHoverBackground,
 });
 globalStyle(`${button}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${toastVars.color.buttonFocusRing}`,
   outlineOffset: '-1px',
 });
 
@@ -58,28 +108,29 @@ export const toast = style({
   right: '0',
   margin: '0 auto',
   boxSizing: 'border-box',
-  background: 'var(--color-gray-50)',
-  color: 'var(--color-gray-900)',
-  border: '1px solid var(--color-gray-200)',
+  background: toastVars.color.toastBackground,
+  color: toastVars.color.toastForeground,
+  border: `1px solid ${toastVars.color.toastBorder}`,
   padding: '1rem',
   width: '100%',
-  boxShadow: '0 2px 10px rgb(0 0 0 / 0.1)',
+  boxShadow: toastVars.color.toastShadow,
   backgroundClip: 'padding-box',
-  borderRadius: '0.5rem',
+  borderRadius: toastVars.shape.toastCorner,
   transformOrigin: 'bottom center',
   bottom: '0',
   left: 'auto',
   marginRight: '0',
   WebkitUserSelect: 'none',
   userSelect: 'none',
-  transition:
-    'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),\n    opacity 0.5s,\n    height 0.15s',
+  transition: `transform ${sys.motion.duration.long[3]} ${sys.motion.easing.decelerate.emphasized}, opacity ${sys.motion.duration.long[3]}, height ${sys.motion.duration.short[4]}`,
   cursor: 'default',
   zIndex: 'calc(1000 - var(--toast-index))',
   height: 'var(--height)',
   transform:
     'translateX(var(--toast-swipe-movement-x))\n    translateY(\n      calc(\n        var(--toast-swipe-movement-y) - (var(--toast-index) * var(--peek)) -\n          (var(--shrink) * var(--height))\n      )\n    )\n    scale(var(--scale))',
   vars: {
+    ...toastColorDefaults,
+    ...toastShapeDefaults,
     '--gap': '0.75rem',
     '--peek': '0.75rem',
     '--scale': 'calc(max(0, 1 - (var(--toast-index) * 0.1)))',
@@ -163,10 +214,10 @@ export const close = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: '0.25rem',
+  borderRadius: toastVars.shape.closeCorner,
 });
 globalStyle(`${close}:hover`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: toastVars.color.closeHoverBackground,
 });
 
 export const icon = style({

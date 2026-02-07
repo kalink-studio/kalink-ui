@@ -9,7 +9,7 @@ export default function ExamplePopover() {
         <BellIcon aria-label="Notifications" className={styles.icon} />
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Positioner sideOffset={8}>
+        <Popover.Positioner className={styles.positioner} sideOffset={8}>
           <Popover.Popup className={styles.popup}>
             <Popover.Arrow className={styles.arrow}>
               <ArrowSvg />

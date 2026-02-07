@@ -1,5 +1,59 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { sys } from '../../styles';
+
+export const menuVars = createThemeContract({
+  color: {
+    triggerForeground: null,
+    triggerBackground: null,
+    triggerBorder: null,
+    triggerHoverBackground: null,
+    triggerFocusRing: null,
+    popupBackground: null,
+    popupOutlineLight: null,
+    popupOutlineDark: null,
+    popupShadow: null,
+    itemHighlightedForeground: null,
+    itemHighlightedBackground: null,
+    separator: null,
+    arrowOuterStroke: null,
+    arrowInnerStroke: null,
+  },
+  shape: {
+    triggerCorner: null,
+    popupCorner: null,
+    itemCorner: null,
+  },
+});
+
+const menuColorDefaults = assignVars(menuVars.color, {
+  triggerForeground: sys.color.content.base,
+  triggerBackground: sys.color.container.base,
+  triggerBorder: sys.color.container.high,
+  triggerHoverBackground: sys.color.container.low,
+  triggerFocusRing: sys.color.tone.primary,
+  popupBackground: sys.color.surface.base,
+  popupOutlineLight: sys.color.container.high,
+  popupOutlineDark: sys.color.container.top,
+  popupShadow: sys.elevation.moderate,
+  itemHighlightedForeground: sys.color.container.base,
+  itemHighlightedBackground: sys.color.content.base,
+  separator: sys.color.container.high,
+  arrowOuterStroke: sys.color.container.high,
+  arrowInnerStroke: sys.color.container.top,
+});
+
+const menuShapeDefaults = assignVars(menuVars.shape, {
+  triggerCorner: '0.375rem',
+  popupCorner: '0.375rem',
+  itemCorner: '0.25rem',
+});
 
 export const button = style({
   boxSizing: 'border-box',
@@ -11,31 +65,35 @@ export const button = style({
   padding: '0 0.875rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
-  borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
+  border: `1px solid ${menuVars.color.triggerBorder}`,
+  borderRadius: menuVars.shape.triggerCorner,
+  backgroundColor: menuVars.color.triggerBackground,
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: menuVars.color.triggerForeground,
   userSelect: 'none',
+  vars: {
+    ...menuColorDefaults,
+    ...menuShapeDefaults,
+  },
 });
 globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: menuVars.color.triggerHoverBackground,
     },
   },
 });
 globalStyle(`${button}:active`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: menuVars.color.triggerHoverBackground,
 });
 globalStyle(`${button}[data-popup-open]`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: menuVars.color.triggerHoverBackground,
 });
 globalStyle(`${button}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${menuVars.color.triggerFocusRing}`,
   outlineOffset: '-1px',
 });
 
@@ -45,24 +103,27 @@ export const buttonIcon = style({
 
 export const positioner = style({
   outline: '0',
+  vars: {
+    ...menuColorDefaults,
+    ...menuShapeDefaults,
+  },
 });
 
 export const popup = style({
   boxSizing: 'border-box',
   paddingBlock: '0.25rem',
-  borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  borderRadius: menuVars.shape.popupCorner,
+  backgroundColor: menuVars.color.popupBackground,
+  color: menuVars.color.triggerForeground,
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${menuVars.color.popupOutlineLight}`,
+      boxShadow: menuVars.color.popupShadow,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${menuVars.color.popupOutlineDark}`,
       outlineOffset: '-1px',
     },
   },
@@ -97,13 +158,13 @@ globalStyle(`${arrow}[data-side='right']`, {
 });
 
 export const arrowFill = style({
-  fill: 'canvas',
+  fill: menuVars.color.popupBackground,
 });
 
 export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
-      fill: 'var(--color-gray-200)',
+      fill: menuVars.color.arrowOuterStroke,
     },
   },
 });
@@ -111,7 +172,7 @@ export const arrowOuterStroke = style({
 export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
-      fill: 'var(--color-gray-300)',
+      fill: menuVars.color.arrowInnerStroke,
     },
   },
 });
@@ -130,7 +191,7 @@ export const item = style({
 globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
-  color: 'var(--color-gray-50)',
+  color: menuVars.color.itemHighlightedForeground,
 });
 globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
@@ -138,14 +199,14 @@ globalStyle(`${item}[data-highlighted]::before`, {
   position: 'absolute',
   insetBlock: '0',
   insetInline: '0.25rem',
-  borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-900)',
+  borderRadius: menuVars.shape.itemCorner,
+  backgroundColor: menuVars.color.itemHighlightedBackground,
 });
 
 export const separator = style({
   margin: '0.375rem 1rem',
   height: '1px',
-  backgroundColor: 'var(--color-gray-200)',
+  backgroundColor: menuVars.color.separator,
 });
 
 export const menuRecipe = recipe({

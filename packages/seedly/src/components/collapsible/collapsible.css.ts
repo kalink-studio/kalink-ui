@@ -1,13 +1,15 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { sys } from '../../styles';
+
 export const collapsible = style({
   display: 'flex',
   width: '14rem',
   minHeight: '9rem',
   flexDirection: 'column',
   justifyContent: 'center',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
 });
 
 export const icon = style({
@@ -25,8 +27,8 @@ export const trigger = style({
   outline: '0',
   padding: '0.25rem 0.5rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-100)',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.container.low,
+  color: sys.color.content.base,
   fontFamily: 'inherit',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
@@ -35,15 +37,15 @@ export const trigger = style({
 globalStyle(`${trigger}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-200)',
+      backgroundColor: sys.color.container.high,
     },
   },
 });
 globalStyle(`${trigger}:active`, {
-  backgroundColor: 'var(--color-gray-200)',
+  backgroundColor: sys.color.container.high,
 });
 globalStyle(`${trigger}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
 });
 globalStyle(`${trigger}[data-panel-open] ${icon}`, {
   transform: 'rotate(90deg)',
@@ -76,7 +78,7 @@ export const content = style({
   marginTop: '0.25rem',
   padding: '0.5rem 0 0.5rem 1.75rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
   cursor: 'text',
 });
 

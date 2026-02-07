@@ -1,10 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const menubar = style({
   display: 'flex',
-  backgroundColor: 'var(--color-gray-50)',
-  border: '1px solid var(--color-gray-200)',
+  backgroundColor: sys.color.container.base,
+  border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',
   padding: '0.125rem',
 });
@@ -16,7 +18,7 @@ export const menuTrigger = style({
   margin: '0',
   outline: '0',
   border: '0',
-  color: 'var(--color-gray-600)',
+  color: stateColor.mutedContent,
   borderRadius: '0.25rem',
   userSelect: 'none',
   height: '2rem',
@@ -25,11 +27,11 @@ export const menuTrigger = style({
   fontWeight: '500',
 });
 globalStyle(`${menuTrigger}[data-pressed]`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
   outline: 'none',
 });
 globalStyle(`${menuTrigger}:focus-visible`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
   outline: 'none',
 });
 globalStyle(`${menuTrigger}[data-disabled]`, {
@@ -44,17 +46,16 @@ export const menuPopup = style({
   boxSizing: 'border-box',
   paddingBlock: '0.25rem',
   borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
   transformOrigin: 'var(--transform-origin)',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${sys.color.container.top}`,
       outlineOffset: '-1px',
     },
   },
@@ -90,12 +91,12 @@ globalStyle(`${menuItem}[data-popup-open]::before`, {
   insetBlock: '0',
   insetInline: '0.25rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: sys.color.container.low,
 });
 globalStyle(`${menuItem}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
-  color: 'var(--color-gray-50)',
+  color: sys.color.container.base,
 });
 globalStyle(`${menuItem}[data-highlighted]::before`, {
   content: "''",
@@ -104,13 +105,13 @@ globalStyle(`${menuItem}[data-highlighted]::before`, {
   insetBlock: '0',
   insetInline: '0.25rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-900)',
+  backgroundColor: sys.color.content.base,
 });
 
 export const menuSeparator = style({
   margin: '0.375rem 1rem',
   height: '1px',
-  backgroundColor: 'var(--color-gray-200)',
+  backgroundColor: sys.color.container.high,
 });
 
 export const menubarRecipe = recipe({

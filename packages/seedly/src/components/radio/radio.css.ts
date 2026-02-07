@@ -1,12 +1,36 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { sys } from '../../styles';
+
+export const radioVars = createThemeContract({
+  color: {
+    foreground: null,
+    border: null,
+    checkedBackground: null,
+    checkedForeground: null,
+    focusRing: null,
+  },
+});
 
 export const radioGroup = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
   gap: '0.25rem',
-  color: 'var(--color-gray-900)',
+  color: radioVars.color.foreground,
+  vars: assignVars(radioVars.color, {
+    foreground: sys.color.content.base,
+    border: sys.color.container.top,
+    checkedBackground: sys.color.content.base,
+    checkedForeground: sys.color.container.base,
+    focusRing: sys.color.tone.primary,
+  }),
 });
 
 export const caption = style({
@@ -33,14 +57,14 @@ export const radio = style({
   border: 'none',
 });
 globalStyle(`${radio}[data-unchecked]`, {
-  border: '1px solid var(--color-gray-300)',
+  border: `1px solid ${radioVars.color.border}`,
   backgroundColor: 'transparent',
 });
 globalStyle(`${radio}[data-checked]`, {
-  backgroundColor: 'var(--color-gray-900)',
+  backgroundColor: radioVars.color.checkedBackground,
 });
 globalStyle(`${radio}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${radioVars.color.focusRing}`,
   outlineOffset: '2px',
 });
 
@@ -57,7 +81,7 @@ globalStyle(`${indicator}::before`, {
   borderRadius: '100%',
   width: '0.5rem',
   height: '0.5rem',
-  backgroundColor: 'var(--color-gray-50)',
+  backgroundColor: radioVars.color.checkedForeground,
 });
 
 export const radioRecipe = recipe({

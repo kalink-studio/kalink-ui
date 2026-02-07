@@ -1,13 +1,53 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { stateColor, sys } from '../../styles';
+
+export const toggleGroupVars = createThemeContract({
+  color: {
+    panelBorder: null,
+    panelBackground: null,
+    buttonForeground: null,
+    buttonHoverBackground: null,
+    buttonActiveBackground: null,
+    buttonPressedBackground: null,
+    buttonPressedForeground: null,
+    focusRing: null,
+  },
+  shape: {
+    panelCorner: null,
+    buttonCorner: null,
+  },
+});
 
 export const panel = style({
   display: 'flex',
   gap: '1px',
-  border: '1px solid var(--color-gray-200)',
-  backgroundColor: 'var(--color-gray-50)',
-  borderRadius: '0.375rem',
+  border: `1px solid ${toggleGroupVars.color.panelBorder}`,
+  backgroundColor: toggleGroupVars.color.panelBackground,
+  borderRadius: toggleGroupVars.shape.panelCorner,
   padding: '0.125rem',
+  vars: {
+    ...assignVars(toggleGroupVars.color, {
+      panelBorder: sys.color.container.high,
+      panelBackground: sys.color.container.base,
+      buttonForeground: stateColor.mutedContent,
+      buttonHoverBackground: sys.color.container.low,
+      buttonActiveBackground: sys.color.container.high,
+      buttonPressedBackground: sys.color.container.low,
+      buttonPressedForeground: sys.color.content.base,
+      focusRing: sys.color.tone.primary,
+    }),
+    ...assignVars(toggleGroupVars.shape, {
+      panelCorner: '0.375rem',
+      buttonCorner: '0.25rem',
+    }),
+  },
 });
 
 export const button = style({
@@ -21,29 +61,29 @@ export const button = style({
   margin: '0',
   outline: '0',
   border: '0',
-  borderRadius: '0.25rem',
+  borderRadius: toggleGroupVars.shape.buttonCorner,
   backgroundColor: 'transparent',
-  color: 'var(--color-gray-600)',
+  color: toggleGroupVars.color.buttonForeground,
   userSelect: 'none',
 });
 globalStyle(`${button}:focus-visible`, {
   backgroundColor: 'transparent',
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${toggleGroupVars.color.focusRing}`,
   outlineOffset: '-1px',
 });
 globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: toggleGroupVars.color.buttonHoverBackground,
     },
   },
 });
 globalStyle(`${button}:active`, {
-  backgroundColor: 'var(--color-gray-200)',
+  backgroundColor: toggleGroupVars.color.buttonActiveBackground,
 });
 globalStyle(`${button}[data-pressed]`, {
-  backgroundColor: 'var(--color-gray-100)',
-  color: 'var(--color-gray-900)',
+  backgroundColor: toggleGroupVars.color.buttonPressedBackground,
+  color: toggleGroupVars.color.buttonPressedForeground,
 });
 
 export const icon = style({

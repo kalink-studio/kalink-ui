@@ -11,7 +11,7 @@ export default function ExampleTooltip() {
             <BoldIcon className={styles.icon} />
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Positioner sideOffset={10}>
+            <Tooltip.Positioner className={styles.positioner} sideOffset={10}>
               <Tooltip.Popup className={styles.popup}>
                 <Tooltip.Arrow className={styles.arrow}>
                   <ArrowSvg />
@@ -27,7 +27,7 @@ export default function ExampleTooltip() {
             <ItalicIcon className={styles.icon} />
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Positioner sideOffset={10}>
+            <Tooltip.Positioner className={styles.positioner} sideOffset={10}>
               <Tooltip.Popup className={styles.popup}>
                 <Tooltip.Arrow className={styles.arrow}>
                   <ArrowSvg />
@@ -43,7 +43,7 @@ export default function ExampleTooltip() {
             <UnderlineIcon className={styles.icon} />
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Positioner sideOffset={10}>
+            <Tooltip.Positioner className={styles.positioner} sideOffset={10}>
               <Tooltip.Popup className={styles.popup}>
                 <Tooltip.Arrow className={styles.arrow}>
                   <ArrowSvg />

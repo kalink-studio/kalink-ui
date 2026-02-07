@@ -1,5 +1,53 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { stateColor, sys } from '../../styles';
+
+export const popoverVars = createThemeContract({
+  color: {
+    triggerForeground: null,
+    triggerBackground: null,
+    triggerBorder: null,
+    triggerHoverBackground: null,
+    triggerFocusRing: null,
+    popupBackground: null,
+    popupOutlineLight: null,
+    popupOutlineDark: null,
+    popupShadow: null,
+    popupDescription: null,
+    arrowOuterStroke: null,
+    arrowInnerStroke: null,
+  },
+  shape: {
+    triggerCorner: null,
+    popupCorner: null,
+  },
+});
+
+const popoverColorDefaults = assignVars(popoverVars.color, {
+  triggerForeground: sys.color.content.base,
+  triggerBackground: sys.color.container.base,
+  triggerBorder: sys.color.container.high,
+  triggerHoverBackground: sys.color.container.low,
+  triggerFocusRing: sys.color.tone.primary,
+  popupBackground: sys.color.surface.base,
+  popupOutlineLight: sys.color.container.high,
+  popupOutlineDark: sys.color.container.top,
+  popupShadow: sys.elevation.moderate,
+  popupDescription: stateColor.mutedContent,
+  arrowOuterStroke: sys.color.container.high,
+  arrowInnerStroke: sys.color.container.top,
+});
+
+const popoverShapeDefaults = assignVars(popoverVars.shape, {
+  triggerCorner: '0.375rem',
+  popupCorner: '0.5rem',
+});
 
 export const iconButton = style({
   boxSizing: 'border-box',
@@ -11,27 +59,31 @@ export const iconButton = style({
   padding: '0',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
-  borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
-  color: 'var(--color-gray-900)',
+  border: `1px solid ${popoverVars.color.triggerBorder}`,
+  borderRadius: popoverVars.shape.triggerCorner,
+  backgroundColor: popoverVars.color.triggerBackground,
+  color: popoverVars.color.triggerForeground,
   userSelect: 'none',
+  vars: {
+    ...popoverColorDefaults,
+    ...popoverShapeDefaults,
+  },
 });
 globalStyle(`${iconButton}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: popoverVars.color.triggerHoverBackground,
     },
   },
 });
 globalStyle(`${iconButton}:active`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: popoverVars.color.triggerHoverBackground,
 });
 globalStyle(`${iconButton}[data-popup-open]`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: popoverVars.color.triggerHoverBackground,
 });
 globalStyle(`${iconButton}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${popoverVars.color.triggerFocusRing}`,
   outlineOffset: '-1px',
 });
 
@@ -44,14 +96,18 @@ export const positioner = style({
   width: 'var(--positioner-width)',
   height: 'var(--positioner-height)',
   maxWidth: 'var(--available-width)',
+  vars: {
+    ...popoverColorDefaults,
+    ...popoverShapeDefaults,
+  },
 });
 
 export const popup = style({
   boxSizing: 'border-box',
   padding: '1rem 1.5rem',
-  borderRadius: '0.5rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  borderRadius: popoverVars.shape.popupCorner,
+  backgroundColor: popoverVars.color.popupBackground,
+  color: popoverVars.color.triggerForeground,
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   width: 'var(--popup-width, auto)',
@@ -59,12 +115,11 @@ export const popup = style({
   maxWidth: '500px',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${popoverVars.color.popupOutlineLight}`,
+      boxShadow: popoverVars.color.popupShadow,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${popoverVars.color.popupOutlineDark}`,
       outlineOffset: '-1px',
     },
   },
@@ -99,13 +154,13 @@ globalStyle(`${arrow}[data-side='right']`, {
 });
 
 export const arrowFill = style({
-  fill: 'canvas',
+  fill: popoverVars.color.popupBackground,
 });
 
 export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
-      fill: 'var(--color-gray-200)',
+      fill: popoverVars.color.arrowOuterStroke,
     },
   },
 });
@@ -113,7 +168,7 @@ export const arrowOuterStroke = style({
 export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
-      fill: 'var(--color-gray-300)',
+      fill: popoverVars.color.arrowInnerStroke,
     },
   },
 });
@@ -129,7 +184,7 @@ export const description = style({
   margin: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-600)',
+  color: popoverVars.color.popupDescription,
 });
 
 export const container = style({
@@ -149,28 +204,28 @@ export const button = style({
   padding: '0 0.875rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
-  borderRadius: '0.375rem',
-  backgroundColor: 'var(--color-gray-50)',
+  border: `1px solid ${popoverVars.color.triggerBorder}`,
+  borderRadius: popoverVars.shape.triggerCorner,
+  backgroundColor: popoverVars.color.triggerBackground,
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: popoverVars.color.triggerForeground,
   userSelect: 'none',
 });
 globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: popoverVars.color.triggerHoverBackground,
     },
   },
 });
 globalStyle(`${button}:active`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: popoverVars.color.triggerHoverBackground,
 });
 globalStyle(`${button}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${popoverVars.color.triggerFocusRing}`,
   outlineOffset: '-1px',
 });
 

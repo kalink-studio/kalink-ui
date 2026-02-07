@@ -1,6 +1,8 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const accordion = style({
   boxSizing: 'border-box',
   display: 'flex',
@@ -8,11 +10,11 @@ export const accordion = style({
   maxWidth: 'calc(100vw - 8rem)',
   flexDirection: 'column',
   justifyContent: 'center',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
 });
 
 export const item = style({
-  borderBottom: '1px solid var(--color-gray-200)',
+  borderBottom: `1px solid ${sys.color.container.high}`,
 });
 
 export const header = style({
@@ -29,12 +31,12 @@ export const trigger = style({
   justifyContent: 'space-between',
   paddingBlock: '0.5rem',
   paddingInline: '0.75rem 0.25rem',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
   fontFamily: 'inherit',
   fontWeight: '500',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  background: 'var(--color-gray-50)',
+  background: sys.color.container.base,
   border: 'none',
   outline: 'none',
   textAlign: 'left',
@@ -42,12 +44,12 @@ export const trigger = style({
 globalStyle(`${trigger}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: sys.color.container.low,
     },
   },
 });
 globalStyle(`${trigger}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${sys.color.tone.primary}`,
   zIndex: '1',
 });
 
@@ -67,7 +69,7 @@ export const panel = style({
   boxSizing: 'border-box',
   height: 'var(--accordion-panel-height)',
   overflow: 'hidden',
-  color: 'var(--color-gray-600)',
+  color: stateColor.mutedContent,
   fontSize: '1rem',
   lineHeight: '1.5rem',
   transition: 'height 150ms ease-out',

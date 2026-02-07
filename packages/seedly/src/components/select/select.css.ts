@@ -1,18 +1,78 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+
+import { sys } from '../../styles';
+
+export const selectVars = createThemeContract({
+  color: {
+    foreground: null,
+    triggerBackground: null,
+    triggerBorder: null,
+    triggerHoverBackground: null,
+    focusRing: null,
+    popupBackground: null,
+    popupOutlineLight: null,
+    popupOutlineDark: null,
+    popupShadow: null,
+    itemHighlightedForeground: null,
+    itemHighlightedBackground: null,
+    arrowOuterStroke: null,
+    arrowInnerStroke: null,
+    scrollArrowBackground: null,
+  },
+  shape: {
+    triggerCorner: null,
+    popupCorner: null,
+    itemCorner: null,
+    scrollArrowCorner: null,
+  },
+});
+
+const selectColorDefaults = assignVars(selectVars.color, {
+  foreground: sys.color.content.base,
+  triggerBackground: sys.color.surface.base,
+  triggerBorder: sys.color.container.high,
+  triggerHoverBackground: sys.color.container.low,
+  focusRing: sys.color.tone.primary,
+  popupBackground: sys.color.surface.base,
+  popupOutlineLight: sys.color.container.high,
+  popupOutlineDark: sys.color.container.top,
+  popupShadow: sys.elevation.moderate,
+  itemHighlightedForeground: sys.color.container.base,
+  itemHighlightedBackground: sys.color.content.base,
+  arrowOuterStroke: sys.color.container.high,
+  arrowInnerStroke: sys.color.container.top,
+  scrollArrowBackground: sys.color.surface.base,
+});
+
+const selectShapeDefaults = assignVars(selectVars.shape, {
+  triggerCorner: '0.375rem',
+  popupCorner: '0.375rem',
+  itemCorner: '0.25rem',
+  scrollArrowCorner: '0.375rem',
+});
 
 export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
   gap: '0.25rem',
+  vars: {
+    ...selectColorDefaults,
+    ...selectShapeDefaults,
+  },
 });
 
 export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
-  color: 'var(--color-gray-900)',
+  color: selectVars.color.foreground,
   cursor: 'default',
 });
 
@@ -27,13 +87,13 @@ export const select = style({
   paddingRight: '0.75rem',
   margin: '0',
   outline: '0',
-  border: '1px solid var(--color-gray-200)',
-  borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
+  border: `1px solid ${selectVars.color.triggerBorder}`,
+  borderRadius: selectVars.shape.triggerCorner,
+  backgroundColor: selectVars.color.triggerBackground,
   fontFamily: 'inherit',
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  color: 'var(--color-gray-900)',
+  color: selectVars.color.foreground,
   WebkitUserSelect: 'none',
   userSelect: 'none',
   minWidth: '10rem',
@@ -41,15 +101,15 @@ export const select = style({
 globalStyle(`${select}:hover`, {
   '@media': {
     '(hover: hover)': {
-      backgroundColor: 'var(--color-gray-100)',
+      backgroundColor: selectVars.color.triggerHoverBackground,
     },
   },
 });
 globalStyle(`${select}[data-popup-open]`, {
-  backgroundColor: 'var(--color-gray-100)',
+  backgroundColor: selectVars.color.triggerHoverBackground,
 });
 globalStyle(`${select}:focus-visible`, {
-  outline: '2px solid var(--color-blue)',
+  outline: `2px solid ${selectVars.color.focusRing}`,
   outlineOffset: '-1px',
 });
 
@@ -64,25 +124,28 @@ export const positioner = style({
   zIndex: '1',
   WebkitUserSelect: 'none',
   userSelect: 'none',
+  vars: {
+    ...selectColorDefaults,
+    ...selectShapeDefaults,
+  },
 });
 
 export const popup = style({
   boxSizing: 'border-box',
-  borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
+  borderRadius: selectVars.shape.popupCorner,
+  backgroundColor: selectVars.color.popupBackground,
   backgroundClip: 'padding-box',
-  color: 'var(--color-gray-900)',
+  color: selectVars.color.foreground,
   minWidth: 'var(--anchor-width)',
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${selectVars.color.popupOutlineLight}`,
+      boxShadow: selectVars.color.popupShadow,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${selectVars.color.popupOutlineDark}`,
     },
   },
 });
@@ -131,13 +194,13 @@ globalStyle(`${arrow}[data-side='right']`, {
 });
 
 export const arrowFill = style({
-  fill: 'canvas',
+  fill: selectVars.color.popupBackground,
 });
 
 export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
-      fill: 'var(--color-gray-200)',
+      fill: selectVars.color.arrowOuterStroke,
     },
   },
 });
@@ -145,7 +208,7 @@ export const arrowOuterStroke = style({
 export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
-      fill: 'var(--color-gray-300)',
+      fill: selectVars.color.arrowInnerStroke,
     },
   },
 });
@@ -179,7 +242,7 @@ globalStyle(`[data-side='none'] ${item}`, {
 globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
-  color: 'var(--color-gray-50)',
+  color: selectVars.color.itemHighlightedForeground,
 });
 globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
@@ -187,8 +250,8 @@ globalStyle(`${item}[data-highlighted]::before`, {
   position: 'absolute',
   insetBlock: '0',
   insetInline: '0.25rem',
-  borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-900)',
+  borderRadius: selectVars.shape.itemCorner,
+  backgroundColor: selectVars.color.itemHighlightedBackground,
 });
 
 export const itemIndicator = style({
@@ -207,11 +270,11 @@ export const itemText = style({
 
 export const scrollArrow = style({
   width: '100%',
-  background: 'canvas',
+  background: selectVars.color.scrollArrowBackground,
   zIndex: '1',
   textAlign: 'center',
   cursor: 'default',
-  borderRadius: '0.375rem',
+  borderRadius: selectVars.shape.scrollArrowCorner,
   height: '1rem',
   fontSize: '0.75rem',
   display: 'flex',

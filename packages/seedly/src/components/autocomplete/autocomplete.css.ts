@@ -1,18 +1,20 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
+import { stateColor, sys } from '../../styles';
+
 export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   margin: '0',
-  border: '1px solid var(--color-gray-200)',
+  border: `1px solid ${sys.color.container.high}`,
   width: '16rem',
   height: '2.5rem',
   borderRadius: '0.375rem',
   fontFamily: 'inherit',
   fontSize: '1rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
   outline: 'none',
   '@media': {
     '(min-width: 500px)': {
@@ -21,8 +23,8 @@ export const input = style({
   },
 });
 globalStyle(`${input}:focus`, {
-  borderColor: 'var(--color-blue)',
-  outline: '1px solid var(--color-blue)',
+  borderColor: sys.color.tone.primary,
+  outline: `1px solid ${sys.color.tone.primary}`,
 });
 
 export const label = style({
@@ -32,7 +34,7 @@ export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
-  color: 'var(--color-gray-900)',
+  color: sys.color.content.base,
 });
 
 export const positioner = style({
@@ -42,19 +44,18 @@ export const positioner = style({
 export const popup = style({
   boxSizing: 'border-box',
   borderRadius: '0.375rem',
-  backgroundColor: 'canvas',
-  color: 'var(--color-gray-900)',
+  backgroundColor: sys.color.surface.base,
+  color: sys.color.content.base,
   width: 'var(--anchor-width)',
   maxHeight: '23rem',
   maxWidth: 'var(--available-width)',
   '@media': {
     '(prefers-color-scheme: light)': {
-      outline: '1px solid var(--color-gray-200)',
-      boxShadow:
-        '0 10px 15px -3px var(--color-gray-200),\n      0 4px 6px -4px var(--color-gray-200)',
+      outline: `1px solid ${sys.color.container.high}`,
+      boxShadow: sys.elevation.moderate,
     },
     '(prefers-color-scheme: dark)': {
-      outline: '1px solid var(--color-gray-300)',
+      outline: `1px solid ${sys.color.container.top}`,
       outlineOffset: '-1px',
     },
   },
@@ -88,7 +89,7 @@ export const item = style({
 globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
-  color: 'var(--color-gray-50)',
+  color: sys.color.container.base,
 });
 globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
@@ -97,13 +98,13 @@ globalStyle(`${item}[data-highlighted]::before`, {
   insetBlock: '0',
   insetInline: '0.5rem',
   borderRadius: '0.25rem',
-  backgroundColor: 'var(--color-gray-900)',
+  backgroundColor: sys.color.content.base,
 });
 
 export const separator = style({
   margin: '0.375rem 1rem',
   height: '1px',
-  backgroundColor: 'var(--color-gray-200)',
+  backgroundColor: sys.color.container.high,
 });
 
 export const empty = style({});
@@ -113,7 +114,7 @@ globalStyle(`${empty}:not(:empty)`, {
   padding: '1rem',
   fontSize: '0.925rem',
   lineHeight: '1rem',
-  color: 'var(--color-gray-600)',
+  color: stateColor.mutedContent,
 });
 
 export const autocompleteRecipe = recipe({
