@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Field = style({
+export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
@@ -10,14 +10,14 @@ export const Field = style({
   maxWidth: '16rem',
 });
 
-export const Label = style({
+export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
   color: 'var(--color-gray-900)',
 });
 
-export const Input = style({
+export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   margin: '0',
@@ -30,24 +30,24 @@ export const Input = style({
   backgroundColor: 'transparent',
   color: 'var(--color-gray-900)',
 });
-globalStyle(`${Input}:focus`, {
+globalStyle(`${input}:focus`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Error = style({
+export const error = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: 'var(--color-red-800)',
 });
 
-export const Description = style({
+export const description = style({
   margin: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: 'var(--color-gray-600)',
 });
 
-export const FieldRecipe = recipe({
-  base: Field,
+export const fieldRecipe = recipe({
+  base: field,
 });

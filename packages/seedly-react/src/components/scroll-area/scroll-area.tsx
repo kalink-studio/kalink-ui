@@ -3,10 +3,10 @@ import * as styles from '@kalink-ui/seedly/components/scroll-area';
 
 export default function ExampleScrollArea() {
   return (
-    <ScrollArea.Root className={styles.ScrollArea}>
-      <ScrollArea.Viewport className={styles.Viewport}>
-        <ScrollArea.Content className={styles.Content}>
-          <p className={styles.Paragraph}>
+    <ScrollArea.Root className={styles.scrollArea}>
+      <ScrollArea.Viewport className={styles.viewport}>
+        <ScrollArea.Content className={styles.content}>
+          <p className={styles.paragraph}>
             Vernacular architecture is building done outside any academic
             tradition, and without professional guidance. It is not a particular
             architectural movement or style, but rather a broad category,
@@ -18,7 +18,7 @@ export default function ExampleScrollArea() {
             percentage of new buildings every year designed by architects and
             built by engineers.
           </p>
-          <p className={styles.Paragraph}>
+          <p className={styles.paragraph}>
             This type of architecture usually serves immediate, local needs, is
             constrained by the materials available in its particular region and
             reflects local traditions and cultural practices. The study of
@@ -32,8 +32,8 @@ export default function ExampleScrollArea() {
           </p>
         </ScrollArea.Content>
       </ScrollArea.Viewport>
-      <ScrollArea.Scrollbar className={styles.Scrollbar}>
-        <ScrollArea.Thumb className={styles.Thumb} />
+      <ScrollArea.Scrollbar className={styles.scrollbar}>
+        <ScrollArea.Thumb className={styles.thumb} />
       </ScrollArea.Scrollbar>
     </ScrollArea.Root>
   );

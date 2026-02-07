@@ -4,13 +4,13 @@ import * as React from 'react';
 
 export default function ExampleCollapsible() {
   return (
-    <Collapsible.Root className={styles.Collapsible}>
-      <Collapsible.Trigger className={styles.Trigger}>
-        <ChevronIcon className={styles.Icon} />
+    <Collapsible.Root className={styles.collapsible}>
+      <Collapsible.Trigger className={styles.trigger}>
+        <ChevronIcon className={styles.icon} />
         Recovery keys
       </Collapsible.Trigger>
-      <Collapsible.Panel className={styles.Panel}>
-        <div className={styles.Content}>
+      <Collapsible.Panel className={styles.panel}>
+        <div className={styles.content}>
           <div>alien-bean-pasta</div>
           <div>wild-irish-burrito</div>
           <div>horse-battery-staple</div>

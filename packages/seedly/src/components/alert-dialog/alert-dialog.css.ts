@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -20,25 +20,25 @@ export const Button = style({
   color: 'var(--color-gray-900)',
   userSelect: 'none',
 });
-globalStyle(`${Button}[data-color='red']`, {
+globalStyle(`${button}[data-color='red']`, {
   color: 'var(--color-red)',
 });
-globalStyle(`${Button}:hover`, {
+globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active`, {
+globalStyle(`${button}:active`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Backdrop = style({
+export const backdrop = style({
   position: 'fixed',
   minHeight: '100dvh',
   inset: '0',
@@ -56,14 +56,14 @@ export const Backdrop = style({
     },
   },
 });
-globalStyle(`${Backdrop}[data-starting-style]`, {
+globalStyle(`${backdrop}[data-starting-style]`, {
   opacity: '0',
 });
-globalStyle(`${Backdrop}[data-ending-style]`, {
+globalStyle(`${backdrop}[data-ending-style]`, {
   opacity: '0',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   position: 'fixed',
   top: '50%',
@@ -84,16 +84,16 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'translate(-50%, -50%) scale(0.9)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'translate(-50%, -50%) scale(0.9)',
 });
 
-export const Title = style({
+export const title = style({
   marginTop: '-0.375rem',
   marginBottom: '0.25rem',
   fontSize: '1.125rem',
@@ -102,19 +102,19 @@ export const Title = style({
   fontWeight: '500',
 });
 
-export const Description = style({
+export const description = style({
   margin: '0 0 1.5rem',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: 'var(--color-gray-600)',
 });
 
-export const Actions = style({
+export const actions = style({
   display: 'flex',
   justifyContent: 'end',
   gap: '1rem',
 });
 
-export const AlertDialogRecipe = recipe({
-  base: Button,
+export const alertDialogRecipe = recipe({
+  base: button,
 });

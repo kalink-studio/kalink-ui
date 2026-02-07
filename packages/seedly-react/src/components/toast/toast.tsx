@@ -8,7 +8,7 @@ export default function ExampleToast() {
     <Toast.Provider>
       <ToastButton />
       <Toast.Portal>
-        <Toast.Viewport className={styles.Viewport}>
+        <Toast.Viewport className={styles.viewport}>
           <ToastList />
         </Toast.Viewport>
       </Toast.Portal>
@@ -29,7 +29,7 @@ function ToastButton() {
   }
 
   return (
-    <button type="button" className={styles.Button} onClick={createToast}>
+    <button type="button" className={styles.button} onClick={createToast}>
       Create toast
     </button>
   );
@@ -38,12 +38,12 @@ function ToastButton() {
 function ToastList() {
   const { toasts } = Toast.useToastManager();
   return toasts.map((toast) => (
-    <Toast.Root key={toast.id} toast={toast} className={styles.Toast}>
-      <Toast.Content className={styles.Content}>
-        <Toast.Title className={styles.Title} />
-        <Toast.Description className={styles.Description} />
-        <Toast.Close className={styles.Close} aria-label="Close">
-          <XIcon className={styles.Icon} />
+    <Toast.Root key={toast.id} toast={toast} className={styles.toast}>
+      <Toast.Content className={styles.content}>
+        <Toast.Title className={styles.title} />
+        <Toast.Description className={styles.description} />
+        <Toast.Close className={styles.close} aria-label="Close">
+          <XIcon className={styles.icon} />
         </Toast.Close>
       </Toast.Content>
     </Toast.Root>

@@ -4,27 +4,27 @@ import * as React from 'react';
 
 export default function ExampleTabs() {
   return (
-    <Tabs.Root className={styles.Tabs} defaultValue="overview">
-      <Tabs.List className={styles.List}>
-        <Tabs.Tab className={styles.Tab} value="overview">
+    <Tabs.Root className={styles.tabs} defaultValue="overview">
+      <Tabs.List className={styles.list}>
+        <Tabs.Tab className={styles.tab} value="overview">
           Overview
         </Tabs.Tab>
-        <Tabs.Tab className={styles.Tab} value="projects">
+        <Tabs.Tab className={styles.tab} value="projects">
           Projects
         </Tabs.Tab>
-        <Tabs.Tab className={styles.Tab} value="account">
+        <Tabs.Tab className={styles.tab} value="account">
           Account
         </Tabs.Tab>
-        <Tabs.Indicator className={styles.Indicator} />
+        <Tabs.Indicator className={styles.indicator} />
       </Tabs.List>
-      <Tabs.Panel className={styles.Panel} value="overview">
-        <OverviewIcon className={styles.Icon} />
+      <Tabs.Panel className={styles.panel} value="overview">
+        <OverviewIcon className={styles.icon} />
       </Tabs.Panel>
-      <Tabs.Panel className={styles.Panel} value="projects">
-        <ProjectIcon className={styles.Icon} />
+      <Tabs.Panel className={styles.panel} value="projects">
+        <ProjectIcon className={styles.icon} />
       </Tabs.Panel>
-      <Tabs.Panel className={styles.Panel} value="account">
-        <PersonIcon className={styles.Icon} />
+      <Tabs.Panel className={styles.panel} value="account">
+        <PersonIcon className={styles.icon} />
       </Tabs.Panel>
     </Tabs.Root>
   );

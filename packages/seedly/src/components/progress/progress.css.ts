@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Progress = style({
+export const progress = style({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
   gridGap: '0.25rem',
@@ -9,14 +9,14 @@ export const Progress = style({
   width: '12rem',
 });
 
-export const Label = style({
+export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
   color: 'var(--color-gray-900)',
 });
 
-export const Value = style({
+export const value = style({
   gridColumnStart: '2',
   margin: '0',
   fontSize: '0.875rem',
@@ -25,7 +25,7 @@ export const Value = style({
   textAlign: 'right',
 });
 
-export const Track = style({
+export const track = style({
   gridColumn: '1 / 3',
   overflow: 'hidden',
   backgroundColor: 'var(--color-gray-200)',
@@ -34,12 +34,12 @@ export const Track = style({
   borderRadius: '0.25rem',
 });
 
-export const Indicator = style({
+export const indicator = style({
   display: 'block',
   backgroundColor: 'var(--color-gray-500)',
   transition: 'width 500ms',
 });
 
-export const ProgressRecipe = recipe({
-  base: Progress,
+export const progressRecipe = recipe({
+  base: progress,
 });

@@ -4,18 +4,18 @@ import * as styles from '@kalink-ui/seedly/components/dialog';
 export default function ExampleDialog() {
   return (
     <Dialog.Root>
-      <Dialog.Trigger className={styles.Button}>
+      <Dialog.Trigger className={styles.button}>
         View notifications
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Backdrop className={styles.Backdrop} />
-        <Dialog.Popup className={styles.Popup}>
-          <Dialog.Title className={styles.Title}>Notifications</Dialog.Title>
-          <Dialog.Description className={styles.Description}>
+        <Dialog.Backdrop className={styles.backdrop} />
+        <Dialog.Popup className={styles.popup}>
+          <Dialog.Title className={styles.title}>Notifications</Dialog.Title>
+          <Dialog.Description className={styles.description}>
             You are all caught up. Good job!
           </Dialog.Description>
-          <div className={styles.Actions}>
-            <Dialog.Close className={styles.Button}>Close</Dialog.Close>
+          <div className={styles.actions}>
+            <Dialog.Close className={styles.button}>Close</Dialog.Close>
           </div>
         </Dialog.Popup>
       </Dialog.Portal>

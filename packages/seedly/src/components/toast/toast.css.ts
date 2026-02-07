@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -20,22 +20,22 @@ export const Button = style({
   color: 'var(--color-gray-900)',
   userSelect: 'none',
 });
-globalStyle(`${Button}:hover`, {
+globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active`, {
+globalStyle(`${button}:active`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Viewport = style({
+export const viewport = style({
   position: 'fixed',
   zIndex: '1',
   width: '250px',
@@ -53,7 +53,7 @@ export const Viewport = style({
   },
 });
 
-export const Toast = style({
+export const toast = style({
   position: 'absolute',
   right: '0',
   margin: '0 auto',
@@ -89,36 +89,36 @@ export const Toast = style({
       'calc(\n    var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) +\n      var(--toast-swipe-movement-y)\n  )',
   },
 });
-globalStyle(`${Toast}[data-expanded]`, {
+globalStyle(`${toast}[data-expanded]`, {
   transform:
     'translateX(var(--toast-swipe-movement-x)) translateY(var(--offset-y))',
   height: 'var(--toast-height)',
 });
-globalStyle(`${Toast}[data-starting-style]`, {
+globalStyle(`${toast}[data-starting-style]`, {
   transform: 'translateY(150%)',
 });
-globalStyle(`${Toast}[data-ending-style]`, {
+globalStyle(`${toast}[data-ending-style]`, {
   transform: 'translateY(150%)',
   opacity: '0',
 });
-globalStyle(`${Toast}[data-limited]`, {
+globalStyle(`${toast}[data-limited]`, {
   opacity: '0',
 });
-globalStyle(`${Toast}[data-ending-style][data-swipe-direction='up']`, {
+globalStyle(`${toast}[data-ending-style][data-swipe-direction='up']`, {
   transform: 'translateY(calc(var(--toast-swipe-movement-y) - 150%))',
 });
-globalStyle(`${Toast}[data-ending-style][data-swipe-direction='left']`, {
+globalStyle(`${toast}[data-ending-style][data-swipe-direction='left']`, {
   transform:
     'translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--offset-y))',
 });
-globalStyle(`${Toast}[data-ending-style][data-swipe-direction='right']`, {
+globalStyle(`${toast}[data-ending-style][data-swipe-direction='right']`, {
   transform:
     'translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--offset-y))',
 });
-globalStyle(`${Toast}[data-ending-style][data-swipe-direction='down']`, {
+globalStyle(`${toast}[data-ending-style][data-swipe-direction='down']`, {
   transform: 'translateY(calc(var(--toast-swipe-movement-y) + 150%))',
 });
-globalStyle(`${Toast}::after`, {
+globalStyle(`${toast}::after`, {
   content: "''",
   position: 'absolute',
   top: '100%',
@@ -127,31 +127,31 @@ globalStyle(`${Toast}::after`, {
   height: 'calc(var(--gap) + 1px)',
 });
 
-export const Content = style({
+export const content = style({
   overflow: 'hidden',
   transition: 'opacity 0.25s',
 });
-globalStyle(`${Content}[data-behind]`, {
+globalStyle(`${content}[data-behind]`, {
   opacity: '0',
 });
-globalStyle(`${Content}[data-expanded]`, {
+globalStyle(`${content}[data-expanded]`, {
   opacity: '1',
 });
 
-export const Title = style({
+export const title = style({
   fontWeight: '500',
   fontSize: '0.975rem',
   lineHeight: '1.25rem',
   margin: '0',
 });
 
-export const Description = style({
+export const description = style({
   fontSize: '0.925rem',
   lineHeight: '1.25rem',
   margin: '0',
 });
 
-export const Close = style({
+export const close = style({
   position: 'absolute',
   top: '0.5rem',
   right: '0.5rem',
@@ -165,15 +165,15 @@ export const Close = style({
   justifyContent: 'center',
   borderRadius: '0.25rem',
 });
-globalStyle(`${Close}:hover`, {
+globalStyle(`${close}:hover`, {
   backgroundColor: 'var(--color-gray-100)',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '1rem',
   height: '1rem',
 });
 
-export const ToastRecipe = recipe({
-  base: Button,
+export const toastRecipe = recipe({
+  base: button,
 });

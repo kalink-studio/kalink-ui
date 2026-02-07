@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Menubar = style({
+export const menubar = style({
   display: 'flex',
   backgroundColor: 'var(--color-gray-50)',
   border: '1px solid var(--color-gray-200)',
@@ -9,7 +9,7 @@ export const Menubar = style({
   padding: '0.125rem',
 });
 
-export const MenuTrigger = style({
+export const menuTrigger = style({
   boxSizing: 'border-box',
   background: 'none',
   padding: '0 0.75rem',
@@ -24,23 +24,23 @@ export const MenuTrigger = style({
   fontSize: '0.875rem',
   fontWeight: '500',
 });
-globalStyle(`${MenuTrigger}[data-pressed]`, {
+globalStyle(`${menuTrigger}[data-pressed]`, {
   backgroundColor: 'var(--color-gray-100)',
   outline: 'none',
 });
-globalStyle(`${MenuTrigger}:focus-visible`, {
+globalStyle(`${menuTrigger}:focus-visible`, {
   backgroundColor: 'var(--color-gray-100)',
   outline: 'none',
 });
-globalStyle(`${MenuTrigger}[data-disabled]`, {
+globalStyle(`${menuTrigger}[data-disabled]`, {
   opacity: '0.5',
 });
 
-export const MenuPositioner = style({
+export const menuPositioner = style({
   outline: '0',
 });
 
-export const MenuPopup = style({
+export const menuPopup = style({
   boxSizing: 'border-box',
   paddingBlock: '0.25rem',
   borderRadius: '0.375rem',
@@ -59,15 +59,15 @@ export const MenuPopup = style({
     },
   },
 });
-globalStyle(`${MenuPopup}[data-ending-style]`, {
+globalStyle(`${menuPopup}[data-ending-style]`, {
   opacity: '0',
   transition: 'opacity 150ms',
 });
-globalStyle(`${MenuPopup}[data-instant]`, {
+globalStyle(`${menuPopup}[data-instant]`, {
   transition: 'none',
 });
 
-export const MenuItem = style({
+export const menuItem = style({
   outline: '0',
   cursor: 'default',
   userSelect: 'none',
@@ -79,11 +79,11 @@ export const MenuItem = style({
   justifyContent: 'space-between',
   gap: '1rem',
 });
-globalStyle(`${MenuItem}[data-popup-open]`, {
+globalStyle(`${menuItem}[data-popup-open]`, {
   zIndex: '0',
   position: 'relative',
 });
-globalStyle(`${MenuItem}[data-popup-open]::before`, {
+globalStyle(`${menuItem}[data-popup-open]::before`, {
   content: "''",
   zIndex: '-1',
   position: 'absolute',
@@ -92,12 +92,12 @@ globalStyle(`${MenuItem}[data-popup-open]::before`, {
   borderRadius: '0.25rem',
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${MenuItem}[data-highlighted]`, {
+globalStyle(`${menuItem}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
   color: 'var(--color-gray-50)',
 });
-globalStyle(`${MenuItem}[data-highlighted]::before`, {
+globalStyle(`${menuItem}[data-highlighted]::before`, {
   content: "''",
   zIndex: '-1',
   position: 'absolute',
@@ -107,12 +107,12 @@ globalStyle(`${MenuItem}[data-highlighted]::before`, {
   backgroundColor: 'var(--color-gray-900)',
 });
 
-export const MenuSeparator = style({
+export const menuSeparator = style({
   margin: '0.375rem 1rem',
   height: '1px',
   backgroundColor: 'var(--color-gray-200)',
 });
 
-export const MenubarRecipe = recipe({
-  base: Menubar,
+export const menubarRecipe = recipe({
+  base: menubar,
 });

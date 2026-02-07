@@ -7,13 +7,13 @@ import * as React from 'react';
 
 export default function ExampleToolbar() {
   return (
-    <Toolbar.Root className={styles.Toolbar}>
-      <ToggleGroup className={styles.Group} aria-label="Alignment">
+    <Toolbar.Root className={styles.toolbar}>
+      <ToggleGroup className={styles.group} aria-label="Alignment">
         <Toolbar.Button
           render={<Toggle />}
           aria-label="Align left"
           value="align-left"
-          className={styles.Button}
+          className={styles.button}
         >
           Align Left
         </Toolbar.Button>
@@ -21,50 +21,50 @@ export default function ExampleToolbar() {
           render={<Toggle />}
           aria-label="Align right"
           value="align-right"
-          className={styles.Button}
+          className={styles.button}
         >
           Align Right
         </Toolbar.Button>
       </ToggleGroup>
-      <Toolbar.Separator className={styles.Separator} />
-      <Toolbar.Group className={styles.Group} aria-label="Numerical format">
+      <Toolbar.Separator className={styles.separator} />
+      <Toolbar.Group className={styles.group} aria-label="Numerical format">
         <Toolbar.Button
-          className={styles.Button}
+          className={styles.button}
           aria-label="Format as currency"
         >
           $
         </Toolbar.Button>
         <Toolbar.Button
-          className={styles.Button}
+          className={styles.button}
           aria-label="Format as percent"
         >
           %
         </Toolbar.Button>
       </Toolbar.Group>
-      <Toolbar.Separator className={styles.Separator} />
+      <Toolbar.Separator className={styles.separator} />
       <Select.Root defaultValue="Helvetica">
-        <Toolbar.Button render={<Select.Trigger />} className={styles.Button}>
+        <Toolbar.Button render={<Select.Trigger />} className={styles.button}>
           <Select.Value />
-          <Select.Icon className={styles.SelectIcon}>
+          <Select.Icon className={styles.selectIcon}>
             <ChevronUpDownIcon />
           </Select.Icon>
         </Toolbar.Button>
         <Select.Portal>
-          <Select.Positioner className={styles.Positioner} sideOffset={8}>
-            <Select.Popup className={styles.Popup}>
-              <Select.Item className={styles.Item} value="Helvetica">
-                <Select.ItemIndicator className={styles.ItemIndicator}>
-                  <CheckIcon className={styles.ItemIndicatorIcon} />
+          <Select.Positioner className={styles.positioner} sideOffset={8}>
+            <Select.Popup className={styles.popup}>
+              <Select.Item className={styles.item} value="Helvetica">
+                <Select.ItemIndicator className={styles.itemIndicator}>
+                  <CheckIcon className={styles.itemIndicatorIcon} />
                 </Select.ItemIndicator>
-                <Select.ItemText className={styles.ItemText}>
+                <Select.ItemText className={styles.itemText}>
                   Helvetica
                 </Select.ItemText>
               </Select.Item>
-              <Select.Item className={styles.Item} value="Arial">
-                <Select.ItemIndicator className={styles.ItemIndicator}>
-                  <CheckIcon className={styles.ItemIndicatorIcon} />
+              <Select.Item className={styles.item} value="Arial">
+                <Select.ItemIndicator className={styles.itemIndicator}>
+                  <CheckIcon className={styles.itemIndicatorIcon} />
                 </Select.ItemIndicator>
-                <Select.ItemText className={styles.ItemText}>
+                <Select.ItemText className={styles.itemText}>
                   Arial
                 </Select.ItemText>
               </Select.Item>
@@ -72,8 +72,8 @@ export default function ExampleToolbar() {
           </Select.Positioner>
         </Select.Portal>
       </Select.Root>
-      <Toolbar.Separator className={styles.Separator} />
-      <Toolbar.Link className={styles.Link} href="#">
+      <Toolbar.Separator className={styles.separator} />
+      <Toolbar.Link className={styles.link} href="#">
         Edited 51m ago
       </Toolbar.Link>
     </Toolbar.Root>

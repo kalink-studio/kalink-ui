@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Input = style({
+export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   paddingRight: 'calc(0.5rem + 1.5rem)',
@@ -15,12 +15,12 @@ export const Input = style({
   backgroundColor: 'canvas',
   color: 'var(--color-gray-900)',
 });
-globalStyle(`${Input}:focus`, {
+globalStyle(`${input}:focus`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Label = style({
+export const label = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.25rem',
@@ -31,25 +31,25 @@ export const Label = style({
   position: 'relative',
 });
 
-export const InputWrapper = style({
+export const inputWrapper = style({
   position: 'relative',
 });
 
-export const Trigger = style({});
+export const trigger = style({});
 
-export const Clear = style({});
+export const clear = style({});
 
-export const TriggerIcon = style({});
+export const triggerIcon = style({});
 
-export const ClearIcon = style({});
+export const clearIcon = style({});
 
-export const Empty = style({});
+export const empty = style({});
 
-globalStyle(`${InputWrapper}:has(${Clear}) ${Input}`, {
+globalStyle(`${inputWrapper}:has(${clear}) ${input}`, {
   paddingRight: 'calc(0.5rem + 1.5rem * 2)',
 });
 
-export const ActionButtons = style({
+export const actionButtons = style({
   boxSizing: 'border-box',
   position: 'absolute',
   display: 'flex',
@@ -64,11 +64,11 @@ export const ActionButtons = style({
   padding: '0',
 });
 
-export const Positioner = style({
+export const positioner = style({
   outline: '0',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   borderRadius: '0.375rem',
   backgroundColor: 'canvas',
@@ -90,16 +90,16 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'scale(0.95)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'scale(0.95)',
 });
 
-export const List = style({
+export const list = style({
   boxSizing: 'border-box',
   overflowY: 'auto',
   overscrollBehavior: 'contain',
@@ -108,11 +108,11 @@ export const List = style({
   outline: '0',
   maxHeight: 'min(23rem, var(--available-height))',
 });
-globalStyle(`${List}[data-empty]`, {
+globalStyle(`${list}[data-empty]`, {
   padding: '0',
 });
 
-export const Item = style({
+export const item = style({
   boxSizing: 'border-box',
   outline: '0',
   cursor: 'default',
@@ -127,12 +127,12 @@ export const Item = style({
   fontSize: '1rem',
   lineHeight: '1rem',
 });
-globalStyle(`${Item}[data-highlighted]`, {
+globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
   color: 'var(--color-gray-50)',
 });
-globalStyle(`${Item}[data-highlighted]::before`, {
+globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
   zIndex: '-1',
   position: 'absolute',
@@ -142,23 +142,23 @@ globalStyle(`${Item}[data-highlighted]::before`, {
   backgroundColor: 'var(--color-gray-900)',
 });
 
-export const ItemText = style({
+export const itemText = style({
   gridColumnStart: '2',
 });
 
-export const ItemIndicator = style({
+export const itemIndicator = style({
   gridColumnStart: '1',
 });
 
-export const ItemIndicatorIcon = style({
+export const itemIndicatorIcon = style({
   display: 'block',
   width: '0.75rem',
   height: '0.75rem',
 });
 
 globalStyle(
-  `${Trigger},
-${Clear}`,
+  `${trigger},
+${clear}`,
   {
     boxSizing: 'border-box',
     display: 'flex',
@@ -174,20 +174,20 @@ ${Clear}`,
   },
 );
 globalStyle(
-  `${ClearIcon},
-${TriggerIcon}`,
+  `${clearIcon},
+${triggerIcon}`,
   {
     width: '1rem',
     height: '1rem',
   },
 );
-globalStyle(`${Empty}:not(:empty)`, {
+globalStyle(`${empty}:not(:empty)`, {
   fontSize: '0.925rem',
   lineHeight: '1rem',
   color: 'var(--color-gray-600)',
   padding: '1rem',
 });
 
-export const ComboboxRecipe = recipe({
-  base: Input,
+export const comboboxRecipe = recipe({
+  base: input,
 });

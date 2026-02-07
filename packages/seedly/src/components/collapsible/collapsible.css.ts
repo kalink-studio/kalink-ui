@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Collapsible = style({
+export const collapsible = style({
   display: 'flex',
   width: '14rem',
   minHeight: '9rem',
@@ -10,13 +10,13 @@ export const Collapsible = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '0.75rem',
   height: '0.75rem',
   transition: 'transform 150ms ease-out',
 });
 
-export const Trigger = style({
+export const trigger = style({
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
@@ -32,24 +32,24 @@ export const Trigger = style({
   lineHeight: '1.25rem',
   fontWeight: '500',
 });
-globalStyle(`${Trigger}:hover`, {
+globalStyle(`${trigger}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-200)',
     },
   },
 });
-globalStyle(`${Trigger}:active`, {
+globalStyle(`${trigger}:active`, {
   backgroundColor: 'var(--color-gray-200)',
 });
-globalStyle(`${Trigger}:focus-visible`, {
+globalStyle(`${trigger}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
 });
-globalStyle(`${Trigger}[data-panel-open] ${Icon}`, {
+globalStyle(`${trigger}[data-panel-open] ${icon}`, {
   transform: 'rotate(90deg)',
 });
 
-export const Panel = style({
+export const panel = style({
   display: 'flex',
   height: 'var(--collapsible-panel-height)',
   flexDirection: 'column',
@@ -59,17 +59,17 @@ export const Panel = style({
   lineHeight: '1.25rem',
   transition: 'all 150ms ease-out',
 });
-globalStyle(`${Panel}[hidden]:not([hidden='until-found'])`, {
+globalStyle(`${panel}[hidden]:not([hidden='until-found'])`, {
   display: 'none',
 });
-globalStyle(`${Panel}[data-starting-style]`, {
+globalStyle(`${panel}[data-starting-style]`, {
   height: '0',
 });
-globalStyle(`${Panel}[data-ending-style]`, {
+globalStyle(`${panel}[data-ending-style]`, {
   height: '0',
 });
 
-export const Content = style({
+export const content = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5rem',
@@ -80,6 +80,6 @@ export const Content = style({
   cursor: 'text',
 });
 
-export const CollapsibleRecipe = recipe({
-  base: Collapsible,
+export const collapsibleRecipe = recipe({
+  base: collapsible,
 });

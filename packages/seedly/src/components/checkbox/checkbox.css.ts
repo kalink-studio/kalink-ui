@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Label = style({
+export const label = style({
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
@@ -10,7 +10,7 @@ export const Label = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Checkbox = style({
+export const checkbox = style({
   boxSizing: 'border-box',
   display: 'flex',
   width: '1.25rem',
@@ -23,31 +23,31 @@ export const Checkbox = style({
   margin: '0',
   border: 'none',
 });
-globalStyle(`${Checkbox}[data-unchecked]`, {
+globalStyle(`${checkbox}[data-unchecked]`, {
   border: '1px solid var(--color-gray-300)',
   backgroundColor: 'transparent',
 });
-globalStyle(`${Checkbox}[data-checked]`, {
+globalStyle(`${checkbox}[data-checked]`, {
   backgroundColor: 'var(--color-gray-900)',
 });
-globalStyle(`${Checkbox}:focus-visible`, {
+globalStyle(`${checkbox}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '2px',
 });
 
-export const Indicator = style({
+export const indicator = style({
   display: 'flex',
   color: 'var(--color-gray-50)',
 });
-globalStyle(`${Indicator}[data-unchecked]`, {
+globalStyle(`${indicator}[data-unchecked]`, {
   display: 'none',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '0.75rem',
   height: '0.75rem',
 });
 
-export const CheckboxRecipe = recipe({
-  base: Label,
+export const checkboxRecipe = recipe({
+  base: label,
 });

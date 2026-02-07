@@ -1,18 +1,18 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Container = style({
+export const container = style({
   display: 'flex',
   gap: '1rem',
   textWrap: 'nowrap',
 });
 
-export const Separator = style({
+export const separator = style({
   width: '1px',
   backgroundColor: 'var(--color-gray-300)',
 });
 
-export const Link = style({
+export const link = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: 'var(--color-gray-900)',
@@ -21,19 +21,19 @@ export const Link = style({
   textDecorationLine: 'none',
   textUnderlineOffset: '2px',
 });
-globalStyle(`${Link}:hover`, {
+globalStyle(`${link}:hover`, {
   '@media': {
     '(hover: hover)': {
       textDecorationLine: 'underline',
     },
   },
 });
-globalStyle(`${Link}:focus-visible`, {
+globalStyle(`${link}:focus-visible`, {
   borderRadius: '0.125rem',
   outline: '2px solid var(--color-blue)',
   textDecorationLine: 'none',
 });
 
-export const SeparatorRecipe = recipe({
-  base: Container,
+export const separatorRecipe = recipe({
+  base: container,
 });

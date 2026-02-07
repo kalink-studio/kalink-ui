@@ -3,9 +3,9 @@ import * as styles from '@kalink-ui/seedly/components/switch';
 
 export default function ExampleSwitch() {
   return (
-    <label className={styles.Label}>
-      <Switch.Root defaultChecked className={styles.Switch}>
-        <Switch.Thumb className={styles.Thumb} />
+    <label className={styles.label}>
+      <Switch.Root defaultChecked className={styles.switchRoot}>
+        <Switch.Thumb className={styles.thumb} />
       </Switch.Root>
       Notifications
     </label>

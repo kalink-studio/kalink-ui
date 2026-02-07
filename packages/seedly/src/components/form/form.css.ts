@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Form = style({
+export const form = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
@@ -9,21 +9,21 @@ export const Form = style({
   maxWidth: '16rem',
 });
 
-export const Field = style({
+export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
   gap: '0.25rem',
 });
 
-export const Label = style({
+export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
   color: 'var(--color-gray-900)',
 });
 
-export const Input = style({
+export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   margin: '0',
@@ -36,18 +36,18 @@ export const Input = style({
   backgroundColor: 'transparent',
   color: 'var(--color-gray-900)',
 });
-globalStyle(`${Input}:focus`, {
+globalStyle(`${input}:focus`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Error = style({
+export const error = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: 'var(--color-red-800)',
 });
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -66,26 +66,26 @@ export const Button = style({
   color: 'var(--color-gray-900)',
   userSelect: 'none',
 });
-globalStyle(`${Button}:hover:not([data-disabled])`, {
+globalStyle(`${button}:hover:not([data-disabled])`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active:not([data-disabled])`, {
+globalStyle(`${button}:active:not([data-disabled])`, {
   backgroundColor: 'var(--color-gray-200)',
   boxShadow: 'inset 0 1px 3px var(--color-gray-200)',
   borderTopColor: 'var(--color-gray-300)',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
-globalStyle(`${Button}[data-disabled]`, {
+globalStyle(`${button}[data-disabled]`, {
   color: 'var(--color-gray-500)',
 });
 
-export const FormRecipe = recipe({
-  base: Form,
+export const formRecipe = recipe({
+  base: form,
 });

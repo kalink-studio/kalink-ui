@@ -5,22 +5,22 @@ import * as React from 'react';
 export default function ExampleNumberField() {
   const id = React.useId();
   return (
-    <NumberField.Root id={id} defaultValue={100} className={styles.Field}>
-      <NumberField.ScrubArea className={styles.ScrubArea}>
-        <label htmlFor={id} className={styles.Label}>
+    <NumberField.Root id={id} defaultValue={100} className={styles.field}>
+      <NumberField.ScrubArea className={styles.scrubArea}>
+        <label htmlFor={id} className={styles.label}>
           Amount
         </label>
-        <NumberField.ScrubAreaCursor className={styles.ScrubAreaCursor}>
+        <NumberField.ScrubAreaCursor className={styles.scrubAreaCursor}>
           <CursorGrowIcon />
         </NumberField.ScrubAreaCursor>
       </NumberField.ScrubArea>
 
-      <NumberField.Group className={styles.Group}>
-        <NumberField.Decrement className={styles.Decrement}>
+      <NumberField.Group className={styles.group}>
+        <NumberField.Decrement className={styles.decrement}>
           <MinusIcon />
         </NumberField.Decrement>
-        <NumberField.Input className={styles.Input} />
-        <NumberField.Increment className={styles.Increment}>
+        <NumberField.Input className={styles.input} />
+        <NumberField.Increment className={styles.increment}>
           <PlusIcon />
         </NumberField.Increment>
       </NumberField.Group>

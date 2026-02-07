@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Trigger = style({
+export const trigger = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -15,11 +15,11 @@ export const Trigger = style({
   userSelect: 'none',
 });
 
-export const Positioner = style({
+export const positioner = style({
   outline: '0',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   paddingBlock: '0.25rem',
   borderRadius: '0.375rem',
@@ -39,11 +39,11 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
 });
 
-export const Item = style({
+export const item = style({
   outline: '0',
   cursor: 'default',
   userSelect: 'none',
@@ -54,12 +54,12 @@ export const Item = style({
   fontSize: '0.875rem',
   lineHeight: '1rem',
 });
-globalStyle(`${Item}[data-highlighted]`, {
+globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
   color: 'var(--color-gray-50)',
 });
-globalStyle(`${Item}[data-highlighted]::before`, {
+globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
   zIndex: '-1',
   position: 'absolute',
@@ -69,12 +69,12 @@ globalStyle(`${Item}[data-highlighted]::before`, {
   backgroundColor: 'var(--color-gray-900)',
 });
 
-export const Separator = style({
+export const separator = style({
   margin: '0.375rem 1rem',
   height: '1px',
   backgroundColor: 'var(--color-gray-200)',
 });
 
-export const ContextMenuRecipe = recipe({
-  base: Trigger,
+export const contextMenuRecipe = recipe({
+  base: trigger,
 });

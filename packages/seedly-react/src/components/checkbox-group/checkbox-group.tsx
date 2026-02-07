@@ -10,46 +10,46 @@ export default function ExampleCheckboxGroup() {
     <CheckboxGroup
       aria-labelledby={id}
       defaultValue={['fuji-apple']}
-      className={styles.CheckboxGroup}
+      className={styles.checkboxGroup}
     >
-      <div className={styles.Caption} id={id}>
+      <div className={styles.caption} id={id}>
         Apples
       </div>
 
-      <label className={styles.Item}>
+      <label className={styles.item}>
         <Checkbox.Root
           name="apple"
           value="fuji-apple"
-          className={styles.Checkbox}
+          className={styles.checkbox}
         >
-          <Checkbox.Indicator className={styles.Indicator}>
-            <CheckIcon className={styles.Icon} />
+          <Checkbox.Indicator className={styles.indicator}>
+            <CheckIcon className={styles.icon} />
           </Checkbox.Indicator>
         </Checkbox.Root>
         Fuji
       </label>
 
-      <label className={styles.Item}>
+      <label className={styles.item}>
         <Checkbox.Root
           name="apple"
           value="gala-apple"
-          className={styles.Checkbox}
+          className={styles.checkbox}
         >
-          <Checkbox.Indicator className={styles.Indicator}>
-            <CheckIcon className={styles.Icon} />
+          <Checkbox.Indicator className={styles.indicator}>
+            <CheckIcon className={styles.icon} />
           </Checkbox.Indicator>
         </Checkbox.Root>
         Gala
       </label>
 
-      <label className={styles.Item}>
+      <label className={styles.item}>
         <Checkbox.Root
           name="apple"
           value="granny-smith-apple"
-          className={styles.Checkbox}
+          className={styles.checkbox}
         >
-          <Checkbox.Indicator className={styles.Indicator}>
-            <CheckIcon className={styles.Icon} />
+          <Checkbox.Indicator className={styles.indicator}>
+            <CheckIcon className={styles.icon} />
           </Checkbox.Indicator>
         </Checkbox.Root>
         Granny Smith

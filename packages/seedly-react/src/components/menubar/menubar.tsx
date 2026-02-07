@@ -6,48 +6,48 @@ import * as React from 'react';
 
 export default function ExampleMenubar() {
   return (
-    <Menubar className={styles.Menubar}>
+    <Menubar className={styles.menubar}>
       <Menu.Root>
-        <Menu.Trigger className={styles.MenuTrigger}>File</Menu.Trigger>
+        <Menu.Trigger className={styles.menuTrigger}>File</Menu.Trigger>
         <Menu.Portal>
           <Menu.Positioner
-            className={styles.MenuPositioner}
+            className={styles.menuPositioner}
             sideOffset={6}
             alignOffset={-2}
           >
-            <Menu.Popup className={styles.MenuPopup}>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+            <Menu.Popup className={styles.menuPopup}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 New
               </Menu.Item>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Open
               </Menu.Item>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Save
               </Menu.Item>
 
               <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className={styles.MenuItem}>
+                <Menu.SubmenuTrigger className={styles.menuItem}>
                   Export
                   <ChevronRightIcon />
                 </Menu.SubmenuTrigger>
                 <Menu.Portal>
                   <Menu.Positioner alignOffset={-4}>
-                    <Menu.Popup className={styles.MenuPopup}>
+                    <Menu.Popup className={styles.menuPopup}>
                       <Menu.Item
-                        className={styles.MenuItem}
+                        className={styles.menuItem}
                         onClick={handleClick}
                       >
                         PDF
                       </Menu.Item>
                       <Menu.Item
-                        className={styles.MenuItem}
+                        className={styles.menuItem}
                         onClick={handleClick}
                       >
                         PNG
                       </Menu.Item>
                       <Menu.Item
-                        className={styles.MenuItem}
+                        className={styles.menuItem}
                         onClick={handleClick}
                       >
                         SVG
@@ -57,8 +57,8 @@ export default function ExampleMenubar() {
                 </Menu.Portal>
               </Menu.SubmenuRoot>
 
-              <Menu.Separator className={styles.MenuSeparator} />
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Separator className={styles.menuSeparator} />
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Print
               </Menu.Item>
             </Menu.Popup>
@@ -67,17 +67,17 @@ export default function ExampleMenubar() {
       </Menu.Root>
 
       <Menu.Root>
-        <Menu.Trigger className={styles.MenuTrigger}>Edit</Menu.Trigger>
+        <Menu.Trigger className={styles.menuTrigger}>Edit</Menu.Trigger>
         <Menu.Portal>
-          <Menu.Positioner className={styles.MenuPositioner} sideOffset={6}>
-            <Menu.Popup className={styles.MenuPopup}>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+          <Menu.Positioner className={styles.menuPositioner} sideOffset={6}>
+            <Menu.Popup className={styles.menuPopup}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Cut
               </Menu.Item>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Copy
               </Menu.Item>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Paste
               </Menu.Item>
             </Menu.Popup>
@@ -86,39 +86,39 @@ export default function ExampleMenubar() {
       </Menu.Root>
 
       <Menu.Root>
-        <Menu.Trigger className={styles.MenuTrigger}>View</Menu.Trigger>
+        <Menu.Trigger className={styles.menuTrigger}>View</Menu.Trigger>
         <Menu.Portal>
-          <Menu.Positioner className={styles.MenuPositioner} sideOffset={6}>
-            <Menu.Popup className={styles.MenuPopup}>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+          <Menu.Positioner className={styles.menuPositioner} sideOffset={6}>
+            <Menu.Popup className={styles.menuPopup}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Zoom In
               </Menu.Item>
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Zoom Out
               </Menu.Item>
 
               <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className={styles.MenuItem}>
+                <Menu.SubmenuTrigger className={styles.menuItem}>
                   Layout
                   <ChevronRightIcon />
                 </Menu.SubmenuTrigger>
                 <Menu.Portal>
                   <Menu.Positioner alignOffset={-4}>
-                    <Menu.Popup className={styles.MenuPopup}>
+                    <Menu.Popup className={styles.menuPopup}>
                       <Menu.Item
-                        className={styles.MenuItem}
+                        className={styles.menuItem}
                         onClick={handleClick}
                       >
                         Single Page
                       </Menu.Item>
                       <Menu.Item
-                        className={styles.MenuItem}
+                        className={styles.menuItem}
                         onClick={handleClick}
                       >
                         Two Pages
                       </Menu.Item>
                       <Menu.Item
-                        className={styles.MenuItem}
+                        className={styles.menuItem}
                         onClick={handleClick}
                       >
                         Continuous
@@ -128,8 +128,8 @@ export default function ExampleMenubar() {
                 </Menu.Portal>
               </Menu.SubmenuRoot>
 
-              <Menu.Separator className={styles.MenuSeparator} />
-              <Menu.Item className={styles.MenuItem} onClick={handleClick}>
+              <Menu.Separator className={styles.menuSeparator} />
+              <Menu.Item className={styles.menuItem} onClick={handleClick}>
                 Full Screen
               </Menu.Item>
             </Menu.Popup>
@@ -138,7 +138,7 @@ export default function ExampleMenubar() {
       </Menu.Root>
 
       <Menu.Root disabled>
-        <Menu.Trigger className={styles.MenuTrigger}>Help</Menu.Trigger>
+        <Menu.Trigger className={styles.menuTrigger}>Help</Menu.Trigger>
       </Menu.Root>
     </Menubar>
   );

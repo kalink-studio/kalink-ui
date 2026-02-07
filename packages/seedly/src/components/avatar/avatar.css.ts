@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Root = style({
+export const root = style({
   display: 'inline-flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -18,13 +18,13 @@ export const Root = style({
   width: '3rem',
 });
 
-export const Image = style({
+export const image = style({
   objectFit: 'cover',
   height: '100%',
   width: '100%',
 });
 
-export const Fallback = style({
+export const fallback = style({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
@@ -33,6 +33,6 @@ export const Fallback = style({
   fontSize: '1rem',
 });
 
-export const AvatarRecipe = recipe({
-  base: Root,
+export const avatarRecipe = recipe({
+  base: root,
 });

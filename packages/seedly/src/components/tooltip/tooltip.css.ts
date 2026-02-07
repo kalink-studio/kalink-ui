@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Panel = style({
+export const panel = style({
   display: 'flex',
   border: '1px solid var(--color-gray-200)',
   backgroundColor: 'var(--color-gray-50)',
@@ -9,7 +9,7 @@ export const Panel = style({
   padding: '0.125rem',
 });
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -25,31 +25,31 @@ export const Button = style({
   color: 'var(--color-gray-900)',
   userSelect: 'none',
 });
-globalStyle(`${Button}[data-popup-open]`, {
+globalStyle(`${button}[data-popup-open]`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   backgroundColor: 'transparent',
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
-globalStyle(`${Button}:hover`, {
+globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active`, {
+globalStyle(`${button}:active`, {
   backgroundColor: 'var(--color-gray-200)',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '1rem',
   height: '1rem',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
@@ -72,43 +72,43 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-instant]`, {
+globalStyle(`${popup}[data-instant]`, {
   transition: 'none',
 });
 
-export const Arrow = style({
+export const arrow = style({
   display: 'flex',
 });
-globalStyle(`${Arrow}[data-side='top']`, {
+globalStyle(`${arrow}[data-side='top']`, {
   bottom: '-8px',
   rotate: '180deg',
 });
-globalStyle(`${Arrow}[data-side='bottom']`, {
+globalStyle(`${arrow}[data-side='bottom']`, {
   top: '-8px',
   rotate: '0deg',
 });
-globalStyle(`${Arrow}[data-side='left']`, {
+globalStyle(`${arrow}[data-side='left']`, {
   right: '-13px',
   rotate: '90deg',
 });
-globalStyle(`${Arrow}[data-side='right']`, {
+globalStyle(`${arrow}[data-side='right']`, {
   left: '-13px',
   rotate: '-90deg',
 });
 
-export const ArrowFill = style({
+export const arrowFill = style({
   fill: 'canvas',
 });
 
-export const ArrowOuterStroke = style({
+export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
       fill: 'var(--color-gray-200)',
@@ -116,7 +116,7 @@ export const ArrowOuterStroke = style({
   },
 });
 
-export const ArrowInnerStroke = style({
+export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
       fill: 'var(--color-gray-300)',
@@ -124,6 +124,6 @@ export const ArrowInnerStroke = style({
   },
 });
 
-export const TooltipRecipe = recipe({
-  base: Panel,
+export const tooltipRecipe = recipe({
+  base: panel,
 });

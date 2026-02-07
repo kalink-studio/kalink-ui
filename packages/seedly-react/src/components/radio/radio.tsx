@@ -10,29 +10,29 @@ export default function ExampleRadioGroup() {
     <RadioGroup
       aria-labelledby={id}
       defaultValue="fuji-apple"
-      className={styles.RadioGroup}
+      className={styles.radioGroup}
     >
-      <div className={styles.Caption} id={id}>
+      <div className={styles.caption} id={id}>
         Best apple
       </div>
 
-      <label className={styles.Item}>
-        <Radio.Root value="fuji-apple" className={styles.Radio}>
-          <Radio.Indicator className={styles.Indicator} />
+      <label className={styles.item}>
+        <Radio.Root value="fuji-apple" className={styles.radio}>
+          <Radio.Indicator className={styles.indicator} />
         </Radio.Root>
         Fuji
       </label>
 
-      <label className={styles.Item}>
-        <Radio.Root value="gala-apple" className={styles.Radio}>
-          <Radio.Indicator className={styles.Indicator} />
+      <label className={styles.item}>
+        <Radio.Root value="gala-apple" className={styles.radio}>
+          <Radio.Indicator className={styles.indicator} />
         </Radio.Root>
         Gala
       </label>
 
-      <label className={styles.Item}>
-        <Radio.Root value="granny-smith-apple" className={styles.Radio}>
-          <Radio.Indicator className={styles.Indicator} />
+      <label className={styles.item}>
+        <Radio.Root value="granny-smith-apple" className={styles.radio}>
+          <Radio.Indicator className={styles.indicator} />
         </Radio.Root>
         Granny Smith
       </label>

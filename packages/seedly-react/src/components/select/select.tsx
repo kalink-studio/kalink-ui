@@ -13,42 +13,42 @@ const apples = [
 
 export default function ExampleSelect() {
   return (
-    <Field.Root className={styles.Field}>
+    <Field.Root className={styles.field}>
       <Field.Label
-        className={styles.Label}
+        className={styles.label}
         nativeLabel={false}
         render={<div />}
       >
         Apple
       </Field.Label>
       <Select.Root items={apples}>
-        <Select.Trigger className={styles.Select}>
-          <Select.Value className={styles.Value} placeholder="Select apple" />
-          <Select.Icon className={styles.SelectIcon}>
+        <Select.Trigger className={styles.select}>
+          <Select.Value className={styles.value} placeholder="Select apple" />
+          <Select.Icon className={styles.selectIcon}>
             <ChevronUpDownIcon />
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Positioner className={styles.Positioner} sideOffset={8}>
-            <Select.Popup className={styles.Popup}>
-              <Select.ScrollUpArrow className={styles.ScrollArrow} />
-              <Select.List className={styles.List}>
+          <Select.Positioner className={styles.positioner} sideOffset={8}>
+            <Select.Popup className={styles.popup}>
+              <Select.ScrollUpArrow className={styles.scrollArrow} />
+              <Select.List className={styles.list}>
                 {apples.map(({ label, value }) => (
                   <Select.Item
                     key={label}
                     value={value}
-                    className={styles.Item}
+                    className={styles.item}
                   >
-                    <Select.ItemIndicator className={styles.ItemIndicator}>
-                      <CheckIcon className={styles.ItemIndicatorIcon} />
+                    <Select.ItemIndicator className={styles.itemIndicator}>
+                      <CheckIcon className={styles.itemIndicatorIcon} />
                     </Select.ItemIndicator>
-                    <Select.ItemText className={styles.ItemText}>
+                    <Select.ItemText className={styles.itemText}>
                       {label}
                     </Select.ItemText>
                   </Select.Item>
                 ))}
               </Select.List>
-              <Select.ScrollDownArrow className={styles.ScrollArrow} />
+              <Select.ScrollDownArrow className={styles.scrollArrow} />
             </Select.Popup>
           </Select.Positioner>
         </Select.Portal>

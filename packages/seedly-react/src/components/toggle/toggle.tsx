@@ -5,22 +5,22 @@ import * as React from 'react';
 
 export default function ExampleToggle() {
   return (
-    <div className={styles.Panel}>
+    <div className={styles.panel}>
       <Toggle
         aria-label="Favorite"
-        className={styles.Button}
+        className={styles.button}
         render={(props, state) => {
           if (state.pressed) {
             return (
               <button type="button" {...props}>
-                <HeartFilledIcon className={styles.Icon} />
+                <HeartFilledIcon className={styles.icon} />
               </button>
             );
           }
 
           return (
             <button type="button" {...props}>
-              <HeartOutlineIcon className={styles.Icon} />
+              <HeartOutlineIcon className={styles.icon} />
             </button>
           );
         }}

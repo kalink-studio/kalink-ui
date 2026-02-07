@@ -7,48 +7,48 @@ export default function ExampleCombobox() {
   const id = React.useId();
   return (
     <Combobox.Root items={fruits}>
-      <div className={styles.Label}>
+      <div className={styles.label}>
         <label htmlFor={id}>Choose a fruit</label>
-        <div className={styles.InputWrapper}>
+        <div className={styles.inputWrapper}>
           <Combobox.Input
             placeholder="e.g. Apple"
             id={id}
-            className={styles.Input}
+            className={styles.input}
           />
-          <div className={styles.ActionButtons}>
+          <div className={styles.actionButtons}>
             <Combobox.Clear
-              className={styles.Clear}
+              className={styles.clear}
               aria-label="Clear selection"
             >
-              <ClearIcon className={styles.ClearIcon} />
+              <ClearIcon className={styles.clearIcon} />
             </Combobox.Clear>
             <Combobox.Trigger
-              className={styles.Trigger}
+              className={styles.trigger}
               aria-label="Open popup"
             >
-              <ChevronDownIcon className={styles.TriggerIcon} />
+              <ChevronDownIcon className={styles.triggerIcon} />
             </Combobox.Trigger>
           </div>
         </div>
       </div>
 
       <Combobox.Portal>
-        <Combobox.Positioner className={styles.Positioner} sideOffset={4}>
-          <Combobox.Popup className={styles.Popup}>
-            <Combobox.Empty className={styles.Empty}>
+        <Combobox.Positioner className={styles.positioner} sideOffset={4}>
+          <Combobox.Popup className={styles.popup}>
+            <Combobox.Empty className={styles.empty}>
               No fruits found.
             </Combobox.Empty>
-            <Combobox.List className={styles.List}>
+            <Combobox.List className={styles.list}>
               {(item: Fruit) => (
                 <Combobox.Item
                   key={item.value}
                   value={item}
-                  className={styles.Item}
+                  className={styles.item}
                 >
-                  <Combobox.ItemIndicator className={styles.ItemIndicator}>
-                    <CheckIcon className={styles.ItemIndicatorIcon} />
+                  <Combobox.ItemIndicator className={styles.itemIndicator}>
+                    <CheckIcon className={styles.itemIndicatorIcon} />
                   </Combobox.ItemIndicator>
-                  <div className={styles.ItemText}>{item.label}</div>
+                  <div className={styles.itemText}>{item.label}</div>
                 </Combobox.Item>
               )}
             </Combobox.List>

@@ -5,19 +5,19 @@ import * as React from 'react';
 
 export default function ExampleToggleGroup() {
   return (
-    <ToggleGroup defaultValue={['left']} className={styles.Panel}>
-      <Toggle aria-label="Align left" value="left" className={styles.Button}>
-        <AlignLeftIcon className={styles.Icon} />
+    <ToggleGroup defaultValue={['left']} className={styles.panel}>
+      <Toggle aria-label="Align left" value="left" className={styles.button}>
+        <AlignLeftIcon className={styles.icon} />
       </Toggle>
       <Toggle
         aria-label="Align center"
         value="center"
-        className={styles.Button}
+        className={styles.button}
       >
-        <AlignCenterIcon className={styles.Icon} />
+        <AlignCenterIcon className={styles.icon} />
       </Toggle>
-      <Toggle aria-label="Align right" value="right" className={styles.Button}>
-        <AlignRightIcon className={styles.Icon} />
+      <Toggle aria-label="Align right" value="right" className={styles.button}>
+        <AlignRightIcon className={styles.icon} />
       </Toggle>
     </ToggleGroup>
   );

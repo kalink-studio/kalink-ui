@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Accordion = style({
+export const accordion = style({
   boxSizing: 'border-box',
   display: 'flex',
   width: '24rem',
@@ -11,15 +11,15 @@ export const Accordion = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Item = style({
+export const item = style({
   borderBottom: '1px solid var(--color-gray-200)',
 });
 
-export const Header = style({
+export const header = style({
   margin: '0',
 });
 
-export const Trigger = style({
+export const trigger = style({
   boxSizing: 'border-box',
   position: 'relative',
   display: 'flex',
@@ -39,19 +39,19 @@ export const Trigger = style({
   outline: 'none',
   textAlign: 'left',
 });
-globalStyle(`${Trigger}:hover`, {
+globalStyle(`${trigger}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Trigger}:focus-visible`, {
+globalStyle(`${trigger}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   zIndex: '1',
 });
 
-export const TriggerIcon = style({
+export const triggerIcon = style({
   boxSizing: 'border-box',
   flexShrink: '0',
   width: '0.75rem',
@@ -59,11 +59,11 @@ export const TriggerIcon = style({
   marginRight: '0.5rem',
   transition: 'transform 150ms ease-out',
 });
-globalStyle(`[data-panel-open] > ${TriggerIcon}`, {
+globalStyle(`[data-panel-open] > ${triggerIcon}`, {
   transform: 'rotate(45deg) scale(1.1)',
 });
 
-export const Panel = style({
+export const panel = style({
   boxSizing: 'border-box',
   height: 'var(--accordion-panel-height)',
   overflow: 'hidden',
@@ -72,17 +72,17 @@ export const Panel = style({
   lineHeight: '1.5rem',
   transition: 'height 150ms ease-out',
 });
-globalStyle(`${Panel}[data-starting-style]`, {
+globalStyle(`${panel}[data-starting-style]`, {
   height: '0',
 });
-globalStyle(`${Panel}[data-ending-style]`, {
+globalStyle(`${panel}[data-ending-style]`, {
   height: '0',
 });
 
-export const Content = style({
+export const content = style({
   padding: '0.75rem',
 });
 
-export const AccordionRecipe = recipe({
-  base: Accordion,
+export const accordionRecipe = recipe({
+  base: accordion,
 });

@@ -4,10 +4,10 @@ import * as React from 'react';
 
 export default function ExampleCheckbox() {
   return (
-    <label className={styles.Label}>
-      <Checkbox.Root defaultChecked className={styles.Checkbox}>
-        <Checkbox.Indicator className={styles.Indicator}>
-          <CheckIcon className={styles.Icon} />
+    <label className={styles.label}>
+      <Checkbox.Root defaultChecked className={styles.checkbox}>
+        <Checkbox.Indicator className={styles.indicator}>
+          <CheckIcon className={styles.icon} />
         </Checkbox.Indicator>
       </Checkbox.Root>
       Enable notifications

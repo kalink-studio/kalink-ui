@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Toolbar = style({
+export const toolbar = style({
   display: 'flex',
   alignItems: 'center',
   gap: '1px',
@@ -12,12 +12,12 @@ export const Toolbar = style({
   width: '37.5rem',
 });
 
-export const Group = style({
+export const group = style({
   display: 'flex',
   gap: '0.25rem',
 });
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -36,42 +36,42 @@ export const Button = style({
   fontSize: '0.875rem',
   fontWeight: '500',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   backgroundColor: 'transparent',
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
-globalStyle(`${Button}:hover`, {
+globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active`, {
+globalStyle(`${button}:active`, {
   backgroundColor: 'var(--color-gray-200)',
 });
-globalStyle(`${Button}[data-pressed]`, {
+globalStyle(`${button}[data-pressed]`, {
   backgroundColor: 'var(--color-gray-100)',
   color: 'var(--color-gray-900)',
 });
-globalStyle(`${Button}[aria-pressed]`, {
+globalStyle(`${button}[aria-pressed]`, {
   padding: '0 0.75rem',
 });
-globalStyle(`${Button}[role='combobox']`, {
+globalStyle(`${button}[role='combobox']`, {
   minWidth: '8rem',
   justifyContent: 'space-between',
   padding: '0 0.75rem',
 });
 
-export const Separator = style({
+export const separator = style({
   width: '1px',
   height: '16px',
   margin: '0.25rem',
   backgroundColor: 'var(--color-gray-300)',
 });
 
-export const Link = style({
+export const link = style({
   color: 'var(--color-gray-500)',
   fontFamily: 'inherit',
   fontSize: '0.875rem',
@@ -80,12 +80,12 @@ export const Link = style({
   flex: '0 0 auto',
   marginInline: 'auto 0.875rem',
 });
-globalStyle(`${Link}:focus-visible`, {
+globalStyle(`${link}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-2px',
   borderRadius: 'var(--radius-sm)',
 });
-globalStyle(`${Link}:hover`, {
+globalStyle(`${link}:hover`, {
   '@media': {
     '(hover: hover)': {
       color: 'var(--color-blue)',
@@ -93,7 +93,7 @@ globalStyle(`${Link}:hover`, {
   },
 });
 
-export const Select = style({
+export const select = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -115,33 +115,33 @@ export const Select = style({
   userSelect: 'none',
   minWidth: '9rem',
 });
-globalStyle(`${Select}:hover`, {
+globalStyle(`${select}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Select}[data-popup-open]`, {
+globalStyle(`${select}[data-popup-open]`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Select}:focus-visible`, {
+globalStyle(`${select}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const SelectIcon = style({
+export const selectIcon = style({
   display: 'flex',
 });
 
-export const Positioner = style({
+export const positioner = style({
   outline: '0',
   WebkitUserSelect: 'none',
   userSelect: 'none',
   zIndex: '1',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   paddingBlock: '0.25rem',
   borderRadius: '0.375rem',
@@ -163,45 +163,45 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-side='none']`, {
+globalStyle(`${popup}[data-side='none']`, {
   transition: 'none',
   transform: 'none',
   opacity: '1',
 });
 
-export const Arrow = style({
+export const arrow = style({
   display: 'flex',
 });
-globalStyle(`${Arrow}[data-side='top']`, {
+globalStyle(`${arrow}[data-side='top']`, {
   bottom: '-8px',
   rotate: '180deg',
 });
-globalStyle(`${Arrow}[data-side='bottom']`, {
+globalStyle(`${arrow}[data-side='bottom']`, {
   top: '-8px',
   rotate: '0deg',
 });
-globalStyle(`${Arrow}[data-side='left']`, {
+globalStyle(`${arrow}[data-side='left']`, {
   right: '-13px',
   rotate: '90deg',
 });
-globalStyle(`${Arrow}[data-side='right']`, {
+globalStyle(`${arrow}[data-side='right']`, {
   left: '-13px',
   rotate: '-90deg',
 });
 
-export const ArrowFill = style({
+export const arrowFill = style({
   fill: 'canvas',
 });
 
-export const ArrowOuterStroke = style({
+export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
       fill: 'var(--color-gray-200)',
@@ -209,7 +209,7 @@ export const ArrowOuterStroke = style({
   },
 });
 
-export const ArrowInnerStroke = style({
+export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
       fill: 'var(--color-gray-300)',
@@ -217,7 +217,7 @@ export const ArrowInnerStroke = style({
   },
 });
 
-export const Item = style({
+export const item = style({
   boxSizing: 'border-box',
   outline: '0',
   lineHeight: '1rem',
@@ -240,16 +240,16 @@ export const Item = style({
     },
   },
 });
-globalStyle(`[data-side='none'] ${Item}`, {
+globalStyle(`[data-side='none'] ${item}`, {
   paddingRight: '3rem',
   minWidth: 'calc(var(--anchor-width) + 1rem)',
 });
-globalStyle(`${Item}[data-highlighted]`, {
+globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
   color: 'var(--color-gray-50)',
 });
-globalStyle(`${Item}[data-highlighted]::before`, {
+globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
   zIndex: '-1',
   position: 'absolute',
@@ -259,20 +259,20 @@ globalStyle(`${Item}[data-highlighted]::before`, {
   backgroundColor: 'var(--color-gray-900)',
 });
 
-export const ItemIndicator = style({
+export const itemIndicator = style({
   gridColumnStart: '1',
 });
 
-export const ItemIndicatorIcon = style({
+export const itemIndicatorIcon = style({
   display: 'block',
   width: '0.75rem',
   height: '0.75rem',
 });
 
-export const ItemText = style({
+export const itemText = style({
   gridColumnStart: '2',
 });
 
-export const ToolbarRecipe = recipe({
-  base: Toolbar,
+export const toolbarRecipe = recipe({
+  base: toolbar,
 });

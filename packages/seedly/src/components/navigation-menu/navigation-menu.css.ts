@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Root = style({
+export const root = style({
   backgroundColor: 'var(--color-gray-50)',
   borderRadius: '0.5rem',
   padding: '0.25rem',
@@ -9,7 +9,7 @@ export const Root = style({
   minWidth: 'max-content',
 });
 
-export const List = style({
+export const list = style({
   display: 'flex',
   position: 'relative',
   listStyle: 'none',
@@ -17,7 +17,7 @@ export const List = style({
   margin: '0',
 });
 
-export const Trigger = style({
+export const trigger = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -44,30 +44,30 @@ export const Trigger = style({
     },
   },
 });
-globalStyle(`${Trigger}:hover`, {
+globalStyle(`${trigger}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Trigger}[data-popup-open]`, {
+globalStyle(`${trigger}[data-popup-open]`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Trigger}:focus-visible`, {
+globalStyle(`${trigger}:focus-visible`, {
   position: 'relative',
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Icon = style({
+export const icon = style({
   transition: 'transform 0.2s ease',
 });
-globalStyle(`${Icon}[data-popup-open]`, {
+globalStyle(`${icon}[data-popup-open]`, {
   transform: 'rotate(180deg)',
 });
 
-export const Positioner = style({
+export const positioner = style({
   boxSizing: 'border-box',
   transitionProperty: 'top, left, right, bottom',
   transitionDuration: 'var(--duration)',
@@ -80,39 +80,39 @@ export const Positioner = style({
     '--duration': '0.35s',
   },
 });
-globalStyle(`${Positioner}::before`, {
+globalStyle(`${positioner}::before`, {
   content: "''",
   position: 'absolute',
 });
-globalStyle(`${Positioner}[data-side='top']::before`, {
+globalStyle(`${positioner}[data-side='top']::before`, {
   left: '0',
   right: '0',
   bottom: '-10px',
   height: '10px',
 });
-globalStyle(`${Positioner}[data-side='bottom']::before`, {
+globalStyle(`${positioner}[data-side='bottom']::before`, {
   left: '0',
   right: '0',
   top: '-10px',
   height: '10px',
 });
-globalStyle(`${Positioner}[data-side='left']::before`, {
+globalStyle(`${positioner}[data-side='left']::before`, {
   top: '0',
   bottom: '0',
   right: '-10px',
   width: '10px',
 });
-globalStyle(`${Positioner}[data-side='right']::before`, {
+globalStyle(`${positioner}[data-side='right']::before`, {
   top: '0',
   bottom: '0',
   left: '-10px',
   width: '10px',
 });
-globalStyle(`${Positioner}[data-instant]`, {
+globalStyle(`${positioner}[data-instant]`, {
   transition: 'none',
 });
 
-export const Popup = style({
+export const popup = style({
   position: 'relative',
   boxSizing: 'border-box',
   borderRadius: '0.5rem',
@@ -125,18 +125,18 @@ export const Popup = style({
   width: 'var(--popup-width)',
   height: 'var(--popup-height)',
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
   transitionTimingFunction: 'ease',
   transitionDuration: '0.15s',
 });
 
-export const Content = style({
+export const content = style({
   boxSizing: 'border-box',
   transition:
     'opacity calc(var(--duration) * 0.5) ease,\n    transform var(--duration) var(--easing)',
@@ -150,42 +150,42 @@ export const Content = style({
     },
   },
 });
-globalStyle(`${Content}[data-starting-style]`, {
+globalStyle(`${content}[data-starting-style]`, {
   opacity: '0',
 });
-globalStyle(`${Content}[data-ending-style]`, {
+globalStyle(`${content}[data-ending-style]`, {
   opacity: '0',
 });
 globalStyle(
-  `${Content}[data-starting-style][data-activation-direction='left']`,
+  `${content}[data-starting-style][data-activation-direction='left']`,
   {
     transform: 'translateX(-50%)',
   },
 );
 globalStyle(
-  `${Content}[data-starting-style][data-activation-direction='right']`,
+  `${content}[data-starting-style][data-activation-direction='right']`,
   {
     transform: 'translateX(50%)',
   },
 );
-globalStyle(`${Content}[data-ending-style][data-activation-direction='left']`, {
+globalStyle(`${content}[data-ending-style][data-activation-direction='left']`, {
   transform: 'translateX(50%)',
 });
 globalStyle(
-  `${Content}[data-ending-style][data-activation-direction='right']`,
+  `${content}[data-ending-style][data-activation-direction='right']`,
   {
     transform: 'translateX(-50%)',
   },
 );
 
-export const Viewport = style({
+export const viewport = style({
   position: 'relative',
   overflow: 'hidden',
   width: '100%',
   height: '100%',
 });
 
-export const GridLinkList = style({
+export const gridLinkList = style({
   display: 'grid',
   gridTemplateColumns: '12rem 12rem',
   listStyle: 'none',
@@ -198,7 +198,7 @@ export const GridLinkList = style({
   },
 });
 
-export const FlexLinkList = style({
+export const flexLinkList = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -208,7 +208,7 @@ export const FlexLinkList = style({
   listStyle: 'none',
 });
 
-export const LinkCard = style({
+export const linkCard = style({
   boxSizing: 'border-box',
   display: 'block',
   padding: '0.5rem',
@@ -223,59 +223,59 @@ export const LinkCard = style({
     },
   },
 });
-globalStyle(`${LinkCard}:hover`, {
+globalStyle(`${linkCard}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${LinkCard}:focus-visible`, {
+globalStyle(`${linkCard}:focus-visible`, {
   position: 'relative',
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const LinkTitle = style({
+export const linkTitle = style({
   margin: '0 0 4px',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.25rem',
 });
 
-export const LinkDescription = style({
+export const linkDescription = style({
   margin: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: 'var(--color-gray-500)',
 });
 
-export const Arrow = style({
+export const arrow = style({
   display: 'flex',
   transition: 'left calc(var(--duration)) var(--easing)',
 });
-globalStyle(`${Arrow}[data-side='top']`, {
+globalStyle(`${arrow}[data-side='top']`, {
   bottom: '-8px',
   rotate: '180deg',
 });
-globalStyle(`${Arrow}[data-side='bottom']`, {
+globalStyle(`${arrow}[data-side='bottom']`, {
   top: '-8px',
   rotate: '0deg',
 });
-globalStyle(`${Arrow}[data-side='left']`, {
+globalStyle(`${arrow}[data-side='left']`, {
   right: '-13px',
   rotate: '90deg',
 });
-globalStyle(`${Arrow}[data-side='right']`, {
+globalStyle(`${arrow}[data-side='right']`, {
   left: '-13px',
   rotate: '-90deg',
 });
 
-export const ArrowFill = style({
+export const arrowFill = style({
   fill: 'canvas',
 });
 
-export const ArrowOuterStroke = style({
+export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
       fill: 'var(--color-gray-200)',
@@ -283,7 +283,7 @@ export const ArrowOuterStroke = style({
   },
 });
 
-export const ArrowInnerStroke = style({
+export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
       fill: 'var(--color-gray-300)',
@@ -291,7 +291,7 @@ export const ArrowInnerStroke = style({
   },
 });
 
-globalStyle(`${Popup}`, {
+globalStyle(`${popup}`, {
   '@media': {
     '(prefers-color-scheme: light)': {
       outline: '1px solid var(--color-gray-200)',
@@ -300,7 +300,7 @@ globalStyle(`${Popup}`, {
     },
   },
 });
-globalStyle(`${Popup}`, {
+globalStyle(`${popup}`, {
   '@media': {
     '(prefers-color-scheme: dark)': {
       outline: '1px solid var(--color-gray-300)',
@@ -309,6 +309,6 @@ globalStyle(`${Popup}`, {
   },
 });
 
-export const NavigationMenuRecipe = recipe({
-  base: Root,
+export const navigationMenuRecipe = recipe({
+  base: root,
 });

@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Panel = style({
+export const panel = style({
   display: 'flex',
   gap: '1px',
   border: '1px solid var(--color-gray-200)',
@@ -10,7 +10,7 @@ export const Panel = style({
   padding: '0.125rem',
 });
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -26,31 +26,31 @@ export const Button = style({
   color: 'var(--color-gray-600)',
   userSelect: 'none',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   backgroundColor: 'transparent',
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
-globalStyle(`${Button}:hover`, {
+globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active`, {
+globalStyle(`${button}:active`, {
   backgroundColor: 'var(--color-gray-200)',
 });
-globalStyle(`${Button}[data-pressed]`, {
+globalStyle(`${button}[data-pressed]`, {
   backgroundColor: 'var(--color-gray-100)',
   color: 'var(--color-gray-900)',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '1rem',
   height: '1rem',
 });
 
-export const ToggleGroupRecipe = recipe({
-  base: Panel,
+export const toggleGroupRecipe = recipe({
+  base: panel,
 });

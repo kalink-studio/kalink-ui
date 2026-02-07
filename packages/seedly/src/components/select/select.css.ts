@@ -1,14 +1,14 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Field = style({
+export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
   gap: '0.25rem',
 });
 
-export const Label = style({
+export const label = style({
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
@@ -16,7 +16,7 @@ export const Label = style({
   cursor: 'default',
 });
 
-export const Select = style({
+export const select = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -38,35 +38,35 @@ export const Select = style({
   userSelect: 'none',
   minWidth: '10rem',
 });
-globalStyle(`${Select}:hover`, {
+globalStyle(`${select}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Select}[data-popup-open]`, {
+globalStyle(`${select}[data-popup-open]`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Select}:focus-visible`, {
+globalStyle(`${select}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const SelectIcon = style({
+export const selectIcon = style({
   display: 'flex',
 });
 
-export const Value = style({});
+export const value = style({});
 
-export const Positioner = style({
+export const positioner = style({
   outline: 'none',
   zIndex: '1',
   WebkitUserSelect: 'none',
   userSelect: 'none',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   borderRadius: '0.375rem',
   backgroundColor: 'canvas',
@@ -86,22 +86,22 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-side='none']`, {
+globalStyle(`${popup}[data-side='none']`, {
   transition: 'none',
   transform: 'none',
   opacity: '1',
   minWidth: 'calc(var(--anchor-width) + 1rem)',
 });
 
-export const List = style({
+export const list = style({
   boxSizing: 'border-box',
   position: 'relative',
   paddingBlock: '0.25rem',
@@ -110,31 +110,31 @@ export const List = style({
   scrollPaddingBlock: '1.5rem',
 });
 
-export const Arrow = style({
+export const arrow = style({
   display: 'flex',
 });
-globalStyle(`${Arrow}[data-side='top']`, {
+globalStyle(`${arrow}[data-side='top']`, {
   bottom: '-8px',
   rotate: '180deg',
 });
-globalStyle(`${Arrow}[data-side='bottom']`, {
+globalStyle(`${arrow}[data-side='bottom']`, {
   top: '-8px',
   rotate: '0deg',
 });
-globalStyle(`${Arrow}[data-side='left']`, {
+globalStyle(`${arrow}[data-side='left']`, {
   right: '-13px',
   rotate: '90deg',
 });
-globalStyle(`${Arrow}[data-side='right']`, {
+globalStyle(`${arrow}[data-side='right']`, {
   left: '-13px',
   rotate: '-90deg',
 });
 
-export const ArrowFill = style({
+export const arrowFill = style({
   fill: 'canvas',
 });
 
-export const ArrowOuterStroke = style({
+export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
       fill: 'var(--color-gray-200)',
@@ -142,7 +142,7 @@ export const ArrowOuterStroke = style({
   },
 });
 
-export const ArrowInnerStroke = style({
+export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
       fill: 'var(--color-gray-300)',
@@ -150,7 +150,7 @@ export const ArrowInnerStroke = style({
   },
 });
 
-export const Item = style({
+export const item = style({
   boxSizing: 'border-box',
   outline: '0',
   fontSize: '0.875rem',
@@ -172,16 +172,16 @@ export const Item = style({
     },
   },
 });
-globalStyle(`[data-side='none'] ${Item}`, {
+globalStyle(`[data-side='none'] ${item}`, {
   fontSize: '1rem',
   paddingRight: '3rem',
 });
-globalStyle(`${Item}[data-highlighted]`, {
+globalStyle(`${item}[data-highlighted]`, {
   zIndex: '0',
   position: 'relative',
   color: 'var(--color-gray-50)',
 });
-globalStyle(`${Item}[data-highlighted]::before`, {
+globalStyle(`${item}[data-highlighted]::before`, {
   content: "''",
   zIndex: '-1',
   position: 'absolute',
@@ -191,21 +191,21 @@ globalStyle(`${Item}[data-highlighted]::before`, {
   backgroundColor: 'var(--color-gray-900)',
 });
 
-export const ItemIndicator = style({
+export const itemIndicator = style({
   gridColumnStart: '1',
 });
 
-export const ItemIndicatorIcon = style({
+export const itemIndicatorIcon = style({
   display: 'block',
   width: '0.75rem',
   height: '0.75rem',
 });
 
-export const ItemText = style({
+export const itemText = style({
   gridColumnStart: '2',
 });
 
-export const ScrollArrow = style({
+export const scrollArrow = style({
   width: '100%',
   background: 'canvas',
   zIndex: '1',
@@ -218,27 +218,27 @@ export const ScrollArrow = style({
   alignItems: 'center',
   justifyContent: 'center',
 });
-globalStyle(`${ScrollArrow}::before`, {
+globalStyle(`${scrollArrow}::before`, {
   content: "''",
   position: 'absolute',
   width: '100%',
   height: '100%',
   left: '0',
 });
-globalStyle(`${ScrollArrow}[data-direction='up'][data-side='none']::before`, {
+globalStyle(`${scrollArrow}[data-direction='up'][data-side='none']::before`, {
   top: '-100%',
 });
-globalStyle(`${ScrollArrow}[data-direction='down']`, {
+globalStyle(`${scrollArrow}[data-direction='down']`, {
   bottom: '0',
 });
-globalStyle(`${ScrollArrow}[data-direction='down'][data-side='none']::before`, {
+globalStyle(`${scrollArrow}[data-direction='down'][data-side='none']::before`, {
   bottom: '-100%',
 });
 
-globalStyle(`${Value}[data-placeholder]`, {
+globalStyle(`${value}[data-placeholder]`, {
   opacity: '0.6',
 });
 
-export const SelectRecipe = recipe({
-  base: Field,
+export const selectRecipe = recipe({
+  base: field,
 });

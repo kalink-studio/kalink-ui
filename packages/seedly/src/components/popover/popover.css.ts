@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const IconButton = style({
+export const iconButton = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -17,36 +17,36 @@ export const IconButton = style({
   color: 'var(--color-gray-900)',
   userSelect: 'none',
 });
-globalStyle(`${IconButton}:hover`, {
+globalStyle(`${iconButton}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${IconButton}:active`, {
+globalStyle(`${iconButton}:active`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${IconButton}[data-popup-open]`, {
+globalStyle(`${iconButton}[data-popup-open]`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${IconButton}:focus-visible`, {
+globalStyle(`${iconButton}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '1.25rem',
   height: '1.25rem',
 });
 
-export const Positioner = style({
+export const positioner = style({
   width: 'var(--positioner-width)',
   height: 'var(--positioner-height)',
   maxWidth: 'var(--available-width)',
 });
 
-export const Popup = style({
+export const popup = style({
   boxSizing: 'border-box',
   padding: '1rem 1.5rem',
   borderRadius: '0.5rem',
@@ -69,40 +69,40 @@ export const Popup = style({
     },
   },
 });
-globalStyle(`${Popup}[data-starting-style]`, {
+globalStyle(`${popup}[data-starting-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
-globalStyle(`${Popup}[data-ending-style]`, {
+globalStyle(`${popup}[data-ending-style]`, {
   opacity: '0',
   transform: 'scale(0.9)',
 });
 
-export const Arrow = style({
+export const arrow = style({
   display: 'flex',
 });
-globalStyle(`${Arrow}[data-side='top']`, {
+globalStyle(`${arrow}[data-side='top']`, {
   bottom: '-8px',
   rotate: '180deg',
 });
-globalStyle(`${Arrow}[data-side='bottom']`, {
+globalStyle(`${arrow}[data-side='bottom']`, {
   top: '-8px',
   rotate: '0deg',
 });
-globalStyle(`${Arrow}[data-side='left']`, {
+globalStyle(`${arrow}[data-side='left']`, {
   right: '-13px',
   rotate: '90deg',
 });
-globalStyle(`${Arrow}[data-side='right']`, {
+globalStyle(`${arrow}[data-side='right']`, {
   left: '-13px',
   rotate: '-90deg',
 });
 
-export const ArrowFill = style({
+export const arrowFill = style({
   fill: 'canvas',
 });
 
-export const ArrowOuterStroke = style({
+export const arrowOuterStroke = style({
   '@media': {
     '(prefers-color-scheme: light)': {
       fill: 'var(--color-gray-200)',
@@ -110,7 +110,7 @@ export const ArrowOuterStroke = style({
   },
 });
 
-export const ArrowInnerStroke = style({
+export const arrowInnerStroke = style({
   '@media': {
     '(prefers-color-scheme: dark)': {
       fill: 'var(--color-gray-300)',
@@ -118,28 +118,28 @@ export const ArrowInnerStroke = style({
   },
 });
 
-export const Title = style({
+export const title = style({
   margin: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   fontWeight: '500',
 });
 
-export const Description = style({
+export const description = style({
   margin: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: 'var(--color-gray-600)',
 });
 
-export const Container = style({
+export const container = style({
   display: 'flex',
   gap: '8px',
   flexWrap: 'wrap',
   justifyContent: 'center',
 });
 
-export const Button = style({
+export const button = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -159,21 +159,21 @@ export const Button = style({
   color: 'var(--color-gray-900)',
   userSelect: 'none',
 });
-globalStyle(`${Button}:hover`, {
+globalStyle(`${button}:hover`, {
   '@media': {
     '(hover: hover)': {
       backgroundColor: 'var(--color-gray-100)',
     },
   },
 });
-globalStyle(`${Button}:active`, {
+globalStyle(`${button}:active`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Button}:focus-visible`, {
+globalStyle(`${button}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const PopoverRecipe = recipe({
-  base: IconButton,
+export const popoverRecipe = recipe({
+  base: iconButton,
 });

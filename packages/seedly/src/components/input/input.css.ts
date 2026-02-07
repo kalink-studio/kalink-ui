@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Label = style({
+export const label = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
@@ -12,7 +12,7 @@ export const Label = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Input = style({
+export const input = style({
   boxSizing: 'border-box',
   paddingLeft: '0.875rem',
   margin: '0',
@@ -26,11 +26,11 @@ export const Input = style({
   backgroundColor: 'transparent',
   color: 'var(--color-gray-900)',
 });
-globalStyle(`${Input}:focus`, {
+globalStyle(`${input}:focus`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const InputRecipe = recipe({
-  base: Label,
+export const inputRecipe = recipe({
+  base: label,
 });

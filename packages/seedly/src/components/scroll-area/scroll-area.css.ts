@@ -1,24 +1,24 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const ScrollArea = style({
+export const scrollArea = style({
   boxSizing: 'border-box',
   width: '24rem',
   height: '8.5rem',
   maxWidth: 'calc(100vw - 8rem)',
 });
 
-export const Viewport = style({
+export const viewport = style({
   height: '100%',
   borderRadius: '0.375rem',
   outline: '1px solid var(--color-gray-200)',
   outlineOffset: '-1px',
 });
-globalStyle(`${Viewport}:focus-visible`, {
+globalStyle(`${viewport}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
 });
 
-export const Content = style({
+export const content = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
@@ -27,14 +27,14 @@ export const Content = style({
   paddingRight: '1.5rem',
 });
 
-export const Paragraph = style({
+export const paragraph = style({
   margin: '0',
   fontSize: '0.875rem',
   lineHeight: '1.375rem',
   color: 'var(--color-gray-900)',
 });
 
-export const Scrollbar = style({
+export const scrollbar = style({
   display: 'flex',
   justifyContent: 'center',
   backgroundColor: 'var(--color-gray-200)',
@@ -45,28 +45,28 @@ export const Scrollbar = style({
   transition: 'opacity 150ms',
   pointerEvents: 'none',
 });
-globalStyle(`${Scrollbar}[data-scrolling]`, {
+globalStyle(`${scrollbar}[data-scrolling]`, {
   transitionDuration: '0ms',
   opacity: '1',
   pointerEvents: 'auto',
 });
-globalStyle(`${Scrollbar}[data-hovering]`, {
+globalStyle(`${scrollbar}[data-hovering]`, {
   opacity: '1',
   pointerEvents: 'auto',
 });
-globalStyle(`${Scrollbar}::before`, {
+globalStyle(`${scrollbar}::before`, {
   content: "''",
   position: 'absolute',
   width: '1.25rem',
   height: '100%',
 });
 
-export const Thumb = style({
+export const thumb = style({
   width: '100%',
   borderRadius: 'inherit',
   backgroundColor: 'var(--color-gray-500)',
 });
 
-export const ScrollAreaRecipe = recipe({
-  base: ScrollArea,
+export const scrollAreaRecipe = recipe({
+  base: scrollArea,
 });

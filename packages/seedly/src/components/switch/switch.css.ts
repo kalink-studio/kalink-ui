@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Label = style({
+export const label = style({
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
@@ -10,7 +10,7 @@ export const Label = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Switch = style({
+export const switchRoot = style({
   position: 'relative',
   display: 'flex',
   appearance: 'none',
@@ -44,23 +44,23 @@ export const Switch = style({
     },
   },
 });
-globalStyle(`${Switch}:active`, {
+globalStyle(`${switchRoot}:active`, {
   backgroundColor: 'var(--color-gray-100)',
 });
-globalStyle(`${Switch}[data-checked]`, {
+globalStyle(`${switchRoot}[data-checked]`, {
   backgroundPositionX: '0%',
 });
-globalStyle(`${Switch}[data-checked]:active`, {
+globalStyle(`${switchRoot}[data-checked]:active`, {
   backgroundColor: 'var(--color-gray-500)',
 });
-globalStyle(`${Switch}[data-checked]`, {
+globalStyle(`${switchRoot}[data-checked]`, {
   '@media': {
     '(prefers-color-scheme: dark)': {
       boxShadow: 'none',
     },
   },
 });
-globalStyle(`${Switch}:focus-visible::before`, {
+globalStyle(`${switchRoot}:focus-visible::before`, {
   content: "''",
   inset: '0',
   position: 'absolute',
@@ -69,7 +69,7 @@ globalStyle(`${Switch}:focus-visible::before`, {
   outlineOffset: '2px',
 });
 
-export const Thumb = style({
+export const thumb = style({
   aspectRatio: '1 / 1',
   height: '100%',
   borderRadius: '100%',
@@ -86,10 +86,10 @@ export const Thumb = style({
     },
   },
 });
-globalStyle(`${Thumb}[data-checked]`, {
+globalStyle(`${thumb}[data-checked]`, {
   translate: '1rem 0',
 });
 
-export const SwitchRecipe = recipe({
-  base: Label,
+export const switchRecipe = recipe({
+  base: label,
 });

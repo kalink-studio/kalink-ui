@@ -1,12 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Tabs = style({
+export const tabs = style({
   border: '1px solid var(--color-gray-200)',
   borderRadius: '0.375rem',
 });
 
-export const List = style({
+export const list = style({
   display: 'flex',
   position: 'relative',
   zIndex: '0',
@@ -15,7 +15,7 @@ export const List = style({
   boxShadow: 'inset 0 -1px var(--color-gray-200)',
 });
 
-export const Tab = style({
+export const tab = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -36,20 +36,20 @@ export const Tab = style({
   paddingBlock: '0',
   height: '2rem',
 });
-globalStyle(`${Tab}[data-active]`, {
+globalStyle(`${tab}[data-active]`, {
   color: 'var(--color-gray-900)',
 });
-globalStyle(`${Tab}:hover`, {
+globalStyle(`${tab}:hover`, {
   '@media': {
     '(hover: hover)': {
       color: 'var(--color-gray-900)',
     },
   },
 });
-globalStyle(`${Tab}:focus-visible`, {
+globalStyle(`${tab}:focus-visible`, {
   position: 'relative',
 });
-globalStyle(`${Tab}:focus-visible::before`, {
+globalStyle(`${tab}:focus-visible::before`, {
   content: "''",
   position: 'absolute',
   inset: '0.25rem 0',
@@ -58,7 +58,7 @@ globalStyle(`${Tab}:focus-visible::before`, {
   outlineOffset: '-1px',
 });
 
-export const Indicator = style({
+export const indicator = style({
   position: 'absolute',
   zIndex: '-1',
   left: '0',
@@ -73,7 +73,7 @@ export const Indicator = style({
   transitionTimingFunction: 'ease-in-out',
 });
 
-export const Panel = style({
+export const panel = style({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -81,21 +81,21 @@ export const Panel = style({
   height: '8rem',
   outline: '0',
 });
-globalStyle(`${Panel}:focus-visible`, {
+globalStyle(`${panel}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
   borderRadius: '0.375rem',
 });
-globalStyle(`${Panel}[hidden]`, {
+globalStyle(`${panel}[hidden]`, {
   display: 'none',
 });
 
-export const Icon = style({
+export const icon = style({
   width: '2.5rem',
   height: '2.5rem',
   color: 'var(--color-gray-300)',
 });
 
-export const TabsRecipe = recipe({
-  base: Tabs,
+export const tabsRecipe = recipe({
+  base: tabs,
 });

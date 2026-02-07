@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const RadioGroup = style({
+export const radioGroup = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
@@ -9,17 +9,17 @@ export const RadioGroup = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Caption = style({
+export const caption = style({
   fontWeight: '500',
 });
 
-export const Item = style({
+export const item = style({
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
 });
 
-export const Radio = style({
+export const radio = style({
   boxSizing: 'border-box',
   display: 'flex',
   width: '1.25rem',
@@ -32,27 +32,27 @@ export const Radio = style({
   margin: '0',
   border: 'none',
 });
-globalStyle(`${Radio}[data-unchecked]`, {
+globalStyle(`${radio}[data-unchecked]`, {
   border: '1px solid var(--color-gray-300)',
   backgroundColor: 'transparent',
 });
-globalStyle(`${Radio}[data-checked]`, {
+globalStyle(`${radio}[data-checked]`, {
   backgroundColor: 'var(--color-gray-900)',
 });
-globalStyle(`${Radio}:focus-visible`, {
+globalStyle(`${radio}:focus-visible`, {
   outline: '2px solid var(--color-blue)',
   outlineOffset: '2px',
 });
 
-export const Indicator = style({
+export const indicator = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 });
-globalStyle(`${Indicator}[data-unchecked]`, {
+globalStyle(`${indicator}[data-unchecked]`, {
   display: 'none',
 });
-globalStyle(`${Indicator}::before`, {
+globalStyle(`${indicator}::before`, {
   content: "''",
   borderRadius: '100%',
   width: '0.5rem',
@@ -60,6 +60,6 @@ globalStyle(`${Indicator}::before`, {
   backgroundColor: 'var(--color-gray-50)',
 });
 
-export const RadioRecipe = recipe({
-  base: RadioGroup,
+export const radioRecipe = recipe({
+  base: radioGroup,
 });

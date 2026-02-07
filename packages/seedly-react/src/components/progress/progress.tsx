@@ -17,11 +17,11 @@ export default function ExampleProgress() {
   }, []);
 
   return (
-    <Progress.Root className={styles.Progress} value={value}>
-      <Progress.Label className={styles.Label}>Export data</Progress.Label>
-      <Progress.Value className={styles.Value} />
-      <Progress.Track className={styles.Track}>
-        <Progress.Indicator className={styles.Indicator} />
+    <Progress.Root className={styles.progress} value={value}>
+      <Progress.Label className={styles.label}>Export data</Progress.Label>
+      <Progress.Value className={styles.value} />
+      <Progress.Track className={styles.track}>
+        <Progress.Indicator className={styles.indicator} />
       </Progress.Track>
     </Progress.Root>
   );

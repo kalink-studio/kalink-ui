@@ -3,26 +3,26 @@ import * as styles from '@kalink-ui/seedly/components/separator';
 
 export default function ExampleSeparator() {
   return (
-    <div className={styles.Container}>
-      <a href="#" className={styles.Link}>
+    <div className={styles.container}>
+      <a href="#" className={styles.link}>
         Home
       </a>
-      <a href="#" className={styles.Link}>
+      <a href="#" className={styles.link}>
         Pricing
       </a>
-      <a href="#" className={styles.Link}>
+      <a href="#" className={styles.link}>
         Blog
       </a>
-      <a href="#" className={styles.Link}>
+      <a href="#" className={styles.link}>
         Support
       </a>
 
-      <Separator orientation="vertical" className={styles.Separator} />
+      <Separator orientation="vertical" className={styles.separator} />
 
-      <a href="#" className={styles.Link}>
+      <a href="#" className={styles.link}>
         Log in
       </a>
-      <a href="#" className={styles.Link}>
+      <a href="#" className={styles.link}>
         Sign up
       </a>
     </div>

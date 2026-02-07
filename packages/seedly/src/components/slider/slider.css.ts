@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Control = style({
+export const control = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
@@ -11,7 +11,7 @@ export const Control = style({
   userSelect: 'none',
 });
 
-export const Track = style({
+export const track = style({
   width: '100%',
   height: '0.25rem',
   backgroundColor: 'var(--color-gray-200)',
@@ -20,13 +20,13 @@ export const Track = style({
   userSelect: 'none',
 });
 
-export const Indicator = style({
+export const indicator = style({
   borderRadius: '0.25rem',
   backgroundColor: 'var(--color-gray-700)',
   userSelect: 'none',
 });
 
-export const Thumb = style({
+export const thumb = style({
   width: '1rem',
   height: '1rem',
   borderRadius: '100%',
@@ -34,10 +34,10 @@ export const Thumb = style({
   outline: '1px solid var(--color-gray-300)',
   userSelect: 'none',
 });
-globalStyle(`${Thumb}:has(:focus-visible)`, {
+globalStyle(`${thumb}:has(:focus-visible)`, {
   outline: '2px solid var(--color-blue)',
 });
 
-export const SliderRecipe = recipe({
-  base: Control,
+export const sliderRecipe = recipe({
+  base: control,
 });

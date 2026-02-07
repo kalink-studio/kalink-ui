@@ -5,25 +5,25 @@ import * as styles from '@kalink-ui/seedly/components/autocomplete';
 export default function ExampleAutocomplete() {
   return (
     <Autocomplete.Root items={tags}>
-      <label className={styles.Label}>
+      <label className={styles.label}>
         Search tags
         <Autocomplete.Input
           placeholder="e.g. feature"
-          className={styles.Input}
+          className={styles.input}
         />
       </label>
 
       <Autocomplete.Portal>
-        <Autocomplete.Positioner className={styles.Positioner} sideOffset={4}>
-          <Autocomplete.Popup className={styles.Popup}>
-            <Autocomplete.Empty className={styles.Empty}>
+        <Autocomplete.Positioner className={styles.positioner} sideOffset={4}>
+          <Autocomplete.Popup className={styles.popup}>
+            <Autocomplete.Empty className={styles.empty}>
               No tags found.
             </Autocomplete.Empty>
-            <Autocomplete.List className={styles.List}>
+            <Autocomplete.List className={styles.list}>
               {(tag: Tag) => (
                 <Autocomplete.Item
                   key={tag.id}
-                  className={styles.Item}
+                  className={styles.item}
                   value={tag}
                 >
                   {tag.value}

@@ -1,24 +1,24 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-export const Field = style({
+export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
   gap: '0.25rem',
 });
 
-export const ScrubArea = style({
+export const scrubArea = style({
   cursor: 'ew-resize',
   fontWeight: 'bold',
   userSelect: 'none',
 });
 
-export const ScrubAreaCursor = style({
+export const scrubAreaCursor = style({
   filter: 'drop-shadow(0 1px 1px #0008)',
 });
 
-export const Label = style({
+export const label = style({
   cursor: 'ew-resize',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
@@ -26,11 +26,11 @@ export const Label = style({
   color: 'var(--color-gray-900)',
 });
 
-export const Group = style({
+export const group = style({
   display: 'flex',
 });
 
-export const Input = style({
+export const input = style({
   boxSizing: 'border-box',
   margin: '0',
   padding: '0',
@@ -49,25 +49,25 @@ export const Input = style({
   textAlign: 'center',
   fontVariantNumeric: 'tabular-nums',
 });
-globalStyle(`${Input}:focus`, {
+globalStyle(`${input}:focus`, {
   zIndex: '1',
   outline: '2px solid var(--color-blue)',
   outlineOffset: '-1px',
 });
 
-export const Decrement = style({
+export const decrement = style({
   borderTopRightRadius: '0',
   borderBottomRightRadius: '0',
 });
 
-export const Increment = style({
+export const increment = style({
   borderTopLeftRadius: '0',
   borderBottomLeftRadius: '0',
 });
 
 globalStyle(
-  `${Decrement},
-${Increment}`,
+  `${decrement},
+${increment}`,
   {
     boxSizing: 'border-box',
     display: 'flex',
@@ -87,8 +87,8 @@ ${Increment}`,
   },
 );
 globalStyle(
-  `${Decrement},
-${Increment}:hover`,
+  `${decrement},
+${increment}:hover`,
   {
     '@media': {
       '(hover: hover)': {
@@ -98,13 +98,13 @@ ${Increment}:hover`,
   },
 );
 globalStyle(
-  `${Decrement},
-${Increment}:active`,
+  `${decrement},
+${increment}:active`,
   {
     backgroundColor: 'var(--color-gray-100)',
   },
 );
 
-export const NumberFieldRecipe = recipe({
-  base: Field,
+export const numberFieldRecipe = recipe({
+  base: field,
 });

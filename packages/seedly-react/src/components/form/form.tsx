@@ -11,7 +11,7 @@ export default function ExampleForm() {
 
   return (
     <Form
-      className={styles.Form}
+      className={styles.form}
       errors={errors}
       onSubmit={async (event) => {
         event.preventDefault();
@@ -28,23 +28,23 @@ export default function ExampleForm() {
         setLoading(false);
       }}
     >
-      <Field.Root name="url" className={styles.Field}>
-        <Field.Label className={styles.Label}>Homepage</Field.Label>
+      <Field.Root name="url" className={styles.field}>
+        <Field.Label className={styles.label}>Homepage</Field.Label>
         <Field.Control
           type="url"
           required
           defaultValue="https://example.com"
           placeholder="https://example.com"
           pattern="https?://.*"
-          className={styles.Input}
+          className={styles.input}
         />
-        <Field.Error className={styles.Error} />
+        <Field.Error className={styles.error} />
       </Field.Root>
       <Button
         type="submit"
         disabled={loading}
         focusableWhenDisabled
-        className={styles.Button}
+        className={styles.button}
       >
         Submit
       </Button>
