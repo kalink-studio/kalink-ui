@@ -1,12 +1,6 @@
 {
   "extends": "@kalink-ui/typescript-config/lib-react.json",
-  "include": [
-    "src",
-    ".storybook/**/*",
-    "eslint.config.mts",
-    "vite.config.mts",
-    "vitest.shims.d.ts"
-  ],
+  "include": ["src", "eslint.config.mts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "noEmit": false,

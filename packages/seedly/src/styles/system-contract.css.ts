@@ -1,5 +1,5 @@
 import { createThemeContract } from '@vanilla-extract/css';
-import { ArrayValues } from 'type-fest';
+import { type ArrayValues } from 'type-fest';
 
 export const typeContract = {
   font: null,
@@ -135,8 +135,8 @@ export const sys = createThemeContract({
     (acc, variant) => ({
       ...acc,
       [variant]: typographySizes.reduce(
-        (acc, size) => ({
-          ...acc,
+        (sizeAcc, size) => ({
+          ...sizeAcc,
           [size]: typeContract,
         }),
         {} as Record<TypographySize, typeof typeContract>,
@@ -176,7 +176,10 @@ export type TypographyVariant = ArrayValues<typeof typographyVariants>;
 export type TypographySize = ArrayValues<typeof typographySizes>;
 
 export type Duration = {
-  [K in keyof typeof sys.motion.duration]: `${K}.${Extract<keyof (typeof sys.motion.duration)[K], string | number>}`;
+  [K in keyof typeof sys.motion.duration]: `${K}.${Extract<
+    keyof (typeof sys.motion.duration)[K],
+    string | number
+  >}`;
 }[keyof typeof sys.motion.duration];
 
 export type Easing = {

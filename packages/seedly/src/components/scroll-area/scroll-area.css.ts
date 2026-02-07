@@ -1,119 +1,72 @@
-import {
-  assignVars,
-  createThemeContract,
-  createVar,
-  style,
-} from '@vanilla-extract/css';
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
+import { globalStyle, style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
-import { createToneStyles, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
-
-export const viewportMaxHeight = createVar();
-
-const scrollAreaToneVars = createThemeContract({
-  base: null,
-  onBase: null,
+export const ScrollArea = style({
+  boxSizing: 'border-box',
+  width: '24rem',
+  height: '8.5rem',
+  maxWidth: 'calc(100vw - 8rem)',
 });
 
-const scrollAreaToneDefaults = assignVars(scrollAreaToneVars, {
-  base: sys.color.content.base,
-  onBase: sys.color.content.base,
+export const Viewport = style({
+  height: '100%',
+  borderRadius: '0.375rem',
+  outline: '1px solid var(--color-gray-200)',
+  outlineOffset: '-1px',
 });
-const scrollAreaToneStyles = createToneStyles(scrollAreaToneVars);
-
-export const scrollArea = style({
-  '@layer': {
-    [components]: {
-      overflow: 'hidden',
-      height: '100%',
-
-      position: 'relative',
-    },
-  },
+globalStyle(`${Viewport}:focus-visible`, {
+  outline: '2px solid var(--color-blue)',
 });
 
-export const scrollAreaViewport = style({
-  '@layer': {
-    [components]: {
-      height: '100%',
-      maxHeight: viewportMaxHeight,
-      width: '100%',
-
-      borderRadius: 'inherit',
-
-      vars: {
-        [viewportMaxHeight]: 'initial',
-      },
-    },
-  },
+export const Content = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  paddingBlock: '0.75rem',
+  paddingLeft: '1rem',
+  paddingRight: '1.5rem',
 });
 
-export const scrollAreaScrollbarRecipe = recipe({
-  base: {
-    '@layer': {
-      [components]: {
-        display: 'flex',
-
-        padding: 1,
-
-        transition: transition(['color', 'background-color', 'border-color'], {
-          duration: 'medium.2',
-        }),
-        userSelect: 'none',
-
-        vars: {
-          ...scrollAreaToneDefaults,
-        },
-      },
-    },
-  },
-
-  variants: {
-    orientation: {
-      vertical: {
-        '@layer': {
-          [components]: {
-            height: '100%',
-            width: 10,
-
-            borderInlineStartWidth: 1,
-            borderInlineStartColor: 'transparent',
-          },
-        },
-      },
-
-      horizontal: {
-        '@layer': {
-          [components]: {
-            height: 10,
-            width: '100%',
-
-            borderBlockStartWidth: 1,
-            borderBlockStartColor: 'transparent',
-          },
-        },
-      },
-    },
-
-    tone: scrollAreaToneStyles,
-  },
+export const Paragraph = style({
+  margin: '0',
+  fontSize: '0.875rem',
+  lineHeight: '1.375rem',
+  color: 'var(--color-gray-900)',
 });
 
-export const scrollAreaThumb = style({
-  '@layer': {
-    [components]: {
-      flexGrow: 1,
-
-      position: 'relative',
-
-      borderRadius: sys.shape.corner.small,
-
-      backgroundColor: scrollAreaToneVars.base,
-    },
-  },
+export const Scrollbar = style({
+  display: 'flex',
+  justifyContent: 'center',
+  backgroundColor: 'var(--color-gray-200)',
+  width: '0.25rem',
+  borderRadius: '0.375rem',
+  margin: '0.5rem',
+  opacity: '0',
+  transition: 'opacity 150ms',
+  pointerEvents: 'none',
+});
+globalStyle(`${Scrollbar}[data-scrolling]`, {
+  transitionDuration: '0ms',
+  opacity: '1',
+  pointerEvents: 'auto',
+});
+globalStyle(`${Scrollbar}[data-hovering]`, {
+  opacity: '1',
+  pointerEvents: 'auto',
+});
+globalStyle(`${Scrollbar}::before`, {
+  content: "''",
+  position: 'absolute',
+  width: '1.25rem',
+  height: '100%',
 });
 
-export type ScrollAreaScrollbarVariants = NonNullable<
-  RecipeVariants<typeof scrollAreaScrollbarRecipe>
->;
+export const Thumb = style({
+  width: '100%',
+  borderRadius: 'inherit',
+  backgroundColor: 'var(--color-gray-500)',
+});
+
+export const ScrollAreaRecipe = recipe({
+  base: ScrollArea,
+});
