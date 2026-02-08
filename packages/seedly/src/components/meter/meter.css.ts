@@ -15,8 +15,8 @@ export const meter = style({
   boxSizing: 'border-box',
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
-  gridRowGap: '0.5rem',
-  width: '12rem',
+  rowGap: sys.spacing[4],
+  inlineSize: '12rem',
   vars: assignVars(meterVars.color, {
     foreground: sys.color.content.base,
     track: sys.color.container.low,
@@ -33,7 +33,8 @@ export const label = style({
 
 export const value = style({
   gridColumnStart: '2',
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: meterVars.color.foreground,
@@ -45,7 +46,7 @@ export const track = style({
   overflow: 'hidden',
   backgroundColor: meterVars.color.track,
   boxShadow: `inset 0 0 0 1px ${sys.color.container.high}`,
-  height: '0.5rem',
+  blockSize: sys.spacing[4],
 });
 
 export const indicator = style({

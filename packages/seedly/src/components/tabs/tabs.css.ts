@@ -47,8 +47,8 @@ export const list = style({
   display: 'flex',
   position: 'relative',
   zIndex: '0',
-  paddingInline: '0.25rem',
-  gap: '0.25rem',
+  paddingInline: sys.spacing[2],
+  gap: sys.spacing[2],
   boxShadow: `inset 0 -1px ${tabsVars.color.border}`,
 });
 
@@ -57,7 +57,8 @@ export const tab = style({
   alignItems: 'center',
   justifyContent: 'center',
   border: '0',
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   background: 'none',
   appearance: 'none',
@@ -69,9 +70,9 @@ export const tab = style({
   userSelect: 'none',
   whiteSpace: 'nowrap',
   wordBreak: 'keep-all',
-  paddingInline: '0.5rem',
+  paddingInline: sys.spacing[4],
   paddingBlock: '0',
-  height: '2rem',
+  blockSize: sys.spacing[12],
 
   selectors: {
     [`&[data-active]`]: {
@@ -90,7 +91,8 @@ export const tab = style({
     [`&:focus-visible::before`]: {
       content: "''",
       position: 'absolute',
-      inset: '0.25rem 0',
+      insetBlock: sys.spacing[2],
+      insetInline: '0',
       borderRadius: tabsVars.shape.indicatorCorner,
       outline: `2px solid ${tabsVars.color.focusRing}`,
       outlineOffset: '-1px',
@@ -101,14 +103,14 @@ export const tab = style({
 export const indicator = style({
   position: 'absolute',
   zIndex: '-1',
-  left: '0',
-  top: '50%',
+  insetInlineStart: '0',
+  insetBlockStart: '50%',
   translate: 'var(--active-tab-left) -50%',
-  width: 'var(--active-tab-width)',
-  height: '1.5rem',
+  inlineSize: 'var(--active-tab-width)',
+  blockSize: sys.spacing[10],
   borderRadius: tabsVars.shape.indicatorCorner,
   backgroundColor: tabsVars.color.indicatorBackground,
-  transitionProperty: 'translate, width',
+  transitionProperty: 'translate, inline-size',
   transitionDuration: '200ms',
   transitionTimingFunction: 'ease-in-out',
 });
@@ -118,7 +120,7 @@ export const panel = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '8rem',
+  blockSize: '8rem',
   outline: '0',
 
   selectors: {
@@ -134,8 +136,8 @@ export const panel = style({
 });
 
 export const icon = style({
-  width: '2.5rem',
-  height: '2.5rem',
+  inlineSize: sys.spacing[14],
+  blockSize: sys.spacing[14],
   color: tabsVars.color.icon,
 });
 

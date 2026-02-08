@@ -21,13 +21,15 @@ export const fieldsetVars = createThemeContract({
 
 export const fieldset = style({
   border: '0',
-  margin: '0',
-  padding: '0',
+  marginBlock: '0',
+  marginInline: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
-  width: '100%',
-  maxWidth: '16rem',
+  gap: sys.spacing[8],
+  inlineSize: '100%',
+  maxInlineSize: '16rem',
   vars: {
     ...assignVars(fieldsetVars.color, {
       legendBorder: sys.color.container.high,
@@ -46,8 +48,8 @@ export const fieldset = style({
 });
 
 export const legend = style({
-  borderBottom: `1px solid ${fieldsetVars.color.legendBorder}`,
-  paddingBottom: '0.75rem',
+  borderBlockEnd: `1px solid ${fieldsetVars.color.legendBorder}`,
+  paddingBlockEnd: sys.spacing[6],
   fontWeight: '500',
   fontSize: '1.125rem',
   lineHeight: '1.75rem',
@@ -59,7 +61,7 @@ export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
 });
 
 export const label = style({
@@ -71,11 +73,12 @@ export const label = style({
 
 export const input = style({
   boxSizing: 'border-box',
-  paddingLeft: '0.875rem',
-  margin: '0',
+  paddingInlineStart: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   border: `1px solid ${fieldsetVars.color.border}`,
-  width: '100%',
-  height: '2.5rem',
+  inlineSize: '100%',
+  blockSize: sys.spacing[14],
   borderRadius: fieldsetVars.shape.corner,
   fontFamily: 'inherit',
   fontSize: '1rem',
@@ -97,7 +100,8 @@ export const error = style({
 });
 
 export const description = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: fieldsetVars.color.description,

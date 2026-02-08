@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -10,13 +11,14 @@ export const toolbar = style({
   border: `1px solid ${sys.color.container.high}`,
   backgroundColor: sys.color.container.base,
   borderRadius: '0.375rem',
-  padding: '0.125rem',
-  width: '37.5rem',
+  paddingBlock: sys.spacing[1],
+  paddingInline: sys.spacing[1],
+  inlineSize: '37.5rem',
 });
 
 export const group = style({
   display: 'flex',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
 });
 
 export const button = style({
@@ -24,10 +26,12 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  minWidth: '2rem',
-  height: '2rem',
-  padding: '0',
-  margin: '0',
+  minInlineSize: sys.spacing[12],
+  blockSize: sys.spacing[12],
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: '0',
   borderRadius: '0.25rem',
@@ -59,20 +63,23 @@ export const button = style({
       color: sys.color.content.base,
     },
     [`&[aria-pressed]`]: {
-      padding: '0 0.75rem',
+      paddingBlock: '0',
+      paddingInline: sys.spacing[6],
     },
     [`&[role='combobox']`]: {
-      minWidth: '8rem',
+      minInlineSize: '8rem',
       justifyContent: 'space-between',
-      padding: '0 0.75rem',
+      paddingBlock: '0',
+      paddingInline: sys.spacing[6],
     },
   },
 });
 
 export const separator = style({
-  width: '1px',
-  height: '16px',
-  margin: '0.25rem',
+  inlineSize: '1px',
+  blockSize: sys.spacing[8],
+  marginBlock: sys.spacing[2],
+  marginInline: sys.spacing[2],
   backgroundColor: sys.color.container.top,
 });
 
@@ -83,7 +90,7 @@ export const link = style({
   textDecoration: 'none',
   alignSelf: 'center',
   flex: '0 0 auto',
-  marginInline: 'auto 0.875rem',
+  marginInline: `auto ${sys.spacing[7]}`,
 
   selectors: {
     [`&:focus-visible`]: {
@@ -106,11 +113,12 @@ export const select = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '0.75rem',
-  height: '2.5rem',
-  paddingLeft: '0.875rem',
-  paddingRight: '0.75rem',
-  margin: '0',
+  gap: sys.spacing[6],
+  blockSize: sys.spacing[14],
+  paddingInlineStart: sys.spacing[7],
+  paddingInlineEnd: sys.spacing[6],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',
@@ -121,7 +129,7 @@ export const select = style({
   cursor: 'default',
   WebkitUserSelect: 'none',
   userSelect: 'none',
-  minWidth: '9rem',
+  minInlineSize: '9rem',
 
   selectors: {
     [`&:hover`]: {
@@ -154,14 +162,14 @@ export const positioner = style({
 
 export const popup = style({
   boxSizing: 'border-box',
-  paddingBlock: '0.25rem',
+  paddingBlock: sys.spacing[2],
   borderRadius: '0.375rem',
   backgroundColor: sys.color.surface.base,
   color: sys.color.content.base,
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   overflowY: 'auto',
-  maxHeight: 'var(--available-height)',
+  maxBlockSize: 'var(--available-height)',
   '@media': {
     '(prefers-color-scheme: light)': {
       outline: `1px solid ${sys.color.container.high}`,
@@ -195,19 +203,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },
@@ -237,29 +245,29 @@ export const item = style({
   boxSizing: 'border-box',
   outline: '0',
   lineHeight: '1rem',
-  paddingBlock: '0.5rem',
-  paddingLeft: '0.625rem',
-  paddingRight: '1rem',
-  minWidth: 'var(--anchor-width)',
+  paddingBlock: sys.spacing[4],
+  paddingInlineStart: sys.spacing[5],
+  paddingInlineEnd: sys.spacing[8],
+  minInlineSize: 'var(--anchor-width)',
   display: 'grid',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
   alignItems: 'center',
-  gridTemplateColumns: '0.75rem 1fr',
+  gridTemplateColumns: `${sys.spacing[6]} 1fr`,
   cursor: 'default',
   WebkitUserSelect: 'none',
   userSelect: 'none',
-  scrollMarginBlock: '1rem',
+  scrollMarginBlock: sys.spacing[8],
   fontSize: '0.875rem',
   '@media': {
     '(pointer: coarse)': {
-      paddingBlock: '0.625rem',
+      paddingBlock: sys.spacing[5],
     },
   },
 
   selectors: {
     [`[data-side='none'] &`]: {
-      paddingRight: '3rem',
-      minWidth: 'calc(var(--anchor-width) + 1rem)',
+      paddingInlineEnd: sys.spacing[15],
+      minInlineSize: calc.add('var(--anchor-width)', sys.spacing[8]),
     },
     [`&[data-highlighted]`]: {
       zIndex: '0',
@@ -271,7 +279,7 @@ export const item = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.25rem',
+      insetInline: sys.spacing[2],
       borderRadius: '0.25rem',
       backgroundColor: sys.color.content.base,
     },
@@ -284,8 +292,8 @@ export const itemIndicator = style({
 
 export const itemIndicatorIcon = style({
   display: 'block',
-  width: '0.75rem',
-  height: '0.75rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
 });
 
 export const itemText = style({

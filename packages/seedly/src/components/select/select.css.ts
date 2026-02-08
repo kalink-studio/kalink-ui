@@ -1,4 +1,5 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -56,7 +57,7 @@ export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
   vars: {
     ...selectColorDefaults,
     ...selectShapeDefaults,
@@ -76,11 +77,12 @@ export const select = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '0.75rem',
-  height: '2.5rem',
-  paddingLeft: '0.875rem',
-  paddingRight: '0.75rem',
-  margin: '0',
+  gap: sys.spacing[6],
+  blockSize: sys.spacing[14],
+  paddingInlineStart: sys.spacing[7],
+  paddingInlineEnd: sys.spacing[6],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${selectVars.color.triggerBorder}`,
   borderRadius: selectVars.shape.triggerCorner,
@@ -91,7 +93,7 @@ export const select = style({
   color: selectVars.color.foreground,
   WebkitUserSelect: 'none',
   userSelect: 'none',
-  minWidth: '10rem',
+  minInlineSize: '10rem',
 
   selectors: {
     [`&:hover`]: {
@@ -140,7 +142,7 @@ export const popup = style({
   backgroundColor: selectVars.color.popupBackground,
   backgroundClip: 'padding-box',
   color: selectVars.color.foreground,
-  minWidth: 'var(--anchor-width)',
+  minInlineSize: 'var(--anchor-width)',
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
   '@media': {
@@ -166,7 +168,7 @@ export const popup = style({
       transition: 'none',
       transform: 'none',
       opacity: '1',
-      minWidth: 'calc(var(--anchor-width) + 1rem)',
+      minInlineSize: calc.add('var(--anchor-width)', sys.spacing[8]),
     },
   },
 });
@@ -174,10 +176,10 @@ export const popup = style({
 export const list = style({
   boxSizing: 'border-box',
   position: 'relative',
-  paddingBlock: '0.25rem',
+  paddingBlock: sys.spacing[2],
   overflowY: 'auto',
-  maxHeight: 'var(--available-height)',
-  scrollPaddingBlock: '1.5rem',
+  maxBlockSize: 'var(--available-height)',
+  scrollPaddingBlock: sys.spacing[10],
 });
 
 export const arrow = style({
@@ -185,19 +187,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },
@@ -228,19 +230,19 @@ export const item = style({
   outline: '0',
   fontSize: '0.875rem',
   lineHeight: '1rem',
-  paddingBlock: '0.5rem',
-  paddingLeft: '0.625rem',
-  paddingRight: '1rem',
+  paddingBlock: sys.spacing[4],
+  paddingInlineStart: sys.spacing[5],
+  paddingInlineEnd: sys.spacing[8],
   display: 'grid',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
   alignItems: 'center',
-  gridTemplateColumns: '0.75rem 1fr',
+  gridTemplateColumns: `${sys.spacing[6]} 1fr`,
   cursor: 'default',
   WebkitUserSelect: 'none',
   userSelect: 'none',
   '@media': {
     '(pointer: coarse)': {
-      paddingBlock: '0.625rem',
+      paddingBlock: sys.spacing[5],
       fontSize: '0.925rem',
     },
   },
@@ -248,7 +250,7 @@ export const item = style({
   selectors: {
     [`[data-side='none'] &`]: {
       fontSize: '1rem',
-      paddingRight: '3rem',
+      paddingInlineEnd: sys.spacing[15],
     },
     [`&[data-highlighted]`]: {
       zIndex: '0',
@@ -260,7 +262,7 @@ export const item = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.25rem',
+      insetInline: sys.spacing[2],
       borderRadius: selectVars.shape.itemCorner,
       backgroundColor: selectVars.color.itemHighlightedBackground,
     },
@@ -273,8 +275,8 @@ export const itemIndicator = style({
 
 export const itemIndicatorIcon = style({
   display: 'block',
-  width: '0.75rem',
-  height: '0.75rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
 });
 
 export const itemText = style({
@@ -282,13 +284,13 @@ export const itemText = style({
 });
 
 export const scrollArrow = style({
-  width: '100%',
+  inlineSize: '100%',
   background: selectVars.color.scrollArrowBackground,
   zIndex: '1',
   textAlign: 'center',
   cursor: 'default',
   borderRadius: selectVars.shape.scrollArrowCorner,
-  height: '1rem',
+  blockSize: sys.spacing[8],
   fontSize: '0.75rem',
   display: 'flex',
   alignItems: 'center',
@@ -298,18 +300,18 @@ export const scrollArrow = style({
     [`&::before`]: {
       content: "''",
       position: 'absolute',
-      width: '100%',
-      height: '100%',
-      left: '0',
+      inlineSize: '100%',
+      blockSize: '100%',
+      insetInlineStart: '0',
     },
     [`&[data-direction='up'][data-side='none']::before`]: {
-      top: '-100%',
+      insetBlockStart: '-100%',
     },
     [`&[data-direction='down']`]: {
-      bottom: '0',
+      insetBlockEnd: '0',
     },
     [`&[data-direction='down'][data-side='none']::before`]: {
-      bottom: '-100%',
+      insetBlockEnd: '-100%',
     },
   },
 });

@@ -26,8 +26,8 @@ export const root = style({
   fontSize: '1rem',
   lineHeight: '1',
   overflow: 'hidden',
-  height: '3rem',
-  width: '3rem',
+  blockSize: sys.spacing[15],
+  inlineSize: sys.spacing[15],
   vars: {
     ...assignVars(avatarVars.color, {
       foreground: sys.color.content.base,
@@ -41,16 +41,16 @@ export const root = style({
 
 export const image = style({
   objectFit: 'cover',
-  height: '100%',
-  width: '100%',
+  blockSize: '100%',
+  inlineSize: '100%',
 });
 
 export const fallback = style({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
-  height: '100%',
-  width: '100%',
+  blockSize: '100%',
+  inlineSize: '100%',
   fontSize: '1rem',
 });
 

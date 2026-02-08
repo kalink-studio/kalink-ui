@@ -8,20 +8,23 @@ export const menubar = style({
   backgroundColor: sys.color.container.base,
   border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',
-  padding: '0.125rem',
+  paddingBlock: sys.spacing[1],
+  paddingInline: sys.spacing[1],
 });
 
 export const menuTrigger = style({
   boxSizing: 'border-box',
   background: 'none',
-  padding: '0 0.75rem',
-  margin: '0',
+  paddingBlock: '0',
+  paddingInline: sys.spacing[6],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: '0',
   color: stateColor.mutedContent,
   borderRadius: '0.25rem',
   userSelect: 'none',
-  height: '2rem',
+  blockSize: sys.spacing[12],
   fontFamily: 'inherit',
   fontSize: '0.875rem',
   fontWeight: '500',
@@ -47,7 +50,7 @@ export const menuPositioner = style({
 
 export const menuPopup = style({
   boxSizing: 'border-box',
-  paddingBlock: '0.25rem',
+  paddingBlock: sys.spacing[2],
   borderRadius: '0.375rem',
   backgroundColor: sys.color.surface.base,
   color: sys.color.content.base,
@@ -78,13 +81,14 @@ export const menuItem = style({
   outline: '0',
   cursor: 'default',
   userSelect: 'none',
-  padding: '0.5rem 1rem',
+  paddingBlock: sys.spacing[4],
+  paddingInline: sys.spacing[8],
   display: 'flex',
   fontSize: '0.875rem',
   lineHeight: '1rem',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '1rem',
+  gap: sys.spacing[8],
 
   selectors: {
     [`&[data-popup-open]`]: {
@@ -96,7 +100,7 @@ export const menuItem = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.25rem',
+      insetInline: sys.spacing[2],
       borderRadius: '0.25rem',
       backgroundColor: sys.color.container.low,
     },
@@ -110,7 +114,7 @@ export const menuItem = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.25rem',
+      insetInline: sys.spacing[2],
       borderRadius: '0.25rem',
       backgroundColor: sys.color.content.base,
     },
@@ -118,8 +122,9 @@ export const menuItem = style({
 });
 
 export const menuSeparator = style({
-  margin: '0.375rem 1rem',
-  height: '1px',
+  marginBlock: sys.spacing[3],
+  marginInline: sys.spacing[8],
+  blockSize: '1px',
   backgroundColor: sys.color.container.high,
 });
 

@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -6,17 +7,20 @@ import { stateColor, sys } from '../../styles';
 export const root = style({
   backgroundColor: sys.color.container.base,
   borderRadius: '0.5rem',
-  padding: '0.25rem',
+  paddingBlock: sys.spacing[2],
+  paddingInline: sys.spacing[2],
   color: sys.color.content.base,
-  minWidth: 'max-content',
+  minInlineSize: 'max-content',
 });
 
 export const list = style({
   display: 'flex',
   position: 'relative',
   listStyle: 'none',
-  padding: '0',
-  margin: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
 });
 
 export const trigger = style({
@@ -24,10 +28,12 @@ export const trigger = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '0.375rem',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  gap: sys.spacing[3],
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: 'none',
   borderRadius: '0.375rem',
@@ -42,7 +48,8 @@ export const trigger = style({
   '@media': {
     '(max-width: 500px)': {
       fontSize: '0.925rem',
-      padding: '0 0.5rem',
+      paddingBlock: '0',
+      paddingInline: sys.spacing[4],
     },
   },
 
@@ -80,9 +87,9 @@ export const positioner = style({
   transitionProperty: 'top, left, right, bottom',
   transitionDuration: 'var(--duration)',
   transitionTimingFunction: 'var(--easing)',
-  width: 'var(--positioner-width)',
-  height: 'var(--positioner-height)',
-  maxWidth: 'var(--available-width)',
+  inlineSize: 'var(--positioner-width)',
+  blockSize: 'var(--positioner-height)',
+  maxInlineSize: 'var(--available-width)',
   vars: {
     '--easing': sys.motion.easing.decelerate.emphasized,
     '--duration': sys.motion.duration.medium[4],
@@ -96,26 +103,26 @@ export const positioner = style({
     [`&[data-side='top']::before`]: {
       left: '0',
       right: '0',
-      bottom: '-10px',
-      height: '10px',
+      bottom: calc.negate(sys.spacing[5]),
+      blockSize: sys.spacing[5],
     },
     [`&[data-side='bottom']::before`]: {
       left: '0',
       right: '0',
-      top: '-10px',
-      height: '10px',
+      top: calc.negate(sys.spacing[5]),
+      blockSize: sys.spacing[5],
     },
     [`&[data-side='left']::before`]: {
       top: '0',
       bottom: '0',
-      right: '-10px',
-      width: '10px',
+      right: calc.negate(sys.spacing[5]),
+      inlineSize: sys.spacing[5],
     },
     [`&[data-side='right']::before`]: {
       top: '0',
       bottom: '0',
-      left: '-10px',
-      width: '10px',
+      left: calc.negate(sys.spacing[5]),
+      inlineSize: sys.spacing[5],
     },
     [`&[data-instant]`]: {
       transition: 'none',
@@ -130,11 +137,11 @@ export const popup = style({
   backgroundColor: sys.color.surface.base,
   color: sys.color.content.base,
   transformOrigin: 'var(--transform-origin)',
-  transitionProperty: 'opacity, transform, width, height',
+  transitionProperty: 'opacity, transform, inline-size, block-size',
   transitionDuration: 'var(--duration)',
   transitionTimingFunction: 'var(--easing)',
-  width: 'var(--popup-width)',
-  height: 'var(--popup-height)',
+  inlineSize: 'var(--popup-width)',
+  blockSize: 'var(--popup-height)',
   '@media': {
     '(prefers-color-scheme: light)': {
       outline: `1px solid ${sys.color.container.high}`,
@@ -164,13 +171,14 @@ export const content = style({
   boxSizing: 'border-box',
   transition:
     'opacity calc(var(--duration) * 0.5) ease,\n    transform var(--duration) var(--easing)',
-  padding: '1.5rem',
-  width: 'calc(100vw - 40px)',
-  height: '100%',
+  paddingBlock: sys.spacing[10],
+  paddingInline: sys.spacing[10],
+  inlineSize: calc.subtract('100vw', sys.spacing[14]),
+  blockSize: '100%',
   '@media': {
     '(min-width: 500px)': {
-      width: 'max-content',
-      minWidth: '400px',
+      inlineSize: 'max-content',
+      minInlineSize: '400px',
     },
   },
 
@@ -199,16 +207,18 @@ export const content = style({
 export const viewport = style({
   position: 'relative',
   overflow: 'hidden',
-  width: '100%',
-  height: '100%',
+  inlineSize: '100%',
+  blockSize: '100%',
 });
 
 export const gridLinkList = style({
   display: 'grid',
   gridTemplateColumns: '12rem 12rem',
   listStyle: 'none',
-  padding: '0',
-  margin: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   '@media': {
     '(max-width: 500px)': {
       gridTemplateColumns: '1fr',
@@ -220,16 +230,19 @@ export const flexLinkList = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  maxWidth: '400px',
-  padding: '0',
-  margin: '0',
+  maxInlineSize: '400px',
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   listStyle: 'none',
 });
 
 export const linkCard = style({
   boxSizing: 'border-box',
   display: 'block',
-  padding: '0.5rem',
+  paddingBlock: sys.spacing[4],
+  paddingInline: sys.spacing[4],
   borderRadius: '0.375rem',
   textDecoration: 'none',
   color: 'inherit',
@@ -237,7 +250,8 @@ export const linkCard = style({
   backgroundColor: 'transparent',
   '@media': {
     '(min-width: 425px)': {
-      padding: '0.75rem',
+      paddingBlock: sys.spacing[6],
+      paddingInline: sys.spacing[6],
     },
   },
 
@@ -258,14 +272,17 @@ export const linkCard = style({
 });
 
 export const linkTitle = style({
-  margin: '0 0 4px',
+  marginBlockStart: '0',
+  marginBlockEnd: sys.spacing[2],
+  marginInline: '0',
   fontSize: '1rem',
   fontWeight: '500',
   lineHeight: '1.25rem',
 });
 
 export const linkDescription = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: stateColor.disabledContent,
@@ -277,19 +294,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },

@@ -17,7 +17,7 @@ export const radioGroup = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
   color: radioVars.color.foreground,
   vars: assignVars(radioVars.color, {
     foreground: sys.color.content.base,
@@ -35,20 +35,22 @@ export const caption = style({
 export const item = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
 });
 
 export const radio = style({
   boxSizing: 'border-box',
   display: 'flex',
-  width: '1.25rem',
-  height: '1.25rem',
+  inlineSize: sys.spacing[9],
+  blockSize: sys.spacing[9],
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '100%',
   outline: '0',
-  padding: '0',
-  margin: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   border: 'none',
 
   selectors: {
@@ -78,8 +80,8 @@ export const indicator = style({
     [`&::before`]: {
       content: "''",
       borderRadius: '100%',
-      width: '0.5rem',
-      height: '0.5rem',
+      inlineSize: sys.spacing[4],
+      blockSize: sys.spacing[4],
       backgroundColor: radioVars.color.checkedForeground,
     },
   },

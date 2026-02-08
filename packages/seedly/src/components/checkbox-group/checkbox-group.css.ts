@@ -20,7 +20,7 @@ export const checkboxGroup = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
   color: checkboxGroupVars.color.foreground,
   vars: {
     ...assignVars(checkboxGroupVars.color, {
@@ -43,20 +43,22 @@ export const caption = style({
 export const item = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
 });
 
 export const checkbox = style({
   boxSizing: 'border-box',
   display: 'flex',
-  width: '1.25rem',
-  height: '1.25rem',
+  inlineSize: sys.spacing[9],
+  blockSize: sys.spacing[9],
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: checkboxGroupVars.shape.corner,
   outline: '0',
-  padding: '0',
-  margin: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   border: 'none',
 
   selectors: {
@@ -86,8 +88,8 @@ export const indicator = style({
 });
 
 export const icon = style({
-  width: '0.75rem',
-  height: '0.75rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
 });
 
 export const checkboxGroupRecipe = recipe({

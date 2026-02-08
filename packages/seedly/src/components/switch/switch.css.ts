@@ -16,7 +16,7 @@ export const switchVars = createThemeContract({
 export const label = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: switchVars.color.label,
@@ -34,11 +34,13 @@ export const switchRoot = style({
   display: 'flex',
   appearance: 'none',
   border: '0',
-  margin: '0',
-  padding: '1px',
-  width: '2.5rem',
-  height: '1.5rem',
-  borderRadius: '1.5rem',
+  marginBlock: '0',
+  marginInline: '0',
+  paddingBlock: '1px',
+  paddingInline: '1px',
+  inlineSize: sys.spacing[14],
+  blockSize: sys.spacing[10],
+  borderRadius: sys.spacing[10],
   outline: '1px solid',
   outlineOffset: '-1px',
   backgroundColor: 'transparent',
@@ -78,7 +80,8 @@ export const switchRoot = style({
     },
     [`&:focus-visible::before`]: {
       content: "''",
-      inset: '0',
+      insetBlock: '0',
+      insetInline: '0',
       position: 'absolute',
       borderRadius: 'inherit',
       outline: `2px solid ${switchVars.color.focusRing}`,
@@ -89,7 +92,7 @@ export const switchRoot = style({
 
 export const thumb = style({
   aspectRatio: '1 / 1',
-  height: '100%',
+  blockSize: '100%',
   borderRadius: '100%',
   backgroundColor: switchVars.color.thumbBackground,
   transition: 'translate 150ms ease',
@@ -104,7 +107,7 @@ export const thumb = style({
 
   selectors: {
     [`&[data-checked]`]: {
-      translate: '1rem 0',
+      translate: `${sys.spacing[8]} 0`,
     },
   },
 });

@@ -7,7 +7,7 @@ export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
 });
 
 export const scrubArea = style({
@@ -34,15 +34,17 @@ export const group = style({
 
 export const input = style({
   boxSizing: 'border-box',
-  margin: '0',
-  padding: '0',
+  marginBlock: '0',
+  marginInline: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
   borderRadius: '0',
-  borderTop: `1px solid ${sys.color.container.high}`,
-  borderBottom: `1px solid ${sys.color.container.high}`,
-  borderLeft: 'none',
-  borderRight: 'none',
-  width: '6rem',
-  height: '2.5rem',
+  borderBlockStart: `1px solid ${sys.color.container.high}`,
+  borderBlockEnd: `1px solid ${sys.color.container.high}`,
+  borderInlineStart: 'none',
+  borderInlineEnd: 'none',
+  inlineSize: '6rem',
+  blockSize: sys.spacing[14],
   fontFamily: 'inherit',
   fontSize: '1rem',
   fontWeight: 'normal',
@@ -65,11 +67,13 @@ const stepperButtonStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '2.5rem',
-  height: '2.5rem',
-  margin: '0',
+  inlineSize: sys.spacing[14],
+  blockSize: sys.spacing[14],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
-  padding: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
   border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',
   backgroundColor: sys.color.container.base,
@@ -80,15 +84,15 @@ const stepperButtonStyle = {
 
 export const decrement = style({
   ...stepperButtonStyle,
-  borderTopRightRadius: '0',
-  borderBottomRightRadius: '0',
+  borderStartEndRadius: '0',
+  borderEndEndRadius: '0',
   backgroundColor: sys.color.container.low,
 });
 
 export const increment = style({
   ...stepperButtonStyle,
-  borderTopLeftRadius: '0',
-  borderBottomLeftRadius: '0',
+  borderStartStartRadius: '0',
+  borderEndStartRadius: '0',
 
   selectors: {
     [`&:hover`]: {

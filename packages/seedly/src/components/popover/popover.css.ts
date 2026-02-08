@@ -1,4 +1,5 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -49,10 +50,12 @@ export const iconButton = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '2.5rem',
-  height: '2.5rem',
-  padding: '0',
-  margin: '0',
+  inlineSize: sys.spacing[14],
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${popoverVars.color.triggerBorder}`,
   borderRadius: popoverVars.shape.triggerCorner,
@@ -86,14 +89,14 @@ export const iconButton = style({
 });
 
 export const icon = style({
-  width: '1.25rem',
-  height: '1.25rem',
+  inlineSize: sys.spacing[9],
+  blockSize: sys.spacing[9],
 });
 
 export const positioner = style({
-  width: 'var(--positioner-width)',
-  height: 'var(--positioner-height)',
-  maxWidth: 'var(--available-width)',
+  inlineSize: 'var(--positioner-width)',
+  blockSize: 'var(--positioner-height)',
+  maxInlineSize: 'var(--available-width)',
   vars: {
     ...popoverColorDefaults,
     ...popoverShapeDefaults,
@@ -102,15 +105,16 @@ export const positioner = style({
 
 export const popup = style({
   boxSizing: 'border-box',
-  padding: '1rem 1.5rem',
+  paddingBlock: sys.spacing[8],
+  paddingInline: sys.spacing[10],
   borderRadius: popoverVars.shape.popupCorner,
   backgroundColor: popoverVars.color.popupBackground,
   color: popoverVars.color.triggerForeground,
   transformOrigin: 'var(--transform-origin)',
   transition: 'transform 150ms,\n    opacity 150ms',
-  width: 'var(--popup-width, auto)',
-  height: 'var(--popup-height, auto)',
-  maxWidth: '500px',
+  inlineSize: 'var(--popup-width, auto)',
+  blockSize: 'var(--popup-height, auto)',
+  maxInlineSize: '500px',
   '@media': {
     '(prefers-color-scheme: light)': {
       outline: `1px solid ${popoverVars.color.popupOutlineLight}`,
@@ -139,19 +143,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },
@@ -178,14 +182,16 @@ export const arrowInnerStroke = style({
 });
 
 export const title = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   fontWeight: '500',
 });
 
 export const description = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: popoverVars.color.popupDescription,
@@ -193,7 +199,7 @@ export const description = style({
 
 export const container = style({
   display: 'flex',
-  gap: '8px',
+  gap: sys.spacing[4],
   flexWrap: 'wrap',
   justifyContent: 'center',
 });
@@ -203,10 +209,12 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '0.375rem',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  gap: sys.spacing[3],
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${popoverVars.color.triggerBorder}`,
   borderRadius: popoverVars.shape.triggerCorner,

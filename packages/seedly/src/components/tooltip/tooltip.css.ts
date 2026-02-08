@@ -1,4 +1,5 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -53,7 +54,8 @@ export const panel = style({
   border: `1px solid ${tooltipVars.color.panelBorder}`,
   backgroundColor: tooltipVars.color.panelBackground,
   borderRadius: tooltipVars.shape.panelCorner,
-  padding: '0.125rem',
+  paddingBlock: sys.spacing[1],
+  paddingInline: sys.spacing[1],
   vars: {
     ...tooltipColorDefaults,
     ...tooltipShapeDefaults,
@@ -65,10 +67,12 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '2rem',
-  height: '2rem',
-  padding: '0',
-  margin: '0',
+  inlineSize: sys.spacing[12],
+  blockSize: sys.spacing[12],
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: '0',
   borderRadius: tooltipVars.shape.buttonCorner,
@@ -99,8 +103,8 @@ export const button = style({
 });
 
 export const icon = style({
-  width: '1rem',
-  height: '1rem',
+  inlineSize: sys.spacing[8],
+  blockSize: sys.spacing[8],
 });
 
 export const positioner = style({
@@ -116,7 +120,8 @@ export const popup = style({
   lineHeight: '1.25rem',
   display: 'flex',
   flexDirection: 'column',
-  padding: '0.25rem 0.5rem',
+  paddingBlock: sys.spacing[2],
+  paddingInline: sys.spacing[4],
   borderRadius: tooltipVars.shape.popupCorner,
   backgroundColor: tooltipVars.color.popupBackground,
   color: tooltipVars.color.popupForeground,
@@ -153,19 +158,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },

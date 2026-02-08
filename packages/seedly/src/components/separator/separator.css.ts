@@ -17,7 +17,7 @@ export const separatorVars = createThemeContract({
 
 export const container = style({
   display: 'flex',
-  gap: '1rem',
+  gap: sys.spacing[8],
   textWrap: 'nowrap',
   vars: {
     ...assignVars(separatorVars.color, {
@@ -33,7 +33,7 @@ export const container = style({
 });
 
 export const separator = style({
-  width: '1px',
+  inlineSize: '1px',
   backgroundColor: separatorVars.color.separator,
 });
 

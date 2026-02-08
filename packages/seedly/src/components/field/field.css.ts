@@ -21,9 +21,9 @@ export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
-  width: '100%',
-  maxWidth: '16rem',
+  gap: sys.spacing[2],
+  inlineSize: '100%',
+  maxInlineSize: '16rem',
   vars: {
     ...assignVars(fieldVars.color, {
       label: sys.color.content.base,
@@ -48,11 +48,12 @@ export const label = style({
 
 export const input = style({
   boxSizing: 'border-box',
-  paddingLeft: '0.875rem',
-  margin: '0',
+  paddingInlineStart: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   border: `1px solid ${fieldVars.color.border}`,
-  width: '100%',
-  height: '2.5rem',
+  inlineSize: '100%',
+  blockSize: sys.spacing[14],
   borderRadius: fieldVars.shape.corner,
   fontFamily: 'inherit',
   fontSize: '1rem',
@@ -74,7 +75,8 @@ export const error = style({
 });
 
 export const description = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: fieldVars.color.description,

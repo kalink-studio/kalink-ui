@@ -17,9 +17,9 @@ export const progressVars = createThemeContract({
 export const progress = style({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
-  gridGap: '0.25rem',
-  gridRowGap: '0.5rem',
-  width: '12rem',
+  columnGap: sys.spacing[2],
+  rowGap: sys.spacing[4],
+  inlineSize: '12rem',
   vars: {
     ...assignVars(progressVars.color, {
       foreground: sys.color.content.base,
@@ -41,7 +41,8 @@ export const label = style({
 
 export const value = style({
   gridColumnStart: '2',
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: progressVars.color.foreground,
@@ -53,7 +54,7 @@ export const track = style({
   overflow: 'hidden',
   backgroundColor: progressVars.color.track,
   boxShadow: `inset 0 0 0 1px ${progressVars.color.track}`,
-  height: '0.25rem',
+  blockSize: sys.spacing[2],
   borderRadius: progressVars.shape.trackCorner,
 });
 

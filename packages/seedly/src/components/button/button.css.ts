@@ -24,9 +24,11 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${buttonVars.color.border}`,
   borderRadius: buttonVars.shape.corner,
@@ -64,7 +66,7 @@ export const button = style({
     [`&:active:not([data-disabled])`]: {
       backgroundColor: buttonVars.color.activeBackground,
       boxShadow: sys.elevation.minimal,
-      borderTopColor: buttonVars.color.activeBorder,
+      borderBlockStartColor: buttonVars.color.activeBorder,
     },
     [`&:focus-visible`]: {
       outline: `2px solid ${buttonVars.color.focusRing}`,

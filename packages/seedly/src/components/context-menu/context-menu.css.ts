@@ -8,8 +8,8 @@ export const trigger = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '15rem',
-  height: '12rem',
+  inlineSize: '15rem',
+  blockSize: '12rem',
   border: `1px solid ${sys.color.container.top}`,
   color: sys.color.content.base,
   borderRadius: '0.375rem',
@@ -23,7 +23,7 @@ export const positioner = style({
 
 export const popup = style({
   boxSizing: 'border-box',
-  paddingBlock: '0.25rem',
+  paddingBlock: sys.spacing[2],
   borderRadius: '0.375rem',
   backgroundColor: sys.color.surface.base,
   color: sys.color.content.base,
@@ -51,9 +51,9 @@ export const item = style({
   outline: '0',
   cursor: 'default',
   userSelect: 'none',
-  paddingBlock: '0.5rem',
-  paddingLeft: '1rem',
-  paddingRight: '2rem',
+  paddingBlock: sys.spacing[4],
+  paddingInlineStart: sys.spacing[8],
+  paddingInlineEnd: sys.spacing[12],
   display: 'flex',
   fontSize: '0.875rem',
   lineHeight: '1rem',
@@ -69,7 +69,7 @@ export const item = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.25rem',
+      insetInline: sys.spacing[2],
       borderRadius: '0.25rem',
       backgroundColor: sys.color.content.base,
     },
@@ -77,8 +77,9 @@ export const item = style({
 });
 
 export const separator = style({
-  margin: '0.375rem 1rem',
-  height: '1px',
+  marginBlock: sys.spacing[3],
+  marginInline: sys.spacing[8],
+  blockSize: '1px',
   backgroundColor: sys.color.container.high,
 });
 

@@ -20,7 +20,7 @@ export const checkboxVars = createThemeContract({
 export const label = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: checkboxVars.color.label,
@@ -42,14 +42,16 @@ export const label = style({
 export const checkbox = style({
   boxSizing: 'border-box',
   display: 'flex',
-  width: '1.25rem',
-  height: '1.25rem',
+  inlineSize: sys.spacing[9],
+  blockSize: sys.spacing[9],
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: checkboxVars.shape.corner,
   outline: '0',
-  padding: '0',
-  margin: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   border: 'none',
 
   selectors: {
@@ -79,8 +81,8 @@ export const indicator = style({
 });
 
 export const icon = style({
-  width: '0.75rem',
-  height: '0.75rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
 });
 
 export const checkboxRecipe = recipe({

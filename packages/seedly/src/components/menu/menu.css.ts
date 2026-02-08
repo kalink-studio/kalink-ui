@@ -1,4 +1,5 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -55,10 +56,12 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '0.375rem',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  gap: sys.spacing[3],
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${menuVars.color.triggerBorder}`,
   borderRadius: menuVars.shape.triggerCorner,
@@ -96,7 +99,7 @@ export const button = style({
 });
 
 export const buttonIcon = style({
-  marginRight: '-0.25rem',
+  marginInlineEnd: calc.negate(sys.spacing[2]),
 });
 
 export const positioner = style({
@@ -109,7 +112,7 @@ export const positioner = style({
 
 export const popup = style({
   boxSizing: 'border-box',
-  paddingBlock: '0.25rem',
+  paddingBlock: sys.spacing[2],
   borderRadius: menuVars.shape.popupCorner,
   backgroundColor: menuVars.color.popupBackground,
   color: menuVars.color.triggerForeground,
@@ -143,19 +146,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },
@@ -185,9 +188,9 @@ export const item = style({
   outline: '0',
   cursor: 'default',
   userSelect: 'none',
-  paddingBlock: '0.5rem',
-  paddingLeft: '1rem',
-  paddingRight: '2rem',
+  paddingBlock: sys.spacing[4],
+  paddingInlineStart: sys.spacing[8],
+  paddingInlineEnd: sys.spacing[12],
   display: 'flex',
   fontSize: '0.875rem',
   lineHeight: '1rem',
@@ -203,7 +206,7 @@ export const item = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.25rem',
+      insetInline: sys.spacing[2],
       borderRadius: menuVars.shape.itemCorner,
       backgroundColor: menuVars.color.itemHighlightedBackground,
     },
@@ -211,8 +214,9 @@ export const item = style({
 });
 
 export const separator = style({
-  margin: '0.375rem 1rem',
-  height: '1px',
+  marginBlock: sys.spacing[3],
+  marginInline: sys.spacing[8],
+  blockSize: '1px',
   backgroundColor: menuVars.color.separator,
 });
 

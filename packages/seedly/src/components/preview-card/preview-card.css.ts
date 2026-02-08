@@ -1,18 +1,19 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
 
 export const positioner = style({
-  height: 'var(--positioner-height)',
-  width: 'var(--positioner-width)',
-  maxWidth: 'var(--available-width)',
+  blockSize: 'var(--positioner-height)',
+  inlineSize: 'var(--positioner-width)',
+  maxInlineSize: 'var(--available-width)',
 });
 
 export const popup = style({
   boxSizing: 'border-box',
-  width: 'var(--popup-width, auto)',
-  height: 'var(--popup-height, auto)',
+  inlineSize: 'var(--popup-width, auto)',
+  blockSize: 'var(--popup-height, auto)',
   borderRadius: '0.5rem',
   backgroundColor: sys.color.surface.base,
   transformOrigin: 'var(--transform-origin)',
@@ -45,19 +46,19 @@ export const arrow = style({
 
   selectors: {
     [`&[data-side='top']`]: {
-      bottom: '-8px',
+      bottom: calc.negate(sys.spacing[4]),
       rotate: '180deg',
     },
     [`&[data-side='bottom']`]: {
-      top: '-8px',
+      top: calc.negate(sys.spacing[4]),
       rotate: '0deg',
     },
     [`&[data-side='left']`]: {
-      right: '-13px',
+      right: calc.negate(sys.spacing[7]),
       rotate: '90deg',
     },
     [`&[data-side='right']`]: {
-      left: '-13px',
+      left: calc.negate(sys.spacing[7]),
       rotate: '-90deg',
     },
   },
@@ -84,22 +85,24 @@ export const arrowInnerStroke = style({
 });
 
 export const popupContent = style({
-  width: 'min-content',
+  inlineSize: 'min-content',
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem',
-  padding: '0.5rem',
+  gap: sys.spacing[4],
+  paddingBlock: sys.spacing[4],
+  paddingInline: sys.spacing[4],
   boxSizing: 'border-box',
 });
 
 export const image = style({
   display: 'block',
   borderRadius: '0.25rem',
-  maxWidth: 'none',
+  maxInlineSize: 'none',
 });
 
 export const summary = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   color: sys.color.content.base,
@@ -108,14 +111,15 @@ export const summary = style({
 
 export const container = style({
   display: 'flex',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
   flexWrap: 'wrap',
   justifyContent: 'center',
   alignItems: 'baseline',
 });
 
 export const paragraph = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: sys.color.content.base,
@@ -152,7 +156,7 @@ export const link = style({
 export const linkGroup = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
   alignItems: 'baseline',
 });
 
@@ -161,9 +165,11 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${sys.color.container.high}`,
   borderRadius: '0.375rem',

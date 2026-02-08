@@ -1,4 +1,5 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
@@ -47,9 +48,11 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${toastVars.color.buttonBorder}`,
   borderRadius: toastVars.shape.buttonCorner,
@@ -86,51 +89,54 @@ export const button = style({
 export const viewport = style({
   position: 'fixed',
   zIndex: '1',
-  width: '250px',
-  margin: '0 auto',
-  bottom: '1rem',
-  right: '1rem',
-  left: 'auto',
-  top: 'auto',
+  inlineSize: '250px',
+  marginBlock: '0',
+  marginInline: 'auto',
+  insetBlockEnd: sys.spacing[8],
+  insetInlineEnd: sys.spacing[8],
+  insetInlineStart: 'auto',
+  insetBlockStart: 'auto',
   '@media': {
     '(min-width: 500px)': {
-      bottom: '2rem',
-      right: '2rem',
-      width: '300px',
+      insetBlockEnd: sys.spacing[12],
+      insetInlineEnd: sys.spacing[12],
+      inlineSize: '300px',
     },
   },
 });
 
 export const toast = style({
   position: 'absolute',
-  right: '0',
-  margin: '0 auto',
+  insetInlineEnd: '0',
+  marginBlock: '0',
+  marginInline: 'auto',
   boxSizing: 'border-box',
   background: toastVars.color.toastBackground,
   color: toastVars.color.toastForeground,
   border: `1px solid ${toastVars.color.toastBorder}`,
-  padding: '1rem',
-  width: '100%',
+  paddingBlock: sys.spacing[8],
+  paddingInline: sys.spacing[8],
+  inlineSize: '100%',
   boxShadow: toastVars.color.toastShadow,
   backgroundClip: 'padding-box',
   borderRadius: toastVars.shape.toastCorner,
   transformOrigin: 'bottom center',
-  bottom: '0',
-  left: 'auto',
-  marginRight: '0',
+  insetBlockEnd: '0',
+  insetInlineStart: 'auto',
+  marginInlineEnd: '0',
   WebkitUserSelect: 'none',
   userSelect: 'none',
-  transition: `transform ${sys.motion.duration.long[3]} ${sys.motion.easing.decelerate.emphasized}, opacity ${sys.motion.duration.long[3]}, height ${sys.motion.duration.short[4]}`,
+  transition: `transform ${sys.motion.duration.long[3]} ${sys.motion.easing.decelerate.emphasized}, opacity ${sys.motion.duration.long[3]}, block-size ${sys.motion.duration.short[4]}`,
   cursor: 'default',
   zIndex: 'calc(1000 - var(--toast-index))',
-  height: 'var(--height)',
+  blockSize: 'var(--height)',
   transform:
     'translateX(var(--toast-swipe-movement-x))\n    translateY(\n      calc(\n        var(--toast-swipe-movement-y) - (var(--toast-index) * var(--peek)) -\n          (var(--shrink) * var(--height))\n      )\n    )\n    scale(var(--scale))',
   vars: {
     ...toastColorDefaults,
     ...toastShapeDefaults,
-    '--gap': '0.75rem',
-    '--peek': '0.75rem',
+    '--gap': sys.spacing[6],
+    '--peek': sys.spacing[6],
     '--scale': 'calc(max(0, 1 - (var(--toast-index) * 0.1)))',
     '--shrink': 'calc(1 - var(--scale))',
     '--height': 'var(--toast-frontmost-height, var(--toast-height))',
@@ -142,7 +148,7 @@ export const toast = style({
     [`&[data-expanded]`]: {
       transform:
         'translateX(var(--toast-swipe-movement-x)) translateY(var(--offset-y))',
-      height: 'var(--toast-height)',
+      blockSize: 'var(--toast-height)',
     },
     [`&[data-starting-style]`]: {
       transform: 'translateY(150%)',
@@ -171,10 +177,10 @@ export const toast = style({
     [`&::after`]: {
       content: "''",
       position: 'absolute',
-      top: '100%',
-      width: '100%',
-      left: '0',
-      height: 'calc(var(--gap) + 1px)',
+      insetBlockStart: '100%',
+      inlineSize: '100%',
+      insetInlineStart: '0',
+      blockSize: calc.add('var(--gap)', '1px'),
     },
   },
 });
@@ -197,24 +203,27 @@ export const title = style({
   fontWeight: '500',
   fontSize: '0.975rem',
   lineHeight: '1.25rem',
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
 });
 
 export const description = style({
   fontSize: '0.925rem',
   lineHeight: '1.25rem',
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
 });
 
 export const close = style({
   position: 'absolute',
-  top: '0.5rem',
-  right: '0.5rem',
-  padding: '0',
+  insetBlockStart: sys.spacing[4],
+  insetInlineEnd: sys.spacing[4],
+  paddingBlock: '0',
+  paddingInline: '0',
   border: 'none',
   background: 'transparent',
-  width: '1.25rem',
-  height: '1.25rem',
+  inlineSize: sys.spacing[9],
+  blockSize: sys.spacing[9],
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -228,8 +237,8 @@ export const close = style({
 });
 
 export const icon = style({
-  width: '1rem',
-  height: '1rem',
+  inlineSize: sys.spacing[8],
+  blockSize: sys.spacing[8],
 });
 
 export const toastRecipe = recipe({

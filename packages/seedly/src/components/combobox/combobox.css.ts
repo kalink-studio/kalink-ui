@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -7,7 +8,7 @@ export const label = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
   fontWeight: '500',
@@ -25,18 +26,19 @@ const actionButtonStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '1.5rem',
-  height: '2.5rem',
+  inlineSize: sys.spacing[10],
+  blockSize: sys.spacing[14],
   color: stateColor.mutedContent,
   border: 'none',
-  padding: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
   borderRadius: '0.25rem',
   background: 'none',
 } as const;
 
 const actionIconStyle = {
-  width: '1rem',
-  height: '1rem',
+  inlineSize: sys.spacing[8],
+  blockSize: sys.spacing[8],
 } as const;
 
 export const trigger = style(actionButtonStyle);
@@ -45,12 +47,13 @@ export const clear = style(actionButtonStyle);
 
 export const input = style({
   boxSizing: 'border-box',
-  paddingLeft: '0.875rem',
-  paddingRight: 'calc(0.5rem + 1.5rem)',
-  margin: '0',
+  paddingInlineStart: sys.spacing[7],
+  paddingInlineEnd: calc.add(sys.spacing[4], sys.spacing[10]),
+  marginBlock: '0',
+  marginInline: '0',
   border: `1px solid ${sys.color.container.high}`,
-  width: '16rem',
-  height: '2.5rem',
+  inlineSize: '16rem',
+  blockSize: sys.spacing[14],
   borderRadius: '0.375rem',
   fontFamily: 'inherit',
   fontSize: '1rem',
@@ -63,7 +66,10 @@ export const input = style({
       outlineOffset: '-1px',
     },
     [`${inputWrapper}:has(${clear}) &`]: {
-      paddingRight: 'calc(0.5rem + 1.5rem * 2)',
+      paddingInlineEnd: calc.add(
+        sys.spacing[4],
+        calc.multiply(sys.spacing[10], 2),
+      ),
     },
   },
 });
@@ -78,7 +84,8 @@ export const empty = style({
       fontSize: '0.925rem',
       lineHeight: '1rem',
       color: stateColor.mutedContent,
-      padding: '1rem',
+      paddingBlock: sys.spacing[8],
+      paddingInline: sys.spacing[8],
     },
   },
 });
@@ -89,13 +96,14 @@ export const actionButtons = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  bottom: '0',
-  height: '2.5rem',
-  right: '0.5rem',
+  insetBlockEnd: '0',
+  blockSize: sys.spacing[14],
+  insetInlineEnd: sys.spacing[4],
   borderRadius: '0.25rem',
   border: 'none',
   color: stateColor.mutedContent,
-  padding: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
 });
 
 export const positioner = style({
@@ -107,9 +115,9 @@ export const popup = style({
   borderRadius: '0.375rem',
   backgroundColor: sys.color.surface.base,
   color: sys.color.content.base,
-  width: 'var(--anchor-width)',
-  maxHeight: '23rem',
-  maxWidth: 'var(--available-width)',
+  inlineSize: 'var(--anchor-width)',
+  maxBlockSize: '23rem',
+  maxInlineSize: 'var(--available-width)',
   transition: 'opacity 0.1s,\n    transform 0.1s',
   transformOrigin: 'var(--transform-origin)',
   '@media': {
@@ -139,14 +147,15 @@ export const list = style({
   boxSizing: 'border-box',
   overflowY: 'auto',
   overscrollBehavior: 'contain',
-  paddingBlock: '0.5rem',
-  scrollPaddingBlock: '0.5rem',
+  paddingBlock: sys.spacing[4],
+  scrollPaddingBlock: sys.spacing[4],
   outline: '0',
-  maxHeight: 'min(23rem, var(--available-height))',
+  maxBlockSize: `min(${calc.multiply(sys.spacing[8], 23)}, var(--available-height))`,
 
   selectors: {
     [`&[data-empty]`]: {
-      padding: '0',
+      paddingBlock: '0',
+      paddingInline: '0',
     },
   },
 });
@@ -156,13 +165,13 @@ export const item = style({
   outline: '0',
   cursor: 'default',
   userSelect: 'none',
-  paddingBlock: '0.5rem',
-  paddingLeft: '1rem',
-  paddingRight: '2rem',
+  paddingBlock: sys.spacing[4],
+  paddingInlineStart: sys.spacing[8],
+  paddingInlineEnd: sys.spacing[12],
   display: 'grid',
-  gap: '0.5rem',
+  gap: sys.spacing[4],
   alignItems: 'center',
-  gridTemplateColumns: '0.75rem 1fr',
+  gridTemplateColumns: `${sys.spacing[6]} 1fr`,
   fontSize: '1rem',
   lineHeight: '1rem',
 
@@ -177,7 +186,7 @@ export const item = style({
       zIndex: '-1',
       position: 'absolute',
       insetBlock: '0',
-      insetInline: '0.5rem',
+      insetInline: sys.spacing[4],
       borderRadius: '0.25rem',
       backgroundColor: sys.color.content.base,
     },
@@ -194,8 +203,8 @@ export const itemIndicator = style({
 
 export const itemIndicatorIcon = style({
   display: 'block',
-  width: '0.75rem',
-  height: '0.75rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
 });
 
 export const comboboxRecipe = recipe({

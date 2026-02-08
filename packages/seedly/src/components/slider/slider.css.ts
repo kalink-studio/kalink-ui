@@ -21,8 +21,8 @@ export const control = style({
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
-  width: '14rem',
-  paddingBlock: '0.75rem',
+  inlineSize: '14rem',
+  paddingBlock: sys.spacing[6],
   touchAction: 'none',
   userSelect: 'none',
   vars: {
@@ -41,8 +41,8 @@ export const control = style({
 });
 
 export const track = style({
-  width: '100%',
-  height: '0.25rem',
+  inlineSize: '100%',
+  blockSize: sys.spacing[2],
   backgroundColor: sliderVars.color.track,
   boxShadow: `inset 0 0 0 1px ${sliderVars.color.track}`,
   borderRadius: sliderVars.shape.trackCorner,
@@ -56,8 +56,8 @@ export const indicator = style({
 });
 
 export const thumb = style({
-  width: '1rem',
-  height: '1rem',
+  inlineSize: sys.spacing[8],
+  blockSize: sys.spacing[8],
   borderRadius: sliderVars.shape.thumbCorner,
   backgroundColor: sliderVars.color.thumbBackground,
   outline: `1px solid ${sliderVars.color.thumbOutline}`,

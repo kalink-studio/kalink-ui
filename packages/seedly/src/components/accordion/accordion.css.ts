@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -6,31 +7,32 @@ import { stateColor, sys } from '../../styles';
 export const accordion = style({
   boxSizing: 'border-box',
   display: 'flex',
-  width: '24rem',
-  maxWidth: 'calc(100vw - 8rem)',
+  inlineSize: '24rem',
+  maxInlineSize: calc.subtract('100vw', calc.multiply(sys.spacing[8], 8)),
   flexDirection: 'column',
   justifyContent: 'center',
   color: sys.color.content.base,
 });
 
 export const item = style({
-  borderBottom: `1px solid ${sys.color.container.high}`,
+  borderBlockEnd: `1px solid ${sys.color.container.high}`,
 });
 
 export const header = style({
-  margin: '0',
+  marginBlock: '0',
+  marginInline: '0',
 });
 
 export const trigger = style({
   boxSizing: 'border-box',
   position: 'relative',
   display: 'flex',
-  width: '100%',
-  gap: '1rem',
+  inlineSize: '100%',
+  gap: sys.spacing[8],
   alignItems: 'baseline',
   justifyContent: 'space-between',
-  paddingBlock: '0.5rem',
-  paddingInline: '0.75rem 0.25rem',
+  paddingBlock: sys.spacing[4],
+  paddingInline: `${sys.spacing[6]} ${sys.spacing[2]}`,
   color: sys.color.content.base,
   fontFamily: 'inherit',
   fontWeight: '500',
@@ -39,7 +41,7 @@ export const trigger = style({
   background: sys.color.container.base,
   border: 'none',
   outline: 'none',
-  textAlign: 'left',
+  textAlign: 'start',
 
   selectors: {
     [`&:hover`]: {
@@ -59,9 +61,9 @@ export const trigger = style({
 export const triggerIcon = style({
   boxSizing: 'border-box',
   flexShrink: '0',
-  width: '0.75rem',
-  height: '0.75rem',
-  marginRight: '0.5rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
+  marginInlineEnd: sys.spacing[4],
   transition: 'transform 150ms ease-out',
 
   selectors: {
@@ -73,25 +75,26 @@ export const triggerIcon = style({
 
 export const panel = style({
   boxSizing: 'border-box',
-  height: 'var(--accordion-panel-height)',
+  blockSize: 'var(--accordion-panel-height)',
   overflow: 'hidden',
   color: stateColor.mutedContent,
   fontSize: '1rem',
   lineHeight: '1.5rem',
-  transition: 'height 150ms ease-out',
+  transition: 'block-size 150ms ease-out',
 
   selectors: {
     [`&[data-starting-style]`]: {
-      height: '0',
+      blockSize: '0',
     },
     [`&[data-ending-style]`]: {
-      height: '0',
+      blockSize: '0',
     },
   },
 });
 
 export const content = style({
-  padding: '0.75rem',
+  paddingBlock: sys.spacing[6],
+  paddingInline: sys.spacing[6],
 });
 
 export const accordionRecipe = recipe({

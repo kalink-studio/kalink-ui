@@ -1,4 +1,5 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { stateColor, sys } from '../../styles';
@@ -47,9 +48,11 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${dialogVars.color.triggerBorder}`,
   borderRadius: dialogVars.shape.triggerCorner,
@@ -85,8 +88,9 @@ export const button = style({
 
 export const backdrop = style({
   position: 'fixed',
-  minHeight: '100dvh',
-  inset: '0',
+  minBlockSize: '100dvh',
+  insetBlock: '0',
+  insetInline: '0',
   backgroundColor: dialogVars.color.backdrop,
   opacity: '0.2',
   transition: `opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.decelerate.emphasized}`,
@@ -118,13 +122,14 @@ export const backdrop = style({
 export const popup = style({
   boxSizing: 'border-box',
   position: 'fixed',
-  top: '50%',
-  left: '50%',
+  insetBlockStart: '50%',
+  insetInlineStart: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '24rem',
-  maxWidth: 'calc(100vw - 3rem)',
-  marginTop: '-2rem',
-  padding: '1.5rem',
+  inlineSize: '24rem',
+  maxInlineSize: calc.subtract('100vw', sys.spacing[15]),
+  marginBlockStart: calc.negate(sys.spacing[12]),
+  paddingBlock: sys.spacing[10],
+  paddingInline: sys.spacing[10],
   borderRadius: dialogVars.shape.popupCorner,
   outline: `1px solid ${dialogVars.color.popupOutlineLight}`,
   backgroundColor: dialogVars.color.popupBackground,
@@ -153,8 +158,8 @@ export const popup = style({
 });
 
 export const title = style({
-  marginTop: '-0.375rem',
-  marginBottom: '0.25rem',
+  marginBlockStart: calc.negate(sys.spacing[3]),
+  marginBlockEnd: sys.spacing[2],
   fontSize: '1.125rem',
   lineHeight: '1.75rem',
   letterSpacing: '-0.0025em',
@@ -162,7 +167,8 @@ export const title = style({
 });
 
 export const description = style({
-  margin: '0 0 1.5rem',
+  marginBlock: `0 ${sys.spacing[10]}`,
+  marginInline: '0',
   fontSize: '1rem',
   lineHeight: '1.5rem',
   color: dialogVars.color.description,
@@ -171,7 +177,7 @@ export const description = style({
 export const actions = style({
   display: 'flex',
   justifyContent: 'end',
-  gap: '1rem',
+  gap: sys.spacing[8],
 });
 
 export const dialogRecipe = recipe({

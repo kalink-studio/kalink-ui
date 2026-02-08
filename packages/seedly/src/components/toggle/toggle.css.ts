@@ -25,7 +25,8 @@ export const panel = style({
   border: `1px solid ${toggleVars.color.panelBorder}`,
   backgroundColor: toggleVars.color.panelBackground,
   borderRadius: toggleVars.shape.panelCorner,
-  padding: '0.125rem',
+  paddingBlock: sys.spacing[1],
+  paddingInline: sys.spacing[1],
   vars: {
     ...assignVars(toggleVars.color, {
       panelBorder: sys.color.container.high,
@@ -48,10 +49,12 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '2rem',
-  height: '2rem',
-  padding: '0',
-  margin: '0',
+  inlineSize: sys.spacing[12],
+  blockSize: sys.spacing[12],
+  paddingBlock: '0',
+  paddingInline: '0',
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: '0',
   borderRadius: toggleVars.shape.buttonCorner,
@@ -82,8 +85,8 @@ export const button = style({
 });
 
 export const icon = style({
-  width: '1.25rem',
-  height: '1.25rem',
+  inlineSize: sys.spacing[9],
+  blockSize: sys.spacing[9],
 });
 
 export const toggleRecipe = recipe({

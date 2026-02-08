@@ -5,8 +5,8 @@ import { sys } from '../../styles';
 
 export const collapsible = style({
   display: 'flex',
-  width: '14rem',
-  minHeight: '9rem',
+  inlineSize: '14rem',
+  minBlockSize: '9rem',
   flexDirection: 'column',
   justifyContent: 'center',
   color: sys.color.content.base,
@@ -15,11 +15,13 @@ export const collapsible = style({
 export const trigger = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '0.5rem',
-  margin: '0',
+  gap: sys.spacing[4],
+  marginBlock: '0',
+  marginInline: '0',
   border: '0',
   outline: '0',
-  padding: '0.25rem 0.5rem',
+  paddingBlock: sys.spacing[2],
+  paddingInline: sys.spacing[4],
   borderRadius: '0.25rem',
   backgroundColor: sys.color.container.low,
   color: sys.color.content.base,
@@ -46,8 +48,8 @@ export const trigger = style({
 });
 
 export const icon = style({
-  width: '0.75rem',
-  height: '0.75rem',
+  inlineSize: sys.spacing[6],
+  blockSize: sys.spacing[6],
   transition: 'transform 150ms ease-out',
 
   selectors: {
@@ -59,7 +61,7 @@ export const icon = style({
 
 export const panel = style({
   display: 'flex',
-  height: 'var(--collapsible-panel-height)',
+  blockSize: 'var(--collapsible-panel-height)',
   flexDirection: 'column',
   justifyContent: 'end',
   overflow: 'hidden',
@@ -72,10 +74,10 @@ export const panel = style({
       display: 'none',
     },
     [`&[data-starting-style]`]: {
-      height: '0',
+      blockSize: '0',
     },
     [`&[data-ending-style]`]: {
-      height: '0',
+      blockSize: '0',
     },
   },
 });
@@ -83,9 +85,11 @@ export const panel = style({
 export const content = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem',
-  marginTop: '0.25rem',
-  padding: '0.5rem 0 0.5rem 1.75rem',
+  gap: sys.spacing[4],
+  marginBlockStart: sys.spacing[2],
+  paddingBlock: sys.spacing[4],
+  paddingInlineStart: sys.spacing[11],
+  paddingInlineEnd: '0',
   borderRadius: '0.25rem',
   backgroundColor: sys.color.container.low,
   cursor: 'text',

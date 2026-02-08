@@ -28,9 +28,9 @@ export const formVars = createThemeContract({
 export const form = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
-  width: '100%',
-  maxWidth: '16rem',
+  gap: sys.spacing[8],
+  inlineSize: '100%',
+  maxInlineSize: '16rem',
   vars: {
     ...assignVars(formVars.color, {
       label: sys.color.content.base,
@@ -58,7 +58,7 @@ export const field = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: '0.25rem',
+  gap: sys.spacing[2],
 });
 
 export const label = style({
@@ -70,11 +70,12 @@ export const label = style({
 
 export const input = style({
   boxSizing: 'border-box',
-  paddingLeft: '0.875rem',
-  margin: '0',
+  paddingInlineStart: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   border: `1px solid ${formVars.color.inputBorder}`,
-  width: '100%',
-  height: '2.5rem',
+  inlineSize: '100%',
+  blockSize: sys.spacing[14],
   borderRadius: formVars.shape.inputCorner,
   fontFamily: 'inherit',
   fontSize: '1rem',
@@ -100,9 +101,11 @@ export const button = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '2.5rem',
-  padding: '0 0.875rem',
-  margin: '0',
+  blockSize: sys.spacing[14],
+  paddingBlock: '0',
+  paddingInline: sys.spacing[7],
+  marginBlock: '0',
+  marginInline: '0',
   outline: '0',
   border: `1px solid ${formVars.color.buttonBorder}`,
   borderRadius: formVars.shape.buttonCorner,
@@ -125,7 +128,7 @@ export const button = style({
     [`&:active:not([data-disabled])`]: {
       backgroundColor: formVars.color.buttonActiveBackground,
       boxShadow: sys.elevation.minimal,
-      borderTopColor: formVars.color.buttonActiveBorder,
+      borderBlockStartColor: formVars.color.buttonActiveBorder,
     },
     [`&:focus-visible`]: {
       outline: `2px solid ${formVars.color.buttonFocusRing}`,
