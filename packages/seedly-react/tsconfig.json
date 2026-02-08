@@ -12,6 +12,10 @@
     "noEmit": false,
     "incremental": true,
     "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "types": ["react"],
     "declaration": true,
     "emitDeclarationOnly": true,
