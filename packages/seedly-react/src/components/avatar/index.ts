@@ -1,1 +1,9 @@
-export { default as Avatar } from './avatar';
+import { Fallback } from './fallback';
+import { Image } from './image';
+import { Root } from './root';
+
+export const Avatar = {
+  Root,
+  Image,
+  Fallback,
+} as const;
