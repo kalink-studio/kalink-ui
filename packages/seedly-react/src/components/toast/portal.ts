@@ -1,3 +1,3 @@
 import { Toast } from '@base-ui/react/toast';
 
-export const Portal: typeof Toast.Portal = Toast.Portal;
+export const Portal = Toast.Portal;

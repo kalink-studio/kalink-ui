@@ -1,3 +1,3 @@
 import { NavigationMenu } from '@base-ui/react/navigation-menu';
 
-export const Portal: typeof NavigationMenu.Portal = NavigationMenu.Portal;
+export const Portal = NavigationMenu.Portal;

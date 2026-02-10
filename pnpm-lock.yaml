@@ -439,8 +439,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@liip/storybook-addon-resizr':
-        specifier: ^0.1.5
-        version: 0.1.5(storybook@10.1.10(@testing-library/dom@10.4.1)(bufferutil@4.0.9)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(utf-8-validate@6.0.5))
+        specifier: ^0.1.6
+        version: 0.1.6(storybook@10.1.10(@testing-library/dom@10.4.1)(bufferutil@4.0.9)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(utf-8-validate@6.0.5))
       '@storybook/addon-a11y':
         specifier: ^10.1.10
         version: 10.1.10(storybook@10.1.10(@testing-library/dom@10.4.1)(bufferutil@4.0.9)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(utf-8-validate@6.0.5))
@@ -2308,8 +2308,8 @@ packages:
     peerDependencies:
       yjs: '>=13.5.22'
 
-  '@liip/storybook-addon-resizr@0.1.5':
-    resolution: {integrity: sha512-V1123pc9ySX4pW0y2PXRsluvAObRAaBWZwi7VczufzrA5yTDDt6Qpa16/h+RaAsMHjXXf3Vw1ZLYsuSkdXo/yw==}
+  '@liip/storybook-addon-resizr@0.1.6':
+    resolution: {integrity: sha512-IcEO7NstkxLqeleSHg9oB8iSXoadWmP586c2MaWNfgx5NjxxR6ROYmudj/nzkp/BJPByKYdT4T+ivP2qFs2OQg==}
     peerDependencies:
       storybook: ^10.1.0
 
@@ -10147,7 +10147,7 @@ snapshots:
       lexical: 0.35.0
       yjs: 13.6.27
 
-  '@liip/storybook-addon-resizr@0.1.5(storybook@10.1.10(@testing-library/dom@10.4.1)(bufferutil@4.0.9)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(utf-8-validate@6.0.5))':
+  '@liip/storybook-addon-resizr@0.1.6(storybook@10.1.10(@testing-library/dom@10.4.1)(bufferutil@4.0.9)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(utf-8-validate@6.0.5))':
     dependencies:
       storybook: 10.1.10(@testing-library/dom@10.4.1)(bufferutil@4.0.9)(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(utf-8-validate@6.0.5)
 

@@ -39,6 +39,7 @@ export const button = style({
   lineHeight: '1.5rem',
   color: buttonVars.color.foreground,
   userSelect: 'none',
+
   vars: {
     ...assignVars(buttonVars.color, {
       foreground: sys.color.content.base,
@@ -50,6 +51,7 @@ export const button = style({
       focusRing: sys.color.tone.primary,
       disabledForeground: stateColor.disabledContent,
     }),
+
     ...assignVars(buttonVars.shape, {
       corner: '0.375rem',
     }),
@@ -63,15 +65,18 @@ export const button = style({
         },
       },
     },
+
     [`&:active:not([data-disabled])`]: {
       backgroundColor: buttonVars.color.activeBackground,
       boxShadow: sys.elevation.minimal,
       borderBlockStartColor: buttonVars.color.activeBorder,
     },
+
     [`&:focus-visible`]: {
       outline: `2px solid ${buttonVars.color.focusRing}`,
       outlineOffset: '-1px',
     },
+
     [`&[data-disabled]`]: {
       color: buttonVars.color.disabledForeground,
     },

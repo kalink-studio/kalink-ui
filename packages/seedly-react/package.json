@@ -30,7 +30,7 @@
     "@chromatic-com/storybook": "^4.1.3",
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
-    "@liip/storybook-addon-resizr": "^0.1.5",
+    "@liip/storybook-addon-resizr": "^0.1.6",
     "@storybook/addon-a11y": "^10.1.10",
     "@storybook/addon-docs": "^10.1.10",
     "@storybook/addon-onboarding": "^10.1.10",

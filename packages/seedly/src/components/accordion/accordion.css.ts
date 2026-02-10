@@ -1,16 +1,14 @@
 import { style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
 
 export const accordion = style({
-  boxSizing: 'border-box',
   display: 'flex',
-  inlineSize: '24rem',
-  maxInlineSize: calc.subtract('100vw', calc.multiply(sys.spacing[8], 8)),
   flexDirection: 'column',
   justifyContent: 'center',
+  boxSizing: 'border-box',
+
   color: sys.color.content.base,
 });
 
@@ -32,29 +30,27 @@ export const trigger = style({
   alignItems: 'baseline',
   justifyContent: 'space-between',
   paddingBlock: sys.spacing[4],
-  paddingInline: `${sys.spacing[6]} ${sys.spacing[2]}`,
+  paddingInlineStart: sys.spacing[6],
+  paddingInlineEnd: sys.spacing[2],
+
   color: sys.color.content.base,
   fontFamily: 'inherit',
   fontWeight: '500',
   fontSize: '1rem',
   lineHeight: '1.5rem',
+  textAlign: 'start',
+
   background: sys.color.container.base,
   border: 'none',
   outline: 'none',
-  textAlign: 'start',
 
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: sys.color.container.low,
-        },
-      },
-    },
-    [`&:focus-visible`]: {
-      outline: `2px solid ${sys.color.tone.primary}`,
-      zIndex: '1',
-    },
+  ':hover': {
+    backgroundColor: sys.color.container.low,
+  },
+
+  ':focus-visible': {
+    outline: `2px solid ${sys.color.tone.primary}`,
+    zIndex: '1',
   },
 });
 
@@ -64,10 +60,13 @@ export const triggerIcon = style({
   inlineSize: sys.spacing[6],
   blockSize: sys.spacing[6],
   marginInlineEnd: sys.spacing[4],
-  transition: 'transform 150ms ease-out',
+  transition: transition('transform', {
+    duration: 'short.4',
+    easing: 'standard',
+  }),
 
   selectors: {
-    [`[data-panel-open] > &`]: {
+    '[data-panel-open] > &': {
       transform: 'rotate(45deg) scale(1.1)',
     },
   },
@@ -83,10 +82,10 @@ export const panel = style({
   transition: 'block-size 150ms ease-out',
 
   selectors: {
-    [`&[data-starting-style]`]: {
+    '&[data-starting-style]': {
       blockSize: '0',
     },
-    [`&[data-ending-style]`]: {
+    '&[data-ending-style]': {
       blockSize: '0',
     },
   },

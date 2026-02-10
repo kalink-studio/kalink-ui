@@ -14,6 +14,9 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-vitest'),
     getAbsolutePath('@liip/storybook-addon-resizr'),
   ],
+  features: {
+    viewport: false,
+  },
   framework: {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},

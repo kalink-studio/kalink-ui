@@ -1,3 +1,3 @@
 import { Combobox } from '@base-ui/react/combobox';
 
-export const Portal: typeof Combobox.Portal = Combobox.Portal;
+export const Portal = Combobox.Portal;

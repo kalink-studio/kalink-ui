@@ -10,7 +10,8 @@
 ## TypeScript Practices
 
 - Avoid any; prefer unknown with type guards (isObject, Array.isArray) for narrowing.
-- Try to avoid `as` casts when possible.
+- Take advantage of TypeScript's type inference instead of explicit type annotations.
+- Avoid `as` casts when possible.
 - Prefer named interfaces/types exported from modules over large inline object types.
 - For functions that accept object params, define and use a named interface/type for the parameter shape.
 - Model with discriminated unions, generics, and utility types rather than loosening types.

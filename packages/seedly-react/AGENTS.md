@@ -1,9 +1,5 @@
 # Seedly React Agent Notes
 
-## Goal
-
-- Keep Base UI parity while binding Seedly default classes.
-
 ## Wrapper implementation rules
 
 - Prefer explicit composition wrappers over `withClassName`.

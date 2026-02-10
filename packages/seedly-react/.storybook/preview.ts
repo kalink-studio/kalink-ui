@@ -26,10 +26,10 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      values: [
-        { name: 'light', value: '#f7f8fa' },
-        { name: 'dark', value: '#0d1017' },
-      ],
+      options: {
+        light: { name: 'Light', value: 'oklch(98% 0.01% 264deg)' },
+        dark: { name: 'Dark', value: '#0d1017' },
+      },
     },
   },
 };

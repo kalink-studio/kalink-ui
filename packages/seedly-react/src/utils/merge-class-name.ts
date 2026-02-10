@@ -22,11 +22,7 @@ export function mergeClassName<State>(
   }
 
   if (typeof className === 'function') {
-    return function mergedClassName(state: State) {
-      const stateClassName = className(state);
-
-      return joinClassNames(baseClassName, stateClassName);
-    };
+    return (state: State) => joinClassNames(baseClassName, className(state));
   }
 
   return joinClassNames(baseClassName, className);
