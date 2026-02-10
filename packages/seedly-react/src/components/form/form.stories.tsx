@@ -1,22 +1,22 @@
-import { Button } from '@base-ui/react/button';
-import { Field } from '@base-ui/react/field';
-import { Form } from '@base-ui/react/form';
 import * as styles from '@kalink-ui/seedly/components/form';
 import * as React from 'react';
 
-import { Form as SeedlyForm } from '.';
+import { Button } from '../button';
+import { Field } from '../field';
+
+import { Form } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Form',
-  component: SeedlyForm,
+  component: Form,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyForm>;
+} satisfies Meta<typeof Form>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyForm>;
+type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -28,7 +28,6 @@ function Example() {
 
   return (
     <Form
-      className={styles.form}
       errors={errors}
       onSubmit={async (event) => {
         event.preventDefault();

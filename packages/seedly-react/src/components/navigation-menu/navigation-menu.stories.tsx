@@ -1,20 +1,19 @@
-import { NavigationMenu } from '@base-ui/react/navigation-menu';
 import * as styles from '@kalink-ui/seedly/components/navigation-menu';
 import * as React from 'react';
 
-import { NavigationMenu as SeedlyNavigationMenu } from '.';
+import { NavigationMenu } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Navigation Menu',
-  component: SeedlyNavigationMenu.Root,
+  component: NavigationMenu.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyNavigationMenu.Root>;
+} satisfies Meta<typeof NavigationMenu.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyNavigationMenu.Root>;
+type Story = StoryObj<typeof NavigationMenu.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,16 +21,16 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <NavigationMenu.Root className={styles.root}>
-      <NavigationMenu.List className={styles.list}>
+    <NavigationMenu.Root>
+      <NavigationMenu.List>
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className={styles.trigger}>
+          <NavigationMenu.Trigger>
             Overview
-            <NavigationMenu.Icon className={styles.icon}>
+            <NavigationMenu.Icon>
               <ChevronDownIcon />
             </NavigationMenu.Icon>
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className={styles.content}>
+          <NavigationMenu.Content>
             <ul className={styles.gridLinkList}>
               {overviewLinks.map((item) => (
                 <li key={item.href}>
@@ -46,13 +45,13 @@ function Example() {
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className={styles.trigger}>
+          <NavigationMenu.Trigger>
             Handbook
-            <NavigationMenu.Icon className={styles.icon}>
+            <NavigationMenu.Icon>
               <ChevronDownIcon />
             </NavigationMenu.Icon>
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className={styles.content}>
+          <NavigationMenu.Content>
             <ul className={styles.flexLinkList}>
               {handbookLinks.map((item) => (
                 <li key={item.href}>
@@ -78,16 +77,15 @@ function Example() {
 
       <NavigationMenu.Portal>
         <NavigationMenu.Positioner
-          className={styles.positioner}
           sideOffset={10}
           collisionPadding={{ top: 5, bottom: 5, left: 20, right: 20 }}
           collisionAvoidance={{ side: 'none' }}
         >
-          <NavigationMenu.Popup className={styles.popup}>
-            <NavigationMenu.Arrow className={styles.arrow}>
+          <NavigationMenu.Popup>
+            <NavigationMenu.Arrow>
               <ArrowSvg />
             </NavigationMenu.Arrow>
-            <NavigationMenu.Viewport className={styles.viewport} />
+            <NavigationMenu.Viewport />
           </NavigationMenu.Popup>
         </NavigationMenu.Positioner>
       </NavigationMenu.Portal>
@@ -95,7 +93,7 @@ function Example() {
   );
 }
 
-function Link(props: NavigationMenu.Link.Props) {
+function Link(props: React.ComponentProps<typeof NavigationMenu.Link>) {
   return (
     <NavigationMenu.Link
       render={

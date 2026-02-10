@@ -1,19 +1,18 @@
-import { Autocomplete } from '@base-ui/react/autocomplete';
 import * as styles from '@kalink-ui/seedly/components/autocomplete';
 
-import { Autocomplete as SeedlyAutocomplete } from '.';
+import { Autocomplete } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Autocomplete',
-  component: SeedlyAutocomplete.Root,
+  component: Autocomplete.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyAutocomplete.Root>;
+} satisfies Meta<typeof Autocomplete.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyAutocomplete.Root>;
+type Story = StoryObj<typeof Autocomplete.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -24,25 +23,16 @@ function Example() {
     <Autocomplete.Root items={tags}>
       <label className={styles.label}>
         Search tags
-        <Autocomplete.Input
-          placeholder="e.g. feature"
-          className={styles.input}
-        />
+        <Autocomplete.Input placeholder="e.g. feature" />
       </label>
 
       <Autocomplete.Portal>
-        <Autocomplete.Positioner className={styles.positioner} sideOffset={4}>
-          <Autocomplete.Popup className={styles.popup}>
-            <Autocomplete.Empty className={styles.empty}>
-              No tags found.
-            </Autocomplete.Empty>
-            <Autocomplete.List className={styles.list}>
+        <Autocomplete.Positioner sideOffset={4}>
+          <Autocomplete.Popup>
+            <Autocomplete.Empty>No tags found.</Autocomplete.Empty>
+            <Autocomplete.List>
               {(tag: Tag) => (
-                <Autocomplete.Item
-                  key={tag.id}
-                  className={styles.item}
-                  value={tag}
-                >
+                <Autocomplete.Item key={tag.id} value={tag}>
                   {tag.value}
                 </Autocomplete.Item>
               )}

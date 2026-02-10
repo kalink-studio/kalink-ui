@@ -1,21 +1,21 @@
-import { Field } from '@base-ui/react/field';
-import { Select } from '@base-ui/react/select';
 import * as styles from '@kalink-ui/seedly/components/select';
 import * as React from 'react';
 
-import { Select as SeedlySelect } from '.';
+import { Field } from '../field';
+
+import { Select } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Select',
-  component: SeedlySelect.Root,
+  component: Select.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlySelect.Root>;
+} satisfies Meta<typeof Select.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlySelect.Root>;
+type Story = StoryObj<typeof Select.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -40,33 +40,27 @@ function Example() {
         Apple
       </Field.Label>
       <Select.Root items={apples}>
-        <Select.Trigger className={styles.select}>
-          <Select.Value className={styles.value} placeholder="Select apple" />
-          <Select.Icon className={styles.selectIcon}>
+        <Select.Trigger>
+          <Select.Value placeholder="Select apple" />
+          <Select.Icon>
             <ChevronUpDownIcon />
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Positioner className={styles.positioner} sideOffset={8}>
-            <Select.Popup className={styles.popup}>
-              <Select.ScrollUpArrow className={styles.scrollArrow} />
-              <Select.List className={styles.list}>
+          <Select.Positioner sideOffset={8}>
+            <Select.Popup>
+              <Select.ScrollUpArrow />
+              <Select.List>
                 {apples.map(({ label, value }) => (
-                  <Select.Item
-                    key={label}
-                    value={value}
-                    className={styles.item}
-                  >
-                    <Select.ItemIndicator className={styles.itemIndicator}>
+                  <Select.Item key={label} value={value}>
+                    <Select.ItemIndicator>
                       <CheckIcon className={styles.itemIndicatorIcon} />
                     </Select.ItemIndicator>
-                    <Select.ItemText className={styles.itemText}>
-                      {label}
-                    </Select.ItemText>
+                    <Select.ItemText>{label}</Select.ItemText>
                   </Select.Item>
                 ))}
               </Select.List>
-              <Select.ScrollDownArrow className={styles.scrollArrow} />
+              <Select.ScrollDownArrow />
             </Select.Popup>
           </Select.Positioner>
         </Select.Portal>

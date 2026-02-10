@@ -1,19 +1,16 @@
-import { Meter } from '@base-ui/react/meter';
-import * as styles from '@kalink-ui/seedly/components/meter';
-
-import { Meter as SeedlyMeter } from '.';
+import { Meter } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Meter',
-  component: SeedlyMeter.Root,
+  component: Meter.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyMeter.Root>;
+} satisfies Meta<typeof Meter.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyMeter.Root>;
+type Story = StoryObj<typeof Meter.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -21,11 +18,11 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Meter.Root className={styles.meter} value={24}>
-      <Meter.Label className={styles.label}>Storage Used</Meter.Label>
-      <Meter.Value className={styles.value} />
-      <Meter.Track className={styles.track}>
-        <Meter.Indicator className={styles.indicator} />
+    <Meter.Root value={24}>
+      <Meter.Label>Storage Used</Meter.Label>
+      <Meter.Value />
+      <Meter.Track>
+        <Meter.Indicator />
       </Meter.Track>
     </Meter.Root>
   );

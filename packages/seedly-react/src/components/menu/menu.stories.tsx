@@ -1,20 +1,19 @@
-import { Menu } from '@base-ui/react/menu';
 import * as styles from '@kalink-ui/seedly/components/menu';
 import * as React from 'react';
 
-import { Menu as SeedlyMenu } from '.';
+import { Menu } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Menu',
-  component: SeedlyMenu.Root,
+  component: Menu.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyMenu.Root>;
+} satisfies Meta<typeof Menu.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyMenu.Root>;
+type Story = StoryObj<typeof Menu.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,23 +22,23 @@ export const Default: Story = {
 function Example() {
   return (
     <Menu.Root>
-      <Menu.Trigger className={styles.button}>
+      <Menu.Trigger>
         Song <ChevronDownIcon className={styles.buttonIcon} />
       </Menu.Trigger>
       <Menu.Portal>
-        <Menu.Positioner className={styles.positioner} sideOffset={8}>
-          <Menu.Popup className={styles.popup}>
-            <Menu.Arrow className={styles.arrow}>
+        <Menu.Positioner sideOffset={8}>
+          <Menu.Popup>
+            <Menu.Arrow>
               <ArrowSvg />
             </Menu.Arrow>
-            <Menu.Item className={styles.item}>Add to Library</Menu.Item>
-            <Menu.Item className={styles.item}>Add to Playlist</Menu.Item>
-            <Menu.Separator className={styles.separator} />
-            <Menu.Item className={styles.item}>Play Next</Menu.Item>
-            <Menu.Item className={styles.item}>Play Last</Menu.Item>
-            <Menu.Separator className={styles.separator} />
-            <Menu.Item className={styles.item}>Favorite</Menu.Item>
-            <Menu.Item className={styles.item}>Share</Menu.Item>
+            <Menu.Item>Add to Library</Menu.Item>
+            <Menu.Item>Add to Playlist</Menu.Item>
+            <Menu.Separator />
+            <Menu.Item>Play Next</Menu.Item>
+            <Menu.Item>Play Last</Menu.Item>
+            <Menu.Separator />
+            <Menu.Item>Favorite</Menu.Item>
+            <Menu.Item>Share</Menu.Item>
           </Menu.Popup>
         </Menu.Positioner>
       </Menu.Portal>

@@ -1,20 +1,19 @@
-import { Tabs } from '@base-ui/react/tabs';
 import * as styles from '@kalink-ui/seedly/components/tabs';
 import * as React from 'react';
 
-import { Tabs as SeedlyTabs } from '.';
+import { Tabs } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Tabs',
-  component: SeedlyTabs.Root,
+  component: Tabs.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyTabs.Root>;
+} satisfies Meta<typeof Tabs.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyTabs.Root>;
+type Story = StoryObj<typeof Tabs.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,26 +21,20 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Tabs.Root className={styles.tabs} defaultValue="overview">
-      <Tabs.List className={styles.list}>
-        <Tabs.Tab className={styles.tab} value="overview">
-          Overview
-        </Tabs.Tab>
-        <Tabs.Tab className={styles.tab} value="projects">
-          Projects
-        </Tabs.Tab>
-        <Tabs.Tab className={styles.tab} value="account">
-          Account
-        </Tabs.Tab>
-        <Tabs.Indicator className={styles.indicator} />
+    <Tabs.Root defaultValue="overview">
+      <Tabs.List>
+        <Tabs.Tab value="overview">Overview</Tabs.Tab>
+        <Tabs.Tab value="projects">Projects</Tabs.Tab>
+        <Tabs.Tab value="account">Account</Tabs.Tab>
+        <Tabs.Indicator />
       </Tabs.List>
-      <Tabs.Panel className={styles.panel} value="overview">
+      <Tabs.Panel value="overview">
         <OverviewIcon className={styles.icon} />
       </Tabs.Panel>
-      <Tabs.Panel className={styles.panel} value="projects">
+      <Tabs.Panel value="projects">
         <ProjectIcon className={styles.icon} />
       </Tabs.Panel>
-      <Tabs.Panel className={styles.panel} value="account">
+      <Tabs.Panel value="account">
         <PersonIcon className={styles.icon} />
       </Tabs.Panel>
     </Tabs.Root>

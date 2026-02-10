@@ -1,19 +1,18 @@
-import { Switch } from '@base-ui/react/switch';
 import * as styles from '@kalink-ui/seedly/components/switch';
 
-import { Switch as SeedlySwitch } from '.';
+import { Switch } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Switch',
-  component: SeedlySwitch.Root,
+  component: Switch.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlySwitch.Root>;
+} satisfies Meta<typeof Switch.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlySwitch.Root>;
+type Story = StoryObj<typeof Switch.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,8 +21,8 @@ export const Default: Story = {
 function Example() {
   return (
     <label className={styles.label}>
-      <Switch.Root defaultChecked className={styles.switchRoot}>
-        <Switch.Thumb className={styles.thumb} />
+      <Switch.Root defaultChecked>
+        <Switch.Thumb />
       </Switch.Root>
       Notifications
     </label>

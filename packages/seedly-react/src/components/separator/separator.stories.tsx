@@ -1,19 +1,18 @@
-import { Separator } from '@base-ui/react/separator';
 import * as styles from '@kalink-ui/seedly/components/separator';
 
-import { Separator as SeedlySeparator } from '.';
+import { Separator } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Separator',
-  component: SeedlySeparator,
+  component: Separator,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlySeparator>;
+} satisfies Meta<typeof Separator>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlySeparator>;
+type Story = StoryObj<typeof Separator>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -35,7 +34,7 @@ function Example() {
         Support
       </a>
 
-      <Separator orientation="vertical" className={styles.separator} />
+      <Separator orientation="vertical" />
 
       <a href="#" className={styles.link}>
         Log in

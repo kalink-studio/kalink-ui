@@ -1,20 +1,19 @@
-import { NumberField } from '@base-ui/react/number-field';
 import * as styles from '@kalink-ui/seedly/components/number-field';
 import * as React from 'react';
 
-import { NumberField as SeedlyNumberField } from '.';
+import { NumberField } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Number Field',
-  component: SeedlyNumberField.Root,
+  component: NumberField.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyNumberField.Root>;
+} satisfies Meta<typeof NumberField.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyNumberField.Root>;
+type Story = StoryObj<typeof NumberField.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,22 +22,22 @@ export const Default: Story = {
 function Example() {
   const id = React.useId();
   return (
-    <NumberField.Root id={id} defaultValue={100} className={styles.field}>
-      <NumberField.ScrubArea className={styles.scrubArea}>
+    <NumberField.Root id={id} defaultValue={100}>
+      <NumberField.ScrubArea>
         <label htmlFor={id} className={styles.label}>
           Amount
         </label>
-        <NumberField.ScrubAreaCursor className={styles.scrubAreaCursor}>
+        <NumberField.ScrubAreaCursor>
           <CursorGrowIcon />
         </NumberField.ScrubAreaCursor>
       </NumberField.ScrubArea>
 
-      <NumberField.Group className={styles.group}>
-        <NumberField.Decrement className={styles.decrement}>
+      <NumberField.Group>
+        <NumberField.Decrement>
           <MinusIcon />
         </NumberField.Decrement>
-        <NumberField.Input className={styles.input} />
-        <NumberField.Increment className={styles.increment}>
+        <NumberField.Input />
+        <NumberField.Increment>
           <PlusIcon />
         </NumberField.Increment>
       </NumberField.Group>

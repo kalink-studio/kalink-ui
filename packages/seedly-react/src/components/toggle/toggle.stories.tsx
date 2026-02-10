@@ -1,20 +1,19 @@
-import { Toggle } from '@base-ui/react/toggle';
 import * as styles from '@kalink-ui/seedly/components/toggle';
 import * as React from 'react';
 
-import { Toggle as SeedlyToggle } from '.';
+import { Toggle } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Toggle',
-  component: SeedlyToggle,
+  component: Toggle,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyToggle>;
+} satisfies Meta<typeof Toggle>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyToggle>;
+type Story = StoryObj<typeof Toggle>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -25,7 +24,6 @@ function Example() {
     <div className={styles.panel}>
       <Toggle
         aria-label="Favorite"
-        className={styles.button}
         render={(props, state) => {
           if (state.pressed) {
             return (

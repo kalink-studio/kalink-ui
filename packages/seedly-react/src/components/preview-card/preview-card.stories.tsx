@@ -1,20 +1,19 @@
-import { PreviewCard } from '@base-ui/react/preview-card';
 import * as styles from '@kalink-ui/seedly/components/preview-card';
 import * as React from 'react';
 
-import { PreviewCard as SeedlyPreviewCard } from '.';
+import { PreviewCard } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Preview Card',
-  component: SeedlyPreviewCard.Root,
+  component: PreviewCard.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyPreviewCard.Root>;
+} satisfies Meta<typeof PreviewCard.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyPreviewCard.Root>;
+type Story = StoryObj<typeof PreviewCard.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -25,19 +24,16 @@ function Example() {
     <PreviewCard.Root>
       <p className={styles.paragraph}>
         The principles of good{' '}
-        <PreviewCard.Trigger
-          className={styles.link}
-          href="https://en.wikipedia.org/wiki/Typography"
-        >
+        <PreviewCard.Trigger href="https://en.wikipedia.org/wiki/Typography">
           typography
         </PreviewCard.Trigger>{' '}
         remain in the digital age.
       </p>
 
       <PreviewCard.Portal>
-        <PreviewCard.Positioner sideOffset={8} className={styles.positioner}>
-          <PreviewCard.Popup className={styles.popup}>
-            <PreviewCard.Arrow className={styles.arrow}>
+        <PreviewCard.Positioner sideOffset={8}>
+          <PreviewCard.Popup>
+            <PreviewCard.Arrow>
               <ArrowSvg />
             </PreviewCard.Arrow>
             <div className={styles.popupContent}>

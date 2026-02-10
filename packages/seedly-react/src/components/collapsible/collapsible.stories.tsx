@@ -1,20 +1,19 @@
-import { Collapsible } from '@base-ui/react/collapsible';
 import * as styles from '@kalink-ui/seedly/components/collapsible';
 import * as React from 'react';
 
-import { Collapsible as SeedlyCollapsible } from '.';
+import { Collapsible } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Collapsible',
-  component: SeedlyCollapsible.Root,
+  component: Collapsible.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyCollapsible.Root>;
+} satisfies Meta<typeof Collapsible.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyCollapsible.Root>;
+type Story = StoryObj<typeof Collapsible.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,12 +21,12 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Collapsible.Root className={styles.collapsible}>
-      <Collapsible.Trigger className={styles.trigger}>
+    <Collapsible.Root>
+      <Collapsible.Trigger>
         <ChevronIcon className={styles.icon} />
         Recovery keys
       </Collapsible.Trigger>
-      <Collapsible.Panel className={styles.panel}>
+      <Collapsible.Panel>
         <div className={styles.content}>
           <div>alien-bean-pasta</div>
           <div>wild-irish-burrito</div>

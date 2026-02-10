@@ -1,20 +1,18 @@
-import { Progress } from '@base-ui/react/progress';
-import * as styles from '@kalink-ui/seedly/components/progress';
 import * as React from 'react';
 
-import { Progress as SeedlyProgress } from '.';
+import { Progress } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Progress',
-  component: SeedlyProgress.Root,
+  component: Progress.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyProgress.Root>;
+} satisfies Meta<typeof Progress.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyProgress.Root>;
+type Story = StoryObj<typeof Progress.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -34,11 +32,11 @@ function Example() {
   }, []);
 
   return (
-    <Progress.Root className={styles.progress} value={value}>
-      <Progress.Label className={styles.label}>Export data</Progress.Label>
-      <Progress.Value className={styles.value} />
-      <Progress.Track className={styles.track}>
-        <Progress.Indicator className={styles.indicator} />
+    <Progress.Root value={value}>
+      <Progress.Label>Export data</Progress.Label>
+      <Progress.Value />
+      <Progress.Track>
+        <Progress.Indicator />
       </Progress.Track>
     </Progress.Root>
   );

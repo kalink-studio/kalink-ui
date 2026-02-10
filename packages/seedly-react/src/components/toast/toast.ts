@@ -5,4 +5,5 @@ export { Portal } from './portal';
 export { Provider } from './provider';
 export { Root } from './root';
 export { Title } from './title';
+export { useToastManager } from './use-toast-manager';
 export { Viewport } from './viewport';

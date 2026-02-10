@@ -1,21 +1,21 @@
-import { Toggle } from '@base-ui/react/toggle';
-import { ToggleGroup } from '@base-ui/react/toggle-group';
 import * as styles from '@kalink-ui/seedly/components/toggle-group';
 import * as React from 'react';
 
-import { ToggleGroup as SeedlyToggleGroup } from '.';
+import { Toggle } from '../toggle';
+
+import { ToggleGroup } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Toggle Group',
-  component: SeedlyToggleGroup,
+  component: ToggleGroup,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyToggleGroup>;
+} satisfies Meta<typeof ToggleGroup>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyToggleGroup>;
+type Story = StoryObj<typeof ToggleGroup>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,7 +23,7 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <ToggleGroup defaultValue={['left']} className={styles.panel}>
+    <ToggleGroup defaultValue={['left']}>
       <Toggle aria-label="Align left" value="left" className={styles.button}>
         <AlignLeftIcon className={styles.icon} />
       </Toggle>

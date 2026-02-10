@@ -1,20 +1,19 @@
-import { Accordion } from '@base-ui/react/accordion';
 import * as styles from '@kalink-ui/seedly/components/accordion';
 import * as React from 'react';
 
-import { Accordion as SeedlyAccordion } from '.';
+import { Accordion } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Accordion',
-  component: SeedlyAccordion.Root,
+  component: Accordion.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyAccordion.Root>;
+} satisfies Meta<typeof Accordion.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyAccordion.Root>;
+type Story = StoryObj<typeof Accordion.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,15 +21,15 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Accordion.Root className={styles.accordion}>
-      <Accordion.Item className={styles.item}>
-        <Accordion.Header className={styles.header}>
-          <Accordion.Trigger className={styles.trigger}>
+    <Accordion.Root>
+      <Accordion.Item>
+        <Accordion.Header>
+          <Accordion.Trigger>
             What is Base UI?
             <PlusIcon className={styles.triggerIcon} />
           </Accordion.Trigger>
         </Accordion.Header>
-        <Accordion.Panel className={styles.panel}>
+        <Accordion.Panel>
           <div className={styles.content}>
             Base UI is a library of high-quality unstyled React components for
             design systems and web apps.
@@ -38,14 +37,14 @@ function Example() {
         </Accordion.Panel>
       </Accordion.Item>
 
-      <Accordion.Item className={styles.item}>
-        <Accordion.Header className={styles.header}>
-          <Accordion.Trigger className={styles.trigger}>
+      <Accordion.Item>
+        <Accordion.Header>
+          <Accordion.Trigger>
             How do I get started?
             <PlusIcon className={styles.triggerIcon} />
           </Accordion.Trigger>
         </Accordion.Header>
-        <Accordion.Panel className={styles.panel}>
+        <Accordion.Panel>
           <div className={styles.content}>
             Head to the “Quick start” guide in the docs. If you’ve used unstyled
             libraries before, you’ll feel at home.
@@ -53,14 +52,14 @@ function Example() {
         </Accordion.Panel>
       </Accordion.Item>
 
-      <Accordion.Item className={styles.item}>
-        <Accordion.Header className={styles.header}>
-          <Accordion.Trigger className={styles.trigger}>
+      <Accordion.Item>
+        <Accordion.Header>
+          <Accordion.Trigger>
             Can I use it for my project?
             <PlusIcon className={styles.triggerIcon} />
           </Accordion.Trigger>
         </Accordion.Header>
-        <Accordion.Panel className={styles.panel}>
+        <Accordion.Panel>
           <div className={styles.content}>
             Of course! Base UI is free and open source.
           </div>

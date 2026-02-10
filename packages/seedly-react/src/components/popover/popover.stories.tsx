@@ -1,20 +1,19 @@
-import { Popover } from '@base-ui/react/popover';
 import * as styles from '@kalink-ui/seedly/components/popover';
 import * as React from 'react';
 
-import { Popover as SeedlyPopover } from '.';
+import { Popover } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Popover',
-  component: SeedlyPopover.Root,
+  component: Popover.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyPopover.Root>;
+} satisfies Meta<typeof Popover.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyPopover.Root>;
+type Story = StoryObj<typeof Popover.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,19 +22,17 @@ export const Default: Story = {
 function Example() {
   return (
     <Popover.Root>
-      <Popover.Trigger className={styles.iconButton}>
+      <Popover.Trigger>
         <BellIcon aria-label="Notifications" className={styles.icon} />
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Positioner className={styles.positioner} sideOffset={8}>
-          <Popover.Popup className={styles.popup}>
-            <Popover.Arrow className={styles.arrow}>
+        <Popover.Positioner sideOffset={8}>
+          <Popover.Popup>
+            <Popover.Arrow>
               <ArrowSvg />
             </Popover.Arrow>
-            <Popover.Title className={styles.title}>
-              Notifications
-            </Popover.Title>
-            <Popover.Description className={styles.description}>
+            <Popover.Title>Notifications</Popover.Title>
+            <Popover.Description>
               You are all caught up. Good job!
             </Popover.Description>
           </Popover.Popup>

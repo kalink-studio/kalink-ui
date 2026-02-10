@@ -1,21 +1,19 @@
-import { Radio } from '@base-ui/react/radio';
-import { RadioGroup } from '@base-ui/react/radio-group';
 import * as styles from '@kalink-ui/seedly/components/radio';
 import * as React from 'react';
 
-import { Radio as SeedlyRadio } from '.';
+import { Radio } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Radio',
-  component: SeedlyRadio.Root,
+  component: Radio.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyRadio.Root>;
+} satisfies Meta<typeof Radio.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyRadio.Root>;
+type Story = StoryObj<typeof Radio.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -24,35 +22,31 @@ export const Default: Story = {
 function Example() {
   const id = React.useId();
   return (
-    <RadioGroup
-      aria-labelledby={id}
-      defaultValue="fuji-apple"
-      className={styles.radioGroup}
-    >
+    <Radio.Group aria-labelledby={id} defaultValue="fuji-apple">
       <div className={styles.caption} id={id}>
         Best apple
       </div>
 
       <label className={styles.item}>
-        <Radio.Root value="fuji-apple" className={styles.radio}>
-          <Radio.Indicator className={styles.indicator} />
+        <Radio.Root value="fuji-apple">
+          <Radio.Indicator />
         </Radio.Root>
         Fuji
       </label>
 
       <label className={styles.item}>
-        <Radio.Root value="gala-apple" className={styles.radio}>
-          <Radio.Indicator className={styles.indicator} />
+        <Radio.Root value="gala-apple">
+          <Radio.Indicator />
         </Radio.Root>
         Gala
       </label>
 
       <label className={styles.item}>
-        <Radio.Root value="granny-smith-apple" className={styles.radio}>
-          <Radio.Indicator className={styles.indicator} />
+        <Radio.Root value="granny-smith-apple">
+          <Radio.Indicator />
         </Radio.Root>
         Granny Smith
       </label>
-    </RadioGroup>
+    </Radio.Group>
   );
 }

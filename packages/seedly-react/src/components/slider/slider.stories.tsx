@@ -1,19 +1,16 @@
-import { Slider } from '@base-ui/react/slider';
-import * as styles from '@kalink-ui/seedly/components/slider';
-
-import { Slider as SeedlySlider } from '.';
+import { Slider } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Slider',
-  component: SeedlySlider.Root,
+  component: Slider.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlySlider.Root>;
+} satisfies Meta<typeof Slider.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlySlider.Root>;
+type Story = StoryObj<typeof Slider.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,10 +19,10 @@ export const Default: Story = {
 function Example() {
   return (
     <Slider.Root defaultValue={25}>
-      <Slider.Control className={styles.control}>
-        <Slider.Track className={styles.track}>
-          <Slider.Indicator className={styles.indicator} />
-          <Slider.Thumb aria-label="Volume" className={styles.thumb} />
+      <Slider.Control>
+        <Slider.Track>
+          <Slider.Indicator />
+          <Slider.Thumb aria-label="Volume" />
         </Slider.Track>
       </Slider.Control>
     </Slider.Root>

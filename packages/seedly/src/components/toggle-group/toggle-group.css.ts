@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { sys } from '../../styles';
 
 export const toggleGroupVars = createThemeContract({
   color: {
@@ -32,10 +32,10 @@ export const panel = style({
     ...assignVars(toggleGroupVars.color, {
       panelBorder: sys.color.container.high,
       panelBackground: sys.color.container.base,
-      buttonForeground: stateColor.mutedContent,
+      buttonForeground: sys.color.content.base,
       buttonHoverBackground: sys.color.container.low,
       buttonActiveBackground: sys.color.container.high,
-      buttonPressedBackground: sys.color.container.low,
+      buttonPressedBackground: sys.color.container.high,
       buttonPressedForeground: sys.color.content.base,
       focusRing: sys.color.tone.primary,
     }),

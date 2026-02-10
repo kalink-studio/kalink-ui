@@ -1,21 +1,21 @@
-import { Checkbox } from '@base-ui/react/checkbox';
-import { CheckboxGroup } from '@base-ui/react/checkbox-group';
 import * as styles from '@kalink-ui/seedly/components/checkbox-group';
 import * as React from 'react';
 
-import { CheckboxGroup as SeedlyCheckboxGroup } from '.';
+import { Checkbox } from '../checkbox';
+
+import { CheckboxGroup } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Checkbox Group',
-  component: SeedlyCheckboxGroup,
+  component: CheckboxGroup,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyCheckboxGroup>;
+} satisfies Meta<typeof CheckboxGroup>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyCheckboxGroup>;
+type Story = StoryObj<typeof CheckboxGroup>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -24,11 +24,7 @@ export const Default: Story = {
 function Example() {
   const id = React.useId();
   return (
-    <CheckboxGroup
-      aria-labelledby={id}
-      defaultValue={['fuji-apple']}
-      className={styles.checkboxGroup}
-    >
+    <CheckboxGroup aria-labelledby={id} defaultValue={['fuji-apple']}>
       <div className={styles.caption} id={id}>
         Apples
       </div>

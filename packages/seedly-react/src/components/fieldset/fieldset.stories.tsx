@@ -1,20 +1,20 @@
-import { Field } from '@base-ui/react/field';
-import { Fieldset } from '@base-ui/react/fieldset';
 import * as styles from '@kalink-ui/seedly/components/fieldset';
 
-import { Fieldset as SeedlyFieldset } from '.';
+import { Field } from '../field';
+
+import { Fieldset } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Fieldset',
-  component: SeedlyFieldset.Root,
+  component: Fieldset.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyFieldset.Root>;
+} satisfies Meta<typeof Fieldset.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyFieldset.Root>;
+type Story = StoryObj<typeof Fieldset.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -22,10 +22,8 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Fieldset.Root className={styles.fieldset}>
-      <Fieldset.Legend className={styles.legend}>
-        Billing details
-      </Fieldset.Legend>
+    <Fieldset.Root>
+      <Fieldset.Legend>Billing details</Fieldset.Legend>
 
       <Field.Root className={styles.field}>
         <Field.Label className={styles.label}>Company</Field.Label>

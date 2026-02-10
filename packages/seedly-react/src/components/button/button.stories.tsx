@@ -1,24 +1,21 @@
-import { Button } from '@base-ui/react/button';
-import * as styles from '@kalink-ui/seedly/components/button';
-
-import { Button as SeedlyButton } from '.';
+import { Button } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Button',
-  component: SeedlyButton,
+  component: Button,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyButton>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyButton>;
+type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   render: () => <Example />,
 };
 
 function Example() {
-  return <Button className={styles.button}>Submit</Button>;
+  return <Button>Submit</Button>;
 }

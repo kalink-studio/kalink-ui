@@ -1,23 +1,23 @@
-import { Select } from '@base-ui/react/select';
-import { Toggle } from '@base-ui/react/toggle';
-import { ToggleGroup } from '@base-ui/react/toggle-group';
-import { Toolbar } from '@base-ui/react/toolbar';
 import * as styles from '@kalink-ui/seedly/components/toolbar';
 import * as React from 'react';
 
-import { Toolbar as SeedlyToolbar } from '.';
+import { Select } from '../select';
+import { Toggle } from '../toggle';
+import { ToggleGroup } from '../toggle-group';
+
+import { Toolbar } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Toolbar',
-  component: SeedlyToolbar.Root,
+  component: Toolbar.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyToolbar.Root>;
+} satisfies Meta<typeof Toolbar.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyToolbar.Root>;
+type Story = StoryObj<typeof Toolbar.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -25,13 +25,12 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Toolbar.Root className={styles.toolbar}>
+    <Toolbar.Root>
       <ToggleGroup className={styles.group} aria-label="Alignment">
         <Toolbar.Button
           render={<Toggle />}
           aria-label="Align left"
           value="align-left"
-          className={styles.button}
         >
           Align Left
         </Toolbar.Button>
@@ -39,29 +38,18 @@ function Example() {
           render={<Toggle />}
           aria-label="Align right"
           value="align-right"
-          className={styles.button}
         >
           Align Right
         </Toolbar.Button>
       </ToggleGroup>
-      <Toolbar.Separator className={styles.separator} />
-      <Toolbar.Group className={styles.group} aria-label="Numerical format">
-        <Toolbar.Button
-          className={styles.button}
-          aria-label="Format as currency"
-        >
-          $
-        </Toolbar.Button>
-        <Toolbar.Button
-          className={styles.button}
-          aria-label="Format as percent"
-        >
-          %
-        </Toolbar.Button>
+      <Toolbar.Separator />
+      <Toolbar.Group aria-label="Numerical format">
+        <Toolbar.Button aria-label="Format as currency">$</Toolbar.Button>
+        <Toolbar.Button aria-label="Format as percent">%</Toolbar.Button>
       </Toolbar.Group>
-      <Toolbar.Separator className={styles.separator} />
+      <Toolbar.Separator />
       <Select.Root defaultValue="Helvetica">
-        <Toolbar.Button render={<Select.Trigger />} className={styles.button}>
+        <Toolbar.Button render={<Select.Trigger />}>
           <Select.Value />
           <Select.Icon className={styles.selectIcon}>
             <ChevronUpDownIcon />
@@ -90,10 +78,8 @@ function Example() {
           </Select.Positioner>
         </Select.Portal>
       </Select.Root>
-      <Toolbar.Separator className={styles.separator} />
-      <Toolbar.Link className={styles.link} href="#">
-        Edited 51m ago
-      </Toolbar.Link>
+      <Toolbar.Separator />
+      <Toolbar.Link href="#">Edited 51m ago</Toolbar.Link>
     </Toolbar.Root>
   );
 }

@@ -1,19 +1,18 @@
-import { ScrollArea } from '@base-ui/react/scroll-area';
 import * as styles from '@kalink-ui/seedly/components/scroll-area';
 
-import { ScrollArea as SeedlyScrollArea } from '.';
+import { ScrollArea } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Scroll Area',
-  component: SeedlyScrollArea.Root,
+  component: ScrollArea.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyScrollArea.Root>;
+} satisfies Meta<typeof ScrollArea.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyScrollArea.Root>;
+type Story = StoryObj<typeof ScrollArea.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -21,9 +20,9 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <ScrollArea.Root className={styles.scrollArea}>
-      <ScrollArea.Viewport className={styles.viewport}>
-        <ScrollArea.Content className={styles.content}>
+    <ScrollArea.Root>
+      <ScrollArea.Viewport>
+        <ScrollArea.Content>
           <p className={styles.paragraph}>
             Vernacular architecture is building done outside any academic
             tradition, and without professional guidance. It is not a particular
@@ -50,8 +49,8 @@ function Example() {
           </p>
         </ScrollArea.Content>
       </ScrollArea.Viewport>
-      <ScrollArea.Scrollbar className={styles.scrollbar}>
-        <ScrollArea.Thumb className={styles.thumb} />
+      <ScrollArea.Scrollbar>
+        <ScrollArea.Thumb />
       </ScrollArea.Scrollbar>
     </ScrollArea.Root>
   );

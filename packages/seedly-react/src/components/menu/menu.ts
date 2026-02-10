@@ -5,4 +5,6 @@ export { Portal } from './portal';
 export { Positioner } from './positioner';
 export { Root } from './root';
 export { Separator } from './separator';
+export { SubmenuRoot } from './submenu-root';
+export { SubmenuTrigger } from './submenu-trigger';
 export { Trigger } from './trigger';

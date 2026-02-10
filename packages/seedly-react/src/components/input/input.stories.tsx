@@ -1,19 +1,18 @@
-import { Input } from '@base-ui/react/input';
 import * as styles from '@kalink-ui/seedly/components/input';
 
-import { Input as SeedlyInput } from '.';
+import { Input } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Input',
-  component: SeedlyInput,
+  component: Input,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyInput>;
+} satisfies Meta<typeof Input>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyInput>;
+type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,7 +22,7 @@ function Example() {
   return (
     <label className={styles.label}>
       Name
-      <Input placeholder="Enter your name" className={styles.input} />
+      <Input placeholder="Enter your name" />
     </label>
   );
 }

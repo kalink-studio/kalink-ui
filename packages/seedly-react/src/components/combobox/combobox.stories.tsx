@@ -1,20 +1,19 @@
-import { Combobox } from '@base-ui/react/combobox';
 import * as styles from '@kalink-ui/seedly/components/combobox';
 import * as React from 'react';
 
-import { Combobox as SeedlyCombobox } from '.';
+import { Combobox } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Combobox',
-  component: SeedlyCombobox.Root,
+  component: Combobox.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyCombobox.Root>;
+} satisfies Meta<typeof Combobox.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyCombobox.Root>;
+type Story = StoryObj<typeof Combobox.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -27,22 +26,12 @@ function Example() {
       <div className={styles.label}>
         <label htmlFor={id}>Choose a fruit</label>
         <div className={styles.inputWrapper}>
-          <Combobox.Input
-            placeholder="e.g. Apple"
-            id={id}
-            className={styles.input}
-          />
+          <Combobox.Input placeholder="e.g. Apple" id={id} />
           <div className={styles.actionButtons}>
-            <Combobox.Clear
-              className={styles.clear}
-              aria-label="Clear selection"
-            >
+            <Combobox.Clear aria-label="Clear selection">
               <ClearIcon className={styles.clearIcon} />
             </Combobox.Clear>
-            <Combobox.Trigger
-              className={styles.trigger}
-              aria-label="Open popup"
-            >
+            <Combobox.Trigger aria-label="Open popup">
               <ChevronDownIcon className={styles.triggerIcon} />
             </Combobox.Trigger>
           </div>
@@ -50,19 +39,13 @@ function Example() {
       </div>
 
       <Combobox.Portal>
-        <Combobox.Positioner className={styles.positioner} sideOffset={4}>
-          <Combobox.Popup className={styles.popup}>
-            <Combobox.Empty className={styles.empty}>
-              No fruits found.
-            </Combobox.Empty>
-            <Combobox.List className={styles.list}>
+        <Combobox.Positioner sideOffset={4}>
+          <Combobox.Popup>
+            <Combobox.Empty>No fruits found.</Combobox.Empty>
+            <Combobox.List>
               {(item: Fruit) => (
-                <Combobox.Item
-                  key={item.value}
-                  value={item}
-                  className={styles.item}
-                >
-                  <Combobox.ItemIndicator className={styles.itemIndicator}>
+                <Combobox.Item key={item.value} value={item}>
+                  <Combobox.ItemIndicator>
                     <CheckIcon className={styles.itemIndicatorIcon} />
                   </Combobox.ItemIndicator>
                   <div className={styles.itemText}>{item.label}</div>

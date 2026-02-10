@@ -1,20 +1,19 @@
-import { Toast } from '@base-ui/react/toast';
 import * as styles from '@kalink-ui/seedly/components/toast';
 import * as React from 'react';
 
-import { Toast as SeedlyToast } from '.';
+import { Toast } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Toast',
-  component: SeedlyToast.Root,
+  component: Toast.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyToast.Root>;
+} satisfies Meta<typeof Toast.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyToast.Root>;
+type Story = StoryObj<typeof Toast.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -25,7 +24,7 @@ function Example() {
     <Toast.Provider>
       <ToastCreateButton />
       <Toast.Portal>
-        <Toast.Viewport className={styles.viewport}>
+        <Toast.Viewport>
           <ToastList />
         </Toast.Viewport>
       </Toast.Portal>
@@ -55,11 +54,11 @@ function ToastCreateButton() {
 function ToastList() {
   const { toasts } = Toast.useToastManager();
   return toasts.map((toast) => (
-    <Toast.Root key={toast.id} toast={toast} className={styles.toast}>
-      <Toast.Content className={styles.content}>
-        <Toast.Title className={styles.title} />
-        <Toast.Description className={styles.description} />
-        <Toast.Close className={styles.close} aria-label="Close">
+    <Toast.Root key={toast.id} toast={toast}>
+      <Toast.Content>
+        <Toast.Title />
+        <Toast.Description />
+        <Toast.Close aria-label="Close">
           <XIcon className={styles.icon} />
         </Toast.Close>
       </Toast.Content>

@@ -1,21 +1,21 @@
-import { Menu } from '@base-ui/react/menu';
-import { Menubar } from '@base-ui/react/menubar';
 import * as styles from '@kalink-ui/seedly/components/menubar';
 import * as React from 'react';
 
-import { Menubar as SeedlyMenubar } from '.';
+import { Menu } from '../menu';
+
+import { Menubar } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Menubar',
-  component: SeedlyMenubar,
+  component: Menubar,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyMenubar>;
+} satisfies Meta<typeof Menubar>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyMenubar>;
+type Story = StoryObj<typeof Menubar>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,7 +23,7 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Menubar className={styles.menubar}>
+    <Menubar>
       <Menu.Root>
         <Menu.Trigger className={styles.menuTrigger}>File</Menu.Trigger>
         <Menu.Portal>

@@ -1,20 +1,19 @@
-import { Checkbox } from '@base-ui/react/checkbox';
 import * as styles from '@kalink-ui/seedly/components/checkbox';
 import * as React from 'react';
 
-import { Checkbox as SeedlyCheckbox } from '.';
+import { Checkbox } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Checkbox',
-  component: SeedlyCheckbox.Root,
+  component: Checkbox.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyCheckbox.Root>;
+} satisfies Meta<typeof Checkbox.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyCheckbox.Root>;
+type Story = StoryObj<typeof Checkbox.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -23,8 +22,8 @@ export const Default: Story = {
 function Example() {
   return (
     <label className={styles.label}>
-      <Checkbox.Root defaultChecked className={styles.checkbox}>
-        <Checkbox.Indicator className={styles.indicator}>
+      <Checkbox.Root defaultChecked>
+        <Checkbox.Indicator>
           <CheckIcon className={styles.icon} />
         </Checkbox.Indicator>
       </Checkbox.Root>

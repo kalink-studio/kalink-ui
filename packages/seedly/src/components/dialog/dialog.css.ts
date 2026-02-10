@@ -101,7 +101,7 @@ export const backdrop = style({
   },
   '@media': {
     '(prefers-color-scheme: dark)': {
-      opacity: '0.7',
+      opacity: '0.35',
     },
   },
   vars: {

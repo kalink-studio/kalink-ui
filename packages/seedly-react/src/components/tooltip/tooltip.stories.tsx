@@ -1,20 +1,19 @@
-import { Tooltip } from '@base-ui/react/tooltip';
 import * as styles from '@kalink-ui/seedly/components/tooltip';
 import * as React from 'react';
 
-import { Tooltip as SeedlyTooltip } from '.';
+import { Tooltip } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Tooltip',
-  component: SeedlyTooltip.Root,
+  component: Tooltip.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof SeedlyTooltip.Root>;
+} satisfies Meta<typeof Tooltip.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyTooltip.Root>;
+type Story = StoryObj<typeof Tooltip.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
@@ -25,13 +24,13 @@ function Example() {
     <Tooltip.Provider>
       <div className={styles.panel}>
         <Tooltip.Root>
-          <Tooltip.Trigger aria-label="Bold" className={styles.button}>
+          <Tooltip.Trigger aria-label="Bold">
             <BoldIcon className={styles.icon} />
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Positioner className={styles.positioner} sideOffset={10}>
-              <Tooltip.Popup className={styles.popup}>
-                <Tooltip.Arrow className={styles.arrow}>
+            <Tooltip.Positioner sideOffset={10}>
+              <Tooltip.Popup>
+                <Tooltip.Arrow>
                   <ArrowSvg />
                 </Tooltip.Arrow>
                 Bold
@@ -41,13 +40,13 @@ function Example() {
         </Tooltip.Root>
 
         <Tooltip.Root>
-          <Tooltip.Trigger aria-label="Italic" className={styles.button}>
+          <Tooltip.Trigger aria-label="Italic">
             <ItalicIcon className={styles.icon} />
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Positioner className={styles.positioner} sideOffset={10}>
-              <Tooltip.Popup className={styles.popup}>
-                <Tooltip.Arrow className={styles.arrow}>
+            <Tooltip.Positioner sideOffset={10}>
+              <Tooltip.Popup>
+                <Tooltip.Arrow>
                   <ArrowSvg />
                 </Tooltip.Arrow>
                 Italic
@@ -57,13 +56,13 @@ function Example() {
         </Tooltip.Root>
 
         <Tooltip.Root>
-          <Tooltip.Trigger aria-label="Underline" className={styles.button}>
+          <Tooltip.Trigger aria-label="Underline">
             <UnderlineIcon className={styles.icon} />
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <Tooltip.Positioner className={styles.positioner} sideOffset={10}>
-              <Tooltip.Popup className={styles.popup}>
-                <Tooltip.Arrow className={styles.arrow}>
+            <Tooltip.Positioner sideOffset={10}>
+              <Tooltip.Popup>
+                <Tooltip.Arrow>
                   <ArrowSvg />
                 </Tooltip.Arrow>
                 Underline
