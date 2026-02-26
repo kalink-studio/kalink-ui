@@ -40,7 +40,7 @@ export const trigger = style([
     textDecoration: 'none',
     whiteSpace: 'nowrap',
     backgroundColor: sys.color.container.base,
-    borderRadius: '0.375rem',
+    borderRadius: sys.shape.corner.medium,
     outline: '0',
     userSelect: 'none',
     '@media': {
@@ -75,7 +75,7 @@ export const icon = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transition: 'transform 0.2s ease',
+  transition: `transform ${sys.motion.duration.medium[1]} ${sys.motion.easing.standard}`,
 
   selectors: {
     [`&[data-popup-open]`]: {
@@ -85,7 +85,7 @@ export const icon = style({
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({}),
+  ...createFloatingPositionerStyles(),
   inlineSize: 'var(--positioner-width)',
   blockSize: 'var(--positioner-height)',
   maxInlineSize: 'var(--available-width)',
@@ -134,22 +134,16 @@ export const positioner = style({
 
 export const popup = style({
   ...createFloatingPopupStyles({
-    borderRadius: '0.5rem',
-    backgroundColor: sys.color.surface.base,
-    color: sys.color.content.base,
+    borderRadius: sys.shape.corner.rounded,
     inlineSize: 'var(--popup-width)',
     blockSize: 'var(--popup-height)',
-    lightOutline: sys.color.border.low,
-    darkOutline: sys.color.border.low,
-    darkOutlineOffset: '-1px',
-    shadow: sys.elevation.moderate,
     transition:
       'opacity var(--duration),\n    transform var(--duration),\n    inline-size var(--duration),\n    block-size var(--duration)',
     endingStyle: {
       opacity: '0',
       transform: 'scale(0.9)',
-      transitionTimingFunction: 'ease',
-      transitionDuration: '0.15s',
+      transitionTimingFunction: sys.motion.easing.standard,
+      transitionDuration: sys.motion.duration.short[4],
     },
   }),
   position: 'relative',
@@ -233,7 +227,7 @@ export const linkCard = style({
   color: 'inherit',
   backgroundColor: 'transparent',
   border: 'none',
-  borderRadius: '0.375rem',
+  borderRadius: sys.shape.corner.medium,
   '@media': {
     '(min-width: 425px)': {
       paddingBlock: sys.spacing[6],
@@ -277,12 +271,7 @@ export const linkDescription = style({
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles({
-    sideTopOffset: calc.negate(sys.spacing[4]),
-    sideBottomOffset: calc.negate(sys.spacing[4]),
-    sideLeftOffset: calc.negate(sys.spacing[7]),
-    sideRightOffset: calc.negate(sys.spacing[7]),
-  }),
+  ...createFloatingArrowPlacementStyles(),
   transition: 'left calc(var(--duration)) var(--easing)',
 });
 

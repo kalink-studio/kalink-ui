@@ -47,12 +47,11 @@ export const value = style([
 export const track = style({
   gridColumn: '1 / 3',
   ...createRangeTrackStyles({
-    blockSize: sys.spacing[2],
     overflow: 'hidden',
   }),
 });
 
 export const indicator = style({
   ...createRangeIndicatorStyles(),
-  transition: 'width 500ms',
+  transition: `width ${sys.motion.duration.long[3]} ${sys.motion.easing.standard}`,
 });

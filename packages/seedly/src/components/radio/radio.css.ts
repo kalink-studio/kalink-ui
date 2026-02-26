@@ -43,8 +43,7 @@ export const item = style({
 
 export const radio = style({
   ...createChoiceControlStyles({
-    size: sys.spacing[9],
-    borderRadius: '100%',
+    borderRadius: sys.shape.corner.circle,
     uncheckedBorderColor: radioVars.color.border,
     checkedBackgroundColor: radioVars.color.checkedBackground,
     focusRingColor: radioVars.color.focusRing,
@@ -56,7 +55,7 @@ export const indicator = style({
     alignCenter: true,
     before: {
       size: sys.spacing[4],
-      borderRadius: '100%',
+      borderRadius: sys.shape.corner.circle,
       backgroundColor: radioVars.color.checkedForeground,
     },
   }),

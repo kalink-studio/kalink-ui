@@ -23,7 +23,6 @@ export const fieldVars = createThemeContract({
 
 export const field = style({
   ...createFieldStackStyles({
-    gap: sys.spacing[2],
     alignItems: 'start',
     inlineSize: '100%',
   }),
@@ -37,7 +36,7 @@ export const field = style({
       description: stateColor.mutedContent,
     }),
     ...assignVars(fieldVars.shape, {
-      corner: '0.375rem',
+      corner: sys.shape.corner.medium,
     }),
   },
 });
@@ -52,10 +51,7 @@ export const input = style([
   typography.body.large,
   {
     ...createTextInputStyles({
-      paddingInlineStart: sys.spacing[7],
       border: `1px solid ${fieldVars.color.border}`,
-      inlineSize: '100%',
-      blockSize: sys.spacing[14],
       borderRadius: fieldVars.shape.corner,
       backgroundColor: sys.color.surface.base,
       color: fieldVars.color.foreground,

@@ -43,14 +43,14 @@ export function createRangeTrackRootVars({
 }
 
 export interface RangeTrackStylesOptions {
-  blockSize: string;
+  blockSize?: string;
   overflow?: 'hidden';
 }
 
 export function createRangeTrackStyles({
-  blockSize,
+  blockSize = sys.spacing[2],
   overflow,
-}: RangeTrackStylesOptions): StyleRule {
+}: RangeTrackStylesOptions = {}): StyleRule {
   return {
     blockSize,
     overflow,

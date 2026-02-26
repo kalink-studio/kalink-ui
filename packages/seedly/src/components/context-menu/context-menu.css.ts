@@ -16,9 +16,6 @@ import {
 const contextMenuItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: sys.color.container.base,
-    backgroundColor: sys.color.content.base,
-    insetInline: sys.spacing[2],
-    borderRadius: '0.25rem',
   }).selectors ?? {};
 
 const contextMenuTriggerButtonVars = {
@@ -48,7 +45,7 @@ const contextMenuTriggerButtonVars = {
     gap: '0',
   }),
   ...assignVars(buttonVars.shape, {
-    corner: '0.375rem',
+    corner: sys.shape.corner.medium,
   }),
 };
 
@@ -66,21 +63,12 @@ export const trigger = style([
 ]);
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    outline: '0',
-  }),
+  ...createFloatingPositionerStyles(),
 });
 
 export const popup = style({
   ...createFloatingPopupStyles({
     paddingBlock: sys.spacing[2],
-    borderRadius: '0.375rem',
-    backgroundColor: sys.color.surface.base,
-    color: sys.color.content.base,
-    lightOutline: sys.color.border.low,
-    darkOutline: sys.color.border.low,
-    darkOutlineOffset: '-1px',
-    shadow: sys.elevation.moderate,
     includeStartingStyle: false,
     endingStyle: {
       opacity: '0',

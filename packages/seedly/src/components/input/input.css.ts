@@ -21,7 +21,6 @@ export const inputVars = createThemeContract({
 
 export const label = style({
   ...createFieldStackStyles({
-    gap: sys.spacing[2],
     alignItems: 'flex-start',
   }),
   ...createFieldLabelStyles({
@@ -35,7 +34,7 @@ export const label = style({
       focusRing: sys.color.tone.primary,
     }),
     ...assignVars(inputVars.shape, {
-      corner: '0.375rem',
+      corner: sys.shape.corner.medium,
     }),
   },
 });
@@ -44,10 +43,7 @@ export const input = style([
   typography.body.large,
   {
     ...createTextInputStyles({
-      paddingInlineStart: sys.spacing[7],
       border: `1px solid ${inputVars.color.border}`,
-      inlineSize: '100%',
-      blockSize: sys.spacing[14],
       borderRadius: inputVars.shape.corner,
       backgroundColor: sys.color.surface.base,
       color: inputVars.color.foreground,

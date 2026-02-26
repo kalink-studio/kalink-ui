@@ -55,16 +55,15 @@ const menuColorDefaults = assignVars(menuVars.color, {
 });
 
 const menuShapeDefaults = assignVars(menuVars.shape, {
-  triggerCorner: '0.375rem',
-  popupCorner: '0.375rem',
-  itemCorner: '0.25rem',
+  triggerCorner: sys.shape.corner.medium,
+  popupCorner: sys.shape.corner.medium,
+  itemCorner: sys.shape.corner.small,
 });
 
 const menuItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: menuVars.color.itemHighlightedForeground,
     backgroundColor: menuVars.color.itemHighlightedBackground,
-    insetInline: sys.spacing[2],
     borderRadius: menuVars.shape.itemCorner,
   }).selectors ?? {};
 
@@ -95,9 +94,7 @@ export const buttonIcon = style({
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    outline: '0',
-  }),
+  ...createFloatingPositionerStyles(),
   vars: {
     ...menuColorDefaults,
     ...menuShapeDefaults,
@@ -112,18 +109,12 @@ export const popup = style({
     color: menuVars.color.triggerForeground,
     lightOutline: menuVars.color.popupOutlineLight,
     darkOutline: menuVars.color.popupOutlineDark,
-    darkOutlineOffset: '-1px',
     shadow: menuVars.color.popupShadow,
   }),
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles({
-    sideTopOffset: calc.negate(sys.spacing[4]),
-    sideBottomOffset: calc.negate(sys.spacing[4]),
-    sideLeftOffset: calc.negate(sys.spacing[7]),
-    sideRightOffset: calc.negate(sys.spacing[7]),
-  }),
+  ...createFloatingArrowPlacementStyles(),
 });
 
 export const arrowFill = style({

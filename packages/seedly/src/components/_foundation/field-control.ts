@@ -1,7 +1,9 @@
 import { type StyleRule } from '@vanilla-extract/css';
 
+import { sys } from '../../styles';
+
 export interface FieldStackStylesOptions {
-  gap: string;
+  gap?: string;
   alignItems?: 'start' | 'flex-start';
   inlineSize?: string;
   maxInlineSize?: string;
@@ -9,13 +11,13 @@ export interface FieldStackStylesOptions {
 }
 
 export function createFieldStackStyles(
-  options: FieldStackStylesOptions,
+  options: FieldStackStylesOptions = {},
 ): StyleRule {
   return {
     display: 'flex',
     flexDirection: 'column',
     alignItems: options.alignItems,
-    gap: options.gap,
+    gap: options.gap ?? sys.spacing[2],
     inlineSize: options.inlineSize,
     maxInlineSize: options.maxInlineSize,
     position: options.position,
@@ -23,15 +25,15 @@ export function createFieldStackStyles(
 }
 
 export interface FieldLabelStylesOptions {
-  color: string;
+  color?: string;
   cursor?: 'default' | 'ew-resize';
 }
 
 export function createFieldLabelStyles(
-  options: FieldLabelStylesOptions,
+  options: FieldLabelStylesOptions = {},
 ): StyleRule {
   return {
-    color: options.color,
+    color: options.color ?? sys.color.content.base,
     cursor: options.cursor,
   };
 }
@@ -44,15 +46,15 @@ export interface TextInputFocusStylesOptions {
 }
 
 export interface TextInputStylesOptions {
-  paddingInlineStart: string;
+  paddingInlineStart?: string;
   paddingInlineEnd?: string;
-  border: string;
+  border?: string;
   restingBorderColor?: string;
-  inlineSize: string;
-  blockSize: string;
-  borderRadius: string;
-  backgroundColor: string;
-  color: string;
+  inlineSize?: string;
+  blockSize?: string;
+  borderRadius?: string;
+  backgroundColor?: string;
+  color?: string;
   outline?: string;
   focus?: TextInputFocusStylesOptions;
   selectors?: Record<string, StyleRule>;
@@ -66,8 +68,10 @@ export interface TextInputTriggerStylesOptions extends TextInputStylesOptions {
 }
 
 export function createTextInputStyles(
-  options: TextInputStylesOptions,
+  options: TextInputStylesOptions = {},
 ): StyleRule {
+  const border = options.border ?? `1px solid ${sys.color.border.base}`;
+
   const selectors: Record<string, StyleRule> = {
     ...(options.selectors ?? {}),
   };
@@ -86,26 +90,26 @@ export function createTextInputStyles(
   }
 
   return {
-    paddingInlineStart: options.paddingInlineStart,
+    paddingInlineStart: options.paddingInlineStart ?? sys.spacing[7],
     paddingInlineEnd: options.paddingInlineEnd,
     marginBlock: '0',
     marginInline: '0',
-    border: options.border,
+    border,
     borderColor:
       options.restingBorderColor ??
       'color-mix(in srgb, currentColor 32%, transparent)',
-    inlineSize: options.inlineSize,
-    blockSize: options.blockSize,
-    borderRadius: options.borderRadius,
-    backgroundColor: options.backgroundColor,
-    color: options.color,
+    inlineSize: options.inlineSize ?? '100%',
+    blockSize: options.blockSize ?? sys.spacing[14],
+    borderRadius: options.borderRadius ?? sys.shape.corner.medium,
+    backgroundColor: options.backgroundColor ?? sys.color.surface.base,
+    color: options.color ?? sys.color.content.base,
     outline: options.outline,
     selectors,
   };
 }
 
 export function createTextInputTriggerStyles(
-  options: TextInputTriggerStylesOptions,
+  options: TextInputTriggerStylesOptions = {},
 ): StyleRule {
   const textInputStyles = createTextInputStyles(options);
 

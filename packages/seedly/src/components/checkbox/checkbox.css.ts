@@ -40,14 +40,13 @@ export const label = style({
       focusRing: sys.color.tone.primary,
     }),
     ...assignVars(checkboxVars.shape, {
-      corner: '0.25rem',
+      corner: sys.shape.corner.small,
     }),
   },
 });
 
 export const checkbox = style({
   ...createChoiceControlStyles({
-    size: sys.spacing[9],
     borderRadius: checkboxVars.shape.corner,
     uncheckedBorderColor: checkboxVars.color.border,
     checkedBackgroundColor: checkboxVars.color.checkedBackground,

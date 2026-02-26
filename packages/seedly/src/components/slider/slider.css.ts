@@ -33,15 +33,13 @@ export const control = style({
       thumbFocusRing: sys.color.tone.primary,
     }),
     ...assignVars(sliderVars.shape, {
-      thumbCorner: '100%',
+      thumbCorner: sys.shape.corner.circle,
     }),
   },
 });
 
 export const track = style({
-  ...createRangeTrackStyles({
-    blockSize: sys.spacing[2],
-  }),
+  ...createRangeTrackStyles(),
   inlineSize: '100%',
   userSelect: 'none',
 });

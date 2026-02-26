@@ -27,16 +27,11 @@ const menubarPopupOpenItemSelectors =
   createInsetHighlightStyles({
     selector: '&[data-popup-open]',
     backgroundColor: sys.color.container.low,
-    insetInline: sys.spacing[2],
-    borderRadius: '0.25rem',
   }).selectors ?? {};
 
 const menubarHighlightedItemSelectors =
   createInsetHighlightStyles({
     textColor: sys.color.container.base,
-    backgroundColor: sys.color.content.base,
-    insetInline: sys.spacing[2],
-    borderRadius: '0.25rem',
   }).selectors ?? {};
 
 export const menubar = style({
@@ -49,7 +44,7 @@ export const menuTrigger = style([
     blockSize: sys.spacing[12],
     paddingBlock: '0',
     paddingInline: sys.spacing[6],
-    borderRadius: '0.25rem',
+    borderRadius: sys.shape.corner.small,
 
     selectors: {
       ...menubarTriggerStateSelectors,
@@ -62,26 +57,17 @@ export const menuTrigger = style([
 ]);
 
 export const menuPositioner = style({
-  ...createFloatingPositionerStyles({
-    outline: '0',
-  }),
+  ...createFloatingPositionerStyles(),
 });
 
 export const menuPopup = style({
   ...createFloatingPopupStyles({
     paddingBlock: sys.spacing[2],
-    borderRadius: '0.375rem',
-    backgroundColor: sys.color.surface.base,
-    color: sys.color.content.base,
-    lightOutline: sys.color.border.low,
-    darkOutline: sys.color.border.low,
-    darkOutlineOffset: '-1px',
-    shadow: sys.elevation.moderate,
     transition: null,
     includeStartingStyle: false,
     endingStyle: {
       opacity: '0',
-      transition: 'opacity 150ms',
+      transition: `opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.standard}`,
     },
     selectors: {
       [`&[data-instant]`]: {

@@ -1,5 +1,4 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 
 import { stateColor, sys, typography } from '../../styles';
 import {
@@ -49,8 +48,8 @@ const popoverColorDefaults = assignVars(popoverVars.color, {
 });
 
 const popoverShapeDefaults = assignVars(popoverVars.shape, {
-  triggerCorner: '0.375rem',
-  popupCorner: '0.5rem',
+  triggerCorner: sys.shape.corner.medium,
+  popupCorner: sys.shape.corner.rounded,
 });
 
 export const iconButton = style([
@@ -70,7 +69,7 @@ export const iconButton = style([
   },
 ]);
 export const positioner = style({
-  ...createFloatingPositionerStyles({}),
+  ...createFloatingPositionerStyles(),
   inlineSize: 'var(--positioner-width)',
   blockSize: 'var(--positioner-height)',
   maxInlineSize: 'var(--available-width)',
@@ -92,18 +91,12 @@ export const popup = style({
     maxInlineSize: '500px',
     lightOutline: popoverVars.color.popupOutlineLight,
     darkOutline: popoverVars.color.popupOutlineDark,
-    darkOutlineOffset: '-1px',
     shadow: popoverVars.color.popupShadow,
   }),
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles({
-    sideTopOffset: calc.negate(sys.spacing[4]),
-    sideBottomOffset: calc.negate(sys.spacing[4]),
-    sideLeftOffset: calc.negate(sys.spacing[7]),
-    sideRightOffset: calc.negate(sys.spacing[7]),
-  }),
+  ...createFloatingArrowPlacementStyles(),
 });
 
 export const arrowFill = style({

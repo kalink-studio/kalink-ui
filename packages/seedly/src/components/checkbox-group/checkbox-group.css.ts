@@ -39,7 +39,7 @@ export const checkboxGroup = style({
       focusRing: sys.color.tone.primary,
     }),
     ...assignVars(checkboxGroupVars.shape, {
-      corner: '0.25rem',
+      corner: sys.shape.corner.small,
     }),
   },
 });
@@ -56,7 +56,6 @@ export const item = style({
 
 export const checkbox = style({
   ...createChoiceControlStyles({
-    size: sys.spacing[9],
     borderRadius: checkboxGroupVars.shape.corner,
     uncheckedBorderColor: checkboxGroupVars.color.border,
     checkedBackgroundColor: checkboxGroupVars.color.checkedBackground,

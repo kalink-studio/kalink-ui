@@ -27,9 +27,9 @@ export function createFloatingPositionerStyles(
 }
 
 export interface FloatingPopupStylesOptions {
-  borderRadius: string;
-  backgroundColor: string;
-  color: string;
+  borderRadius?: string;
+  backgroundColor?: string;
+  color?: string;
   paddingBlock?: string;
   paddingInline?: string;
   transformOrigin?: string;
@@ -41,8 +41,8 @@ export interface FloatingPopupStylesOptions {
   maxBlockSize?: string;
   backgroundClip?: 'padding-box';
   overflowY?: 'auto';
-  lightOutline?: string;
-  darkOutline?: string;
+  lightOutline?: string | null;
+  darkOutline?: string | null;
   shadow?: string;
   darkShadow?: string;
   darkOutlineOffset?: string;
@@ -59,8 +59,18 @@ const defaultFloatingStateStyle = {
 } as const;
 
 export function createFloatingPopupStyles(
-  options: FloatingPopupStylesOptions,
+  options: FloatingPopupStylesOptions = {},
 ): StyleRule {
+  const lightOutline =
+    options.lightOutline === null
+      ? null
+      : (options.lightOutline ?? sys.color.border.low);
+  const darkOutline =
+    options.darkOutline === null
+      ? null
+      : (options.darkOutline ?? sys.color.border.low);
+  const shadow = options.shadow ?? sys.elevation.moderate;
+
   const selectors: Record<string, StyleRule> = {
     ...(options.selectors ?? {}),
   };
@@ -77,34 +87,35 @@ export function createFloatingPopupStyles(
 
   const media: Record<string, StyleRule> = {};
 
-  if (options.lightOutline) {
+  if (lightOutline) {
     media['(prefers-color-scheme: light)'] = {
-      outline: `1px solid ${options.lightOutline}`,
-      boxShadow: options.shadow,
+      outline: `1px solid ${lightOutline}`,
+      boxShadow: shadow,
     };
   }
 
-  if (options.darkOutline) {
-    const darkShadow = options.darkShadow ?? options.shadow;
+  if (darkOutline) {
+    const darkShadow = options.darkShadow ?? shadow;
 
     media['(prefers-color-scheme: dark)'] = {
-      outline: `1px solid ${options.darkOutline}`,
-      outlineOffset: options.darkOutlineOffset,
+      outline: `1px solid ${darkOutline}`,
+      outlineOffset: options.darkOutlineOffset ?? '-1px',
       boxShadow: darkShadow,
     };
   }
 
   return {
-    borderRadius: options.borderRadius,
-    backgroundColor: options.backgroundColor,
-    color: options.color,
+    borderRadius: options.borderRadius ?? sys.shape.corner.medium,
+    backgroundColor: options.backgroundColor ?? sys.color.surface.base,
+    color: options.color ?? sys.color.content.base,
     paddingBlock: options.paddingBlock,
     paddingInline: options.paddingInline,
     transformOrigin: options.transformOrigin ?? 'var(--transform-origin)',
     transition:
       options.transition === null
         ? undefined
-        : (options.transition ?? 'transform 150ms,\n    opacity 150ms'),
+        : (options.transition ??
+          `transform ${sys.motion.duration.short[4]} ${sys.motion.easing.standard},\n    opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.standard}`),
     inlineSize: options.inlineSize,
     blockSize: options.blockSize,
     minInlineSize: options.minInlineSize,
@@ -118,45 +129,49 @@ export function createFloatingPopupStyles(
 }
 
 export interface FloatingArrowPlacementStylesOptions {
-  sideTopOffset: string;
-  sideBottomOffset: string;
-  sideLeftOffset: string;
-  sideRightOffset: string;
+  sideTopOffset?: string;
+  sideBottomOffset?: string;
+  sideLeftOffset?: string;
+  sideRightOffset?: string;
 }
 
 export function createFloatingArrowPlacementStyles(
-  options: FloatingArrowPlacementStylesOptions,
+  options: FloatingArrowPlacementStylesOptions = {},
 ): StyleRule {
   return {
     display: 'flex',
     selectors: {
       [`&[data-side='top']`]: {
-        bottom: options.sideTopOffset,
+        bottom: options.sideTopOffset ?? calc.negate(sys.spacing[4]),
         rotate: '180deg',
       },
       [`&[data-side='bottom']`]: {
-        top: options.sideBottomOffset,
+        top: options.sideBottomOffset ?? calc.negate(sys.spacing[4]),
         rotate: '0deg',
       },
       [`&[data-side='left']`]: {
-        right: options.sideLeftOffset,
+        right: options.sideLeftOffset ?? calc.negate(sys.spacing[7]),
         rotate: '90deg',
       },
       [`&[data-side='right']`]: {
-        left: options.sideRightOffset,
+        left: options.sideRightOffset ?? calc.negate(sys.spacing[7]),
         rotate: '-90deg',
       },
     },
   };
 }
 
-export function createArrowFillStyles(color: string): StyleRule {
+export function createArrowFillStyles(
+  color: string = sys.color.surface.base,
+): StyleRule {
   return {
     fill: color,
   };
 }
 
-export function createArrowOuterStrokeStyles(color: string): StyleRule {
+export function createArrowOuterStrokeStyles(
+  color: string = sys.color.border.low,
+): StyleRule {
   return {
     '@media': {
       '(prefers-color-scheme: light)': {
@@ -166,7 +181,9 @@ export function createArrowOuterStrokeStyles(color: string): StyleRule {
   };
 }
 
-export function createArrowInnerStrokeStyles(color: string): StyleRule {
+export function createArrowInnerStrokeStyles(
+  color: string = floatingSurfaceDarkOutlineColor,
+): StyleRule {
   return {
     '@media': {
       '(prefers-color-scheme: dark)': {

@@ -57,17 +57,16 @@ const selectColorDefaults = assignVars(selectVars.color, {
 });
 
 const selectShapeDefaults = assignVars(selectVars.shape, {
-  triggerCorner: '0.375rem',
-  popupCorner: '0.375rem',
-  itemCorner: '0.25rem',
-  scrollArrowCorner: '0.375rem',
+  triggerCorner: sys.shape.corner.medium,
+  popupCorner: sys.shape.corner.medium,
+  itemCorner: sys.shape.corner.small,
+  scrollArrowCorner: sys.shape.corner.medium,
 });
 
 const selectItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: selectVars.color.itemHighlightedForeground,
     backgroundColor: selectVars.color.itemHighlightedBackground,
-    insetInline: sys.spacing[2],
     borderRadius: selectVars.shape.itemCorner,
   }).selectors ?? {};
 
@@ -79,10 +78,7 @@ export const select = style([
       ...selectShapeDefaults,
     },
     ...createTextInputTriggerStyles({
-      blockSize: sys.spacing[14],
-      inlineSize: '100%',
       gap: sys.spacing[6],
-      paddingInlineStart: sys.spacing[7],
       paddingInlineEnd: sys.spacing[6],
       border: `1px solid ${selectVars.color.triggerBorder}`,
       restingBorderColor: selectVars.color.triggerBorder,
@@ -121,7 +117,6 @@ export const value = style({
 
 export const positioner = style({
   ...createFloatingPositionerStyles({
-    outline: 'none',
     zIndex: '1',
     webkitUserSelect: 'none',
     userSelect: 'none',

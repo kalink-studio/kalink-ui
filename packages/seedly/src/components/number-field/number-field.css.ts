@@ -7,7 +7,6 @@ const restingControlBorder = sys.color.border.base;
 
 export const field = style({
   ...createFieldStackStyles({
-    gap: sys.spacing[2],
     alignItems: 'start',
   }),
 });
@@ -24,7 +23,6 @@ export const scrubAreaCursor = style({
 
 export const label = style({
   ...createFieldLabelStyles({
-    color: sys.color.content.base,
     cursor: 'ew-resize',
   }),
 });
@@ -41,7 +39,7 @@ export const input = style([
     marginInline: '0',
     paddingBlock: '0',
     paddingInline: '0',
-    borderRadius: '0',
+    borderRadius: sys.shape.corner.none,
     borderBlockStart: `1px solid ${restingControlBorder}`,
     borderBlockEnd: `1px solid ${restingControlBorder}`,
     borderInlineStart: 'none',
@@ -76,7 +74,7 @@ const stepperButtonStyle = {
   paddingBlock: '0',
   paddingInline: '0',
   border: `1px solid ${restingControlBorder}`,
-  borderRadius: '0.375rem',
+  borderRadius: sys.shape.corner.medium,
   backgroundColor: sys.color.container.base,
   backgroundClip: 'padding-box',
   color: sys.color.content.base,
@@ -85,15 +83,15 @@ const stepperButtonStyle = {
 
 export const decrement = style({
   ...stepperButtonStyle,
-  borderStartEndRadius: '0',
-  borderEndEndRadius: '0',
+  borderStartEndRadius: sys.shape.corner.none,
+  borderEndEndRadius: sys.shape.corner.none,
   backgroundColor: sys.color.container.low,
 });
 
 export const increment = style({
   ...stepperButtonStyle,
-  borderStartStartRadius: '0',
-  borderEndStartRadius: '0',
+  borderStartStartRadius: sys.shape.corner.none,
+  borderEndStartRadius: sys.shape.corner.none,
 
   selectors: {
     [`&:hover`]: {

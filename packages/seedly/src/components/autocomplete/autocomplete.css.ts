@@ -14,23 +14,13 @@ import {
 const autocompleteItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: sys.color.container.base,
-    backgroundColor: sys.color.content.base,
     insetInline: sys.spacing[4],
-    borderRadius: '0.25rem',
   }).selectors ?? {};
 
 export const input = style([
   typography.body.large,
   {
     ...createTextInputStyles({
-      paddingInlineStart: sys.spacing[7],
-      inlineSize: '100%',
-      blockSize: sys.spacing[14],
-
-      border: `1px solid ${sys.color.border.base}`,
-      borderRadius: '0.375rem',
-      backgroundColor: sys.color.surface.base,
-      color: sys.color.content.base,
       outline: 'none',
 
       focus: {
@@ -44,32 +34,18 @@ export const input = style([
 ]);
 
 export const label = style({
-  ...createFieldStackStyles({
-    gap: sys.spacing[2],
-  }),
-  ...createFieldLabelStyles({
-    color: sys.color.content.base,
-  }),
+  ...createFieldStackStyles(),
+  ...createFieldLabelStyles(),
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    outline: '0',
-  }),
+  ...createFloatingPositionerStyles(),
 });
 
 export const popup = style({
   ...createFloatingPopupStyles({
     inlineSize: 'var(--anchor-width)',
     maxInlineSize: 'var(--available-width)',
-
-    borderRadius: '0.375rem',
-    backgroundColor: sys.color.surface.base,
-    color: sys.color.content.base,
-    lightOutline: sys.color.border.low,
-    darkOutline: sys.color.border.low,
-    darkOutlineOffset: '-1px',
-    shadow: sys.elevation.moderate,
 
     transition: null,
 

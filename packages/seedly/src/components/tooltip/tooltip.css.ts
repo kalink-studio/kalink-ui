@@ -1,5 +1,4 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 
 import { sys, typography } from '../../styles';
 import {
@@ -52,9 +51,9 @@ const tooltipColorDefaults = assignVars(tooltipVars.color, {
 });
 
 const tooltipShapeDefaults = assignVars(tooltipVars.shape, {
-  panelCorner: '0.375rem',
-  buttonCorner: '0.25rem',
-  popupCorner: '0.375rem',
+  panelCorner: sys.shape.corner.medium,
+  buttonCorner: sys.shape.corner.small,
+  popupCorner: sys.shape.corner.medium,
 });
 export const button = style([
   {
@@ -94,7 +93,6 @@ export const popup = style([
       color: tooltipVars.color.popupForeground,
       lightOutline: tooltipVars.color.popupOutlineLight,
       darkOutline: tooltipVars.color.popupOutlineDark,
-      darkOutlineOffset: '-1px',
       shadow: tooltipVars.color.popupShadow,
       selectors: {
         [`&[data-instant]`]: {
@@ -108,12 +106,7 @@ export const popup = style([
 ]);
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles({
-    sideTopOffset: calc.negate(sys.spacing[4]),
-    sideBottomOffset: calc.negate(sys.spacing[4]),
-    sideLeftOffset: calc.negate(sys.spacing[7]),
-    sideRightOffset: calc.negate(sys.spacing[7]),
-  }),
+  ...createFloatingArrowPlacementStyles(),
 });
 
 export const arrowFill = style({

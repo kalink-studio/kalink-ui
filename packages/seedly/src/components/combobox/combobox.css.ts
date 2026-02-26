@@ -14,13 +14,10 @@ import {
 
 export const label = style({
   ...createFieldStackStyles({
-    gap: sys.spacing[2],
     alignItems: 'start',
     inlineSize: '100%',
   }),
-  ...createFieldLabelStyles({
-    color: sys.color.content.base,
-  }),
+  ...createFieldLabelStyles(),
   position: 'relative',
 });
 
@@ -34,9 +31,7 @@ export const inputWrapper = style({
 const comboboxItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: sys.color.container.base,
-    backgroundColor: sys.color.content.base,
     insetInline: sys.spacing[4],
-    borderRadius: '0.25rem',
   }).selectors ?? {};
 
 export const trigger = style({});
@@ -47,14 +42,7 @@ export const input = style([
   typography.body.large,
   {
     ...createTextInputStyles({
-      paddingInlineStart: sys.spacing[7],
       paddingInlineEnd: calc.add(sys.spacing[4], sys.spacing[10]),
-      border: `1px solid ${sys.color.border.base}`,
-      inlineSize: '100%',
-      blockSize: sys.spacing[14],
-      borderRadius: '0.375rem',
-      backgroundColor: sys.color.surface.base,
-      color: sys.color.content.base,
       focus: {
         outlineColor: sys.color.tone.primary,
       },
@@ -95,27 +83,18 @@ export const actionButtons = style({
   color: stateColor.mutedContent,
   backgroundColor: 'transparent',
   border: 'none',
-  borderRadius: '0.25rem',
+  borderRadius: sys.shape.corner.small,
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    outline: '0',
-  }),
+  ...createFloatingPositionerStyles(),
 });
 
 export const popup = style({
   ...createFloatingPopupStyles({
-    borderRadius: '0.375rem',
-    backgroundColor: sys.color.surface.base,
-    color: sys.color.content.base,
     inlineSize: 'var(--anchor-width)',
     maxInlineSize: 'var(--available-width)',
-    lightOutline: sys.color.border.low,
-    darkOutline: sys.color.border.low,
-    darkOutlineOffset: '-1px',
-    shadow: sys.elevation.moderate,
-    transition: 'opacity 0.1s,\n    transform 0.1s',
+    transition: `opacity ${sys.motion.duration.short[2]} ${sys.motion.easing.standard},\n    transform ${sys.motion.duration.short[2]} ${sys.motion.easing.standard}`,
     startingStyle: {
       opacity: '0',
       transform: 'scale(0.95)',
