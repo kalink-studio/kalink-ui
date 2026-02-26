@@ -1,7 +1,11 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { sys, typography } from '../../styles';
+import {
+  createFieldLabelStyles,
+  createFieldStackStyles,
+  createTextInputStyles,
+} from '../_foundation';
 
 export const inputVars = createThemeContract({
   color: {
@@ -16,19 +20,18 @@ export const inputVars = createThemeContract({
 });
 
 export const label = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: sys.spacing[2],
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  fontWeight: '500',
-  color: inputVars.color.label,
+  ...createFieldStackStyles({
+    gap: sys.spacing[2],
+    alignItems: 'flex-start',
+  }),
+  ...createFieldLabelStyles({
+    color: inputVars.color.label,
+  }),
   vars: {
     ...assignVars(inputVars.color, {
       label: sys.color.content.base,
       foreground: sys.color.content.base,
-      border: sys.color.container.high,
+      border: sys.color.border.base,
       focusRing: sys.color.tone.primary,
     }),
     ...assignVars(inputVars.shape, {
@@ -37,29 +40,20 @@ export const label = style({
   },
 });
 
-export const input = style({
-  boxSizing: 'border-box',
-  paddingInlineStart: sys.spacing[7],
-  marginBlock: '0',
-  marginInline: '0',
-  border: `1px solid ${inputVars.color.border}`,
-  inlineSize: '14rem',
-  blockSize: sys.spacing[14],
-  borderRadius: inputVars.shape.corner,
-  fontFamily: 'inherit',
-  fontSize: '1rem',
-  fontWeight: 'normal',
-  backgroundColor: 'transparent',
-  color: inputVars.color.foreground,
-
-  selectors: {
-    [`&:focus`]: {
-      outline: `2px solid ${inputVars.color.focusRing}`,
-      outlineOffset: '-1px',
-    },
+export const input = style([
+  typography.body.large,
+  {
+    ...createTextInputStyles({
+      paddingInlineStart: sys.spacing[7],
+      border: `1px solid ${inputVars.color.border}`,
+      inlineSize: '100%',
+      blockSize: sys.spacing[14],
+      borderRadius: inputVars.shape.corner,
+      backgroundColor: sys.color.surface.base,
+      color: inputVars.color.foreground,
+      focus: {
+        outlineColor: inputVars.color.focusRing,
+      },
+    }),
   },
-});
-
-export const inputRecipe = recipe({
-  base: label,
-});
+]);

@@ -5,9 +5,13 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  mapContractVars,
+  sys,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
-import { createSpacingContractStyles } from '../layout/shared/spacing';
 
 export const switcherVars = createThemeContract({
   spacing: {
@@ -26,7 +30,8 @@ const switcherLayoutDefaults = assignVars(switcherVars.layout, {
   threshold: sys.layout.measure,
 });
 
-export const switcherSpacingStyles = createSpacingContractStyles(
+export const switcherSpacingStyles = mapContractVars(
+  sys.spacing,
   switcherVars.spacing,
 );
 
@@ -110,11 +115,6 @@ limitValues.forEach((limit) => {
 export type SwitcherVariants = NonNullable<
   RecipeVariants<typeof switcherRecipe>
 >;
-
-export const spacingAt = createResponsiveVariants({
-  styles: switcherSpacingStyles,
-  media: defaultMedia,
-});
 
 export const limitAt = createResponsiveVariants({
   styles: switcherLimitStyles,

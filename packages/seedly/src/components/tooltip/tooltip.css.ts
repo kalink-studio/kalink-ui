@@ -1,8 +1,16 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { sys, typography } from '../../styles';
+import {
+  createArrowFillStyles,
+  createArrowInnerStrokeStyles,
+  createArrowOuterStrokeStyles,
+  createFloatingArrowPlacementStyles,
+  createFloatingPopupStyles,
+  createFloatingPositionerStyles,
+  floatingSurfaceDarkOutlineColor,
+} from '../_foundation';
 
 export const tooltipVars = createThemeContract({
   color: {
@@ -28,7 +36,7 @@ export const tooltipVars = createThemeContract({
 });
 
 const tooltipColorDefaults = assignVars(tooltipVars.color, {
-  panelBorder: sys.color.container.high,
+  panelBorder: sys.color.border.base,
   panelBackground: sys.color.container.base,
   buttonForeground: sys.color.content.base,
   buttonHoverBackground: sys.color.container.low,
@@ -36,11 +44,11 @@ const tooltipColorDefaults = assignVars(tooltipVars.color, {
   focusRing: sys.color.tone.primary,
   popupForeground: sys.color.content.base,
   popupBackground: sys.color.surface.base,
-  popupOutlineLight: sys.color.container.high,
-  popupOutlineDark: sys.color.container.top,
+  popupOutlineLight: sys.color.border.low,
+  popupOutlineDark: sys.color.border.low,
   popupShadow: sys.elevation.moderate,
-  arrowOuterStroke: sys.color.container.high,
-  arrowInnerStroke: sys.color.container.top,
+  arrowOuterStroke: sys.color.border.low,
+  arrowInnerStroke: floatingSurfaceDarkOutlineColor,
 });
 
 const tooltipShapeDefaults = assignVars(tooltipVars.shape, {
@@ -48,154 +56,74 @@ const tooltipShapeDefaults = assignVars(tooltipVars.shape, {
   buttonCorner: '0.25rem',
   popupCorner: '0.375rem',
 });
-
-export const panel = style({
-  display: 'flex',
-  border: `1px solid ${tooltipVars.color.panelBorder}`,
-  backgroundColor: tooltipVars.color.panelBackground,
-  borderRadius: tooltipVars.shape.panelCorner,
-  paddingBlock: sys.spacing[1],
-  paddingInline: sys.spacing[1],
-  vars: {
-    ...tooltipColorDefaults,
-    ...tooltipShapeDefaults,
-  },
-});
-
-export const button = style({
-  boxSizing: 'border-box',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  inlineSize: sys.spacing[12],
-  blockSize: sys.spacing[12],
-  paddingBlock: '0',
-  paddingInline: '0',
-  marginBlock: '0',
-  marginInline: '0',
-  outline: '0',
-  border: '0',
-  borderRadius: tooltipVars.shape.buttonCorner,
-  backgroundColor: 'transparent',
-  color: tooltipVars.color.buttonForeground,
-  userSelect: 'none',
-
-  selectors: {
-    [`&[data-popup-open]`]: {
-      backgroundColor: tooltipVars.color.buttonHoverBackground,
+export const button = style([
+  {
+    inlineSize: sys.spacing[12],
+    blockSize: sys.spacing[12],
+    borderRadius: tooltipVars.shape.buttonCorner,
+    vars: {
+      ...tooltipColorDefaults,
+      ...tooltipShapeDefaults,
     },
-    [`&:focus-visible`]: {
-      backgroundColor: 'transparent',
-      outline: `2px solid ${tooltipVars.color.focusRing}`,
-      outlineOffset: '-1px',
-    },
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: tooltipVars.color.buttonHoverBackground,
-        },
+    selectors: {
+      '&[data-popup-open]': {
+        backgroundColor: tooltipVars.color.buttonHoverBackground,
+      },
+      '&:focus-visible': {
+        backgroundColor: 'transparent',
       },
     },
-    [`&:active`]: {
-      backgroundColor: tooltipVars.color.buttonActiveBackground,
-    },
   },
-});
-
-export const icon = style({
-  inlineSize: sys.spacing[8],
-  blockSize: sys.spacing[8],
-});
-
+]);
 export const positioner = style({
+  ...createFloatingPositionerStyles(),
   vars: {
     ...tooltipColorDefaults,
     ...tooltipShapeDefaults,
   },
 });
 
-export const popup = style({
-  boxSizing: 'border-box',
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  display: 'flex',
-  flexDirection: 'column',
-  paddingBlock: sys.spacing[2],
-  paddingInline: sys.spacing[4],
-  borderRadius: tooltipVars.shape.popupCorner,
-  backgroundColor: tooltipVars.color.popupBackground,
-  color: tooltipVars.color.popupForeground,
-  transformOrigin: 'var(--transform-origin)',
-  transition: 'transform 150ms,\n    opacity 150ms',
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      outline: `1px solid ${tooltipVars.color.popupOutlineLight}`,
-      boxShadow: tooltipVars.color.popupShadow,
-    },
-    '(prefers-color-scheme: dark)': {
-      outline: `1px solid ${tooltipVars.color.popupOutlineDark}`,
-      outlineOffset: '-1px',
-    },
+export const popup = style([
+  typography.body.medium,
+  {
+    ...createFloatingPopupStyles({
+      paddingBlock: sys.spacing[2],
+      paddingInline: sys.spacing[4],
+      borderRadius: tooltipVars.shape.popupCorner,
+      backgroundColor: tooltipVars.color.popupBackground,
+      color: tooltipVars.color.popupForeground,
+      lightOutline: tooltipVars.color.popupOutlineLight,
+      darkOutline: tooltipVars.color.popupOutlineDark,
+      darkOutlineOffset: '-1px',
+      shadow: tooltipVars.color.popupShadow,
+      selectors: {
+        [`&[data-instant]`]: {
+          transition: 'none',
+        },
+      },
+    }),
+    display: 'flex',
+    flexDirection: 'column',
   },
-
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-      transform: 'scale(0.9)',
-    },
-    [`&[data-ending-style]`]: {
-      opacity: '0',
-      transform: 'scale(0.9)',
-    },
-    [`&[data-instant]`]: {
-      transition: 'none',
-    },
-  },
-});
+]);
 
 export const arrow = style({
-  display: 'flex',
-
-  selectors: {
-    [`&[data-side='top']`]: {
-      bottom: calc.negate(sys.spacing[4]),
-      rotate: '180deg',
-    },
-    [`&[data-side='bottom']`]: {
-      top: calc.negate(sys.spacing[4]),
-      rotate: '0deg',
-    },
-    [`&[data-side='left']`]: {
-      right: calc.negate(sys.spacing[7]),
-      rotate: '90deg',
-    },
-    [`&[data-side='right']`]: {
-      left: calc.negate(sys.spacing[7]),
-      rotate: '-90deg',
-    },
-  },
+  ...createFloatingArrowPlacementStyles({
+    sideTopOffset: calc.negate(sys.spacing[4]),
+    sideBottomOffset: calc.negate(sys.spacing[4]),
+    sideLeftOffset: calc.negate(sys.spacing[7]),
+    sideRightOffset: calc.negate(sys.spacing[7]),
+  }),
 });
 
 export const arrowFill = style({
-  fill: tooltipVars.color.popupBackground,
+  ...createArrowFillStyles(tooltipVars.color.popupBackground),
 });
 
 export const arrowOuterStroke = style({
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      fill: tooltipVars.color.arrowOuterStroke,
-    },
-  },
+  ...createArrowOuterStrokeStyles(tooltipVars.color.arrowOuterStroke),
 });
 
 export const arrowInnerStroke = style({
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      fill: tooltipVars.color.arrowInnerStroke,
-    },
-  },
-});
-
-export const tooltipRecipe = recipe({
-  base: panel,
+  ...createArrowInnerStrokeStyles(tooltipVars.color.arrowInnerStroke),
 });

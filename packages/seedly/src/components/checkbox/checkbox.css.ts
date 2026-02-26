@@ -1,7 +1,15 @@
-import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
+import {
+  assignVars,
+  createThemeContract,
+  globalStyle,
+  style,
+} from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import {
+  createChoiceControlStyles,
+  createChoiceIndicatorStyles,
+} from '../_foundation';
 
 export const checkboxVars = createThemeContract({
   color: {
@@ -21,14 +29,12 @@ export const label = style({
   display: 'flex',
   alignItems: 'center',
   gap: sys.spacing[4],
-  fontSize: '1rem',
-  lineHeight: '1.5rem',
   color: checkboxVars.color.label,
   vars: {
     ...assignVars(checkboxVars.color, {
       label: sys.color.content.base,
       foreground: sys.color.content.base,
-      border: sys.color.container.top,
+      border: sys.color.border.high,
       checkedBackground: sys.color.content.base,
       checkedForeground: sys.color.container.base,
       focusRing: sys.color.tone.primary,
@@ -40,51 +46,25 @@ export const label = style({
 });
 
 export const checkbox = style({
-  boxSizing: 'border-box',
-  display: 'flex',
-  inlineSize: sys.spacing[9],
-  blockSize: sys.spacing[9],
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: checkboxVars.shape.corner,
-  outline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
-  marginBlock: '0',
-  marginInline: '0',
-  border: 'none',
+  ...createChoiceControlStyles({
+    size: sys.spacing[9],
+    borderRadius: checkboxVars.shape.corner,
+    uncheckedBorderColor: checkboxVars.color.border,
+    checkedBackgroundColor: checkboxVars.color.checkedBackground,
+    focusRingColor: checkboxVars.color.focusRing,
+  }),
+});
 
-  selectors: {
-    [`&[data-unchecked]`]: {
-      border: `1px solid ${checkboxVars.color.border}`,
-      backgroundColor: 'transparent',
-    },
-    [`&[data-checked]`]: {
-      backgroundColor: checkboxVars.color.checkedBackground,
-    },
-    [`&:focus-visible`]: {
-      outline: `2px solid ${checkboxVars.color.focusRing}`,
-      outlineOffset: '2px',
-    },
-  },
+const checkboxIndicatorStyles = createChoiceIndicatorStyles({
+  color: checkboxVars.color.checkedForeground,
 });
 
 export const indicator = style({
-  display: 'flex',
-  color: checkboxVars.color.checkedForeground,
-
-  selectors: {
-    [`&[data-unchecked]`]: {
-      display: 'none',
-    },
-  },
+  ...checkboxIndicatorStyles,
+  selectors: checkboxIndicatorStyles.selectors,
 });
 
-export const icon = style({
+globalStyle(`${indicator} > svg`, {
   inlineSize: sys.spacing[6],
   blockSize: sys.spacing[6],
-});
-
-export const checkboxRecipe = recipe({
-  base: label,
 });

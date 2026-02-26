@@ -1,57 +1,53 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
+import {
+  createRangeIndicatorStyles,
+  createRangeTrackRootVars,
+  createRangeTrackStyles,
+} from '../_foundation';
 
 export const sliderVars = createThemeContract({
   color: {
-    track: null,
-    indicator: null,
     thumbBackground: null,
     thumbOutline: null,
     thumbFocusRing: null,
   },
   shape: {
-    trackCorner: null,
     thumbCorner: null,
   },
 });
 
 export const control = style({
-  boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
-  inlineSize: '14rem',
+  inlineSize: '100%',
   paddingBlock: sys.spacing[6],
   touchAction: 'none',
   userSelect: 'none',
   vars: {
+    ...createRangeTrackRootVars(),
     ...assignVars(sliderVars.color, {
-      track: sys.color.container.high,
-      indicator: sys.color.content.base,
       thumbBackground: sys.color.surface.bright,
-      thumbOutline: sys.color.container.top,
+      thumbOutline: sys.color.container.low,
       thumbFocusRing: sys.color.tone.primary,
     }),
     ...assignVars(sliderVars.shape, {
-      trackCorner: '0.25rem',
       thumbCorner: '100%',
     }),
   },
 });
 
 export const track = style({
+  ...createRangeTrackStyles({
+    blockSize: sys.spacing[2],
+  }),
   inlineSize: '100%',
-  blockSize: sys.spacing[2],
-  backgroundColor: sliderVars.color.track,
-  boxShadow: `inset 0 0 0 1px ${sliderVars.color.track}`,
-  borderRadius: sliderVars.shape.trackCorner,
   userSelect: 'none',
 });
 
 export const indicator = style({
-  borderRadius: sliderVars.shape.trackCorner,
-  backgroundColor: sliderVars.color.indicator,
+  ...createRangeIndicatorStyles(),
   userSelect: 'none',
 });
 
@@ -60,6 +56,7 @@ export const thumb = style({
   blockSize: sys.spacing[8],
   borderRadius: sliderVars.shape.thumbCorner,
   backgroundColor: sliderVars.color.thumbBackground,
+  boxShadow: sys.elevation.minimal,
   outline: `1px solid ${sliderVars.color.thumbOutline}`,
   userSelect: 'none',
 
@@ -68,8 +65,4 @@ export const thumb = style({
       outline: `2px solid ${sliderVars.color.thumbFocusRing}`,
     },
   },
-});
-
-export const sliderRecipe = recipe({
-  base: control,
 });

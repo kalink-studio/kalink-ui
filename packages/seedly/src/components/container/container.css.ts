@@ -118,14 +118,13 @@ export const containerRecipe = recipe({
 
           selectors: {
             '&::before': {
-              content: '""',
-              position: 'absolute',
               inset: 0,
+              position: 'absolute',
               border: '1px solid',
               borderColor: containerVars.color.outline,
               borderRadius: 'inherit',
+              content: '""',
               pointerEvents: 'none',
-              boxSizing: 'border-box',
             },
           },
         },

@@ -9,8 +9,6 @@ import {
 } from '../../styles';
 import { components } from '../../styles/layers.css';
 
-import { createSpacingContractStyles } from './shared/spacing';
-
 export const layoutVars = createThemeContract({
   spacing: {
     block: null,
@@ -24,65 +22,45 @@ export const layoutVars = createThemeContract({
   },
 });
 
-export const layoutSpacingStyles = createSpacingContractStyles(
+export const layoutSpacingStyles = mapContractVars(
+  sys.spacing,
   layoutVars.spacing,
-  {
-    mapValue: (value) => ({
-      block: value,
-      inline: value,
-    }),
-  },
 );
 
-export const layoutElevationStyles = mapContractVars(sys.elevation, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(layoutVars.elevation, {
-          level: sys.elevation[key],
-        }),
-      },
-    },
-  },
-}));
+export const layoutElevationStyles = mapContractVars(
+  sys.elevation,
+  layoutVars.elevation,
+);
 
-export const layoutRadiusStyles = mapContractVars(sys.shape.corner, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(layoutVars.shape, {
-          corner: sys.shape.corner[key],
-        }),
-      },
-    },
-  },
-}));
+export const layoutRadiusStyles = mapContractVars(
+  sys.shape.corner,
+  layoutVars.shape,
+);
 
 export const layoutRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
-        boxSizing: 'border-box',
-        position: 'relative',
-
         paddingBlock: layoutVars.spacing.block,
         paddingInline: layoutVars.spacing.inline,
+
+        position: 'relative',
 
         borderRadius: layoutVars.shape.corner,
         boxShadow: layoutVars.elevation.level,
 
-        vars: {
-          ...assignVars(layoutVars.spacing, {
+        vars: assignVars(layoutVars, {
+          spacing: {
             block: sys.spacing[0],
             inline: sys.spacing[0],
-          }),
-          ...assignVars(layoutVars.shape, {
+          },
+          shape: {
             corner: sys.shape.corner.none,
-          }),
-          ...assignVars(layoutVars.elevation, {
+          },
+          elevation: {
             level: sys.elevation.none,
-          }),
-        },
+          },
+        }),
       },
     },
   },
@@ -93,17 +71,6 @@ export const layoutRecipe = recipe({
     radius: layoutRadiusStyles,
   },
 });
-
-export const spacingAt = createResponsiveVariants({
-  styles: layoutSpacingStyles,
-  media: defaultMedia,
-});
-
-export const elevationAt = createResponsiveVariants({
-  styles: layoutElevationStyles,
-  media: defaultMedia,
-});
-
 export const radiusAt = createResponsiveVariants({
   styles: layoutRadiusStyles,
   media: defaultMedia,

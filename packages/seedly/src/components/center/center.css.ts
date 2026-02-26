@@ -1,9 +1,13 @@
 import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  mapContractVars,
+  sys,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
-import { createSpacingContractStyles } from '../layout/shared/spacing';
 
 export const centerVars = createThemeContract({
   spacing: {
@@ -22,7 +26,8 @@ const centerLayoutDefaults = assignVars(centerVars.layout, {
   measure: sys.layout.measure,
 });
 
-export const centerGuttersStyles = createSpacingContractStyles(
+export const centerGuttersStyles = mapContractVars(
+  sys.spacing,
   centerVars.spacing,
 );
 
@@ -78,11 +83,6 @@ export const centerRecipe = recipe({
 });
 
 export type CenterVariants = NonNullable<RecipeVariants<typeof centerRecipe>>;
-
-export const guttersAt = createResponsiveVariants({
-  styles: centerGuttersStyles,
-  media: defaultMedia,
-});
 
 export const andTextAt = createResponsiveVariants({
   styles: centerAndTextStyles,

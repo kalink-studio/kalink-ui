@@ -25,6 +25,12 @@ export const themeProperties = defineProperties({
           [sys.color.container.top]:
             `color-mix(in srgb, ${refs.colors.neutral[100]} 88%, ${refs.colors.neutral[0]})`,
           [sys.color.content.base]: refs.colors.neutral[0],
+          [sys.color.border.low]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 22%, transparent)`,
+          [sys.color.border.base]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 30%, transparent)`,
+          [sys.color.border.high]:
+            `color-mix(in srgb, ${refs.colors.neutral[0]} 36%, transparent)`,
         },
       },
       inverted: {
@@ -43,6 +49,12 @@ export const themeProperties = defineProperties({
           [sys.color.container.top]:
             `color-mix(in srgb, ${refs.colors.neutral[0]} 88%, ${refs.colors.neutral[100]})`,
           [sys.color.content.base]: refs.colors.neutral[100],
+          [sys.color.border.low]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 22%, transparent)`,
+          [sys.color.border.base]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 30%, transparent)`,
+          [sys.color.border.high]:
+            `color-mix(in srgb, ${refs.colors.neutral[100]} 36%, transparent)`,
         },
       },
     },

@@ -1,7 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, typography } from '../../styles';
 
 export const separatorVars = createThemeContract({
   color: {
@@ -15,53 +14,58 @@ export const separatorVars = createThemeContract({
   },
 });
 
-export const container = style({
-  display: 'flex',
-  gap: sys.spacing[8],
-  textWrap: 'nowrap',
+const separatorColorDefaults = assignVars(separatorVars.color, {
+  separator: sys.color.border.high,
+  link: sys.color.content.base,
+  linkDecoration: stateColor.subtleContent,
+  focusRing: sys.color.tone.primary,
+});
+
+const separatorShapeDefaults = assignVars(separatorVars.shape, {
+  focusCorner: '0.125rem',
+});
+export const separator = style({
+  inlineSize: '100%',
+  blockSize: '1px',
+  backgroundColor: separatorVars.color.separator,
   vars: {
-    ...assignVars(separatorVars.color, {
-      separator: sys.color.container.top,
-      link: sys.color.content.base,
-      linkDecoration: stateColor.subtleContent,
-      focusRing: sys.color.tone.primary,
-    }),
-    ...assignVars(separatorVars.shape, {
-      focusCorner: '0.125rem',
-    }),
+    ...separatorColorDefaults,
+    ...separatorShapeDefaults,
+  },
+  selectors: {
+    '&[data-orientation="vertical"]': {
+      inlineSize: '1px',
+      blockSize: '1.25rem',
+    },
   },
 });
 
-export const separator = style({
-  inlineSize: '1px',
-  backgroundColor: separatorVars.color.separator,
-});
+export const link = style([
+  typography.body.medium,
+  {
+    color: separatorVars.color.link,
+    textDecorationColor: separatorVars.color.linkDecoration,
+    textDecorationThickness: '1px',
+    textDecorationLine: 'none',
+    textUnderlineOffset: '2px',
+    vars: {
+      ...separatorColorDefaults,
+      ...separatorShapeDefaults,
+    },
 
-export const link = style({
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  color: separatorVars.color.link,
-  textDecorationColor: separatorVars.color.linkDecoration,
-  textDecorationThickness: '1px',
-  textDecorationLine: 'none',
-  textUnderlineOffset: '2px',
-
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          textDecorationLine: 'underline',
+    selectors: {
+      [`&:hover`]: {
+        '@media': {
+          '(hover: hover)': {
+            textDecorationLine: 'underline',
+          },
         },
       },
-    },
-    [`&:focus-visible`]: {
-      borderRadius: separatorVars.shape.focusCorner,
-      outline: `2px solid ${separatorVars.color.focusRing}`,
-      textDecorationLine: 'none',
+      [`&:focus-visible`]: {
+        borderRadius: separatorVars.shape.focusCorner,
+        outline: `2px solid ${separatorVars.color.focusRing}`,
+        textDecorationLine: 'none',
+      },
     },
   },
-});
-
-export const separatorRecipe = recipe({
-  base: container,
-});
+]);

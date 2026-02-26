@@ -1,15 +1,17 @@
 {
-  "extends": "@kalink-ui/typescript-config/lib-react.json",
+  "extends": "@kalink-ui/typescript-config/base.json",
   "include": ["src", "eslint.config.mts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "noEmit": false,
     "incremental": true,
     "composite": true,
-    "types": ["react"],
+    "baseUrl": ".",
     "declaration": true,
     "emitDeclarationOnly": true,
-    "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

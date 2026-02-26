@@ -5,7 +5,12 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import {
+  createResponsiveVariants,
+  defaultMedia,
+  mapContractVars,
+  sys,
+} from '../../styles';
 import { components } from '../../styles/layers.css';
 import {
   gridAlignContentStyles,
@@ -13,7 +18,6 @@ import {
   gridJustifyContentStyles,
   gridJustifyItemsStyles,
 } from '../layout/shared/maps';
-import { createSpacingVarStyles } from '../layout/shared/spacing';
 
 export const gridVars = createThemeContract({
   spacing: {
@@ -34,23 +38,29 @@ const gridSpacingDefaults = assignVars(gridVars.spacing, {
   gap: sys.spacing[0],
 });
 
+const gridAxisSpacingDefaults = {
+  ...assignVars(gridVars.columnSpacing, {
+    gap: gridVars.spacing.gap,
+  }),
+  ...assignVars(gridVars.rowSpacing, {
+    gap: gridVars.spacing.gap,
+  }),
+};
+
 const gridLayoutDefaults = assignVars(gridVars.layout, {
   minCellSize: '250px',
 });
 
-export const gridSpacingStyles = createSpacingVarStyles(
-  gridVars.spacing,
-  'gap',
-);
+export const gridSpacingStyles = mapContractVars(sys.spacing, gridVars.spacing);
 
-export const gridColumnSpacingStyles = createSpacingVarStyles(
+export const gridColumnSpacingStyles = mapContractVars(
+  sys.spacing,
   gridVars.columnSpacing,
-  'columnGap',
 );
 
-export const gridRowSpacingStyles = createSpacingVarStyles(
+export const gridRowSpacingStyles = mapContractVars(
+  sys.spacing,
   gridVars.rowSpacing,
-  'rowGap',
 );
 
 export {
@@ -102,9 +112,12 @@ export const gridRecipe = recipe({
       [components]: {
         display: 'grid',
         gap: gridVars.spacing.gap,
+        columnGap: gridVars.columnSpacing.gap,
+        rowGap: gridVars.rowSpacing.gap,
 
         vars: {
           ...gridSpacingDefaults,
+          ...gridAxisSpacingDefaults,
           ...gridLayoutDefaults,
         },
       },
@@ -125,21 +138,6 @@ export const gridRecipe = recipe({
 });
 
 export type GridVariants = NonNullable<RecipeVariants<typeof gridRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: gridSpacingStyles,
-  media: defaultMedia,
-});
-
-export const columnSpacingAt = createResponsiveVariants({
-  styles: gridColumnSpacingStyles,
-  media: defaultMedia,
-});
-
-export const rowSpacingAt = createResponsiveVariants({
-  styles: gridRowSpacingStyles,
-  media: defaultMedia,
-});
 
 export const columnsAt = createResponsiveVariants({
   styles: gridColumnsStyles as Record<ColumnCount, StyleRule | StyleRule[]>,

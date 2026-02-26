@@ -1,133 +1,119 @@
 import { style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { sys, typography } from '../../styles';
+import {
+  createFloatingPopupStyles,
+  createFloatingPositionerStyles,
+  createInsetHighlightStyles,
+  createInteractiveStateStyles,
+} from '../_foundation';
+
+const menubarTriggerStateSelectors =
+  createInteractiveStateStyles({
+    pressed: {
+      styles: {
+        backgroundColor: sys.color.container.low,
+        outline: 'none',
+      },
+    },
+    disabled: {
+      styles: {
+        opacity: '0.5',
+      },
+    },
+  }).selectors ?? {};
+
+const menubarPopupOpenItemSelectors =
+  createInsetHighlightStyles({
+    selector: '&[data-popup-open]',
+    backgroundColor: sys.color.container.low,
+    insetInline: sys.spacing[2],
+    borderRadius: '0.25rem',
+  }).selectors ?? {};
+
+const menubarHighlightedItemSelectors =
+  createInsetHighlightStyles({
+    textColor: sys.color.container.base,
+    backgroundColor: sys.color.content.base,
+    insetInline: sys.spacing[2],
+    borderRadius: '0.25rem',
+  }).selectors ?? {};
 
 export const menubar = style({
   display: 'flex',
-  backgroundColor: sys.color.container.base,
-  border: `1px solid ${sys.color.container.high}`,
-  borderRadius: '0.375rem',
-  paddingBlock: sys.spacing[1],
-  paddingInline: sys.spacing[1],
 });
 
-export const menuTrigger = style({
-  boxSizing: 'border-box',
-  background: 'none',
-  paddingBlock: '0',
-  paddingInline: sys.spacing[6],
-  marginBlock: '0',
-  marginInline: '0',
-  outline: '0',
-  border: '0',
-  color: stateColor.mutedContent,
-  borderRadius: '0.25rem',
-  userSelect: 'none',
-  blockSize: sys.spacing[12],
-  fontFamily: 'inherit',
-  fontSize: '0.875rem',
-  fontWeight: '500',
+export const menuTrigger = style([
+  typography.label.medium,
+  {
+    blockSize: sys.spacing[12],
+    paddingBlock: '0',
+    paddingInline: sys.spacing[6],
+    borderRadius: '0.25rem',
 
-  selectors: {
-    [`&[data-pressed]`]: {
-      backgroundColor: sys.color.container.low,
-      outline: 'none',
-    },
-    [`&:focus-visible`]: {
-      backgroundColor: sys.color.container.low,
-      outline: 'none',
-    },
-    [`&[data-disabled]`]: {
-      opacity: '0.5',
+    selectors: {
+      ...menubarTriggerStateSelectors,
+      [`&:focus-visible`]: {
+        backgroundColor: sys.color.container.low,
+        outline: 'none',
+      },
     },
   },
-});
+]);
 
 export const menuPositioner = style({
-  outline: '0',
+  ...createFloatingPositionerStyles({
+    outline: '0',
+  }),
 });
 
 export const menuPopup = style({
-  boxSizing: 'border-box',
-  paddingBlock: sys.spacing[2],
-  borderRadius: '0.375rem',
-  backgroundColor: sys.color.surface.base,
-  color: sys.color.content.base,
-  transformOrigin: 'var(--transform-origin)',
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      outline: `1px solid ${sys.color.container.high}`,
-      boxShadow: sys.elevation.moderate,
-    },
-    '(prefers-color-scheme: dark)': {
-      outline: `1px solid ${sys.color.container.top}`,
-      outlineOffset: '-1px',
-    },
-  },
-
-  selectors: {
-    [`&[data-ending-style]`]: {
+  ...createFloatingPopupStyles({
+    paddingBlock: sys.spacing[2],
+    borderRadius: '0.375rem',
+    backgroundColor: sys.color.surface.base,
+    color: sys.color.content.base,
+    lightOutline: sys.color.border.low,
+    darkOutline: sys.color.border.low,
+    darkOutlineOffset: '-1px',
+    shadow: sys.elevation.moderate,
+    transition: null,
+    includeStartingStyle: false,
+    endingStyle: {
       opacity: '0',
       transition: 'opacity 150ms',
     },
-    [`&[data-instant]`]: {
-      transition: 'none',
+    selectors: {
+      [`&[data-instant]`]: {
+        transition: 'none',
+      },
     },
-  },
+  }),
 });
 
-export const menuItem = style({
-  outline: '0',
-  cursor: 'default',
-  userSelect: 'none',
-  paddingBlock: sys.spacing[4],
-  paddingInline: sys.spacing[8],
-  display: 'flex',
-  fontSize: '0.875rem',
-  lineHeight: '1rem',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: sys.spacing[8],
+export const menuItem = style([
+  typography.label.medium,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: sys.spacing[8],
+    paddingBlock: sys.spacing[4],
+    paddingInline: sys.spacing[8],
+    outline: '0',
+    cursor: 'default',
+    userSelect: 'none',
 
-  selectors: {
-    [`&[data-popup-open]`]: {
-      zIndex: '0',
-      position: 'relative',
-    },
-    [`&[data-popup-open]::before`]: {
-      content: "''",
-      zIndex: '-1',
-      position: 'absolute',
-      insetBlock: '0',
-      insetInline: sys.spacing[2],
-      borderRadius: '0.25rem',
-      backgroundColor: sys.color.container.low,
-    },
-    [`&[data-highlighted]`]: {
-      zIndex: '0',
-      position: 'relative',
-      color: sys.color.container.base,
-    },
-    [`&[data-highlighted]::before`]: {
-      content: "''",
-      zIndex: '-1',
-      position: 'absolute',
-      insetBlock: '0',
-      insetInline: sys.spacing[2],
-      borderRadius: '0.25rem',
-      backgroundColor: sys.color.content.base,
+    selectors: {
+      ...menubarPopupOpenItemSelectors,
+      ...menubarHighlightedItemSelectors,
     },
   },
-});
+]);
 
 export const menuSeparator = style({
+  blockSize: '1px',
   marginBlock: sys.spacing[3],
   marginInline: sys.spacing[8],
-  blockSize: '1px',
-  backgroundColor: sys.color.container.high,
-});
-
-export const menubarRecipe = recipe({
-  base: menubar,
+  backgroundColor: sys.color.border.high,
 });

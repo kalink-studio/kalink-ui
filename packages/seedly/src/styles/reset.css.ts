@@ -1,6 +1,7 @@
 import { globalStyle } from '@vanilla-extract/css';
 
 import { base } from './layers.css';
+import { sys } from './system-contract.css';
 
 globalStyle('*, *::before, *::after', {
   '@layer': {
@@ -14,6 +15,8 @@ globalStyle('*', {
   '@layer': {
     [base]: {
       margin: 0,
+
+      color: 'currentColor',
     },
   },
 });
@@ -22,6 +25,8 @@ globalStyle('body', {
   '@layer': {
     [base]: {
       position: 'relative',
+
+      color: sys.color.content.base,
       WebkitFontSmoothing: 'antialiased',
     },
   },
@@ -47,8 +52,11 @@ globalStyle('input, button, textarea, select', {
 globalStyle('button', {
   '@layer': {
     [base]: {
-      border: 'none',
+      padding: '0',
+
       backgroundColor: 'transparent',
+      border: 'none',
+
       cursor: 'pointer',
     },
   },

@@ -1,78 +1,80 @@
 import { style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, typography } from '../../styles';
+import {
+  createArrowFillStyles,
+  createArrowInnerStrokeStyles,
+  createArrowOuterStrokeStyles,
+  createFloatingArrowPlacementStyles,
+  createFloatingPopupStyles,
+  createFloatingPositionerStyles,
+  floatingSurfaceDarkOutlineColor,
+} from '../_foundation';
 
 export const root = style({
-  backgroundColor: sys.color.container.base,
-  borderRadius: '0.5rem',
-  paddingBlock: sys.spacing[2],
-  paddingInline: sys.spacing[2],
-  color: sys.color.content.base,
   minInlineSize: 'max-content',
 });
 
 export const list = style({
   display: 'flex',
-  position: 'relative',
-  listStyle: 'none',
   paddingBlock: '0',
   paddingInline: '0',
   marginBlock: '0',
   marginInline: '0',
+  position: 'relative',
+  listStyle: 'none',
 });
 
-export const trigger = style({
-  boxSizing: 'border-box',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: sys.spacing[3],
-  blockSize: sys.spacing[14],
-  paddingBlock: '0',
-  paddingInline: sys.spacing[7],
-  marginBlock: '0',
-  marginInline: '0',
-  outline: '0',
-  border: 'none',
-  borderRadius: '0.375rem',
-  backgroundColor: sys.color.container.base,
-  fontFamily: 'inherit',
-  fontSize: '1rem',
-  fontWeight: '500',
-  lineHeight: '1.5rem',
-  color: sys.color.content.base,
-  userSelect: 'none',
-  textDecoration: 'none',
-  '@media': {
-    '(max-width: 500px)': {
-      fontSize: '0.925rem',
-      paddingBlock: '0',
-      paddingInline: sys.spacing[4],
-    },
-  },
-
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: sys.color.container.low,
-        },
+export const trigger = style([
+  typography.label.large,
+  {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: sys.spacing[3],
+    blockSize: sys.spacing[14],
+    paddingInline: sys.spacing[7],
+    marginBlock: '0',
+    marginInline: '0',
+    textDecoration: 'none',
+    whiteSpace: 'nowrap',
+    backgroundColor: sys.color.container.base,
+    borderRadius: '0.375rem',
+    outline: '0',
+    userSelect: 'none',
+    '@media': {
+      '(max-width: 500px)': {
+        fontSize: sys.typography.label.medium.size,
+        lineHeight: sys.typography.label.medium.lineHeight,
+        paddingInline: sys.spacing[4],
       },
     },
-    [`&[data-popup-open]`]: {
-      backgroundColor: sys.color.container.low,
-    },
-    [`&:focus-visible`]: {
-      position: 'relative',
-      outline: `2px solid ${sys.color.tone.primary}`,
-      outlineOffset: '-1px',
+
+    selectors: {
+      [`&:hover`]: {
+        '@media': {
+          '(hover: hover)': {
+            backgroundColor: sys.color.container.low,
+          },
+        },
+      },
+      [`&[data-popup-open]`]: {
+        backgroundColor: sys.color.container.low,
+      },
+      [`&:focus-visible`]: {
+        position: 'relative',
+        outline: `2px solid ${sys.color.tone.primary}`,
+        outlineOffset: '-1px',
+      },
     },
   },
-});
+]);
 
 export const icon = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   transition: 'transform 0.2s ease',
 
   selectors: {
@@ -83,13 +85,13 @@ export const icon = style({
 });
 
 export const positioner = style({
-  boxSizing: 'border-box',
-  transitionProperty: 'top, left, right, bottom',
-  transitionDuration: 'var(--duration)',
-  transitionTimingFunction: 'var(--easing)',
+  ...createFloatingPositionerStyles({}),
   inlineSize: 'var(--positioner-width)',
   blockSize: 'var(--positioner-height)',
   maxInlineSize: 'var(--available-width)',
+  transitionProperty: 'top, left, right, bottom',
+  transitionDuration: 'var(--duration)',
+  transitionTimingFunction: 'var(--easing)',
   vars: {
     '--easing': sys.motion.easing.decelerate.emphasized,
     '--duration': sys.motion.duration.medium[4],
@@ -97,32 +99,32 @@ export const positioner = style({
 
   selectors: {
     [`&::before`]: {
-      content: "''",
       position: 'absolute',
+      content: "''",
     },
     [`&[data-side='top']::before`]: {
+      blockSize: sys.spacing[5],
       left: '0',
       right: '0',
       bottom: calc.negate(sys.spacing[5]),
-      blockSize: sys.spacing[5],
     },
     [`&[data-side='bottom']::before`]: {
+      blockSize: sys.spacing[5],
       left: '0',
       right: '0',
       top: calc.negate(sys.spacing[5]),
-      blockSize: sys.spacing[5],
     },
     [`&[data-side='left']::before`]: {
+      inlineSize: sys.spacing[5],
       top: '0',
       bottom: '0',
       right: calc.negate(sys.spacing[5]),
-      inlineSize: sys.spacing[5],
     },
     [`&[data-side='right']::before`]: {
+      inlineSize: sys.spacing[5],
       top: '0',
       bottom: '0',
       left: calc.negate(sys.spacing[5]),
-      inlineSize: sys.spacing[5],
     },
     [`&[data-instant]`]: {
       transition: 'none',
@@ -131,50 +133,35 @@ export const positioner = style({
 });
 
 export const popup = style({
-  position: 'relative',
-  boxSizing: 'border-box',
-  borderRadius: '0.5rem',
-  backgroundColor: sys.color.surface.base,
-  color: sys.color.content.base,
-  transformOrigin: 'var(--transform-origin)',
-  transitionProperty: 'opacity, transform, inline-size, block-size',
-  transitionDuration: 'var(--duration)',
-  transitionTimingFunction: 'var(--easing)',
-  inlineSize: 'var(--popup-width)',
-  blockSize: 'var(--popup-height)',
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      outline: `1px solid ${sys.color.container.high}`,
-      boxShadow: sys.elevation.moderate,
-    },
-    '(prefers-color-scheme: dark)': {
-      outline: `1px solid ${sys.color.container.top}`,
-      outlineOffset: '-1px',
-    },
-  },
-
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-      transform: 'scale(0.9)',
-    },
-    [`&[data-ending-style]`]: {
+  ...createFloatingPopupStyles({
+    borderRadius: '0.5rem',
+    backgroundColor: sys.color.surface.base,
+    color: sys.color.content.base,
+    inlineSize: 'var(--popup-width)',
+    blockSize: 'var(--popup-height)',
+    lightOutline: sys.color.border.low,
+    darkOutline: sys.color.border.low,
+    darkOutlineOffset: '-1px',
+    shadow: sys.elevation.moderate,
+    transition:
+      'opacity var(--duration),\n    transform var(--duration),\n    inline-size var(--duration),\n    block-size var(--duration)',
+    endingStyle: {
       opacity: '0',
       transform: 'scale(0.9)',
       transitionTimingFunction: 'ease',
       transitionDuration: '0.15s',
     },
-  },
+  }),
+  position: 'relative',
 });
 
 export const content = style({
-  boxSizing: 'border-box',
-  transition:
-    'opacity calc(var(--duration) * 0.5) ease,\n    transform var(--duration) var(--easing)',
-  paddingBlock: sys.spacing[10],
-  paddingInline: sys.spacing[10],
   inlineSize: calc.subtract('100vw', sys.spacing[14]),
   blockSize: '100%',
+  paddingBlock: sys.spacing[10],
+  paddingInline: sys.spacing[10],
+  transition:
+    'opacity calc(var(--duration) * 0.5) ease,\n    transform var(--duration) var(--easing)',
   '@media': {
     '(min-width: 500px)': {
       inlineSize: 'max-content',
@@ -205,20 +192,20 @@ export const content = style({
 });
 
 export const viewport = style({
-  position: 'relative',
-  overflow: 'hidden',
   inlineSize: '100%',
   blockSize: '100%',
+  overflow: 'hidden',
+  position: 'relative',
 });
 
 export const gridLinkList = style({
   display: 'grid',
   gridTemplateColumns: '12rem 12rem',
-  listStyle: 'none',
   paddingBlock: '0',
   paddingInline: '0',
   marginBlock: '0',
   marginInline: '0',
+  listStyle: 'none',
   '@media': {
     '(max-width: 500px)': {
       gridTemplateColumns: '1fr',
@@ -239,15 +226,14 @@ export const flexLinkList = style({
 });
 
 export const linkCard = style({
-  boxSizing: 'border-box',
   display: 'block',
   paddingBlock: sys.spacing[4],
   paddingInline: sys.spacing[4],
-  borderRadius: '0.375rem',
   textDecoration: 'none',
   color: 'inherit',
-  border: 'none',
   backgroundColor: 'transparent',
+  border: 'none',
+  borderRadius: '0.375rem',
   '@media': {
     '(min-width: 425px)': {
       paddingBlock: sys.spacing[6],
@@ -283,55 +269,31 @@ export const linkTitle = style({
 export const linkDescription = style({
   marginBlock: '0',
   marginInline: '0',
-  fontSize: '0.875rem',
+  fontSize: sys.typography.body.medium.size,
   lineHeight: '1.25rem',
+  whiteSpace: 'normal',
+  overflowWrap: 'anywhere',
   color: stateColor.disabledContent,
 });
 
 export const arrow = style({
-  display: 'flex',
+  ...createFloatingArrowPlacementStyles({
+    sideTopOffset: calc.negate(sys.spacing[4]),
+    sideBottomOffset: calc.negate(sys.spacing[4]),
+    sideLeftOffset: calc.negate(sys.spacing[7]),
+    sideRightOffset: calc.negate(sys.spacing[7]),
+  }),
   transition: 'left calc(var(--duration)) var(--easing)',
-
-  selectors: {
-    [`&[data-side='top']`]: {
-      bottom: calc.negate(sys.spacing[4]),
-      rotate: '180deg',
-    },
-    [`&[data-side='bottom']`]: {
-      top: calc.negate(sys.spacing[4]),
-      rotate: '0deg',
-    },
-    [`&[data-side='left']`]: {
-      right: calc.negate(sys.spacing[7]),
-      rotate: '90deg',
-    },
-    [`&[data-side='right']`]: {
-      left: calc.negate(sys.spacing[7]),
-      rotate: '-90deg',
-    },
-  },
 });
 
 export const arrowFill = style({
-  fill: sys.color.surface.base,
+  ...createArrowFillStyles(sys.color.surface.base),
 });
 
 export const arrowOuterStroke = style({
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      fill: sys.color.container.high,
-    },
-  },
+  ...createArrowOuterStrokeStyles(sys.color.border.low),
 });
 
 export const arrowInnerStroke = style({
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      fill: sys.color.container.top,
-    },
-  },
-});
-
-export const navigationMenuRecipe = recipe({
-  base: root,
+  ...createArrowInnerStrokeStyles(floatingSurfaceDarkOutlineColor),
 });

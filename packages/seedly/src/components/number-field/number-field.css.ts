@@ -1,18 +1,20 @@
 import { style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, typography } from '../../styles';
+import { createFieldLabelStyles, createFieldStackStyles } from '../_foundation';
+
+const restingControlBorder = sys.color.border.base;
 
 export const field = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'start',
-  gap: sys.spacing[2],
+  ...createFieldStackStyles({
+    gap: sys.spacing[2],
+    alignItems: 'start',
+  }),
 });
 
 export const scrubArea = style({
+  fontWeight: sys.typography.headline.small.weight,
   cursor: 'ew-resize',
-  fontWeight: 'bold',
   userSelect: 'none',
 });
 
@@ -21,49 +23,48 @@ export const scrubAreaCursor = style({
 });
 
 export const label = style({
-  cursor: 'ew-resize',
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  fontWeight: '500',
-  color: sys.color.content.base,
+  ...createFieldLabelStyles({
+    color: sys.color.content.base,
+    cursor: 'ew-resize',
+  }),
 });
 
 export const group = style({
   display: 'flex',
+  inlineSize: '100%',
 });
 
-export const input = style({
-  boxSizing: 'border-box',
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
-  borderRadius: '0',
-  borderBlockStart: `1px solid ${sys.color.container.high}`,
-  borderBlockEnd: `1px solid ${sys.color.container.high}`,
-  borderInlineStart: 'none',
-  borderInlineEnd: 'none',
-  inlineSize: '6rem',
-  blockSize: sys.spacing[14],
-  fontFamily: 'inherit',
-  fontSize: '1rem',
-  fontWeight: 'normal',
-  backgroundColor: 'transparent',
-  color: sys.color.content.base,
-  textAlign: 'center',
-  fontVariantNumeric: 'tabular-nums',
+export const input = style([
+  typography.body.large,
+  {
+    marginBlock: '0',
+    marginInline: '0',
+    paddingBlock: '0',
+    paddingInline: '0',
+    borderRadius: '0',
+    borderBlockStart: `1px solid ${restingControlBorder}`,
+    borderBlockEnd: `1px solid ${restingControlBorder}`,
+    borderInlineStart: 'none',
+    borderInlineEnd: 'none',
+    flex: '1 1 auto',
+    minInlineSize: '0',
+    blockSize: sys.spacing[14],
+    backgroundColor: sys.color.surface.base,
+    color: sys.color.content.base,
+    textAlign: 'center',
+    fontVariantNumeric: 'tabular-nums',
 
-  selectors: {
-    [`&:focus`]: {
-      zIndex: '1',
-      outline: `2px solid ${sys.color.tone.primary}`,
-      outlineOffset: '-1px',
+    selectors: {
+      [`&:focus`]: {
+        zIndex: '1',
+        outline: `2px solid ${sys.color.tone.primary}`,
+        outlineOffset: '-1px',
+      },
     },
   },
-});
+]);
 
 const stepperButtonStyle = {
-  boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -74,7 +75,7 @@ const stepperButtonStyle = {
   outline: '0',
   paddingBlock: '0',
   paddingInline: '0',
-  border: `1px solid ${sys.color.container.high}`,
+  border: `1px solid ${restingControlBorder}`,
   borderRadius: '0.375rem',
   backgroundColor: sys.color.container.base,
   backgroundClip: 'padding-box',
@@ -106,8 +107,4 @@ export const increment = style({
       backgroundColor: sys.color.container.low,
     },
   },
-});
-
-export const numberFieldRecipe = recipe({
-  base: field,
 });

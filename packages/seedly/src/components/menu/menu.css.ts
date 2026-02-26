@@ -1,8 +1,17 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
+import { sys, typography } from '../../styles';
+import {
+  createArrowFillStyles,
+  createArrowInnerStrokeStyles,
+  createArrowOuterStrokeStyles,
+  createFloatingArrowPlacementStyles,
+  createFloatingPopupStyles,
+  createFloatingPositionerStyles,
+  createInsetHighlightStyles,
+  floatingSurfaceDarkOutlineColor,
+} from '../_foundation';
 
 export const menuVars = createThemeContract({
   color: {
@@ -31,18 +40,18 @@ export const menuVars = createThemeContract({
 const menuColorDefaults = assignVars(menuVars.color, {
   triggerForeground: sys.color.content.base,
   triggerBackground: sys.color.container.base,
-  triggerBorder: sys.color.container.high,
+  triggerBorder: sys.color.border.base,
   triggerHoverBackground: sys.color.container.low,
   triggerFocusRing: sys.color.tone.primary,
   popupBackground: sys.color.surface.base,
-  popupOutlineLight: sys.color.container.high,
-  popupOutlineDark: sys.color.container.top,
+  popupOutlineLight: sys.color.border.low,
+  popupOutlineDark: sys.color.border.low,
   popupShadow: sys.elevation.moderate,
   itemHighlightedForeground: sys.color.container.base,
   itemHighlightedBackground: sys.color.content.base,
-  separator: sys.color.container.high,
-  arrowOuterStroke: sys.color.container.high,
-  arrowInnerStroke: sys.color.container.top,
+  separator: sys.color.border.high,
+  arrowOuterStroke: sys.color.border.low,
+  arrowInnerStroke: floatingSurfaceDarkOutlineColor,
 });
 
 const menuShapeDefaults = assignVars(menuVars.shape, {
@@ -51,59 +60,44 @@ const menuShapeDefaults = assignVars(menuVars.shape, {
   itemCorner: '0.25rem',
 });
 
-export const button = style({
-  boxSizing: 'border-box',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: sys.spacing[3],
-  blockSize: sys.spacing[14],
-  paddingBlock: '0',
-  paddingInline: sys.spacing[7],
-  marginBlock: '0',
-  marginInline: '0',
-  outline: '0',
-  border: `1px solid ${menuVars.color.triggerBorder}`,
-  borderRadius: menuVars.shape.triggerCorner,
-  backgroundColor: menuVars.color.triggerBackground,
-  fontFamily: 'inherit',
-  fontSize: '1rem',
-  fontWeight: '500',
-  lineHeight: '1.5rem',
-  color: menuVars.color.triggerForeground,
-  userSelect: 'none',
-  vars: {
-    ...menuColorDefaults,
-    ...menuShapeDefaults,
-  },
+const menuItemHighlightSelectors =
+  createInsetHighlightStyles({
+    textColor: menuVars.color.itemHighlightedForeground,
+    backgroundColor: menuVars.color.itemHighlightedBackground,
+    insetInline: sys.spacing[2],
+    borderRadius: menuVars.shape.itemCorner,
+  }).selectors ?? {};
 
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: menuVars.color.triggerHoverBackground,
-        },
+export const button = style([
+  typography.label.large,
+  {
+    blockSize: sys.spacing[14],
+    paddingInline: sys.spacing[7],
+    gap: sys.spacing[3],
+    vars: {
+      ...menuColorDefaults,
+      ...menuShapeDefaults,
+    },
+    selectors: {
+      '&[data-popup-open]': {
+        backgroundColor: menuVars.color.triggerHoverBackground,
       },
     },
-    [`&:active`]: {
-      backgroundColor: menuVars.color.triggerHoverBackground,
-    },
-    [`&[data-popup-open]`]: {
-      backgroundColor: menuVars.color.triggerHoverBackground,
-    },
-    [`&:focus-visible`]: {
-      outline: `2px solid ${menuVars.color.triggerFocusRing}`,
-      outlineOffset: '-1px',
-    },
   },
-});
+]);
 
 export const buttonIcon = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexShrink: '0',
   marginInlineEnd: calc.negate(sys.spacing[2]),
 });
 
 export const positioner = style({
-  outline: '0',
+  ...createFloatingPositionerStyles({
+    outline: '0',
+  }),
   vars: {
     ...menuColorDefaults,
     ...menuShapeDefaults,
@@ -111,115 +105,59 @@ export const positioner = style({
 });
 
 export const popup = style({
-  boxSizing: 'border-box',
-  paddingBlock: sys.spacing[2],
-  borderRadius: menuVars.shape.popupCorner,
-  backgroundColor: menuVars.color.popupBackground,
-  color: menuVars.color.triggerForeground,
-  transformOrigin: 'var(--transform-origin)',
-  transition: 'transform 150ms,\n    opacity 150ms',
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      outline: `1px solid ${menuVars.color.popupOutlineLight}`,
-      boxShadow: menuVars.color.popupShadow,
-    },
-    '(prefers-color-scheme: dark)': {
-      outline: `1px solid ${menuVars.color.popupOutlineDark}`,
-      outlineOffset: '-1px',
-    },
-  },
-
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-      transform: 'scale(0.9)',
-    },
-    [`&[data-ending-style]`]: {
-      opacity: '0',
-      transform: 'scale(0.9)',
-    },
-  },
+  ...createFloatingPopupStyles({
+    paddingBlock: sys.spacing[2],
+    borderRadius: menuVars.shape.popupCorner,
+    backgroundColor: menuVars.color.popupBackground,
+    color: menuVars.color.triggerForeground,
+    lightOutline: menuVars.color.popupOutlineLight,
+    darkOutline: menuVars.color.popupOutlineDark,
+    darkOutlineOffset: '-1px',
+    shadow: menuVars.color.popupShadow,
+  }),
 });
 
 export const arrow = style({
-  display: 'flex',
-
-  selectors: {
-    [`&[data-side='top']`]: {
-      bottom: calc.negate(sys.spacing[4]),
-      rotate: '180deg',
-    },
-    [`&[data-side='bottom']`]: {
-      top: calc.negate(sys.spacing[4]),
-      rotate: '0deg',
-    },
-    [`&[data-side='left']`]: {
-      right: calc.negate(sys.spacing[7]),
-      rotate: '90deg',
-    },
-    [`&[data-side='right']`]: {
-      left: calc.negate(sys.spacing[7]),
-      rotate: '-90deg',
-    },
-  },
+  ...createFloatingArrowPlacementStyles({
+    sideTopOffset: calc.negate(sys.spacing[4]),
+    sideBottomOffset: calc.negate(sys.spacing[4]),
+    sideLeftOffset: calc.negate(sys.spacing[7]),
+    sideRightOffset: calc.negate(sys.spacing[7]),
+  }),
 });
 
 export const arrowFill = style({
-  fill: menuVars.color.popupBackground,
+  ...createArrowFillStyles(menuVars.color.popupBackground),
 });
 
 export const arrowOuterStroke = style({
-  '@media': {
-    '(prefers-color-scheme: light)': {
-      fill: menuVars.color.arrowOuterStroke,
-    },
-  },
+  ...createArrowOuterStrokeStyles(menuVars.color.arrowOuterStroke),
 });
 
 export const arrowInnerStroke = style({
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      fill: menuVars.color.arrowInnerStroke,
-    },
-  },
+  ...createArrowInnerStrokeStyles(menuVars.color.arrowInnerStroke),
 });
 
-export const item = style({
-  outline: '0',
-  cursor: 'default',
-  userSelect: 'none',
-  paddingBlock: sys.spacing[4],
-  paddingInlineStart: sys.spacing[8],
-  paddingInlineEnd: sys.spacing[12],
-  display: 'flex',
-  fontSize: '0.875rem',
-  lineHeight: '1rem',
+export const item = style([
+  typography.label.medium,
+  {
+    outline: '0',
+    cursor: 'default',
+    userSelect: 'none',
+    paddingBlock: sys.spacing[4],
+    paddingInlineStart: sys.spacing[8],
+    paddingInlineEnd: sys.spacing[12],
+    display: 'flex',
 
-  selectors: {
-    [`&[data-highlighted]`]: {
-      zIndex: '0',
-      position: 'relative',
-      color: menuVars.color.itemHighlightedForeground,
-    },
-    [`&[data-highlighted]::before`]: {
-      content: "''",
-      zIndex: '-1',
-      position: 'absolute',
-      insetBlock: '0',
-      insetInline: sys.spacing[2],
-      borderRadius: menuVars.shape.itemCorner,
-      backgroundColor: menuVars.color.itemHighlightedBackground,
+    selectors: {
+      ...menuItemHighlightSelectors,
     },
   },
-});
+]);
 
 export const separator = style({
   marginBlock: sys.spacing[3],
   marginInline: sys.spacing[8],
   blockSize: '1px',
   backgroundColor: menuVars.color.separator,
-});
-
-export const menuRecipe = recipe({
-  base: button,
 });

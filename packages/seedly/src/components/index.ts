@@ -20,6 +20,7 @@ export * as frameStyles from './frame';
 export * as formStyles from './form';
 export * as gridStyles from './grid';
 export * as inputStyles from './input';
+export * as labelStyles from './label';
 export * as menuStyles from './menu';
 export * as menubarStyles from './menubar';
 export * as meterStyles from './meter';

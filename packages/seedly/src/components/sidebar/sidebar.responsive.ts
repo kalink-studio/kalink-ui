@@ -1,9 +1,5 @@
-import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
+import { sidebarRecipe, type SidebarVariants } from './sidebar.css';
 
-import { sidebarRecipe, spacingAt } from './sidebar.css';
-
-export const sidebarResponsive = responsiveRecipe({
-  recipe: sidebarRecipe,
-  at: { spacing: spacingAt },
-  order: defaultOrder,
-});
+export const sidebarResponsive = (props: SidebarVariants = {}) => {
+  return sidebarRecipe(props);
+};

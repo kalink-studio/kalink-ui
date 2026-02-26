@@ -4,21 +4,15 @@ import {
   alignContentAt,
   alignItemsAt,
   autoLayoutAt,
-  columnSpacingAt,
   columnsAt,
   gridRecipe,
   justifyContentAt,
   justifyItemsAt,
-  rowSpacingAt,
-  spacingAt,
 } from './grid.css';
 
 export const gridResponsive = responsiveRecipe({
   recipe: gridRecipe,
   at: {
-    spacing: spacingAt,
-    columnSpacing: columnSpacingAt,
-    rowSpacing: rowSpacingAt,
     columns: columnsAt,
     autoLayout: autoLayoutAt,
     justifyItems: justifyItemsAt,

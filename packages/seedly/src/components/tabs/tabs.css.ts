@@ -1,7 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, typography } from '../../styles';
 
 export const tabsVars = createThemeContract({
   color: {
@@ -20,7 +19,7 @@ export const tabsVars = createThemeContract({
 });
 
 const tabsColorDefaults = assignVars(tabsVars.color, {
-  border: sys.color.container.high,
+  border: sys.color.border.base,
   tabForeground: stateColor.mutedContent,
   tabActiveForeground: sys.color.content.base,
   indicatorBackground: sys.color.container.low,
@@ -45,82 +44,65 @@ export const tabs = style({
 
 export const list = style({
   display: 'flex',
+  gap: sys.spacing[2],
+  paddingInline: sys.spacing[2],
   position: 'relative',
   zIndex: '0',
-  paddingInline: sys.spacing[2],
-  gap: sys.spacing[2],
   boxShadow: `inset 0 -1px ${tabsVars.color.border}`,
 });
 
-export const tab = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: '0',
-  marginBlock: '0',
-  marginInline: '0',
-  outline: '0',
-  background: 'none',
-  appearance: 'none',
-  color: tabsVars.color.tabForeground,
-  fontFamily: 'inherit',
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  fontWeight: '500',
-  userSelect: 'none',
-  whiteSpace: 'nowrap',
-  wordBreak: 'keep-all',
-  paddingInline: sys.spacing[4],
-  paddingBlock: '0',
-  blockSize: sys.spacing[12],
+export const tab = style([
+  typography.label.medium,
+  {
+    marginBlock: '0',
+    marginInline: '0',
+    borderWidth: '0',
+    appearance: 'none',
+    whiteSpace: 'nowrap',
+    wordBreak: 'keep-all',
+    blockSize: sys.spacing[12],
 
-  selectors: {
-    [`&[data-active]`]: {
-      color: tabsVars.color.tabActiveForeground,
-    },
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          color: tabsVars.color.tabActiveForeground,
-        },
+    selectors: {
+      [`&[data-active]`]: {
+        color: tabsVars.color.tabActiveForeground,
+      },
+      [`&:focus-visible`]: {
+        position: 'relative',
+      },
+      [`&:focus-visible::before`]: {
+        content: "''",
+        position: 'absolute',
+        insetBlock: sys.spacing[2],
+        insetInline: '0',
+        borderRadius: tabsVars.shape.indicatorCorner,
+        outline: `2px solid ${tabsVars.color.focusRing}`,
+        outlineOffset: '-1px',
       },
     },
-    [`&:focus-visible`]: {
-      position: 'relative',
-    },
-    [`&:focus-visible::before`]: {
-      content: "''",
-      position: 'absolute',
-      insetBlock: sys.spacing[2],
-      insetInline: '0',
-      borderRadius: tabsVars.shape.indicatorCorner,
-      outline: `2px solid ${tabsVars.color.focusRing}`,
-      outlineOffset: '-1px',
-    },
   },
-});
+]);
 
 export const indicator = style({
+  inlineSize: 'var(--active-tab-width)',
+  blockSize: 'var(--active-tab-height)',
   position: 'absolute',
   zIndex: '-1',
   insetInlineStart: '0',
-  insetBlockStart: '50%',
-  translate: 'var(--active-tab-left) -50%',
-  inlineSize: 'var(--active-tab-width)',
-  blockSize: sys.spacing[10],
+  insetBlockStart: 'var(--active-tab-top)',
   borderRadius: tabsVars.shape.indicatorCorner,
   backgroundColor: tabsVars.color.indicatorBackground,
-  transitionProperty: 'translate, inline-size',
+  translate: 'var(--active-tab-left) 0',
+  transitionProperty: 'translate, inline-size, block-size',
   transitionDuration: '200ms',
   transitionTimingFunction: 'ease-in-out',
 });
 
 export const panel = style({
-  position: 'relative',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   blockSize: '8rem',
+  position: 'relative',
   outline: '0',
 
   selectors: {
@@ -139,8 +121,4 @@ export const icon = style({
   inlineSize: sys.spacing[14],
   blockSize: sys.spacing[14],
   color: tabsVars.color.icon,
-});
-
-export const tabsRecipe = recipe({
-  base: tabs,
 });

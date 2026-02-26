@@ -5,9 +5,8 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { createSpacingContractStyles } from '../layout/shared/spacing';
 
 export const coverVars = createThemeContract({
   spacing: {
@@ -26,7 +25,8 @@ const coverLayoutDefaults = assignVars(coverVars.layout, {
   minBlockSize: '100vh',
 });
 
-export const coverSpacingStyles = createSpacingContractStyles(
+export const coverSpacingStyles = mapContractVars(
+  sys.spacing,
   coverVars.spacing,
 );
 
@@ -91,8 +91,3 @@ globalStyle(`${coverRecipe.classNames.base} > [data-cover-center]`, {
 });
 
 export type CoverVariants = NonNullable<RecipeVariants<typeof coverRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: coverSpacingStyles,
-  media: defaultMedia,
-});

@@ -1,112 +1,24 @@
-import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
+import { style } from '@vanilla-extract/css';
 
-import { stateColor, sys } from '../../styles';
-
-export const fieldsetVars = createThemeContract({
-  color: {
-    legendBorder: null,
-    legendForeground: null,
-    label: null,
-    foreground: null,
-    border: null,
-    focusRing: null,
-    error: null,
-    description: null,
-  },
-  shape: {
-    corner: null,
-  },
-});
+import { sys, typography } from '../../styles';
 
 export const fieldset = style({
-  border: '0',
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
   display: 'flex',
   flexDirection: 'column',
   gap: sys.spacing[8],
   inlineSize: '100%',
-  maxInlineSize: '16rem',
-  vars: {
-    ...assignVars(fieldsetVars.color, {
-      legendBorder: sys.color.container.high,
-      legendForeground: sys.color.content.base,
-      label: sys.color.content.base,
-      foreground: sys.color.content.base,
-      border: sys.color.container.high,
-      focusRing: sys.color.tone.primary,
-      error: sys.color.tone.destructive,
-      description: stateColor.mutedContent,
-    }),
-    ...assignVars(fieldsetVars.shape, {
-      corner: '0.375rem',
-    }),
-  },
-});
-
-export const legend = style({
-  borderBlockEnd: `1px solid ${fieldsetVars.color.legendBorder}`,
-  paddingBlockEnd: sys.spacing[6],
-  fontWeight: '500',
-  fontSize: '1.125rem',
-  lineHeight: '1.75rem',
-  letterSpacing: '-0.0025em',
-  color: fieldsetVars.color.legendForeground,
-});
-
-export const field = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'start',
-  gap: sys.spacing[2],
-});
-
-export const label = style({
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  fontWeight: '500',
-  color: fieldsetVars.color.label,
-});
-
-export const input = style({
-  boxSizing: 'border-box',
-  paddingInlineStart: sys.spacing[7],
   marginBlock: '0',
   marginInline: '0',
-  border: `1px solid ${fieldsetVars.color.border}`,
-  inlineSize: '100%',
-  blockSize: sys.spacing[14],
-  borderRadius: fieldsetVars.shape.corner,
-  fontFamily: 'inherit',
-  fontSize: '1rem',
-  backgroundColor: 'transparent',
-  color: fieldsetVars.color.foreground,
+  paddingBlock: '0',
+  paddingInline: '0',
+  border: '0',
+});
 
-  selectors: {
-    [`&:focus`]: {
-      outline: `2px solid ${fieldsetVars.color.focusRing}`,
-      outlineOffset: '-1px',
-    },
+export const legend = style([
+  typography.title.large,
+  {
+    borderBlockEnd: `1px solid ${sys.color.border.low}`,
+    paddingBlockEnd: sys.spacing[6],
+    color: sys.color.content.base,
   },
-});
-
-export const error = style({
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  color: fieldsetVars.color.error,
-});
-
-export const description = style({
-  marginBlock: '0',
-  marginInline: '0',
-  fontSize: '0.875rem',
-  lineHeight: '1.25rem',
-  color: fieldsetVars.color.description,
-});
-
-export const fieldsetRecipe = recipe({
-  base: fieldset,
-});
+]);

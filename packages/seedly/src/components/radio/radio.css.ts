@@ -1,7 +1,10 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { recipe } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
+import {
+  createChoiceControlStyles,
+  createChoiceIndicatorStyles,
+} from '../_foundation';
 
 export const radioVars = createThemeContract({
   color: {
@@ -21,7 +24,7 @@ export const radioGroup = style({
   color: radioVars.color.foreground,
   vars: assignVars(radioVars.color, {
     foreground: sys.color.content.base,
-    border: sys.color.container.top,
+    border: sys.color.border.high,
     checkedBackground: sys.color.content.base,
     checkedForeground: sys.color.container.base,
     focusRing: sys.color.tone.primary,
@@ -29,7 +32,7 @@ export const radioGroup = style({
 });
 
 export const caption = style({
-  fontWeight: '500',
+  display: 'block',
 });
 
 export const item = style({
@@ -39,54 +42,22 @@ export const item = style({
 });
 
 export const radio = style({
-  boxSizing: 'border-box',
-  display: 'flex',
-  inlineSize: sys.spacing[9],
-  blockSize: sys.spacing[9],
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '100%',
-  outline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
-  marginBlock: '0',
-  marginInline: '0',
-  border: 'none',
-
-  selectors: {
-    [`&[data-unchecked]`]: {
-      border: `1px solid ${radioVars.color.border}`,
-      backgroundColor: 'transparent',
-    },
-    [`&[data-checked]`]: {
-      backgroundColor: radioVars.color.checkedBackground,
-    },
-    [`&:focus-visible`]: {
-      outline: `2px solid ${radioVars.color.focusRing}`,
-      outlineOffset: '2px',
-    },
-  },
+  ...createChoiceControlStyles({
+    size: sys.spacing[9],
+    borderRadius: '100%',
+    uncheckedBorderColor: radioVars.color.border,
+    checkedBackgroundColor: radioVars.color.checkedBackground,
+    focusRingColor: radioVars.color.focusRing,
+  }),
 });
 
 export const indicator = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-
-  selectors: {
-    [`&[data-unchecked]`]: {
-      display: 'none',
-    },
-    [`&::before`]: {
-      content: "''",
+  ...createChoiceIndicatorStyles({
+    alignCenter: true,
+    before: {
+      size: sys.spacing[4],
       borderRadius: '100%',
-      inlineSize: sys.spacing[4],
-      blockSize: sys.spacing[4],
       backgroundColor: radioVars.color.checkedForeground,
     },
-  },
-});
-
-export const radioRecipe = recipe({
-  base: radioGroup,
+  }),
 });

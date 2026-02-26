@@ -15,6 +15,18 @@ export type Responsive<T, B extends string = BreakpointWithBase> =
   | ResponsiveObject<T, B>
   | ResponsiveArray<T>;
 
+type MakeResponsiveAtKeys<
+  V extends Record<string, unknown>,
+  A extends Partial<Record<keyof V, unknown>>,
+  B extends string,
+> = {
+  [K in keyof V]: K extends keyof A
+    ? V[K] extends string | number
+      ? Responsive<V[K], B>
+      : V[K]
+    : V[K];
+};
+
 function entriesOf<K extends string | number, V>(
   record: Partial<Record<K, V>>,
 ): [K, V][] {
@@ -119,24 +131,29 @@ function joinClassNames(classNames: (string | undefined)[]): string {
   return classes.join(' ');
 }
 
-type MakeResponsive<V, B extends string> = {
-  [K in keyof V]: V[K] extends string | number ? Responsive<V[K], B> : V[K];
-};
-
-export interface ResponsiveRecipeArgs<V, Bps extends string> {
+export interface ResponsiveRecipeArgs<
+  V extends Record<string, unknown>,
+  Bps extends string,
+  A extends Partial<
+    Record<keyof V, Partial<Record<Bps, Record<string, string>>>>
+  >,
+> {
   recipe: (props: V) => string;
-  at: Partial<Record<keyof V, Partial<Record<Bps, Record<string, string>>>>>;
+  at: A;
   order: readonly Bps[];
 }
 
 export function responsiveRecipe<
   V extends Record<string, unknown>,
   const Bps extends string,
->(args: ResponsiveRecipeArgs<V, Bps>) {
+  A extends Partial<
+    Record<keyof V, Partial<Record<Bps, Record<string, string>>>>
+  >,
+>(args: ResponsiveRecipeArgs<V, Bps, A>) {
   const { recipe, at, order } = args;
 
   return (
-    props: MakeResponsive<V, Bps>,
+    props: MakeResponsiveAtKeys<V, A, Bps>,
     ...classNames: (string | undefined)[]
   ) => {
     const keys = Object.keys(props) as (keyof V)[];

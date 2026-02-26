@@ -5,9 +5,8 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
-import { createSpacingContractStyles } from '../layout/shared/spacing';
 
 export const sidebarVars = createThemeContract({
   spacing: {
@@ -28,7 +27,8 @@ const sidebarLayoutDefaults = assignVars(sidebarVars.layout, {
   contentMinWidth: '50%',
 });
 
-export const sidebarSpacingStyles = createSpacingContractStyles(
+export const sidebarSpacingStyles = mapContractVars(
+  sys.spacing,
   sidebarVars.spacing,
 );
 
@@ -109,8 +109,3 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
 });
 
 export type SidebarVariants = NonNullable<RecipeVariants<typeof sidebarRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: sidebarSpacingStyles,
-  media: defaultMedia,
-});

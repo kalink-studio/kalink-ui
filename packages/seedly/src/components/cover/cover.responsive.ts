@@ -1,9 +1,5 @@
-import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
+import { coverRecipe, type CoverVariants } from './cover.css';
 
-import { coverRecipe, spacingAt } from './cover.css';
-
-export const coverResponsive = responsiveRecipe({
-  recipe: coverRecipe,
-  at: { spacing: spacingAt },
-  order: defaultOrder,
-});
+export const coverResponsive = (props: CoverVariants = {}) => {
+  return coverRecipe(props);
+};
