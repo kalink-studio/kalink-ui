@@ -1,11 +1,7 @@
-import * as styles from '@kalink-ui/seedly/components/toggle-group';
-import * as React from 'react';
-
-import { Toggle } from '../toggle';
-
-import { ToggleGroup } from '.';
+import { ToggleGroup, ToggleGroupItem } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 const meta = {
   title: 'Components/Toggle Group',
@@ -24,24 +20,26 @@ export const Default: Story = {
 function Example() {
   return (
     <ToggleGroup defaultValue={['left']}>
-      <Toggle aria-label="Align left" value="left" className={styles.button}>
-        <AlignLeftIcon className={styles.icon} />
-      </Toggle>
-      <Toggle
+      <ToggleGroupItem
+        aria-label="Align left"
+        value="left"
+        icon={<AlignLeftIcon />}
+      />
+      <ToggleGroupItem
         aria-label="Align center"
         value="center"
-        className={styles.button}
-      >
-        <AlignCenterIcon className={styles.icon} />
-      </Toggle>
-      <Toggle aria-label="Align right" value="right" className={styles.button}>
-        <AlignRightIcon className={styles.icon} />
-      </Toggle>
+        icon={<AlignCenterIcon />}
+      />
+      <ToggleGroupItem
+        aria-label="Align right"
+        value="right"
+        icon={<AlignRightIcon />}
+      />
     </ToggleGroup>
   );
 }
 
-function AlignLeftIcon(props: React.ComponentProps<'svg'>) {
+function AlignLeftIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"
@@ -59,7 +57,7 @@ function AlignLeftIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function AlignCenterIcon(props: React.ComponentProps<'svg'>) {
+function AlignCenterIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"
@@ -77,7 +75,7 @@ function AlignCenterIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function AlignRightIcon(props: React.ComponentProps<'svg'>) {
+function AlignRightIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"

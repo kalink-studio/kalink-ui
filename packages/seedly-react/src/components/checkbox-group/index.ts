@@ -1,1 +1,1 @@
-export { CheckboxGroup } from './checkbox-group';
+export * as CheckboxGroup from './checkbox-group';

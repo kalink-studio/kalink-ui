@@ -1,11 +1,7 @@
-import * as styles from '@kalink-ui/seedly/components/menubar';
-import * as React from 'react';
-
-import { Menu } from '../menu';
-
-import { Menubar } from '.';
+import { Menubar, MenubarMenu } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps, MouseEvent } from 'react';
 
 const meta = {
   title: 'Components/Menubar',
@@ -24,148 +20,110 @@ export const Default: Story = {
 function Example() {
   return (
     <Menubar>
-      <Menu.Root>
-        <Menu.Trigger className={styles.menuTrigger}>File</Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner
-            className={styles.menuPositioner}
-            sideOffset={6}
-            alignOffset={-2}
-          >
-            <Menu.Popup className={styles.menuPopup}>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                New
-              </Menu.Item>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Open
-              </Menu.Item>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Save
-              </Menu.Item>
+      <MenubarMenu.Root>
+        <MenubarMenu.Trigger>File</MenubarMenu.Trigger>
+        <MenubarMenu.Portal>
+          <MenubarMenu.Positioner sideOffset={6} alignOffset={-2}>
+            <MenubarMenu.Popup>
+              <MenubarMenu.Item onClick={handleClick}>New</MenubarMenu.Item>
+              <MenubarMenu.Item onClick={handleClick}>Open</MenubarMenu.Item>
+              <MenubarMenu.Item onClick={handleClick}>Save</MenubarMenu.Item>
 
-              <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className={styles.menuItem}>
+              <MenubarMenu.SubmenuRoot>
+                <MenubarMenu.SubmenuTrigger>
                   Export
                   <ChevronRightIcon />
-                </Menu.SubmenuTrigger>
-                <Menu.Portal>
-                  <Menu.Positioner alignOffset={-4}>
-                    <Menu.Popup className={styles.menuPopup}>
-                      <Menu.Item
-                        className={styles.menuItem}
-                        onClick={handleClick}
-                      >
+                </MenubarMenu.SubmenuTrigger>
+                <MenubarMenu.Portal>
+                  <MenubarMenu.Positioner alignOffset={-4}>
+                    <MenubarMenu.Popup>
+                      <MenubarMenu.Item onClick={handleClick}>
                         PDF
-                      </Menu.Item>
-                      <Menu.Item
-                        className={styles.menuItem}
-                        onClick={handleClick}
-                      >
+                      </MenubarMenu.Item>
+                      <MenubarMenu.Item onClick={handleClick}>
                         PNG
-                      </Menu.Item>
-                      <Menu.Item
-                        className={styles.menuItem}
-                        onClick={handleClick}
-                      >
+                      </MenubarMenu.Item>
+                      <MenubarMenu.Item onClick={handleClick}>
                         SVG
-                      </Menu.Item>
-                    </Menu.Popup>
-                  </Menu.Positioner>
-                </Menu.Portal>
-              </Menu.SubmenuRoot>
+                      </MenubarMenu.Item>
+                    </MenubarMenu.Popup>
+                  </MenubarMenu.Positioner>
+                </MenubarMenu.Portal>
+              </MenubarMenu.SubmenuRoot>
 
-              <Menu.Separator className={styles.menuSeparator} />
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Print
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
+              <MenubarMenu.Separator />
+              <MenubarMenu.Item onClick={handleClick}>Print</MenubarMenu.Item>
+            </MenubarMenu.Popup>
+          </MenubarMenu.Positioner>
+        </MenubarMenu.Portal>
+      </MenubarMenu.Root>
 
-      <Menu.Root>
-        <Menu.Trigger className={styles.menuTrigger}>Edit</Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner className={styles.menuPositioner} sideOffset={6}>
-            <Menu.Popup className={styles.menuPopup}>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Cut
-              </Menu.Item>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Copy
-              </Menu.Item>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Paste
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
+      <MenubarMenu.Root>
+        <MenubarMenu.Trigger>Edit</MenubarMenu.Trigger>
+        <MenubarMenu.Portal>
+          <MenubarMenu.Positioner sideOffset={6}>
+            <MenubarMenu.Popup>
+              <MenubarMenu.Item onClick={handleClick}>Cut</MenubarMenu.Item>
+              <MenubarMenu.Item onClick={handleClick}>Copy</MenubarMenu.Item>
+              <MenubarMenu.Item onClick={handleClick}>Paste</MenubarMenu.Item>
+            </MenubarMenu.Popup>
+          </MenubarMenu.Positioner>
+        </MenubarMenu.Portal>
+      </MenubarMenu.Root>
 
-      <Menu.Root>
-        <Menu.Trigger className={styles.menuTrigger}>View</Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner className={styles.menuPositioner} sideOffset={6}>
-            <Menu.Popup className={styles.menuPopup}>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
-                Zoom In
-              </Menu.Item>
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
+      <MenubarMenu.Root>
+        <MenubarMenu.Trigger>View</MenubarMenu.Trigger>
+        <MenubarMenu.Portal>
+          <MenubarMenu.Positioner sideOffset={6}>
+            <MenubarMenu.Popup>
+              <MenubarMenu.Item onClick={handleClick}>Zoom In</MenubarMenu.Item>
+              <MenubarMenu.Item onClick={handleClick}>
                 Zoom Out
-              </Menu.Item>
+              </MenubarMenu.Item>
 
-              <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className={styles.menuItem}>
+              <MenubarMenu.SubmenuRoot>
+                <MenubarMenu.SubmenuTrigger>
                   Layout
                   <ChevronRightIcon />
-                </Menu.SubmenuTrigger>
-                <Menu.Portal>
-                  <Menu.Positioner alignOffset={-4}>
-                    <Menu.Popup className={styles.menuPopup}>
-                      <Menu.Item
-                        className={styles.menuItem}
-                        onClick={handleClick}
-                      >
+                </MenubarMenu.SubmenuTrigger>
+                <MenubarMenu.Portal>
+                  <MenubarMenu.Positioner alignOffset={-4}>
+                    <MenubarMenu.Popup>
+                      <MenubarMenu.Item onClick={handleClick}>
                         Single Page
-                      </Menu.Item>
-                      <Menu.Item
-                        className={styles.menuItem}
-                        onClick={handleClick}
-                      >
+                      </MenubarMenu.Item>
+                      <MenubarMenu.Item onClick={handleClick}>
                         Two Pages
-                      </Menu.Item>
-                      <Menu.Item
-                        className={styles.menuItem}
-                        onClick={handleClick}
-                      >
+                      </MenubarMenu.Item>
+                      <MenubarMenu.Item onClick={handleClick}>
                         Continuous
-                      </Menu.Item>
-                    </Menu.Popup>
-                  </Menu.Positioner>
-                </Menu.Portal>
-              </Menu.SubmenuRoot>
+                      </MenubarMenu.Item>
+                    </MenubarMenu.Popup>
+                  </MenubarMenu.Positioner>
+                </MenubarMenu.Portal>
+              </MenubarMenu.SubmenuRoot>
 
-              <Menu.Separator className={styles.menuSeparator} />
-              <Menu.Item className={styles.menuItem} onClick={handleClick}>
+              <MenubarMenu.Separator />
+              <MenubarMenu.Item onClick={handleClick}>
                 Full Screen
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
+              </MenubarMenu.Item>
+            </MenubarMenu.Popup>
+          </MenubarMenu.Positioner>
+        </MenubarMenu.Portal>
+      </MenubarMenu.Root>
 
-      <Menu.Root disabled>
-        <Menu.Trigger className={styles.menuTrigger}>Help</Menu.Trigger>
-      </Menu.Root>
+      <MenubarMenu.Root disabled>
+        <MenubarMenu.Trigger>Help</MenubarMenu.Trigger>
+      </MenubarMenu.Root>
     </Menubar>
   );
 }
 
-function handleClick(event: React.MouseEvent<HTMLElement>) {
+function handleClick(event: MouseEvent<HTMLElement>) {
   console.log(`${event.currentTarget.textContent} clicked`);
 }
 
-function ChevronRightIcon(props: React.ComponentProps<'svg'>) {
+function ChevronRightIcon(props: ComponentProps<'svg'>) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" {...props}>
       <path

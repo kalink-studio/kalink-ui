@@ -10,7 +10,7 @@ import type { Responsive } from '@kalink-ui/seedly/styles';
 
 export type ClusterProps = useRender.ComponentProps<'div'> &
   Omit<ClusterVariants, 'spacing' | 'justify' | 'align' | 'direction'> & {
-    spacing?: Responsive<NonNullable<ClusterVariants['spacing']>>;
+    spacing?: NonNullable<ClusterVariants['spacing']>;
     justify?: Responsive<NonNullable<ClusterVariants['justify']>>;
     align?: Responsive<NonNullable<ClusterVariants['align']>>;
     direction?: Responsive<NonNullable<ClusterVariants['direction']>>;

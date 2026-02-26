@@ -1,9 +1,7 @@
-import * as styles from '@kalink-ui/seedly/components/accordion';
-import * as React from 'react';
-
 import { Accordion } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 const meta = {
   title: 'Components/Accordion',
@@ -26,14 +24,14 @@ function Example() {
         <Accordion.Header>
           <Accordion.Trigger>
             What is Base UI?
-            <PlusIcon className={styles.triggerIcon} />
+            <Accordion.TriggerIcon render={<PlusIcon />} />
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Panel>
-          <div className={styles.content}>
+          <Accordion.Content>
             Base UI is a library of high-quality unstyled React components for
             design systems and web apps.
-          </div>
+          </Accordion.Content>
         </Accordion.Panel>
       </Accordion.Item>
 
@@ -41,14 +39,14 @@ function Example() {
         <Accordion.Header>
           <Accordion.Trigger>
             How do I get started?
-            <PlusIcon className={styles.triggerIcon} />
+            <Accordion.TriggerIcon render={<PlusIcon />} />
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Panel>
-          <div className={styles.content}>
+          <Accordion.Content>
             Head to the “Quick start” guide in the docs. If you’ve used unstyled
             libraries before, you’ll feel at home.
-          </div>
+          </Accordion.Content>
         </Accordion.Panel>
       </Accordion.Item>
 
@@ -56,20 +54,20 @@ function Example() {
         <Accordion.Header>
           <Accordion.Trigger>
             Can I use it for my project?
-            <PlusIcon className={styles.triggerIcon} />
+            <Accordion.TriggerIcon render={<PlusIcon />} />
           </Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Panel>
-          <div className={styles.content}>
+          <Accordion.Content>
             Of course! Base UI is free and open source.
-          </div>
+          </Accordion.Content>
         </Accordion.Panel>
       </Accordion.Item>
     </Accordion.Root>
   );
 }
 
-function PlusIcon(props: React.ComponentProps<'svg'>) {
+function PlusIcon(props: ComponentProps<'svg'>) {
   return (
     <svg viewBox="0 0 12 12" fill="currentcolor" {...props}>
       <path d="M6.75 0H5.25V5.25H0V6.75L5.25 6.75V12H6.75V6.75L12 6.75V5.25H6.75V0Z" />

@@ -15,6 +15,21 @@ function joinClassNames(
 
 export function mergeClassName<State>(
   baseClassName: string,
+  className: (state: State) => string | undefined,
+): (state: State) => string;
+
+export function mergeClassName(
+  baseClassName: string,
+  className: string | undefined,
+): string;
+
+export function mergeClassName<State>(
+  baseClassName: string,
+  className: ComponentClassName<State> | undefined,
+): ComponentClassName<State>;
+
+export function mergeClassName<State>(
+  baseClassName: string,
   className: ComponentClassName<State> | undefined,
 ): ComponentClassName<State> {
   if (className === undefined || className === '') {

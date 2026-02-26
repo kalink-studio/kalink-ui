@@ -1,7 +1,6 @@
-import * as styles from '@kalink-ui/seedly/components/checkbox-group';
 import * as React from 'react';
 
-import { Checkbox } from '../checkbox';
+import { Fieldset } from '../fieldset';
 
 import { CheckboxGroup } from '.';
 
@@ -9,65 +8,52 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Components/Checkbox Group',
-  component: CheckboxGroup,
+  component: CheckboxGroup.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof CheckboxGroup>;
+} satisfies Meta<typeof CheckboxGroup.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof CheckboxGroup>;
+type Story = StoryObj<typeof CheckboxGroup.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
 };
 
 function Example() {
-  const id = React.useId();
   return (
-    <CheckboxGroup aria-labelledby={id} defaultValue={['fuji-apple']}>
-      <div className={styles.caption} id={id}>
-        Apples
-      </div>
+    <Fieldset.Root>
+      <Fieldset.Legend>Apples</Fieldset.Legend>
 
-      <label className={styles.item}>
-        <Checkbox.Root
-          name="apple"
-          value="fuji-apple"
-          className={styles.checkbox}
-        >
-          <Checkbox.Indicator className={styles.indicator}>
-            <CheckIcon className={styles.icon} />
-          </Checkbox.Indicator>
-        </Checkbox.Root>
-        Fuji
-      </label>
+      <CheckboxGroup.Root defaultValue={['fuji-apple']}>
+        <CheckboxGroup.Item>
+          <CheckboxGroup.Checkbox name="apple" value="fuji-apple">
+            <CheckboxGroup.Indicator>
+              <CheckIcon />
+            </CheckboxGroup.Indicator>
+          </CheckboxGroup.Checkbox>
+          Fuji
+        </CheckboxGroup.Item>
 
-      <label className={styles.item}>
-        <Checkbox.Root
-          name="apple"
-          value="gala-apple"
-          className={styles.checkbox}
-        >
-          <Checkbox.Indicator className={styles.indicator}>
-            <CheckIcon className={styles.icon} />
-          </Checkbox.Indicator>
-        </Checkbox.Root>
-        Gala
-      </label>
+        <CheckboxGroup.Item>
+          <CheckboxGroup.Checkbox name="apple" value="gala-apple">
+            <CheckboxGroup.Indicator>
+              <CheckIcon />
+            </CheckboxGroup.Indicator>
+          </CheckboxGroup.Checkbox>
+          Gala
+        </CheckboxGroup.Item>
 
-      <label className={styles.item}>
-        <Checkbox.Root
-          name="apple"
-          value="granny-smith-apple"
-          className={styles.checkbox}
-        >
-          <Checkbox.Indicator className={styles.indicator}>
-            <CheckIcon className={styles.icon} />
-          </Checkbox.Indicator>
-        </Checkbox.Root>
-        Granny Smith
-      </label>
-    </CheckboxGroup>
+        <CheckboxGroup.Item>
+          <CheckboxGroup.Checkbox name="apple" value="granny-smith-apple">
+            <CheckboxGroup.Indicator>
+              <CheckIcon />
+            </CheckboxGroup.Indicator>
+          </CheckboxGroup.Checkbox>
+          Granny Smith
+        </CheckboxGroup.Item>
+      </CheckboxGroup.Root>
+    </Fieldset.Root>
   );
 }
 

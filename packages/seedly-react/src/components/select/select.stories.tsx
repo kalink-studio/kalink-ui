@@ -1,11 +1,9 @@
-import * as styles from '@kalink-ui/seedly/components/select';
-import * as React from 'react';
-
 import { Field } from '../field';
 
 import { Select } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 const meta = {
   title: 'Components/Select',
@@ -31,12 +29,8 @@ const apples = [
 
 function Example() {
   return (
-    <Field.Root className={styles.field}>
-      <Field.Label
-        className={styles.label}
-        nativeLabel={false}
-        render={<div />}
-      >
+    <Field.Root>
+      <Field.Label nativeLabel={false} render={<div />}>
         Apple
       </Field.Label>
       <Select.Root items={apples}>
@@ -54,7 +48,7 @@ function Example() {
                 {apples.map(({ label, value }) => (
                   <Select.Item key={label} value={value}>
                     <Select.ItemIndicator>
-                      <CheckIcon className={styles.itemIndicatorIcon} />
+                      <CheckIcon />
                     </Select.ItemIndicator>
                     <Select.ItemText>{label}</Select.ItemText>
                   </Select.Item>
@@ -69,7 +63,7 @@ function Example() {
   );
 }
 
-function ChevronUpDownIcon(props: React.ComponentProps<'svg'>) {
+function ChevronUpDownIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="8"
@@ -86,7 +80,7 @@ function ChevronUpDownIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function CheckIcon(props: React.ComponentProps<'svg'>) {
+function CheckIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       fill="currentcolor"

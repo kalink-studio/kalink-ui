@@ -4,13 +4,58 @@ import {
 } from '@base-ui/react/number-field';
 import { increment as incrementClassName } from '@kalink-ui/seedly/components/number-field';
 
+import { Button, type ButtonCompositionProps } from '../button';
 import { mergeClassName } from '@/utils/merge-class-name';
+import {
+  resolveStateClassName,
+  resolveStateRender,
+} from '@/utils/resolve-state-props';
 
-export function Increment({ className, ...props }: NumberFieldIncrementProps) {
+type IncrementProps = Omit<NumberFieldIncrementProps, 'className' | 'render'> &
+  ButtonCompositionProps & {
+    className?: NumberFieldIncrementProps['className'];
+    render?: NumberFieldIncrementProps['render'];
+  };
+
+export function Increment({
+  className,
+  render,
+  unstyled,
+  variant = 'bare',
+  tone = 'neutral',
+  size = 'md',
+  shape,
+  flow,
+  loading,
+  icon,
+  ...props
+}: IncrementProps) {
   return (
     <NumberField.Increment
       {...props}
-      className={mergeClassName(incrementClassName, className)}
+      render={(incrementProps, state) => {
+        const resolvedClassName = resolveStateClassName(className, state);
+
+        return (
+          <Button
+            {...incrementProps}
+            unstyled={unstyled}
+            variant={variant}
+            tone={tone}
+            size={size}
+            shape={shape}
+            flow={flow}
+            loading={loading}
+            icon={icon}
+            className={
+              unstyled
+                ? resolvedClassName
+                : mergeClassName(incrementClassName, resolvedClassName)
+            }
+            render={resolveStateRender(render, state)}
+          />
+        );
+      }}
     />
   );
 }

@@ -1,5 +1,4 @@
-import * as styles from '@kalink-ui/seedly/components/combobox';
-import * as React from 'react';
+import { useId, type ComponentProps } from 'react';
 
 import { Combobox } from '.';
 
@@ -20,23 +19,22 @@ export const Default: Story = {
 };
 
 function Example() {
-  const id = React.useId();
+  const id = useId();
   return (
     <Combobox.Root items={fruits}>
-      <div className={styles.label}>
-        <label htmlFor={id}>Choose a fruit</label>
-        <div className={styles.inputWrapper}>
+      <Combobox.Label htmlFor={id}>
+        Choose a fruit
+        <Combobox.InputWrapper>
           <Combobox.Input placeholder="e.g. Apple" id={id} />
-          <div className={styles.actionButtons}>
-            <Combobox.Clear aria-label="Clear selection">
-              <ClearIcon className={styles.clearIcon} />
-            </Combobox.Clear>
-            <Combobox.Trigger aria-label="Open popup">
-              <ChevronDownIcon className={styles.triggerIcon} />
-            </Combobox.Trigger>
-          </div>
-        </div>
-      </div>
+          <Combobox.ActionButtons>
+            <Combobox.Clear aria-label="Clear selection" icon={<ClearIcon />} />
+            <Combobox.Trigger
+              aria-label="Open popup"
+              icon={<ChevronDownIcon />}
+            />
+          </Combobox.ActionButtons>
+        </Combobox.InputWrapper>
+      </Combobox.Label>
 
       <Combobox.Portal>
         <Combobox.Positioner sideOffset={4}>
@@ -46,9 +44,9 @@ function Example() {
               {(item: Fruit) => (
                 <Combobox.Item key={item.value} value={item}>
                   <Combobox.ItemIndicator>
-                    <CheckIcon className={styles.itemIndicatorIcon} />
+                    <CheckIcon />
                   </Combobox.ItemIndicator>
-                  <div className={styles.itemText}>{item.label}</div>
+                  <Combobox.ItemText>{item.label}</Combobox.ItemText>
                 </Combobox.Item>
               )}
             </Combobox.List>
@@ -59,7 +57,7 @@ function Example() {
   );
 }
 
-function CheckIcon(props: React.ComponentProps<'svg'>) {
+function CheckIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       fill="currentcolor"
@@ -73,10 +71,12 @@ function CheckIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function ClearIcon(props: React.ComponentProps<'svg'>) {
+function ClearIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -91,10 +91,12 @@ function ClearIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function ChevronDownIcon(props: React.ComponentProps<'svg'>) {
+function ChevronDownIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

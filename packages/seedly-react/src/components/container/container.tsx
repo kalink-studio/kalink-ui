@@ -6,11 +6,9 @@ import {
 
 import { mergeClassName } from '@/utils/merge-class-name';
 
-import type { Responsive } from '@kalink-ui/seedly/styles';
-
 export type ContainerProps = useRender.ComponentProps<'div'> &
   Omit<ContainerVariants, 'spacing'> & {
-    spacing?: Responsive<NonNullable<ContainerVariants['spacing']>>;
+    spacing?: NonNullable<ContainerVariants['spacing']>;
   };
 
 export function Container({

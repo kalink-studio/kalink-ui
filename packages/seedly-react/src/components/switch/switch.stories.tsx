@@ -1,5 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/switch';
-
 import { Switch } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -18,13 +16,64 @@ export const Default: Story = {
   render: () => <Example />,
 };
 
+export const States: Story = {
+  render: () => <StateGallery />,
+};
+
 function Example() {
   return (
-    <label className={styles.label}>
-      <Switch.Root defaultChecked>
+    <Switch.Label>
+      <Switch.Root>
         <Switch.Thumb />
       </Switch.Root>
       Notifications
-    </label>
+    </Switch.Label>
+  );
+}
+
+function StateGallery() {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gap: '1rem',
+        alignItems: 'start',
+      }}
+    >
+      <Switch.Label>
+        <Switch.Root>
+          <Switch.Thumb />
+        </Switch.Root>
+        Off
+      </Switch.Label>
+
+      <Switch.Label>
+        <Switch.Root defaultChecked>
+          <Switch.Thumb />
+        </Switch.Root>
+        On
+      </Switch.Label>
+
+      <Switch.Label>
+        <Switch.Root disabled>
+          <Switch.Thumb />
+        </Switch.Root>
+        Disabled
+      </Switch.Label>
+
+      <Switch.Label>
+        <Switch.Root defaultChecked disabled>
+          <Switch.Thumb />
+        </Switch.Root>
+        Disabled on
+      </Switch.Label>
+
+      <Switch.Label>
+        <Switch.Root readOnly defaultChecked>
+          <Switch.Thumb />
+        </Switch.Root>
+        Read-only
+      </Switch.Label>
+    </div>
   );
 }

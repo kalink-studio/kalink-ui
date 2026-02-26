@@ -1,4 +1,4 @@
-import * as styles from '@kalink-ui/seedly/components/separator';
+import { Cluster } from '../cluster';
 
 import { Separator } from '.';
 
@@ -20,28 +20,16 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <div className={styles.container}>
-      <a href="#" className={styles.link}>
-        Home
-      </a>
-      <a href="#" className={styles.link}>
-        Pricing
-      </a>
-      <a href="#" className={styles.link}>
-        Blog
-      </a>
-      <a href="#" className={styles.link}>
-        Support
-      </a>
+    <Cluster spacing={4} align="center" render={<nav />}>
+      <a href="#">Home</a>
+      <a href="#">Pricing</a>
+      <a href="#">Blog</a>
+      <a href="#">Support</a>
 
       <Separator orientation="vertical" />
 
-      <a href="#" className={styles.link}>
-        Log in
-      </a>
-      <a href="#" className={styles.link}>
-        Sign up
-      </a>
-    </div>
+      <a href="#">Log in</a>
+      <a href="#">Sign up</a>
+    </Cluster>
   );
 }

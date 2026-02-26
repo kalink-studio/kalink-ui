@@ -11,7 +11,7 @@ import type { Responsive } from '@kalink-ui/seedly/styles';
 export type CenterProps = useRender.ComponentProps<'div'> &
   Omit<CenterVariants, 'gutters' | 'andText' | 'intrinsic'> & {
     andText?: Responsive<NonNullable<CenterVariants['andText']>>;
-    gutters?: Responsive<NonNullable<CenterVariants['gutters']>>;
+    gutters?: NonNullable<CenterVariants['gutters']>;
     intrinsic?: Responsive<NonNullable<CenterVariants['intrinsic']>>;
   };
 

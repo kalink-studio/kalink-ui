@@ -6,37 +6,64 @@ import {
 
 import { mergeClassName } from '@/utils/merge-class-name';
 
-import type { Responsive } from '@kalink-ui/seedly/styles';
+import type {
+  ColorTone,
+  ContainerLevel,
+  SurfaceLevel,
+} from '@kalink-ui/seedly/styles';
 
 interface BoxLayoutOnlyProps {
-  tone?: undefined;
+  colorSource?: undefined;
   variant?: never;
+  colorKey?: never;
 }
 
 interface BoxToneProps {
-  tone: NonNullable<BoxVariants['tone']>;
+  colorSource: 'tone';
+  colorKey: ColorTone;
+  variant?: BoxVariants['variant'];
+}
+
+interface BoxContainerProps {
+  colorSource: 'container';
+  colorKey: ContainerLevel;
+  variant?: BoxVariants['variant'];
+}
+
+interface BoxSurfaceProps {
+  colorSource: 'surface';
+  colorKey: SurfaceLevel;
   variant?: BoxVariants['variant'];
 }
 
 export type BoxLayoutProps = useRender.ComponentProps<'div'> &
-  Omit<BoxVariants, 'spacing' | 'tone' | 'variant'> & {
-    spacing?: Responsive<NonNullable<BoxVariants['spacing']>>;
+  Omit<BoxVariants, 'spacing' | 'variant' | 'colorSource' | 'colorKey'> & {
+    spacing?: NonNullable<BoxVariants['spacing']>;
   };
 
-export type BoxProps = BoxLayoutProps & (BoxLayoutOnlyProps | BoxToneProps);
+export type BoxProps = BoxLayoutProps &
+  (BoxLayoutOnlyProps | BoxToneProps | BoxContainerProps | BoxSurfaceProps);
 
 export function Box({
   spacing,
   radius,
   elevation,
-  tone,
+  colorSource,
+  colorKey,
   className,
   variant,
   render,
   ...props
 }: BoxProps) {
   const mergedClassName = mergeClassName(
-    boxResponsive({ variant, spacing, radius, elevation, tone }),
+    boxResponsive({
+      variant,
+      colorSource,
+      colorKey,
+      spacing,
+      radius,
+      elevation,
+    }),
     className,
   );
 

@@ -24,11 +24,6 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
-  tags: {
-    internal: {
-      defaultFilterSelection: 'exclude',
-    },
-  },
 };
 
 export default config;

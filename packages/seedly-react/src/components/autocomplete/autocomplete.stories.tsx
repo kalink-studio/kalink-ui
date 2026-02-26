@@ -1,5 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/autocomplete';
-
 import { Autocomplete } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -21,10 +19,10 @@ export const Default: Story = {
 function Example() {
   return (
     <Autocomplete.Root items={tags}>
-      <label className={styles.label}>
+      <Autocomplete.Label>
         Search tags
         <Autocomplete.Input placeholder="e.g. feature" />
-      </label>
+      </Autocomplete.Label>
 
       <Autocomplete.Portal>
         <Autocomplete.Positioner sideOffset={4}>

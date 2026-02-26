@@ -13,7 +13,7 @@ import type { Responsive } from '@kalink-ui/seedly/styles';
 export type SwitcherProps = useRender.ComponentProps<'div'> &
   Omit<SwitcherVariants, 'spacing' | 'limit'> & {
     threshold?: string;
-    spacing?: Responsive<NonNullable<SwitcherVariants['spacing']>>;
+    spacing?: NonNullable<SwitcherVariants['spacing']>;
     limit?: Responsive<NonNullable<SwitcherVariants['limit']>>;
   };
 

@@ -27,8 +27,8 @@ const preview: Preview = {
     },
     backgrounds: {
       options: {
-        light: { name: 'Light', value: 'oklch(98% 0.01% 264deg)' },
-        dark: { name: 'Dark', value: '#0d1017' },
+        light: { name: 'Light', value: 'oklch(98.4% 0.003 247.858)' },
+        dark: { name: 'Dark', value: 'oklch(20% 0.0166 257.417)' },
       },
     },
   },

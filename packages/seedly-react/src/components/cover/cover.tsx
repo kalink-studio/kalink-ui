@@ -8,12 +8,10 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 import { mergeClassName } from '@/utils/merge-class-name';
 
-import type { Responsive } from '@kalink-ui/seedly/styles';
-
 export type CoverProps = useRender.ComponentProps<'div'> &
   Omit<CoverVariants, 'spacing'> & {
     minSize?: string;
-    spacing?: Responsive<NonNullable<CoverVariants['spacing']>>;
+    spacing?: NonNullable<CoverVariants['spacing']>;
   };
 
 export function Cover({

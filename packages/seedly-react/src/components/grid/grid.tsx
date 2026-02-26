@@ -15,9 +15,9 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { mergeClassName } from '@/utils/merge-class-name';
 
 interface GridVariantResponsive {
-  spacing?: Responsive<NonNullable<GridVariants['spacing']>>;
-  columnSpacing?: Responsive<NonNullable<GridVariants['columnSpacing']>>;
-  rowSpacing?: Responsive<NonNullable<GridVariants['rowSpacing']>>;
+  spacing?: NonNullable<GridVariants['spacing']>;
+  columnSpacing?: NonNullable<GridVariants['columnSpacing']>;
+  rowSpacing?: NonNullable<GridVariants['rowSpacing']>;
   columns?: Responsive<NonNullable<GridVariants['columns']>>;
   autoLayout?: Responsive<NonNullable<GridVariants['autoLayout']>>;
   justifyItems?: Responsive<NonNullable<GridVariants['justifyItems']>>;

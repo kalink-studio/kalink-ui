@@ -8,13 +8,11 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 import { mergeClassName } from '@/utils/merge-class-name';
 
-import type { Responsive } from '@kalink-ui/seedly/styles';
-
 export type SidebarProps = useRender.ComponentProps<'div'> &
   Omit<SidebarVariants, 'sideWidth' | 'spacing'> & {
     sideWidth?: string;
     contentMinWidth?: string;
-    spacing?: Responsive<NonNullable<SidebarVariants['spacing']>>;
+    spacing?: NonNullable<SidebarVariants['spacing']>;
   };
 
 export function Sidebar({

@@ -1,6 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/toolbar';
-import * as React from 'react';
-
 import { Select } from '../select';
 import { Toggle } from '../toggle';
 import { ToggleGroup } from '../toggle-group';
@@ -8,6 +5,7 @@ import { ToggleGroup } from '../toggle-group';
 import { Toolbar } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 const meta = {
   title: 'Components/Toolbar',
@@ -26,7 +24,7 @@ export const Default: Story = {
 function Example() {
   return (
     <Toolbar.Root>
-      <ToggleGroup className={styles.group} aria-label="Alignment">
+      <ToggleGroup aria-label="Alignment" defaultValue={['align-left']}>
         <Toolbar.Button
           render={<Toggle />}
           aria-label="Align left"
@@ -44,35 +42,31 @@ function Example() {
       </ToggleGroup>
       <Toolbar.Separator />
       <Toolbar.Group aria-label="Numerical format">
-        <Toolbar.Button aria-label="Format as currency">$</Toolbar.Button>
+        <Toolbar.Button aria-label="Format as currency" icon="$" />
         <Toolbar.Button aria-label="Format as percent">%</Toolbar.Button>
       </Toolbar.Group>
       <Toolbar.Separator />
       <Select.Root defaultValue="Helvetica">
         <Toolbar.Button render={<Select.Trigger />}>
           <Select.Value />
-          <Select.Icon className={styles.selectIcon}>
+          <Select.Icon>
             <ChevronUpDownIcon />
           </Select.Icon>
         </Toolbar.Button>
         <Select.Portal>
-          <Select.Positioner className={styles.positioner} sideOffset={8}>
-            <Select.Popup className={styles.popup}>
-              <Select.Item className={styles.item} value="Helvetica">
-                <Select.ItemIndicator className={styles.itemIndicator}>
-                  <CheckIcon className={styles.itemIndicatorIcon} />
+          <Select.Positioner sideOffset={8}>
+            <Select.Popup>
+              <Select.Item value="Helvetica">
+                <Select.ItemIndicator>
+                  <CheckIcon />
                 </Select.ItemIndicator>
-                <Select.ItemText className={styles.itemText}>
-                  Helvetica
-                </Select.ItemText>
+                <Select.ItemText>Helvetica</Select.ItemText>
               </Select.Item>
-              <Select.Item className={styles.item} value="Arial">
-                <Select.ItemIndicator className={styles.itemIndicator}>
-                  <CheckIcon className={styles.itemIndicatorIcon} />
+              <Select.Item value="Arial">
+                <Select.ItemIndicator>
+                  <CheckIcon />
                 </Select.ItemIndicator>
-                <Select.ItemText className={styles.itemText}>
-                  Arial
-                </Select.ItemText>
+                <Select.ItemText>Arial</Select.ItemText>
               </Select.Item>
             </Select.Popup>
           </Select.Positioner>
@@ -84,7 +78,7 @@ function Example() {
   );
 }
 
-function ChevronUpDownIcon(props: React.ComponentProps<'svg'>) {
+function ChevronUpDownIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="8"
@@ -101,7 +95,7 @@ function ChevronUpDownIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function CheckIcon(props: React.ComponentProps<'svg'>) {
+function CheckIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       fill="currentcolor"

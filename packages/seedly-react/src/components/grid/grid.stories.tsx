@@ -6,54 +6,88 @@ const meta = {
   title: 'Layout/Grid',
   component: SeedlyGrid,
   tags: ['autodocs'],
+  parameters: {
+    controls: { expanded: true },
+  },
+  args: {
+    spacing: 4,
+    columns: 4,
+    autoLayout: undefined,
+    minSize: '10rem',
+    justifyItems: 'stretch',
+    alignItems: 'stretch',
+    justifyContent: 'start',
+    alignContent: 'start',
+  },
+  argTypes: {
+    spacing: {
+      control: {
+        type: 'select',
+      },
+      options: [0, 2, 4, 6, 8, 10, 12],
+    },
+    columns: {
+      control: {
+        type: 'select',
+      },
+      options: [1, 2, 3, 4, 5, 6, 8, 12],
+    },
+    autoLayout: {
+      control: {
+        type: 'inline-radio',
+      },
+      options: [undefined, 'fit', 'fill'],
+    },
+    minSize: {
+      control: {
+        type: 'text',
+      },
+    },
+    justifyItems: {
+      control: {
+        type: 'select',
+      },
+      options: ['start', 'center', 'end', 'stretch'],
+    },
+    alignItems: {
+      control: {
+        type: 'select',
+      },
+      options: ['start', 'center', 'end', 'stretch'],
+    },
+    justifyContent: {
+      control: {
+        type: 'select',
+      },
+      options: ['start', 'center', 'end', 'spaceBetween', 'spaceAround'],
+    },
+    alignContent: {
+      control: {
+        type: 'select',
+      },
+      options: ['start', 'center', 'end', 'stretch', 'spaceBetween'],
+    },
+  },
 } satisfies Meta<typeof SeedlyGrid>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyGrid>;
+type Story = StoryObj<typeof meta>;
 
-export const FixedColumns: Story = {
-  render: () => <FixedColumnsExample />,
-};
-
-export const AutoLayout: Story = {
-  render: () => <AutoLayoutExample />,
-};
-
-function FixedColumnsExample() {
-  return (
-    <SeedlyGrid columns={{ xs: 2, md: 4 }} spacing={{ xs: 3, md: 5 }}>
-      <SeedlyGridChild colSpan={{ xs: 2, md: 2 }}>
+export const Default: Story = {
+  render: (args) => (
+    <SeedlyGrid {...args}>
+      <SeedlyGridChild colSpan={2}>
         <Card>Hero</Card>
       </SeedlyGridChild>
-      <SeedlyGridChild>
-        <Card>A</Card>
-      </SeedlyGridChild>
-      <SeedlyGridChild>
-        <Card>B</Card>
-      </SeedlyGridChild>
-      <SeedlyGridChild>
-        <Card>C</Card>
-      </SeedlyGridChild>
-      <SeedlyGridChild>
-        <Card>D</Card>
-      </SeedlyGridChild>
+      <Card>A</Card>
+      <Card>B</Card>
+      <Card>C</Card>
+      <Card>D</Card>
+      <Card>E</Card>
     </SeedlyGrid>
-  );
-}
-
-function AutoLayoutExample() {
-  return (
-    <SeedlyGrid minSize="10rem" autoLayout="fit" spacing={4}>
-      <Card>Card 1</Card>
-      <Card>Card 2</Card>
-      <Card>Card 3</Card>
-      <Card>Card 4</Card>
-      <Card>Card 5</Card>
-      <Card>Card 6</Card>
-    </SeedlyGrid>
-  );
-}
+  ),
+};
 
 function Card({ children }: { children: string }) {
   return (

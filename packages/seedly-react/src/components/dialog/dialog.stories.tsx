@@ -1,5 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/dialog';
-
 import { Dialog } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -29,9 +27,9 @@ function Example() {
           <Dialog.Description>
             You are all caught up. Good job!
           </Dialog.Description>
-          <div className={styles.actions}>
+          <Dialog.Actions>
             <Dialog.Close>Close</Dialog.Close>
-          </div>
+          </Dialog.Actions>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

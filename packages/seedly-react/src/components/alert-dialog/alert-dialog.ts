@@ -1,3 +1,4 @@
+export { Actions } from './actions';
 export { Backdrop } from './backdrop';
 export { Close } from './close';
 export { Description } from './description';

@@ -1,6 +1,7 @@
 export { Empty } from './empty';
 export { Input } from './input';
 export { Item } from './item';
+export { Label } from './label';
 export { List } from './list';
 export { Popup } from './popup';
 export { Portal } from './portal';

@@ -1,5 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/fieldset';
-
 import { Field } from '../field';
 
 import { Fieldset } from '.';
@@ -25,20 +23,14 @@ function Example() {
     <Fieldset.Root>
       <Fieldset.Legend>Billing details</Fieldset.Legend>
 
-      <Field.Root className={styles.field}>
-        <Field.Label className={styles.label}>Company</Field.Label>
-        <Field.Control
-          placeholder="Enter company name"
-          className={styles.input}
-        />
+      <Field.Root>
+        <Field.Label>Company</Field.Label>
+        <Field.Control placeholder="Enter company name" />
       </Field.Root>
 
-      <Field.Root className={styles.field}>
-        <Field.Label className={styles.label}>Tax ID</Field.Label>
-        <Field.Control
-          placeholder="Enter fiscal number"
-          className={styles.input}
-        />
+      <Field.Root>
+        <Field.Label>Tax ID</Field.Label>
+        <Field.Control placeholder="Enter fiscal number" />
       </Field.Root>
     </Fieldset.Root>
   );

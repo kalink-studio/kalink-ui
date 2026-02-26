@@ -9,4 +9,5 @@ export { Portal } from './portal';
 export { Positioner } from './positioner';
 export { Root } from './root';
 export { Trigger } from './trigger';
+export { TriggerLink } from './trigger-link';
 export { Viewport } from './viewport';

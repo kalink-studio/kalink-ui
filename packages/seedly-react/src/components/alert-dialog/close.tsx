@@ -1,15 +1,60 @@
 import { AlertDialog } from '@base-ui/react/alert-dialog';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/alert-dialog';
 
+import { Button, type ButtonCompositionProps } from '../button';
 import { mergeClassName } from '@/utils/merge-class-name';
+import {
+  resolveStateClassName,
+  resolveStateRender,
+} from '@/utils/resolve-state-props';
 
 import type { DialogCloseProps } from '@base-ui/react/dialog';
 
-export function Close({ className, ...props }: DialogCloseProps) {
+type CloseProps = Omit<DialogCloseProps, 'className' | 'render'> &
+  ButtonCompositionProps & {
+    className?: DialogCloseProps['className'];
+    render?: DialogCloseProps['render'];
+  };
+
+export function Close({
+  className,
+  render,
+  unstyled,
+  variant = 'outline',
+  tone = 'neutral',
+  size = 'md',
+  shape,
+  flow,
+  loading,
+  icon,
+  ...props
+}: CloseProps) {
   return (
     <AlertDialog.Close
       {...props}
-      className={mergeClassName(buttonClassName, className)}
+      render={(closeProps, state) => {
+        const resolvedClassName = resolveStateClassName(className, state);
+
+        return (
+          <Button
+            {...closeProps}
+            unstyled={unstyled}
+            variant={variant}
+            tone={tone}
+            size={size}
+            shape={shape}
+            flow={flow}
+            loading={loading}
+            icon={icon}
+            className={
+              unstyled
+                ? resolvedClassName
+                : mergeClassName(buttonClassName, resolvedClassName)
+            }
+            render={resolveStateRender(render, state)}
+          />
+        );
+      }}
     />
   );
 }

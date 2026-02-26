@@ -8,3 +8,4 @@ export { Separator } from './separator';
 export { SubmenuRoot } from './submenu-root';
 export { SubmenuTrigger } from './submenu-trigger';
 export { Trigger } from './trigger';
+export { TriggerIcon } from './trigger-icon';

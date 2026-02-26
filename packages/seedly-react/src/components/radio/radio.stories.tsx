@@ -1,5 +1,4 @@
-import * as styles from '@kalink-ui/seedly/components/radio';
-import * as React from 'react';
+import { Fieldset } from '../fieldset';
 
 import { Radio } from '.';
 
@@ -20,33 +19,32 @@ export const Default: Story = {
 };
 
 function Example() {
-  const id = React.useId();
   return (
-    <Radio.Group aria-labelledby={id} defaultValue="fuji-apple">
-      <div className={styles.caption} id={id}>
-        Best apple
-      </div>
+    <Fieldset.Root>
+      <Fieldset.Legend>Best apple</Fieldset.Legend>
 
-      <label className={styles.item}>
-        <Radio.Root value="fuji-apple">
-          <Radio.Indicator />
-        </Radio.Root>
-        Fuji
-      </label>
+      <Radio.Group defaultValue="fuji-apple">
+        <Radio.Item>
+          <Radio.Root value="fuji-apple">
+            <Radio.Indicator />
+          </Radio.Root>
+          Fuji
+        </Radio.Item>
 
-      <label className={styles.item}>
-        <Radio.Root value="gala-apple">
-          <Radio.Indicator />
-        </Radio.Root>
-        Gala
-      </label>
+        <Radio.Item>
+          <Radio.Root value="gala-apple">
+            <Radio.Indicator />
+          </Radio.Root>
+          Gala
+        </Radio.Item>
 
-      <label className={styles.item}>
-        <Radio.Root value="granny-smith-apple">
-          <Radio.Indicator />
-        </Radio.Root>
-        Granny Smith
-      </label>
-    </Radio.Group>
+        <Radio.Item>
+          <Radio.Root value="granny-smith-apple">
+            <Radio.Indicator />
+          </Radio.Root>
+          Granny Smith
+        </Radio.Item>
+      </Radio.Group>
+    </Fieldset.Root>
   );
 }

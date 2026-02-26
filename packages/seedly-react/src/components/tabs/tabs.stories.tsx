@@ -1,9 +1,7 @@
-import * as styles from '@kalink-ui/seedly/components/tabs';
-import * as React from 'react';
-
 import { Tabs } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 const meta = {
   title: 'Components/Tabs',
@@ -29,19 +27,19 @@ function Example() {
         <Tabs.Indicator />
       </Tabs.List>
       <Tabs.Panel value="overview">
-        <OverviewIcon className={styles.icon} />
+        <OverviewIcon />
       </Tabs.Panel>
       <Tabs.Panel value="projects">
-        <ProjectIcon className={styles.icon} />
+        <ProjectIcon />
       </Tabs.Panel>
       <Tabs.Panel value="account">
-        <PersonIcon className={styles.icon} />
+        <PersonIcon />
       </Tabs.Panel>
     </Tabs.Root>
   );
 }
 
-function OverviewIcon(props: React.ComponentProps<'svg'>) {
+function OverviewIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="40"
@@ -55,7 +53,7 @@ function OverviewIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function ProjectIcon(props: React.ComponentProps<'svg'>) {
+function ProjectIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="40"
@@ -69,7 +67,7 @@ function ProjectIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function PersonIcon(props: React.ComponentProps<'svg'>) {
+function PersonIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="40"

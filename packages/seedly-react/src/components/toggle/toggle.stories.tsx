@@ -1,9 +1,9 @@
-import * as styles from '@kalink-ui/seedly/components/toggle';
-import * as React from 'react';
+import { Button } from '../button';
 
 import { Toggle } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { ComponentProps } from 'react';
 
 const meta = {
   title: 'Components/Toggle',
@@ -21,30 +21,28 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <div className={styles.panel}>
-      <Toggle
-        aria-label="Favorite"
-        render={(props, state) => {
-          if (state.pressed) {
-            return (
-              <button type="button" {...props}>
-                <HeartFilledIcon className={styles.icon} />
-              </button>
-            );
-          }
-
+    <Toggle
+      aria-label="Favorite"
+      render={(props, state) => {
+        if (state.pressed) {
           return (
-            <button type="button" {...props}>
-              <HeartOutlineIcon className={styles.icon} />
-            </button>
+            <Button {...props} unstyled aria-label={undefined}>
+              <HeartFilledIcon />
+            </Button>
           );
-        }}
-      />
-    </div>
+        }
+
+        return (
+          <Button {...props} unstyled aria-label={undefined}>
+            <HeartOutlineIcon />
+          </Button>
+        );
+      }}
+    />
   );
 }
 
-function HeartFilledIcon(props: React.ComponentProps<'svg'>) {
+function HeartFilledIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"
@@ -58,7 +56,7 @@ function HeartFilledIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function HeartOutlineIcon(props: React.ComponentProps<'svg'>) {
+function HeartOutlineIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"

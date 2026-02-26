@@ -1,5 +1,6 @@
-import * as styles from '@kalink-ui/seedly/components/toast';
 import * as React from 'react';
+
+import { Button } from '../button';
 
 import { Toast } from '.';
 
@@ -45,9 +46,14 @@ function ToastCreateButton() {
   }
 
   return (
-    <button type="button" className={styles.button} onClick={createToast}>
+    <Button
+      type="button"
+      variant="outline"
+      tone="neutral"
+      onClick={createToast}
+    >
       Create toast
-    </button>
+    </Button>
   );
 }
 
@@ -58,9 +64,7 @@ function ToastList() {
       <Toast.Content>
         <Toast.Title />
         <Toast.Description />
-        <Toast.Close aria-label="Close">
-          <XIcon className={styles.icon} />
-        </Toast.Close>
+        <Toast.Close aria-label="Close" icon={<XIcon />} />
       </Toast.Content>
     </Toast.Root>
   ));

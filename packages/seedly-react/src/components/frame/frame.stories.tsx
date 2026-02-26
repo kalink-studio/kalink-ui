@@ -6,19 +6,29 @@ const meta = {
   title: 'Layout/Frame',
   component: SeedlyFrame,
   tags: ['autodocs'],
+  parameters: {
+    controls: { expanded: true },
+  },
+  args: {
+    ratio: '16:9',
+  },
+  argTypes: {
+    ratio: {
+      control: {
+        type: 'select',
+      },
+      options: ['1:1', '3:2', '2:3', '4:3', '16:9', '9:16'],
+    },
+  },
 } satisfies Meta<typeof SeedlyFrame>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlyFrame>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => <Example />,
-};
-
-function Example() {
-  return (
-    <SeedlyFrame ratio="16:9">
+  render: ({ ratio }) => (
+    <SeedlyFrame ratio={ratio}>
       <div
         style={{
           inlineSize: '100%',
@@ -34,5 +44,5 @@ function Example() {
         16:9 preview
       </div>
     </SeedlyFrame>
-  );
-}
+  ),
+};

@@ -1,4 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/checkbox';
 import * as React from 'react';
 
 import { Checkbox } from '.';
@@ -21,14 +20,14 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <label className={styles.label}>
+    <Checkbox.Label>
       <Checkbox.Root defaultChecked>
         <Checkbox.Indicator>
-          <CheckIcon className={styles.icon} />
+          <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>
       Enable notifications
-    </label>
+    </Checkbox.Label>
   );
 }
 

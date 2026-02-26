@@ -1,5 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/alert-dialog';
-
 import { AlertDialog } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -21,7 +19,7 @@ export const Default: Story = {
 function Example() {
   return (
     <AlertDialog.Root>
-      <AlertDialog.Trigger data-color="red">Discard draft</AlertDialog.Trigger>
+      <AlertDialog.Trigger tone="error">Discard draft</AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Backdrop />
         <AlertDialog.Popup>
@@ -29,10 +27,12 @@ function Example() {
           <AlertDialog.Description>
             You can&apos;t undo this action.
           </AlertDialog.Description>
-          <div className={styles.actions}>
+          <AlertDialog.Actions>
             <AlertDialog.Close>Cancel</AlertDialog.Close>
-            <AlertDialog.Close data-color="red">Discard</AlertDialog.Close>
-          </div>
+            <AlertDialog.Close tone="error" variant="solid">
+              Discard
+            </AlertDialog.Close>
+          </AlertDialog.Actions>
         </AlertDialog.Popup>
       </AlertDialog.Portal>
     </AlertDialog.Root>

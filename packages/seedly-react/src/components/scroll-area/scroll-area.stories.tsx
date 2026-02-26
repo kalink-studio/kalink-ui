@@ -1,5 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/scroll-area';
-
 import { ScrollArea } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -23,7 +21,7 @@ function Example() {
     <ScrollArea.Root>
       <ScrollArea.Viewport>
         <ScrollArea.Content>
-          <p className={styles.paragraph}>
+          <p>
             Vernacular architecture is building done outside any academic
             tradition, and without professional guidance. It is not a particular
             architectural movement or style, but rather a broad category,
@@ -35,7 +33,7 @@ function Example() {
             percentage of new buildings every year designed by architects and
             built by engineers.
           </p>
-          <p className={styles.paragraph}>
+          <p>
             This type of architecture usually serves immediate, local needs, is
             constrained by the materials available in its particular region and
             reflects local traditions and cultural practices. The study of

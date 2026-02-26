@@ -10,7 +10,7 @@ import type { Responsive } from '@kalink-ui/seedly/styles';
 
 export type StackProps = useRender.ComponentProps<'div'> &
   Omit<StackVariants, 'spacing' | 'align'> & {
-    spacing?: Responsive<NonNullable<StackVariants['spacing']>>;
+    spacing?: NonNullable<StackVariants['spacing']>;
     align?: Responsive<NonNullable<StackVariants['align']>>;
   };
 

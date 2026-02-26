@@ -6,19 +6,60 @@ const meta = {
   title: 'Layout/Sidebar',
   component: SeedlySidebar,
   tags: ['autodocs'],
+  parameters: {
+    controls: { expanded: true },
+  },
+  args: {
+    side: 'left',
+    sideWidth: '14rem',
+    contentMinWidth: '60%',
+    spacing: 6,
+    noStretch: false,
+  },
+  argTypes: {
+    side: {
+      control: {
+        type: 'inline-radio',
+      },
+      options: ['left', 'right'],
+    },
+    sideWidth: {
+      control: {
+        type: 'text',
+      },
+    },
+    contentMinWidth: {
+      control: {
+        type: 'text',
+      },
+    },
+    spacing: {
+      control: {
+        type: 'select',
+      },
+      options: [0, 2, 4, 6, 8, 10, 12],
+    },
+    noStretch: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
 } satisfies Meta<typeof SeedlySidebar>;
 
 export default meta;
 
-type Story = StoryObj<typeof SeedlySidebar>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => <Example />,
-};
-
-function Example() {
-  return (
-    <SeedlySidebar sideWidth="14rem" contentMinWidth="60%" spacing={6}>
+  render: ({ side, sideWidth, contentMinWidth, spacing, noStretch }) => (
+    <SeedlySidebar
+      side={side}
+      sideWidth={sideWidth}
+      contentMinWidth={contentMinWidth}
+      spacing={spacing}
+      noStretch={noStretch}
+    >
       <aside
         style={{
           padding: '1rem',
@@ -38,5 +79,5 @@ function Example() {
         Main content area
       </main>
     </SeedlySidebar>
-  );
-}
+  ),
+};

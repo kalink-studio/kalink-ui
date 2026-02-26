@@ -1,6 +1,4 @@
-import * as styles from '@kalink-ui/seedly/components/input';
-
-import { Input } from '.';
+import { Input, InputLabel } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -20,9 +18,9 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <label className={styles.label}>
+    <InputLabel>
       Name
       <Input placeholder="Enter your name" />
-    </label>
+    </InputLabel>
   );
 }

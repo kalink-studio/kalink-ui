@@ -1,4 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/number-field';
 import * as React from 'react';
 
 import { NumberField } from '.';
@@ -24,22 +23,16 @@ function Example() {
   return (
     <NumberField.Root id={id} defaultValue={100}>
       <NumberField.ScrubArea>
-        <label htmlFor={id} className={styles.label}>
-          Amount
-        </label>
+        <NumberField.Label htmlFor={id}>Amount</NumberField.Label>
         <NumberField.ScrubAreaCursor>
           <CursorGrowIcon />
         </NumberField.ScrubAreaCursor>
       </NumberField.ScrubArea>
 
       <NumberField.Group>
-        <NumberField.Decrement>
-          <MinusIcon />
-        </NumberField.Decrement>
+        <NumberField.Decrement aria-label="Decrease" icon={<MinusIcon />} />
         <NumberField.Input />
-        <NumberField.Increment>
-          <PlusIcon />
-        </NumberField.Increment>
+        <NumberField.Increment aria-label="Increase" icon={<PlusIcon />} />
       </NumberField.Group>
     </NumberField.Root>
   );

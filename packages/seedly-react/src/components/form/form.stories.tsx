@@ -1,4 +1,3 @@
-import * as styles from '@kalink-ui/seedly/components/form';
 import * as React from 'react';
 
 import { Button } from '../button';
@@ -44,24 +43,18 @@ function Example() {
         setLoading(false);
       }}
     >
-      <Field.Root name="url" className={styles.field}>
-        <Field.Label className={styles.label}>Homepage</Field.Label>
+      <Field.Root name="url">
+        <Field.Label>Homepage</Field.Label>
         <Field.Control
           type="url"
           required
           defaultValue="https://example.com"
           placeholder="https://example.com"
           pattern="https?://.*"
-          className={styles.input}
         />
-        <Field.Error className={styles.error} />
+        <Field.Error />
       </Field.Root>
-      <Button
-        type="submit"
-        disabled={loading}
-        focusableWhenDisabled
-        className={styles.button}
-      >
+      <Button type="submit" disabled={loading} focusableWhenDisabled>
         Submit
       </Button>
     </Form>
