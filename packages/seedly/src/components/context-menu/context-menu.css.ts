@@ -2,7 +2,8 @@ import { assignVars, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
 import {
-  createFloatingPopupStyles,
+  createFloatingItemStyles,
+  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
 } from '../_foundation';
@@ -67,30 +68,22 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
+  ...createFloatingSurfaceStyles({
     paddingBlock: sys.spacing[2],
-    includeStartingStyle: false,
-    endingStyle: {
-      opacity: '0',
+    motion: {
+      preset: 'fadeOut',
     },
   }),
 });
 
 export const item = style([
   typography.label.medium,
-  {
-    outline: '0',
-    cursor: 'default',
-    userSelect: 'none',
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[8],
-    paddingInlineEnd: sys.spacing[12],
-    display: 'flex',
-
+  createFloatingItemStyles({
+    preset: 'menu',
     selectors: {
       ...contextMenuItemHighlightSelectors,
     },
-  },
+  }),
 ]);
 
 export const separator = style({

@@ -2,7 +2,8 @@ import { style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
 import {
-  createFloatingPopupStyles,
+  createFloatingItemStyles,
+  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
   createInteractiveStateStyles,
@@ -61,13 +62,15 @@ export const menuPositioner = style({
 });
 
 export const menuPopup = style({
-  ...createFloatingPopupStyles({
+  ...createFloatingSurfaceStyles({
     paddingBlock: sys.spacing[2],
-    transition: null,
-    includeStartingStyle: false,
-    endingStyle: {
-      opacity: '0',
-      transition: `opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.standard}`,
+    motion: {
+      preset: 'fadeOut',
+      transition: null,
+      endingStyle: {
+        opacity: '0',
+        transition: `opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.standard}`,
+      },
     },
     selectors: {
       [`&[data-instant]`]: {
@@ -79,22 +82,13 @@ export const menuPopup = style({
 
 export const menuItem = style([
   typography.label.medium,
-  {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: sys.spacing[8],
-    paddingBlock: sys.spacing[4],
-    paddingInline: sys.spacing[8],
-    outline: '0',
-    cursor: 'default',
-    userSelect: 'none',
-
+  createFloatingItemStyles({
+    preset: 'menuRow',
     selectors: {
       ...menubarPopupOpenItemSelectors,
       ...menubarHighlightedItemSelectors,
     },
-  },
+  }),
 ]);
 
 export const menuSeparator = style({

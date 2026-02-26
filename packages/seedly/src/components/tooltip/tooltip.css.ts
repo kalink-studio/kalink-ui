@@ -6,7 +6,7 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
-  createFloatingPopupStyles,
+  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
@@ -85,14 +85,14 @@ export const positioner = style({
 export const popup = style([
   typography.body.medium,
   {
-    ...createFloatingPopupStyles({
+    ...createFloatingSurfaceStyles({
       paddingBlock: sys.spacing[2],
       paddingInline: sys.spacing[4],
       borderRadius: tooltipVars.shape.popupCorner,
-      backgroundColor: tooltipVars.color.popupBackground,
-      color: tooltipVars.color.popupForeground,
-      lightOutline: tooltipVars.color.popupOutlineLight,
-      darkOutline: tooltipVars.color.popupOutlineDark,
+      background: tooltipVars.color.popupBackground,
+      foreground: tooltipVars.color.popupForeground,
+      outlineLight: tooltipVars.color.popupOutlineLight,
+      outlineDark: tooltipVars.color.popupOutlineDark,
       shadow: tooltipVars.color.popupShadow,
       selectors: {
         [`&[data-instant]`]: {

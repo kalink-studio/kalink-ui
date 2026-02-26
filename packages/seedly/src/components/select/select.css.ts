@@ -6,11 +6,12 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFieldTextInputTriggerStyles,
-  createFloatingPopupStyles,
+  createFloatingItemStyles,
+  createFloatingListStyles,
+  createFloatingAnchoredSurfaceStyles,
   createFloatingPositionerStyles,
   createInteractiveStateStyles,
   createInsetHighlightStyles,
-  floatingPanelMaxBlockSize,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
@@ -125,14 +126,14 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
+  ...createFloatingAnchoredSurfaceStyles({
+    anchorWidth: 'min-inline',
     borderRadius: selectVars.shape.popupCorner,
-    backgroundColor: selectVars.color.popupBackground,
-    color: selectVars.color.foreground,
-    minInlineSize: 'var(--anchor-width)',
+    background: selectVars.color.popupBackground,
+    foreground: selectVars.color.foreground,
     backgroundClip: 'padding-box',
-    lightOutline: selectVars.color.popupOutlineLight,
-    darkOutline: selectVars.color.popupOutlineDark,
+    outlineLight: selectVars.color.popupOutlineLight,
+    outlineDark: selectVars.color.popupOutlineDark,
     shadow: selectVars.color.popupShadow,
     selectors: {
       [`&[data-side='none']`]: {
@@ -146,11 +147,9 @@ export const popup = style({
 });
 
 export const list = style({
-  maxBlockSize: floatingPanelMaxBlockSize,
-  paddingBlock: sys.spacing[2],
-  overflowY: 'auto',
-  scrollPaddingBlock: sys.spacing[10],
-  position: 'relative',
+  ...createFloatingListStyles({
+    preset: 'listboxCompact',
+  }),
 });
 
 export const arrowOuterStroke = style({
@@ -163,26 +162,18 @@ export const arrowInnerStroke = style({
 
 export const item = style([
   typography.label.medium,
-  {
-    display: 'grid',
-    alignItems: 'center',
-    gap: sys.spacing[4],
-    gridTemplateColumns: `${sys.spacing[6]} 1fr`,
-    paddingBlock: sys.spacing[4],
+  createFloatingItemStyles({
+    preset: 'listboxWithIndicator',
     paddingInlineStart: sys.spacing[5],
     paddingInlineEnd: sys.spacing[8],
-    outline: '0',
-    cursor: 'default',
-    WebkitUserSelect: 'none',
-    userSelect: 'none',
-    '@media': {
+    webkitUserSelect: 'none',
+    media: {
       '(pointer: coarse)': {
         paddingBlock: sys.spacing[5],
         fontSize: sys.typography.label.large.size,
         lineHeight: sys.typography.label.large.lineHeight,
       },
     },
-
     selectors: {
       [`[data-side='none'] &`]: {
         fontSize: sys.typography.label.large.size,
@@ -191,7 +182,7 @@ export const item = style([
       },
       ...selectItemHighlightSelectors,
     },
-  },
+  }),
 ]);
 
 export const itemIndicator = style({

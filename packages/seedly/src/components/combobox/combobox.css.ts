@@ -6,10 +6,11 @@ import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
   createFieldStackStyles,
-  createFloatingPopupStyles,
+  createFloatingItemStyles,
+  createFloatingListStyles,
+  createFloatingAnchoredSurfaceStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
-  floatingPanelMaxBlockSize,
 } from '../_foundation';
 
 export const label = style({
@@ -88,58 +89,33 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
-    inlineSize: 'var(--anchor-width)',
-    maxInlineSize: 'var(--available-width)',
-    transition: `opacity ${sys.motion.duration.short[2]} ${sys.motion.easing.standard},\n    transform ${sys.motion.duration.short[2]} ${sys.motion.easing.standard}`,
-    startingStyle: {
-      opacity: '0',
-      transform: 'scale(0.95)',
-    },
-    endingStyle: {
-      opacity: '0',
-      transform: 'scale(0.95)',
+  ...createFloatingAnchoredSurfaceStyles({
+    motion: {
+      preset: 'scaleSoft',
     },
   }),
   overflow: 'hidden',
 });
 
 export const list = style({
-  maxBlockSize: floatingPanelMaxBlockSize,
-  overflowY: 'auto',
-  overflowX: 'hidden',
-  overscrollBehavior: 'contain',
-  paddingBlock: sys.spacing[4],
-  scrollPaddingBlock: sys.spacing[4],
-  outline: '0',
-
-  selectors: {
-    [`&[data-empty]`]: {
-      paddingBlock: '0',
-      paddingInline: '0',
+  ...createFloatingListStyles({
+    selectors: {
+      [`&[data-empty]`]: {
+        paddingBlock: '0',
+        paddingInline: '0',
+      },
     },
-  },
+  }),
 });
 
 export const item = style([
   typography.body.large,
-  {
-    display: 'grid',
-    alignItems: 'center',
-    gap: sys.spacing[4],
-    gridTemplateColumns: `${sys.spacing[6]} 1fr`,
-    minInlineSize: '0',
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[8],
-    paddingInlineEnd: sys.spacing[12],
-    outline: '0',
-    cursor: 'default',
-    userSelect: 'none',
-
+  createFloatingItemStyles({
+    preset: 'listboxWithIndicator',
     selectors: {
       ...comboboxItemHighlightSelectors,
     },
-  },
+  }),
 ]);
 
 export const itemText = style({

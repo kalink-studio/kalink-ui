@@ -6,7 +6,7 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
-  createFloatingPopupStyles,
+  createFloatingSurfaceStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
@@ -17,7 +17,7 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
+  ...createFloatingSurfaceStyles({
     borderRadius: sys.shape.corner.rounded,
     inlineSize: 'var(--popup-width, auto)',
     blockSize: 'var(--popup-height, auto)',

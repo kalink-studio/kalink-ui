@@ -6,7 +6,7 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
-  createFloatingPopupStyles,
+  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
@@ -80,17 +80,17 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
+  ...createFloatingSurfaceStyles({
     paddingBlock: sys.spacing[8],
     paddingInline: sys.spacing[10],
     borderRadius: popoverVars.shape.popupCorner,
-    backgroundColor: popoverVars.color.popupBackground,
-    color: popoverVars.color.triggerForeground,
+    background: popoverVars.color.popupBackground,
+    foreground: popoverVars.color.triggerForeground,
     inlineSize: 'var(--popup-width, auto)',
     blockSize: 'var(--popup-height, auto)',
     maxInlineSize: '500px',
-    lightOutline: popoverVars.color.popupOutlineLight,
-    darkOutline: popoverVars.color.popupOutlineDark,
+    outlineLight: popoverVars.color.popupOutlineLight,
+    outlineDark: popoverVars.color.popupOutlineDark,
     shadow: popoverVars.color.popupShadow,
   }),
 });

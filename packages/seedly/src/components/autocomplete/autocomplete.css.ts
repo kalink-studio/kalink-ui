@@ -5,10 +5,11 @@ import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
   createFieldStackStyles,
-  createFloatingPopupStyles,
+  createFloatingItemStyles,
+  createFloatingListStyles,
+  createFloatingAnchoredSurfaceStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
-  floatingPanelMaxBlockSize,
 } from '../_foundation';
 
 const autocompleteItemHighlightSelectors =
@@ -34,56 +35,33 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
-    inlineSize: 'var(--anchor-width)',
-    maxInlineSize: 'var(--available-width)',
-
-    transition: null,
-
-    includeStartingStyle: false,
-    includeEndingStyle: false,
+  ...createFloatingAnchoredSurfaceStyles({
+    motion: {
+      preset: 'none',
+    },
   }),
   overflow: 'hidden',
 });
 
 export const list = style({
-  maxBlockSize: floatingPanelMaxBlockSize,
-  overflowY: 'auto',
-  overflowX: 'hidden',
-  overscrollBehavior: 'contain',
-  paddingBlock: sys.spacing[4],
-  scrollPaddingBlock: sys.spacing[4],
-
-  outline: '0',
-
-  selectors: {
-    [`&[data-empty]`]: {
-      paddingBlock: '0',
-      paddingInline: '0',
+  ...createFloatingListStyles({
+    selectors: {
+      [`&[data-empty]`]: {
+        paddingBlock: '0',
+        paddingInline: '0',
+      },
     },
-  },
+  }),
 });
 
 export const item = style([
   typography.body.large,
-  {
-    display: 'flex',
-    minInlineSize: '0',
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[8],
-    paddingInlineEnd: sys.spacing[12],
-
+  createFloatingItemStyles({
     overflowWrap: 'anywhere',
-
-    outline: '0',
-
-    cursor: 'default',
-    userSelect: 'none',
-
     selectors: {
       ...autocompleteItemHighlightSelectors,
     },
-  },
+  }),
 ]);
 export const empty = style({
   selectors: {

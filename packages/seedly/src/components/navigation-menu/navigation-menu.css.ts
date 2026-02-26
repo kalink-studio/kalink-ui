@@ -7,7 +7,7 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
-  createFloatingPopupStyles,
+  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
@@ -133,17 +133,19 @@ export const positioner = style({
 });
 
 export const popup = style({
-  ...createFloatingPopupStyles({
+  ...createFloatingSurfaceStyles({
     borderRadius: sys.shape.corner.rounded,
     inlineSize: 'var(--popup-width)',
     blockSize: 'var(--popup-height)',
-    transition:
-      'opacity var(--duration),\n    transform var(--duration),\n    inline-size var(--duration),\n    block-size var(--duration)',
-    endingStyle: {
-      opacity: '0',
-      transform: 'scale(0.9)',
-      transitionTimingFunction: sys.motion.easing.standard,
-      transitionDuration: sys.motion.duration.short[4],
+    motion: {
+      transition:
+        'opacity var(--duration),\n    transform var(--duration),\n    inline-size var(--duration),\n    block-size var(--duration)',
+      endingStyle: {
+        opacity: '0',
+        transform: 'scale(0.9)',
+        transitionTimingFunction: sys.motion.easing.standard,
+        transitionDuration: sys.motion.duration.short[4],
+      },
     },
   }),
   position: 'relative',
