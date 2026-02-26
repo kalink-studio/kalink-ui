@@ -56,7 +56,7 @@ export interface TextInputStylesOptions {
   backgroundColor?: string;
   color?: string;
   outline?: string;
-  focus?: TextInputFocusStylesOptions;
+  focus?: TextInputFocusStylesOptions | null;
   selectors?: Record<string, StyleRule>;
 }
 
@@ -67,26 +67,46 @@ export interface TextInputTriggerStylesOptions extends TextInputStylesOptions {
   cursor?: 'default' | 'pointer';
 }
 
+export interface FieldTextInputStylesOptions {
+  foreground?: string;
+  borderColor?: string;
+  backgroundColor?: string;
+  borderRadius?: string;
+  focusRingColor?: string | null;
+  paddingInlineStart?: string;
+  paddingInlineEnd?: string;
+  inlineSize?: string;
+  blockSize?: string;
+  outline?: string;
+  selectors?: Record<string, StyleRule>;
+}
+
+export interface FieldTextInputTriggerStylesOptions extends FieldTextInputStylesOptions {
+  minInlineSize?: string;
+  gap?: string;
+  justifyContent?: 'space-between' | 'center' | 'flex-start';
+  cursor?: 'default' | 'pointer';
+}
+
 export function createTextInputStyles(
   options: TextInputStylesOptions = {},
 ): StyleRule {
   const border = options.border ?? `1px solid ${sys.color.border.base}`;
+  const focusSelector = options.focus?.selector ?? '&:focus';
 
   const selectors: Record<string, StyleRule> = {
     ...(options.selectors ?? {}),
   };
 
-  if (options.focus?.styles) {
-    const selector = options.focus.selector ?? '&:focus';
-
-    selectors[selector] = options.focus.styles;
-  } else if (options.focus?.outlineColor) {
-    const selector = options.focus.selector ?? '&:focus';
-
-    selectors[selector] = {
-      outline: `2px solid ${options.focus.outlineColor}`,
-      outlineOffset: options.focus.outlineOffset ?? '-1px',
-    };
+  if (options.focus !== null) {
+    if (options.focus?.styles) {
+      selectors[focusSelector] = options.focus.styles;
+    } else {
+      selectors[focusSelector] = {
+        outline: `2px solid ${options.focus?.outlineColor ?? sys.color.tone.primary}`,
+        outlineOffset: options.focus?.outlineOffset ?? '-1px',
+      };
+    }
   }
 
   return {
@@ -124,4 +144,60 @@ export function createTextInputTriggerStyles(
     WebkitUserSelect: 'none',
     userSelect: 'none',
   };
+}
+
+export function createFieldTextInputStyles(
+  options: FieldTextInputStylesOptions = {},
+): StyleRule {
+  const borderColor = options.borderColor ?? sys.color.border.base;
+
+  return createTextInputStyles({
+    paddingInlineStart: options.paddingInlineStart,
+    paddingInlineEnd: options.paddingInlineEnd,
+    border: `1px solid ${borderColor}`,
+    restingBorderColor: borderColor,
+    inlineSize: options.inlineSize,
+    blockSize: options.blockSize,
+    borderRadius: options.borderRadius,
+    backgroundColor: options.backgroundColor,
+    color: options.foreground,
+    outline: options.outline,
+    focus:
+      options.focusRingColor === null
+        ? null
+        : {
+            outlineColor: options.focusRingColor,
+          },
+    selectors: options.selectors,
+  });
+}
+
+export function createFieldTextInputTriggerStyles(
+  options: FieldTextInputTriggerStylesOptions = {},
+): StyleRule {
+  const borderColor = options.borderColor ?? sys.color.border.base;
+
+  return createTextInputTriggerStyles({
+    paddingInlineStart: options.paddingInlineStart,
+    paddingInlineEnd: options.paddingInlineEnd,
+    border: `1px solid ${borderColor}`,
+    restingBorderColor: borderColor,
+    inlineSize: options.inlineSize,
+    blockSize: options.blockSize,
+    borderRadius: options.borderRadius,
+    backgroundColor: options.backgroundColor,
+    color: options.foreground,
+    outline: options.outline,
+    focus:
+      options.focusRingColor === null
+        ? null
+        : {
+            outlineColor: options.focusRingColor,
+          },
+    selectors: options.selectors,
+    minInlineSize: options.minInlineSize,
+    gap: options.gap,
+    justifyContent: options.justifyContent,
+    cursor: options.cursor,
+  });
 }

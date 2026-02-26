@@ -5,11 +5,11 @@ import { sys, typography } from '../../styles';
 import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
+  createFieldTextInputTriggerStyles,
   createFloatingPopupStyles,
   createFloatingPositionerStyles,
   createInteractiveStateStyles,
   createInsetHighlightStyles,
-  createTextInputTriggerStyles,
   floatingPanelMaxBlockSize,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
@@ -77,17 +77,14 @@ export const select = style([
       ...selectColorDefaults,
       ...selectShapeDefaults,
     },
-    ...createTextInputTriggerStyles({
+    ...createFieldTextInputTriggerStyles({
+      foreground: selectVars.color.foreground,
+      borderColor: selectVars.color.triggerBorder,
+      backgroundColor: selectVars.color.triggerBackground,
+      borderRadius: selectVars.shape.triggerCorner,
+      focusRingColor: selectVars.color.focusRing,
       gap: sys.spacing[6],
       paddingInlineEnd: sys.spacing[6],
-      border: `1px solid ${selectVars.color.triggerBorder}`,
-      restingBorderColor: selectVars.color.triggerBorder,
-      borderRadius: selectVars.shape.triggerCorner,
-      backgroundColor: selectVars.color.triggerBackground,
-      color: selectVars.color.foreground,
-      focus: {
-        outlineColor: selectVars.color.focusRing,
-      },
     }),
     ...createInteractiveStateStyles({
       hover: {

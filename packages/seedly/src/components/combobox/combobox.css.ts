@@ -3,12 +3,12 @@ import { calc } from '@vanilla-extract/css-utils';
 
 import { stateColor, sys, typography } from '../../styles';
 import {
+  createFieldTextInputStyles,
   createFieldLabelStyles,
   createFieldStackStyles,
   createFloatingPopupStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
-  createTextInputStyles,
   floatingPanelMaxBlockSize,
 } from '../_foundation';
 
@@ -41,11 +41,8 @@ export const clear = style({});
 export const input = style([
   typography.body.large,
   {
-    ...createTextInputStyles({
+    ...createFieldTextInputStyles({
       paddingInlineEnd: calc.add(sys.spacing[4], sys.spacing[10]),
-      focus: {
-        outlineColor: sys.color.tone.primary,
-      },
       selectors: {
         [`${inputWrapper}:has(${clear}) &`]: {
           paddingInlineEnd: calc.add(

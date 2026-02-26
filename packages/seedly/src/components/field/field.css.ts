@@ -2,9 +2,9 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
 import {
+  createFieldTextInputStyles,
   createFieldLabelStyles,
   createFieldStackStyles,
-  createTextInputStyles,
 } from '../_foundation';
 
 export const fieldVars = createThemeContract({
@@ -50,14 +50,11 @@ export const label = style({
 export const input = style([
   typography.body.large,
   {
-    ...createTextInputStyles({
-      border: `1px solid ${fieldVars.color.border}`,
+    ...createFieldTextInputStyles({
+      borderColor: fieldVars.color.border,
       borderRadius: fieldVars.shape.corner,
-      backgroundColor: sys.color.surface.base,
-      color: fieldVars.color.foreground,
-      focus: {
-        outlineColor: fieldVars.color.focusRing,
-      },
+      foreground: fieldVars.color.foreground,
+      focusRingColor: fieldVars.color.focusRing,
     }),
   },
 ]);

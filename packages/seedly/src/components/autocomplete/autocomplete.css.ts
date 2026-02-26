@@ -2,12 +2,12 @@ import { style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
 import {
+  createFieldTextInputStyles,
   createFieldLabelStyles,
   createFieldStackStyles,
   createFloatingPopupStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
-  createTextInputStyles,
   floatingPanelMaxBlockSize,
 } from '../_foundation';
 
@@ -20,16 +20,7 @@ const autocompleteItemHighlightSelectors =
 export const input = style([
   typography.body.large,
   {
-    ...createTextInputStyles({
-      outline: 'none',
-
-      focus: {
-        styles: {
-          borderColor: sys.color.tone.primary,
-          outline: `1px solid ${sys.color.tone.primary}`,
-        },
-      },
-    }),
+    ...createFieldTextInputStyles(),
   },
 ]);
 
