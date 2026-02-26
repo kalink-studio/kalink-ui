@@ -11,8 +11,8 @@ export const teamSection = recipe({
 export const teamGrid = recipe({
   base: {
     display: 'grid',
-    gap: vars.ref.spacing['3xl'],
     gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+    gap: vars.ref.spacing['3xl'],
     margin: 0,
     padding: 0,
     listStyle: 'none',
@@ -23,18 +23,18 @@ export const teamCard = recipe({
   base: {
     display: 'grid',
     gap: vars.ref.spacing.md,
-    backgroundColor: vars.system.color.surfaceContainer,
-    color: vars.system.color.onSurface,
-    borderRadius: vars.ref.radius.rounded,
     overflow: 'hidden',
+    color: vars.system.color.onSurface,
+    backgroundColor: vars.system.color.surfaceContainer,
+    borderRadius: vars.ref.radius.rounded,
   },
 });
 
 export const teamFigure = recipe({
   base: {
-    position: 'relative',
     width: '100%',
     paddingBlockEnd: '125%',
+    position: 'relative',
   },
 });
 

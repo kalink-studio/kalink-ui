@@ -30,9 +30,9 @@ globalStyle('*', {
 globalStyle(':root', {
   '@layer': {
     [base]: {
+      minHeight: '0vw',
       fontSize:
         'clamp(0.75rem, calc(0.75rem + ((1vw - 0.35rem) * 0.2941)), 1rem)',
-      minHeight: '0vw',
       scrollBehavior: 'smooth',
     },
   },

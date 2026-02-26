@@ -4,19 +4,19 @@ import { vars } from '@/styles/contract.css';
 
 export const surfaceTint = styleVariants({
   primary: {
-    backgroundColor: vars.system.color.primary,
     color: vars.system.color.onPrimary,
+    backgroundColor: vars.system.color.primary,
   },
   secondary: {
-    backgroundColor: vars.system.color.secondary,
     color: vars.system.color.onSecondary,
+    backgroundColor: vars.system.color.secondary,
   },
   primaryContainer: {
-    backgroundColor: vars.system.color.primaryContainer,
     color: vars.system.color.onPrimaryContainer,
+    backgroundColor: vars.system.color.primaryContainer,
   },
   secondaryContainer: {
-    backgroundColor: vars.system.color.secondaryContainer,
     color: vars.system.color.onSecondaryContainer,
+    backgroundColor: vars.system.color.secondaryContainer,
   },
 });

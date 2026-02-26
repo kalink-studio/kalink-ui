@@ -40,7 +40,7 @@ export const contactsInfo = recipe({
 
 export const mapWrapper = recipe({
   base: {
-    borderRadius: vars.ref.radius.rounded,
     overflow: 'hidden',
+    borderRadius: vars.ref.radius.rounded,
   },
 });

@@ -7,9 +7,9 @@ export const listItemsSection = style({
 });
 
 export const listItemsList = style({
-  listStyle: 'disc inside',
   display: 'grid',
   gap: vars.ref.spacing.sm,
   margin: 0,
   padding: 0,
+  listStyle: 'disc inside',
 });

@@ -21,14 +21,14 @@ export const body = style([
 ]);
 
 export const skipLink = style({
+  paddingBlock: '0.75rem',
+  paddingInline: '1.25rem',
   position: 'fixed',
   insetInlineStart: '1.5rem',
   insetBlockStart: '1.5rem',
-  paddingBlock: '0.75rem',
-  paddingInline: '1.25rem',
   zIndex: 110,
-  backgroundColor: vars.system.color.primary,
   color: vars.system.color.onPrimary,
+  backgroundColor: vars.system.color.primary,
   borderRadius: vars.ref.radius.default,
   transform: 'translateY(-200%)',
   transition: 'transform 150ms ease',

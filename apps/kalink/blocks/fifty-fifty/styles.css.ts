@@ -36,11 +36,11 @@ export const fiftyFiftyLayout = recipe({
 
 export const fiftyFiftyMedia = recipe({
   base: {
-    position: 'relative',
     flex: 1,
     minHeight: '320px',
-    borderRadius: vars.ref.radius.rounded,
     overflow: 'hidden',
+    position: 'relative',
+    borderRadius: vars.ref.radius.rounded,
   },
 });
 
