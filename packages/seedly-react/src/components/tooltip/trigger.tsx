@@ -21,7 +21,7 @@ export function Trigger({
   variant = 'ghost',
   tone = 'neutral',
   size = 'sm',
-  shape,
+  shape = 'small',
   flow,
   loading,
   icon,

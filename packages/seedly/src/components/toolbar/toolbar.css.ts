@@ -1,6 +1,16 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+
+export const toolbarVars = createThemeContract({
+  size: {
+    separatorInlineSize: null,
+  },
+});
+
+const toolbarSizeDefaults = assignVars(toolbarVars.size, {
+  separatorInlineSize: '1px',
+});
 
 export const toolbar = style({
   display: 'flex',
@@ -9,6 +19,9 @@ export const toolbar = style({
   gap: sys.spacing[1],
   rowGap: sys.spacing[1],
   inlineSize: '100%',
+  vars: {
+    ...toolbarSizeDefaults,
+  },
 });
 
 export const group = style({
@@ -17,10 +30,7 @@ export const group = style({
 });
 
 export const button = style([
-  typography.label.medium,
   {
-    minInlineSize: sys.spacing[12],
-    blockSize: sys.spacing[12],
     borderWidth: '0',
 
     selectors: {
@@ -52,7 +62,7 @@ export const button = style([
 ]);
 
 export const separator = style({
-  inlineSize: '1px',
+  inlineSize: toolbarVars.size.separatorInlineSize,
   blockSize: sys.spacing[8],
   marginBlock: sys.spacing[2],
   marginInline: sys.spacing[2],

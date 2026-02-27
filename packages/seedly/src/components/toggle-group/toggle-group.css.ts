@@ -11,11 +11,18 @@ export const toggleGroupVars = createThemeContract({
     buttonPressedForeground: null,
     focusRing: null,
   },
+  spacing: {
+    panelGap: null,
+  },
+});
+
+const toggleGroupSpacingDefaults = assignVars(toggleGroupVars.spacing, {
+  panelGap: '1px',
 });
 
 export const panel = style({
   display: 'flex',
-  gap: '1px',
+  gap: toggleGroupVars.spacing.panelGap,
   vars: {
     ...assignVars(toggleGroupVars.color, {
       buttonForeground: sys.color.content.base,
@@ -25,13 +32,12 @@ export const panel = style({
       buttonPressedForeground: sys.color.content.base,
       focusRing: sys.color.tone.primary,
     }),
+    ...toggleGroupSpacingDefaults,
   },
 });
 
 export const button = style([
   {
-    minInlineSize: sys.spacing[12],
-    blockSize: sys.spacing[12],
     borderWidth: '0',
 
     selectors: {

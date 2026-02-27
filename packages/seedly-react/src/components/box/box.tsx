@@ -15,34 +15,37 @@ import type {
 interface BoxLayoutOnlyProps {
   colorSource?: undefined;
   variant?: never;
-  colorKey?: never;
+  colorKey?: undefined;
 }
+
+type BoxColorVariant = NonNullable<BoxVariants['variant']>;
 
 interface BoxToneProps {
   colorSource: 'tone';
   colorKey: ColorTone;
-  variant?: BoxVariants['variant'];
+  variant?: BoxColorVariant;
 }
 
 interface BoxContainerProps {
   colorSource: 'container';
   colorKey: ContainerLevel;
-  variant?: BoxVariants['variant'];
+  variant?: BoxColorVariant;
 }
 
 interface BoxSurfaceProps {
   colorSource: 'surface';
   colorKey: SurfaceLevel;
-  variant?: BoxVariants['variant'];
+  variant?: BoxColorVariant;
 }
+
+type BoxColorProps = BoxToneProps | BoxContainerProps | BoxSurfaceProps;
 
 export type BoxLayoutProps = useRender.ComponentProps<'div'> &
   Omit<BoxVariants, 'spacing' | 'variant' | 'colorSource' | 'colorKey'> & {
     spacing?: NonNullable<BoxVariants['spacing']>;
   };
 
-export type BoxProps = BoxLayoutProps &
-  (BoxLayoutOnlyProps | BoxToneProps | BoxContainerProps | BoxSurfaceProps);
+export type BoxProps = BoxLayoutProps & (BoxLayoutOnlyProps | BoxColorProps);
 
 export function Box({
   spacing,

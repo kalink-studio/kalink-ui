@@ -30,6 +30,9 @@ export const popoverVars = createThemeContract({
     triggerCorner: null,
     popupCorner: null,
   },
+  layout: {
+    popupMaxInlineSize: null,
+  },
 });
 
 const popoverColorDefaults = assignVars(popoverVars.color, {
@@ -52,14 +55,16 @@ const popoverShapeDefaults = assignVars(popoverVars.shape, {
   popupCorner: sys.shape.corner.rounded,
 });
 
+const popoverLayoutDefaults = assignVars(popoverVars.layout, {
+  popupMaxInlineSize: '500px',
+});
+
 export const iconButton = style([
   {
-    inlineSize: sys.spacing[14],
-    blockSize: sys.spacing[14],
-    borderRadius: popoverVars.shape.triggerCorner,
     vars: {
       ...popoverColorDefaults,
       ...popoverShapeDefaults,
+      ...popoverLayoutDefaults,
     },
     selectors: {
       '&[data-popup-open]': {
@@ -76,6 +81,7 @@ export const positioner = style({
   vars: {
     ...popoverColorDefaults,
     ...popoverShapeDefaults,
+    ...popoverLayoutDefaults,
   },
 });
 
@@ -88,7 +94,7 @@ export const popup = style({
     foreground: popoverVars.color.triggerForeground,
     inlineSize: 'var(--popup-width, auto)',
     blockSize: 'var(--popup-height, auto)',
-    maxInlineSize: '500px',
+    maxInlineSize: popoverVars.layout.popupMaxInlineSize,
     outlineLight: popoverVars.color.popupOutlineLight,
     outlineDark: popoverVars.color.popupOutlineDark,
     shadow: popoverVars.color.popupShadow,

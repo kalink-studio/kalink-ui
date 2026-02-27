@@ -19,6 +19,11 @@ export const checkboxGroupVars = createThemeContract({
     checkedForeground: null,
     focusRing: null,
   },
+  spacing: {
+    groupGap: null,
+    itemGap: null,
+    indicatorSize: null,
+  },
   shape: {
     corner: null,
   },
@@ -28,7 +33,7 @@ export const checkboxGroup = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: sys.spacing[2],
+  gap: checkboxGroupVars.spacing.groupGap,
   color: checkboxGroupVars.color.foreground,
   vars: {
     ...assignVars(checkboxGroupVars.color, {
@@ -41,6 +46,11 @@ export const checkboxGroup = style({
     ...assignVars(checkboxGroupVars.shape, {
       corner: sys.shape.corner.small,
     }),
+    ...assignVars(checkboxGroupVars.spacing, {
+      groupGap: sys.spacing[2],
+      itemGap: sys.spacing[4],
+      indicatorSize: sys.spacing[6],
+    }),
   },
 });
 
@@ -51,7 +61,7 @@ export const caption = style({
 export const item = style({
   display: 'flex',
   alignItems: 'center',
-  gap: sys.spacing[4],
+  gap: checkboxGroupVars.spacing.itemGap,
 });
 
 export const checkbox = style({
@@ -73,6 +83,6 @@ export const indicator = style({
 });
 
 globalStyle(`${indicator} > svg`, {
-  inlineSize: sys.spacing[6],
-  blockSize: sys.spacing[6],
+  inlineSize: checkboxGroupVars.spacing.indicatorSize,
+  blockSize: checkboxGroupVars.spacing.indicatorSize,
 });

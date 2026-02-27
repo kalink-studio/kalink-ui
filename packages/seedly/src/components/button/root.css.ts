@@ -297,7 +297,9 @@ export const buttonRecipe = recipe({
       true: {
         '@layer': {
           [components]: {
-            gap: '0',
+            vars: {
+              [buttonVars.spacing.gap]: sys.spacing[0],
+            },
           },
         },
       },

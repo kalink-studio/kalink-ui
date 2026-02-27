@@ -11,6 +11,7 @@ import {
 } from '../layout/layout.css';
 
 import type {
+  StaticColorArgs,
   StaticColorKey,
   StaticColorSource,
   StaticColorValues,
@@ -37,6 +38,8 @@ const boxVariants = {
   bare: {},
 } as const satisfies Record<StaticColorVariant, Record<string, never>>;
 
+const boxVariantKeys = Object.keys(boxVariants) as StaticColorVariant[];
+
 const boxColorSources = [
   'none',
   'tone',
@@ -55,10 +58,24 @@ const toneColorKeys = [
 const containerColorKeys = ['low', 'base', 'high', 'top'] as const;
 const surfaceColorKeys = ['dim', 'base', 'bright'] as const;
 
+interface BoxColorKeyBySource {
+  tone: (typeof toneColorKeys)[number];
+  container: (typeof containerColorKeys)[number];
+  surface: (typeof surfaceColorKeys)[number];
+}
+
+const boxColorKeysBySource = {
+  tone: toneColorKeys,
+  container: containerColorKeys,
+  surface: surfaceColorKeys,
+} as const satisfies {
+  [K in keyof BoxColorKeyBySource]: readonly BoxColorKeyBySource[K][];
+};
+
 const boxColorKeys = [
-  ...toneColorKeys,
-  ...containerColorKeys,
-  ...surfaceColorKeys,
+  ...boxColorKeysBySource.tone,
+  ...boxColorKeysBySource.container,
+  ...boxColorKeysBySource.surface,
 ] as const satisfies readonly StaticColorKey[];
 
 const emptyColorSourceStyles = boxColorSources.reduce(
@@ -85,89 +102,40 @@ const assignBoxColorVars = (values: StaticColorValues) => {
   });
 };
 
-const toneCompoundVariants = toneColorKeys.flatMap((colorKey) => {
-  return (Object.keys(boxVariants) as StaticColorVariant[]).map((variant) => {
-    return {
-      variants: {
-        colorSource: 'tone' as const,
+const createColorCompoundVariants = <TColorSource extends StaticColorSource>(
+  colorSource: TColorSource,
+  colorKeys: readonly BoxColorKeyBySource[TColorSource][],
+) => {
+  return colorKeys.flatMap((colorKey) => {
+    return boxVariantKeys.map((variant) => {
+      const colorProfileArgs = {
+        profile: 'static',
+        colorSource,
         colorKey,
         variant,
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...assignBoxColorVars(
-                resolveColorProfileValues({
-                  profile: 'static',
-                  colorSource: 'tone',
-                  colorKey,
-                  variant,
-                }),
-              ),
-            },
-          },
-        },
-      },
-    };
-  });
-});
+      } as Extract<StaticColorArgs, { colorSource: TColorSource }>;
 
-const containerCompoundVariants = containerColorKeys.flatMap((colorKey) => {
-  return (Object.keys(boxVariants) as StaticColorVariant[]).map((variant) => {
-    return {
-      variants: {
-        colorSource: 'container' as const,
-        colorKey,
-        variant,
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...assignBoxColorVars(
-                resolveColorProfileValues({
-                  profile: 'static',
-                  colorSource: 'container',
-                  colorKey,
-                  variant,
-                }),
-              ),
+      return {
+        variants: {
+          colorSource,
+          colorKey,
+          variant,
+        },
+        style: {
+          '@layer': {
+            [components]: {
+              vars: {
+                ...assignBoxColorVars(
+                  resolveColorProfileValues(colorProfileArgs),
+                ),
+              },
             },
           },
         },
-      },
-    };
+      };
+    });
   });
-});
-
-const surfaceCompoundVariants = surfaceColorKeys.flatMap((colorKey) => {
-  return (Object.keys(boxVariants) as StaticColorVariant[]).map((variant) => {
-    return {
-      variants: {
-        colorSource: 'surface' as const,
-        colorKey,
-        variant,
-      },
-      style: {
-        '@layer': {
-          [components]: {
-            vars: {
-              ...assignBoxColorVars(
-                resolveColorProfileValues({
-                  profile: 'static',
-                  colorSource: 'surface',
-                  colorKey,
-                  variant,
-                }),
-              ),
-            },
-          },
-        },
-      },
-    };
-  });
-});
+};
 
 export const boxRecipe = recipe({
   base: [
@@ -214,9 +182,9 @@ export const boxRecipe = recipe({
   },
 
   compoundVariants: [
-    ...toneCompoundVariants,
-    ...containerCompoundVariants,
-    ...surfaceCompoundVariants,
+    ...createColorCompoundVariants('tone', boxColorKeysBySource.tone),
+    ...createColorCompoundVariants('container', boxColorKeysBySource.container),
+    ...createColorCompoundVariants('surface', boxColorKeysBySource.surface),
   ],
 });
 

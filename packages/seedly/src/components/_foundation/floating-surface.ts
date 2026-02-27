@@ -27,9 +27,9 @@ export function createFloatingPositionerStyles(
 }
 
 export interface FloatingPopupStylesOptions {
-  borderRadius?: string;
-  backgroundColor?: string;
-  color?: string;
+  borderRadius: string;
+  backgroundColor: string;
+  color: string;
   paddingBlock?: string;
   paddingInline?: string;
   transformOrigin?: string;
@@ -41,11 +41,11 @@ export interface FloatingPopupStylesOptions {
   maxBlockSize?: string;
   backgroundClip?: 'padding-box';
   overflowY?: 'auto';
-  lightOutline?: string | null;
-  darkOutline?: string | null;
-  shadow?: string;
+  outline: string | null;
+  outlineInverse?: string | null;
+  shadow: string;
   darkShadow?: string;
-  darkOutlineOffset?: string;
+  outlineInverseOffset?: string;
   selectors?: Record<string, StyleRule>;
   includeStartingStyle?: boolean;
   includeEndingStyle?: boolean;
@@ -65,9 +65,9 @@ export interface FloatingSurfaceMotionOptions {
 }
 
 export interface FloatingSurfaceStylesOptions {
-  borderRadius?: string;
-  background?: string;
-  foreground?: string;
+  borderRadius: string;
+  background: string;
+  foreground: string;
   paddingBlock?: string;
   paddingInline?: string;
   transformOrigin?: string;
@@ -78,11 +78,12 @@ export interface FloatingSurfaceStylesOptions {
   maxBlockSize?: string;
   backgroundClip?: 'padding-box';
   overflowY?: 'auto';
-  outlineLight?: string | null;
-  outlineDark?: string | null;
-  shadow?: string;
+  outline: string | null;
+  outlineInverse?: string | null;
+  shadow: string;
+  transition?: string | null;
   darkShadow?: string;
-  darkOutlineOffset?: string;
+  outlineInverseOffset?: string;
   selectors?: Record<string, StyleRule>;
   motion?: FloatingSurfaceMotionOptions;
   popup?: Partial<FloatingPopupStylesOptions>;
@@ -97,12 +98,12 @@ export type FloatingListPreset = 'listbox' | 'listboxCompact';
 
 export interface FloatingListStylesOptions {
   preset?: FloatingListPreset;
-  maxBlockSize?: string;
+  maxBlockSize: string;
   overflowY?: 'auto';
   overflowX?: 'hidden';
   overscrollBehavior?: 'contain';
-  paddingBlock?: string;
-  scrollPaddingBlock?: string;
+  paddingBlock: string;
+  scrollPaddingBlock: string;
   outline?: string;
   position?: 'relative';
   selectors?: Record<string, StyleRule>;
@@ -154,7 +155,6 @@ const floatingMotionPresets: Record<
 > = {
   scale: {},
   scaleSoft: {
-    transition: `opacity ${sys.motion.duration.short[2]} ${sys.motion.easing.standard},\n    transform ${sys.motion.duration.short[2]} ${sys.motion.easing.standard}`,
     startingStyle: softFloatingStateStyle,
     endingStyle: softFloatingStateStyle,
   },
@@ -180,15 +180,15 @@ const floatingListPresets: Record<
     overflowY: 'auto',
     overflowX: 'hidden',
     overscrollBehavior: 'contain',
-    paddingBlock: sys.spacing[4],
-    scrollPaddingBlock: sys.spacing[4],
+    paddingBlock: '0',
+    scrollPaddingBlock: '0',
     outline: '0',
   },
   listboxCompact: {
     maxBlockSize: floatingPanelMaxBlockSize,
     overflowY: 'auto',
-    paddingBlock: sys.spacing[2],
-    scrollPaddingBlock: sys.spacing[10],
+    paddingBlock: '0',
+    scrollPaddingBlock: '0',
     position: 'relative',
   },
 };
@@ -199,10 +199,6 @@ const floatingItemPresets: Record<
 > = {
   listbox: {
     display: 'flex',
-    minInlineSize: '0',
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[8],
-    paddingInlineEnd: sys.spacing[12],
     outline: '0',
     cursor: 'default',
     userSelect: 'none',
@@ -210,21 +206,12 @@ const floatingItemPresets: Record<
   listboxWithIndicator: {
     display: 'grid',
     alignItems: 'center',
-    gap: sys.spacing[4],
-    gridTemplateColumns: `${sys.spacing[6]} 1fr`,
-    minInlineSize: '0',
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[8],
-    paddingInlineEnd: sys.spacing[12],
     outline: '0',
     cursor: 'default',
     userSelect: 'none',
   },
   menu: {
     display: 'flex',
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[8],
-    paddingInlineEnd: sys.spacing[12],
     outline: '0',
     cursor: 'default',
     userSelect: 'none',
@@ -233,9 +220,6 @@ const floatingItemPresets: Record<
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: sys.spacing[8],
-    paddingBlock: sys.spacing[4],
-    paddingInline: sys.spacing[8],
     outline: '0',
     cursor: 'default',
     userSelect: 'none',
@@ -243,7 +227,7 @@ const floatingItemPresets: Record<
 };
 
 export function createFloatingSurfaceStyles(
-  options: FloatingSurfaceStylesOptions = {},
+  options: FloatingSurfaceStylesOptions,
 ): StyleRule {
   const motionPreset = floatingMotionPresets[options.motion?.preset ?? 'scale'];
   const mergedSelectors = {
@@ -261,7 +245,7 @@ export function createFloatingSurfaceStyles(
     transition:
       options.popup?.transition ??
       options.motion?.transition ??
-      motionPreset.transition,
+      options.transition,
     inlineSize: options.popup?.inlineSize ?? options.inlineSize,
     blockSize: options.popup?.blockSize ?? options.blockSize,
     minInlineSize: options.popup?.minInlineSize ?? options.minInlineSize,
@@ -269,12 +253,12 @@ export function createFloatingSurfaceStyles(
     maxBlockSize: options.popup?.maxBlockSize ?? options.maxBlockSize,
     backgroundClip: options.popup?.backgroundClip ?? options.backgroundClip,
     overflowY: options.popup?.overflowY ?? options.overflowY,
-    lightOutline: options.popup?.lightOutline ?? options.outlineLight,
-    darkOutline: options.popup?.darkOutline ?? options.outlineDark,
+    outline: options.popup?.outline ?? options.outline,
+    outlineInverse: options.popup?.outlineInverse ?? options.outlineInverse,
     shadow: options.popup?.shadow ?? options.shadow,
     darkShadow: options.popup?.darkShadow ?? options.darkShadow,
-    darkOutlineOffset:
-      options.popup?.darkOutlineOffset ?? options.darkOutlineOffset,
+    outlineInverseOffset:
+      options.popup?.outlineInverseOffset ?? options.outlineInverseOffset,
     selectors: mergedSelectors,
     includeStartingStyle:
       options.popup?.includeStartingStyle ??
@@ -296,7 +280,7 @@ export function createFloatingSurfaceStyles(
 }
 
 export function createFloatingAnchoredSurfaceStyles(
-  options: FloatingAnchoredSurfaceStylesOptions = {},
+  options: FloatingAnchoredSurfaceStylesOptions,
 ): StyleRule {
   const anchorWidth = options.anchorWidth ?? 'inline';
   const useAvailableWidth = options.useAvailableWidth ?? true;
@@ -318,7 +302,7 @@ export function createFloatingAnchoredSurfaceStyles(
 }
 
 export function createFloatingListStyles(
-  options: FloatingListStylesOptions = {},
+  options: FloatingListStylesOptions,
 ): StyleRule {
   const preset = floatingListPresets[options.preset ?? 'listbox'];
   const styles = options.styles ?? {};
@@ -384,17 +368,10 @@ export function createFloatingItemStyles(
 }
 
 export function createFloatingPopupStyles(
-  options: FloatingPopupStylesOptions = {},
+  options: FloatingPopupStylesOptions,
 ): StyleRule {
-  const lightOutline =
-    options.lightOutline === null
-      ? null
-      : (options.lightOutline ?? sys.color.border.low);
-  const darkOutline =
-    options.darkOutline === null
-      ? null
-      : (options.darkOutline ?? sys.color.border.low);
-  const shadow = options.shadow ?? sys.elevation.moderate;
+  const outline = options.outline;
+  const outlineInverse = options.outlineInverse;
 
   const selectors: Record<string, StyleRule> = {
     ...(options.selectors ?? {}),
@@ -412,35 +389,24 @@ export function createFloatingPopupStyles(
 
   const media: Record<string, StyleRule> = {};
 
-  if (lightOutline) {
-    media['(prefers-color-scheme: light)'] = {
-      outline: `1px solid ${lightOutline}`,
-      boxShadow: shadow,
-    };
-  }
-
-  if (darkOutline) {
-    const darkShadow = options.darkShadow ?? shadow;
-
+  if (outlineInverse || options.darkShadow || options.outlineInverseOffset) {
     media['(prefers-color-scheme: dark)'] = {
-      outline: `1px solid ${darkOutline}`,
-      outlineOffset: options.darkOutlineOffset ?? '-1px',
-      boxShadow: darkShadow,
+      outline: outlineInverse ? `1px solid ${outlineInverse}` : undefined,
+      outlineOffset: options.outlineInverseOffset,
+      boxShadow: options.darkShadow,
     };
   }
 
   return {
-    borderRadius: options.borderRadius ?? sys.shape.corner.medium,
-    backgroundColor: options.backgroundColor ?? sys.color.surface.base,
-    color: options.color ?? sys.color.content.base,
+    borderRadius: options.borderRadius,
+    backgroundColor: options.backgroundColor,
+    color: options.color,
+    outline: outline ? `1px solid ${outline}` : undefined,
+    boxShadow: options.shadow,
     paddingBlock: options.paddingBlock,
     paddingInline: options.paddingInline,
     transformOrigin: options.transformOrigin ?? 'var(--transform-origin)',
-    transition:
-      options.transition === null
-        ? undefined
-        : (options.transition ??
-          `transform ${sys.motion.duration.short[4]} ${sys.motion.easing.standard},\n    opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.standard}`),
+    transition: options.transition === null ? undefined : options.transition,
     inlineSize: options.inlineSize,
     blockSize: options.blockSize,
     minInlineSize: options.minInlineSize,
@@ -486,17 +452,13 @@ export function createFloatingArrowPlacementStyles(
   };
 }
 
-export function createArrowFillStyles(
-  color: string = sys.color.surface.base,
-): StyleRule {
+export function createArrowFillStyles(color: string): StyleRule {
   return {
     fill: color,
   };
 }
 
-export function createArrowOuterStrokeStyles(
-  color: string = sys.color.border.low,
-): StyleRule {
+export function createArrowOuterStrokeStyles(color: string): StyleRule {
   return {
     '@media': {
       '(prefers-color-scheme: light)': {
@@ -506,9 +468,7 @@ export function createArrowOuterStrokeStyles(
   };
 }
 
-export function createArrowInnerStrokeStyles(
-  color: string = floatingSurfaceDarkOutlineColor,
-): StyleRule {
+export function createArrowInnerStrokeStyles(color: string): StyleRule {
   return {
     '@media': {
       '(prefers-color-scheme: dark)': {

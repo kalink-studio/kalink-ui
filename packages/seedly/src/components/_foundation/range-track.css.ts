@@ -4,8 +4,6 @@ import {
   type StyleRule,
 } from '@vanilla-extract/css';
 
-import { sys } from '../../styles';
-
 export const rangeTrackVars = createThemeContract({
   color: {
     background: null,
@@ -18,18 +16,18 @@ export const rangeTrackVars = createThemeContract({
 });
 
 export interface RangeTrackRootVarsOptions {
-  trackBackground?: string;
-  trackBorder?: string;
-  indicator?: string;
-  corner?: string;
+  trackBackground: string;
+  trackBorder: string;
+  indicator: string;
+  corner: string;
 }
 
 export function createRangeTrackRootVars({
-  trackBackground = sys.color.container.base,
-  trackBorder = 'transparent',
-  indicator = sys.color.content.base,
-  corner = sys.shape.corner.sharp,
-}: RangeTrackRootVarsOptions = {}): NonNullable<StyleRule['vars']> {
+  trackBackground,
+  trackBorder,
+  indicator,
+  corner,
+}: RangeTrackRootVarsOptions): NonNullable<StyleRule['vars']> {
   return assignVars(rangeTrackVars, {
     color: {
       background: trackBackground,
@@ -43,14 +41,14 @@ export function createRangeTrackRootVars({
 }
 
 export interface RangeTrackStylesOptions {
-  blockSize?: string;
+  blockSize: string;
   overflow?: 'hidden';
 }
 
 export function createRangeTrackStyles({
-  blockSize = sys.spacing[2],
+  blockSize,
   overflow,
-}: RangeTrackStylesOptions = {}): StyleRule {
+}: RangeTrackStylesOptions): StyleRule {
   return {
     blockSize,
     overflow,

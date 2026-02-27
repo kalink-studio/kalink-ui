@@ -26,81 +26,45 @@ const containerColorDefaults = assignVars(containerVars.color, {
   outline: 'transparent',
 });
 
+const subtleContainerOutline = `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), ${containerVars.color.base})`;
+
+const createContainerLevelStyle = (baseColor: string) => {
+  return {
+    '@layer': {
+      [components]: {
+        vars: {
+          [containerVars.color.base]: baseColor,
+          [containerVars.color.background]: baseColor,
+        },
+      },
+    },
+  };
+};
+
+const createContainerVariantStyle = (background: string, outline: string) => {
+  return {
+    '@layer': {
+      [components]: {
+        vars: {
+          [containerVars.color.background]: background,
+          [containerVars.color.outline]: outline,
+        },
+      },
+    },
+  };
+};
+
 const containerLevelStyles = {
-  low: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.base]: sys.color.container.low,
-          [containerVars.color.background]: sys.color.container.low,
-        },
-      },
-    },
-  },
-  base: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.base]: sys.color.container.base,
-          [containerVars.color.background]: sys.color.container.base,
-        },
-      },
-    },
-  },
-  high: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.base]: sys.color.container.high,
-          [containerVars.color.background]: sys.color.container.high,
-        },
-      },
-    },
-  },
-  top: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.base]: sys.color.container.top,
-          [containerVars.color.background]: sys.color.container.top,
-        },
-      },
-    },
-  },
+  low: createContainerLevelStyle(sys.color.container.low),
+  base: createContainerLevelStyle(sys.color.container.base),
+  high: createContainerLevelStyle(sys.color.container.high),
+  top: createContainerLevelStyle(sys.color.container.top),
 } as const;
 
 const containerVariantStyles = {
-  solid: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.outline]: 'transparent',
-          [containerVars.color.background]: containerVars.color.base,
-        },
-      },
-    },
-  },
-  outline: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.background]: 'transparent',
-          [containerVars.color.outline]:
-            `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), ${containerVars.color.base})`,
-        },
-      },
-    },
-  },
-  bare: {
-    '@layer': {
-      [components]: {
-        vars: {
-          [containerVars.color.background]: 'transparent',
-          [containerVars.color.outline]: 'transparent',
-        },
-      },
-    },
-  },
+  solid: createContainerVariantStyle(containerVars.color.base, 'transparent'),
+  outline: createContainerVariantStyle('transparent', subtleContainerOutline),
+  bare: createContainerVariantStyle('transparent', 'transparent'),
 } as const;
 
 export const containerRecipe = recipe({

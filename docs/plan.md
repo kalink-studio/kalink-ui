@@ -1,101 +1,308 @@
-# Kalink Migration Plan
+# Seedly Tokenization Migration Plan
 
-## Objectives
+## Purpose
 
-- Merge the legacy `~/dev/kalink` Next.js + Prismic site into `apps/kalink` inside the monorepo.
-- Replace Prismic with Payload CMS while keeping Next.js (App Router) and aligning with workspace tooling.
-- Reuse primitives, utilities, and design tokens from `@kalink-ui/seedly` and `@kalink-ui/dibbly` to avoid duplicated UI logic.
-- Adopt vanilla-extract for all local styling; keep image handling simple (single media field per asset) for this phase.
+Finalize local component token usage across `packages/seedly/src/components` with a single, consistent migration path.
 
-## Active Work – Canopy Plugins
+- local contracts are complete for each component's theme-facing surface
+- token-eligible style properties map to local tokens (or explicit direct `sys` usage when intentional)
+- local defaults map cleanly to global system tokens (`sys`)
+- breaking changes are allowed during migration
 
-- Align `@kalink-ui/canopy` with Payload’s plugin authoring guide so packages can ship self-contained enhancements.
-- Extract the slug field into a Payload plugin that registers hooks and admin components via the documented `PayloadPlugin` signature.
-- Expose a future-friendly plugin barrel (e.g., `plugins/slug`) and keep shared helpers internal to avoid duplicate admin bundles.
-- Update `apps/kalink` payload config to consume the slug plugin and drop direct field wiring in collection definitions.
-- Start a shared field library under `packages/canopy/src/fields` (e.g., the new heading group) so blocks/globals can reuse strongly-typed building blocks.
+---
 
-## Phase Overview
+## Non-Negotiables
 
-1. **Baseline & Dependencies** – Sync package versions, add vanilla-extract support to `apps/kalink`, and ensure Payload admin runs locally.
-2. **Payload Data Model** – Port custom types to collections/globals, establish relationships, and generate TypeScript types.
-3. **Block Library** – Translate Prismic slices into Payload blocks and build matching React renderers backed by Seedly components.
-4. **Frontend Layout & Navigation** – Recreate layout, metadata, navbar, footer, and sub-navigation behavior using Payload data.
-5. **Forms & Integrations** – Port contact form (Resend), map locator, toast system, and any other client-side services.
-6. **Commerce Endpoints** _(if still required)_ – Migrate Stripe-powered endpoints under `/shop` to Payload/Next.
-7. **Content Migration & QA** – Script/import existing Prismic content into Payload, verify routes, styling, and accessibility.
-8. **Handoff** – Document admin usage, deployment steps, and remaining backlog (e.g., responsive media ratios).
+- **Backward compatibility:** not required.
+- **Source of truth:** `packages/seedly/src/styles/system-contract.css.ts`.
+- **Ownership model:** component contracts own theme-facing defaults.
+- **Foundation role:** `_foundation` composes behavior and structure, but does not own visual defaults.
+- **Naming model:** local tokens are role-based and theme-agnostic (for example, `popupOutline`).
+- **Dual-scheme exception:** only when simultaneous schemes are required; use `Default`/`Inverse`, not `Light`/`Dark`.
+- **Migration mode:** no dual path; intermediate states can be broken and are not releasable.
+- **Release gate:** migration is only releasable when global validation passes.
 
-## Dependency Tasks
+Validation gate (in order):
 
-### Already in workspace
+1. `pnpm run format:fix`
+2. `pnpm run lint:fix`
+3. `pnpm run tsc`
 
-- `payload`, `@payloadcms/*`, Next 15 / React 19 runtime.
-- Workspace packages `@kalink-ui/seedly`, `@kalink-ui/dibbly` (bring UI primitives + utilities).
+---
 
-### Install / update in `apps/kalink`
+## Current Status
 
-- Vanilla extract toolchain: `@vanilla-extract/next-plugin`, `@vanilla-extract/css`, `@vanilla-extract/sprinkles`, `@vanilla-extract/recipes`, `@vanilla-extract/css-utils`, `@vanilla-extract/dynamic`.
-- UI helpers: `clsx`, `framer-motion`, `@uidotdev/usehooks`, `lucide-react`, `simplebar-react`.
-- Forms & comms: `react-hook-form`, `resend`.
-- Map: `@vis.gl/react-google-maps`.
-- Commerce (pending confirmation): `stripe`, `@stripe/stripe-js`, `@stripe/react-stripe-js`.
-- Radix primitives not provided by Seedly exports but used by legacy components: `@radix-ui/react-navigation-menu`, `@radix-ui/react-popover`, `@radix-ui/react-dialog`, `@radix-ui/react-select`, `@radix-ui/react-toast`, `@radix-ui/react-label`, `@radix-ui/react-scroll-area`, `@radix-ui/react-slot`.
-- Configure `next.config.ts` with `createVanillaExtractPlugin()` and `transpilePackages` for `@kalink-ui/*`.
+- Migration has started.
+- Completed component: `accordion`.
+- Next unchecked component: `alert-dialog`.
+- `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
-## Data Model Mapping (Prismic → Payload)
+Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-| Prismic custom type  | Payload target                                            | Key fields                                                                                                                                                                           | Notes                                                                                  |
-| -------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| `page`               | `pages` collection                                        | `title`, `slug` (from UID), `navigationLabel`, `tint` (`primary` \| `secondary`), SEO group (`metaTitle`, `metaDescription`, `metaImage` upload), `blocks` (array of Payload blocks) | All standard pages; enforce unique slugs; expose boolean `showInNavigation` if needed. |
-| `homepage`           | `pages` collection (singleton entry flagged `isHomepage`) | Same as `page` plus `isHomepage` boolean                                                                                                                                             | Allows reuse of renderer; homepage resolved by `isHomepage = true`.                    |
-| `service`            | `services` collection                                     | `title`, `slug`, `backgroundTint`, `picture` (upload)                                                                                                                                | Used inside Services Grid block.                                                       |
-| `serviceDescription` | `serviceDescriptions` collection                          | `title`, `description`, `backgroundTint`                                                                                                                                             | Linkable from Services Grid items.                                                     |
-| `person`             | `people` collection                                       | `givenName`, `surname`, `jobTitle`, `summary` (Lexical rich text), `picture`                                                                                                         | Consumed by Team block.                                                                |
-| `testimonial`        | `testimonials` collection                                 | `givenName`, `text`                                                                                                                                                                  | Consumed by Testimonials Row block.                                                    |
-| `courseSessions`     | `courseSessions` collection                               | `title`/`slug`, `items` (array `{ label, value }`)                                                                                                                                   | Supplies select options for contact form fields.                                       |
-| `mainNavigation`     | `mainNavigation` **global**                               | `items` array of relationships to `pages` with ordering                                                                                                                              | Powers navbar structure; manage via Payload global admin view.                         |
-| (Media)              | `media` collection (already present)                      | `alt`, file upload                                                                                                                                                                   | Reuse for all image fields.                                                            |
-| (Users)              | `users` collection (already present)                      | auth                                                                                                                                                                                 | No change.                                                                             |
+- `alert-dialog`
+- `autocomplete`
+- `checkbox`
+- `checkbox-group`
+- `combobox`
+- `context-menu`
+- `dialog`
+- `field`
+- `input`
+- `menu`
+- `menubar`
+- `meter`
+- `navigation-menu`
+- `number-field`
+- `popover`
+- `preview-card`
+- `progress`
+- `radio`
+- `select`
+- `slider`
+- `tooltip`
 
-## Slice → Block Mapping
+---
 
-| Prismic slice                             | Payload block slug            | Fields                                                                                                                                                                                                                                                                                | Component/notes                                                                               |
-| ----------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `intro_block` (default & withLinkToMedia) | `introBlock`                  | Shared: `title`, `body` (rich text), `backgroundTint`, sub-nav fields (`showInSubnav`, `subnavLabel`, `slug`). Variant: `ctas` array (`label`, `media` relationship, `variant`).                                                                                                      | Render with Seedly `Container`/`Stack` primitives; CTA variant optional.                      |
-| `media_banner`                            | `mediaBanner`                 | `items` repeatable group: `title`, `body` rich text, `image` upload, `direction`, sub-nav metadata.                                                                                                                                                                                   | Rebuild carousel-style layout; use Seedly `Grid`, `Frame`.                                    |
-| `fifty_fifty_section`                     | `fiftyFifty`                  | `title`, `body` rich text, `image`, `direction`, `backgroundTint`, sub-nav metadata.                                                                                                                                                                                                  | Layout with Seedly `Grid`/`Box`.                                                              |
-| `list_items`                              | `listItems`                   | `title`, `backgroundTint`, sub-nav metadata, `items` array `{ label }`.                                                                                                                                                                                                               | Use Seedly `Stack` + `Text`.                                                                  |
-| `contacts`                                | `contacts`                    | `title`, `subtitle`, `backgroundTint`, sub-nav metadata, `info` rich text, `formType` (`message` \| `inscription`), `formFields` array (`fieldType`, `fieldName`, `fieldLabel`, `required`, `optionsSource` relationship to `courseSessions`), `location` point, map config booleans. | Google Maps API key and map ID pulled from env vars at runtime; block only toggles map usage. |
-| `team`                                    | `team`                        | `title`, sub-nav metadata, `items` array with `person` relationship, `direction`, `backgroundTint`.                                                                                                                                                                                   | Render using Person cards from Seedly primitives.                                             |
-| `testimonials_row`                        | `testimonialsRow`             | `title`, sub-nav metadata, `items` array with `testimonial` relationship + `tintScheme`.                                                                                                                                                                                              | Build scrolling row using `Stack`/`SimpleBar`.                                                |
-| `grid` (ServicesGrid)                     | `servicesGrid`                | `title`, sub-nav metadata, `items` array referencing either `service` or `serviceDescription`, with display variant.                                                                                                                                                                  | Combine cards reused from library.                                                            |
-| `contacts` map                            | handled inside contacts block | Expose `mapApiKey`, `mapId` fields for Google map integration.                                                                                                                                                                                                                        |
+## Contract Standard (Target)
 
-## Implementation Notes
+Each component should use only the groups it needs:
 
-- Centralise block definitions under `apps/kalink/blocks` with shared field fragments, mirroring legacy slice directory structure for easier porting.
-- Generate Payload types (`payload-types.ts`) and create Zod/TypeScript adapters for frontend block props.
-- Expose a `resolveBlocks` helper that maps Payload block entries to React components (akin to Prismic `SliceZone`).
-- Build layout primitives (`LayoutShell`, `Navbar`, `Footer`) consuming Payload queries; reuse `Seedly` Box/Stack/Text/Button` throughout and keep bespoke styles in vanilla-extract files adjacent to components.
-- Implement navigation slug helpers (`slugify`, `getBlockSlug`) using `@kalink-ui/dibbly` utilities.
-- Keep image fields single-file for now; plan responsive/crop enhancements later.
+- `color`
+- `spacing`
+- `shape`
+- `size`
+- `layout`
+- `motion`
+- `elevation`
+- `typography`
 
-## Decisions
+Naming convention:
 
-- `mainNavigation` will be implemented as a Payload global.
-- Stripe-powered `/shop` endpoints are out of scope for this pass; drop during migration and reintroduce later if required.
-- Google Maps API key and map ID stay in environment variables; Payload content only enables/labels map usage.
-- Content migration will be manual via Payload admin.
+- **role-first + semantic suffix**
+- examples: `triggerBackground`, `triggerBorder`, `triggerFocusRing`, `itemHighlightedBackground`, `popupOutline`, `thumbSize`, `thumbCorner`
 
-## Next Steps
+State suffixes:
 
-- Lock dependency list and update `apps/kalink` configuration.
-- Begin implementing Payload collections/blocks in the order above, followed by frontend renderers phase-by-phase.
+- `Hover`, `Active`, `Pressed`, `Disabled`, `FocusRing`, `Muted` (as relevant)
 
-## WIP Snapshot (2025-02-14)
+---
 
-- Payload collections, blocks, globals, and frontend scaffold migrated; React blocks render using Seedly/Dibbly primitives with vanilla-extract styles.
-- CMS helpers (`lib/cms.ts`) fetch Payload data; navigation + anchors + layout/footer implemented.
-- `contact-form` client component wired to Resend server action; map locator added.
-- Outstanding: resolve ESLint import-order/type warnings, polish typings (`types/cms.ts`), finish block renderers (media handling, tint composition), and rerun `pnpm lint` once fixes are in.
+## Token Eligibility Policy
+
+A property must use local token or direct `sys` token if it is theme-facing:
+
+- color/background/border/outline/shadow
+- spacing and sizing likely to be overridden
+- radius/corners
+- typography values (or variant tokens)
+- visible motion durations/easings
+
+Structural-only properties may stay literal/non-tokenized:
+
+- `display`, `position`, `z-index` semantics
+- flex/grid mechanics
+- selector wiring and state mechanics
+- purely algorithmic calculations not intended for theming
+
+---
+
+## Mapping Rules
+
+1. Every local default maps to `sys`, unless intentionally derived (`calc`, `color-mix`, etc.).
+2. Derived values should still be assigned in local defaults (not repeatedly inlined in style rules).
+3. Shared factory options receive local token values for token-eligible properties.
+4. Root/owning slot hosts merged default assignment for that component.
+5. Avoid duplicate assignment blocks across slots unless scoping requires it.
+6. Do not rely on `_foundation` visual fallbacks; pass component token values explicitly.
+7. Prefer one top-level assignment: `assignVars(<componentVars>, { ... })`.
+
+---
+
+## Foundation Alignment
+
+Core strict-default hardening is done for:
+
+- `packages/seedly/src/components/_foundation/field-control.ts`
+- `packages/seedly/src/components/_foundation/choice-control.ts`
+- `packages/seedly/src/components/_foundation/highlight-item.ts`
+- `packages/seedly/src/components/_foundation/range-track.css.ts`
+- `packages/seedly/src/components/_foundation/dialog-surface.ts`
+- `packages/seedly/src/components/_foundation/floating-surface.ts`
+- `packages/seedly/src/components/_foundation/control.ts`
+
+Remaining shared cleanup:
+
+- normalize popup/dialog outline API naming to role-based terms (`outline`, optional `outlineInverse`)
+- update impacted callers: `dialog`, `alert-dialog`, `menu`, `popover`, `select`, `tooltip`
+- run a dedicated final verification pass after all components are migrated
+
+---
+
+## Session Workflow
+
+### Start
+
+1. Read this file.
+2. Pick the next unchecked component in alphabetical order.
+3. Mark it `in progress` in the checklist.
+4. Add/update its tracking block.
+
+### Execute (per component)
+
+1. Propose/adjust contract.
+2. Map all token-eligible properties.
+3. Implement component and `_foundation` caller changes as needed.
+4. Remove dead tokens and obsolete assignments.
+5. Validate at checkpoints with:
+   - `pnpm run format:fix`
+   - `pnpm run lint:fix`
+   - `pnpm run tsc`
+
+### End
+
+1. Update tracking block with exact deltas and validation results.
+2. Mark checklist item:
+   - `done` if complete, or
+   - keep in progress with blocker note.
+3. Leave a short handoff note if interrupted.
+4. Ask if a commit needs to be created. If answer is yes, use Conventional Commits with component scope (for example, `refactor(accordion): ...`).
+
+---
+
+## Alphabetical Component Checklist
+
+- [x] `accordion`
+- [ ] `alert-dialog` (next; keep dialog naming parity)
+- [ ] `autocomplete`
+- [ ] `avatar`
+- [ ] `box`
+- [ ] `button`
+- [ ] `center`
+- [ ] `checkbox`
+- [ ] `checkbox-group`
+- [ ] `cluster`
+- [ ] `collapsible`
+- [ ] `combobox`
+- [ ] `container`
+- [ ] `context-menu`
+- [ ] `cover`
+- [ ] `dialog`
+- [ ] `field`
+- [ ] `fieldset`
+- [ ] `form`
+- [ ] `frame`
+- [ ] `grid`
+- [ ] `input`
+- [ ] `label`
+- [ ] `layout`
+- [ ] `menu`
+- [ ] `menubar`
+- [ ] `meter`
+- [ ] `navigation-menu`
+- [ ] `number-field`
+- [ ] `popover`
+- [ ] `preview-card`
+- [ ] `progress`
+- [ ] `radio`
+- [ ] `scroll-area`
+- [ ] `select`
+- [ ] `separator`
+- [ ] `sidebar`
+- [ ] `slider`
+- [ ] `stack`
+- [ ] `switch`
+- [ ] `switcher`
+- [ ] `tabs`
+- [ ] `toast`
+- [ ] `toggle`
+- [ ] `toggle-group`
+- [ ] `toolbar`
+- [ ] `tooltip`
+
+---
+
+## Cross-Cutting QA Checklist
+
+- [ ] Every component has local contract coverage appropriate to its theme-facing surface
+- [ ] Every local contract has defaults assigned
+- [ ] Components own theme-facing defaults (no hidden `_foundation` visual defaults)
+- [ ] No unused local tokens remain
+- [ ] No token-eligible property bypasses local contract unintentionally
+- [ ] Naming follows role/state conventions
+- [ ] No `Light`/`Dark` local suffixes unless true dual-scheme rendering is required
+- [ ] `_foundation` helpers do not silently override component intent
+- [ ] Component exports remain coherent after refactors
+- [ ] Validation sequence passes
+
+---
+
+## Session Tracking Template
+
+### `<component-name>`
+
+- Status: `not started | in progress | done`
+- Contract changes:
+  - Added:
+  - Renamed:
+  - Removed:
+- Mapping coverage:
+  - Properties audited:
+  - Properties remapped:
+  - Intentional direct `sys` usages:
+- Foundation changes:
+- Validation:
+  - format:
+  - lint:
+  - tsc:
+- Notes / follow-ups:
+
+---
+
+## Change Control
+
+If policy changes mid-migration:
+
+1. Update this file immediately in:
+   - Contract standard
+   - Token eligibility policy
+   - Mapping rules
+2. Add a short rationale note in the current component tracking block.
+3. List completed components that need normalization follow-up.
+4. Add explicit follow-up checklist items.
+
+---
+
+## Migration Log
+
+### `_foundation` strict-default refactor
+
+- Status: `core pass done; normalization + final verification pending`
+- Result:
+  - Theme-facing fallback defaults removed from shared factories.
+  - Factory contracts tightened so theme-facing values are explicit.
+- Current validation snapshot:
+  - `pnpm run tsc` still fails in `@kalink-ui/seedly` due expected downstream caller migration work.
+
+### `accordion`
+
+- Status: `done`
+- Outcome:
+  - Added full local coverage for color/spacing/shape/size/layout/motion groups needed by the component.
+  - Remapped token-eligible properties to local contract defaults.
+  - Normalized to a single top-level `assignVars(accordionVars, { ... })` owner block.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+---
+
+## Final Exit Criteria
+
+Migration is complete when:
+
+1. All checklist components are marked done.
+2. Shared foundations are aligned with explicit token flow.
+3. Token naming and group structure are consistent across components.
+4. Validation sequence passes repository-wide.
+5. This plan file reflects final statuses and notes.

@@ -12,6 +12,11 @@ export const separatorVars = createThemeContract({
   shape: {
     focusCorner: null,
   },
+  size: {
+    blockSize: null,
+    verticalInlineSize: null,
+    verticalBlockSize: null,
+  },
 });
 
 const separatorColorDefaults = assignVars(separatorVars.color, {
@@ -22,20 +27,27 @@ const separatorColorDefaults = assignVars(separatorVars.color, {
 });
 
 const separatorShapeDefaults = assignVars(separatorVars.shape, {
-  focusCorner: '0.125rem',
+  focusCorner: sys.shape.corner.sharp,
+});
+
+const separatorSizeDefaults = assignVars(separatorVars.size, {
+  blockSize: '1px',
+  verticalInlineSize: '1px',
+  verticalBlockSize: sys.spacing[9],
 });
 export const separator = style({
   inlineSize: '100%',
-  blockSize: '1px',
+  blockSize: separatorVars.size.blockSize,
   backgroundColor: separatorVars.color.separator,
   vars: {
     ...separatorColorDefaults,
     ...separatorShapeDefaults,
+    ...separatorSizeDefaults,
   },
   selectors: {
     '&[data-orientation="vertical"]': {
-      inlineSize: '1px',
-      blockSize: '1.25rem',
+      inlineSize: separatorVars.size.verticalInlineSize,
+      blockSize: separatorVars.size.verticalBlockSize,
     },
   },
 });
@@ -51,6 +63,7 @@ export const link = style([
     vars: {
       ...separatorColorDefaults,
       ...separatorShapeDefaults,
+      ...separatorSizeDefaults,
     },
 
     selectors: {

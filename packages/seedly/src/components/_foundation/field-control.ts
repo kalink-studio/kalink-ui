@@ -1,9 +1,7 @@
 import { type StyleRule } from '@vanilla-extract/css';
 
-import { sys } from '../../styles';
-
 export interface FieldStackStylesOptions {
-  gap?: string;
+  gap: string;
   alignItems?: 'start' | 'flex-start';
   inlineSize?: string;
   maxInlineSize?: string;
@@ -11,13 +9,13 @@ export interface FieldStackStylesOptions {
 }
 
 export function createFieldStackStyles(
-  options: FieldStackStylesOptions = {},
+  options: FieldStackStylesOptions,
 ): StyleRule {
   return {
     display: 'flex',
     flexDirection: 'column',
     alignItems: options.alignItems,
-    gap: options.gap ?? sys.spacing[2],
+    gap: options.gap,
     inlineSize: options.inlineSize,
     maxInlineSize: options.maxInlineSize,
     position: options.position,
@@ -25,15 +23,15 @@ export function createFieldStackStyles(
 }
 
 export interface FieldLabelStylesOptions {
-  color?: string;
+  color: string;
   cursor?: 'default' | 'ew-resize';
 }
 
 export function createFieldLabelStyles(
-  options: FieldLabelStylesOptions = {},
+  options: FieldLabelStylesOptions,
 ): StyleRule {
   return {
-    color: options.color ?? sys.color.content.base,
+    color: options.color,
     cursor: options.cursor,
   };
 }
@@ -41,20 +39,20 @@ export function createFieldLabelStyles(
 export interface TextInputFocusStylesOptions {
   selector?: string;
   styles?: StyleRule;
-  outlineColor?: string;
-  outlineOffset?: string;
+  outlineColor: string;
+  outlineOffset: string;
 }
 
 export interface TextInputStylesOptions {
-  paddingInlineStart?: string;
+  paddingInlineStart: string;
   paddingInlineEnd?: string;
-  border?: string;
-  restingBorderColor?: string;
-  inlineSize?: string;
-  blockSize?: string;
-  borderRadius?: string;
-  backgroundColor?: string;
-  color?: string;
+  border: string;
+  restingBorderColor: string;
+  inlineSize: string;
+  blockSize: string;
+  borderRadius: string;
+  backgroundColor: string;
+  color: string;
   outline?: string;
   focus?: TextInputFocusStylesOptions | null;
   selectors?: Record<string, StyleRule>;
@@ -68,15 +66,16 @@ export interface TextInputTriggerStylesOptions extends TextInputStylesOptions {
 }
 
 export interface FieldTextInputStylesOptions {
-  foreground?: string;
-  borderColor?: string;
-  backgroundColor?: string;
-  borderRadius?: string;
-  focusRingColor?: string | null;
-  paddingInlineStart?: string;
+  foreground: string;
+  borderColor: string;
+  backgroundColor: string;
+  borderRadius: string;
+  focusRingColor: string | null;
+  focusRingOffset: string;
+  paddingInlineStart: string;
   paddingInlineEnd?: string;
-  inlineSize?: string;
-  blockSize?: string;
+  inlineSize: string;
+  blockSize: string;
   outline?: string;
   selectors?: Record<string, StyleRule>;
 }
@@ -89,47 +88,44 @@ export interface FieldTextInputTriggerStylesOptions extends FieldTextInputStyles
 }
 
 export function createTextInputStyles(
-  options: TextInputStylesOptions = {},
+  options: TextInputStylesOptions,
 ): StyleRule {
-  const border = options.border ?? `1px solid ${sys.color.border.base}`;
   const focusSelector = options.focus?.selector ?? '&:focus';
 
   const selectors: Record<string, StyleRule> = {
     ...(options.selectors ?? {}),
   };
 
-  if (options.focus !== null) {
+  if (options.focus != null) {
     if (options.focus?.styles) {
       selectors[focusSelector] = options.focus.styles;
     } else {
       selectors[focusSelector] = {
-        outline: `2px solid ${options.focus?.outlineColor ?? sys.color.tone.primary}`,
-        outlineOffset: options.focus?.outlineOffset ?? '-1px',
+        outline: `2px solid ${options.focus.outlineColor}`,
+        outlineOffset: options.focus.outlineOffset,
       };
     }
   }
 
   return {
-    paddingInlineStart: options.paddingInlineStart ?? sys.spacing[7],
+    paddingInlineStart: options.paddingInlineStart,
     paddingInlineEnd: options.paddingInlineEnd,
     marginBlock: '0',
     marginInline: '0',
-    border,
-    borderColor:
-      options.restingBorderColor ??
-      'color-mix(in srgb, currentColor 32%, transparent)',
-    inlineSize: options.inlineSize ?? '100%',
-    blockSize: options.blockSize ?? sys.spacing[14],
-    borderRadius: options.borderRadius ?? sys.shape.corner.medium,
-    backgroundColor: options.backgroundColor ?? sys.color.surface.base,
-    color: options.color ?? sys.color.content.base,
+    border: options.border,
+    borderColor: options.restingBorderColor,
+    inlineSize: options.inlineSize,
+    blockSize: options.blockSize,
+    borderRadius: options.borderRadius,
+    backgroundColor: options.backgroundColor,
+    color: options.color,
     outline: options.outline,
     selectors,
   };
 }
 
 export function createTextInputTriggerStyles(
-  options: TextInputTriggerStylesOptions = {},
+  options: TextInputTriggerStylesOptions,
 ): StyleRule {
   const textInputStyles = createTextInputStyles(options);
 
@@ -147,15 +143,13 @@ export function createTextInputTriggerStyles(
 }
 
 export function createFieldTextInputStyles(
-  options: FieldTextInputStylesOptions = {},
+  options: FieldTextInputStylesOptions,
 ): StyleRule {
-  const borderColor = options.borderColor ?? sys.color.border.base;
-
   return createTextInputStyles({
     paddingInlineStart: options.paddingInlineStart,
     paddingInlineEnd: options.paddingInlineEnd,
-    border: `1px solid ${borderColor}`,
-    restingBorderColor: borderColor,
+    border: `1px solid ${options.borderColor}`,
+    restingBorderColor: options.borderColor,
     inlineSize: options.inlineSize,
     blockSize: options.blockSize,
     borderRadius: options.borderRadius,
@@ -167,21 +161,20 @@ export function createFieldTextInputStyles(
         ? null
         : {
             outlineColor: options.focusRingColor,
+            outlineOffset: options.focusRingOffset,
           },
     selectors: options.selectors,
   });
 }
 
 export function createFieldTextInputTriggerStyles(
-  options: FieldTextInputTriggerStylesOptions = {},
+  options: FieldTextInputTriggerStylesOptions,
 ): StyleRule {
-  const borderColor = options.borderColor ?? sys.color.border.base;
-
   return createTextInputTriggerStyles({
     paddingInlineStart: options.paddingInlineStart,
     paddingInlineEnd: options.paddingInlineEnd,
-    border: `1px solid ${borderColor}`,
-    restingBorderColor: borderColor,
+    border: `1px solid ${options.borderColor}`,
+    restingBorderColor: options.borderColor,
     inlineSize: options.inlineSize,
     blockSize: options.blockSize,
     borderRadius: options.borderRadius,
@@ -193,6 +186,7 @@ export function createFieldTextInputTriggerStyles(
         ? null
         : {
             outlineColor: options.focusRingColor,
+            outlineOffset: options.focusRingOffset,
           },
     selectors: options.selectors,
     minInlineSize: options.minInlineSize,

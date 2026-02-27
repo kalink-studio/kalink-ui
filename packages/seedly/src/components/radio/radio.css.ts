@@ -14,21 +14,39 @@ export const radioVars = createThemeContract({
     checkedForeground: null,
     focusRing: null,
   },
+  spacing: {
+    groupGap: null,
+    itemGap: null,
+    indicatorSize: null,
+  },
+  shape: {
+    corner: null,
+  },
 });
 
 export const radioGroup = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  gap: sys.spacing[2],
+  gap: radioVars.spacing.groupGap,
   color: radioVars.color.foreground,
-  vars: assignVars(radioVars.color, {
-    foreground: sys.color.content.base,
-    border: sys.color.border.high,
-    checkedBackground: sys.color.content.base,
-    checkedForeground: sys.color.container.base,
-    focusRing: sys.color.tone.primary,
-  }),
+  vars: {
+    ...assignVars(radioVars.color, {
+      foreground: sys.color.content.base,
+      border: sys.color.border.high,
+      checkedBackground: sys.color.content.base,
+      checkedForeground: sys.color.container.base,
+      focusRing: sys.color.tone.primary,
+    }),
+    ...assignVars(radioVars.spacing, {
+      groupGap: sys.spacing[2],
+      itemGap: sys.spacing[4],
+      indicatorSize: sys.spacing[4],
+    }),
+    ...assignVars(radioVars.shape, {
+      corner: sys.shape.corner.circle,
+    }),
+  },
 });
 
 export const caption = style({
@@ -38,12 +56,12 @@ export const caption = style({
 export const item = style({
   display: 'flex',
   alignItems: 'center',
-  gap: sys.spacing[4],
+  gap: radioVars.spacing.itemGap,
 });
 
 export const radio = style({
   ...createChoiceControlStyles({
-    borderRadius: sys.shape.corner.circle,
+    borderRadius: radioVars.shape.corner,
     uncheckedBorderColor: radioVars.color.border,
     checkedBackgroundColor: radioVars.color.checkedBackground,
     focusRingColor: radioVars.color.focusRing,
@@ -54,8 +72,8 @@ export const indicator = style({
   ...createChoiceIndicatorStyles({
     alignCenter: true,
     before: {
-      size: sys.spacing[4],
-      borderRadius: sys.shape.corner.circle,
+      size: radioVars.spacing.indicatorSize,
+      borderRadius: radioVars.shape.corner,
       backgroundColor: radioVars.color.checkedForeground,
     },
   }),

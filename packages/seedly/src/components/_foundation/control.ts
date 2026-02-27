@@ -75,7 +75,7 @@ export interface InteractiveStateStylesOptions {
   focusVisible?: {
     selector?: string;
     outlineColor: string;
-    outlineOffset?: string;
+    outlineOffset: string;
     styles?: StyleRule;
   };
   disabled?: {
@@ -125,7 +125,7 @@ export function createInteractiveStateStyles(
     selectors[selector] = {
       ...options.focusVisible.styles,
       outline: `2px solid ${options.focusVisible.outlineColor}`,
-      outlineOffset: options.focusVisible.outlineOffset ?? '-1px',
+      outlineOffset: options.focusVisible.outlineOffset,
     };
   }
 

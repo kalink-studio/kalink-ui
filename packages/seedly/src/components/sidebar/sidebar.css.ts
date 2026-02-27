@@ -24,7 +24,7 @@ const sidebarSpacingDefaults = assignVars(sidebarVars.spacing, {
 
 const sidebarLayoutDefaults = assignVars(sidebarVars.layout, {
   sideWidth: 'auto',
-  contentMinWidth: '50%',
+  contentMinWidth: sys.layout.measure,
 });
 
 export const sidebarSpacingStyles = mapContractVars(

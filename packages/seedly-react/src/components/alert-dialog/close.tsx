@@ -22,7 +22,7 @@ export function Close({
   unstyled,
   variant = 'outline',
   tone = 'neutral',
-  size = 'md',
+  size = 'sm',
   shape,
   flow,
   loading,

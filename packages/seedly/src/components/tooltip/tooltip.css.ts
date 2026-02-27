@@ -57,9 +57,6 @@ const tooltipShapeDefaults = assignVars(tooltipVars.shape, {
 });
 export const button = style([
   {
-    inlineSize: sys.spacing[12],
-    blockSize: sys.spacing[12],
-    borderRadius: tooltipVars.shape.buttonCorner,
     vars: {
       ...tooltipColorDefaults,
       ...tooltipShapeDefaults,

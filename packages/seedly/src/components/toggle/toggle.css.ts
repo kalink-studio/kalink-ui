@@ -1,7 +1,5 @@
 import { createThemeContract, style } from '@vanilla-extract/css';
 
-import { sys } from '../../styles';
-
 export const toggleVars = createThemeContract({
   color: {
     panelBorder: null,
@@ -19,8 +17,6 @@ export const toggleVars = createThemeContract({
 });
 export const button = style([
   {
-    minInlineSize: sys.spacing[12],
-    blockSize: sys.spacing[12],
     borderWidth: '0',
 
     selectors: {

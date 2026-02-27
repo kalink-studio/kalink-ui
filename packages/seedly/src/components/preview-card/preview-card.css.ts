@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
 import {
@@ -10,10 +10,23 @@ import {
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
+export const previewCardVars = createThemeContract({
+  layout: {
+    popupMaxInlineSize: null,
+  },
+});
+
+const previewCardLayoutDefaults = assignVars(previewCardVars.layout, {
+  popupMaxInlineSize: 'min(var(--available-width), 22rem)',
+});
+
 export const positioner = style({
   blockSize: 'var(--positioner-height)',
   inlineSize: 'var(--positioner-width)',
   maxInlineSize: 'var(--available-width)',
+  vars: {
+    ...previewCardLayoutDefaults,
+  },
 });
 
 export const popup = style({
@@ -21,7 +34,7 @@ export const popup = style({
     borderRadius: sys.shape.corner.rounded,
     inlineSize: 'var(--popup-width, auto)',
     blockSize: 'var(--popup-height, auto)',
-    maxInlineSize: 'min(var(--available-width), 22rem)',
+    maxInlineSize: previewCardVars.layout.popupMaxInlineSize,
   }),
 });
 

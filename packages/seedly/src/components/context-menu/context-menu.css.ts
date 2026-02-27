@@ -1,4 +1,4 @@
-import { assignVars, style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
 import {
@@ -13,6 +13,23 @@ import {
   buttonStyledVariantClass,
   buttonVars,
 } from '../button';
+
+export const contextMenuVars = createThemeContract({
+  layout: {
+    triggerBlockSize: null,
+  },
+  size: {
+    separatorBlockSize: null,
+  },
+});
+
+const contextMenuLayoutDefaults = assignVars(contextMenuVars.layout, {
+  triggerBlockSize: '12rem',
+});
+
+const contextMenuSizeDefaults = assignVars(contextMenuVars.size, {
+  separatorBlockSize: '1px',
+});
 
 const contextMenuItemHighlightSelectors =
   createInsetHighlightStyles({
@@ -56,10 +73,14 @@ export const trigger = style([
   buttonStyledVariantClass,
   {
     inlineSize: '100%',
-    blockSize: '12rem',
+    blockSize: contextMenuVars.layout.triggerBlockSize,
     WebkitUserSelect: 'none',
     userSelect: 'none',
-    vars: contextMenuTriggerButtonVars,
+    vars: {
+      ...contextMenuTriggerButtonVars,
+      ...contextMenuLayoutDefaults,
+      ...contextMenuSizeDefaults,
+    },
   },
 ]);
 
@@ -89,6 +110,6 @@ export const item = style([
 export const separator = style({
   marginBlock: sys.spacing[3],
   marginInline: sys.spacing[8],
-  blockSize: '1px',
+  blockSize: contextMenuVars.size.separatorBlockSize,
   backgroundColor: sys.color.border.high,
 });

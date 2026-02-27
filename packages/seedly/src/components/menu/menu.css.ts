@@ -36,6 +36,9 @@ export const menuVars = createThemeContract({
     popupCorner: null,
     itemCorner: null,
   },
+  size: {
+    separatorBlockSize: null,
+  },
 });
 
 const menuColorDefaults = assignVars(menuVars.color, {
@@ -61,6 +64,10 @@ const menuShapeDefaults = assignVars(menuVars.shape, {
   itemCorner: sys.shape.corner.small,
 });
 
+const menuSizeDefaults = assignVars(menuVars.size, {
+  separatorBlockSize: '1px',
+});
+
 const menuItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: menuVars.color.itemHighlightedForeground,
@@ -69,14 +76,11 @@ const menuItemHighlightSelectors =
   }).selectors ?? {};
 
 export const button = style([
-  typography.label.large,
   {
-    blockSize: sys.spacing[14],
-    paddingInline: sys.spacing[7],
-    gap: sys.spacing[3],
     vars: {
       ...menuColorDefaults,
       ...menuShapeDefaults,
+      ...menuSizeDefaults,
     },
     selectors: {
       '&[data-popup-open]': {
@@ -112,6 +116,11 @@ export const popup = style({
     outlineDark: menuVars.color.popupOutlineDark,
     shadow: menuVars.color.popupShadow,
   }),
+  vars: {
+    ...menuColorDefaults,
+    ...menuShapeDefaults,
+    ...menuSizeDefaults,
+  },
 });
 
 export const arrow = style({
@@ -143,6 +152,6 @@ export const item = style([
 export const separator = style({
   marginBlock: sys.spacing[3],
   marginInline: sys.spacing[8],
-  blockSize: '1px',
+  blockSize: menuVars.size.separatorBlockSize,
   backgroundColor: menuVars.color.separator,
 });

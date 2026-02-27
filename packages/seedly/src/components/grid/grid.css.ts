@@ -48,7 +48,7 @@ const gridAxisSpacingDefaults = {
 };
 
 const gridLayoutDefaults = assignVars(gridVars.layout, {
-  minCellSize: '250px',
+  minCellSize: `calc(${sys.layout.measure} / 3)`,
 });
 
 export const gridSpacingStyles = mapContractVars(sys.spacing, gridVars.spacing);

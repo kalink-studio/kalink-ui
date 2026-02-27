@@ -13,6 +13,10 @@ export const sliderVars = createThemeContract({
     thumbOutline: null,
     thumbFocusRing: null,
   },
+  spacing: {
+    controlPaddingBlock: null,
+    thumbSize: null,
+  },
   shape: {
     thumbCorner: null,
   },
@@ -22,7 +26,7 @@ export const control = style({
   display: 'flex',
   alignItems: 'center',
   inlineSize: '100%',
-  paddingBlock: sys.spacing[6],
+  paddingBlock: sliderVars.spacing.controlPaddingBlock,
   touchAction: 'none',
   userSelect: 'none',
   vars: {
@@ -34,6 +38,10 @@ export const control = style({
     }),
     ...assignVars(sliderVars.shape, {
       thumbCorner: sys.shape.corner.circle,
+    }),
+    ...assignVars(sliderVars.spacing, {
+      controlPaddingBlock: sys.spacing[6],
+      thumbSize: sys.spacing[8],
     }),
   },
 });
@@ -50,8 +58,8 @@ export const indicator = style({
 });
 
 export const thumb = style({
-  inlineSize: sys.spacing[8],
-  blockSize: sys.spacing[8],
+  inlineSize: sliderVars.spacing.thumbSize,
+  blockSize: sliderVars.spacing.thumbSize,
   borderRadius: sliderVars.shape.thumbCorner,
   backgroundColor: sliderVars.color.thumbBackground,
   boxShadow: sys.elevation.minimal,
