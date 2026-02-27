@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`.
-- Next unchecked component: `combobox`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`.
+- Next unchecked component: `container`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `combobox`
 - `context-menu`
 - `dialog`
 - `field`
@@ -193,7 +192,7 @@ Examples:
 - [x] `checkbox-group`
 - [x] `cluster`
 - [x] `collapsible`
-- [ ] `combobox`
+- [x] `combobox`
 - [ ] `container`
 - [ ] `context-menu`
 - [ ] `cover`
@@ -478,6 +477,25 @@ If policy changes mid-migration:
   - Properties audited: root foreground + minimum block size, trigger paddings/corner/focus outline offset, icon size + transform motion, panel size motion, content spacing/background/corner.
   - Properties remapped: root `color`/`minBlockSize`; trigger `paddingBlock`/`paddingInline`/`borderRadius`/`outlineOffset`; icon `blockSize`/`inlineSize` + transition duration/easing; panel transition duration/easing; content `gap`/`marginBlockStart`/`paddingBlock`/`paddingInlineStart`/`paddingInlineEnd`/`backgroundColor`/`borderRadius`.
   - Intentional direct `sys` usages: local default assignment for `size.rootMinBlockSize` uses an intentional derived value: `calc(${sys.spacing[18]} * 2)`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `combobox`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, `size`, and `spacing` groups for label/input/popup/list/item/action surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(comboboxVars, { ... })`.
+  - Remapped token-eligible input/empty/action/popup/highlight/list properties to local tokens and aligned strict `_foundation` call sites for field, highlight, and floating surface/list APIs.
+  - Kept portal-safe token assignment by applying defaults on both `label` (owner subtree) and `positioner` (portal subtree).
+- Mapping coverage:
+  - Properties audited: label stack + color, input surface/focus/spacing, empty state padding/foreground, action button icon color/sizing/shape/positioning, popup surface, list panel sizing/padding, highlighted item inset/background/foreground/corner.
+  - Properties remapped: label gap/foreground; input background/border/foreground/focus/corner/paddings/size; empty foreground; action button foreground/corner/size/inset; popup background/foreground/outline/shadow/corner; list max size + paddings; item highlight background/foreground/inset/corner.
+  - Intentional direct `sys` usages: empty-state typography (`sys.typography.body.medium.size` and `.lineHeight`) and derived input end padding (`calc` from spacing tokens).
 - Foundation changes:
   - none.
 - Validation:

@@ -11,52 +11,116 @@ import {
   createFloatingAnchoredSurfaceStyles,
   createFloatingPositionerStyles,
   createInsetHighlightStyles,
+  floatingPanelMaxBlockSize,
 } from '../_foundation';
 
 export const comboboxVars = createThemeContract({
+  color: {
+    actionButtonForeground: null,
+    emptyForeground: null,
+    inputBackground: null,
+    inputBorder: null,
+    inputFocusRing: null,
+    inputForeground: null,
+    itemHighlightedBackground: null,
+    itemHighlightedForeground: null,
+    label: null,
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupShadow: null,
+  },
+  layout: {
+    inputFocusRingOffset: null,
+    inputInlineSize: null,
+  },
   spacing: {
-    itemHighlightInsetInline: null,
-    inputPaddingInlineEnd: null,
-    inputPaddingInlineEndWithClear: null,
+    actionButtonInsetInlineEnd: null,
     emptyPaddingBlock: null,
     emptyPaddingInline: null,
-    actionButtonSize: null,
-    actionButtonInsetInlineEnd: null,
+    inputPaddingInlineEnd: null,
+    inputPaddingInlineEndWithClear: null,
+    inputPaddingInlineStart: null,
+    itemHighlightInsetInline: null,
+    listPaddingBlock: null,
+    listScrollPaddingBlock: null,
+    stackGap: null,
     zero: null,
   },
   shape: {
     actionButtonCorner: null,
+    inputCorner: null,
+    itemHighlightCorner: null,
+    popupCorner: null,
+  },
+  size: {
+    actionButtonSize: null,
+    inputBlockSize: null,
+    listMaxBlockSize: null,
   },
 });
 
-const comboboxSpacingDefaults = assignVars(comboboxVars.spacing, {
-  itemHighlightInsetInline: sys.spacing[4],
-  inputPaddingInlineEnd: calc.add(sys.spacing[4], sys.spacing[10]),
-  inputPaddingInlineEndWithClear: calc.add(
-    sys.spacing[4],
-    calc.multiply(sys.spacing[10], 2),
-  ),
-  emptyPaddingBlock: sys.spacing[8],
-  emptyPaddingInline: sys.spacing[8],
-  actionButtonSize: sys.spacing[14],
-  actionButtonInsetInlineEnd: sys.spacing[4],
-  zero: sys.spacing[0],
-});
-
-const comboboxShapeDefaults = assignVars(comboboxVars.shape, {
-  actionButtonCorner: sys.shape.corner.small,
+const comboboxDefaults = assignVars(comboboxVars, {
+  color: {
+    actionButtonForeground: stateColor.mutedContent,
+    emptyForeground: stateColor.mutedContent,
+    inputBackground: sys.color.surface.base,
+    inputBorder: sys.color.border.base,
+    inputFocusRing: sys.color.tone.primary,
+    inputForeground: sys.color.content.base,
+    itemHighlightedBackground: sys.color.content.base,
+    itemHighlightedForeground: sys.color.container.base,
+    label: sys.color.content.base,
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+  },
+  layout: {
+    inputFocusRingOffset: '-1px',
+    inputInlineSize: '100%',
+  },
+  shape: {
+    actionButtonCorner: sys.shape.corner.small,
+    inputCorner: sys.shape.corner.medium,
+    itemHighlightCorner: sys.shape.corner.small,
+    popupCorner: sys.shape.corner.medium,
+  },
+  size: {
+    actionButtonSize: sys.spacing[14],
+    inputBlockSize: sys.spacing[14],
+    listMaxBlockSize: floatingPanelMaxBlockSize,
+  },
+  spacing: {
+    actionButtonInsetInlineEnd: sys.spacing[4],
+    emptyPaddingBlock: sys.spacing[8],
+    emptyPaddingInline: sys.spacing[8],
+    inputPaddingInlineEnd: calc.add(sys.spacing[4], sys.spacing[10]),
+    inputPaddingInlineEndWithClear: calc.add(
+      sys.spacing[4],
+      calc.multiply(sys.spacing[10], 2),
+    ),
+    inputPaddingInlineStart: sys.spacing[4],
+    itemHighlightInsetInline: sys.spacing[4],
+    listPaddingBlock: sys.spacing[0],
+    listScrollPaddingBlock: sys.spacing[0],
+    stackGap: sys.spacing[2],
+    zero: sys.spacing[0],
+  },
 });
 
 export const label = style({
   ...createFieldStackStyles({
     alignItems: 'start',
-    inlineSize: '100%',
+    gap: comboboxVars.spacing.stackGap,
+    inlineSize: comboboxVars.layout.inputInlineSize,
   }),
-  ...createFieldLabelStyles(),
+  ...createFieldLabelStyles({
+    color: comboboxVars.color.label,
+  }),
   position: 'relative',
   vars: {
-    ...comboboxSpacingDefaults,
-    ...comboboxShapeDefaults,
+    ...comboboxDefaults,
   },
 });
 
@@ -69,8 +133,10 @@ export const inputWrapper = style({
 
 const comboboxItemHighlightSelectors =
   createInsetHighlightStyles({
-    textColor: sys.color.container.base,
+    backgroundColor: comboboxVars.color.itemHighlightedBackground,
+    borderRadius: comboboxVars.shape.itemHighlightCorner,
     insetInline: comboboxVars.spacing.itemHighlightInsetInline,
+    textColor: comboboxVars.color.itemHighlightedForeground,
   }).selectors ?? {};
 
 export const trigger = style({});
@@ -81,7 +147,16 @@ export const input = style([
   typography.body.large,
   {
     ...createFieldTextInputStyles({
+      backgroundColor: comboboxVars.color.inputBackground,
+      blockSize: comboboxVars.size.inputBlockSize,
+      borderColor: comboboxVars.color.inputBorder,
+      borderRadius: comboboxVars.shape.inputCorner,
+      focusRingColor: comboboxVars.color.inputFocusRing,
+      focusRingOffset: comboboxVars.layout.inputFocusRingOffset,
+      foreground: comboboxVars.color.inputForeground,
+      inlineSize: comboboxVars.layout.inputInlineSize,
       paddingInlineEnd: comboboxVars.spacing.inputPaddingInlineEnd,
+      paddingInlineStart: comboboxVars.spacing.inputPaddingInlineStart,
       selectors: {
         [`${inputWrapper}:has(${clear}) &`]: {
           paddingInlineEnd: comboboxVars.spacing.inputPaddingInlineEndWithClear,
@@ -98,7 +173,7 @@ export const empty = style({
       paddingInline: comboboxVars.spacing.emptyPaddingInline,
       fontSize: sys.typography.body.medium.size,
       lineHeight: sys.typography.body.medium.lineHeight,
-      color: stateColor.mutedContent,
+      color: comboboxVars.color.emptyForeground,
     },
   },
 });
@@ -107,13 +182,13 @@ export const actionButtons = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  blockSize: comboboxVars.spacing.actionButtonSize,
+  blockSize: comboboxVars.size.actionButtonSize,
   paddingBlock: comboboxVars.spacing.zero,
   paddingInline: comboboxVars.spacing.zero,
   position: 'absolute',
   insetBlockEnd: comboboxVars.spacing.zero,
   insetInlineEnd: comboboxVars.spacing.actionButtonInsetInlineEnd,
-  color: stateColor.mutedContent,
+  color: comboboxVars.color.actionButtonForeground,
   backgroundColor: 'transparent',
   border: 'none',
   borderRadius: comboboxVars.shape.actionButtonCorner,
@@ -122,22 +197,29 @@ export const actionButtons = style({
 export const positioner = style({
   ...createFloatingPositionerStyles(),
   vars: {
-    ...comboboxSpacingDefaults,
-    ...comboboxShapeDefaults,
+    ...comboboxDefaults,
   },
 });
 
 export const popup = style({
   ...createFloatingAnchoredSurfaceStyles({
+    background: comboboxVars.color.popupBackground,
+    borderRadius: comboboxVars.shape.popupCorner,
+    foreground: comboboxVars.color.popupForeground,
     motion: {
       preset: 'scaleSoft',
     },
+    outline: comboboxVars.color.popupOutline,
+    shadow: comboboxVars.color.popupShadow,
   }),
   overflow: 'hidden',
 });
 
 export const list = style({
   ...createFloatingListStyles({
+    maxBlockSize: comboboxVars.size.listMaxBlockSize,
+    paddingBlock: comboboxVars.spacing.listPaddingBlock,
+    scrollPaddingBlock: comboboxVars.spacing.listScrollPaddingBlock,
     selectors: {
       [`&[data-empty]`]: {
         paddingBlock: comboboxVars.spacing.zero,
