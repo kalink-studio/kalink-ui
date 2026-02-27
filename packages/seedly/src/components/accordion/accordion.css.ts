@@ -1,17 +1,83 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition, typography } from '../../styles';
 
+export const accordionVars = createThemeContract({
+  color: {
+    itemBorder: null,
+    panelForeground: null,
+    rootForeground: null,
+  },
+  layout: {
+    triggerFocusOutlineOffset: null,
+  },
+  motion: {
+    iconTransformDuration: null,
+    iconTransformEasing: null,
+    panelSizeDuration: null,
+    panelSizeEasing: null,
+  },
+  shape: {
+    contentCorner: null,
+  },
+  size: {
+    itemBorderBlockEndWidth: null,
+    triggerIconSize: null,
+  },
+  spacing: {
+    contentPaddingBlock: null,
+    contentPaddingInline: null,
+    triggerIconMarginInlineEnd: null,
+    triggerPaddingBlock: null,
+    triggerPaddingInlineEnd: null,
+    triggerPaddingInlineStart: null,
+  },
+});
+
+const accordionDefaults = assignVars(accordionVars, {
+  color: {
+    itemBorder: sys.color.border.low,
+    panelForeground: stateColor.mutedContent,
+    rootForeground: sys.color.content.base,
+  },
+  layout: {
+    triggerFocusOutlineOffset: '0',
+  },
+  motion: {
+    iconTransformDuration: sys.motion.duration.short[4],
+    iconTransformEasing: sys.motion.easing.standard,
+    panelSizeDuration: sys.motion.duration.short[4],
+    panelSizeEasing: sys.motion.easing.standard,
+  },
+  shape: {
+    contentCorner: sys.shape.corner.none,
+  },
+  size: {
+    itemBorderBlockEndWidth: '1px',
+    triggerIconSize: sys.spacing[6],
+  },
+  spacing: {
+    contentPaddingBlock: sys.spacing[6],
+    contentPaddingInline: sys.spacing[6],
+    triggerIconMarginInlineEnd: sys.spacing[4],
+    triggerPaddingBlock: sys.spacing[4],
+    triggerPaddingInlineEnd: sys.spacing[2],
+    triggerPaddingInlineStart: sys.spacing[6],
+  },
+});
+
 export const accordion = style({
+  vars: accordionDefaults,
+
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
 
-  color: sys.color.content.base,
+  color: accordionVars.color.rootForeground,
 });
 
 export const item = style({
-  borderBlockEnd: `1px solid ${sys.color.border.low}`,
+  borderBlockEnd: `${accordionVars.size.itemBorderBlockEndWidth} solid ${accordionVars.color.itemBorder}`,
 });
 
 export const header = style({
@@ -21,23 +87,24 @@ export const header = style({
 
 export const trigger = style([
   {
-    display: 'flex',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    inlineSize: '100%',
-
-    paddingBlock: sys.spacing[4],
-    paddingInlineStart: sys.spacing[6],
-    paddingInlineEnd: sys.spacing[2],
-
     position: 'relative',
+
+    alignItems: 'baseline',
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    inlineSize: '100%',
+    paddingBlock: accordionVars.spacing.triggerPaddingBlock,
+    paddingInlineEnd: accordionVars.spacing.triggerPaddingInlineEnd,
+    paddingInlineStart: accordionVars.spacing.triggerPaddingInlineStart,
 
     textAlign: 'start',
 
     selectors: {
       '&:focus-visible': {
         zIndex: '1',
-        outlineOffset: '0',
+
+        outlineOffset: accordionVars.layout.triggerFocusOutlineOffset,
       },
     },
   },
@@ -46,13 +113,13 @@ export const trigger = style([
 export const triggerIcon = style({
   flexShrink: '0',
 
-  inlineSize: sys.spacing[6],
-  blockSize: sys.spacing[6],
-  marginInlineEnd: sys.spacing[4],
+  blockSize: accordionVars.size.triggerIconSize,
+  inlineSize: accordionVars.size.triggerIconSize,
+  marginInlineEnd: accordionVars.spacing.triggerIconMarginInlineEnd,
 
   transition: transition('transform', {
-    duration: 'short.4',
-    easing: 'standard',
+    duration: accordionVars.motion.iconTransformDuration,
+    easing: accordionVars.motion.iconTransformEasing,
   }),
 
   selectors: {
@@ -68,18 +135,19 @@ export const panel = style([
     blockSize: 'var(--accordion-panel-height)',
     overflow: 'hidden',
 
-    color: stateColor.mutedContent,
+    color: accordionVars.color.panelForeground,
 
     transition: transition('block-size', {
-      duration: 'short.4',
-      easing: 'standard',
+      duration: accordionVars.motion.panelSizeDuration,
+      easing: accordionVars.motion.panelSizeEasing,
     }),
 
     selectors: {
-      '&[data-starting-style]': {
+      '&[data-ending-style]': {
         blockSize: '0',
       },
-      '&[data-ending-style]': {
+
+      '&[data-starting-style]': {
         blockSize: '0',
       },
     },
@@ -87,6 +155,8 @@ export const panel = style([
 ]);
 
 export const content = style({
-  paddingBlock: sys.spacing[6],
-  paddingInline: sys.spacing[6],
+  paddingBlock: accordionVars.spacing.contentPaddingBlock,
+  paddingInline: accordionVars.spacing.contentPaddingInline,
+
+  borderRadius: accordionVars.shape.contentCorner,
 });
