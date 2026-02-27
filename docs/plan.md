@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`.
-- Next unchecked component: `container`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`.
+- Next unchecked component: `context-menu`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -193,7 +193,7 @@ Examples:
 - [x] `cluster`
 - [x] `collapsible`
 - [x] `combobox`
-- [ ] `container`
+- [x] `container`
 - [ ] `context-menu`
 - [ ] `cover`
 - [ ] `dialog`
@@ -361,6 +361,7 @@ If policy changes mid-migration:
   - Normalized the local contract to role-based color keys: `rootBackground`, `rootBorder`, `rootForeground`.
   - Consolidated local defaults into one owner assignment block: `assignVars(boxVars, { ... })`.
   - Remapped all token-eligible root surface/content/outline references to the renamed local tokens, including static color profile variant assignments.
+  - Kept the local contract internal (not exported) so `box` remains system-profile-coupled while retaining an explicit component-owned composition seam.
 - Mapping coverage:
   - Properties audited: root background/foreground, pseudo-element border outline.
   - Properties remapped: `backgroundColor`, `color`, and `::before` `borderColor` now reference role-based local tokens.
@@ -496,6 +497,25 @@ If policy changes mid-migration:
   - Properties audited: label stack + color, input surface/focus/spacing, empty state padding/foreground, action button icon color/sizing/shape/positioning, popup surface, list panel sizing/padding, highlighted item inset/background/foreground/corner.
   - Properties remapped: label gap/foreground; input background/border/foreground/focus/corner/paddings/size; empty foreground; action button foreground/corner/size/inset; popup background/foreground/outline/shadow/corner; list max size + paddings; item highlight background/foreground/inset/corner.
   - Intentional direct `sys` usages: empty-state typography (`sys.typography.body.medium.size` and `.lineHeight`) and derived input end padding (`calc` from spacing tokens).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `container`
+
+- Status: `done`
+- Outcome:
+  - Normalized the local contract to role-based color keys: `rootBackground`, `rootForeground`, `rootLevelBackground`, `rootOutline`.
+  - Consolidated defaults into one owner assignment block: `assignVars(containerVars, { ... })`.
+  - Kept `container` tightly coupled to system container colors by mapping defaults directly to `sys` and preserving level-driven surface behavior.
+  - Kept the local contract internal (not exported) so level/variant composition remains explicit without introducing consumer-facing color override intent.
+- Mapping coverage:
+  - Properties audited: root foreground/background, level-derived background composition, outline pseudo-element border color.
+  - Properties remapped: root `color`/`backgroundColor` and `::before` `borderColor` now resolve through role-based local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `containerDefaults` (`sys.color.container.*`, `sys.color.content.base`) and derived subtle outline (`color-mix`).
 - Foundation changes:
   - none.
 - Validation:

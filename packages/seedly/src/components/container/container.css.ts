@@ -10,44 +10,48 @@ import {
   layoutRadiusStyles,
 } from '../layout/layout.css';
 
-export const containerVars = createThemeContract({
+const containerVars = createThemeContract({
   color: {
-    base: null,
-    background: null,
-    foreground: null,
-    outline: null,
+    rootBackground: null,
+    rootForeground: null,
+    rootLevelBackground: null,
+    rootOutline: null,
   },
 });
 
-const containerColorDefaults = assignVars(containerVars.color, {
-  base: sys.color.container.base,
-  background: sys.color.container.base,
-  foreground: sys.color.content.base,
-  outline: 'transparent',
+const containerDefaults = assignVars(containerVars, {
+  color: {
+    rootBackground: sys.color.container.base,
+    rootForeground: sys.color.content.base,
+    rootLevelBackground: sys.color.container.base,
+    rootOutline: 'transparent',
+  },
 });
 
-const subtleContainerOutline = `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), ${containerVars.color.base})`;
+const subtleContainerOutline = `color-mix(in srgb, ${sys.color.content.base} calc(${sys.state.muted.text} * 100%), ${containerVars.color.rootLevelBackground})`;
 
-const createContainerLevelStyle = (baseColor: string) => {
+const createContainerLevelStyle = (rootLevelBackground: string) => {
   return {
     '@layer': {
       [components]: {
         vars: {
-          [containerVars.color.base]: baseColor,
-          [containerVars.color.background]: baseColor,
+          [containerVars.color.rootLevelBackground]: rootLevelBackground,
         },
       },
     },
   };
 };
 
-const createContainerVariantStyle = (background: string, outline: string) => {
+const createContainerVariantStyle = (
+  rootBackground: string,
+  rootOutline: string,
+) => {
   return {
     '@layer': {
       [components]: {
         vars: {
-          [containerVars.color.background]: background,
-          [containerVars.color.outline]: outline,
+          [containerVars.color.rootBackground]: rootBackground,
+          [containerVars.color.rootOutline]: rootOutline,
         },
       },
     },
@@ -62,7 +66,10 @@ const containerLevelStyles = {
 } as const;
 
 const containerVariantStyles = {
-  solid: createContainerVariantStyle(containerVars.color.base, 'transparent'),
+  solid: createContainerVariantStyle(
+    containerVars.color.rootLevelBackground,
+    'transparent',
+  ),
   outline: createContainerVariantStyle('transparent', subtleContainerOutline),
   bare: createContainerVariantStyle('transparent', 'transparent'),
 } as const;
@@ -73,22 +80,22 @@ export const containerRecipe = recipe({
     {
       '@layer': {
         [components]: {
-          color: containerVars.color.foreground,
-          backgroundColor: containerVars.color.background,
-
           vars: {
-            ...containerColorDefaults,
+            ...containerDefaults,
           },
+
+          backgroundColor: containerVars.color.rootBackground,
+          color: containerVars.color.rootForeground,
 
           selectors: {
             '&::before': {
-              inset: 0,
-              position: 'absolute',
               border: '1px solid',
-              borderColor: containerVars.color.outline,
+              borderColor: containerVars.color.rootOutline,
               borderRadius: 'inherit',
               content: '""',
+              inset: 0,
               pointerEvents: 'none',
+              position: 'absolute',
             },
           },
         },

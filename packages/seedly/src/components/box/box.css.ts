@@ -18,7 +18,7 @@ import type {
   StaticColorVariant,
 } from '../../styles';
 
-export const boxVars = createThemeContract({
+const boxVars = createThemeContract({
   color: {
     rootBackground: null,
     rootBorder: null,
