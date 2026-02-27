@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`.
-- Next unchecked component: `collapsible`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`.
+- Next unchecked component: `combobox`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -192,7 +192,7 @@ Examples:
 - [x] `checkbox`
 - [x] `checkbox-group`
 - [x] `cluster`
-- [ ] `collapsible`
+- [x] `collapsible`
 - [ ] `combobox`
 - [ ] `container`
 - [ ] `context-menu`
@@ -459,6 +459,25 @@ If policy changes mid-migration:
   - Properties audited: root flex cluster spacing gap.
   - Properties remapped: root `gap` now resolves through `clusterVars.spacing.rootGap`.
   - Intentional direct `sys` usages: component-owned default assignment in `clusterDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `collapsible`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `motion`, `shape`, `size`, and `spacing` groups for root/trigger/icon/panel/content surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(collapsibleVars, { ... })`.
+  - Remapped token-eligible foreground/background/spacing/shape/size/focus/motion properties to local tokens.
+  - Scoped panel animation transition to `block-size` and wired duration/easing through local motion tokens.
+- Mapping coverage:
+  - Properties audited: root foreground + minimum block size, trigger paddings/corner/focus outline offset, icon size + transform motion, panel size motion, content spacing/background/corner.
+  - Properties remapped: root `color`/`minBlockSize`; trigger `paddingBlock`/`paddingInline`/`borderRadius`/`outlineOffset`; icon `blockSize`/`inlineSize` + transition duration/easing; panel transition duration/easing; content `gap`/`marginBlockStart`/`paddingBlock`/`paddingInlineStart`/`paddingInlineEnd`/`backgroundColor`/`borderRadius`.
+  - Intentional direct `sys` usages: local default assignment for `size.rootMinBlockSize` uses an intentional derived value: `calc(${sys.spacing[18]} * 2)`.
 - Foundation changes:
   - none.
 - Validation:
