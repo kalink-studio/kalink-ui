@@ -10,20 +10,21 @@ import {
 import { components } from '../../styles/layers.css';
 
 export const centerVars = createThemeContract({
-  spacing: {
-    gutters: null,
-  },
   layout: {
-    measure: null,
+    rootMeasure: null,
+  },
+  spacing: {
+    rootGutters: null,
   },
 });
 
-const centerSpacingDefaults = assignVars(centerVars.spacing, {
-  gutters: sys.spacing[0],
-});
-
-const centerLayoutDefaults = assignVars(centerVars.layout, {
-  measure: sys.layout.measure,
+const centerDefaults = assignVars(centerVars, {
+  layout: {
+    rootMeasure: sys.layout.measure,
+  },
+  spacing: {
+    rootGutters: sys.spacing[0],
+  },
 });
 
 export const centerGuttersStyles = mapContractVars(
@@ -57,16 +58,14 @@ export const centerRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
+        vars: centerDefaults,
+
         display: 'block',
+
         boxSizing: 'content-box',
         marginInline: 'auto',
-        maxInlineSize: centerVars.layout.measure,
-        paddingInline: centerVars.spacing.gutters,
-
-        vars: {
-          ...centerSpacingDefaults,
-          ...centerLayoutDefaults,
-        },
+        maxInlineSize: centerVars.layout.rootMeasure,
+        paddingInline: centerVars.spacing.rootGutters,
       },
     },
   },

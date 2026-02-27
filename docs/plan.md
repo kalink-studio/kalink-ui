@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`.
-- Next unchecked component: `center`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`.
+- Next unchecked component: `checkbox`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -190,7 +190,7 @@ Examples:
 - [x] `avatar`
 - [x] `box`
 - [x] `button`
-- [ ] `center`
+- [x] `center`
 - [ ] `checkbox`
 - [ ] `checkbox-group`
 - [ ] `cluster`
@@ -389,6 +389,24 @@ If policy changes mid-migration:
   - Intentional direct `sys` usages: component-owned default assignments in `buttonBaseClass` map to `sys`/`stateColor` tokens.
 - Foundation changes:
   - Updated `context-menu` button token assignment to consume renamed `buttonVars` role/state keys after removal of `buttonStateVars`.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `center`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys: `layout.rootMeasure` and `spacing.rootGutters`.
+  - Consolidated defaults into one owner assignment block: `assignVars(centerVars, { ... })`.
+  - Remapped token-eligible root sizing/spacing properties to the role-based local tokens while preserving existing responsive variant API (`gutters`, `andText`, `intrinsic`).
+- Mapping coverage:
+  - Properties audited: root `maxInlineSize`, root `paddingInline`.
+  - Properties remapped: `maxInlineSize` now resolves through `centerVars.layout.rootMeasure`; `paddingInline` resolves through `centerVars.spacing.rootGutters`.
+  - Intentional direct `sys` usages: none.
+- Foundation changes:
+  - none.
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
