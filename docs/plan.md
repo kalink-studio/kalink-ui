@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`.
-- Next unchecked component: `avatar`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`.
+- Next unchecked component: `box`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -187,7 +187,7 @@ Examples:
 - [x] `accordion`
 - [x] `alert-dialog`
 - [x] `autocomplete`
-- [ ] `avatar`
+- [x] `avatar`
 - [ ] `box`
 - [ ] `button`
 - [ ] `center`
@@ -340,6 +340,22 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
 - Notes / follow-ups:
   - `autocomplete` no longer appears in the known strict-default fallout list.
+
+### `avatar`
+
+- Status: `done`
+- Outcome:
+  - Normalized contract naming to role-based keys: `rootBackground`, `rootForeground`, `rootCorner`, `rootSize`.
+  - Consolidated all local defaults into a single owner assignment block: `assignVars(avatarVars, { ... })`.
+  - Remapped root token-eligible properties (background, foreground, corner, size) to local contract values.
+- Mapping coverage:
+  - Properties audited: root color surface/content, root corner radius, avatar root size.
+  - Properties remapped: root background/foreground/corner/size references.
+  - Intentional direct `sys` usages: none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
 
 ---
 

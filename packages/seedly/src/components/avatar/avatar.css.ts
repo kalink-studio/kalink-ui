@@ -4,46 +4,49 @@ import { sys, typography } from '../../styles';
 
 export const avatarVars = createThemeContract({
   color: {
-    foreground: null,
-    background: null,
-  },
-  size: {
-    root: null,
+    rootBackground: null,
+    rootForeground: null,
   },
   shape: {
-    corner: null,
+    rootCorner: null,
+  },
+  size: {
+    rootSize: null,
+  },
+});
+
+const avatarDefaults = assignVars(avatarVars, {
+  color: {
+    rootBackground: sys.color.container.low,
+    rootForeground: sys.color.content.base,
+  },
+  shape: {
+    rootCorner: sys.shape.corner.circle,
+  },
+  size: {
+    rootSize: sys.spacing[15],
   },
 });
 
 export const root = style([
   typography.label.large,
   {
-    display: 'inline-flex',
+    vars: avatarDefaults,
+
     alignItems: 'center',
+    display: 'inline-flex',
     justifyContent: 'center',
-    blockSize: avatarVars.size.root,
-    inlineSize: avatarVars.size.root,
+
+    blockSize: avatarVars.size.rootSize,
+    inlineSize: avatarVars.size.rootSize,
     overflow: 'hidden',
 
-    color: avatarVars.color.foreground,
-    backgroundColor: avatarVars.color.background,
-    borderRadius: avatarVars.shape.corner,
+    backgroundColor: avatarVars.color.rootBackground,
+    borderRadius: avatarVars.shape.rootCorner,
+    color: avatarVars.color.rootForeground,
 
     userSelect: 'none',
     verticalAlign: 'middle',
-
-    vars: {
-      ...assignVars(avatarVars.color, {
-        foreground: sys.color.content.base,
-        background: sys.color.container.low,
-      }),
-      ...assignVars(avatarVars.size, {
-        root: sys.spacing[15],
-      }),
-      ...assignVars(avatarVars.shape, {
-        corner: sys.shape.corner.circle,
-      }),
-    },
   },
 ]);
 
@@ -55,9 +58,10 @@ export const image = style({
 });
 
 export const fallback = style({
-  display: 'flex',
   alignItems: 'center',
+  display: 'flex',
   justifyContent: 'center',
+
   blockSize: '100%',
   inlineSize: '100%',
 });
