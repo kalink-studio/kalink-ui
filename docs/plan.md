@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`.
-- Next unchecked component: `checkbox-group`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`.
+- Next unchecked component: `cluster`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `checkbox-group`
 - `combobox`
 - `context-menu`
 - `dialog`
@@ -191,7 +190,7 @@ Examples:
 - [x] `button`
 - [x] `center`
 - [x] `checkbox`
-- [ ] `checkbox-group`
+- [x] `checkbox-group`
 - [ ] `cluster`
 - [ ] `collapsible`
 - [ ] `combobox`
@@ -423,6 +422,25 @@ If policy changes mid-migration:
   - Properties audited: label foreground + item gap, control border/background/focus/corner/size, indicator foreground + icon size.
   - Properties remapped: label color/gap, control borderRadius/uncheckedBorderColor/checkedBackgroundColor/focusRingColor/focusOutlineOffset/size, indicator color, indicator svg block/inline size.
   - Intentional direct `sys` usages: component-owned default assignments in `checkboxDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `checkbox-group`
+
+- Status: `done`
+- Outcome:
+  - Refactored `checkbox-group` ownership to group-only concerns (wrapper/root), with checkbox visuals delegated to `checkbox`.
+  - Consolidated defaults into one owner assignment block: `assignVars(checkboxGroupVars, { ... })`.
+  - Removed duplicated control/indicator styling and local tokens from `checkbox-group` to avoid reimplementing `checkbox` semantics.
+  - Updated `seedly-react` `checkbox-group` to export wrapper/root only; stories now compose with `Checkbox.*` directly.
+- Mapping coverage:
+  - Properties audited: root foreground + group gap.
+  - Properties remapped: root color/gap now resolve through `checkboxGroupVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `checkboxGroupDefaults`.
 - Foundation changes:
   - none.
 - Validation:

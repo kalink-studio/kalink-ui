@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Checkbox } from '../checkbox';
 import { Fieldset } from '../fieldset';
 
 import { CheckboxGroup } from '.';
@@ -26,32 +27,32 @@ function Example() {
       <Fieldset.Legend>Apples</Fieldset.Legend>
 
       <CheckboxGroup.Root defaultValue={['fuji-apple']}>
-        <CheckboxGroup.Item>
-          <CheckboxGroup.Checkbox name="apple" value="fuji-apple">
-            <CheckboxGroup.Indicator>
+        <Checkbox.Label>
+          <Checkbox.Root name="apple" value="fuji-apple">
+            <Checkbox.Indicator>
               <CheckIcon />
-            </CheckboxGroup.Indicator>
-          </CheckboxGroup.Checkbox>
+            </Checkbox.Indicator>
+          </Checkbox.Root>
           Fuji
-        </CheckboxGroup.Item>
+        </Checkbox.Label>
 
-        <CheckboxGroup.Item>
-          <CheckboxGroup.Checkbox name="apple" value="gala-apple">
-            <CheckboxGroup.Indicator>
+        <Checkbox.Label>
+          <Checkbox.Root name="apple" value="gala-apple">
+            <Checkbox.Indicator>
               <CheckIcon />
-            </CheckboxGroup.Indicator>
-          </CheckboxGroup.Checkbox>
+            </Checkbox.Indicator>
+          </Checkbox.Root>
           Gala
-        </CheckboxGroup.Item>
+        </Checkbox.Label>
 
-        <CheckboxGroup.Item>
-          <CheckboxGroup.Checkbox name="apple" value="granny-smith-apple">
-            <CheckboxGroup.Indicator>
+        <Checkbox.Label>
+          <Checkbox.Root name="apple" value="granny-smith-apple">
+            <Checkbox.Indicator>
               <CheckIcon />
-            </CheckboxGroup.Indicator>
-          </CheckboxGroup.Checkbox>
+            </Checkbox.Indicator>
+          </Checkbox.Root>
           Granny Smith
-        </CheckboxGroup.Item>
+        </Checkbox.Label>
       </CheckboxGroup.Root>
     </Fieldset.Root>
   );
