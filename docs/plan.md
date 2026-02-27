@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`.
-- Next unchecked component: `autocomplete`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`.
+- Next unchecked component: `avatar`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `autocomplete`
 - `checkbox`
 - `checkbox-group`
 - `combobox`
@@ -187,7 +186,7 @@ Examples:
 
 - [x] `accordion`
 - [x] `alert-dialog`
-- [ ] `autocomplete`
+- [x] `autocomplete`
 - [ ] `avatar`
 - [ ] `box`
 - [ ] `button`
@@ -322,6 +321,25 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
 - Notes / follow-ups:
   - `dialog` still has pending outline naming migration and remains intentionally out of scope for this component-focused pass.
+
+### `autocomplete`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage from spacing-only to role-based `color`, `layout`, `shape`, `size`, and `spacing` groups.
+  - Consolidated component defaults into one owner assignment block: `assignVars(autocompleteVars, { ... })`.
+  - Remapped token-eligible field/list/popup/highlight styles to local tokens and updated callers to satisfy strict `_foundation` factory options.
+  - Kept portal-safe token assignment by applying defaults on both `label` (owner subtree) and `positioner` (portal subtree).
+- Mapping coverage:
+  - Properties audited: input control surface, label color, popup surface, list panel sizing/padding, item highlight, empty state color.
+  - Properties remapped: input border/background/foreground/focus/corner/padding/size, popup background/foreground/outline/shadow/corner, list max size + paddings, highlight background/foreground/inset/corner, empty foreground.
+  - Intentional direct `sys` usages: empty-state typography (`sys.typography.body.medium.size` and `.lineHeight`).
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+- Notes / follow-ups:
+  - `autocomplete` no longer appears in the known strict-default fallout list.
 
 ---
 
