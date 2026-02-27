@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed component: `accordion`.
-- Next unchecked component: `alert-dialog`.
+- Completed components: `accordion`, `alert-dialog`.
+- Next unchecked component: `autocomplete`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `alert-dialog`
 - `autocomplete`
 - `checkbox`
 - `checkbox-group`
@@ -169,10 +168,25 @@ Remaining shared cleanup:
 
 ---
 
+## Commit Protocol
+
+- Only create commits when explicitly requested.
+- Prefer one focused commit per completed component migration.
+- For shared refactors, use `_foundation` as scope.
+- Use Conventional Commits with clear migration intent.
+- Include validation status in the commit body when `tsc` still has known unrelated migration failures.
+
+Examples:
+
+- `refactor(alert-dialog): finalize local token contract and mapping`
+- `refactor(_foundation): normalize popup outline API naming`
+
+---
+
 ## Alphabetical Component Checklist
 
 - [x] `accordion`
-- [ ] `alert-dialog` (next; keep dialog naming parity)
+- [x] `alert-dialog`
 - [ ] `autocomplete`
 - [ ] `avatar`
 - [ ] `box`
@@ -294,6 +308,20 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `alert-dialog`
+
+- Status: `done`
+- Outcome:
+  - Kept local contract role-based and normalized key ordering to align with contract standards.
+  - Consolidated defaults into a single owner assignment block: `assignVars(alertDialogVars, { ... })`.
+  - Remapped popup outline wiring to the strict foundation dialog API (`outline`) and removed obsolete light/dark caller fields.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+- Notes / follow-ups:
+  - `dialog` still has pending outline naming migration and remains intentionally out of scope for this component-focused pass.
 
 ---
 
