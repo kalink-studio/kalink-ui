@@ -1,6 +1,6 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { sys, typography } from '../../styles';
+import { sys, transition, typography } from '../../styles';
 import {
   createFloatingItemStyles,
   createFloatingSurfaceStyles,
@@ -8,6 +8,16 @@ import {
   createInsetHighlightStyles,
   createInteractiveStateStyles,
 } from '../_foundation';
+
+export const menubarVars = createThemeContract({
+  size: {
+    separatorBlockSize: null,
+  },
+});
+
+const menubarSizeDefaults = assignVars(menubarVars.size, {
+  separatorBlockSize: '1px',
+});
 
 const menubarTriggerStateSelectors =
   createInteractiveStateStyles({
@@ -19,7 +29,7 @@ const menubarTriggerStateSelectors =
     },
     disabled: {
       styles: {
-        opacity: '0.5',
+        opacity: sys.state.disabled.text,
       },
     },
   }).selectors ?? {};
@@ -37,10 +47,12 @@ const menubarHighlightedItemSelectors =
 
 export const menubar = style({
   display: 'flex',
+  vars: {
+    ...menubarSizeDefaults,
+  },
 });
 
 export const menuTrigger = style([
-  typography.label.medium,
   {
     blockSize: sys.spacing[12],
     paddingBlock: '0',
@@ -69,7 +81,10 @@ export const menuPopup = style({
       transition: null,
       endingStyle: {
         opacity: '0',
-        transition: `opacity ${sys.motion.duration.short[4]} ${sys.motion.easing.standard}`,
+        transition: transition('opacity', {
+          duration: 'short.4',
+          easing: 'standard',
+        }),
       },
     },
     selectors: {
@@ -92,7 +107,7 @@ export const menuItem = style([
 ]);
 
 export const menuSeparator = style({
-  blockSize: '1px',
+  blockSize: menubarVars.size.separatorBlockSize,
   marginBlock: sys.spacing[3],
   marginInline: sys.spacing[8],
   backgroundColor: sys.color.border.high,

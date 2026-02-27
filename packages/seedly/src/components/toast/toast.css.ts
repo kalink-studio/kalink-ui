@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
-import { sys, typography } from '../../styles';
+import { sys, transition, typography } from '../../styles';
 
 export const toastVars = createThemeContract({
   color: {
@@ -21,6 +21,10 @@ export const toastVars = createThemeContract({
     toastCorner: null,
     closeCorner: null,
   },
+  layout: {
+    viewportInlineSizeMobile: null,
+    viewportInlineSizeDesktop: null,
+  },
 });
 
 const toastColorDefaults = assignVars(toastVars.color, {
@@ -37,12 +41,17 @@ const toastColorDefaults = assignVars(toastVars.color, {
 });
 
 const toastShapeDefaults = assignVars(toastVars.shape, {
-  buttonCorner: '0.375rem',
-  toastCorner: '0.5rem',
-  closeCorner: '0.25rem',
+  buttonCorner: sys.shape.corner.medium,
+  toastCorner: sys.shape.corner.rounded,
+  closeCorner: sys.shape.corner.small,
+});
+
+const toastLayoutDefaults = assignVars(toastVars.layout, {
+  viewportInlineSizeMobile: '250px',
+  viewportInlineSizeDesktop: '300px',
 });
 export const viewport = style({
-  inlineSize: '250px',
+  inlineSize: toastVars.layout.viewportInlineSizeMobile,
   marginBlock: '0',
   marginInline: 'auto',
   position: 'fixed',
@@ -51,9 +60,14 @@ export const viewport = style({
   insetInlineStart: 'auto',
   insetBlockStart: 'auto',
   zIndex: '1',
+  vars: {
+    ...toastColorDefaults,
+    ...toastShapeDefaults,
+    ...toastLayoutDefaults,
+  },
   '@media': {
     '(min-width: 500px)': {
-      inlineSize: '300px',
+      inlineSize: toastVars.layout.viewportInlineSizeDesktop,
       insetBlockEnd: sys.spacing[12],
       insetInlineEnd: sys.spacing[12],
     },
@@ -82,13 +96,20 @@ export const toast = style({
   transformOrigin: 'bottom center',
   transform:
     'translateX(var(--toast-swipe-movement-x))\n    translateY(\n      calc(\n        var(--toast-swipe-movement-y) - (var(--toast-index) * var(--peek)) -\n          (var(--shrink) * var(--height))\n      )\n    )\n    scale(var(--scale))',
-  transition: `transform ${sys.motion.duration.long[3]} ${sys.motion.easing.decelerate.emphasized}, opacity ${sys.motion.duration.long[3]}, block-size ${sys.motion.duration.short[4]}`,
+  transition: `${transition(['transform', 'opacity'], {
+    duration: 'long.3',
+    easing: 'decelerate.emphasized',
+  })}, ${transition('block-size', {
+    duration: 'short.4',
+    easing: 'standard',
+  })}`,
   cursor: 'default',
   WebkitUserSelect: 'none',
   userSelect: 'none',
   vars: {
     ...toastColorDefaults,
     ...toastShapeDefaults,
+    ...toastLayoutDefaults,
     '--gap': sys.spacing[6],
     '--peek': sys.spacing[6],
     '--scale': 'calc(max(0, 1 - (var(--toast-index) * 0.1)))',
@@ -141,7 +162,10 @@ export const toast = style({
 
 export const content = style({
   overflow: 'hidden',
-  transition: 'opacity 0.25s',
+  transition: transition('opacity', {
+    duration: 'medium.2',
+    easing: 'standard',
+  }),
 
   selectors: {
     [`&[data-behind]`]: {

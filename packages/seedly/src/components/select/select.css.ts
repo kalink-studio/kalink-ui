@@ -38,6 +38,16 @@ export const selectVars = createThemeContract({
     itemCorner: null,
     scrollArrowCorner: null,
   },
+  spacing: {
+    triggerGap: null,
+    triggerPaddingInlineEnd: null,
+    popupMinInlineOffset: null,
+    itemPaddingInlineStart: null,
+    itemPaddingInlineEnd: null,
+    itemPaddingBlockCoarse: null,
+    itemPaddingInlineEndWithoutSide: null,
+    scrollArrowBlockSize: null,
+  },
 });
 
 const selectColorDefaults = assignVars(selectVars.color, {
@@ -64,6 +74,17 @@ const selectShapeDefaults = assignVars(selectVars.shape, {
   scrollArrowCorner: sys.shape.corner.medium,
 });
 
+const selectSpacingDefaults = assignVars(selectVars.spacing, {
+  triggerGap: sys.spacing[6],
+  triggerPaddingInlineEnd: sys.spacing[6],
+  popupMinInlineOffset: sys.spacing[8],
+  itemPaddingInlineStart: sys.spacing[5],
+  itemPaddingInlineEnd: sys.spacing[8],
+  itemPaddingBlockCoarse: sys.spacing[5],
+  itemPaddingInlineEndWithoutSide: sys.spacing[15],
+  scrollArrowBlockSize: sys.spacing[8],
+});
+
 const selectItemHighlightSelectors =
   createInsetHighlightStyles({
     textColor: selectVars.color.itemHighlightedForeground,
@@ -77,6 +98,7 @@ export const select = style([
     vars: {
       ...selectColorDefaults,
       ...selectShapeDefaults,
+      ...selectSpacingDefaults,
     },
     ...createFieldTextInputTriggerStyles({
       foreground: selectVars.color.foreground,
@@ -84,8 +106,8 @@ export const select = style([
       backgroundColor: selectVars.color.triggerBackground,
       borderRadius: selectVars.shape.triggerCorner,
       focusRingColor: selectVars.color.focusRing,
-      gap: sys.spacing[6],
-      paddingInlineEnd: sys.spacing[6],
+      gap: selectVars.spacing.triggerGap,
+      paddingInlineEnd: selectVars.spacing.triggerPaddingInlineEnd,
     }),
     ...createInteractiveStateStyles({
       hover: {
@@ -108,7 +130,7 @@ export const selectIcon = style({
 export const value = style({
   selectors: {
     [`&[data-placeholder]`]: {
-      opacity: '0.6',
+      opacity: sys.state.muted.text,
     },
   },
 });
@@ -122,6 +144,7 @@ export const positioner = style({
   vars: {
     ...selectColorDefaults,
     ...selectShapeDefaults,
+    ...selectSpacingDefaults,
   },
 });
 
@@ -140,7 +163,10 @@ export const popup = style({
         transition: 'none',
         transform: 'none',
         opacity: '1',
-        minInlineSize: calc.add('var(--anchor-width)', sys.spacing[8]),
+        minInlineSize: calc.add(
+          'var(--anchor-width)',
+          selectVars.spacing.popupMinInlineOffset,
+        ),
       },
     },
   }),
@@ -164,12 +190,12 @@ export const item = style([
   typography.label.medium,
   createFloatingItemStyles({
     preset: 'listboxWithIndicator',
-    paddingInlineStart: sys.spacing[5],
-    paddingInlineEnd: sys.spacing[8],
+    paddingInlineStart: selectVars.spacing.itemPaddingInlineStart,
+    paddingInlineEnd: selectVars.spacing.itemPaddingInlineEnd,
     webkitUserSelect: 'none',
     media: {
       '(pointer: coarse)': {
-        paddingBlock: sys.spacing[5],
+        paddingBlock: selectVars.spacing.itemPaddingBlockCoarse,
         fontSize: sys.typography.label.large.size,
         lineHeight: sys.typography.label.large.lineHeight,
       },
@@ -178,7 +204,7 @@ export const item = style([
       [`[data-side='none'] &`]: {
         fontSize: sys.typography.label.large.size,
         lineHeight: sys.typography.label.large.lineHeight,
-        paddingInlineEnd: sys.spacing[15],
+        paddingInlineEnd: selectVars.spacing.itemPaddingInlineEndWithoutSide,
       },
       ...selectItemHighlightSelectors,
     },
@@ -199,7 +225,7 @@ export const scrollArrow = style([
     alignItems: 'center',
     justifyContent: 'center',
     inlineSize: '100%',
-    blockSize: sys.spacing[8],
+    blockSize: selectVars.spacing.scrollArrowBlockSize,
     zIndex: '1',
     textAlign: 'center',
     background: selectVars.color.scrollArrowBackground,

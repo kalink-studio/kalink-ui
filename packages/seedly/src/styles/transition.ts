@@ -3,8 +3,8 @@ import { type Duration, type Easing, sys } from './system-contract.css';
 export type CreateTransitionFn = (
   props: string | string[],
   options?: {
-    duration?: Duration;
-    easing?: Easing;
+    duration?: Duration | string;
+    easing?: Easing | string;
     delay?: string;
   },
 ) => string;
@@ -33,11 +33,11 @@ export const transition: CreateTransitionFn = (
   return animatedProps
     .map((animatedProp) => {
       const duration = options.duration
-        ? getFromPath(sys.motion.duration, options.duration)
+        ? getFromPath(sys.motion.duration, options.duration) || options.duration
         : sys.motion.duration.medium[1];
 
       const easing = options.easing
-        ? getFromPath(sys.motion.easing, options.easing)
+        ? getFromPath(sys.motion.easing, options.easing) || options.easing
         : sys.motion.easing.standard;
 
       const delay = options.delay || '0ms';

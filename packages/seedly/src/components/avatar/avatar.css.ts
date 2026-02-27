@@ -7,6 +7,9 @@ export const avatarVars = createThemeContract({
     foreground: null,
     background: null,
   },
+  size: {
+    root: null,
+  },
   shape: {
     corner: null,
   },
@@ -18,8 +21,8 @@ export const root = style([
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    blockSize: sys.spacing[15],
-    inlineSize: sys.spacing[15],
+    blockSize: avatarVars.size.root,
+    inlineSize: avatarVars.size.root,
     overflow: 'hidden',
 
     color: avatarVars.color.foreground,
@@ -34,8 +37,11 @@ export const root = style([
         foreground: sys.color.content.base,
         background: sys.color.container.low,
       }),
+      ...assignVars(avatarVars.size, {
+        root: sys.spacing[15],
+      }),
       ...assignVars(avatarVars.shape, {
-        corner: '100%',
+        corner: sys.shape.corner.circle,
       }),
     },
   },

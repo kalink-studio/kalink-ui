@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys, typography } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
 
 export const tabsVars = createThemeContract({
   color: {
@@ -16,6 +16,9 @@ export const tabsVars = createThemeContract({
     indicatorCorner: null,
     focusCorner: null,
   },
+  layout: {
+    panelBlockSize: null,
+  },
 });
 
 const tabsColorDefaults = assignVars(tabsVars.color, {
@@ -28,9 +31,13 @@ const tabsColorDefaults = assignVars(tabsVars.color, {
 });
 
 const tabsShapeDefaults = assignVars(tabsVars.shape, {
-  rootCorner: '0.375rem',
-  indicatorCorner: '0.25rem',
-  focusCorner: '0.375rem',
+  rootCorner: sys.shape.corner.medium,
+  indicatorCorner: sys.shape.corner.small,
+  focusCorner: sys.shape.corner.medium,
+});
+
+const tabsLayoutDefaults = assignVars(tabsVars.layout, {
+  panelBlockSize: '8rem',
 });
 
 export const tabs = style({
@@ -39,6 +46,7 @@ export const tabs = style({
   vars: {
     ...tabsColorDefaults,
     ...tabsShapeDefaults,
+    ...tabsLayoutDefaults,
   },
 });
 
@@ -52,7 +60,6 @@ export const list = style({
 });
 
 export const tab = style([
-  typography.label.medium,
   {
     marginBlock: '0',
     marginInline: '0',
@@ -60,7 +67,6 @@ export const tab = style([
     appearance: 'none',
     whiteSpace: 'nowrap',
     wordBreak: 'keep-all',
-    blockSize: sys.spacing[12],
 
     selectors: {
       [`&[data-active]`]: {
@@ -92,16 +98,17 @@ export const indicator = style({
   borderRadius: tabsVars.shape.indicatorCorner,
   backgroundColor: tabsVars.color.indicatorBackground,
   translate: 'var(--active-tab-left) 0',
-  transitionProperty: 'translate, inline-size, block-size',
-  transitionDuration: '200ms',
-  transitionTimingFunction: 'ease-in-out',
+  transition: transition(['translate', 'inline-size', 'block-size'], {
+    duration: 'medium.1',
+    easing: 'standard',
+  }),
 });
 
 export const panel = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  blockSize: '8rem',
+  blockSize: tabsVars.layout.panelBlockSize,
   position: 'relative',
   outline: '0',
 

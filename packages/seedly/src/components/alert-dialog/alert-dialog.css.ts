@@ -1,7 +1,14 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 
-import { stateColor, sys, typography } from '../../styles';
+import { stateColor, sys, transition, typography } from '../../styles';
+import {
+  createDialogActionsStyles,
+  createDialogBackdropStyles,
+  createDialogButtonStyles,
+  createDialogDescriptionStyles,
+  createDialogPopupStyles,
+  createDialogTitleStyles,
+} from '../_foundation';
 
 export const alertDialogVars = createThemeContract({
   color: {
@@ -14,6 +21,21 @@ export const alertDialogVars = createThemeContract({
   shape: {
     popupCorner: null,
   },
+  layout: {
+    backdropMinBlockSize: null,
+    popupInlineSize: null,
+    popupMaxInlineSize: null,
+  },
+  spacing: {
+    popupMarginBlockStart: null,
+    popupPaddingBlock: null,
+    popupPaddingInline: null,
+    titleMarginBlockStart: null,
+    titleMarginBlockEnd: null,
+    descriptionMarginBlock: null,
+    descriptionMarginInline: null,
+    actionsGap: null,
+  },
 });
 
 const alertDialogColorDefaults = assignVars(alertDialogVars.color, {
@@ -25,116 +47,86 @@ const alertDialogColorDefaults = assignVars(alertDialogVars.color, {
 });
 
 const alertDialogShapeDefaults = assignVars(alertDialogVars.shape, {
-  popupCorner: '0.5rem',
+  popupCorner: sys.shape.corner.medium,
 });
 
-export const button = style([
-  typography.label.large,
-  {
-    blockSize: sys.spacing[14],
-  },
-]);
-
-export const backdrop = style({
-  minBlockSize: '100dvh',
-  position: 'fixed',
-  insetBlock: '0',
-  insetInline: '0',
-
-  backgroundColor: alertDialogVars.color.backdrop,
-  opacity: '0.2',
-
-  transition: 'opacity 150ms',
-
-  '@supports': {
-    '(-webkit-touch-callout: none)': {
-      position: 'absolute',
-    },
-  },
-
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      opacity: '0.35',
-    },
-  },
-
-  vars: {
-    ...alertDialogColorDefaults,
-    ...alertDialogShapeDefaults,
-  },
-
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-    },
-    [`&[data-ending-style]`]: {
-      opacity: '0',
-    },
-  },
+const alertDialogLayoutDefaults = assignVars(alertDialogVars.layout, {
+  backdropMinBlockSize: '100dvh',
+  popupInlineSize: '24rem',
+  popupMaxInlineSize: `calc(100vw - ${sys.spacing[15]})`,
 });
 
-export const popup = style({
-  inlineSize: '24rem',
-  maxInlineSize: calc.subtract('100vw', sys.spacing[15]),
-  marginBlockStart: calc.negate(sys.spacing[12]),
-  paddingBlock: sys.spacing[10],
-  paddingInline: sys.spacing[10],
-
-  position: 'fixed',
-  insetBlockStart: '50%',
-  insetInlineStart: '50%',
-
-  color: alertDialogVars.color.popupForeground,
-  backgroundColor: alertDialogVars.color.popupBackground,
-  borderRadius: alertDialogVars.shape.popupCorner,
-  outline: `1px solid ${alertDialogVars.color.popupOutline}`,
-
-  transform: 'translate(-50%, -50%)',
-  transition: 'all 150ms',
-
-  '@media': {
-    '(prefers-color-scheme: dark)': {
-      outline: `1px solid ${alertDialogVars.color.popupOutline}`,
-    },
-  },
-
-  vars: {
-    ...alertDialogColorDefaults,
-    ...alertDialogShapeDefaults,
-  },
-
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-      transform: 'translate(-50%, -50%) scale(0.9)',
-    },
-    [`&[data-ending-style]`]: {
-      opacity: '0',
-      transform: 'translate(-50%, -50%) scale(0.9)',
-    },
-  },
+const alertDialogSpacingDefaults = assignVars(alertDialogVars.spacing, {
+  popupMarginBlockStart: `calc(-1 * ${sys.spacing[12]})`,
+  popupPaddingBlock: sys.spacing[10],
+  popupPaddingInline: sys.spacing[10],
+  titleMarginBlockStart: `calc(-1 * ${sys.spacing[3]})`,
+  titleMarginBlockEnd: sys.spacing[2],
+  descriptionMarginBlock: `0 ${sys.spacing[10]}`,
+  descriptionMarginInline: '0',
+  actionsGap: sys.spacing[8],
 });
+
+const alertDialogThemeDefaults = {
+  ...alertDialogColorDefaults,
+  ...alertDialogShapeDefaults,
+  ...alertDialogLayoutDefaults,
+  ...alertDialogSpacingDefaults,
+};
+
+export const button = style(
+  createDialogButtonStyles({
+    vars: alertDialogThemeDefaults,
+  }),
+);
+
+export const backdrop = style(
+  createDialogBackdropStyles({
+    vars: alertDialogThemeDefaults,
+    backdropColor: alertDialogVars.color.backdrop,
+    transition: transition('opacity', {
+      duration: 'short.4',
+      easing: 'standard',
+    }),
+    minBlockSize: alertDialogVars.layout.backdropMinBlockSize,
+  }),
+);
+
+export const popup = style(
+  createDialogPopupStyles({
+    vars: alertDialogThemeDefaults,
+    popupForeground: alertDialogVars.color.popupForeground,
+    popupBackground: alertDialogVars.color.popupBackground,
+    popupCorner: alertDialogVars.shape.popupCorner,
+    popupOutlineLight: alertDialogVars.color.popupOutline,
+    popupOutlineDark: alertDialogVars.color.popupOutline,
+    inlineSize: alertDialogVars.layout.popupInlineSize,
+    maxInlineSize: alertDialogVars.layout.popupMaxInlineSize,
+    marginBlockStart: alertDialogVars.spacing.popupMarginBlockStart,
+    paddingBlock: alertDialogVars.spacing.popupPaddingBlock,
+    paddingInline: alertDialogVars.spacing.popupPaddingInline,
+  }),
+);
 
 export const title = style([
   typography.title.large,
-  {
-    marginBlockStart: calc.negate(sys.spacing[3]),
-    marginBlockEnd: sys.spacing[2],
-  },
+  createDialogTitleStyles({
+    marginBlockStart: alertDialogVars.spacing.titleMarginBlockStart,
+    marginBlockEnd: alertDialogVars.spacing.titleMarginBlockEnd,
+  }),
 ]);
 
 export const description = style([
   typography.body.large,
-  {
-    marginBlock: `0 ${sys.spacing[10]}`,
-    marginInline: '0',
-
-    color: alertDialogVars.color.description,
-  },
+  createDialogDescriptionStyles({
+    descriptionColor: alertDialogVars.color.description,
+    marginBlock: alertDialogVars.spacing.descriptionMarginBlock,
+    marginInline: alertDialogVars.spacing.descriptionMarginInline,
+  }),
 ]);
 
-export const actions = style({
-  display: 'flex',
-  justifyContent: 'end',
-  gap: sys.spacing[8],
-});
+export const actions = style(
+  createDialogActionsStyles({
+    gap: alertDialogVars.spacing.actionsGap,
+  }),
+);

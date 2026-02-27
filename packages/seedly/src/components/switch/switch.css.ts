@@ -5,7 +5,7 @@ import {
   style,
 } from '@vanilla-extract/css';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
 
 export const switchVars = createThemeContract({
   color: {
@@ -28,15 +28,31 @@ export const switchVars = createThemeContract({
     thumbDisabledBackground: null,
     thumbDisabledBorder: null,
   },
+  size: {
+    rootInlineSize: null,
+    rootBlockSize: null,
+    rootPadding: null,
+    thumbSize: null,
+    checkedThumbTranslate: null,
+  },
+  shape: {
+    rootCorner: null,
+    thumbCorner: null,
+  },
 });
 
-const switchRootInlineSize = sys.spacing[14];
-const switchRootBlockSize = sys.spacing[10];
-const switchRootPadding = '2px';
-const switchThumbSize = `calc(${switchRootBlockSize} - ${sys.spacing[3]})`;
-const switchCheckedThumbTranslate = `calc(${switchRootInlineSize} - ${switchThumbSize} - (${switchRootPadding} * 2))`;
-const switchMotionDuration = sys.motion.duration.short[4];
-const switchMotionEasing = sys.motion.easing.standard;
+const switchSizeDefaults = assignVars(switchVars.size, {
+  rootInlineSize: sys.spacing[14],
+  rootBlockSize: sys.spacing[10],
+  rootPadding: '2px',
+  thumbSize: `calc(${switchVars.size.rootBlockSize} - ${sys.spacing[3]})`,
+  checkedThumbTranslate: `calc(${switchVars.size.rootInlineSize} - ${switchVars.size.thumbSize} - (${switchVars.size.rootPadding} * 2))`,
+});
+
+const switchShapeDefaults = assignVars(switchVars.shape, {
+  rootCorner: sys.shape.corner.circle,
+  thumbCorner: sys.shape.corner.circle,
+});
 
 export const label = style({
   display: 'flex',
@@ -46,26 +62,30 @@ export const label = style({
   cursor: 'pointer',
   userSelect: 'none',
   WebkitTapHighlightColor: 'transparent',
-  vars: assignVars(switchVars.color, {
-    label: sys.color.content.base,
-    disabledLabel: stateColor.disabledContent,
-    trackOnStart: `color-mix(in srgb, ${sys.color.content.base} 84%, ${sys.color.tone.secondary})`,
-    trackOnEnd: `color-mix(in srgb, ${sys.color.content.base} 64%, ${sys.color.tone.secondaryContainer})`,
-    trackOffStart: `color-mix(in srgb, ${sys.color.content.base} 18%, ${sys.color.container.base})`,
-    trackOffEnd: sys.color.container.high,
-    trackBorder: sys.color.border.base,
-    trackHoverBorder: sys.color.border.high,
-    trackActiveBorder: `color-mix(in srgb, ${sys.color.content.base} 42%, ${sys.color.border.high})`,
-    disabledTrackBorder: stateColor.subtleContent,
-    disabledTrackStart: `color-mix(in srgb, ${sys.color.content.base} 14%, ${sys.color.container.base})`,
-    disabledTrackEnd: `color-mix(in srgb, ${sys.color.content.base} 8%, ${sys.color.container.high})`,
-    disabledTrackShadow: `inset 0 1px 1px color-mix(in srgb, ${sys.color.content.base} 8%, transparent)`,
-    focusRing: sys.color.tone.primary,
-    thumbBackground: sys.color.surface.bright,
-    thumbBorder: `color-mix(in srgb, ${sys.color.content.base} 18%, transparent)`,
-    thumbDisabledBackground: `color-mix(in srgb, ${sys.color.surface.bright} 60%, ${sys.color.container.low})`,
-    thumbDisabledBorder: `color-mix(in srgb, ${sys.color.content.base} 8%, transparent)`,
-  }),
+  vars: {
+    ...assignVars(switchVars.color, {
+      label: sys.color.content.base,
+      disabledLabel: stateColor.disabledContent,
+      trackOnStart: `color-mix(in srgb, ${sys.color.content.base} 84%, ${sys.color.tone.secondary})`,
+      trackOnEnd: `color-mix(in srgb, ${sys.color.content.base} 64%, ${sys.color.tone.secondaryContainer})`,
+      trackOffStart: `color-mix(in srgb, ${sys.color.content.base} 18%, ${sys.color.container.base})`,
+      trackOffEnd: sys.color.container.high,
+      trackBorder: sys.color.border.base,
+      trackHoverBorder: sys.color.border.high,
+      trackActiveBorder: `color-mix(in srgb, ${sys.color.content.base} 42%, ${sys.color.border.high})`,
+      disabledTrackBorder: stateColor.subtleContent,
+      disabledTrackStart: `color-mix(in srgb, ${sys.color.content.base} 14%, ${sys.color.container.base})`,
+      disabledTrackEnd: `color-mix(in srgb, ${sys.color.content.base} 8%, ${sys.color.container.high})`,
+      disabledTrackShadow: `inset 0 1px 1px color-mix(in srgb, ${sys.color.content.base} 8%, transparent)`,
+      focusRing: sys.color.tone.primary,
+      thumbBackground: sys.color.surface.bright,
+      thumbBorder: `color-mix(in srgb, ${sys.color.content.base} 18%, transparent)`,
+      thumbDisabledBackground: `color-mix(in srgb, ${sys.color.surface.bright} 60%, ${sys.color.container.low})`,
+      thumbDisabledBorder: `color-mix(in srgb, ${sys.color.content.base} 8%, transparent)`,
+    }),
+    ...switchSizeDefaults,
+    ...switchShapeDefaults,
+  },
   selectors: {
     '&:has([data-disabled])': {
       color: switchVars.color.disabledLabel,
@@ -82,12 +102,12 @@ export const switchRoot = style({
   alignItems: 'center',
   justifyContent: 'flex-start',
   flexShrink: 0,
-  inlineSize: switchRootInlineSize,
-  blockSize: switchRootBlockSize,
+  inlineSize: switchVars.size.rootInlineSize,
+  blockSize: switchVars.size.rootBlockSize,
   marginBlock: '0',
   marginInline: '0',
-  paddingBlock: switchRootPadding,
-  paddingInline: switchRootPadding,
+  paddingBlock: switchVars.size.rootPadding,
+  paddingInline: switchVars.size.rootPadding,
   overflow: 'hidden',
   position: 'relative',
   appearance: 'none',
@@ -103,14 +123,18 @@ export const switchRoot = style({
   backgroundSize: '250% 100%',
   backgroundPositionX: '100%',
   backgroundRepeat: 'no-repeat',
-  borderRadius: sys.spacing[10],
+  borderRadius: switchVars.shape.rootCorner,
   outline: '1px solid',
   outlineOffset: '-1px',
   outlineColor: switchVars.color.trackBorder,
   boxShadow: `inset 0 1px 1px color-mix(in srgb, ${sys.color.content.base} 8%, transparent), ${sys.elevation.minimal}`,
-  transitionProperty: 'background-position, box-shadow, outline-color',
-  transitionTimingFunction: switchMotionEasing,
-  transitionDuration: switchMotionDuration,
+  transition: transition(
+    ['background-position', 'box-shadow', 'outline-color'],
+    {
+      duration: 'short.4',
+      easing: 'standard',
+    },
+  ),
   cursor: 'pointer',
   touchAction: 'manipulation',
   WebkitTapHighlightColor: 'transparent',
@@ -122,7 +146,7 @@ export const switchRoot = style({
       boxShadow: `inset 0 1px 1px color-mix(in srgb, ${sys.color.content.base} 16%, transparent), ${sys.elevation.minimal}`,
     },
     '(prefers-reduced-motion: reduce)': {
-      transitionDuration: '0ms',
+      transition: 'none',
     },
   },
   selectors: {
@@ -187,16 +211,19 @@ export const switchRoot = style({
 
 export const thumb = style({
   display: 'block',
-  inlineSize: switchThumbSize,
-  blockSize: switchThumbSize,
-  borderRadius: '100%',
+  inlineSize: switchVars.size.thumbSize,
+  blockSize: switchVars.size.thumbSize,
+  borderRadius: switchVars.shape.thumbCorner,
   backgroundColor: switchVars.color.thumbBackground,
   border: `1px solid ${switchVars.color.thumbBorder}`,
   willChange: 'translate',
-  transitionProperty:
-    'translate, scale, box-shadow, border-color, background-color',
-  transitionTimingFunction: switchMotionEasing,
-  transitionDuration: switchMotionDuration,
+  transition: transition(
+    ['translate', 'scale', 'box-shadow', 'border-color', 'background-color'],
+    {
+      duration: 'short.4',
+      easing: 'standard',
+    },
+  ),
 
   '@media': {
     '(prefers-color-scheme: light)': {
@@ -206,12 +233,12 @@ export const thumb = style({
       boxShadow: sys.elevation.moderate,
     },
     '(prefers-reduced-motion: reduce)': {
-      transitionDuration: '0ms',
+      transition: 'none',
     },
   },
   selectors: {
     '&[data-checked]': {
-      translate: `${switchCheckedThumbTranslate} 0`,
+      translate: `${switchVars.size.checkedThumbTranslate} 0`,
     },
     '&[data-disabled], &[data-readonly]': {
       boxShadow: 'none',

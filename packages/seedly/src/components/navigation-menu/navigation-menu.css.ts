@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
-import { stateColor, sys, typography } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -12,8 +12,25 @@ import {
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
+export const navigationMenuVars = createThemeContract({
+  layout: {
+    contentMinInlineSizeDesktop: null,
+    gridLinkColumnInlineSize: null,
+    flexLinkListMaxInlineSize: null,
+  },
+});
+
+const navigationMenuLayoutDefaults = assignVars(navigationMenuVars.layout, {
+  contentMinInlineSizeDesktop: '400px',
+  gridLinkColumnInlineSize: '12rem',
+  flexLinkListMaxInlineSize: '400px',
+});
+
 export const root = style({
   minInlineSize: 'max-content',
+  vars: {
+    ...navigationMenuLayoutDefaults,
+  },
 });
 
 export const list = style({
@@ -27,7 +44,6 @@ export const list = style({
 });
 
 export const trigger = style([
-  typography.label.large,
   {
     display: 'inline-flex',
     alignItems: 'center',
@@ -75,7 +91,10 @@ export const icon = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transition: `transform ${sys.motion.duration.medium[1]} ${sys.motion.easing.standard}`,
+  transition: transition('transform', {
+    duration: 'medium.3',
+    easing: 'standard',
+  }),
 
   selectors: {
     [`&[data-popup-open]`]: {
@@ -89,9 +108,10 @@ export const positioner = style({
   inlineSize: 'var(--positioner-width)',
   blockSize: 'var(--positioner-height)',
   maxInlineSize: 'var(--available-width)',
-  transitionProperty: 'top, left, right, bottom',
-  transitionDuration: 'var(--duration)',
-  transitionTimingFunction: 'var(--easing)',
+  transition: transition(['top', 'left', 'right', 'bottom'], {
+    duration: 'var(--duration)',
+    easing: 'var(--easing)',
+  }),
   vars: {
     '--easing': sys.motion.easing.decelerate.emphasized,
     '--duration': sys.motion.duration.medium[4],
@@ -138,13 +158,20 @@ export const popup = style({
     inlineSize: 'var(--popup-width)',
     blockSize: 'var(--popup-height)',
     motion: {
-      transition:
-        'opacity var(--duration),\n    transform var(--duration),\n    inline-size var(--duration),\n    block-size var(--duration)',
+      transition: transition(
+        ['opacity', 'transform', 'inline-size', 'block-size'],
+        {
+          duration: 'var(--duration)',
+          easing: 'var(--easing)',
+        },
+      ),
       endingStyle: {
         opacity: '0',
         transform: 'scale(0.9)',
-        transitionTimingFunction: sys.motion.easing.standard,
-        transitionDuration: sys.motion.duration.short[4],
+        transition: transition(['opacity', 'transform'], {
+          duration: 'short.4',
+          easing: 'standard',
+        }),
       },
     },
   }),
@@ -156,12 +183,17 @@ export const content = style({
   blockSize: '100%',
   paddingBlock: sys.spacing[10],
   paddingInline: sys.spacing[10],
-  transition:
-    'opacity calc(var(--duration) * 0.5) ease,\n    transform var(--duration) var(--easing)',
+  transition: `${transition('opacity', {
+    duration: 'long.3',
+    easing: 'standard',
+  })}, ${transition('transform', {
+    duration: 'medium.3',
+    easing: 'decelerate.emphasized',
+  })}`,
   '@media': {
     '(min-width: 500px)': {
       inlineSize: 'max-content',
-      minInlineSize: '400px',
+      minInlineSize: navigationMenuVars.layout.contentMinInlineSizeDesktop,
     },
   },
 
@@ -196,7 +228,7 @@ export const viewport = style({
 
 export const gridLinkList = style({
   display: 'grid',
-  gridTemplateColumns: '12rem 12rem',
+  gridTemplateColumns: `${navigationMenuVars.layout.gridLinkColumnInlineSize} ${navigationMenuVars.layout.gridLinkColumnInlineSize}`,
   paddingBlock: '0',
   paddingInline: '0',
   marginBlock: '0',
@@ -213,7 +245,7 @@ export const flexLinkList = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  maxInlineSize: '400px',
+  maxInlineSize: navigationMenuVars.layout.flexLinkListMaxInlineSize,
   paddingBlock: '0',
   paddingInline: '0',
   marginBlock: '0',
@@ -274,7 +306,10 @@ export const linkDescription = style({
 
 export const arrow = style({
   ...createFloatingArrowPlacementStyles(),
-  transition: 'left calc(var(--duration)) var(--easing)',
+  transition: transition('left', {
+    duration: 'calc(var(--duration))',
+    easing: 'var(--easing)',
+  }),
 });
 
 export const arrowFill = style({

@@ -20,12 +20,12 @@ export const header = style({
 });
 
 export const trigger = style([
-  typography.label.large,
   {
     display: 'flex',
     alignItems: 'baseline',
     justifyContent: 'space-between',
     inlineSize: '100%',
+
     paddingBlock: sys.spacing[4],
     paddingInlineStart: sys.spacing[6],
     paddingInlineEnd: sys.spacing[2],
@@ -45,6 +45,7 @@ export const trigger = style([
 
 export const triggerIcon = style({
   flexShrink: '0',
+
   inlineSize: sys.spacing[6],
   blockSize: sys.spacing[6],
   marginInlineEnd: sys.spacing[4],
@@ -69,7 +70,10 @@ export const panel = style([
 
     color: stateColor.mutedContent,
 
-    transition: 'block-size 150ms ease-out',
+    transition: transition('block-size', {
+      duration: 'short.4',
+      easing: 'standard',
+    }),
 
     selectors: {
       '&[data-starting-style]': {

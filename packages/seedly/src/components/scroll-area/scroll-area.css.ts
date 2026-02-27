@@ -1,15 +1,38 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
+
+export const scrollAreaVars = createThemeContract({
+  layout: {
+    rootBlockSize: null,
+  },
+  shape: {
+    viewportCorner: null,
+    scrollbarCorner: null,
+  },
+});
+
+const scrollAreaLayoutDefaults = assignVars(scrollAreaVars.layout, {
+  rootBlockSize: '8.5rem',
+});
+
+const scrollAreaShapeDefaults = assignVars(scrollAreaVars.shape, {
+  viewportCorner: sys.shape.corner.medium,
+  scrollbarCorner: sys.shape.corner.medium,
+});
 
 export const scrollArea = style({
   inlineSize: '100%',
-  blockSize: '8.5rem',
+  blockSize: scrollAreaVars.layout.rootBlockSize,
+  vars: {
+    ...scrollAreaLayoutDefaults,
+    ...scrollAreaShapeDefaults,
+  },
 });
 
 export const viewport = style({
   blockSize: '100%',
-  borderRadius: '0.375rem',
+  borderRadius: scrollAreaVars.shape.viewportCorner,
   outline: `1px solid ${sys.color.border.base}`,
   outlineOffset: '-1px',
 
@@ -36,14 +59,17 @@ export const scrollbar = style({
   marginInline: sys.spacing[4],
   opacity: '0',
   backgroundColor: sys.color.container.high,
-  borderRadius: '0.375rem',
-  transition: 'opacity 150ms',
+  borderRadius: scrollAreaVars.shape.scrollbarCorner,
+  transition: transition('opacity', {
+    duration: 'short.4',
+    easing: 'standard',
+  }),
   pointerEvents: 'none',
 
   selectors: {
     [`&[data-scrolling]`]: {
       opacity: '1',
-      transitionDuration: '0ms',
+      transition: 'none',
       pointerEvents: 'auto',
     },
     [`&[data-hovering]`]: {
