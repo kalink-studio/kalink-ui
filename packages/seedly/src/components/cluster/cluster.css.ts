@@ -15,12 +15,14 @@ import {
 
 export const clusterVars = createThemeContract({
   spacing: {
-    gap: null,
+    rootGap: null,
   },
 });
 
-const clusterSpacingDefaults = assignVars(clusterVars.spacing, {
-  gap: sys.spacing[0],
+const clusterDefaults = assignVars(clusterVars, {
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
 export const clusterSpacingStyles = mapContractVars(
@@ -53,15 +55,13 @@ export const clusterRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
+        vars: clusterDefaults,
+
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        gap: clusterVars.spacing.gap,
-
-        vars: {
-          ...clusterSpacingDefaults,
-        },
+        gap: clusterVars.spacing.rootGap,
       },
     },
   },

@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`.
-- Next unchecked component: `cluster`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`.
+- Next unchecked component: `collapsible`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -191,7 +191,7 @@ Examples:
 - [x] `center`
 - [x] `checkbox`
 - [x] `checkbox-group`
-- [ ] `cluster`
+- [x] `cluster`
 - [ ] `collapsible`
 - [ ] `combobox`
 - [ ] `container`
@@ -441,6 +441,24 @@ If policy changes mid-migration:
   - Properties audited: root foreground + group gap.
   - Properties remapped: root color/gap now resolve through `checkboxGroupVars` local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `checkboxGroupDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `cluster`
+
+- Status: `done`
+- Outcome:
+  - Normalized local spacing contract naming to role-based key `spacing.rootGap`.
+  - Consolidated defaults into one owner assignment block: `assignVars(clusterVars, { ... })`.
+  - Remapped token-eligible root spacing property (`gap`) to local component token.
+- Mapping coverage:
+  - Properties audited: root flex cluster spacing gap.
+  - Properties remapped: root `gap` now resolves through `clusterVars.spacing.rootGap`.
+  - Intentional direct `sys` usages: component-owned default assignment in `clusterDefaults`.
 - Foundation changes:
   - none.
 - Validation:
