@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`.
-- Next unchecked component: `checkbox`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`.
+- Next unchecked component: `checkbox-group`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `checkbox`
 - `checkbox-group`
 - `combobox`
 - `context-menu`
@@ -191,7 +190,7 @@ Examples:
 - [x] `box`
 - [x] `button`
 - [x] `center`
-- [ ] `checkbox`
+- [x] `checkbox`
 - [ ] `checkbox-group`
 - [ ] `cluster`
 - [ ] `collapsible`
@@ -405,6 +404,25 @@ If policy changes mid-migration:
   - Properties audited: root `maxInlineSize`, root `paddingInline`.
   - Properties remapped: `maxInlineSize` now resolves through `centerVars.layout.rootMeasure`; `paddingInline` resolves through `centerVars.spacing.rootGutters`.
   - Intentional direct `sys` usages: none.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `checkbox`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys for checkbox label/control/indicator surfaces.
+  - Consolidated defaults into one owner assignment block: `assignVars(checkboxVars, { ... })`.
+  - Added strict `_foundation` `choice-control` caller coverage for required `size` and `focusOutlineOffset` options using local tokens.
+  - Remapped token-eligible label/control/indicator style properties to local component tokens.
+- Mapping coverage:
+  - Properties audited: label foreground + item gap, control border/background/focus/corner/size, indicator foreground + icon size.
+  - Properties remapped: label color/gap, control borderRadius/uncheckedBorderColor/checkedBackgroundColor/focusRingColor/focusOutlineOffset/size, indicator color, indicator svg block/inline size.
+  - Intentional direct `sys` usages: component-owned default assignments in `checkboxDefaults`.
 - Foundation changes:
   - none.
 - Validation:

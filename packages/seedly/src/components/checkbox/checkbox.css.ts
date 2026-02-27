@@ -13,57 +13,70 @@ import {
 
 export const checkboxVars = createThemeContract({
   color: {
-    label: null,
-    foreground: null,
-    border: null,
-    checkedBackground: null,
-    checkedForeground: null,
-    focusRing: null,
-  },
-  spacing: {
-    labelGap: null,
-    indicatorSize: null,
+    controlBorder: null,
+    controlCheckedBackground: null,
+    controlFocusRing: null,
+    indicatorForeground: null,
+    labelForeground: null,
   },
   shape: {
-    corner: null,
+    controlCorner: null,
+  },
+  size: {
+    controlSize: null,
+    indicatorSize: null,
+  },
+  spacing: {
+    controlFocusOutlineOffset: null,
+    labelGap: null,
+  },
+});
+
+const checkboxDefaults = assignVars(checkboxVars, {
+  color: {
+    controlBorder: sys.color.border.high,
+    controlCheckedBackground: sys.color.content.base,
+    controlFocusRing: sys.color.tone.primary,
+    indicatorForeground: sys.color.container.base,
+    labelForeground: sys.color.content.base,
+  },
+  shape: {
+    controlCorner: sys.shape.corner.small,
+  },
+  size: {
+    controlSize: sys.spacing[9],
+    indicatorSize: sys.spacing[6],
+  },
+  spacing: {
+    controlFocusOutlineOffset: sys.spacing[1],
+    labelGap: sys.spacing[4],
   },
 });
 
 export const label = style({
-  display: 'flex',
+  vars: checkboxDefaults,
+
   alignItems: 'center',
+  display: 'flex',
+
   gap: checkboxVars.spacing.labelGap,
-  color: checkboxVars.color.label,
-  vars: {
-    ...assignVars(checkboxVars.color, {
-      label: sys.color.content.base,
-      foreground: sys.color.content.base,
-      border: sys.color.border.high,
-      checkedBackground: sys.color.content.base,
-      checkedForeground: sys.color.container.base,
-      focusRing: sys.color.tone.primary,
-    }),
-    ...assignVars(checkboxVars.shape, {
-      corner: sys.shape.corner.small,
-    }),
-    ...assignVars(checkboxVars.spacing, {
-      labelGap: sys.spacing[4],
-      indicatorSize: sys.spacing[6],
-    }),
-  },
+
+  color: checkboxVars.color.labelForeground,
 });
 
 export const checkbox = style({
   ...createChoiceControlStyles({
-    borderRadius: checkboxVars.shape.corner,
-    uncheckedBorderColor: checkboxVars.color.border,
-    checkedBackgroundColor: checkboxVars.color.checkedBackground,
-    focusRingColor: checkboxVars.color.focusRing,
+    borderRadius: checkboxVars.shape.controlCorner,
+    checkedBackgroundColor: checkboxVars.color.controlCheckedBackground,
+    focusOutlineOffset: checkboxVars.spacing.controlFocusOutlineOffset,
+    focusRingColor: checkboxVars.color.controlFocusRing,
+    size: checkboxVars.size.controlSize,
+    uncheckedBorderColor: checkboxVars.color.controlBorder,
   }),
 });
 
 const checkboxIndicatorStyles = createChoiceIndicatorStyles({
-  color: checkboxVars.color.checkedForeground,
+  color: checkboxVars.color.indicatorForeground,
 });
 
 export const indicator = style({
@@ -72,6 +85,6 @@ export const indicator = style({
 });
 
 globalStyle(`${indicator} > svg`, {
-  inlineSize: checkboxVars.spacing.indicatorSize,
-  blockSize: checkboxVars.spacing.indicatorSize,
+  blockSize: checkboxVars.size.indicatorSize,
+  inlineSize: checkboxVars.size.indicatorSize,
 });
