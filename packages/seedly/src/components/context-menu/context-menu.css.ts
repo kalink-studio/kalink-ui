@@ -9,7 +9,6 @@ import {
 } from '../_foundation';
 import {
   buttonBaseClass,
-  buttonStateVars,
   buttonStyledVariantClass,
   buttonVars,
 } from '../button';
@@ -38,32 +37,30 @@ const contextMenuItemHighlightSelectors =
 
 const contextMenuTriggerButtonVars = {
   ...assignVars(buttonVars.color, {
-    foreground: sys.color.content.base,
-    background: 'transparent',
-    border: sys.color.border.base,
-    focusRing: sys.color.tone.primary,
-  }),
-  ...assignVars(buttonStateVars.color, {
-    hoverForeground: sys.color.content.base,
-    hoverBackground: sys.color.container.low,
-    hoverBorder: sys.color.border.base,
-    activeForeground: sys.color.content.base,
-    activeBackground: sys.color.container.low,
-    activeBorder: sys.color.border.base,
-    disabledForeground: stateColor.disabledContent,
-    disabledBackground: 'transparent',
-    disabledBorder: sys.color.border.base,
-    loadingForeground: sys.color.content.base,
-    loadingBackground: sys.color.container.low,
-    loadingBorder: sys.color.border.base,
+    rootActiveBackground: sys.color.container.low,
+    rootActiveBorder: sys.color.border.base,
+    rootActiveForeground: sys.color.content.base,
+    rootBackground: 'transparent',
+    rootBorder: sys.color.border.base,
+    rootDisabledBackground: 'transparent',
+    rootDisabledBorder: sys.color.border.base,
+    rootDisabledForeground: stateColor.disabledContent,
+    rootFocusRing: sys.color.tone.primary,
+    rootForeground: sys.color.content.base,
+    rootHoverBackground: sys.color.container.low,
+    rootHoverBorder: sys.color.border.base,
+    rootHoverForeground: sys.color.content.base,
+    rootLoadingBackground: sys.color.container.low,
+    rootLoadingBorder: sys.color.border.base,
+    rootLoadingForeground: sys.color.content.base,
   }),
   ...assignVars(buttonVars.spacing, {
-    block: '0',
-    inline: '0',
-    gap: '0',
+    rootGap: '0',
+    rootPaddingBlock: '0',
+    rootPaddingInline: '0',
   }),
   ...assignVars(buttonVars.shape, {
-    corner: sys.shape.corner.medium,
+    rootCorner: sys.shape.corner.medium,
   }),
 };
 

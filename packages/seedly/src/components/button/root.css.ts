@@ -4,6 +4,7 @@ import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import {
   mapContractVars,
   resolveColorProfileValues,
+  stateColor,
   sys,
   typography,
   transition,
@@ -14,48 +15,43 @@ import type { ColorTone, ColorVariant, ProfileColorValues } from '../../styles';
 
 export const buttonVars = createThemeContract({
   color: {
-    foreground: null,
-    background: null,
-    border: null,
-    focusRing: null,
+    rootActiveBackground: null,
+    rootActiveBorder: null,
+    rootActiveForeground: null,
+    rootBackground: null,
+    rootBorder: null,
+    rootDisabledBackground: null,
+    rootDisabledBorder: null,
+    rootDisabledForeground: null,
+    rootFocusRing: null,
+    rootForeground: null,
+    rootHoverBackground: null,
+    rootHoverBorder: null,
+    rootHoverForeground: null,
+    rootLoadingBackground: null,
+    rootLoadingBorder: null,
+    rootLoadingForeground: null,
   },
 
-  spacing: {
-    block: null,
-    inline: null,
-    gap: null,
+  motion: {
+    rootTransitionDuration: null,
+    rootTransitionEasing: null,
   },
 
   shape: {
-    corner: null,
+    rootCorner: null,
   },
 
-  icon: {
-    size: null,
+  size: {
+    rootIcon: null,
   },
-});
 
-const buttonStateVars = createThemeContract({
-  color: {
-    hoverForeground: null,
-    hoverBackground: null,
-    hoverBorder: null,
-
-    activeForeground: null,
-    activeBackground: null,
-    activeBorder: null,
-
-    disabledForeground: null,
-    disabledBackground: null,
-    disabledBorder: null,
-
-    loadingForeground: null,
-    loadingBackground: null,
-    loadingBorder: null,
+  spacing: {
+    rootGap: null,
+    rootPaddingBlock: null,
+    rootPaddingInline: null,
   },
 });
-
-export { buttonStateVars };
 
 const buttonTones = [
   'neutral',
@@ -74,28 +70,22 @@ const buttonStyledVariants = [
 const assignButtonColorVars = (values: ProfileColorValues) => {
   return {
     ...assignVars(buttonVars.color, {
-      foreground: values.foreground,
-      background: values.background,
-      border: values.border,
-      focusRing: values.focusRing,
-    }),
-
-    ...assignVars(buttonStateVars.color, {
-      hoverForeground: values.hoverForeground,
-      hoverBackground: values.hoverBackground,
-      hoverBorder: values.hoverBorder,
-
-      activeForeground: values.activeForeground,
-      activeBackground: values.activeBackground,
-      activeBorder: values.activeBorder,
-
-      disabledForeground: values.disabledForeground,
-      disabledBackground: values.disabledBackground,
-      disabledBorder: values.disabledBorder,
-
-      loadingForeground: values.loadingForeground,
-      loadingBackground: values.loadingBackground,
-      loadingBorder: values.loadingBorder,
+      rootActiveBackground: values.activeBackground,
+      rootActiveBorder: values.activeBorder,
+      rootActiveForeground: values.activeForeground,
+      rootBackground: values.background,
+      rootBorder: values.border,
+      rootDisabledBackground: values.disabledBackground,
+      rootDisabledBorder: values.disabledBorder,
+      rootDisabledForeground: values.disabledForeground,
+      rootFocusRing: values.focusRing,
+      rootForeground: values.foreground,
+      rootHoverBackground: values.hoverBackground,
+      rootHoverBorder: values.hoverBorder,
+      rootHoverForeground: values.hoverForeground,
+      rootLoadingBackground: values.loadingBackground,
+      rootLoadingBorder: values.loadingBorder,
+      rootLoadingForeground: values.loadingForeground,
     }),
   };
 };
@@ -108,13 +98,13 @@ const buttonSizeStyles = {
         [components]: {
           vars: {
             ...assignVars(buttonVars.spacing, {
-              block: sys.spacing[4],
-              inline: sys.spacing[6],
-              gap: sys.spacing[3],
+              rootGap: sys.spacing[3],
+              rootPaddingBlock: sys.spacing[4],
+              rootPaddingInline: sys.spacing[6],
             }),
 
-            ...assignVars(buttonVars.icon, {
-              size: sys.spacing[5],
+            ...assignVars(buttonVars.size, {
+              rootIcon: sys.spacing[5],
             }),
           },
         },
@@ -129,13 +119,13 @@ const buttonSizeStyles = {
         [components]: {
           vars: {
             ...assignVars(buttonVars.spacing, {
-              block: sys.spacing[6],
-              inline: sys.spacing[8],
-              gap: sys.spacing[4],
+              rootGap: sys.spacing[4],
+              rootPaddingBlock: sys.spacing[6],
+              rootPaddingInline: sys.spacing[8],
             }),
 
-            ...assignVars(buttonVars.icon, {
-              size: sys.spacing[6],
+            ...assignVars(buttonVars.size, {
+              rootIcon: sys.spacing[6],
             }),
           },
         },
@@ -150,13 +140,13 @@ const buttonSizeStyles = {
         [components]: {
           vars: {
             ...assignVars(buttonVars.spacing, {
-              block: sys.spacing[8],
-              inline: sys.spacing[10],
-              gap: sys.spacing[5],
+              rootGap: sys.spacing[5],
+              rootPaddingBlock: sys.spacing[8],
+              rootPaddingInline: sys.spacing[10],
             }),
 
-            ...assignVars(buttonVars.icon, {
-              size: sys.spacing[7],
+            ...assignVars(buttonVars.size, {
+              rootIcon: sys.spacing[7],
             }),
           },
         },
@@ -170,20 +160,20 @@ export const buttonStyledVariantClass = style({
     [components]: {
       justifyContent: 'center',
 
-      paddingBlock: buttonVars.spacing.block,
-      paddingInline: buttonVars.spacing.inline,
+      paddingBlock: buttonVars.spacing.rootPaddingBlock,
+      paddingInline: buttonVars.spacing.rootPaddingInline,
 
       textDecorationLine: 'none',
-      color: buttonVars.color.foreground,
-      backgroundColor: buttonVars.color.background,
-      borderRadius: buttonVars.shape.corner,
-      border: `1px solid ${buttonVars.color.border}`,
+      color: buttonVars.color.rootForeground,
+      backgroundColor: buttonVars.color.rootBackground,
+      borderRadius: buttonVars.shape.rootCorner,
+      border: `1px solid ${buttonVars.color.rootBorder}`,
 
       transition: transition(
         ['background-color', 'border-color', 'color', 'box-shadow'],
         {
-          duration: 'short.3',
-          easing: 'standard',
+          duration: buttonVars.motion.rootTransitionDuration,
+          easing: buttonVars.motion.rootTransitionEasing,
         },
       ),
 
@@ -191,30 +181,35 @@ export const buttonStyledVariantClass = style({
         '&:hover:not(:disabled):not([data-disabled]):not([data-loading])': {
           '@media': {
             '(hover: hover)': {
-              color: buttonStateVars.color.hoverForeground,
-              backgroundColor: buttonStateVars.color.hoverBackground,
-              borderColor: buttonStateVars.color.hoverBorder,
+              color: buttonVars.color.rootHoverForeground,
+              backgroundColor: buttonVars.color.rootHoverBackground,
+              borderColor: buttonVars.color.rootHoverBorder,
             },
           },
         },
 
         '&:active:not(:disabled):not([data-disabled]):not([data-loading])': {
-          color: buttonStateVars.color.activeForeground,
-          backgroundColor: buttonStateVars.color.activeBackground,
-          borderColor: buttonStateVars.color.activeBorder,
+          color: buttonVars.color.rootActiveForeground,
+          backgroundColor: buttonVars.color.rootActiveBackground,
+          borderColor: buttonVars.color.rootActiveBorder,
+        },
+
+        '&:focus-visible:not(:disabled):not([data-disabled])': {
+          outline: `2px solid ${buttonVars.color.rootFocusRing}`,
+          outlineOffset: '-1px',
         },
 
         '&:disabled, &[data-disabled]': {
-          color: buttonStateVars.color.disabledForeground,
-          backgroundColor: buttonStateVars.color.disabledBackground,
-          borderColor: buttonStateVars.color.disabledBorder,
+          color: buttonVars.color.rootDisabledForeground,
+          backgroundColor: buttonVars.color.rootDisabledBackground,
+          borderColor: buttonVars.color.rootDisabledBorder,
           boxShadow: 'none',
         },
 
         '&[data-loading]': {
-          color: buttonStateVars.color.loadingForeground,
-          backgroundColor: buttonStateVars.color.loadingBackground,
-          borderColor: buttonStateVars.color.loadingBorder,
+          color: buttonVars.color.rootLoadingForeground,
+          backgroundColor: buttonVars.color.rootLoadingBackground,
+          borderColor: buttonVars.color.rootLoadingBorder,
         },
       },
     },
@@ -225,16 +220,50 @@ export const buttonBaseClass = style({
   '@layer': {
     [components]: {
       vars: {
-        [buttonVars.spacing.gap]: sys.spacing[4],
+        ...assignVars(buttonVars, {
+          color: {
+            rootActiveBackground: sys.color.tone.primary,
+            rootActiveBorder: sys.color.tone.primary,
+            rootActiveForeground: sys.color.tone.onPrimary,
+            rootBackground: sys.color.tone.primary,
+            rootBorder: sys.color.tone.primary,
+            rootDisabledBackground: sys.color.container.base,
+            rootDisabledBorder: 'transparent',
+            rootDisabledForeground: stateColor.disabledContent,
+            rootFocusRing: sys.color.tone.primary,
+            rootForeground: sys.color.tone.onPrimary,
+            rootHoverBackground: sys.color.tone.primaryContainer,
+            rootHoverBorder: sys.color.tone.primaryContainer,
+            rootHoverForeground: sys.color.tone.onPrimary,
+            rootLoadingBackground: sys.color.tone.primaryContainer,
+            rootLoadingBorder: sys.color.tone.primaryContainer,
+            rootLoadingForeground: sys.color.tone.onPrimary,
+          },
 
-        ...assignVars(buttonVars.icon, {
-          size: sys.spacing[6],
+          motion: {
+            rootTransitionDuration: sys.motion.duration.short[3],
+            rootTransitionEasing: sys.motion.easing.standard,
+          },
+
+          shape: {
+            rootCorner: sys.shape.corner.medium,
+          },
+
+          size: {
+            rootIcon: sys.spacing[6],
+          },
+
+          spacing: {
+            rootGap: sys.spacing[4],
+            rootPaddingBlock: sys.spacing[6],
+            rootPaddingInline: sys.spacing[8],
+          },
         }),
       },
 
       display: 'inline-flex',
       alignItems: 'center',
-      gap: buttonVars.spacing.gap,
+      gap: buttonVars.spacing.rootGap,
       whiteSpace: 'nowrap',
 
       cursor: 'pointer',
@@ -298,7 +327,7 @@ export const buttonRecipe = recipe({
         '@layer': {
           [components]: {
             vars: {
-              [buttonVars.spacing.gap]: sys.spacing[0],
+              [buttonVars.spacing.rootGap]: sys.spacing[0],
             },
           },
         },
@@ -345,7 +374,7 @@ export const buttonRecipe = recipe({
         style: {
           '@layer': {
             [components]: {
-              paddingInline: buttonVars.spacing.block,
+              paddingInline: buttonVars.spacing.rootPaddingBlock,
             },
           },
         },

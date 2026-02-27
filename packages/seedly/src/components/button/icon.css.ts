@@ -12,8 +12,8 @@ export const buttonIcon = style({
       justifyContent: 'center',
       flexShrink: '0',
 
-      inlineSize: buttonVars.icon.size,
-      blockSize: buttonVars.icon.size,
+      inlineSize: buttonVars.size.rootIcon,
+      blockSize: buttonVars.size.rootIcon,
     },
   },
 });

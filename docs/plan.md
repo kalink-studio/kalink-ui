@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`.
-- Next unchecked component: `button`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`.
+- Next unchecked component: `center`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -189,7 +189,7 @@ Examples:
 - [x] `autocomplete`
 - [x] `avatar`
 - [x] `box`
-- [ ] `button`
+- [x] `button`
 - [ ] `center`
 - [ ] `checkbox`
 - [ ] `checkbox-group`
@@ -370,6 +370,25 @@ If policy changes mid-migration:
   - Intentional direct `sys` usages: none.
 - Foundation changes:
   - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `button`
+
+- Status: `done`
+- Outcome:
+  - Consolidated button styling into one role-based local contract and removed the secondary state contract (`buttonStateVars`).
+  - Added explicit component-owned defaults in one owner assignment block: `assignVars(buttonVars, { ... })`.
+  - Remapped token-eligible root surface/state properties (foreground/background/border/focus/hover/active/disabled/loading), spacing, shape, icon size, and transition motion to local tokens.
+  - Wired focus ring tokens into `:focus-visible` styles and updated icon sizing references to the new size group.
+- Mapping coverage:
+  - Properties audited: root foreground/background/border/focus, hover/active/disabled/loading state colors, paddings/gap, corner, icon size, transition duration/easing.
+  - Properties remapped: all styled button surface/state properties now resolve through `buttonVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `buttonBaseClass` map to `sys`/`stateColor` tokens.
+- Foundation changes:
+  - Updated `context-menu` button token assignment to consume renamed `buttonVars` role/state keys after removal of `buttonStateVars`.
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
