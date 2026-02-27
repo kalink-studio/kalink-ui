@@ -20,16 +20,18 @@ import type {
 
 export const boxVars = createThemeContract({
   color: {
-    background: null,
-    foreground: null,
-    border: null,
+    rootBackground: null,
+    rootBorder: null,
+    rootForeground: null,
   },
 });
 
-const boxColorDefaults = assignVars(boxVars.color, {
-  background: 'transparent',
-  foreground: 'inherit',
-  border: 'transparent',
+const boxDefaults = assignVars(boxVars, {
+  color: {
+    rootBackground: 'transparent',
+    rootBorder: 'transparent',
+    rootForeground: 'inherit',
+  },
 });
 
 const boxVariants = {
@@ -95,10 +97,12 @@ const emptyColorKeyStyles = boxColorKeys.reduce(
 );
 
 const assignBoxColorVars = (values: StaticColorValues) => {
-  return assignVars(boxVars.color, {
-    foreground: values.foreground,
-    background: values.background,
-    border: values.border,
+  return assignVars(boxVars, {
+    color: {
+      rootBackground: values.background,
+      rootBorder: values.border,
+      rootForeground: values.foreground,
+    },
   });
 };
 
@@ -143,22 +147,22 @@ export const boxRecipe = recipe({
     {
       '@layer': {
         [components]: {
-          color: boxVars.color.foreground,
-          backgroundColor: boxVars.color.background,
-
           vars: {
-            ...boxColorDefaults,
+            ...boxDefaults,
           },
+
+          backgroundColor: boxVars.color.rootBackground,
+          color: boxVars.color.rootForeground,
 
           selectors: {
             '&::before': {
-              inset: 0,
-              position: 'absolute',
               border: '1px solid',
-              borderColor: boxVars.color.border,
+              borderColor: boxVars.color.rootBorder,
               borderRadius: 'inherit',
               content: '""',
+              inset: 0,
               pointerEvents: 'none',
+              position: 'absolute',
             },
           },
         },

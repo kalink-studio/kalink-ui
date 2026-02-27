@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`.
-- Next unchecked component: `box`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`.
+- Next unchecked component: `button`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -188,7 +188,7 @@ Examples:
 - [x] `alert-dialog`
 - [x] `autocomplete`
 - [x] `avatar`
-- [ ] `box`
+- [x] `box`
 - [ ] `button`
 - [ ] `center`
 - [ ] `checkbox`
@@ -352,6 +352,24 @@ If policy changes mid-migration:
   - Properties audited: root color surface/content, root corner radius, avatar root size.
   - Properties remapped: root background/foreground/corner/size references.
   - Intentional direct `sys` usages: none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `box`
+
+- Status: `done`
+- Outcome:
+  - Normalized the local contract to role-based color keys: `rootBackground`, `rootBorder`, `rootForeground`.
+  - Consolidated local defaults into one owner assignment block: `assignVars(boxVars, { ... })`.
+  - Remapped all token-eligible root surface/content/outline references to the renamed local tokens, including static color profile variant assignments.
+- Mapping coverage:
+  - Properties audited: root background/foreground, pseudo-element border outline.
+  - Properties remapped: `backgroundColor`, `color`, and `::before` `borderColor` now reference role-based local tokens.
+  - Intentional direct `sys` usages: none.
+- Foundation changes:
+  - none.
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
