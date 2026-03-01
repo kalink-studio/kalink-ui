@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`.
-- Next unchecked component: `form`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`.
+- Next unchecked component: `frame`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -196,7 +196,7 @@ Examples:
 - [x] `dialog`
 - [x] `field`
 - [x] `fieldset`
-- [ ] `form`
+- [x] `form`
 - [ ] `frame`
 - [ ] `grid`
 - [ ] `input`
@@ -606,6 +606,26 @@ If policy changes mid-migration:
   - Properties audited: root stack gap; legend border width/color, spacing, and foreground color.
   - Properties remapped: root `gap`; legend `borderBlockEnd` width/color, `paddingBlockEnd`, and `color` now resolve through `fieldsetVars` local tokens.
   - Intentional direct `sys` usages: `typography.title.large` for legend typography.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `form`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based key `spacing.rootGap`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(formVars, { ... })`.
+  - Remapped token-eligible root stack gap property to the role-based local token.
+- Contract changes:
+  - Renamed: `spacing.gap` -> `spacing.rootGap`.
+- Mapping coverage:
+  - Properties audited: root stack gap.
+  - Properties remapped: root `gap` now resolves through `formVars.spacing.rootGap`.
+  - Intentional direct `sys` usages: component-owned default assignment in `formDefaults` (`sys.spacing[8]`).
 - Foundation changes:
   - none.
 - Validation:
