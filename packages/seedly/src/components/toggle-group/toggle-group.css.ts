@@ -4,36 +4,31 @@ import { sys } from '../../styles';
 
 export const toggleGroupVars = createThemeContract({
   color: {
-    buttonForeground: null,
-    buttonHoverBackground: null,
-    buttonActiveBackground: null,
-    buttonPressedBackground: null,
-    buttonPressedForeground: null,
-    focusRing: null,
+    itemFocusRing: null,
+    itemPressedBackground: null,
+    itemPressedForeground: null,
   },
   spacing: {
-    panelGap: null,
+    groupGap: null,
   },
 });
 
-const toggleGroupSpacingDefaults = assignVars(toggleGroupVars.spacing, {
-  panelGap: '1px',
+const toggleGroupDefaults = assignVars(toggleGroupVars, {
+  color: {
+    itemFocusRing: sys.color.tone.primary,
+    itemPressedBackground: sys.color.container.high,
+    itemPressedForeground: sys.color.content.base,
+  },
+  spacing: {
+    groupGap: '1px',
+  },
 });
 
 export const panel = style({
+  vars: toggleGroupDefaults,
+
   display: 'flex',
-  gap: toggleGroupVars.spacing.panelGap,
-  vars: {
-    ...assignVars(toggleGroupVars.color, {
-      buttonForeground: sys.color.content.base,
-      buttonHoverBackground: sys.color.container.low,
-      buttonActiveBackground: sys.color.container.high,
-      buttonPressedBackground: sys.color.container.high,
-      buttonPressedForeground: sys.color.content.base,
-      focusRing: sys.color.tone.primary,
-    }),
-    ...toggleGroupSpacingDefaults,
-  },
+  gap: toggleGroupVars.spacing.groupGap,
 });
 
 export const button = style([
@@ -42,11 +37,11 @@ export const button = style([
 
     selectors: {
       '&[data-pressed]': {
-        backgroundColor: toggleGroupVars.color.buttonPressedBackground,
-        color: toggleGroupVars.color.buttonPressedForeground,
+        backgroundColor: toggleGroupVars.color.itemPressedBackground,
+        color: toggleGroupVars.color.itemPressedForeground,
       },
       '&:focus-visible': {
-        outline: `2px solid ${toggleGroupVars.color.focusRing}`,
+        outline: `2px solid ${toggleGroupVars.color.itemFocusRing}`,
         outlineOffset: '-1px',
         backgroundColor: 'transparent',
       },
