@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`.
-- Next unchecked component: `switcher`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`.
+- Next unchecked component: `tabs`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -206,7 +206,7 @@ Examples:
 - [x] `slider`
 - [x] `stack`
 - [x] `switch`
-- [ ] `switcher`
+- [x] `switcher`
 - [ ] `tabs`
 - [ ] `toast`
 - [ ] `toggle`
@@ -1094,6 +1094,28 @@ If policy changes mid-migration:
   - Properties audited: label foreground + gap, track size/padding/gradient/border/focus ring/shadows, thumb surface/size/translation/shadow/motion.
   - Properties remapped: track `inlineSize`/`blockSize`/`padding`/`borderRadius`/`outlineColor`/state shadows; label `color`/`gap`; thumb `backgroundColor`/`borderColor`/`boxShadow`/checked translate and transition duration/easing now resolve through `switchVars` local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `switchDefaults` and intentional derived thumb sizing/checked translation (`calc`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `switcher`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys: `layout.rootThreshold` and `spacing.rootGap`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(switcherVars, { ... })`.
+  - Remapped token-eligible root spacing and child flex-basis threshold properties to local tokens.
+  - Updated `seedly-react` inline var wiring so `threshold` overrides target `switcherVars.layout.rootThreshold`.
+- Contract changes:
+  - Renamed: `layout.threshold` -> `layout.rootThreshold`.
+  - Renamed: `spacing.gap` -> `spacing.rootGap`.
+- Mapping coverage:
+  - Properties audited: root wrap gap and child `flexBasis` threshold calculation.
+  - Properties remapped: root `gap` and child `flexBasis` now resolve through `switcherVars` role-based local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `switcherDefaults` (`sys.layout.measure`, `sys.spacing[0]`).
 - Foundation changes:
   - none.
 - Validation:

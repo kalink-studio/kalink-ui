@@ -31,7 +31,7 @@ export function Switcher({
       : {
           ...props.style,
           ...assignInlineVars({
-            [switcherVars.layout.threshold]: threshold,
+            [switcherVars.layout.rootThreshold]: threshold,
           }),
         };
 

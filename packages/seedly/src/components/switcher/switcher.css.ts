@@ -14,20 +14,21 @@ import {
 import { components } from '../../styles/layers.css';
 
 export const switcherVars = createThemeContract({
-  spacing: {
-    gap: null,
-  },
   layout: {
-    threshold: null,
+    rootThreshold: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const switcherSpacingDefaults = assignVars(switcherVars.spacing, {
-  gap: sys.spacing[0],
-});
-
-const switcherLayoutDefaults = assignVars(switcherVars.layout, {
-  threshold: sys.layout.measure,
+const switcherDefaults = assignVars(switcherVars, {
+  layout: {
+    rootThreshold: sys.layout.measure,
+  },
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
 export const switcherSpacingStyles = mapContractVars(
@@ -67,14 +68,11 @@ export const switcherRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
+        vars: switcherDefaults,
+
         display: 'flex',
         flexWrap: 'wrap',
-        gap: switcherVars.spacing.gap,
-
-        vars: {
-          ...switcherSpacingDefaults,
-          ...switcherLayoutDefaults,
-        },
+        gap: switcherVars.spacing.rootGap,
       },
     },
   },
@@ -94,7 +92,7 @@ const limitSelector = (limitClass: string, limit: number) => {
 globalStyle(`${switcherRecipe.classNames.base} > *`, {
   '@layer': {
     [components]: {
-      flexBasis: `calc((${switcherVars.layout.threshold} - 100%) * 999)`,
+      flexBasis: `calc((${switcherVars.layout.rootThreshold} - 100%) * 999)`,
       flexGrow: 1,
     },
   },
