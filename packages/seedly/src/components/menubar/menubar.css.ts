@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
+import { createBarRootStyles } from '../_foundation';
+
 export {
   button as menuTrigger,
   item as menuItem,
@@ -8,6 +10,4 @@ export {
   separator as menuSeparator,
 } from '../menu/menu.css';
 
-export const menubar = style({
-  display: 'flex',
-});
+export const menubar = style(createBarRootStyles());

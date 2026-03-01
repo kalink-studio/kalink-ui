@@ -1,3 +1,4 @@
+export * from './bar-root';
 export * from './choice-control';
 export * from './control';
 export * from './dialog-surface';

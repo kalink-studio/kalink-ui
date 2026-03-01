@@ -27,12 +27,13 @@ export function Button({
   icon,
   ...props
 }: ButtonProps) {
+  const hasCustomRender = render != null;
+
   return (
     <Toolbar.Button
       {...props}
       render={(toolbarButtonProps, state) => {
-        const isComboboxTrigger = toolbarButtonProps.role === 'combobox';
-        const shouldUseChildStyles = unstyled === true || isComboboxTrigger;
+        const shouldUseChildStyles = unstyled === true || hasCustomRender;
         const resolvedClassName = resolveStateClassName(className, state);
 
         return (

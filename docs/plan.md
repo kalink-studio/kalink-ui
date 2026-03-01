@@ -34,7 +34,7 @@ Validation gate (in order):
 
 - Migration has started.
 - Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`, `toast`, `toggle`, `toggle-group`.
-- Next unchecked component: `toolbar`.
+- Next unchecked component: `tooltip`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -211,7 +211,7 @@ Examples:
 - [x] `toast`
 - [x] `toggle`
 - [x] `toggle-group`
-- [ ] `toolbar`
+- [x] `toolbar`
 - [ ] `tooltip`
 
 ---
@@ -1207,6 +1207,28 @@ If policy changes mid-migration:
   - Intentional direct `sys` usages: component-owned default assignments in `toggleGroupDefaults`.
 - Foundation changes:
   - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `toolbar`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, `size`, and `spacing` groups for root/group/button/separator/link surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(toolbarVars, { ... })`.
+  - Remapped token-eligible toolbar-owned spacing, separator, link, and fallback button state properties to local tokens.
+  - Reduced cross-component coupling in `seedly-react` toolbar composition: `Toolbar.Button` now treats custom renders as style owners and avoids applying toolbar fallback styles.
+  - Added shared bar-root plumbing in `_foundation` and reused it in both `toolbar` and `menubar` without changing menubar visual defaults.
+- Contract changes:
+  - Added: `color.buttonActiveBackground`, `color.buttonFocusRing`, `color.buttonHoverBackground`, `color.buttonPressedBackground`, `color.buttonPressedForeground`, `color.linkFocusRing`, `color.linkForeground`, `color.linkHoverForeground`, `color.separatorBackground`, `layout.buttonFocusRingOffset`, `layout.rootInlineSize`, `shape.linkFocusCorner`, `size.separatorBlockSize`, `spacing.buttonPressedPaddingBlock`, `spacing.buttonPressedPaddingInline`, `spacing.groupGap`, `spacing.linkMarginInlineEnd`, `spacing.linkFocusRingOffset`, `spacing.rootGap`, `spacing.rootRowGap`, `spacing.separatorMarginBlock`, `spacing.separatorMarginInline`.
+- Mapping coverage:
+  - Properties audited: root and group spacing/layout, button hover/active/pressed/focus states and pressed paddings, separator sizing/margins/surface, link foreground/hover/focus ring/corner/offset and trailing margin.
+  - Properties remapped: all token-eligible toolbar-owned properties now resolve through `toolbarVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `toolbarDefaults` and link typography utility (`typography.body.medium`).
+- Foundation changes:
+  - Added `_foundation/createBarRootStyles` and reused it in `toolbar` + `menubar` root styles for shared layout plumbing.
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)

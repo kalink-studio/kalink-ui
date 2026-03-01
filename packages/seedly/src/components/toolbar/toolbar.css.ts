@@ -1,93 +1,175 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { createBarRootStyles } from '../_foundation';
 
 export const toolbarVars = createThemeContract({
+  color: {
+    buttonActiveBackground: null,
+    buttonFocusRing: null,
+    buttonHoverBackground: null,
+    buttonPressedBackground: null,
+    buttonPressedForeground: null,
+    linkFocusRing: null,
+    linkForeground: null,
+    linkHoverForeground: null,
+    separatorBackground: null,
+  },
+
+  layout: {
+    buttonFocusRingOffset: null,
+    rootInlineSize: null,
+  },
+
+  shape: {
+    linkFocusCorner: null,
+  },
+
   size: {
+    separatorBlockSize: null,
     separatorInlineSize: null,
+  },
+
+  spacing: {
+    buttonPressedPaddingBlock: null,
+    buttonPressedPaddingInline: null,
+    groupGap: null,
+    linkMarginInlineEnd: null,
+    linkFocusRingOffset: null,
+    rootGap: null,
+    rootRowGap: null,
+    separatorMarginBlock: null,
+    separatorMarginInline: null,
   },
 });
 
-const toolbarSizeDefaults = assignVars(toolbarVars.size, {
-  separatorInlineSize: '1px',
+const toolbarDefaults = assignVars(toolbarVars, {
+  color: {
+    buttonActiveBackground: sys.color.container.high,
+    buttonFocusRing: sys.color.tone.primary,
+    buttonHoverBackground: sys.color.container.low,
+    buttonPressedBackground: sys.color.container.low,
+    buttonPressedForeground: sys.color.content.base,
+    linkFocusRing: sys.color.tone.primary,
+    linkForeground: stateColor.mutedContent,
+    linkHoverForeground: sys.color.tone.primary,
+    separatorBackground: sys.color.border.high,
+  },
+
+  layout: {
+    buttonFocusRingOffset: '-1px',
+    rootInlineSize: '100%',
+  },
+
+  shape: {
+    linkFocusCorner: sys.shape.corner.small,
+  },
+
+  size: {
+    separatorBlockSize: sys.spacing[8],
+    separatorInlineSize: '1px',
+  },
+
+  spacing: {
+    buttonPressedPaddingBlock: sys.spacing[0],
+    buttonPressedPaddingInline: sys.spacing[6],
+    groupGap: sys.spacing[2],
+    linkMarginInlineEnd: sys.spacing[6],
+    linkFocusRingOffset: '-2px',
+    rootGap: sys.spacing[1],
+    rootRowGap: sys.spacing[1],
+    separatorMarginBlock: sys.spacing[2],
+    separatorMarginInline: sys.spacing[2],
+  },
 });
 
 export const toolbar = style({
-  display: 'flex',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  gap: sys.spacing[1],
-  rowGap: sys.spacing[1],
-  inlineSize: '100%',
+  ...createBarRootStyles({
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: toolbarVars.spacing.rootGap,
+    inlineSize: toolbarVars.layout.rootInlineSize,
+    rowGap: toolbarVars.spacing.rootRowGap,
+  }),
+
   vars: {
-    ...toolbarSizeDefaults,
+    ...toolbarDefaults,
   },
 });
 
 export const group = style({
-  display: 'flex',
-  gap: sys.spacing[2],
+  ...createBarRootStyles({
+    gap: toolbarVars.spacing.groupGap,
+  }),
 });
 
 export const button = style([
   {
     borderWidth: '0',
+    vars: {
+      ...toolbarDefaults,
+    },
 
     selectors: {
       '&:hover:not(:disabled):not([data-disabled]):not([data-loading])': {
         '@media': {
           '(hover: hover)': {
-            backgroundColor: sys.color.container.low,
+            backgroundColor: toolbarVars.color.buttonHoverBackground,
           },
         },
       },
       '&:active:not(:disabled):not([data-disabled]):not([data-loading])': {
-        backgroundColor: sys.color.container.high,
+        backgroundColor: toolbarVars.color.buttonActiveBackground,
       },
       '&[data-pressed]': {
-        backgroundColor: sys.color.container.low,
-        color: sys.color.content.base,
+        backgroundColor: toolbarVars.color.buttonPressedBackground,
+        color: toolbarVars.color.buttonPressedForeground,
       },
       '&:focus-visible': {
-        outline: `2px solid ${sys.color.tone.primary}`,
-        outlineOffset: '-1px',
-        backgroundColor: 'transparent',
+        outline: `2px solid ${toolbarVars.color.buttonFocusRing}`,
+        outlineOffset: toolbarVars.layout.buttonFocusRingOffset,
       },
       [`&[aria-pressed]`]: {
-        paddingBlock: '0',
-        paddingInline: sys.spacing[6],
+        paddingBlock: toolbarVars.spacing.buttonPressedPaddingBlock,
+        paddingInline: toolbarVars.spacing.buttonPressedPaddingInline,
       },
     },
   },
 ]);
 
 export const separator = style({
+  vars: {
+    ...toolbarDefaults,
+  },
   inlineSize: toolbarVars.size.separatorInlineSize,
-  blockSize: sys.spacing[8],
-  marginBlock: sys.spacing[2],
-  marginInline: sys.spacing[2],
-  backgroundColor: sys.color.border.high,
+  blockSize: toolbarVars.size.separatorBlockSize,
+  marginBlock: toolbarVars.spacing.separatorMarginBlock,
+  marginInline: toolbarVars.spacing.separatorMarginInline,
+  backgroundColor: toolbarVars.color.separatorBackground,
 });
 
 export const link = style([
   typography.body.medium,
   {
+    vars: {
+      ...toolbarDefaults,
+    },
     alignSelf: 'center',
     flex: '0 0 auto',
-    marginInline: `auto ${sys.spacing[6]}`,
-    color: stateColor.mutedContent,
+    marginInline: `auto ${toolbarVars.spacing.linkMarginInlineEnd}`,
+    color: toolbarVars.color.linkForeground,
     textDecoration: 'none',
 
     selectors: {
       [`&:focus-visible`]: {
-        outline: `2px solid ${sys.color.tone.primary}`,
-        outlineOffset: '-2px',
-        borderRadius: 'var(--radius-sm)',
+        outline: `2px solid ${toolbarVars.color.linkFocusRing}`,
+        outlineOffset: toolbarVars.spacing.linkFocusRingOffset,
+        borderRadius: toolbarVars.shape.linkFocusCorner,
       },
       [`&:hover`]: {
         '@media': {
           '(hover: hover)': {
-            color: sys.color.tone.primary,
+            color: toolbarVars.color.linkHoverForeground,
           },
         },
       },
