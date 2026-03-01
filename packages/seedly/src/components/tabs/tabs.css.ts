@@ -4,59 +4,77 @@ import { stateColor, sys, transition } from '../../styles';
 
 export const tabsVars = createThemeContract({
   color: {
-    border: null,
+    rootBorder: null,
     tabForeground: null,
-    tabActiveForeground: null,
+    tabForegroundActive: null,
+    tabFocusRing: null,
     indicatorBackground: null,
-    focusRing: null,
-    icon: null,
+  },
+  motion: {
+    indicatorTransitionDuration: null,
+    indicatorTransitionEasing: null,
   },
   shape: {
     rootCorner: null,
     indicatorCorner: null,
-    focusCorner: null,
+    panelFocusCorner: null,
   },
-  layout: {
+  size: {
     panelBlockSize: null,
   },
+  spacing: {
+    listGap: null,
+    listPaddingInline: null,
+    tabFocusInsetBlock: null,
+    tabFocusRingOffset: null,
+    panelFocusRingOffset: null,
+  },
 });
 
-const tabsColorDefaults = assignVars(tabsVars.color, {
-  border: sys.color.border.base,
-  tabForeground: stateColor.mutedContent,
-  tabActiveForeground: sys.color.content.base,
-  indicatorBackground: sys.color.container.low,
-  focusRing: sys.color.tone.primary,
-  icon: sys.color.container.top,
-});
-
-const tabsShapeDefaults = assignVars(tabsVars.shape, {
-  rootCorner: sys.shape.corner.medium,
-  indicatorCorner: sys.shape.corner.small,
-  focusCorner: sys.shape.corner.medium,
-});
-
-const tabsLayoutDefaults = assignVars(tabsVars.layout, {
-  panelBlockSize: '8rem',
+const tabsDefaults = assignVars(tabsVars, {
+  color: {
+    rootBorder: sys.color.border.base,
+    tabForeground: stateColor.mutedContent,
+    tabForegroundActive: sys.color.content.base,
+    tabFocusRing: sys.color.tone.primary,
+    indicatorBackground: sys.color.container.low,
+  },
+  motion: {
+    indicatorTransitionDuration: sys.motion.duration.medium[1],
+    indicatorTransitionEasing: sys.motion.easing.standard,
+  },
+  shape: {
+    rootCorner: sys.shape.corner.medium,
+    indicatorCorner: sys.shape.corner.small,
+    panelFocusCorner: sys.shape.corner.medium,
+  },
+  size: {
+    panelBlockSize: `calc(${sys.spacing[18]} * 2)`,
+  },
+  spacing: {
+    listGap: sys.spacing[2],
+    listPaddingInline: sys.spacing[2],
+    tabFocusInsetBlock: sys.spacing[2],
+    tabFocusRingOffset: '-1px',
+    panelFocusRingOffset: '-1px',
+  },
 });
 
 export const tabs = style({
-  border: `1px solid ${tabsVars.color.border}`,
+  border: `1px solid ${tabsVars.color.rootBorder}`,
   borderRadius: tabsVars.shape.rootCorner,
   vars: {
-    ...tabsColorDefaults,
-    ...tabsShapeDefaults,
-    ...tabsLayoutDefaults,
+    ...tabsDefaults,
   },
 });
 
 export const list = style({
   display: 'flex',
-  gap: sys.spacing[2],
-  paddingInline: sys.spacing[2],
+  gap: tabsVars.spacing.listGap,
+  paddingInline: tabsVars.spacing.listPaddingInline,
   position: 'relative',
   zIndex: '0',
-  boxShadow: `inset 0 -1px ${tabsVars.color.border}`,
+  boxShadow: `inset 0 -1px ${tabsVars.color.rootBorder}`,
 });
 
 export const tab = style([
@@ -67,10 +85,11 @@ export const tab = style([
     appearance: 'none',
     whiteSpace: 'nowrap',
     wordBreak: 'keep-all',
+    color: tabsVars.color.tabForeground,
 
     selectors: {
       [`&[data-active]`]: {
-        color: tabsVars.color.tabActiveForeground,
+        color: tabsVars.color.tabForegroundActive,
       },
       [`&:focus-visible`]: {
         position: 'relative',
@@ -78,11 +97,11 @@ export const tab = style([
       [`&:focus-visible::before`]: {
         content: "''",
         position: 'absolute',
-        insetBlock: sys.spacing[2],
+        insetBlock: tabsVars.spacing.tabFocusInsetBlock,
         insetInline: '0',
         borderRadius: tabsVars.shape.indicatorCorner,
-        outline: `2px solid ${tabsVars.color.focusRing}`,
-        outlineOffset: '-1px',
+        outline: `2px solid ${tabsVars.color.tabFocusRing}`,
+        outlineOffset: tabsVars.spacing.tabFocusRingOffset,
       },
     },
   },
@@ -99,8 +118,8 @@ export const indicator = style({
   backgroundColor: tabsVars.color.indicatorBackground,
   translate: 'var(--active-tab-left) 0',
   transition: transition(['translate', 'inline-size', 'block-size'], {
-    duration: 'medium.1',
-    easing: 'standard',
+    duration: tabsVars.motion.indicatorTransitionDuration,
+    easing: tabsVars.motion.indicatorTransitionEasing,
   }),
 });
 
@@ -108,24 +127,18 @@ export const panel = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  blockSize: tabsVars.layout.panelBlockSize,
+  blockSize: tabsVars.size.panelBlockSize,
   position: 'relative',
   outline: '0',
 
   selectors: {
     [`&:focus-visible`]: {
-      outline: `2px solid ${tabsVars.color.focusRing}`,
-      outlineOffset: '-1px',
-      borderRadius: tabsVars.shape.focusCorner,
+      outline: `2px solid ${tabsVars.color.tabFocusRing}`,
+      outlineOffset: tabsVars.spacing.panelFocusRingOffset,
+      borderRadius: tabsVars.shape.panelFocusCorner,
     },
     [`&[hidden]`]: {
       display: 'none',
     },
   },
-});
-
-export const icon = style({
-  inlineSize: sys.spacing[14],
-  blockSize: sys.spacing[14],
-  color: tabsVars.color.icon,
 });

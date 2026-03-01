@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`.
-- Next unchecked component: `tabs`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`.
+- Next unchecked component: `toast`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -207,7 +207,7 @@ Examples:
 - [x] `stack`
 - [x] `switch`
 - [x] `switcher`
-- [ ] `tabs`
+- [x] `tabs`
 - [ ] `toast`
 - [ ] `toggle`
 - [ ] `toggle-group`
@@ -1116,6 +1116,29 @@ If policy changes mid-migration:
   - Properties audited: root wrap gap and child `flexBasis` threshold calculation.
   - Properties remapped: root `gap` and child `flexBasis` now resolve through `switcherVars` role-based local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `switcherDefaults` (`sys.layout.measure`, `sys.spacing[0]`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `tabs`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `motion`, `shape`, `size`, and `spacing` groups for root/list/tab/indicator/panel surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(tabsVars, { ... })`.
+  - Remapped token-eligible list spacing, tab foreground/focus, indicator motion, and panel sizing/focus properties to local tokens.
+  - Removed unused `icon` style export and dead token wiring because no `seedly-react` tabs wrapper consumes it.
+- Contract changes:
+  - Added: `color.rootBorder`, `color.tabForegroundActive`, `color.tabFocusRing`, `motion.indicatorTransitionDuration`, `motion.indicatorTransitionEasing`, `shape.panelFocusCorner`, `size.panelBlockSize`, `spacing.listGap`, `spacing.listPaddingInline`, `spacing.tabFocusInsetBlock`, `spacing.tabFocusRingOffset`, `spacing.panelFocusRingOffset`.
+  - Renamed: `color.border` -> `color.rootBorder`, `color.tabActiveForeground` -> `color.tabForegroundActive`, `color.focusRing` -> `color.tabFocusRing`, `shape.focusCorner` -> `shape.panelFocusCorner`, `layout.panelBlockSize` -> `size.panelBlockSize`.
+  - Removed: `color.icon`, `icon` style export.
+- Mapping coverage:
+  - Properties audited: root border/corner, list gap/padding and divider border, tab foreground/active/focus ring inset and offset, indicator corner/surface/motion, panel size/focus ring/corner.
+  - Properties remapped: list `gap`/`paddingInline`; tab `color`/active `color`/focus-visible `insetBlock` + `outline` + `outlineOffset`; indicator transition `duration`/`easing`; panel `blockSize`/focus-visible `outline` + `outlineOffset` + `borderRadius` now resolve through `tabsVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `tabsDefaults` and intentional derived panel size (`calc(${sys.spacing[18]} * 2)`).
 - Foundation changes:
   - none.
 - Validation:
