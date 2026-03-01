@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`.
-- Next unchecked component: `cover`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`.
+- Next unchecked component: `dialog`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -194,7 +194,7 @@ Examples:
 - [x] `combobox`
 - [x] `container`
 - [x] `context-menu`
-- [ ] `cover`
+- [x] `cover`
 - [ ] `dialog`
 - [ ] `field`
 - [ ] `fieldset`
@@ -535,6 +535,25 @@ If policy changes mid-migration:
   - Properties audited: popup surface (background/foreground/outline/shadow/corner/padding), highlighted item foreground/background/corner/inset, separator size/margins/color.
   - Properties remapped: popup `background`/`foreground`/`outline`/`shadow`/`borderRadius`/`paddingBlock`; highlighted item `textColor`/`backgroundColor`/`borderRadius`/`insetInline`; separator `blockSize`/`marginBlock`/`marginInline`/`backgroundColor`.
   - Intentional direct `sys` usages: component-owned default assignments in `contextMenuDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `cover`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys: `layout.rootMinBlockSize` and `spacing.rootGap`.
+  - Consolidated defaults into one owner assignment block: `assignVars(coverVars, { ... })`.
+  - Remapped token-eligible root and child spacing/sizing properties to local contract tokens.
+  - Updated `seedly-react` inline var wiring so `minSize` overrides target `coverVars.layout.rootMinBlockSize`.
+- Mapping coverage:
+  - Properties audited: root minimum block size and child stack spacing.
+  - Properties remapped: root `minBlockSize` and child `marginBlock` now resolve through role-based local tokens.
+  - Intentional direct `sys` usages: component-owned default assignment in `coverDefaults` (`sys.spacing[0]`).
 - Foundation changes:
   - none.
 - Validation:

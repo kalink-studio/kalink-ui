@@ -9,20 +9,21 @@ import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const coverVars = createThemeContract({
-  spacing: {
-    block: null,
-  },
   layout: {
-    minBlockSize: null,
+    rootMinBlockSize: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const coverSpacingDefaults = assignVars(coverVars.spacing, {
-  block: sys.spacing[0],
-});
-
-const coverLayoutDefaults = assignVars(coverVars.layout, {
-  minBlockSize: '100vh',
+const coverDefaults = assignVars(coverVars, {
+  layout: {
+    rootMinBlockSize: '100vh',
+  },
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
 export const coverSpacingStyles = mapContractVars(
@@ -34,15 +35,12 @@ export const coverRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
+        vars: coverDefaults,
+
         display: 'flex',
         flexDirection: 'column',
 
-        minBlockSize: coverVars.layout.minBlockSize,
-
-        vars: {
-          ...coverSpacingDefaults,
-          ...coverLayoutDefaults,
-        },
+        minBlockSize: coverVars.layout.rootMinBlockSize,
       },
     },
   },
@@ -55,7 +53,7 @@ export const coverRecipe = recipe({
 globalStyle(`${coverRecipe.classNames.base} > *`, {
   '@layer': {
     [components]: {
-      marginBlock: coverVars.spacing.block,
+      marginBlock: coverVars.spacing.rootGap,
     },
   },
 });

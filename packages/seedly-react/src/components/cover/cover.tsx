@@ -27,7 +27,7 @@ export function Cover({
       : {
           ...props.style,
           ...assignInlineVars({
-            [coverVars.layout.minBlockSize]: minSize,
+            [coverVars.layout.rootMinBlockSize]: minSize,
           }),
         };
 
