@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`.
-- Next unchecked component: `preview-card`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`.
+- Next unchecked component: `progress`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `preview-card`
 - `progress`
 - `radio`
 - `select`
@@ -201,7 +200,7 @@ Examples:
 - [x] `navigation-menu`
 - [x] `number-field`
 - [x] `popover`
-- [ ] `preview-card`
+- [x] `preview-card`
 - [ ] `progress`
 - [ ] `radio`
 - [ ] `scroll-area`
@@ -880,6 +879,29 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `popover` no longer appears in the known strict-default fallout list.
+
+### `preview-card`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, and `spacing` groups for trigger text treatment, popup surface, and arrow stroke/fill surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(previewCardVars, { ... })`.
+  - Remapped popup surface wiring to the strict `_foundation` floating-surface API (`background`, `foreground`, `outline`, `outlineInverse`, `shadow`) and removed direct `sys` usage from theme-facing style rules.
+  - Kept portal-safe token assignment by assigning defaults at both `link` (trigger subtree owner) and `positioner` (portal subtree owner).
+- Contract changes:
+  - Added: `color.arrowInnerStroke`, `color.arrowOuterStroke`, `color.popupBackground`, `color.popupForeground`, `color.popupOutline`, `color.popupOutlineInverse`, `color.popupShadow`, `color.triggerFocusRing`, `color.triggerForeground`, `color.triggerUnderline`, `shape.popupCorner`, `shape.triggerFocusCorner`, `spacing.triggerUnderlineOffset`.
+- Mapping coverage:
+  - Properties audited: popup max inline size + floating surface visuals, arrow fill/strokes, trigger color + underline + focus ring/corner.
+  - Properties remapped: popup `background`/`foreground`/`outline`/`outlineInverse`/`shadow`/`borderRadius`/`maxInlineSize`; arrow fill/strokes; trigger `color`/`textDecorationColor`/`textUnderlineOffset`/focus `borderRadius` + `outline` now resolve through `previewCardVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `previewCardDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `preview-card` no longer appears in the known strict-default fallout list.
 
 ---
 
