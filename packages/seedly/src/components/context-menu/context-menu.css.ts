@@ -1,96 +1,96 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys, typography } from '../../styles';
+import { sys, typography } from '../../styles';
 import {
   createFloatingItemStyles,
-  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
+  createFloatingSurfaceStyles,
   createInsetHighlightStyles,
 } from '../_foundation';
-import {
-  buttonBaseClass,
-  buttonStyledVariantClass,
-  buttonVars,
-} from '../button';
 
 export const contextMenuVars = createThemeContract({
-  layout: {
-    triggerBlockSize: null,
+  color: {
+    itemHighlightedBackground: null,
+    itemHighlightedForeground: null,
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupShadow: null,
+    separator: null,
   },
+
+  shape: {
+    itemHighlightCorner: null,
+    popupCorner: null,
+  },
+
   size: {
     separatorBlockSize: null,
   },
+
+  spacing: {
+    itemHighlightInsetInline: null,
+    popupPaddingBlock: null,
+    separatorMarginBlock: null,
+    separatorMarginInline: null,
+  },
 });
 
-const contextMenuLayoutDefaults = assignVars(contextMenuVars.layout, {
-  triggerBlockSize: '12rem',
-});
+const contextMenuDefaults = assignVars(contextMenuVars, {
+  color: {
+    itemHighlightedBackground: sys.color.content.base,
+    itemHighlightedForeground: sys.color.container.base,
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+    separator: sys.color.border.high,
+  },
 
-const contextMenuSizeDefaults = assignVars(contextMenuVars.size, {
-  separatorBlockSize: '1px',
+  shape: {
+    itemHighlightCorner: sys.shape.corner.small,
+    popupCorner: sys.shape.corner.medium,
+  },
+
+  size: {
+    separatorBlockSize: '1px',
+  },
+
+  spacing: {
+    itemHighlightInsetInline: sys.spacing[4],
+    popupPaddingBlock: sys.spacing[2],
+    separatorMarginBlock: sys.spacing[3],
+    separatorMarginInline: sys.spacing[8],
+  },
 });
 
 const contextMenuItemHighlightSelectors =
   createInsetHighlightStyles({
-    textColor: sys.color.container.base,
+    backgroundColor: contextMenuVars.color.itemHighlightedBackground,
+    borderRadius: contextMenuVars.shape.itemHighlightCorner,
+    insetInline: contextMenuVars.spacing.itemHighlightInsetInline,
+    textColor: contextMenuVars.color.itemHighlightedForeground,
   }).selectors ?? {};
 
-const contextMenuTriggerButtonVars = {
-  ...assignVars(buttonVars.color, {
-    rootActiveBackground: sys.color.container.low,
-    rootActiveBorder: sys.color.border.base,
-    rootActiveForeground: sys.color.content.base,
-    rootBackground: 'transparent',
-    rootBorder: sys.color.border.base,
-    rootDisabledBackground: 'transparent',
-    rootDisabledBorder: sys.color.border.base,
-    rootDisabledForeground: stateColor.disabledContent,
-    rootFocusRing: sys.color.tone.primary,
-    rootForeground: sys.color.content.base,
-    rootHoverBackground: sys.color.container.low,
-    rootHoverBorder: sys.color.border.base,
-    rootHoverForeground: sys.color.content.base,
-    rootLoadingBackground: sys.color.container.low,
-    rootLoadingBorder: sys.color.border.base,
-    rootLoadingForeground: sys.color.content.base,
-  }),
-  ...assignVars(buttonVars.spacing, {
-    rootGap: '0',
-    rootPaddingBlock: '0',
-    rootPaddingInline: '0',
-  }),
-  ...assignVars(buttonVars.shape, {
-    rootCorner: sys.shape.corner.medium,
-  }),
-};
-
-export const trigger = style([
-  typography.label.large,
-  buttonBaseClass,
-  buttonStyledVariantClass,
-  {
-    inlineSize: '100%',
-    blockSize: contextMenuVars.layout.triggerBlockSize,
-    WebkitUserSelect: 'none',
-    userSelect: 'none',
-    vars: {
-      ...contextMenuTriggerButtonVars,
-      ...contextMenuLayoutDefaults,
-      ...contextMenuSizeDefaults,
-    },
-  },
-]);
-
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
+  ...createFloatingPositionerStyles({
+    vars: {
+      ...contextMenuDefaults,
+    },
+  }),
 });
 
 export const popup = style({
   ...createFloatingSurfaceStyles({
-    paddingBlock: sys.spacing[2],
+    background: contextMenuVars.color.popupBackground,
+    borderRadius: contextMenuVars.shape.popupCorner,
+    foreground: contextMenuVars.color.popupForeground,
     motion: {
       preset: 'fadeOut',
     },
+    outline: contextMenuVars.color.popupOutline,
+    paddingBlock: contextMenuVars.spacing.popupPaddingBlock,
+    shadow: contextMenuVars.color.popupShadow,
   }),
 });
 
@@ -105,8 +105,9 @@ export const item = style([
 ]);
 
 export const separator = style({
-  marginBlock: sys.spacing[3],
-  marginInline: sys.spacing[8],
   blockSize: contextMenuVars.size.separatorBlockSize,
-  backgroundColor: sys.color.border.high,
+  marginBlock: contextMenuVars.spacing.separatorMarginBlock,
+  marginInline: contextMenuVars.spacing.separatorMarginInline,
+
+  backgroundColor: contextMenuVars.color.separator,
 });

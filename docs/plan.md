@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`.
-- Next unchecked component: `context-menu`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`.
+- Next unchecked component: `cover`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `context-menu`
 - `dialog`
 - `field`
 - `input`
@@ -194,7 +193,7 @@ Examples:
 - [x] `collapsible`
 - [x] `combobox`
 - [x] `container`
-- [ ] `context-menu`
+- [x] `context-menu`
 - [ ] `cover`
 - [ ] `dialog`
 - [ ] `field`
@@ -516,6 +515,26 @@ If policy changes mid-migration:
   - Properties audited: root foreground/background, level-derived background composition, outline pseudo-element border color.
   - Properties remapped: root `color`/`backgroundColor` and `::before` `borderColor` now resolve through role-based local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `containerDefaults` (`sys.color.container.*`, `sys.color.content.base`) and derived subtle outline (`color-mix`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `context-menu`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `shape`, `size`, and `spacing` groups for popup/item/separator surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(contextMenuVars, { ... })`.
+  - Removed trigger-specific visual styling ownership from `context-menu`; trigger remains intentionally context-specific and unstyled.
+  - Remapped token-eligible popup/highlight/separator properties to local tokens and aligned strict `_foundation` call sites for floating surface and inset highlight APIs.
+  - Kept portal-safe token assignment by assigning defaults at `positioner` (portal subtree owner).
+- Mapping coverage:
+  - Properties audited: popup surface (background/foreground/outline/shadow/corner/padding), highlighted item foreground/background/corner/inset, separator size/margins/color.
+  - Properties remapped: popup `background`/`foreground`/`outline`/`shadow`/`borderRadius`/`paddingBlock`; highlighted item `textColor`/`backgroundColor`/`borderRadius`/`insetInline`; separator `blockSize`/`marginBlock`/`marginInline`/`backgroundColor`.
+  - Intentional direct `sys` usages: component-owned default assignments in `contextMenuDefaults`.
 - Foundation changes:
   - none.
 - Validation:

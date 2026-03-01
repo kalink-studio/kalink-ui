@@ -1,3 +1,5 @@
+import { Box } from '../box';
+
 import { ContextMenu } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -19,7 +21,17 @@ export const Default: Story = {
 function Example() {
   return (
     <ContextMenu.Root>
-      <ContextMenu.Trigger>Right click here</ContextMenu.Trigger>
+      <ContextMenu.Trigger>
+        <Box
+          colorKey="high"
+          colorSource="container"
+          radius="medium"
+          spacing={8}
+          variant="outline"
+        >
+          Right click here
+        </Box>
+      </ContextMenu.Trigger>
       <ContextMenu.Portal>
         <ContextMenu.Positioner>
           <ContextMenu.Popup>
