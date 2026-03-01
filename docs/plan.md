@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`, `toast`.
-- Next unchecked component: `toggle`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`, `toast`, `toggle`.
+- Next unchecked component: `toggle-group`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -209,7 +209,7 @@ Examples:
 - [x] `switcher`
 - [x] `tabs`
 - [x] `toast`
-- [ ] `toggle`
+- [x] `toggle`
 - [ ] `toggle-group`
 - [ ] `toolbar`
 - [ ] `tooltip`
@@ -1164,6 +1164,27 @@ If policy changes mid-migration:
   - Intentional direct `sys` usages: component-owned default assignments in `toastDefaults` and typography utilities (`typography.title.small`, `typography.body.medium`).
 - Foundation changes:
   - none (kept toast stack/swipe behavior component-owned; no `_foundation` factory adoption).
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `toggle`
+
+- Status: `done`
+- Outcome:
+  - Reduced the local contract to toggle-owned, role-based color tokens for pressed foreground and focus ring.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(toggleVars, { ... })`.
+  - Remapped token-eligible pressed and focus-visible color properties to local tokens and removed obsolete panel/button-prefixed token keys.
+- Contract changes:
+  - Added: `color.rootFocusRing`, `color.rootPressedForeground`.
+  - Removed: `color.panelBorder`, `color.panelBackground`, `color.buttonForeground`, `color.buttonHoverBackground`, `color.buttonActiveBackground`, `color.buttonPressedForeground`, `color.focusRing`, `shape.panelCorner`, `shape.buttonCorner`.
+- Mapping coverage:
+  - Properties audited: toggle pressed text color and focus-visible outline color.
+  - Properties remapped: `[data-pressed]` `color` and `:focus-visible` `outline` color now resolve through `toggleVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `toggleDefaults`.
+- Foundation changes:
+  - none.
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)

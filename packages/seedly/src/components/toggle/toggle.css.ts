@@ -1,30 +1,34 @@
-import { createThemeContract, style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
+
+import { sys } from '../../styles';
 
 export const toggleVars = createThemeContract({
   color: {
-    panelBorder: null,
-    panelBackground: null,
-    buttonForeground: null,
-    buttonHoverBackground: null,
-    buttonActiveBackground: null,
-    buttonPressedForeground: null,
-    focusRing: null,
-  },
-  shape: {
-    panelCorner: null,
-    buttonCorner: null,
+    rootFocusRing: null,
+    rootPressedForeground: null,
   },
 });
+
+const toggleDefaults = assignVars(toggleVars, {
+  color: {
+    rootFocusRing: sys.color.tone.primary,
+    rootPressedForeground: sys.color.content.base,
+  },
+});
+
 export const button = style([
   {
+    vars: {
+      ...toggleDefaults,
+    },
     borderWidth: '0',
 
     selectors: {
       '&[data-pressed]': {
-        color: toggleVars.color.buttonPressedForeground,
+        color: toggleVars.color.rootPressedForeground,
       },
       '&:focus-visible': {
-        outline: `2px solid ${toggleVars.color.focusRing}`,
+        outline: `2px solid ${toggleVars.color.rootFocusRing}`,
         outlineOffset: '-1px',
         backgroundColor: 'transparent',
       },
