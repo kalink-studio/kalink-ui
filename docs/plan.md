@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`.
-- Next unchecked component: `label`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`.
+- Next unchecked component: `layout`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -199,7 +199,7 @@ Examples:
 - [x] `frame`
 - [x] `grid`
 - [x] `input`
-- [ ] `label`
+- [x] `label`
 - [ ] `layout`
 - [ ] `menu`
 - [ ] `menubar`
@@ -686,6 +686,25 @@ If policy changes mid-migration:
   - Properties audited: label foreground, stack gap, input background/foreground/border/focus/corner/size/padding/inline size.
   - Properties remapped: label color; stack `gap` + `inlineSize`; input `backgroundColor`/`color`/`borderColor`/`borderRadius`/focus outline offset/`inlineSize`/`blockSize`/`paddingInlineStart`/`paddingInlineEnd` now resolve through `inputVars` local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `inputDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `label`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `typography` tokens for `field`, `choice`, and `caption` variants.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(labelVars, { ... })`.
+  - Remapped token-eligible typography properties to local tokens while preserving existing variant API and default (`field`).
+  - Verified `input` label context composition remains one-way (`InputLabel` composes `labelRecipe` + input class) with no input-scope style leakage into standalone `label`.
+- Mapping coverage:
+  - Properties audited: label `fontFamily`, `fontSize`, `fontWeight`, `letterSpacing`, `lineHeight` across `field`, `choice`, `caption` variants.
+  - Properties remapped: all variant typography properties now resolve through `labelVars.typography.*` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `labelDefaults` (`sys.typography.label.medium`, `sys.typography.body.large`, `sys.typography.label.large`).
 - Foundation changes:
   - none.
 - Validation:
