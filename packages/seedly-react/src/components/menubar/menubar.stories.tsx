@@ -21,7 +21,12 @@ function Example() {
   return (
     <Menubar>
       <MenubarMenu.Root>
-        <MenubarMenu.Trigger>File</MenubarMenu.Trigger>
+        <MenubarMenu.Trigger>
+          File
+          <MenubarMenu.TriggerIcon>
+            <ChevronDownIcon />
+          </MenubarMenu.TriggerIcon>
+        </MenubarMenu.Trigger>
         <MenubarMenu.Portal>
           <MenubarMenu.Positioner sideOffset={6} alignOffset={-2}>
             <MenubarMenu.Popup>
@@ -59,7 +64,12 @@ function Example() {
       </MenubarMenu.Root>
 
       <MenubarMenu.Root>
-        <MenubarMenu.Trigger>Edit</MenubarMenu.Trigger>
+        <MenubarMenu.Trigger>
+          Edit
+          <MenubarMenu.TriggerIcon>
+            <ChevronDownIcon />
+          </MenubarMenu.TriggerIcon>
+        </MenubarMenu.Trigger>
         <MenubarMenu.Portal>
           <MenubarMenu.Positioner sideOffset={6}>
             <MenubarMenu.Popup>
@@ -72,7 +82,12 @@ function Example() {
       </MenubarMenu.Root>
 
       <MenubarMenu.Root>
-        <MenubarMenu.Trigger>View</MenubarMenu.Trigger>
+        <MenubarMenu.Trigger>
+          View
+          <MenubarMenu.TriggerIcon>
+            <ChevronDownIcon />
+          </MenubarMenu.TriggerIcon>
+        </MenubarMenu.Trigger>
         <MenubarMenu.Portal>
           <MenubarMenu.Positioner sideOffset={6}>
             <MenubarMenu.Popup>
@@ -113,7 +128,12 @@ function Example() {
       </MenubarMenu.Root>
 
       <MenubarMenu.Root disabled>
-        <MenubarMenu.Trigger>Help</MenubarMenu.Trigger>
+        <MenubarMenu.Trigger>
+          Help
+          <MenubarMenu.TriggerIcon>
+            <ChevronDownIcon />
+          </MenubarMenu.TriggerIcon>
+        </MenubarMenu.Trigger>
       </MenubarMenu.Root>
     </Menubar>
   );
@@ -133,6 +153,14 @@ function ChevronRightIcon(props: ComponentProps<'svg'>) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+function ChevronDownIcon(props: ComponentProps<'svg'>) {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" {...props}>
+      <path d="M1 3.5L5 7.5L9 3.5" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }

@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`.
-- Next unchecked component: `menubar`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`.
+- Next unchecked component: `meter`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `menubar`
 - `meter`
 - `navigation-menu`
 - `number-field`
@@ -201,7 +200,7 @@ Examples:
 - [x] `label`
 - [x] `layout`
 - [x] `menu`
-- [ ] `menubar`
+- [x] `menubar`
 - [ ] `meter`
 - [ ] `navigation-menu`
 - [ ] `number-field`
@@ -520,15 +519,15 @@ If policy changes mid-migration:
 
 - Status: `done`
 - Outcome:
-  - Expanded local contract coverage to role-based `color`, `shape`, `size`, and `spacing` groups for popup/item/separator surfaces.
-  - Consolidated component-owned defaults into one owner assignment block: `assignVars(contextMenuVars, { ... })`.
+  - Scoped `context-menu` styling ownership to context-specific boundaries (`Root`, `Trigger`) and delegated shared visual surfaces to `menu` classes for parity.
   - Removed trigger-specific visual styling ownership from `context-menu`; trigger remains intentionally context-specific and unstyled.
-  - Remapped token-eligible popup/highlight/separator properties to local tokens and aligned strict `_foundation` call sites for floating surface and inset highlight APIs.
-  - Kept portal-safe token assignment by assigning defaults at `positioner` (portal subtree owner).
+  - Simplified `seedly-react` composition so `ContextMenu.Item`/`Popup`/`Portal`/`Positioner`/`Separator` reuse shared `Menu.*` wrappers.
+- Contract changes:
+  - Removed: local `contextMenuVars` contract and duplicated popup/item/separator token assignments.
 - Mapping coverage:
-  - Properties audited: popup surface (background/foreground/outline/shadow/corner/padding), highlighted item foreground/background/corner/inset, separator size/margins/color.
-  - Properties remapped: popup `background`/`foreground`/`outline`/`shadow`/`borderRadius`/`paddingBlock`; highlighted item `textColor`/`backgroundColor`/`borderRadius`/`insetInline`; separator `blockSize`/`marginBlock`/`marginInline`/`backgroundColor`.
-  - Intentional direct `sys` usages: component-owned default assignments in `contextMenuDefaults`.
+  - Properties audited: context menu ownership boundaries for root/trigger vs popup/item/separator surfaces.
+  - Properties remapped: `positioner`/`popup`/`item`/`separator` now resolve through `menu` component classes.
+  - Intentional direct `sys` usages: none.
 - Foundation changes:
   - none.
 - Validation:
@@ -766,6 +765,29 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `menu` no longer appears in the known strict-default fallout list.
+
+### `menubar`
+
+- Status: `done`
+- Outcome:
+  - Scoped `menubar` styling ownership to the root container surface only.
+  - Delegated `menuTrigger`/`menuPopup`/`menuItem`/`menuPositioner`/`menuSeparator` exports to `menu` styles to enforce exact visual parity and avoid duplicated contracts.
+  - Simplified `seedly-react` menubar composition so `MenubarMenu.*` reuses shared `Menu.*` primitives (including `TriggerIcon`) instead of duplicating part wrappers.
+  - Updated `menubar` stories to use composed trigger icons and reflect menu-parity composition.
+- Contract changes:
+  - Removed: local `menubarVars` contract and duplicated menubar surface token wiring.
+- Mapping coverage:
+  - Properties audited: menubar root layout and trigger/popup/item/separator ownership boundaries.
+  - Properties remapped: `menuTrigger`/`menuPopup`/`menuItem`/`menuPositioner`/`menuSeparator` now resolve through `menu` component classes.
+  - Intentional direct `sys` usages: none.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `menubar` no longer appears in the known strict-default fallout list.
 
 ---
 
