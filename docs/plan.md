@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`.
-- Next unchecked component: `switch`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`.
+- Next unchecked component: `switcher`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -205,7 +205,7 @@ Examples:
 - [x] `sidebar`
 - [x] `slider`
 - [x] `stack`
-- [ ] `switch`
+- [x] `switch`
 - [ ] `switcher`
 - [ ] `tabs`
 - [ ] `toast`
@@ -1071,6 +1071,29 @@ If policy changes mid-migration:
   - Properties audited: root stack gap.
   - Properties remapped: root `gap` now resolves through `stackVars.spacing.rootGap`.
   - Intentional direct `sys` usages: component-owned default assignment in `stackDefaults` (`sys.spacing[0]`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `switch`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `elevation`, `motion`, `shape`, `size`, and `spacing` groups for label, track, and thumb surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(switchVars, { ... })`.
+  - Remapped token-eligible label spacing/foreground, track gradient/border/focus/shadow states, and thumb surface/transition properties to local tokens.
+  - Removed dual `prefers-color-scheme` visual shadow branching so switch visuals flow through a single component token contract.
+- Contract changes:
+  - Added: `elevation.thumbShadow`, `elevation.trackShadow`, `elevation.trackShadowActive`, `elevation.trackShadowDisabled`, `motion.thumbTransitionDuration`, `motion.thumbTransitionEasing`, `motion.trackTransitionDuration`, `motion.trackTransitionEasing`, `spacing.labelGap`, `spacing.trackFocusRingOffset`, `spacing.trackPadding`, `color.trackBorderCheckedActive`.
+  - Renamed: `color.label` -> `color.labelForeground`, `color.disabledLabel` -> `color.labelForegroundDisabled`, `color.trackHoverBorder` -> `color.trackBorderHover`, `color.trackActiveBorder` -> `color.trackBorderActive`, `color.disabledTrackBorder` -> `color.trackBorderDisabled`, `color.disabledTrackStart` -> `color.trackStartDisabled`, `color.disabledTrackEnd` -> `color.trackEndDisabled`, `color.focusRing` -> `color.trackFocusRing`, `color.thumbDisabledBackground` -> `color.thumbBackgroundDisabled`, `color.thumbDisabledBorder` -> `color.thumbBorderDisabled`, `size.rootInlineSize` -> `size.trackInlineSize`, `size.rootBlockSize` -> `size.trackBlockSize`, `size.checkedThumbTranslate` -> `size.thumbTranslateChecked`, `shape.rootCorner` -> `shape.trackCorner`.
+  - Removed: `color.disabledTrackShadow`.
+- Mapping coverage:
+  - Properties audited: label foreground + gap, track size/padding/gradient/border/focus ring/shadows, thumb surface/size/translation/shadow/motion.
+  - Properties remapped: track `inlineSize`/`blockSize`/`padding`/`borderRadius`/`outlineColor`/state shadows; label `color`/`gap`; thumb `backgroundColor`/`borderColor`/`boxShadow`/checked translate and transition duration/easing now resolve through `switchVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `switchDefaults` and intentional derived thumb sizing/checked translation (`calc`).
 - Foundation changes:
   - none.
 - Validation:
