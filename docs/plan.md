@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`.
-- Next unchecked component: `meter`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`.
+- Next unchecked component: `navigation-menu`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `meter`
 - `navigation-menu`
 - `number-field`
 - `popover`
@@ -201,7 +200,7 @@ Examples:
 - [x] `layout`
 - [x] `menu`
 - [x] `menubar`
-- [ ] `meter`
+- [x] `meter`
 - [ ] `navigation-menu`
 - [ ] `number-field`
 - [ ] `popover`
@@ -788,6 +787,31 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `menubar` no longer appears in the known strict-default fallout list.
+
+### `meter`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `motion`, `shape`, `size`, and `spacing` groups for root readout and range-track surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(meterVars, { ... })`.
+  - Added strict `_foundation` range-track caller coverage for required root vars (`trackBackground`, `trackBorder`, `indicator`, `corner`) and required track style option (`blockSize`).
+  - Remapped token-eligible readout/track/indicator properties to local tokens, including indicator width transition duration/easing.
+  - Aligned range-track token naming with the shared migration plan for `meter`, `progress`, and `slider`.
+- Contract changes:
+  - Added: `color.indicatorBackground`, `color.rootForeground`, `color.trackBackground`, `color.trackBorder`, `layout.rootColumns`, `motion.indicatorWidthDuration`, `motion.indicatorWidthEasing`, `shape.trackCorner`, `size.trackBlockSize`, `spacing.rootRowGap`.
+  - Renamed: `color.foreground` -> `color.rootForeground`, `layout.columns` -> `layout.rootColumns`, `spacing.rowGap` -> `spacing.rootRowGap`.
+- Mapping coverage:
+  - Properties audited: root grid columns and row gap, label/value foreground, track placement/surface/corner/size, indicator fill and width transition.
+  - Properties remapped: root `gridTemplateColumns`/`rowGap`; label and value `color`; track `gridColumn`/`blockSize` plus range-track `background`/`border`/`indicator`/`corner`; indicator width transition `duration`/`easing` now resolve through `meterVars` local tokens.
+  - Intentional direct `sys` usages: typography utilities (`typography.label.medium`, `typography.body.medium`) and component-owned default assignments in `meterDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `meter` no longer appears in the known strict-default fallout list.
 
 ---
 

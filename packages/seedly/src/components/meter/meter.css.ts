@@ -9,43 +9,80 @@ import {
 
 export const meterVars = createThemeContract({
   color: {
-    foreground: null,
-  },
-  spacing: {
-    rowGap: null,
+    indicatorBackground: null,
+    rootForeground: null,
+    trackBackground: null,
+    trackBorder: null,
   },
   layout: {
-    columns: null,
-    valueColumnStart: null,
+    rootColumns: null,
     trackColumn: null,
+    valueColumnStart: null,
+  },
+  motion: {
+    indicatorWidthDuration: null,
+    indicatorWidthEasing: null,
+  },
+  shape: {
+    trackCorner: null,
+  },
+  size: {
+    trackBlockSize: null,
+  },
+  spacing: {
+    rootRowGap: null,
+  },
+});
+
+const meterDefaults = assignVars(meterVars, {
+  color: {
+    indicatorBackground: sys.color.content.base,
+    rootForeground: sys.color.content.base,
+    trackBackground: sys.color.container.base,
+    trackBorder: 'transparent',
+  },
+  layout: {
+    rootColumns: '1fr 1fr',
+    trackColumn: '1 / 3',
+    valueColumnStart: '2',
+  },
+  motion: {
+    indicatorWidthDuration: sys.motion.duration.long[3],
+    indicatorWidthEasing: sys.motion.easing.standard,
+  },
+  shape: {
+    trackCorner: sys.shape.corner.sharp,
+  },
+  size: {
+    trackBlockSize: sys.spacing[2],
+  },
+  spacing: {
+    rootRowGap: sys.spacing[4],
   },
 });
 
 export const meter = style({
-  display: 'grid',
-  gridTemplateColumns: meterVars.layout.columns,
-  rowGap: meterVars.spacing.rowGap,
-  inlineSize: '100%',
   vars: {
-    ...createRangeTrackRootVars(),
-    ...assignVars(meterVars.color, {
-      foreground: sys.color.content.base,
-    }),
-    ...assignVars(meterVars.spacing, {
-      rowGap: sys.spacing[4],
-    }),
-    ...assignVars(meterVars.layout, {
-      columns: '1fr 1fr',
-      valueColumnStart: '2',
-      trackColumn: '1 / 3',
+    ...meterDefaults,
+    ...createRangeTrackRootVars({
+      trackBackground: meterVars.color.trackBackground,
+      trackBorder: meterVars.color.trackBorder,
+      indicator: meterVars.color.indicatorBackground,
+      corner: meterVars.shape.trackCorner,
     }),
   },
+
+  display: 'grid',
+  gridTemplateColumns: meterVars.layout.rootColumns,
+
+  inlineSize: '100%',
+  rowGap: meterVars.spacing.rootRowGap,
 });
 
 export const label = style([
   typography.label.medium,
   {
-    color: meterVars.color.foreground,
+    color: meterVars.color.rootForeground,
   },
 ]);
 
@@ -55,22 +92,26 @@ export const value = style([
     gridColumnStart: meterVars.layout.valueColumnStart,
     marginBlock: '0',
     marginInline: '0',
-    color: meterVars.color.foreground,
+
+    color: meterVars.color.rootForeground,
     textAlign: 'right',
   },
 ]);
 
 export const track = style({
   gridColumn: meterVars.layout.trackColumn,
+
   ...createRangeTrackStyles({
+    blockSize: meterVars.size.trackBlockSize,
     overflow: 'hidden',
   }),
 });
 
 export const indicator = style({
   ...createRangeIndicatorStyles(),
+
   transition: transition('width', {
-    duration: 'long.3',
-    easing: 'standard',
+    duration: meterVars.motion.indicatorWidthDuration,
+    easing: meterVars.motion.indicatorWidthEasing,
   }),
 });
