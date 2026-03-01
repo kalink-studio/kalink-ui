@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`.
-- Next unchecked component: `slider`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`.
+- Next unchecked component: `stack`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `slider`
 - `tooltip`
 
 ---
@@ -204,7 +203,7 @@ Examples:
 - [x] `select`
 - [x] `separator`
 - [x] `sidebar`
-- [ ] `slider`
+- [x] `slider`
 - [ ] `stack`
 - [ ] `switch`
 - [ ] `switcher`
@@ -1036,6 +1035,28 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `slider`, `tooltip`)
+
+### `slider`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `shape`, `size`, and `spacing` groups for control, range track, indicator, and thumb surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(sliderVars, { ... })`.
+  - Added strict `_foundation` range-track caller coverage for required root vars (`trackBackground`, `trackBorder`, `indicator`, `corner`) and required track style option (`blockSize`).
+  - Remapped token-eligible control/track/indicator/thumb properties to local tokens and aligned slider range-track naming with `meter`/`progress`.
+- Contract changes:
+  - Added: `color.indicatorBackground`, `color.trackBackground`, `color.trackBorder`, `shape.trackCorner`, `size.thumbSize`, `size.trackBlockSize`.
+  - Renamed: `spacing.thumbSize` -> `size.thumbSize`.
+- Mapping coverage:
+  - Properties audited: control padding; track surface/corner/block size; indicator fill surface; thumb size/corner/background/outline/focus ring.
+  - Properties remapped: control `paddingBlock`; track `blockSize` plus range-track `background`/`border`/`corner`; indicator `backgroundColor`; thumb `inlineSize`/`blockSize`/`borderRadius`/`backgroundColor`/`outline` and focus-visible outline now resolve through `sliderVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `sliderDefaults` and thumb elevation (`sys.elevation.minimal`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
 
 ---
 
