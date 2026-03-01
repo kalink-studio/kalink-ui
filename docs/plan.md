@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`.
-- Next unchecked component: `toast`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`, `toast`.
+- Next unchecked component: `toggle`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -208,7 +208,7 @@ Examples:
 - [x] `switch`
 - [x] `switcher`
 - [x] `tabs`
-- [ ] `toast`
+- [x] `toast`
 - [ ] `toggle`
 - [ ] `toggle-group`
 - [ ] `toolbar`
@@ -1141,6 +1141,29 @@ If policy changes mid-migration:
   - Intentional direct `sys` usages: component-owned default assignments in `tabsDefaults` and intentional derived panel size (`calc(${sys.spacing[18]} * 2)`).
 - Foundation changes:
   - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `toast`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `motion`, `shape`, `layout`, `size`, and `spacing` groups for viewport, root toast item, and close control surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(toastVars, { ... })` on `viewport`.
+  - Remapped token-eligible root surface, spacing, sizing, close control geometry, viewport offsets, and content/root transition timing to local tokens.
+  - Removed dead button-prefixed local tokens that were not part of toast ownership.
+- Contract changes:
+  - Added: `color.rootBackground`, `color.rootBorder`, `color.rootForeground`, `color.rootShadow`, `motion.contentOpacityDuration`, `motion.contentOpacityEasing`, `motion.rootResizeDuration`, `motion.rootResizeEasing`, `motion.rootTransformDuration`, `motion.rootTransformEasing`, `shape.rootCorner`, `size.closeSize`, `spacing.closeInsetBlockStart`, `spacing.closeInsetInlineEnd`, `spacing.rootPaddingBlock`, `spacing.rootPaddingInline`, `spacing.stackGap`, `spacing.stackPeek`, `spacing.viewportInsetBlockEndDesktop`, `spacing.viewportInsetBlockEndMobile`, `spacing.viewportInsetInlineEndDesktop`, `spacing.viewportInsetInlineEndMobile`.
+  - Renamed: `color.toastForeground` -> `color.rootForeground`, `color.toastBackground` -> `color.rootBackground`, `color.toastBorder` -> `color.rootBorder`, `color.toastShadow` -> `color.rootShadow`, `shape.toastCorner` -> `shape.rootCorner`.
+  - Removed: `color.buttonForeground`, `color.buttonBackground`, `color.buttonBorder`, `color.buttonHoverBackground`, `color.buttonFocusRing`, `shape.buttonCorner`.
+- Mapping coverage:
+  - Properties audited: viewport inline size and insets, root surface/content/outline/shadow/corner, root paddings, stack gap/peek mechanics, content opacity transition, close size/insets/corner/hover background.
+  - Properties remapped: viewport `inlineSize` + inset offsets, root `color`/`background`/`border`/`borderRadius`/`boxShadow`/`paddingBlock`/`paddingInline`, stack custom properties (`--gap`, `--peek`), content transition duration/easing, close `inlineSize`/`blockSize`/position insets now resolve through `toastVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `toastDefaults` and typography utilities (`typography.title.small`, `typography.body.medium`).
+- Foundation changes:
+  - none (kept toast stack/swipe behavior component-owned; no `_foundation` factory adoption).
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
