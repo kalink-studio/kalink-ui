@@ -20,35 +20,33 @@ import {
 } from '../layout/shared/maps';
 
 export const gridVars = createThemeContract({
-  spacing: {
-    gap: null,
-  },
   columnSpacing: {
-    gap: null,
-  },
-  rowSpacing: {
-    gap: null,
+    rootColumnGap: null,
   },
   layout: {
-    minCellSize: null,
+    rootMinCellSize: null,
+  },
+  rowSpacing: {
+    rootRowGap: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const gridSpacingDefaults = assignVars(gridVars.spacing, {
-  gap: sys.spacing[0],
-});
-
-const gridAxisSpacingDefaults = {
-  ...assignVars(gridVars.columnSpacing, {
-    gap: gridVars.spacing.gap,
-  }),
-  ...assignVars(gridVars.rowSpacing, {
-    gap: gridVars.spacing.gap,
-  }),
-};
-
-const gridLayoutDefaults = assignVars(gridVars.layout, {
-  minCellSize: `calc(${sys.layout.measure} / 3)`,
+const gridDefaults = assignVars(gridVars, {
+  columnSpacing: {
+    rootColumnGap: gridVars.spacing.rootGap,
+  },
+  layout: {
+    rootMinCellSize: `calc(${sys.layout.measure} / 3)`,
+  },
+  rowSpacing: {
+    rootRowGap: gridVars.spacing.rootGap,
+  },
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
 export const gridSpacingStyles = mapContractVars(sys.spacing, gridVars.spacing);
@@ -93,14 +91,14 @@ export const autoLayoutStyles = {
   fill: {
     '@layer': {
       [components]: {
-        gridTemplateColumns: `repeat(auto-fill, minmax(min(${gridVars.layout.minCellSize}, 100%), 1fr))`,
+        gridTemplateColumns: `repeat(auto-fill, minmax(min(${gridVars.layout.rootMinCellSize}, 100%), 1fr))`,
       },
     },
   },
   fit: {
     '@layer': {
       [components]: {
-        gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridVars.layout.minCellSize}, 100%), 1fr))`,
+        gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridVars.layout.rootMinCellSize}, 100%), 1fr))`,
       },
     },
   },
@@ -110,16 +108,13 @@ export const gridRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
-        display: 'grid',
-        gap: gridVars.spacing.gap,
-        columnGap: gridVars.columnSpacing.gap,
-        rowGap: gridVars.rowSpacing.gap,
+        vars: gridDefaults,
 
-        vars: {
-          ...gridSpacingDefaults,
-          ...gridAxisSpacingDefaults,
-          ...gridLayoutDefaults,
-        },
+        display: 'grid',
+
+        columnGap: gridVars.columnSpacing.rootColumnGap,
+        gap: gridVars.spacing.rootGap,
+        rowGap: gridVars.rowSpacing.rootRowGap,
       },
     },
   },

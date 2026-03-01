@@ -92,7 +92,7 @@ export function Grid({
       : {
           ...props.style,
           ...assignInlineVars({
-            [gridVars.layout.minCellSize]: minSize,
+            [gridVars.layout.rootMinCellSize]: minSize,
           }),
         };
 

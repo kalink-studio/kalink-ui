@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`.
-- Next unchecked component: `grid`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`.
+- Next unchecked component: `input`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -198,7 +198,7 @@ Examples:
 - [x] `fieldset`
 - [x] `form`
 - [x] `frame`
-- [ ] `grid`
+- [x] `grid`
 - [ ] `input`
 - [ ] `label`
 - [ ] `layout`
@@ -646,6 +646,29 @@ If policy changes mid-migration:
   - Properties audited: root aspect ratio.
   - Properties remapped: root `aspectRatio` now resolves through `frameVars.layout.rootAspectRatio`.
   - Intentional direct `sys` usages: none.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `grid`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys: `spacing.rootGap`, `columnSpacing.rootColumnGap`, `rowSpacing.rootRowGap`, and `layout.rootMinCellSize`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(gridVars, { ... })`.
+  - Remapped token-eligible root spacing and auto-layout sizing properties to the role-based local tokens while preserving axis-spacing fallback behavior.
+- Contract changes:
+  - Renamed: `spacing.gap` -> `spacing.rootGap`.
+  - Renamed: `columnSpacing.gap` -> `columnSpacing.rootColumnGap`.
+  - Renamed: `rowSpacing.gap` -> `rowSpacing.rootRowGap`.
+  - Renamed: `layout.minCellSize` -> `layout.rootMinCellSize`.
+- Mapping coverage:
+  - Properties audited: root `gap`, `columnGap`, `rowGap`, and auto-layout `gridTemplateColumns` min cell size.
+  - Properties remapped: root `gap`/`columnGap`/`rowGap` and auto-layout `minmax(min(...))` now resolve through `gridVars` role-based local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `gridDefaults` (`sys.spacing[0]`) and intentional derived min cell size (`calc(${sys.layout.measure} / 3)`).
 - Foundation changes:
   - none.
 - Validation:
