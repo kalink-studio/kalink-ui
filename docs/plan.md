@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`.
-- Next unchecked component: `number-field`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`.
+- Next unchecked component: `popover`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `number-field`
 - `popover`
 - `preview-card`
 - `progress`
@@ -201,7 +200,7 @@ Examples:
 - [x] `menubar`
 - [x] `meter`
 - [x] `navigation-menu`
-- [ ] `number-field`
+- [x] `number-field`
 - [ ] `popover`
 - [ ] `preview-card`
 - [ ] `progress`
@@ -834,6 +833,30 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `navigation-menu` no longer appears in the known strict-default fallout list.
+
+### `number-field`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, `size`, `spacing`, and `typography` groups for field stack, input, label, scrub area, cursor, and stepper surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(numberFieldVars, { ... })`.
+  - Updated strict `_foundation` usage for field stack (`gap`, `inlineSize`), label (`color`), and input (`createFieldTextInputStyles`) while preserving segmented-input behavior with component overrides.
+  - Simplified stepper button styling to number-field-specific visuals and geometry now that increment/decrement compose through the shared `Button` wrapper.
+- Contract changes:
+  - Added: `color.decrementBackground`, `color.incrementActiveBackground`, `color.incrementBackground`, `color.incrementHoverBackground`, `color.inputBackground`, `color.inputBorder`, `color.inputFocusRing`, `color.inputForeground`, `color.labelForeground`, `color.scrubAreaCursorShadow`, `color.stepperBorder`, `color.stepperForeground`, `layout.inputFocusRingOffset`, `layout.inputInlineSize`, `shape.inputMergedCorner`, `shape.stepperCorner`, `spacing.fieldGap`, `typography.scrubAreaWeight`.
+  - Removed: `spacing.zero`, `shape.controlCorner`, `shape.mergedCorner`.
+- Mapping coverage:
+  - Properties audited: field stack gap/width, label foreground, input surface/border/focus/size/alignment, scrub area weight, scrub cursor shadow, stepper surface/border/foreground/corner/size and increment interactive states.
+  - Properties remapped: all token-eligible number-field surface and sizing properties now resolve through `numberFieldVars` local tokens.
+  - Intentional direct `sys` usages: zero-value input padding and stepper spacing resets (`sys.spacing[0]`) inside style rules.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `number-field` no longer appears in the known strict-default fallout list.
 
 ---
 

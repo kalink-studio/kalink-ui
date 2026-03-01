@@ -1,49 +1,104 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
-import { createFieldLabelStyles, createFieldStackStyles } from '../_foundation';
+import {
+  createFieldTextInputStyles,
+  createFieldLabelStyles,
+  createFieldStackStyles,
+} from '../_foundation';
 
 export const numberFieldVars = createThemeContract({
-  spacing: {
-    controlSize: null,
-    zero: null,
+  color: {
+    decrementBackground: null,
+    incrementActiveBackground: null,
+    incrementBackground: null,
+    incrementHoverBackground: null,
+    inputBackground: null,
+    inputBorder: null,
+    inputFocusRing: null,
+    inputForeground: null,
+    labelForeground: null,
+    scrubAreaCursorShadow: null,
+    stepperBorder: null,
+    stepperForeground: null,
+  },
+  layout: {
+    inputFocusRingOffset: null,
+    inputInlineSize: null,
   },
   shape: {
-    controlCorner: null,
-    mergedCorner: null,
+    inputMergedCorner: null,
+    stepperCorner: null,
+  },
+  size: {
+    controlSize: null,
+  },
+  spacing: {
+    fieldGap: null,
+  },
+  typography: {
+    scrubAreaWeight: null,
   },
 });
 
-const restingControlBorder = sys.color.border.base;
+const numberFieldDefaults = assignVars(numberFieldVars, {
+  color: {
+    decrementBackground: sys.color.container.low,
+    incrementActiveBackground: sys.color.container.low,
+    incrementBackground: sys.color.container.base,
+    incrementHoverBackground: sys.color.container.low,
+    inputBackground: sys.color.surface.base,
+    inputBorder: sys.color.border.base,
+    inputFocusRing: sys.color.tone.primary,
+    inputForeground: sys.color.content.base,
+    labelForeground: sys.color.content.base,
+    scrubAreaCursorShadow: stateColor.disabledContent,
+    stepperBorder: sys.color.border.base,
+    stepperForeground: sys.color.content.base,
+  },
+  layout: {
+    inputFocusRingOffset: '-1px',
+    inputInlineSize: '100%',
+  },
+  shape: {
+    inputMergedCorner: sys.shape.corner.none,
+    stepperCorner: sys.shape.corner.medium,
+  },
+  size: {
+    controlSize: sys.spacing[14],
+  },
+  spacing: {
+    fieldGap: sys.spacing[2],
+  },
+  typography: {
+    scrubAreaWeight: sys.typography.headline.small.weight,
+  },
+});
 
 export const field = style({
   ...createFieldStackStyles({
     alignItems: 'start',
+    gap: numberFieldVars.spacing.fieldGap,
+    inlineSize: numberFieldVars.layout.inputInlineSize,
   }),
   vars: {
-    ...assignVars(numberFieldVars.spacing, {
-      controlSize: sys.spacing[14],
-      zero: sys.spacing[0],
-    }),
-    ...assignVars(numberFieldVars.shape, {
-      controlCorner: sys.shape.corner.medium,
-      mergedCorner: sys.shape.corner.none,
-    }),
+    ...numberFieldDefaults,
   },
 });
 
 export const scrubArea = style({
-  fontWeight: sys.typography.headline.small.weight,
+  fontWeight: numberFieldVars.typography.scrubAreaWeight,
   cursor: 'ew-resize',
   userSelect: 'none',
 });
 
 export const scrubAreaCursor = style({
-  filter: `drop-shadow(0 1px 1px ${stateColor.disabledContent})`,
+  filter: `drop-shadow(0 1px 1px ${numberFieldVars.color.scrubAreaCursorShadow})`,
 });
 
 export const label = style({
   ...createFieldLabelStyles({
+    color: numberFieldVars.color.labelForeground,
     cursor: 'ew-resize',
   }),
 });
@@ -56,74 +111,76 @@ export const group = style({
 export const input = style([
   typography.body.large,
   {
-    marginBlock: numberFieldVars.spacing.zero,
-    marginInline: numberFieldVars.spacing.zero,
-    paddingBlock: numberFieldVars.spacing.zero,
-    paddingInline: numberFieldVars.spacing.zero,
-    borderRadius: numberFieldVars.shape.mergedCorner,
-    borderBlockStart: `1px solid ${restingControlBorder}`,
-    borderBlockEnd: `1px solid ${restingControlBorder}`,
+    ...createFieldTextInputStyles({
+      backgroundColor: numberFieldVars.color.inputBackground,
+      blockSize: numberFieldVars.size.controlSize,
+      borderColor: numberFieldVars.color.inputBorder,
+      borderRadius: numberFieldVars.shape.inputMergedCorner,
+      focusRingColor: numberFieldVars.color.inputFocusRing,
+      focusRingOffset: numberFieldVars.layout.inputFocusRingOffset,
+      foreground: numberFieldVars.color.inputForeground,
+      inlineSize: numberFieldVars.layout.inputInlineSize,
+      paddingInlineEnd: sys.spacing[0],
+      paddingInlineStart: sys.spacing[0],
+    }),
+
     borderInlineStart: 'none',
     borderInlineEnd: 'none',
+
     flex: '1 1 auto',
     minInlineSize: '0',
-    blockSize: numberFieldVars.spacing.controlSize,
-    backgroundColor: sys.color.surface.base,
-    color: sys.color.content.base,
+
     textAlign: 'center',
     fontVariantNumeric: 'tabular-nums',
 
     selectors: {
       [`&:focus`]: {
         zIndex: '1',
-        outline: `2px solid ${sys.color.tone.primary}`,
-        outlineOffset: '-1px',
+        outline: `2px solid ${numberFieldVars.color.inputFocusRing}`,
+        outlineOffset: numberFieldVars.layout.inputFocusRingOffset,
       },
     },
   },
 ]);
 
 const stepperButtonStyle = {
-  display: 'flex',
-  alignItems: 'center',
   justifyContent: 'center',
-  inlineSize: numberFieldVars.spacing.controlSize,
-  blockSize: numberFieldVars.spacing.controlSize,
-  marginBlock: numberFieldVars.spacing.zero,
-  marginInline: numberFieldVars.spacing.zero,
+  inlineSize: numberFieldVars.size.controlSize,
+  blockSize: numberFieldVars.size.controlSize,
+  marginBlock: sys.spacing[0],
+  marginInline: sys.spacing[0],
   outline: '0',
-  paddingBlock: numberFieldVars.spacing.zero,
-  paddingInline: numberFieldVars.spacing.zero,
-  border: `1px solid ${restingControlBorder}`,
-  borderRadius: numberFieldVars.shape.controlCorner,
-  backgroundColor: sys.color.container.base,
+  paddingBlock: sys.spacing[0],
+  paddingInline: sys.spacing[0],
+  border: `1px solid ${numberFieldVars.color.stepperBorder}`,
+  borderRadius: numberFieldVars.shape.stepperCorner,
+  backgroundColor: numberFieldVars.color.incrementBackground,
   backgroundClip: 'padding-box',
-  color: sys.color.content.base,
-  userSelect: 'none',
+  color: numberFieldVars.color.stepperForeground,
 } as const;
 
 export const decrement = style({
   ...stepperButtonStyle,
-  borderStartEndRadius: numberFieldVars.shape.mergedCorner,
-  borderEndEndRadius: numberFieldVars.shape.mergedCorner,
-  backgroundColor: sys.color.container.low,
+  borderStartEndRadius: numberFieldVars.shape.inputMergedCorner,
+  borderEndEndRadius: numberFieldVars.shape.inputMergedCorner,
+  backgroundColor: numberFieldVars.color.decrementBackground,
 });
 
 export const increment = style({
   ...stepperButtonStyle,
-  borderStartStartRadius: numberFieldVars.shape.mergedCorner,
-  borderEndStartRadius: numberFieldVars.shape.mergedCorner,
+  borderStartStartRadius: numberFieldVars.shape.inputMergedCorner,
+  borderEndStartRadius: numberFieldVars.shape.inputMergedCorner,
 
   selectors: {
     [`&:hover`]: {
       '@media': {
         '(hover: hover)': {
-          backgroundColor: sys.color.container.low,
+          backgroundColor: numberFieldVars.color.incrementHoverBackground,
         },
       },
     },
     [`&:active`]: {
-      backgroundColor: sys.color.container.low,
+      backgroundColor: numberFieldVars.color.incrementActiveBackground,
     },
   },
 });
