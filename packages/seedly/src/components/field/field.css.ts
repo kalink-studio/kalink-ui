@@ -9,41 +9,75 @@ import {
 
 export const fieldVars = createThemeContract({
   color: {
-    label: null,
-    foreground: null,
-    border: null,
-    focusRing: null,
-    error: null,
-    description: null,
+    descriptionForeground: null,
+    errorForeground: null,
+    inputBackground: null,
+    inputBorder: null,
+    inputFocusRing: null,
+    inputForeground: null,
+    labelForeground: null,
+  },
+  layout: {
+    inputFocusRingOffset: null,
+    inputInlineSize: null,
   },
   shape: {
-    corner: null,
+    inputCorner: null,
+  },
+  size: {
+    inputBlockSize: null,
+  },
+  spacing: {
+    inputPaddingInlineEnd: null,
+    inputPaddingInlineStart: null,
+    stackGap: null,
+    zero: null,
+  },
+});
+
+const fieldDefaults = assignVars(fieldVars, {
+  color: {
+    descriptionForeground: stateColor.mutedContent,
+    errorForeground: sys.color.tone.error,
+    inputBackground: sys.color.surface.base,
+    inputBorder: sys.color.border.base,
+    inputFocusRing: sys.color.tone.primary,
+    inputForeground: sys.color.content.base,
+    labelForeground: sys.color.content.base,
+  },
+  layout: {
+    inputFocusRingOffset: '-1px',
+    inputInlineSize: '100%',
+  },
+  shape: {
+    inputCorner: sys.shape.corner.medium,
+  },
+  size: {
+    inputBlockSize: sys.spacing[14],
+  },
+  spacing: {
+    inputPaddingInlineEnd: sys.spacing[4],
+    inputPaddingInlineStart: sys.spacing[4],
+    stackGap: sys.spacing[2],
+    zero: sys.spacing[0],
   },
 });
 
 export const field = style({
+  vars: {
+    ...fieldDefaults,
+  },
+
   ...createFieldStackStyles({
     alignItems: 'start',
-    inlineSize: '100%',
+    gap: fieldVars.spacing.stackGap,
+    inlineSize: fieldVars.layout.inputInlineSize,
   }),
-  vars: {
-    ...assignVars(fieldVars.color, {
-      label: sys.color.content.base,
-      foreground: sys.color.content.base,
-      border: sys.color.border.base,
-      focusRing: sys.color.tone.primary,
-      error: sys.color.tone.error,
-      description: stateColor.mutedContent,
-    }),
-    ...assignVars(fieldVars.shape, {
-      corner: sys.shape.corner.medium,
-    }),
-  },
 });
 
 export const label = style({
   ...createFieldLabelStyles({
-    color: fieldVars.color.label,
+    color: fieldVars.color.labelForeground,
   }),
 });
 
@@ -51,10 +85,16 @@ export const input = style([
   typography.body.large,
   {
     ...createFieldTextInputStyles({
-      borderColor: fieldVars.color.border,
-      borderRadius: fieldVars.shape.corner,
-      foreground: fieldVars.color.foreground,
-      focusRingColor: fieldVars.color.focusRing,
+      backgroundColor: fieldVars.color.inputBackground,
+      blockSize: fieldVars.size.inputBlockSize,
+      borderColor: fieldVars.color.inputBorder,
+      borderRadius: fieldVars.shape.inputCorner,
+      focusRingColor: fieldVars.color.inputFocusRing,
+      focusRingOffset: fieldVars.layout.inputFocusRingOffset,
+      foreground: fieldVars.color.inputForeground,
+      inlineSize: fieldVars.layout.inputInlineSize,
+      paddingInlineEnd: fieldVars.spacing.inputPaddingInlineEnd,
+      paddingInlineStart: fieldVars.spacing.inputPaddingInlineStart,
     }),
   },
 ]);
@@ -62,15 +102,15 @@ export const input = style([
 export const error = style([
   typography.body.medium,
   {
-    color: fieldVars.color.error,
+    color: fieldVars.color.errorForeground,
   },
 ]);
 
 export const description = style([
   typography.body.medium,
   {
-    marginBlock: '0',
-    marginInline: '0',
-    color: fieldVars.color.description,
+    marginBlock: fieldVars.spacing.zero,
+    marginInline: fieldVars.spacing.zero,
+    color: fieldVars.color.descriptionForeground,
   },
 ]);

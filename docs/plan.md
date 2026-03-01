@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`.
-- Next unchecked component: `field`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`.
+- Next unchecked component: `fieldset`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `field`
 - `input`
 - `menu`
 - `menubar`
@@ -195,7 +194,7 @@ Examples:
 - [x] `context-menu`
 - [x] `cover`
 - [x] `dialog`
-- [ ] `field`
+- [x] `field`
 - [ ] `fieldset`
 - [ ] `form`
 - [ ] `frame`
@@ -575,6 +574,26 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `field`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, `size`, and `spacing` groups for field stack, label, input, error, and description surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(fieldVars, { ... })`.
+  - Remapped token-eligible input surface/focus/size/spacing and field stack gap properties to local tokens while satisfying strict `_foundation` `field-control` factory requirements.
+- Mapping coverage:
+  - Properties audited: field stack gap/width, label foreground, input background/foreground/border/focus/corner/size/padding, error foreground, description foreground/margins.
+  - Properties remapped: stack `gap`/`inlineSize`; label color; input `backgroundColor`/`color`/`borderColor`/`borderRadius`/`outline` offset/`inlineSize`/`blockSize`/`paddingInlineStart`/`paddingInlineEnd`; error and description colors; description margins.
+  - Intentional direct `sys` usages: component-owned default assignments in `fieldDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+- Notes / follow-ups:
+  - `field` no longer appears in the known strict-default fallout list.
 
 ---
 
