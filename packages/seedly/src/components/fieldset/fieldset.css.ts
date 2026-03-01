@@ -3,37 +3,55 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { sys, typography } from '../../styles';
 
 export const fieldsetVars = createThemeContract({
+  color: {
+    legendBorder: null,
+    legendForeground: null,
+  },
+  size: {
+    legendBorderBlockEndWidth: null,
+  },
   spacing: {
-    gap: null,
     legendPaddingBlockEnd: null,
-    zero: null,
+    rootGap: null,
+  },
+});
+
+const fieldsetDefaults = assignVars(fieldsetVars, {
+  color: {
+    legendBorder: sys.color.border.low,
+    legendForeground: sys.color.content.base,
+  },
+  size: {
+    legendBorderBlockEndWidth: '1px',
+  },
+  spacing: {
+    legendPaddingBlockEnd: sys.spacing[6],
+    rootGap: sys.spacing[8],
   },
 });
 
 export const fieldset = style({
+  vars: fieldsetDefaults,
+
   display: 'flex',
   flexDirection: 'column',
-  gap: fieldsetVars.spacing.gap,
+
+  gap: fieldsetVars.spacing.rootGap,
   inlineSize: '100%',
-  marginBlock: fieldsetVars.spacing.zero,
-  marginInline: fieldsetVars.spacing.zero,
-  paddingBlock: fieldsetVars.spacing.zero,
-  paddingInline: fieldsetVars.spacing.zero,
+  marginBlock: '0',
+  marginInline: '0',
+  paddingBlock: '0',
+  paddingInline: '0',
+
   border: '0',
-  vars: {
-    ...assignVars(fieldsetVars.spacing, {
-      gap: sys.spacing[8],
-      legendPaddingBlockEnd: sys.spacing[6],
-      zero: sys.spacing[0],
-    }),
-  },
 });
 
 export const legend = style([
   typography.title.large,
   {
-    borderBlockEnd: `1px solid ${sys.color.border.low}`,
     paddingBlockEnd: fieldsetVars.spacing.legendPaddingBlockEnd,
-    color: sys.color.content.base,
+
+    borderBlockEnd: `${fieldsetVars.size.legendBorderBlockEndWidth} solid ${fieldsetVars.color.legendBorder}`,
+    color: fieldsetVars.color.legendForeground,
   },
 ]);

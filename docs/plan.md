@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`.
-- Next unchecked component: `fieldset`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`.
+- Next unchecked component: `form`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -195,7 +195,7 @@ Examples:
 - [x] `cover`
 - [x] `dialog`
 - [x] `field`
-- [ ] `fieldset`
+- [x] `fieldset`
 - [ ] `form`
 - [ ] `frame`
 - [ ] `grid`
@@ -594,6 +594,24 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
 - Notes / follow-ups:
   - `field` no longer appears in the known strict-default fallout list.
+
+### `fieldset`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `size`, and `spacing` groups for fieldset root and legend surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(fieldsetVars, { ... })`.
+  - Remapped token-eligible legend border/foreground and root gap properties to local tokens.
+- Mapping coverage:
+  - Properties audited: root stack gap; legend border width/color, spacing, and foreground color.
+  - Properties remapped: root `gap`; legend `borderBlockEnd` width/color, `paddingBlockEnd`, and `color` now resolve through `fieldsetVars` local tokens.
+  - Intentional direct `sys` usages: `typography.title.large` for legend typography.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
 
 ---
 
