@@ -13,100 +13,94 @@ import {
 export const dialogVars = createThemeContract({
   color: {
     backdrop: null,
+    description: null,
     popupBackground: null,
     popupForeground: null,
-    popupOutlineLight: null,
-    popupOutlineDark: null,
-    description: null,
-  },
-  shape: {
-    popupCorner: null,
+    popupOutline: null,
   },
   layout: {
     backdropMinBlockSize: null,
     popupInlineSize: null,
     popupMaxInlineSize: null,
   },
+  shape: {
+    popupCorner: null,
+  },
   spacing: {
+    actionsGap: null,
+    descriptionMarginBlock: null,
+    descriptionMarginInline: null,
     popupMarginBlockStart: null,
     popupPaddingBlock: null,
     popupPaddingInline: null,
-    titleMarginBlockStart: null,
     titleMarginBlockEnd: null,
-    descriptionMarginBlock: null,
-    descriptionMarginInline: null,
-    actionsGap: null,
+    titleMarginBlockStart: null,
   },
 });
 
-const dialogColorDefaults = assignVars(dialogVars.color, {
-  backdrop: sys.color.content.base,
-  popupBackground: sys.color.container.base,
-  popupForeground: sys.color.content.base,
-  popupOutlineLight: sys.color.border.low,
-  popupOutlineDark: sys.color.border.low,
-  description: stateColor.mutedContent,
+const dialogDefaults = assignVars(dialogVars, {
+  color: {
+    backdrop: sys.color.content.base,
+    description: stateColor.mutedContent,
+    popupBackground: sys.color.container.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+  },
+  layout: {
+    backdropMinBlockSize: '100dvh',
+    popupInlineSize: '24rem',
+    popupMaxInlineSize: `calc(100vw - ${sys.spacing[15]})`,
+  },
+  shape: {
+    popupCorner: sys.shape.corner.medium,
+  },
+  spacing: {
+    actionsGap: sys.spacing[8],
+    descriptionMarginBlock: `0 ${sys.spacing[10]}`,
+    descriptionMarginInline: '0',
+    popupMarginBlockStart: `calc(-1 * ${sys.spacing[12]})`,
+    popupPaddingBlock: sys.spacing[10],
+    popupPaddingInline: sys.spacing[10],
+    titleMarginBlockEnd: sys.spacing[2],
+    titleMarginBlockStart: `calc(-1 * ${sys.spacing[3]})`,
+  },
 });
-
-const dialogShapeDefaults = assignVars(dialogVars.shape, {
-  popupCorner: sys.shape.corner.medium,
-});
-
-const dialogLayoutDefaults = assignVars(dialogVars.layout, {
-  backdropMinBlockSize: '100dvh',
-  popupInlineSize: '24rem',
-  popupMaxInlineSize: `calc(100vw - ${sys.spacing[15]})`,
-});
-
-const dialogSpacingDefaults = assignVars(dialogVars.spacing, {
-  popupMarginBlockStart: `calc(-1 * ${sys.spacing[12]})`,
-  popupPaddingBlock: sys.spacing[10],
-  popupPaddingInline: sys.spacing[10],
-  titleMarginBlockStart: `calc(-1 * ${sys.spacing[3]})`,
-  titleMarginBlockEnd: sys.spacing[2],
-  descriptionMarginBlock: `0 ${sys.spacing[10]}`,
-  descriptionMarginInline: '0',
-  actionsGap: sys.spacing[8],
-});
-
-const dialogThemeDefaults = {
-  ...dialogColorDefaults,
-  ...dialogShapeDefaults,
-  ...dialogLayoutDefaults,
-  ...dialogSpacingDefaults,
-};
 
 export const button = style(
   createDialogButtonStyles({
-    vars: dialogThemeDefaults,
+    vars: dialogDefaults,
   }),
 );
 
 export const backdrop = style(
   createDialogBackdropStyles({
-    vars: dialogThemeDefaults,
+    vars: dialogDefaults,
+
+    minBlockSize: dialogVars.layout.backdropMinBlockSize,
+
     backdropColor: dialogVars.color.backdrop,
+
     transition: transition('opacity', {
       duration: 'short.4',
       easing: 'decelerate.emphasized',
     }),
-    minBlockSize: dialogVars.layout.backdropMinBlockSize,
   }),
 );
 
 export const popup = style(
   createDialogPopupStyles({
-    vars: dialogThemeDefaults,
-    popupForeground: dialogVars.color.popupForeground,
-    popupBackground: dialogVars.color.popupBackground,
-    popupCorner: dialogVars.shape.popupCorner,
-    popupOutlineLight: dialogVars.color.popupOutlineLight,
-    popupOutlineDark: dialogVars.color.popupOutlineDark,
+    vars: dialogDefaults,
+
     inlineSize: dialogVars.layout.popupInlineSize,
     maxInlineSize: dialogVars.layout.popupMaxInlineSize,
     marginBlockStart: dialogVars.spacing.popupMarginBlockStart,
     paddingBlock: dialogVars.spacing.popupPaddingBlock,
     paddingInline: dialogVars.spacing.popupPaddingInline,
+
+    popupForeground: dialogVars.color.popupForeground,
+    popupBackground: dialogVars.color.popupBackground,
+    popupCorner: dialogVars.shape.popupCorner,
+    outline: dialogVars.color.popupOutline,
   }),
 );
 

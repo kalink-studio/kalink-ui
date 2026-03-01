@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`.
-- Next unchecked component: `dialog`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`.
+- Next unchecked component: `field`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `dialog`
 - `field`
 - `input`
 - `menu`
@@ -127,7 +126,7 @@ Core strict-default hardening is done for:
 Remaining shared cleanup:
 
 - normalize popup/dialog outline API naming to role-based terms (`outline`, optional `outlineInverse`)
-- update impacted callers: `dialog`, `alert-dialog`, `menu`, `popover`, `select`, `tooltip`
+- update impacted callers: `menu`, `popover`, `select`, `tooltip`
 - run a dedicated final verification pass after all components are migrated
 
 ---
@@ -195,7 +194,7 @@ Examples:
 - [x] `container`
 - [x] `context-menu`
 - [x] `cover`
-- [ ] `dialog`
+- [x] `dialog`
 - [ ] `field`
 - [ ] `fieldset`
 - [ ] `form`
@@ -315,8 +314,6 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
-- Notes / follow-ups:
-  - `dialog` still has pending outline naming migration and remains intentionally out of scope for this component-focused pass.
 
 ### `autocomplete`
 
@@ -554,6 +551,24 @@ If policy changes mid-migration:
   - Properties audited: root minimum block size and child stack spacing.
   - Properties remapped: root `minBlockSize` and child `marginBlock` now resolve through role-based local tokens.
   - Intentional direct `sys` usages: component-owned default assignment in `coverDefaults` (`sys.spacing[0]`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `dialog`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based popup outline key `color.popupOutline`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(dialogVars, { ... })`.
+  - Remapped popup outline wiring to the strict `_foundation` dialog API (`outline`) and removed obsolete light/dark caller fields.
+- Mapping coverage:
+  - Properties audited: backdrop surface + viewport sizing, popup surface/corner/outline/sizing/spacing, title and description spacing/color, action row gap.
+  - Properties remapped: popup outline now resolves through `dialogVars.color.popupOutline`; all defaults are assigned through the top-level local contract.
+  - Intentional direct `sys` usages: component-owned default assignments in `dialogDefaults`.
 - Foundation changes:
   - none.
 - Validation:
