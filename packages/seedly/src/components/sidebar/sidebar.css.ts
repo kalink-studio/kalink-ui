@@ -9,22 +9,23 @@ import { mapContractVars, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const sidebarVars = createThemeContract({
-  spacing: {
-    gap: null,
-  },
   layout: {
-    sideWidth: null,
-    contentMinWidth: null,
+    contentMinInlineSize: null,
+    sideInlineSize: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const sidebarSpacingDefaults = assignVars(sidebarVars.spacing, {
-  gap: sys.spacing[0],
-});
-
-const sidebarLayoutDefaults = assignVars(sidebarVars.layout, {
-  sideWidth: 'auto',
-  contentMinWidth: sys.layout.measure,
+const sidebarDefaults = assignVars(sidebarVars, {
+  layout: {
+    contentMinInlineSize: sys.layout.measure,
+    sideInlineSize: 'auto',
+  },
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
 export const sidebarSpacingStyles = mapContractVars(
@@ -36,14 +37,11 @@ export const sidebarRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
+        vars: sidebarDefaults,
+
         display: 'flex',
         flexWrap: 'wrap',
-        gap: sidebarVars.spacing.gap,
-
-        vars: {
-          ...sidebarSpacingDefaults,
-          ...sidebarLayoutDefaults,
-        },
+        gap: sidebarVars.spacing.rootGap,
       },
     },
   },
@@ -83,7 +81,7 @@ globalStyle(`${sidebarRecipe.classNames.base} > *`, {
 globalStyle(`${sidebarRecipe.classNames.variants.sideWidth.true} > *`, {
   '@layer': {
     [components]: {
-      flexBasis: sidebarVars.layout.sideWidth,
+      flexBasis: sidebarVars.layout.sideInlineSize,
     },
   },
 });
@@ -93,7 +91,7 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.left} > :last-child`, {
     [components]: {
       flexBasis: 0,
       flexGrow: 999,
-      minInlineSize: sidebarVars.layout.contentMinWidth,
+      minInlineSize: sidebarVars.layout.contentMinInlineSize,
     },
   },
 });
@@ -103,7 +101,7 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
     [components]: {
       flexBasis: 0,
       flexGrow: 999,
-      minInlineSize: sidebarVars.layout.contentMinWidth,
+      minInlineSize: sidebarVars.layout.contentMinInlineSize,
     },
   },
 });

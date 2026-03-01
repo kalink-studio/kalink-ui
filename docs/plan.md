@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`.
-- Next unchecked component: `sidebar`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`.
+- Next unchecked component: `slider`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -203,7 +203,7 @@ Examples:
 - [x] `scroll-area`
 - [x] `select`
 - [x] `separator`
-- [ ] `sidebar`
+- [x] `sidebar`
 - [ ] `slider`
 - [ ] `stack`
 - [ ] `switch`
@@ -1007,6 +1007,29 @@ If policy changes mid-migration:
   - Properties audited: root separator surface and orientation sizing, link foreground/underline treatment, and link focus ring/corner treatment.
   - Properties remapped: root `backgroundColor`/`blockSize` and vertical orientation `inlineSize`/`blockSize`; link `color`/`textDecorationColor`/`textDecorationThickness`/`textUnderlineOffset` and focus-visible `borderRadius`/`outline` now resolve through `separatorVars` local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `separatorDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `slider`, `tooltip`)
+
+### `sidebar`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys: `spacing.rootGap`, `layout.sideInlineSize`, and `layout.contentMinInlineSize`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(sidebarVars, { ... })`.
+  - Remapped token-eligible layout and spacing properties (`gap`, `flexBasis`, `minInlineSize`) to local tokens.
+  - Updated `seedly-react` inline var wiring to map `sideWidth` and `contentMinWidth` props to renamed `sidebarVars.layout` token keys.
+- Contract changes:
+  - Renamed: `spacing.gap` -> `spacing.rootGap`.
+  - Renamed: `layout.sideWidth` -> `layout.sideInlineSize`.
+  - Renamed: `layout.contentMinWidth` -> `layout.contentMinInlineSize`.
+- Mapping coverage:
+  - Properties audited: root cluster gap, side slot `flexBasis`, and content slot `minInlineSize` for both `side.left` and `side.right` selectors.
+  - Properties remapped: root `gap`, side-width variant child `flexBasis`, and content-slot `minInlineSize` now resolve through `sidebarVars` role-based local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `sidebarDefaults` (`sys.spacing[0]`, `sys.layout.measure`).
 - Foundation changes:
   - none.
 - Validation:

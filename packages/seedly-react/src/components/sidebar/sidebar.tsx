@@ -32,10 +32,12 @@ export function Sidebar({
           ...props.style,
           ...assignInlineVars({
             ...(sideWidth != null
-              ? { [sidebarVars.layout.sideWidth]: sideWidth }
+              ? { [sidebarVars.layout.sideInlineSize]: sideWidth }
               : {}),
             ...(contentMinWidth != null
-              ? { [sidebarVars.layout.contentMinWidth]: contentMinWidth }
+              ? {
+                  [sidebarVars.layout.contentMinInlineSize]: contentMinWidth,
+                }
               : {}),
           }),
         };
