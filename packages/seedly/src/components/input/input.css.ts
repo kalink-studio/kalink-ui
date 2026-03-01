@@ -9,33 +9,65 @@ import {
 
 export const inputVars = createThemeContract({
   color: {
-    label: null,
-    foreground: null,
-    border: null,
-    focusRing: null,
+    inputBackground: null,
+    inputBorder: null,
+    inputFocusRing: null,
+    inputForeground: null,
+    labelForeground: null,
+  },
+  layout: {
+    inputFocusRingOffset: null,
+    inputInlineSize: null,
   },
   shape: {
-    corner: null,
+    inputCorner: null,
+  },
+  size: {
+    inputBlockSize: null,
+  },
+  spacing: {
+    inputPaddingInlineEnd: null,
+    inputPaddingInlineStart: null,
+    stackGap: null,
+  },
+});
+
+const inputDefaults = assignVars(inputVars, {
+  color: {
+    inputBackground: sys.color.surface.base,
+    inputBorder: sys.color.border.base,
+    inputFocusRing: sys.color.tone.primary,
+    inputForeground: sys.color.content.base,
+    labelForeground: sys.color.content.base,
+  },
+  layout: {
+    inputFocusRingOffset: '-1px',
+    inputInlineSize: '100%',
+  },
+  shape: {
+    inputCorner: sys.shape.corner.medium,
+  },
+  size: {
+    inputBlockSize: sys.spacing[14],
+  },
+  spacing: {
+    inputPaddingInlineEnd: sys.spacing[4],
+    inputPaddingInlineStart: sys.spacing[4],
+    stackGap: sys.spacing[2],
   },
 });
 
 export const label = style({
   ...createFieldStackStyles({
-    alignItems: 'flex-start',
+    alignItems: 'start',
+    gap: inputVars.spacing.stackGap,
+    inlineSize: inputVars.layout.inputInlineSize,
   }),
   ...createFieldLabelStyles({
-    color: inputVars.color.label,
+    color: inputVars.color.labelForeground,
   }),
   vars: {
-    ...assignVars(inputVars.color, {
-      label: sys.color.content.base,
-      foreground: sys.color.content.base,
-      border: sys.color.border.base,
-      focusRing: sys.color.tone.primary,
-    }),
-    ...assignVars(inputVars.shape, {
-      corner: sys.shape.corner.medium,
-    }),
+    ...inputDefaults,
   },
 });
 
@@ -43,10 +75,16 @@ export const input = style([
   typography.body.large,
   {
     ...createFieldTextInputStyles({
-      borderColor: inputVars.color.border,
-      borderRadius: inputVars.shape.corner,
-      foreground: inputVars.color.foreground,
-      focusRingColor: inputVars.color.focusRing,
+      backgroundColor: inputVars.color.inputBackground,
+      blockSize: inputVars.size.inputBlockSize,
+      borderColor: inputVars.color.inputBorder,
+      borderRadius: inputVars.shape.inputCorner,
+      focusRingColor: inputVars.color.inputFocusRing,
+      focusRingOffset: inputVars.layout.inputFocusRingOffset,
+      foreground: inputVars.color.inputForeground,
+      inlineSize: inputVars.layout.inputInlineSize,
+      paddingInlineEnd: inputVars.spacing.inputPaddingInlineEnd,
+      paddingInlineStart: inputVars.spacing.inputPaddingInlineStart,
     }),
   },
 ]);

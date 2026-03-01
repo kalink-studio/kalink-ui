@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`.
-- Next unchecked component: `input`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`.
+- Next unchecked component: `label`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `input`
 - `menu`
 - `menubar`
 - `meter`
@@ -199,7 +198,7 @@ Examples:
 - [x] `form`
 - [x] `frame`
 - [x] `grid`
-- [ ] `input`
+- [x] `input`
 - [ ] `label`
 - [ ] `layout`
 - [ ] `menu`
@@ -669,6 +668,24 @@ If policy changes mid-migration:
   - Properties audited: root `gap`, `columnGap`, `rowGap`, and auto-layout `gridTemplateColumns` min cell size.
   - Properties remapped: root `gap`/`columnGap`/`rowGap` and auto-layout `minmax(min(...))` now resolve through `gridVars` role-based local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `gridDefaults` (`sys.spacing[0]`) and intentional derived min cell size (`calc(${sys.layout.measure} / 3)`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `input`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, `size`, and `spacing` groups for label + input surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(inputVars, { ... })`.
+  - Remapped token-eligible input surface/focus/size/spacing and stack gap properties to local tokens while satisfying strict `_foundation` `field-control` factory requirements.
+- Mapping coverage:
+  - Properties audited: label foreground, stack gap, input background/foreground/border/focus/corner/size/padding/inline size.
+  - Properties remapped: label color; stack `gap` + `inlineSize`; input `backgroundColor`/`color`/`borderColor`/`borderRadius`/focus outline offset/`inlineSize`/`blockSize`/`paddingInlineStart`/`paddingInlineEnd` now resolve through `inputVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `inputDefaults`.
 - Foundation changes:
   - none.
 - Validation:
