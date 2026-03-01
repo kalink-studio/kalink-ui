@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`.
-- Next unchecked component: `popover`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`.
+- Next unchecked component: `preview-card`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `popover`
 - `preview-card`
 - `progress`
 - `radio`
@@ -201,7 +200,7 @@ Examples:
 - [x] `meter`
 - [x] `navigation-menu`
 - [x] `number-field`
-- [ ] `popover`
+- [x] `popover`
 - [ ] `preview-card`
 - [ ] `progress`
 - [ ] `radio`
@@ -857,6 +856,30 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `number-field` no longer appears in the known strict-default fallout list.
+
+### `popover`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, and `spacing` groups for trigger open state, popup surface, description text, and arrow strokes.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(popoverVars, { ... })`.
+  - Remapped popup outline wiring to the strict `_foundation` floating-surface API (`outline`, `outlineInverse`) and removed obsolete light/dark caller fields.
+  - Kept portal-safe token assignment by assigning defaults at both `iconButton` (trigger subtree owner) and `positioner` (portal subtree owner).
+- Contract changes:
+  - Added: `color.descriptionForeground`, `color.popupForeground`, `color.popupOutline`, `color.popupOutlineInverse`, `color.triggerOpenBackground`, `spacing.popupPaddingBlock`, `spacing.popupPaddingInline`.
+  - Removed: `color.triggerForeground`, `color.triggerBackground`, `color.triggerBorder`, `color.triggerHoverBackground`, `color.triggerFocusRing`, `color.popupOutlineLight`, `color.popupOutlineDark`, `shape.triggerCorner`.
+- Mapping coverage:
+  - Properties audited: trigger open-state background, popup surface (background/foreground/outline/shadow/corner/max inline size), popup paddings, arrow fill/strokes, description foreground.
+  - Properties remapped: icon-button open-state `backgroundColor`; popup `paddingBlock`/`paddingInline`/`color`/`outline`/`outlineInverse`; description `color` now resolve through `popoverVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `popoverDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `popover` no longer appears in the known strict-default fallout list.
 
 ---
 

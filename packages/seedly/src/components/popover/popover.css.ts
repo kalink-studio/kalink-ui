@@ -13,62 +13,66 @@ import {
 
 export const popoverVars = createThemeContract({
   color: {
-    triggerForeground: null,
-    triggerBackground: null,
-    triggerBorder: null,
-    triggerHoverBackground: null,
-    triggerFocusRing: null,
-    popupBackground: null,
-    popupOutlineLight: null,
-    popupOutlineDark: null,
-    popupShadow: null,
-    popupDescription: null,
-    arrowOuterStroke: null,
     arrowInnerStroke: null,
+    arrowOuterStroke: null,
+
+    descriptionForeground: null,
+
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupOutlineInverse: null,
+    popupShadow: null,
+
+    triggerOpenBackground: null,
   },
-  shape: {
-    triggerCorner: null,
-    popupCorner: null,
-  },
+
   layout: {
     popupMaxInlineSize: null,
   },
+
+  shape: {
+    popupCorner: null,
+  },
+
+  spacing: {
+    popupPaddingBlock: null,
+    popupPaddingInline: null,
+  },
 });
 
-const popoverColorDefaults = assignVars(popoverVars.color, {
-  triggerForeground: sys.color.content.base,
-  triggerBackground: sys.color.container.base,
-  triggerBorder: sys.color.border.base,
-  triggerHoverBackground: sys.color.container.low,
-  triggerFocusRing: sys.color.tone.primary,
-  popupBackground: sys.color.surface.base,
-  popupOutlineLight: sys.color.border.low,
-  popupOutlineDark: sys.color.border.low,
-  popupShadow: sys.elevation.moderate,
-  popupDescription: stateColor.mutedContent,
-  arrowOuterStroke: sys.color.border.low,
-  arrowInnerStroke: floatingSurfaceDarkOutlineColor,
-});
-
-const popoverShapeDefaults = assignVars(popoverVars.shape, {
-  triggerCorner: sys.shape.corner.medium,
-  popupCorner: sys.shape.corner.rounded,
-});
-
-const popoverLayoutDefaults = assignVars(popoverVars.layout, {
-  popupMaxInlineSize: '500px',
+const popoverDefaults = assignVars(popoverVars, {
+  color: {
+    arrowInnerStroke: floatingSurfaceDarkOutlineColor,
+    arrowOuterStroke: sys.color.border.low,
+    descriptionForeground: stateColor.mutedContent,
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupOutlineInverse: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+    triggerOpenBackground: sys.color.container.low,
+  },
+  layout: {
+    popupMaxInlineSize: '500px',
+  },
+  shape: {
+    popupCorner: sys.shape.corner.rounded,
+  },
+  spacing: {
+    popupPaddingBlock: sys.spacing[8],
+    popupPaddingInline: sys.spacing[10],
+  },
 });
 
 export const iconButton = style([
   {
     vars: {
-      ...popoverColorDefaults,
-      ...popoverShapeDefaults,
-      ...popoverLayoutDefaults,
+      ...popoverDefaults,
     },
     selectors: {
       '&[data-popup-open]': {
-        backgroundColor: popoverVars.color.triggerHoverBackground,
+        backgroundColor: popoverVars.color.triggerOpenBackground,
       },
     },
   },
@@ -79,24 +83,22 @@ export const positioner = style({
   blockSize: 'var(--positioner-height)',
   maxInlineSize: 'var(--available-width)',
   vars: {
-    ...popoverColorDefaults,
-    ...popoverShapeDefaults,
-    ...popoverLayoutDefaults,
+    ...popoverDefaults,
   },
 });
 
 export const popup = style({
   ...createFloatingSurfaceStyles({
-    paddingBlock: sys.spacing[8],
-    paddingInline: sys.spacing[10],
+    paddingBlock: popoverVars.spacing.popupPaddingBlock,
+    paddingInline: popoverVars.spacing.popupPaddingInline,
     borderRadius: popoverVars.shape.popupCorner,
     background: popoverVars.color.popupBackground,
-    foreground: popoverVars.color.triggerForeground,
+    foreground: popoverVars.color.popupForeground,
     inlineSize: 'var(--popup-width, auto)',
     blockSize: 'var(--popup-height, auto)',
     maxInlineSize: popoverVars.layout.popupMaxInlineSize,
-    outlineLight: popoverVars.color.popupOutlineLight,
-    outlineDark: popoverVars.color.popupOutlineDark,
+    outline: popoverVars.color.popupOutline,
+    outlineInverse: popoverVars.color.popupOutlineInverse,
     shadow: popoverVars.color.popupShadow,
   }),
 });
@@ -130,6 +132,6 @@ export const description = style([
   {
     marginBlock: '0',
     marginInline: '0',
-    color: popoverVars.color.popupDescription,
+    color: popoverVars.color.descriptionForeground,
   },
 ]);
