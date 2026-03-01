@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`.
-- Next unchecked component: `select`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`.
+- Next unchecked component: `separator`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `select`
 - `slider`
 - `tooltip`
 
@@ -115,7 +114,7 @@ Core strict-default hardening is done for:
 Remaining shared cleanup:
 
 - normalize popup/dialog outline API naming to role-based terms (`outline`, optional `outlineInverse`)
-- update impacted callers: `menu`, `popover`, `select`, `tooltip`
+- update impacted callers: `tooltip`
 - run a dedicated final verification pass after all components are migrated
 
 ---
@@ -202,7 +201,7 @@ Examples:
 - [x] `progress`
 - [x] `radio`
 - [x] `scroll-area`
-- [ ] `select`
+- [x] `select`
 - [ ] `separator`
 - [ ] `sidebar`
 - [ ] `slider`
@@ -970,6 +969,29 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `select`, `slider`, `tooltip`)
+
+### `select`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `shape`, `size`, and `spacing` groups for trigger, popup, list, highlighted item, and scroll arrow surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(selectVars, { ... })`.
+  - Remapped popup outline wiring to the strict `_foundation` floating surface API (`outline`, `outlineInverse`) and removed obsolete light/dark caller fields.
+  - Added strict `_foundation` caller coverage for required trigger/list/highlight options (`focusRingOffset`, `paddingInlineStart`, `inlineSize`, `blockSize`, list max/paddings, highlight inset).
+  - Kept portal-safe token assignment by assigning defaults at both `select` (owner subtree) and `positioner` (portal subtree).
+- Contract changes:
+  - Added: `color.popupForeground`, `color.triggerFocusRing`, `color.triggerForeground`, `color.triggerOpenBackground`, `layout.triggerFocusRingOffset`, `layout.triggerInlineSize`, `shape.itemHighlightCorner`, `size.listMaxBlockSize`, `size.triggerBlockSize`, `spacing.itemHighlightInsetInline`, `spacing.listPaddingBlock`, `spacing.listScrollPaddingBlock`, `spacing.triggerPaddingInlineStart`.
+  - Renamed: `color.focusRing` -> `color.triggerFocusRing`, `color.foreground` -> `color.triggerForeground`, `color.itemHighlightedBackground` -> `color.itemHighlightBackground`, `color.itemHighlightedForeground` -> `color.itemHighlightForeground`, `color.popupOutlineLight` -> `color.popupOutline`, `color.popupOutlineDark` -> `color.popupOutlineInverse`, `shape.itemCorner` -> `shape.itemHighlightCorner`.
+- Mapping coverage:
+  - Properties audited: trigger foreground/surface/border/focus/size/spacing, popup surface/outline/shadow/min-inline sizing, list panel sizing/paddings, highlighted item inset/background/foreground/corner, item coarse typography overrides, scroll arrow surface/size/corner.
+  - Properties remapped: trigger `color`/`backgroundColor`/`borderColor`/focus outline offset/`inlineSize`/`blockSize`/paddings/gap and popup-open surface state; popup `foreground`/`outline`/`outlineInverse`; list `maxBlockSize`/`paddingBlock`/`scrollPaddingBlock`; item highlight inset/background/foreground/corner now resolve through `selectVars` local tokens.
+  - Intentional direct `sys` usages: placeholder muted opacity (`sys.state.muted.text`) and coarse/no-side item typography (`sys.typography.label.large`).
+- Foundation changes:
+  - Added shared helper `createFloatingHighlightedItemStyles` to `_foundation/floating-surface` and adopted it in `menu` and `select` to remove duplicated highlight composition wiring.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `slider`, `tooltip`)
 
 ---
 

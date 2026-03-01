@@ -7,10 +7,9 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
-  createFloatingItemStyles,
+  createFloatingHighlightedItemStyles,
   createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
-  createInsetHighlightStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
@@ -88,14 +87,6 @@ const menuDefaults = assignVars(menuVars, {
   },
 });
 
-const menuItemHighlightSelectors =
-  createInsetHighlightStyles({
-    backgroundColor: menuVars.color.itemHighlightedBackground,
-    borderRadius: menuVars.shape.itemHighlightCorner,
-    insetInline: menuVars.spacing.itemHighlightInsetInline,
-    textColor: menuVars.color.itemHighlightedForeground,
-  }).selectors ?? {};
-
 export const button = style([
   {
     vars: {
@@ -156,10 +147,13 @@ export const arrowInnerStroke = style({
 
 export const item = style([
   typography.label.medium,
-  createFloatingItemStyles({
+  createFloatingHighlightedItemStyles({
     preset: 'menu',
-    selectors: {
-      ...menuItemHighlightSelectors,
+    highlight: {
+      backgroundColor: menuVars.color.itemHighlightedBackground,
+      borderRadius: menuVars.shape.itemHighlightCorner,
+      insetInline: menuVars.spacing.itemHighlightInsetInline,
+      textColor: menuVars.color.itemHighlightedForeground,
     },
   }),
 ]);

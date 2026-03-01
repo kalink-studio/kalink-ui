@@ -6,108 +6,131 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFieldTextInputTriggerStyles,
-  createFloatingItemStyles,
+  createFloatingHighlightedItemStyles,
   createFloatingListStyles,
   createFloatingAnchoredSurfaceStyles,
   createFloatingPositionerStyles,
   createInteractiveStateStyles,
-  createInsetHighlightStyles,
+  floatingPanelMaxBlockSize,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
 export const selectVars = createThemeContract({
   color: {
-    foreground: null,
+    arrowInnerStroke: null,
+    arrowOuterStroke: null,
+    itemHighlightBackground: null,
+    itemHighlightForeground: null,
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupOutlineInverse: null,
+    popupShadow: null,
+    scrollArrowBackground: null,
     triggerBackground: null,
     triggerBorder: null,
+    triggerFocusRing: null,
+    triggerForeground: null,
     triggerHoverBackground: null,
-    focusRing: null,
-    popupBackground: null,
-    popupOutlineLight: null,
-    popupOutlineDark: null,
-    popupShadow: null,
-    itemHighlightedForeground: null,
-    itemHighlightedBackground: null,
-    arrowOuterStroke: null,
-    arrowInnerStroke: null,
-    scrollArrowBackground: null,
+    triggerOpenBackground: null,
+  },
+  layout: {
+    triggerFocusRingOffset: null,
+    triggerInlineSize: null,
   },
   shape: {
-    triggerCorner: null,
+    itemHighlightCorner: null,
     popupCorner: null,
-    itemCorner: null,
     scrollArrowCorner: null,
+    triggerCorner: null,
+  },
+  size: {
+    listMaxBlockSize: null,
+    triggerBlockSize: null,
   },
   spacing: {
+    itemHighlightInsetInline: null,
+    itemPaddingBlockCoarse: null,
+    itemPaddingInlineEnd: null,
+    itemPaddingInlineEndWithoutSide: null,
+    itemPaddingInlineStart: null,
+    listPaddingBlock: null,
+    listScrollPaddingBlock: null,
+    popupMinInlineOffset: null,
+    scrollArrowBlockSize: null,
     triggerGap: null,
     triggerPaddingInlineEnd: null,
-    popupMinInlineOffset: null,
-    itemPaddingInlineStart: null,
-    itemPaddingInlineEnd: null,
-    itemPaddingBlockCoarse: null,
-    itemPaddingInlineEndWithoutSide: null,
-    scrollArrowBlockSize: null,
+    triggerPaddingInlineStart: null,
   },
 });
 
-const selectColorDefaults = assignVars(selectVars.color, {
-  foreground: sys.color.content.base,
-  triggerBackground: sys.color.surface.base,
-  triggerBorder: sys.color.border.base,
-  triggerHoverBackground: sys.color.container.low,
-  focusRing: sys.color.tone.primary,
-  popupBackground: sys.color.surface.base,
-  popupOutlineLight: sys.color.border.low,
-  popupOutlineDark: sys.color.border.low,
-  popupShadow: sys.elevation.moderate,
-  itemHighlightedForeground: sys.color.container.base,
-  itemHighlightedBackground: sys.color.content.base,
-  arrowOuterStroke: sys.color.border.low,
-  arrowInnerStroke: floatingSurfaceDarkOutlineColor,
-  scrollArrowBackground: sys.color.surface.base,
+const selectDefaults = assignVars(selectVars, {
+  color: {
+    arrowInnerStroke: floatingSurfaceDarkOutlineColor,
+    arrowOuterStroke: sys.color.border.low,
+    itemHighlightBackground: sys.color.content.base,
+    itemHighlightForeground: sys.color.container.base,
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupOutlineInverse: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+    scrollArrowBackground: sys.color.surface.base,
+    triggerBackground: sys.color.surface.base,
+    triggerBorder: sys.color.border.base,
+    triggerFocusRing: sys.color.tone.primary,
+    triggerForeground: sys.color.content.base,
+    triggerHoverBackground: sys.color.container.low,
+    triggerOpenBackground: sys.color.container.low,
+  },
+  layout: {
+    triggerFocusRingOffset: '-1px',
+    triggerInlineSize: '100%',
+  },
+  shape: {
+    itemHighlightCorner: sys.shape.corner.small,
+    popupCorner: sys.shape.corner.medium,
+    scrollArrowCorner: sys.shape.corner.medium,
+    triggerCorner: sys.shape.corner.medium,
+  },
+  size: {
+    listMaxBlockSize: floatingPanelMaxBlockSize,
+    triggerBlockSize: sys.spacing[14],
+  },
+  spacing: {
+    itemHighlightInsetInline: sys.spacing[4],
+    itemPaddingBlockCoarse: sys.spacing[5],
+    itemPaddingInlineEnd: sys.spacing[8],
+    itemPaddingInlineEndWithoutSide: sys.spacing[15],
+    itemPaddingInlineStart: sys.spacing[5],
+    listPaddingBlock: sys.spacing[0],
+    listScrollPaddingBlock: sys.spacing[0],
+    popupMinInlineOffset: sys.spacing[8],
+    scrollArrowBlockSize: sys.spacing[8],
+    triggerGap: sys.spacing[6],
+    triggerPaddingInlineEnd: sys.spacing[6],
+    triggerPaddingInlineStart: sys.spacing[4],
+  },
 });
-
-const selectShapeDefaults = assignVars(selectVars.shape, {
-  triggerCorner: sys.shape.corner.medium,
-  popupCorner: sys.shape.corner.medium,
-  itemCorner: sys.shape.corner.small,
-  scrollArrowCorner: sys.shape.corner.medium,
-});
-
-const selectSpacingDefaults = assignVars(selectVars.spacing, {
-  triggerGap: sys.spacing[6],
-  triggerPaddingInlineEnd: sys.spacing[6],
-  popupMinInlineOffset: sys.spacing[8],
-  itemPaddingInlineStart: sys.spacing[5],
-  itemPaddingInlineEnd: sys.spacing[8],
-  itemPaddingBlockCoarse: sys.spacing[5],
-  itemPaddingInlineEndWithoutSide: sys.spacing[15],
-  scrollArrowBlockSize: sys.spacing[8],
-});
-
-const selectItemHighlightSelectors =
-  createInsetHighlightStyles({
-    textColor: selectVars.color.itemHighlightedForeground,
-    backgroundColor: selectVars.color.itemHighlightedBackground,
-    borderRadius: selectVars.shape.itemCorner,
-  }).selectors ?? {};
 
 export const select = style([
   typography.label.large,
   {
     vars: {
-      ...selectColorDefaults,
-      ...selectShapeDefaults,
-      ...selectSpacingDefaults,
+      ...selectDefaults,
     },
     ...createFieldTextInputTriggerStyles({
-      foreground: selectVars.color.foreground,
+      foreground: selectVars.color.triggerForeground,
       borderColor: selectVars.color.triggerBorder,
       backgroundColor: selectVars.color.triggerBackground,
       borderRadius: selectVars.shape.triggerCorner,
-      focusRingColor: selectVars.color.focusRing,
+      focusRingColor: selectVars.color.triggerFocusRing,
+      focusRingOffset: selectVars.layout.triggerFocusRingOffset,
       gap: selectVars.spacing.triggerGap,
+      paddingInlineStart: selectVars.spacing.triggerPaddingInlineStart,
       paddingInlineEnd: selectVars.spacing.triggerPaddingInlineEnd,
+      inlineSize: selectVars.layout.triggerInlineSize,
+      blockSize: selectVars.size.triggerBlockSize,
     }),
     ...createInteractiveStateStyles({
       hover: {
@@ -115,7 +138,7 @@ export const select = style([
       },
       popupOpen: {
         styles: {
-          backgroundColor: selectVars.color.triggerHoverBackground,
+          backgroundColor: selectVars.color.triggerOpenBackground,
           borderColor: selectVars.color.triggerBorder,
         },
       },
@@ -142,9 +165,7 @@ export const positioner = style({
     userSelect: 'none',
   }),
   vars: {
-    ...selectColorDefaults,
-    ...selectShapeDefaults,
-    ...selectSpacingDefaults,
+    ...selectDefaults,
   },
 });
 
@@ -153,10 +174,10 @@ export const popup = style({
     anchorWidth: 'min-inline',
     borderRadius: selectVars.shape.popupCorner,
     background: selectVars.color.popupBackground,
-    foreground: selectVars.color.foreground,
+    foreground: selectVars.color.popupForeground,
     backgroundClip: 'padding-box',
-    outlineLight: selectVars.color.popupOutlineLight,
-    outlineDark: selectVars.color.popupOutlineDark,
+    outline: selectVars.color.popupOutline,
+    outlineInverse: selectVars.color.popupOutlineInverse,
     shadow: selectVars.color.popupShadow,
     selectors: {
       [`&[data-side='none']`]: {
@@ -175,6 +196,9 @@ export const popup = style({
 export const list = style({
   ...createFloatingListStyles({
     preset: 'listboxCompact',
+    maxBlockSize: selectVars.size.listMaxBlockSize,
+    paddingBlock: selectVars.spacing.listPaddingBlock,
+    scrollPaddingBlock: selectVars.spacing.listScrollPaddingBlock,
   }),
 });
 
@@ -188,8 +212,14 @@ export const arrowInnerStroke = style({
 
 export const item = style([
   typography.label.medium,
-  createFloatingItemStyles({
+  createFloatingHighlightedItemStyles({
     preset: 'listboxWithIndicator',
+    highlight: {
+      backgroundColor: selectVars.color.itemHighlightBackground,
+      borderRadius: selectVars.shape.itemHighlightCorner,
+      insetInline: selectVars.spacing.itemHighlightInsetInline,
+      textColor: selectVars.color.itemHighlightForeground,
+    },
     paddingInlineStart: selectVars.spacing.itemPaddingInlineStart,
     paddingInlineEnd: selectVars.spacing.itemPaddingInlineEnd,
     webkitUserSelect: 'none',
@@ -206,7 +236,6 @@ export const item = style([
         lineHeight: sys.typography.label.large.lineHeight,
         paddingInlineEnd: selectVars.spacing.itemPaddingInlineEndWithoutSide,
       },
-      ...selectItemHighlightSelectors,
     },
   }),
 ]);

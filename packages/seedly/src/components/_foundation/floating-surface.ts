@@ -3,6 +3,8 @@ import { calc } from '@vanilla-extract/css-utils';
 
 import { sys } from '../../styles';
 
+import { createInsetHighlightStyles } from './highlight-item';
+
 export const floatingSurfaceDarkOutlineColor = `color-mix(in srgb, ${sys.color.content.base} 14%, transparent)`;
 export const floatingPanelMaxBlockSize = `min(${calc.multiply(sys.spacing[8], 23)}, var(--available-height))`;
 
@@ -137,6 +139,18 @@ export interface FloatingItemStylesOptions {
   selectors?: Record<string, StyleRule>;
   media?: Record<string, StyleRule>;
   styles?: StyleRule;
+}
+
+export interface FloatingItemHighlightOptions {
+  selector?: string;
+  textColor?: string;
+  backgroundColor: string;
+  insetInline: string;
+  borderRadius: string;
+}
+
+export interface FloatingHighlightedItemStylesOptions extends FloatingItemStylesOptions {
+  highlight: FloatingItemHighlightOptions;
 }
 
 const defaultFloatingStateStyle = {
@@ -365,6 +379,21 @@ export function createFloatingItemStyles(
       ...(options.media ?? {}),
     },
   };
+}
+
+export function createFloatingHighlightedItemStyles(
+  options: FloatingHighlightedItemStylesOptions,
+): StyleRule {
+  const highlightSelectors =
+    createInsetHighlightStyles(options.highlight).selectors ?? {};
+
+  return createFloatingItemStyles({
+    ...options,
+    selectors: {
+      ...highlightSelectors,
+      ...(options.selectors ?? {}),
+    },
+  });
 }
 
 export function createFloatingPopupStyles(
