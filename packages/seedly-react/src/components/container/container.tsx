@@ -13,7 +13,7 @@ export type ContainerProps = useRender.ComponentProps<'div'> &
 
 export function Container({
   spacing,
-  radius,
+  corner,
   elevation,
   level,
   variant,
@@ -27,7 +27,7 @@ export function Container({
     props: {
       ...props,
       className: mergeClassName(
-        containerResponsive({ spacing, radius, elevation, level, variant }),
+        containerResponsive({ spacing, corner, elevation, level, variant }),
         className,
       ),
     },

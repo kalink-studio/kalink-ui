@@ -7,7 +7,7 @@ import {
   layoutRecipe,
   layoutSpacingStyles,
   layoutElevationStyles,
-  layoutRadiusStyles,
+  layoutCornerStyles,
 } from '../layout/layout.css';
 
 import type {
@@ -176,7 +176,7 @@ export const boxRecipe = recipe({
     colorKey: emptyColorKeyStyles,
     spacing: layoutSpacingStyles,
     elevation: layoutElevationStyles,
-    radius: layoutRadiusStyles,
+    corner: layoutCornerStyles,
   },
 
   defaultVariants: {

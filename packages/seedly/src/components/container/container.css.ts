@@ -7,7 +7,7 @@ import {
   layoutRecipe,
   layoutSpacingStyles,
   layoutElevationStyles,
-  layoutRadiusStyles,
+  layoutCornerStyles,
 } from '../layout/layout.css';
 
 const containerVars = createThemeContract({
@@ -108,7 +108,7 @@ export const containerRecipe = recipe({
     level: containerLevelStyles,
     spacing: layoutSpacingStyles,
     elevation: layoutElevationStyles,
-    radius: layoutRadiusStyles,
+    corner: layoutCornerStyles,
   },
 
   defaultVariants: {

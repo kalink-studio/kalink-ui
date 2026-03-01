@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`.
-- Next unchecked component: `layout`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`.
+- Next unchecked component: `menu`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -200,7 +200,7 @@ Examples:
 - [x] `grid`
 - [x] `input`
 - [x] `label`
-- [ ] `layout`
+- [x] `layout`
 - [ ] `menu`
 - [ ] `menubar`
 - [ ] `meter`
@@ -711,6 +711,36 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `layout`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based keys: `spacing.rootPaddingBlock`, `spacing.rootPaddingInline`, `shape.rootCorner`, `elevation.rootLevel`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(layoutVars, { ... })`.
+  - Remapped token-eligible layout base properties (`paddingBlock`, `paddingInline`, `borderRadius`, `boxShadow`) to local tokens.
+  - Applied intentional API break from `radius` to `corner` across layout exports and downstream `box`/`container` variants and responsive APIs.
+  - Updated `seedly-react` `box`/`container` wrappers and stories to use `corner` prop naming.
+- Contract changes:
+  - Renamed: `spacing.block` -> `spacing.rootPaddingBlock`.
+  - Renamed: `spacing.inline` -> `spacing.rootPaddingInline`.
+  - Renamed: `shape.corner` -> `shape.rootCorner`.
+  - Renamed: `elevation.level` -> `elevation.rootLevel`.
+  - Renamed: `layoutRadiusStyles` -> `layoutCornerStyles`.
+  - Renamed: `radiusAt` -> `cornerAt`.
+  - Renamed: `radius` variant -> `corner` variant (`layout`, `box`, `container`).
+- Mapping coverage:
+  - Properties audited: layout root block/inline padding, corner radius, elevation shadow; shared layout alignment maps in `layout/shared/maps.ts`.
+  - Properties remapped: layout root `paddingBlock`/`paddingInline`/`borderRadius`/`boxShadow` now resolve through role-based local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `layoutRecipe`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `layout/shared/maps.ts` was audited during this pass; no adaptation was required because it only exports generic flex/grid alignment maps and has no dependency on the `radius`/`corner` API.
 
 ---
 

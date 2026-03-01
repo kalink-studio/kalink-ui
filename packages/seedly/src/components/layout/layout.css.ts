@@ -10,15 +10,17 @@ import {
 import { components } from '../../styles/layers.css';
 
 export const layoutVars = createThemeContract({
-  spacing: {
-    block: null,
-    inline: null,
-  },
-  shape: {
-    corner: null,
-  },
   elevation: {
-    level: null,
+    rootLevel: null,
+  },
+
+  shape: {
+    rootCorner: null,
+  },
+
+  spacing: {
+    rootPaddingBlock: null,
+    rootPaddingInline: null,
   },
 });
 
@@ -32,7 +34,7 @@ export const layoutElevationStyles = mapContractVars(
   layoutVars.elevation,
 );
 
-export const layoutRadiusStyles = mapContractVars(
+export const layoutCornerStyles = mapContractVars(
   sys.shape.corner,
   layoutVars.shape,
 );
@@ -41,26 +43,28 @@ export const layoutRecipe = recipe({
   base: {
     '@layer': {
       [components]: {
-        paddingBlock: layoutVars.spacing.block,
-        paddingInline: layoutVars.spacing.inline,
+        vars: assignVars(layoutVars, {
+          elevation: {
+            rootLevel: sys.elevation.none,
+          },
+
+          shape: {
+            rootCorner: sys.shape.corner.none,
+          },
+
+          spacing: {
+            rootPaddingBlock: sys.spacing[0],
+            rootPaddingInline: sys.spacing[0],
+          },
+        }),
 
         position: 'relative',
 
-        borderRadius: layoutVars.shape.corner,
-        boxShadow: layoutVars.elevation.level,
+        paddingBlock: layoutVars.spacing.rootPaddingBlock,
+        paddingInline: layoutVars.spacing.rootPaddingInline,
 
-        vars: assignVars(layoutVars, {
-          spacing: {
-            block: sys.spacing[0],
-            inline: sys.spacing[0],
-          },
-          shape: {
-            corner: sys.shape.corner.none,
-          },
-          elevation: {
-            level: sys.elevation.none,
-          },
-        }),
+        borderRadius: layoutVars.shape.rootCorner,
+        boxShadow: layoutVars.elevation.rootLevel,
       },
     },
   },
@@ -68,10 +72,11 @@ export const layoutRecipe = recipe({
   variants: {
     spacing: layoutSpacingStyles,
     elevation: layoutElevationStyles,
-    radius: layoutRadiusStyles,
+    corner: layoutCornerStyles,
   },
 });
-export const radiusAt = createResponsiveVariants({
-  styles: layoutRadiusStyles,
+
+export const cornerAt = createResponsiveVariants({
+  styles: layoutCornerStyles,
   media: defaultMedia,
 });

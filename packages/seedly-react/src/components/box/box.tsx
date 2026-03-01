@@ -49,7 +49,7 @@ export type BoxProps = BoxLayoutProps & (BoxLayoutOnlyProps | BoxColorProps);
 
 export function Box({
   spacing,
-  radius,
+  corner,
   elevation,
   colorSource,
   colorKey,
@@ -64,7 +64,7 @@ export function Box({
       colorSource,
       colorKey,
       spacing,
-      radius,
+      corner,
       elevation,
     }),
     className,

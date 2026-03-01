@@ -25,7 +25,7 @@ function Example() {
         <Box
           colorKey="high"
           colorSource="container"
-          radius="medium"
+          corner="medium"
           spacing={8}
           variant="outline"
         >

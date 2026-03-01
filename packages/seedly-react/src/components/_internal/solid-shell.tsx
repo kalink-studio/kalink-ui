@@ -3,7 +3,7 @@ import type { ContainerProps } from '@/components/container/container';
 
 export type SolidShellProps = Omit<
   ContainerProps,
-  'variant' | 'level' | 'radius' | 'spacing'
+  'variant' | 'level' | 'corner' | 'spacing'
 >;
 
 export function SolidShell(props: SolidShellProps) {
@@ -11,7 +11,7 @@ export function SolidShell(props: SolidShellProps) {
     <Container
       variant="solid"
       level="base"
-      radius="medium"
+      corner="medium"
       spacing={2}
       {...props}
     />

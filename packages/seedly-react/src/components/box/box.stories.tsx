@@ -14,7 +14,7 @@ const containerColorKeyOptions = ['low', 'base', 'high', 'top'] as const;
 const surfaceColorKeyOptions = ['dim', 'base', 'bright'] as const;
 const variantOptions = ['solid', 'outline', 'bare'] as const;
 const spacingOptions = [0, 2, 4, 6, 8, 10, 12] as const;
-const radiusOptions = ['none', 'sharp', 'small', 'medium', 'rounded'] as const;
+const cornerOptions = ['none', 'sharp', 'small', 'medium', 'rounded'] as const;
 const elevationOptions = [
   'none',
   'minimal',
@@ -31,7 +31,7 @@ interface BoxControlArgs {
   surfaceColorKey?: (typeof surfaceColorKeyOptions)[number];
   variant?: NonNullable<BoxProps['variant']>;
   spacing?: NonNullable<BoxProps['spacing']>;
-  radius?: NonNullable<BoxProps['radius']>;
+  corner?: NonNullable<BoxProps['corner']>;
   elevation?: NonNullable<BoxProps['elevation']>;
 }
 
@@ -50,7 +50,7 @@ const meta = {
     containerColorKey: 'high',
     surfaceColorKey: 'dim',
     spacing: 8,
-    radius: 'medium',
+    corner: 'medium',
     elevation: 'none',
   },
   argTypes: {
@@ -98,11 +98,11 @@ const meta = {
       },
       options: spacingOptions,
     },
-    radius: {
+    corner: {
       control: {
         type: 'select',
       },
-      options: radiusOptions,
+      options: cornerOptions,
     },
     elevation: {
       control: {
@@ -128,7 +128,7 @@ export const Tone: Story = {
     toneColorKey: 'primary',
     variant: 'outline',
     spacing: 6,
-    radius: 'medium',
+    corner: 'medium',
     elevation: 'none',
   },
   render: (args) => renderBox(args),
@@ -140,7 +140,7 @@ export const LayoutOnly: Story = {
     colorSource: undefined,
     variant: undefined,
     spacing: 6,
-    radius: 'medium',
+    corner: 'medium',
     elevation: 'minimal',
   },
   render: (args) => renderBox(args),
@@ -153,7 +153,7 @@ export const Container: Story = {
     containerColorKey: 'high',
     variant: 'solid',
     spacing: 6,
-    radius: 'medium',
+    corner: 'medium',
     elevation: 'none',
   },
   render: (args) => renderBox(args),
@@ -166,7 +166,7 @@ export const Surface: Story = {
     surfaceColorKey: 'dim',
     variant: 'outline',
     spacing: 6,
-    radius: 'medium',
+    corner: 'medium',
     elevation: 'none',
   },
   render: (args) => renderBox(args),
@@ -181,7 +181,7 @@ function renderBox(args: BoxControlArgs) {
     surfaceColorKey = 'dim',
     variant,
     spacing = 6,
-    radius = 'medium',
+    corner = 'medium',
     elevation = 'none',
   } = args;
 
@@ -192,7 +192,7 @@ function renderBox(args: BoxControlArgs) {
         colorKey={toneColorKey}
         variant={variant}
         spacing={spacing}
-        radius={radius}
+        corner={corner}
         elevation={elevation}
       >
         {children}
@@ -207,7 +207,7 @@ function renderBox(args: BoxControlArgs) {
         colorKey={containerColorKey}
         variant={variant}
         spacing={spacing}
-        radius={radius}
+        corner={corner}
         elevation={elevation}
       >
         {children}
@@ -222,7 +222,7 @@ function renderBox(args: BoxControlArgs) {
         colorKey={surfaceColorKey}
         variant={variant}
         spacing={spacing}
-        radius={radius}
+        corner={corner}
         elevation={elevation}
       >
         {children}
@@ -231,7 +231,7 @@ function renderBox(args: BoxControlArgs) {
   }
 
   return (
-    <SeedlyBox spacing={spacing} radius={radius} elevation={elevation}>
+    <SeedlyBox spacing={spacing} corner={corner} elevation={elevation}>
       {children}
     </SeedlyBox>
   );

@@ -13,7 +13,7 @@ const meta = {
     variant: 'solid',
     level: 'high',
     spacing: 6,
-    radius: 'medium',
+    corner: 'medium',
     elevation: 'none',
   },
   argTypes: {
@@ -35,7 +35,7 @@ const meta = {
       },
       options: [0, 2, 4, 6, 8, 10, 12],
     },
-    radius: {
+    corner: {
       control: {
         type: 'select',
       },
@@ -55,12 +55,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: ({ variant, level, spacing, radius, elevation }) => (
+  render: ({ variant, level, spacing, corner, elevation }) => (
     <SeedlyContainer
       variant={variant}
       level={level}
       spacing={spacing}
-      radius={radius}
+      corner={corner}
       elevation={elevation}
     >
       <h3 style={{ margin: 0 }}>Performance report</h3>
