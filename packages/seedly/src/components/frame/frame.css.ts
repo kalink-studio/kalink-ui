@@ -11,12 +11,14 @@ import { components } from '../../styles/layers.css';
 
 export const frameVars = createThemeContract({
   layout: {
-    ratio: null,
+    rootAspectRatio: null,
   },
 });
 
-const frameLayoutDefaults = assignVars(frameVars.layout, {
-  ratio: 'auto',
+const frameDefaults = assignVars(frameVars, {
+  layout: {
+    rootAspectRatio: 'auto',
+  },
 });
 
 export const frameRatioStyles = {
@@ -24,8 +26,10 @@ export const frameRatioStyles = {
     '@layer': {
       [components]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '1 / 1',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '1 / 1',
+            },
           }),
         },
       },
@@ -35,8 +39,10 @@ export const frameRatioStyles = {
     '@layer': {
       [components]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '3 / 2',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '3 / 2',
+            },
           }),
         },
       },
@@ -46,8 +52,10 @@ export const frameRatioStyles = {
     '@layer': {
       [components]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '2 / 3',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '2 / 3',
+            },
           }),
         },
       },
@@ -57,8 +65,10 @@ export const frameRatioStyles = {
     '@layer': {
       [components]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '4 / 3',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '4 / 3',
+            },
           }),
         },
       },
@@ -68,8 +78,10 @@ export const frameRatioStyles = {
     '@layer': {
       [components]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '16 / 9',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '16 / 9',
+            },
           }),
         },
       },
@@ -79,8 +91,10 @@ export const frameRatioStyles = {
     '@layer': {
       [components]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '9 / 16',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '9 / 16',
+            },
           }),
         },
       },
@@ -91,17 +105,14 @@ export const frameRatioStyles = {
 const baseFrame = style({
   '@layer': {
     [components]: {
+      vars: frameDefaults,
+
+      alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
 
+      aspectRatio: frameVars.layout.rootAspectRatio,
       overflow: 'hidden',
-
-      aspectRatio: frameVars.layout.ratio,
-
-      vars: {
-        ...frameLayoutDefaults,
-      },
     },
   },
 });
@@ -117,8 +128,8 @@ export const frameRecipe = recipe({
 globalStyle(`${baseFrame} > img, ${baseFrame} > video`, {
   '@layer': {
     [components]: {
-      inlineSize: '100%',
       blockSize: '100%',
+      inlineSize: '100%',
       objectFit: 'cover',
     },
   },

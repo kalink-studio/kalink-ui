@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`.
-- Next unchecked component: `frame`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`.
+- Next unchecked component: `grid`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -197,7 +197,7 @@ Examples:
 - [x] `field`
 - [x] `fieldset`
 - [x] `form`
-- [ ] `frame`
+- [x] `frame`
 - [ ] `grid`
 - [ ] `input`
 - [ ] `label`
@@ -626,6 +626,26 @@ If policy changes mid-migration:
   - Properties audited: root stack gap.
   - Properties remapped: root `gap` now resolves through `formVars.spacing.rootGap`.
   - Intentional direct `sys` usages: component-owned default assignment in `formDefaults` (`sys.spacing[8]`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components)
+
+### `frame`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based key `layout.rootAspectRatio`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(frameVars, { ... })`.
+  - Remapped token-eligible root aspect-ratio property to the role-based local token.
+- Contract changes:
+  - Renamed: `layout.ratio` -> `layout.rootAspectRatio`.
+- Mapping coverage:
+  - Properties audited: root aspect ratio.
+  - Properties remapped: root `aspectRatio` now resolves through `frameVars.layout.rootAspectRatio`.
+  - Intentional direct `sys` usages: none.
 - Foundation changes:
   - none.
 - Validation:
