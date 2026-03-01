@@ -16,75 +16,95 @@ import {
 
 export const menuVars = createThemeContract({
   color: {
-    triggerForeground: null,
-    triggerBackground: null,
-    triggerBorder: null,
-    triggerHoverBackground: null,
-    triggerFocusRing: null,
-    popupBackground: null,
-    popupOutlineLight: null,
-    popupOutlineDark: null,
-    popupShadow: null,
-    itemHighlightedForeground: null,
-    itemHighlightedBackground: null,
-    separator: null,
-    arrowOuterStroke: null,
     arrowInnerStroke: null,
+    arrowOuterStroke: null,
+
+    itemHighlightedBackground: null,
+    itemHighlightedForeground: null,
+
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupOutlineInverse: null,
+    popupShadow: null,
+
+    separator: null,
+
+    triggerOpenBackground: null,
   },
+
   shape: {
-    triggerCorner: null,
+    itemHighlightCorner: null,
     popupCorner: null,
-    itemCorner: null,
   },
+
   size: {
     separatorBlockSize: null,
   },
+
+  spacing: {
+    itemHighlightInsetInline: null,
+    popupPaddingBlock: null,
+    separatorMarginBlock: null,
+    separatorMarginInline: null,
+    triggerIconMarginInlineEnd: null,
+  },
 });
 
-const menuColorDefaults = assignVars(menuVars.color, {
-  triggerForeground: sys.color.content.base,
-  triggerBackground: sys.color.container.base,
-  triggerBorder: sys.color.border.base,
-  triggerHoverBackground: sys.color.container.low,
-  triggerFocusRing: sys.color.tone.primary,
-  popupBackground: sys.color.surface.base,
-  popupOutlineLight: sys.color.border.low,
-  popupOutlineDark: sys.color.border.low,
-  popupShadow: sys.elevation.moderate,
-  itemHighlightedForeground: sys.color.container.base,
-  itemHighlightedBackground: sys.color.content.base,
-  separator: sys.color.border.high,
-  arrowOuterStroke: sys.color.border.low,
-  arrowInnerStroke: floatingSurfaceDarkOutlineColor,
-});
+const menuDefaults = assignVars(menuVars, {
+  color: {
+    arrowInnerStroke: floatingSurfaceDarkOutlineColor,
+    arrowOuterStroke: sys.color.border.low,
 
-const menuShapeDefaults = assignVars(menuVars.shape, {
-  triggerCorner: sys.shape.corner.medium,
-  popupCorner: sys.shape.corner.medium,
-  itemCorner: sys.shape.corner.small,
-});
+    itemHighlightedBackground: sys.color.content.base,
+    itemHighlightedForeground: sys.color.container.base,
 
-const menuSizeDefaults = assignVars(menuVars.size, {
-  separatorBlockSize: '1px',
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupOutlineInverse: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+
+    separator: sys.color.border.high,
+
+    triggerOpenBackground: sys.color.container.low,
+  },
+
+  shape: {
+    itemHighlightCorner: sys.shape.corner.small,
+    popupCorner: sys.shape.corner.medium,
+  },
+
+  size: {
+    separatorBlockSize: '1px',
+  },
+
+  spacing: {
+    itemHighlightInsetInline: sys.spacing[4],
+    popupPaddingBlock: sys.spacing[2],
+    separatorMarginBlock: sys.spacing[3],
+    separatorMarginInline: sys.spacing[8],
+    triggerIconMarginInlineEnd: sys.spacing[2],
+  },
 });
 
 const menuItemHighlightSelectors =
   createInsetHighlightStyles({
-    textColor: menuVars.color.itemHighlightedForeground,
     backgroundColor: menuVars.color.itemHighlightedBackground,
-    borderRadius: menuVars.shape.itemCorner,
+    borderRadius: menuVars.shape.itemHighlightCorner,
+    insetInline: menuVars.spacing.itemHighlightInsetInline,
+    textColor: menuVars.color.itemHighlightedForeground,
   }).selectors ?? {};
 
 export const button = style([
   {
     vars: {
-      ...menuColorDefaults,
-      ...menuShapeDefaults,
-      ...menuSizeDefaults,
+      ...menuDefaults,
     },
+
     selectors: {
       '&[data-popup-open]': {
-        backgroundColor: menuVars.color.triggerHoverBackground,
+        backgroundColor: menuVars.color.triggerOpenBackground,
       },
     },
   },
@@ -95,32 +115,27 @@ export const buttonIcon = style({
   alignItems: 'center',
   justifyContent: 'center',
   flexShrink: '0',
-  marginInlineEnd: calc.negate(sys.spacing[2]),
+  marginInlineEnd: calc.negate(menuVars.spacing.triggerIconMarginInlineEnd),
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
-  vars: {
-    ...menuColorDefaults,
-    ...menuShapeDefaults,
-  },
+  ...createFloatingPositionerStyles({
+    vars: {
+      ...menuDefaults,
+    },
+  }),
 });
 
 export const popup = style({
   ...createFloatingSurfaceStyles({
-    paddingBlock: sys.spacing[2],
-    borderRadius: menuVars.shape.popupCorner,
     background: menuVars.color.popupBackground,
-    foreground: menuVars.color.triggerForeground,
-    outlineLight: menuVars.color.popupOutlineLight,
-    outlineDark: menuVars.color.popupOutlineDark,
+    borderRadius: menuVars.shape.popupCorner,
+    foreground: menuVars.color.popupForeground,
+    outline: menuVars.color.popupOutline,
+    outlineInverse: menuVars.color.popupOutlineInverse,
+    paddingBlock: menuVars.spacing.popupPaddingBlock,
     shadow: menuVars.color.popupShadow,
   }),
-  vars: {
-    ...menuColorDefaults,
-    ...menuShapeDefaults,
-    ...menuSizeDefaults,
-  },
 });
 
 export const arrow = style({
@@ -150,8 +165,10 @@ export const item = style([
 ]);
 
 export const separator = style({
-  marginBlock: sys.spacing[3],
-  marginInline: sys.spacing[8],
   blockSize: menuVars.size.separatorBlockSize,
+
+  marginBlock: menuVars.spacing.separatorMarginBlock,
+  marginInline: menuVars.spacing.separatorMarginInline,
+
   backgroundColor: menuVars.color.separator,
 });

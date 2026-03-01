@@ -34,12 +34,11 @@ Validation gate (in order):
 
 - Migration has started.
 - Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`.
-- Next unchecked component: `menu`.
+- Next unchecked component: `menubar`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `menu`
 - `menubar`
 - `meter`
 - `navigation-menu`
@@ -201,7 +200,7 @@ Examples:
 - [x] `input`
 - [x] `label`
 - [x] `layout`
-- [ ] `menu`
+- [x] `menu`
 - [ ] `menubar`
 - [ ] `meter`
 - [ ] `navigation-menu`
@@ -741,6 +740,32 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `layout/shared/maps.ts` was audited during this pass; no adaptation was required because it only exports generic flex/grid alignment maps and has no dependency on the `radius`/`corner` API.
+
+### `menu`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `shape`, `size`, and `spacing` groups for trigger icon, popup, item highlight, separator, and arrow surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(menuVars, { ... })`.
+  - Remapped popup outline wiring to the strict `_foundation` floating surface API (`outline`, `outlineInverse`) and removed obsolete light/dark caller fields.
+  - Added strict `_foundation` highlight caller coverage for required `insetInline` option using local tokens.
+  - Kept portal-safe token assignment by assigning defaults at both `button` (trigger subtree owner) and `positioner` (portal subtree owner).
+- Contract changes:
+  - Added: `color.popupForeground`, `color.popupOutline`, `color.popupOutlineInverse`, `color.triggerOpenBackground`, `shape.itemHighlightCorner`, `spacing.itemHighlightInsetInline`, `spacing.popupPaddingBlock`, `spacing.separatorMarginBlock`, `spacing.separatorMarginInline`, `spacing.triggerIconMarginInlineEnd`.
+  - Renamed: `shape.itemCorner` -> `shape.itemHighlightCorner`.
+  - Removed: `color.triggerForeground`, `color.triggerBackground`, `color.triggerBorder`, `color.triggerHoverBackground`, `color.triggerFocusRing`, `color.popupOutlineLight`, `color.popupOutlineDark`, `shape.triggerCorner`.
+- Mapping coverage:
+  - Properties audited: trigger open-state background, trigger icon margin, popup surface (background/foreground/outline/shadow/corner/padding), highlighted item inset/background/foreground/corner, separator size/margins/color, arrow fill/strokes.
+  - Properties remapped: popup `background`/`foreground`/`outline`/`outlineInverse`/`shadow`/`borderRadius`/`paddingBlock`; trigger open-state `backgroundColor`; button icon `marginInlineEnd`; highlighted item `textColor`/`backgroundColor`/`insetInline`/`borderRadius`; separator `blockSize`/`marginBlock`/`marginInline`/`backgroundColor` now resolve through `menuVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `menuDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `menu` no longer appears in the known strict-default fallout list.
 
 ---
 
