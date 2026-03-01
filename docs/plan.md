@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`.
-- Next unchecked component: `scroll-area`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`.
+- Next unchecked component: `select`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -201,7 +201,7 @@ Examples:
 - [x] `preview-card`
 - [x] `progress`
 - [x] `radio`
-- [ ] `scroll-area`
+- [x] `scroll-area`
 - [ ] `select`
 - [ ] `separator`
 - [ ] `sidebar`
@@ -950,6 +950,26 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `radio` no longer appears in the known strict-default fallout list.
+
+### `scroll-area`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `motion`, `shape`, `size`, and `spacing` groups for root, viewport, content, scrollbar, and thumb surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(scrollAreaVars, { ... })`.
+  - Remapped token-eligible viewport outline/focus, content spacing, scrollbar surface/sizing/margins/motion, and thumb surface properties to local tokens.
+- Contract changes:
+  - Added: `color.scrollbarBackground`, `color.thumbBackground`, `color.viewportFocusRing`, `color.viewportOutline`, `motion.scrollbarFadeDuration`, `motion.scrollbarFadeEasing`, `size.scrollbarHitAreaInlineSize`, `size.scrollbarInlineSize`, `spacing.contentGap`, `spacing.contentPaddingBlock`, `spacing.contentPaddingInlineEnd`, `spacing.contentPaddingInlineStart`, `spacing.scrollbarMarginBlock`, `spacing.scrollbarMarginInline`.
+- Mapping coverage:
+  - Properties audited: root block size, viewport corner/outline/focus, content gap/paddings, scrollbar inline size/margins/background/corner/fade transition/hit area, thumb background.
+  - Properties remapped: root `blockSize`; viewport `outline` and focus-visible `outline`; content `gap`/`paddingBlock`/`paddingInlineStart`/`paddingInlineEnd`; scrollbar `inlineSize`/`marginBlock`/`marginInline`/`backgroundColor`/transition `duration`+`easing` and pseudo hit-area `inlineSize`; thumb `backgroundColor` now resolve through `scrollAreaVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `scrollAreaDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `select`, `slider`, `tooltip`)
 
 ---
 
