@@ -30,6 +30,7 @@ export * as popoverStyles from './popover';
 export * as previewCardStyles from './preview-card';
 export * as progressStyles from './progress';
 export * as radioStyles from './radio';
+export * as radioGroupStyles from './radio-group';
 export * as scrollAreaStyles from './scroll-area';
 export * as selectStyles from './select';
 export * as separatorStyles from './separator';

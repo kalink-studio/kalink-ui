@@ -30,6 +30,7 @@ export { Popover } from './popover';
 export { PreviewCard } from './preview-card';
 export { Progress } from './progress';
 export { Radio } from './radio';
+export { RadioGroup } from './radio-group';
 export { ScrollArea } from './scroll-area';
 export { Select } from './select';
 export { Separator } from './separator';

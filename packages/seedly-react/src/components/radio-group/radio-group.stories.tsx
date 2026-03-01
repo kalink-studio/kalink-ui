@@ -1,19 +1,19 @@
 import { Fieldset } from '../fieldset';
-import { RadioGroup } from '../radio-group';
+import { Radio } from '../radio';
 
-import { Radio } from '.';
+import { RadioGroup } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Components/Radio',
-  component: Radio.Root,
+  title: 'Components/Radio Group',
+  component: RadioGroup.Root,
   tags: ['autodocs'],
-} satisfies Meta<typeof Radio.Root>;
+} satisfies Meta<typeof RadioGroup.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof Radio.Root>;
+type Story = StoryObj<typeof RadioGroup.Root>;
 
 export const Default: Story = {
   render: () => <Example />,

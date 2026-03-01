@@ -1,5 +1,3 @@
-export { Caption } from './caption';
-export { Group } from './group';
 export { Indicator } from './indicator';
-export { Item } from './item';
+export { Label } from './label';
 export { Root } from './root';

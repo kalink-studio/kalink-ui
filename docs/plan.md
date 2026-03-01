@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`.
-- Next unchecked component: `radio`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`.
+- Next unchecked component: `scroll-area`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `radio`
 - `select`
 - `slider`
 - `tooltip`
@@ -201,7 +200,7 @@ Examples:
 - [x] `popover`
 - [x] `preview-card`
 - [x] `progress`
-- [ ] `radio`
+- [x] `radio`
 - [ ] `scroll-area`
 - [ ] `select`
 - [ ] `separator`
@@ -926,6 +925,31 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `progress` no longer appears in the known strict-default fallout list.
+
+### `radio`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `shape`, `size`, and `spacing` groups for label/control/indicator surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(radioVars, { ... })`.
+  - Added strict `_foundation` choice-control caller coverage for required `size` and `focusOutlineOffset` options using local tokens.
+  - Split group ownership into a dedicated `radio-group` component to align composition structure with `checkbox` + `checkbox-group`.
+  - Applied a clean API break in `seedly-react`: removed `Radio.Group`/`Radio.Item`/`Radio.Caption`; radio options now compose as `RadioGroup.Root` + `Radio.Label` + `Radio.Root` + `Radio.Indicator`.
+- Contract changes:
+  - Added: `color.controlBorder`, `color.controlCheckedBackground`, `color.controlFocusRing`, `color.indicatorForeground`, `color.labelForeground`, `shape.controlCorner`, `size.controlSize`, `size.indicatorSize`, `spacing.controlFocusOutlineOffset`, `spacing.labelGap`.
+  - Removed: `color.foreground`, `color.border`, `color.checkedBackground`, `color.checkedForeground`, `color.focusRing`, `shape.corner`, `spacing.groupGap`, `spacing.itemGap`, `spacing.indicatorSize`.
+- Mapping coverage:
+  - Properties audited: label foreground + gap, control border/background/focus/corner/size, indicator dot foreground/size/corner, and group foreground + gap ownership split.
+  - Properties remapped: label color/gap and control/indicator theme-facing properties now resolve through `radioVars`; group foreground/gap now resolve through `radioGroupVars`.
+  - Intentional direct `sys` usages: component-owned default assignments in `radioDefaults` and `radioGroupDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `radio` no longer appears in the known strict-default fallout list.
 
 ---
 

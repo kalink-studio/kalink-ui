@@ -8,63 +8,65 @@ import {
 
 export const radioVars = createThemeContract({
   color: {
-    foreground: null,
-    border: null,
-    checkedBackground: null,
-    checkedForeground: null,
-    focusRing: null,
-  },
-  spacing: {
-    groupGap: null,
-    itemGap: null,
-    indicatorSize: null,
+    controlBorder: null,
+    controlCheckedBackground: null,
+    controlFocusRing: null,
+    indicatorForeground: null,
+    labelForeground: null,
   },
   shape: {
-    corner: null,
+    controlCorner: null,
+  },
+  size: {
+    controlSize: null,
+    indicatorSize: null,
+  },
+  spacing: {
+    controlFocusOutlineOffset: null,
+    labelGap: null,
   },
 });
 
-export const radioGroup = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'start',
-  gap: radioVars.spacing.groupGap,
-  color: radioVars.color.foreground,
-  vars: {
-    ...assignVars(radioVars.color, {
-      foreground: sys.color.content.base,
-      border: sys.color.border.high,
-      checkedBackground: sys.color.content.base,
-      checkedForeground: sys.color.container.base,
-      focusRing: sys.color.tone.primary,
-    }),
-    ...assignVars(radioVars.spacing, {
-      groupGap: sys.spacing[2],
-      itemGap: sys.spacing[4],
-      indicatorSize: sys.spacing[4],
-    }),
-    ...assignVars(radioVars.shape, {
-      corner: sys.shape.corner.circle,
-    }),
+const radioDefaults = assignVars(radioVars, {
+  color: {
+    controlBorder: sys.color.border.high,
+    controlCheckedBackground: sys.color.content.base,
+    controlFocusRing: sys.color.tone.primary,
+    indicatorForeground: sys.color.container.base,
+    labelForeground: sys.color.content.base,
+  },
+  shape: {
+    controlCorner: sys.shape.corner.circle,
+  },
+  size: {
+    controlSize: sys.spacing[9],
+    indicatorSize: sys.spacing[4],
+  },
+  spacing: {
+    controlFocusOutlineOffset: sys.spacing[1],
+    labelGap: sys.spacing[4],
   },
 });
 
-export const caption = style({
-  display: 'block',
-});
+export const label = style({
+  vars: radioDefaults,
 
-export const item = style({
   display: 'flex',
   alignItems: 'center',
-  gap: radioVars.spacing.itemGap,
+
+  gap: radioVars.spacing.labelGap,
+
+  color: radioVars.color.labelForeground,
 });
 
 export const radio = style({
   ...createChoiceControlStyles({
-    borderRadius: radioVars.shape.corner,
-    uncheckedBorderColor: radioVars.color.border,
-    checkedBackgroundColor: radioVars.color.checkedBackground,
-    focusRingColor: radioVars.color.focusRing,
+    borderRadius: radioVars.shape.controlCorner,
+    checkedBackgroundColor: radioVars.color.controlCheckedBackground,
+    focusOutlineOffset: radioVars.spacing.controlFocusOutlineOffset,
+    focusRingColor: radioVars.color.controlFocusRing,
+    size: radioVars.size.controlSize,
+    uncheckedBorderColor: radioVars.color.controlBorder,
   }),
 });
 
@@ -72,9 +74,9 @@ export const indicator = style({
   ...createChoiceIndicatorStyles({
     alignCenter: true,
     before: {
-      size: radioVars.spacing.indicatorSize,
-      borderRadius: radioVars.shape.corner,
-      backgroundColor: radioVars.color.checkedForeground,
+      size: radioVars.size.indicatorSize,
+      borderRadius: radioVars.shape.controlCorner,
+      backgroundColor: radioVars.color.indicatorForeground,
     },
   }),
 });
