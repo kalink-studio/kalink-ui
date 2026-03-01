@@ -33,8 +33,8 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`.
-- Next unchecked component: `separator`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`.
+- Next unchecked component: `sidebar`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -202,7 +202,7 @@ Examples:
 - [x] `radio`
 - [x] `scroll-area`
 - [x] `select`
-- [ ] `separator`
+- [x] `separator`
 - [ ] `sidebar`
 - [ ] `slider`
 - [ ] `stack`
@@ -988,6 +988,27 @@ If policy changes mid-migration:
   - Intentional direct `sys` usages: placeholder muted opacity (`sys.state.muted.text`) and coarse/no-side item typography (`sys.typography.label.large`).
 - Foundation changes:
   - Added shared helper `createFloatingHighlightedItemStyles` to `_foundation/floating-surface` and adopted it in `menu` and `select` to remove duplicated highlight composition wiring.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `slider`, `tooltip`)
+
+### `separator`
+
+- Status: `done`
+- Outcome:
+  - Normalized the local contract to role-based keys for separator root and link surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(separatorVars, { ... })`.
+  - Remapped token-eligible separator and link style properties to local contract tokens, including underline thickness and underline offset.
+- Contract changes:
+  - Added: `size.linkUnderlineThickness`, `spacing.linkUnderlineOffset`.
+  - Renamed: `color.separator` -> `color.rootBackground`, `color.link` -> `color.linkForeground`, `color.linkDecoration` -> `color.linkUnderline`, `color.focusRing` -> `color.linkFocusRing`, `shape.focusCorner` -> `shape.linkFocusCorner`, `size.blockSize` -> `size.rootBlockSize`, `size.verticalInlineSize` -> `size.rootVerticalInlineSize`, `size.verticalBlockSize` -> `size.rootVerticalBlockSize`.
+- Mapping coverage:
+  - Properties audited: root separator surface and orientation sizing, link foreground/underline treatment, and link focus ring/corner treatment.
+  - Properties remapped: root `backgroundColor`/`blockSize` and vertical orientation `inlineSize`/`blockSize`; link `color`/`textDecorationColor`/`textDecorationThickness`/`textUnderlineOffset` and focus-visible `borderRadius`/`outline` now resolve through `separatorVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `separatorDefaults`.
+- Foundation changes:
+  - none.
 - Validation:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)

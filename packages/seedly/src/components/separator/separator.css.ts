@@ -4,50 +4,66 @@ import { stateColor, sys, typography } from '../../styles';
 
 export const separatorVars = createThemeContract({
   color: {
-    separator: null,
-    link: null,
-    linkDecoration: null,
-    focusRing: null,
+    linkFocusRing: null,
+    linkForeground: null,
+    linkUnderline: null,
+    rootBackground: null,
   },
+
   shape: {
-    focusCorner: null,
+    linkFocusCorner: null,
   },
+
   size: {
-    blockSize: null,
-    verticalInlineSize: null,
-    verticalBlockSize: null,
+    linkUnderlineThickness: null,
+    rootBlockSize: null,
+    rootVerticalBlockSize: null,
+    rootVerticalInlineSize: null,
+  },
+
+  spacing: {
+    linkUnderlineOffset: null,
   },
 });
 
-const separatorColorDefaults = assignVars(separatorVars.color, {
-  separator: sys.color.border.high,
-  link: sys.color.content.base,
-  linkDecoration: stateColor.subtleContent,
-  focusRing: sys.color.tone.primary,
+const separatorDefaults = assignVars(separatorVars, {
+  color: {
+    linkFocusRing: sys.color.tone.primary,
+    linkForeground: sys.color.content.base,
+    linkUnderline: stateColor.subtleContent,
+    rootBackground: sys.color.border.high,
+  },
+
+  shape: {
+    linkFocusCorner: sys.shape.corner.sharp,
+  },
+
+  size: {
+    linkUnderlineThickness: '1px',
+    rootBlockSize: '1px',
+    rootVerticalBlockSize: sys.spacing[9],
+    rootVerticalInlineSize: '1px',
+  },
+
+  spacing: {
+    linkUnderlineOffset: '2px',
+  },
 });
 
-const separatorShapeDefaults = assignVars(separatorVars.shape, {
-  focusCorner: sys.shape.corner.sharp,
-});
-
-const separatorSizeDefaults = assignVars(separatorVars.size, {
-  blockSize: '1px',
-  verticalInlineSize: '1px',
-  verticalBlockSize: sys.spacing[9],
-});
 export const separator = style({
-  inlineSize: '100%',
-  blockSize: separatorVars.size.blockSize,
-  backgroundColor: separatorVars.color.separator,
   vars: {
-    ...separatorColorDefaults,
-    ...separatorShapeDefaults,
-    ...separatorSizeDefaults,
+    ...separatorDefaults,
   },
+
+  blockSize: separatorVars.size.rootBlockSize,
+  inlineSize: '100%',
+
+  backgroundColor: separatorVars.color.rootBackground,
+
   selectors: {
     '&[data-orientation="vertical"]': {
-      inlineSize: separatorVars.size.verticalInlineSize,
-      blockSize: separatorVars.size.verticalBlockSize,
+      blockSize: separatorVars.size.rootVerticalBlockSize,
+      inlineSize: separatorVars.size.rootVerticalInlineSize,
     },
   },
 });
@@ -55,29 +71,30 @@ export const separator = style({
 export const link = style([
   typography.body.medium,
   {
-    color: separatorVars.color.link,
-    textDecorationColor: separatorVars.color.linkDecoration,
-    textDecorationThickness: '1px',
-    textDecorationLine: 'none',
-    textUnderlineOffset: '2px',
     vars: {
-      ...separatorColorDefaults,
-      ...separatorShapeDefaults,
-      ...separatorSizeDefaults,
+      ...separatorDefaults,
     },
 
+    textDecorationLine: 'none',
+    textDecorationThickness: separatorVars.size.linkUnderlineThickness,
+    textUnderlineOffset: separatorVars.spacing.linkUnderlineOffset,
+
+    color: separatorVars.color.linkForeground,
+    textDecorationColor: separatorVars.color.linkUnderline,
+
     selectors: {
-      [`&:hover`]: {
+      '&:focus-visible': {
+        borderRadius: separatorVars.shape.linkFocusCorner,
+        outline: `2px solid ${separatorVars.color.linkFocusRing}`,
+        textDecorationLine: 'none',
+      },
+
+      '&:hover': {
         '@media': {
           '(hover: hover)': {
             textDecorationLine: 'underline',
           },
         },
-      },
-      [`&:focus-visible`]: {
-        borderRadius: separatorVars.shape.focusCorner,
-        outline: `2px solid ${separatorVars.color.focusRing}`,
-        textDecorationLine: 'none',
       },
     },
   },
