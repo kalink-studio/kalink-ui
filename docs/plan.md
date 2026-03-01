@@ -33,13 +33,12 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`.
-- Next unchecked component: `navigation-menu`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`.
+- Next unchecked component: `number-field`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `navigation-menu`
 - `number-field`
 - `popover`
 - `preview-card`
@@ -201,7 +200,7 @@ Examples:
 - [x] `menu`
 - [x] `menubar`
 - [x] `meter`
-- [ ] `navigation-menu`
+- [x] `navigation-menu`
 - [ ] `number-field`
 - [ ] `popover`
 - [ ] `preview-card`
@@ -812,6 +811,29 @@ If policy changes mid-migration:
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
 - Notes / follow-ups:
   - `meter` no longer appears in the known strict-default fallout list.
+
+### `navigation-menu`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `layout`, `motion`, `shape`, `size`, `spacing`, and `typography` groups for trigger, popup, content, link card, and arrow surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(navigationMenuVars, { ... })`.
+  - Added strict `_foundation` floating-surface caller coverage for required popup options (`background`, `foreground`, `outline`, `shadow`) and remapped popup motion to local tokens.
+  - Kept portal-safe token assignment by assigning defaults at both `root` (trigger subtree owner) and `positioner` (portal subtree owner).
+- Contract changes:
+  - Added: `color.arrowInnerStroke`, `color.arrowOuterStroke`, `color.contentForeground`, `color.linkCardFocusRing`, `color.linkCardHoverBackground`, `color.linkDescriptionForeground`, `color.popupBackground`, `color.popupForeground`, `color.popupOutline`, `color.popupShadow`, `color.triggerBackground`, `color.triggerFocusRing`, `color.triggerHoverBackground`, `color.triggerOpenBackground`, `layout.contentMobileInlineSize`, `motion.arrowPositionDuration`, `motion.arrowPositionEasing`, `motion.contentOpacityDuration`, `motion.contentOpacityEasing`, `motion.contentTransformDuration`, `motion.contentTransformEasing`, `motion.iconRotationDuration`, `motion.iconRotationEasing`, `motion.popupEnterDuration`, `motion.popupEnterEasing`, `motion.popupExitDuration`, `motion.popupExitEasing`, `motion.positionerTransitionDuration`, `motion.positionerTransitionEasing`, `shape.linkCardCorner`, `shape.popupCorner`, `shape.triggerCorner`, `size.triggerBlockSize`, `spacing.contentPaddingBlock`, `spacing.contentPaddingInline`, `spacing.floatingPointerSize`, `spacing.linkCardPaddingBlock`, `spacing.linkCardPaddingBlockDesktop`, `spacing.linkCardPaddingInline`, `spacing.linkCardPaddingInlineDesktop`, `spacing.linkTitleMarginBlockEnd`, `spacing.triggerGap`, `spacing.triggerPaddingInline`, `spacing.triggerPaddingInlineMobile`, `typography.linkDescriptionLineHeight`, `typography.linkDescriptionSize`, `typography.linkTitleLineHeight`, `typography.linkTitleSize`, `typography.linkTitleWeight`, `typography.triggerMobileLineHeight`, `typography.triggerMobileSize`.
+- Mapping coverage:
+  - Properties audited: trigger surface/focus states, popup surface/motion, content width/spacing/motion, grid/flex list sizing, link card hover/focus/spacing, link title/description typography, arrow fill/strokes/position motion.
+  - Properties remapped: all token-eligible trigger/popup/content/link/arrow properties now resolve through `navigationMenuVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `navigationMenuDefaults` and intentional derived mobile content width (`calc.subtract('100vw', sys.spacing[14])`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `number-field`, `popover`, `preview-card`, `progress`, `radio`, `select`, `slider`, `tooltip`)
+- Notes / follow-ups:
+  - `navigation-menu` no longer appears in the known strict-default fallout list.
 
 ---
 

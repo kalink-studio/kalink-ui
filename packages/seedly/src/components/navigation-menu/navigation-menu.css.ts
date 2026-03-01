@@ -7,93 +7,242 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
-  createFloatingSurfaceStyles,
   createFloatingPositionerStyles,
+  createFloatingSurfaceStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
 
 export const navigationMenuVars = createThemeContract({
+  color: {
+    arrowInnerStroke: null,
+    arrowOuterStroke: null,
+    contentForeground: null,
+    linkCardFocusRing: null,
+    linkCardHoverBackground: null,
+    linkDescriptionForeground: null,
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupShadow: null,
+    triggerBackground: null,
+    triggerFocusRing: null,
+    triggerHoverBackground: null,
+    triggerOpenBackground: null,
+  },
+
   layout: {
     contentMinInlineSizeDesktop: null,
-    gridLinkColumnInlineSize: null,
+    contentMobileInlineSize: null,
     flexLinkListMaxInlineSize: null,
+    gridLinkColumnInlineSize: null,
+  },
+
+  motion: {
+    arrowPositionDuration: null,
+    arrowPositionEasing: null,
+    contentOpacityDuration: null,
+    contentOpacityEasing: null,
+    contentTransformDuration: null,
+    contentTransformEasing: null,
+    iconRotationDuration: null,
+    iconRotationEasing: null,
+    popupEnterDuration: null,
+    popupEnterEasing: null,
+    popupExitDuration: null,
+    popupExitEasing: null,
+    positionerTransitionDuration: null,
+    positionerTransitionEasing: null,
+  },
+
+  shape: {
+    linkCardCorner: null,
+    popupCorner: null,
+    triggerCorner: null,
+  },
+
+  size: {
+    triggerBlockSize: null,
+  },
+
+  spacing: {
+    contentPaddingBlock: null,
+    contentPaddingInline: null,
+    floatingPointerSize: null,
+    linkCardPaddingBlock: null,
+    linkCardPaddingBlockDesktop: null,
+    linkCardPaddingInline: null,
+    linkCardPaddingInlineDesktop: null,
+    linkTitleMarginBlockEnd: null,
+    triggerGap: null,
+    triggerPaddingInline: null,
+    triggerPaddingInlineMobile: null,
+  },
+
+  typography: {
+    linkDescriptionLineHeight: null,
+    linkDescriptionSize: null,
+    linkTitleLineHeight: null,
+    linkTitleSize: null,
+    linkTitleWeight: null,
+    triggerMobileLineHeight: null,
+    triggerMobileSize: null,
   },
 });
 
-const navigationMenuLayoutDefaults = assignVars(navigationMenuVars.layout, {
-  contentMinInlineSizeDesktop: '400px',
-  gridLinkColumnInlineSize: '12rem',
-  flexLinkListMaxInlineSize: '400px',
+const navigationMenuDefaults = assignVars(navigationMenuVars, {
+  color: {
+    arrowInnerStroke: floatingSurfaceDarkOutlineColor,
+    arrowOuterStroke: sys.color.border.low,
+    contentForeground: sys.color.content.base,
+    linkCardFocusRing: sys.color.tone.primary,
+    linkCardHoverBackground: sys.color.container.low,
+    linkDescriptionForeground: stateColor.disabledContent,
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+    triggerBackground: sys.color.container.base,
+    triggerFocusRing: sys.color.tone.primary,
+    triggerHoverBackground: sys.color.container.low,
+    triggerOpenBackground: sys.color.container.low,
+  },
+
+  layout: {
+    contentMinInlineSizeDesktop: '400px',
+    contentMobileInlineSize: calc.subtract('100vw', sys.spacing[14]),
+    flexLinkListMaxInlineSize: '400px',
+    gridLinkColumnInlineSize: '12rem',
+  },
+
+  motion: {
+    arrowPositionDuration: sys.motion.duration.medium[4],
+    arrowPositionEasing: sys.motion.easing.decelerate.emphasized,
+    contentOpacityDuration: sys.motion.duration.long[3],
+    contentOpacityEasing: sys.motion.easing.standard,
+    contentTransformDuration: sys.motion.duration.medium[3],
+    contentTransformEasing: sys.motion.easing.decelerate.emphasized,
+    iconRotationDuration: sys.motion.duration.medium[3],
+    iconRotationEasing: sys.motion.easing.standard,
+    popupEnterDuration: sys.motion.duration.medium[4],
+    popupEnterEasing: sys.motion.easing.decelerate.emphasized,
+    popupExitDuration: sys.motion.duration.short[4],
+    popupExitEasing: sys.motion.easing.standard,
+    positionerTransitionDuration: sys.motion.duration.medium[4],
+    positionerTransitionEasing: sys.motion.easing.decelerate.emphasized,
+  },
+
+  shape: {
+    linkCardCorner: sys.shape.corner.medium,
+    popupCorner: sys.shape.corner.rounded,
+    triggerCorner: sys.shape.corner.medium,
+  },
+
+  size: {
+    triggerBlockSize: sys.spacing[14],
+  },
+
+  spacing: {
+    contentPaddingBlock: sys.spacing[10],
+    contentPaddingInline: sys.spacing[10],
+    floatingPointerSize: sys.spacing[5],
+    linkCardPaddingBlock: sys.spacing[4],
+    linkCardPaddingBlockDesktop: sys.spacing[6],
+    linkCardPaddingInline: sys.spacing[4],
+    linkCardPaddingInlineDesktop: sys.spacing[6],
+    linkTitleMarginBlockEnd: sys.spacing[2],
+    triggerGap: sys.spacing[3],
+    triggerPaddingInline: sys.spacing[7],
+    triggerPaddingInlineMobile: sys.spacing[4],
+  },
+
+  typography: {
+    linkDescriptionLineHeight: '1.25rem',
+    linkDescriptionSize: sys.typography.body.medium.size,
+    linkTitleLineHeight: '1.25rem',
+    linkTitleSize: '1rem',
+    linkTitleWeight: '500',
+    triggerMobileLineHeight: sys.typography.label.medium.lineHeight,
+    triggerMobileSize: sys.typography.label.medium.size,
+  },
 });
 
 export const root = style({
-  minInlineSize: 'max-content',
   vars: {
-    ...navigationMenuLayoutDefaults,
+    ...navigationMenuDefaults,
   },
+
+  minInlineSize: 'max-content',
 });
 
 export const list = style({
+  position: 'relative',
+
   display: 'flex',
-  paddingBlock: '0',
-  paddingInline: '0',
+
+  listStyle: 'none',
   marginBlock: '0',
   marginInline: '0',
-  position: 'relative',
-  listStyle: 'none',
+  paddingBlock: '0',
+  paddingInline: '0',
 });
 
-export const trigger = style([
-  {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: sys.spacing[3],
-    blockSize: sys.spacing[14],
-    paddingInline: sys.spacing[7],
-    marginBlock: '0',
-    marginInline: '0',
-    textDecoration: 'none',
-    whiteSpace: 'nowrap',
-    backgroundColor: sys.color.container.base,
-    borderRadius: sys.shape.corner.medium,
-    outline: '0',
-    userSelect: 'none',
-    '@media': {
-      '(max-width: 500px)': {
-        fontSize: sys.typography.label.medium.size,
-        lineHeight: sys.typography.label.medium.lineHeight,
-        paddingInline: sys.spacing[4],
-      },
-    },
+export const trigger = style({
+  alignItems: 'center',
+  display: 'inline-flex',
+  justifyContent: 'center',
 
-    selectors: {
-      [`&:hover`]: {
-        '@media': {
-          '(hover: hover)': {
-            backgroundColor: sys.color.container.low,
-          },
+  blockSize: navigationMenuVars.size.triggerBlockSize,
+  gap: navigationMenuVars.spacing.triggerGap,
+  marginBlock: '0',
+  marginInline: '0',
+  paddingInline: navigationMenuVars.spacing.triggerPaddingInline,
+
+  textDecoration: 'none',
+  whiteSpace: 'nowrap',
+
+  backgroundColor: navigationMenuVars.color.triggerBackground,
+  borderRadius: navigationMenuVars.shape.triggerCorner,
+  outline: '0',
+
+  userSelect: 'none',
+
+  selectors: {
+    [`&:hover`]: {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: navigationMenuVars.color.triggerHoverBackground,
         },
       },
-      [`&[data-popup-open]`]: {
-        backgroundColor: sys.color.container.low,
-      },
-      [`&:focus-visible`]: {
-        position: 'relative',
-        outline: `2px solid ${sys.color.tone.primary}`,
-        outlineOffset: '-1px',
-      },
+    },
+
+    [`&[data-popup-open]`]: {
+      backgroundColor: navigationMenuVars.color.triggerOpenBackground,
+    },
+
+    [`&:focus-visible`]: {
+      outline: `2px solid ${navigationMenuVars.color.triggerFocusRing}`,
+      outlineOffset: '-1px',
+      position: 'relative',
     },
   },
-]);
+
+  '@media': {
+    '(max-width: 500px)': {
+      fontSize: navigationMenuVars.typography.triggerMobileSize,
+      lineHeight: navigationMenuVars.typography.triggerMobileLineHeight,
+      paddingInline: navigationMenuVars.spacing.triggerPaddingInlineMobile,
+    },
+  },
+});
 
 export const icon = style({
-  display: 'inline-flex',
   alignItems: 'center',
+  display: 'inline-flex',
   justifyContent: 'center',
+
   transition: transition('transform', {
-    duration: 'medium.3',
-    easing: 'standard',
+    duration: navigationMenuVars.motion.iconRotationDuration,
+    easing: navigationMenuVars.motion.iconRotationEasing,
   }),
 
   selectors: {
@@ -104,48 +253,55 @@ export const icon = style({
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
-  inlineSize: 'var(--positioner-width)',
-  blockSize: 'var(--positioner-height)',
-  maxInlineSize: 'var(--available-width)',
-  transition: transition(['top', 'left', 'right', 'bottom'], {
-    duration: 'var(--duration)',
-    easing: 'var(--easing)',
-  }),
   vars: {
-    '--easing': sys.motion.easing.decelerate.emphasized,
-    '--duration': sys.motion.duration.medium[4],
+    ...navigationMenuDefaults,
   },
+
+  ...createFloatingPositionerStyles(),
+
+  blockSize: 'var(--positioner-height)',
+  inlineSize: 'var(--positioner-width)',
+  maxInlineSize: 'var(--available-width)',
+
+  transition: transition(['top', 'left', 'right', 'bottom'], {
+    duration: navigationMenuVars.motion.positionerTransitionDuration,
+    easing: navigationMenuVars.motion.positionerTransitionEasing,
+  }),
 
   selectors: {
     [`&::before`]: {
-      position: 'absolute',
       content: "''",
+      position: 'absolute',
     },
+
     [`&[data-side='top']::before`]: {
-      blockSize: sys.spacing[5],
+      blockSize: navigationMenuVars.spacing.floatingPointerSize,
+      bottom: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
       left: '0',
       right: '0',
-      bottom: calc.negate(sys.spacing[5]),
     },
+
     [`&[data-side='bottom']::before`]: {
-      blockSize: sys.spacing[5],
+      blockSize: navigationMenuVars.spacing.floatingPointerSize,
       left: '0',
       right: '0',
-      top: calc.negate(sys.spacing[5]),
+      top: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
     },
+
     [`&[data-side='left']::before`]: {
-      inlineSize: sys.spacing[5],
-      top: '0',
       bottom: '0',
-      right: calc.negate(sys.spacing[5]),
+      inlineSize: navigationMenuVars.spacing.floatingPointerSize,
+      right: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
+      top: '0',
     },
+
     [`&[data-side='right']::before`]: {
-      inlineSize: sys.spacing[5],
-      top: '0',
       bottom: '0',
-      left: calc.negate(sys.spacing[5]),
+      inlineSize: navigationMenuVars.spacing.floatingPointerSize,
+      left: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
+      top: '0',
     },
+
     [`&[data-instant]`]: {
       transition: 'none',
     },
@@ -154,86 +310,107 @@ export const positioner = style({
 
 export const popup = style({
   ...createFloatingSurfaceStyles({
-    borderRadius: sys.shape.corner.rounded,
-    inlineSize: 'var(--popup-width)',
+    background: navigationMenuVars.color.popupBackground,
     blockSize: 'var(--popup-height)',
+    borderRadius: navigationMenuVars.shape.popupCorner,
+    foreground: navigationMenuVars.color.popupForeground,
+    inlineSize: 'var(--popup-width)',
+    outline: navigationMenuVars.color.popupOutline,
+    shadow: navigationMenuVars.color.popupShadow,
+
     motion: {
       transition: transition(
         ['opacity', 'transform', 'inline-size', 'block-size'],
         {
-          duration: 'var(--duration)',
-          easing: 'var(--easing)',
+          duration: navigationMenuVars.motion.popupEnterDuration,
+          easing: navigationMenuVars.motion.popupEnterEasing,
         },
       ),
+
       endingStyle: {
         opacity: '0',
         transform: 'scale(0.9)',
         transition: transition(['opacity', 'transform'], {
-          duration: 'short.4',
-          easing: 'standard',
+          duration: navigationMenuVars.motion.popupExitDuration,
+          easing: navigationMenuVars.motion.popupExitEasing,
         }),
       },
     },
   }),
+
   position: 'relative',
 });
 
 export const content = style({
-  inlineSize: calc.subtract('100vw', sys.spacing[14]),
   blockSize: '100%',
-  paddingBlock: sys.spacing[10],
-  paddingInline: sys.spacing[10],
+  inlineSize: navigationMenuVars.layout.contentMobileInlineSize,
+
+  paddingBlock: navigationMenuVars.spacing.contentPaddingBlock,
+  paddingInline: navigationMenuVars.spacing.contentPaddingInline,
+
+  color: navigationMenuVars.color.contentForeground,
+
   transition: `${transition('opacity', {
-    duration: 'long.3',
-    easing: 'standard',
+    duration: navigationMenuVars.motion.contentOpacityDuration,
+    easing: navigationMenuVars.motion.contentOpacityEasing,
   })}, ${transition('transform', {
-    duration: 'medium.3',
-    easing: 'decelerate.emphasized',
+    duration: navigationMenuVars.motion.contentTransformDuration,
+    easing: navigationMenuVars.motion.contentTransformEasing,
   })}`,
+
+  selectors: {
+    [`&[data-starting-style]`]: {
+      opacity: '0',
+    },
+
+    [`&[data-ending-style]`]: {
+      opacity: '0',
+    },
+
+    [`&[data-starting-style][data-activation-direction='left']`]: {
+      transform: 'translateX(-50%)',
+    },
+
+    [`&[data-starting-style][data-activation-direction='right']`]: {
+      transform: 'translateX(50%)',
+    },
+
+    [`&[data-ending-style][data-activation-direction='left']`]: {
+      transform: 'translateX(50%)',
+    },
+
+    [`&[data-ending-style][data-activation-direction='right']`]: {
+      transform: 'translateX(-50%)',
+    },
+  },
+
   '@media': {
     '(min-width: 500px)': {
       inlineSize: 'max-content',
       minInlineSize: navigationMenuVars.layout.contentMinInlineSizeDesktop,
     },
   },
-
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-    },
-    [`&[data-ending-style]`]: {
-      opacity: '0',
-    },
-    [`&[data-starting-style][data-activation-direction='left']`]: {
-      transform: 'translateX(-50%)',
-    },
-    [`&[data-starting-style][data-activation-direction='right']`]: {
-      transform: 'translateX(50%)',
-    },
-    [`&[data-ending-style][data-activation-direction='left']`]: {
-      transform: 'translateX(50%)',
-    },
-    [`&[data-ending-style][data-activation-direction='right']`]: {
-      transform: 'translateX(-50%)',
-    },
-  },
 });
 
 export const viewport = style({
-  inlineSize: '100%',
-  blockSize: '100%',
-  overflow: 'hidden',
   position: 'relative',
+
+  blockSize: '100%',
+  inlineSize: '100%',
+  overflow: 'hidden',
 });
 
 export const gridLinkList = style({
   display: 'grid',
+
   gridTemplateColumns: `${navigationMenuVars.layout.gridLinkColumnInlineSize} ${navigationMenuVars.layout.gridLinkColumnInlineSize}`,
-  paddingBlock: '0',
-  paddingInline: '0',
+
+  listStyle: 'none',
   marginBlock: '0',
   marginInline: '0',
-  listStyle: 'none',
+  paddingBlock: '0',
+  paddingInline: '0',
+
   '@media': {
     '(max-width: 500px)': {
       gridTemplateColumns: '1fr',
@@ -245,81 +422,93 @@ export const flexLinkList = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
+
   maxInlineSize: navigationMenuVars.layout.flexLinkListMaxInlineSize,
-  paddingBlock: '0',
-  paddingInline: '0',
+
+  listStyle: 'none',
   marginBlock: '0',
   marginInline: '0',
-  listStyle: 'none',
+  paddingBlock: '0',
+  paddingInline: '0',
 });
 
 export const linkCard = style({
   display: 'block',
-  paddingBlock: sys.spacing[4],
-  paddingInline: sys.spacing[4],
-  textDecoration: 'none',
-  color: 'inherit',
-  backgroundColor: 'transparent',
+
   border: 'none',
-  borderRadius: sys.shape.corner.medium,
-  '@media': {
-    '(min-width: 425px)': {
-      paddingBlock: sys.spacing[6],
-      paddingInline: sys.spacing[6],
-    },
-  },
+
+  paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlock,
+  paddingInline: navigationMenuVars.spacing.linkCardPaddingInline,
+
+  textDecoration: 'none',
+
+  backgroundColor: 'transparent',
+  borderRadius: navigationMenuVars.shape.linkCardCorner,
+  color: 'inherit',
 
   selectors: {
     [`&:hover`]: {
       '@media': {
         '(hover: hover)': {
-          backgroundColor: sys.color.container.low,
+          backgroundColor: navigationMenuVars.color.linkCardHoverBackground,
         },
       },
     },
+
     [`&:focus-visible`]: {
-      position: 'relative',
-      outline: `2px solid ${sys.color.tone.primary}`,
+      outline: `2px solid ${navigationMenuVars.color.linkCardFocusRing}`,
       outlineOffset: '-1px',
+      position: 'relative',
+    },
+  },
+
+  '@media': {
+    '(min-width: 425px)': {
+      paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlockDesktop,
+      paddingInline: navigationMenuVars.spacing.linkCardPaddingInlineDesktop,
     },
   },
 });
 
 export const linkTitle = style({
+  marginBlockEnd: navigationMenuVars.spacing.linkTitleMarginBlockEnd,
   marginBlockStart: '0',
-  marginBlockEnd: sys.spacing[2],
   marginInline: '0',
-  fontSize: '1rem',
-  fontWeight: '500',
-  lineHeight: '1.25rem',
+
+  fontSize: navigationMenuVars.typography.linkTitleSize,
+  fontWeight: navigationMenuVars.typography.linkTitleWeight,
+  lineHeight: navigationMenuVars.typography.linkTitleLineHeight,
 });
 
 export const linkDescription = style({
   marginBlock: '0',
   marginInline: '0',
-  fontSize: sys.typography.body.medium.size,
-  lineHeight: '1.25rem',
-  whiteSpace: 'normal',
+
+  fontSize: navigationMenuVars.typography.linkDescriptionSize,
+  lineHeight: navigationMenuVars.typography.linkDescriptionLineHeight,
+
+  color: navigationMenuVars.color.linkDescriptionForeground,
   overflowWrap: 'anywhere',
-  color: stateColor.disabledContent,
+  whiteSpace: 'normal',
 });
 
 export const arrow = style({
   ...createFloatingArrowPlacementStyles(),
+
   transition: transition('left', {
-    duration: 'calc(var(--duration))',
-    easing: 'var(--easing)',
+    duration: navigationMenuVars.motion.arrowPositionDuration,
+    easing: navigationMenuVars.motion.arrowPositionEasing,
   }),
 });
 
 export const arrowFill = style({
-  ...createArrowFillStyles(sys.color.surface.base),
+  ...createArrowFillStyles(navigationMenuVars.color.popupBackground),
 });
 
 export const arrowOuterStroke = style({
-  ...createArrowOuterStrokeStyles(sys.color.border.low),
+  ...createArrowOuterStrokeStyles(navigationMenuVars.color.arrowOuterStroke),
 });
 
 export const arrowInnerStroke = style({
-  ...createArrowInnerStrokeStyles(floatingSurfaceDarkOutlineColor),
+  ...createArrowInnerStrokeStyles(navigationMenuVars.color.arrowInnerStroke),
 });
