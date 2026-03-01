@@ -34,7 +34,7 @@ Validation gate (in order):
 
 - Migration has started.
 - Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`.
-- Next unchecked component: `stack`.
+- Next unchecked component: `switch`.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
@@ -204,7 +204,7 @@ Examples:
 - [x] `separator`
 - [x] `sidebar`
 - [x] `slider`
-- [ ] `stack`
+- [x] `stack`
 - [ ] `switch`
 - [ ] `switcher`
 - [ ] `tabs`
@@ -1051,6 +1051,26 @@ If policy changes mid-migration:
   - Properties audited: control padding; track surface/corner/block size; indicator fill surface; thumb size/corner/background/outline/focus ring.
   - Properties remapped: control `paddingBlock`; track `blockSize` plus range-track `background`/`border`/`corner`; indicator `backgroundColor`; thumb `inlineSize`/`blockSize`/`borderRadius`/`backgroundColor`/`outline` and focus-visible outline now resolve through `sliderVars` local tokens.
   - Intentional direct `sys` usages: component-owned default assignments in `sliderDefaults` and thumb elevation (`sys.elevation.minimal`).
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `stack`
+
+- Status: `done`
+- Outcome:
+  - Normalized local contract naming to role-based key `spacing.rootGap`.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(stackVars, { ... })`.
+  - Remapped token-eligible root stack gap property to the role-based local token.
+- Contract changes:
+  - Renamed: `spacing.gap` -> `spacing.rootGap`.
+- Mapping coverage:
+  - Properties audited: root stack gap.
+  - Properties remapped: root `gap` now resolves through `stackVars.spacing.rootGap`.
+  - Intentional direct `sys` usages: component-owned default assignment in `stackDefaults` (`sys.spacing[0]`).
 - Foundation changes:
   - none.
 - Validation:

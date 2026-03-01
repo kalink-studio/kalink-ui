@@ -11,12 +11,14 @@ import { flexAlignItemsStyles } from '../layout/shared/maps';
 
 export const stackVars = createThemeContract({
   spacing: {
-    gap: null,
+    rootGap: null,
   },
 });
 
-const stackSpacingDefaults = assignVars(stackVars.spacing, {
-  gap: sys.spacing[0],
+const stackDefaults = assignVars(stackVars, {
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
 export const stackSpacingStyles = mapContractVars(
@@ -33,11 +35,9 @@ export const stackRecipe = recipe({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: stackVars.spacing.gap,
+        gap: stackVars.spacing.rootGap,
 
-        vars: {
-          ...stackSpacingDefaults,
-        },
+        vars: stackDefaults,
       },
     },
   },
