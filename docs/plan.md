@@ -33,13 +33,13 @@ Validation gate (in order):
 ## Current Status
 
 - Migration has started.
-- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`, `toast`, `toggle`, `toggle-group`.
-- Next unchecked component: `tooltip`.
+- Completed components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `box`, `button`, `center`, `checkbox`, `checkbox-group`, `cluster`, `collapsible`, `combobox`, `container`, `context-menu`, `cover`, `dialog`, `field`, `fieldset`, `form`, `frame`, `grid`, `input`, `label`, `layout`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `stack`, `switch`, `switcher`, `tabs`, `toast`, `toggle`, `toggle-group`, `toolbar`, `tooltip`.
+- Next unchecked component: none; component checklist is complete.
 - `_foundation` strict-default refactor is complete for the main pass; naming normalization and final verification still remain.
 
 Current known type-check fallout after strict defaults (expected until callers are migrated):
 
-- `tooltip`
+- none.
 
 ---
 
@@ -113,7 +113,7 @@ Core strict-default hardening is done for:
 Remaining shared cleanup:
 
 - normalize popup/dialog outline API naming to role-based terms (`outline`, optional `outlineInverse`)
-- update impacted callers: `tooltip`
+- update impacted callers: complete
 - run a dedicated final verification pass after all components are migrated
 
 ---
@@ -212,7 +212,7 @@ Examples:
 - [x] `toggle`
 - [x] `toggle-group`
 - [x] `toolbar`
-- [ ] `tooltip`
+- [x] `tooltip`
 
 ---
 
@@ -1233,6 +1233,30 @@ If policy changes mid-migration:
   - format: `pnpm run format:fix` (pass)
   - lint: `pnpm run lint:fix` (pass)
   - tsc: `pnpm run tsc` (fail due unrelated in-progress migration components: `tooltip`)
+
+### `tooltip`
+
+- Status: `done`
+- Outcome:
+  - Expanded local contract coverage to role-based `color`, `shape`, and `spacing` groups for trigger open state, popup surface, and arrow stroke/fill surfaces.
+  - Consolidated component-owned defaults into one owner assignment block: `assignVars(tooltipVars, { ... })`.
+  - Remapped popup outline wiring to the strict `_foundation` floating-surface API (`outline`, `outlineInverse`) and removed obsolete light/dark caller fields.
+  - Kept portal-safe token assignment by assigning defaults at both `button` (trigger subtree owner) and `positioner` (portal subtree owner).
+- Contract changes:
+  - Added: `color.popupOutline`, `color.popupOutlineInverse`, `color.triggerOpenBackground`, `spacing.popupPaddingBlock`, `spacing.popupPaddingInline`.
+  - Removed: `color.panelBorder`, `color.panelBackground`, `color.buttonForeground`, `color.buttonHoverBackground`, `color.buttonActiveBackground`, `color.focusRing`, `color.popupOutlineLight`, `color.popupOutlineDark`, `shape.panelCorner`, `shape.buttonCorner`.
+- Mapping coverage:
+  - Properties audited: trigger open-state background, popup surface (background/foreground/outline/shadow/corner), popup padding, arrow fill/strokes.
+  - Properties remapped: trigger open-state `backgroundColor`; popup `paddingBlock`/`paddingInline`/`outline`/`outlineInverse`; arrow fill/strokes now resolve through `tooltipVars` local tokens.
+  - Intentional direct `sys` usages: component-owned default assignments in `tooltipDefaults`.
+- Foundation changes:
+  - none.
+- Validation:
+  - format: `pnpm run format:fix` (pass)
+  - lint: `pnpm run lint:fix` (pass)
+  - tsc: `pnpm run tsc` (fail due unrelated repository issues in `@kalink-ui/web` exports: missing `Heading` and `utilities` members)
+- Notes / follow-ups:
+  - `tooltip` no longer appears in the known strict-default fallout list.
 
 ---
 

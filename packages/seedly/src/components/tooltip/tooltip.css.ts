@@ -13,57 +13,58 @@ import {
 
 export const tooltipVars = createThemeContract({
   color: {
-    panelBorder: null,
-    panelBackground: null,
-    buttonForeground: null,
-    buttonHoverBackground: null,
-    buttonActiveBackground: null,
-    focusRing: null,
-    popupForeground: null,
-    popupBackground: null,
-    popupOutlineLight: null,
-    popupOutlineDark: null,
-    popupShadow: null,
-    arrowOuterStroke: null,
     arrowInnerStroke: null,
+    arrowOuterStroke: null,
+
+    popupBackground: null,
+    popupForeground: null,
+    popupOutline: null,
+    popupOutlineInverse: null,
+    popupShadow: null,
+
+    triggerOpenBackground: null,
   },
+
   shape: {
-    panelCorner: null,
-    buttonCorner: null,
     popupCorner: null,
   },
+
+  spacing: {
+    popupPaddingBlock: null,
+    popupPaddingInline: null,
+  },
 });
 
-const tooltipColorDefaults = assignVars(tooltipVars.color, {
-  panelBorder: sys.color.border.base,
-  panelBackground: sys.color.container.base,
-  buttonForeground: sys.color.content.base,
-  buttonHoverBackground: sys.color.container.low,
-  buttonActiveBackground: sys.color.container.high,
-  focusRing: sys.color.tone.primary,
-  popupForeground: sys.color.content.base,
-  popupBackground: sys.color.surface.base,
-  popupOutlineLight: sys.color.border.low,
-  popupOutlineDark: sys.color.border.low,
-  popupShadow: sys.elevation.moderate,
-  arrowOuterStroke: sys.color.border.low,
-  arrowInnerStroke: floatingSurfaceDarkOutlineColor,
+const tooltipDefaults = assignVars(tooltipVars, {
+  color: {
+    arrowInnerStroke: floatingSurfaceDarkOutlineColor,
+    arrowOuterStroke: sys.color.border.low,
+
+    popupBackground: sys.color.surface.base,
+    popupForeground: sys.color.content.base,
+    popupOutline: sys.color.border.low,
+    popupOutlineInverse: sys.color.border.low,
+    popupShadow: sys.elevation.moderate,
+
+    triggerOpenBackground: sys.color.container.low,
+  },
+  shape: {
+    popupCorner: sys.shape.corner.medium,
+  },
+  spacing: {
+    popupPaddingBlock: sys.spacing[2],
+    popupPaddingInline: sys.spacing[4],
+  },
 });
 
-const tooltipShapeDefaults = assignVars(tooltipVars.shape, {
-  panelCorner: sys.shape.corner.medium,
-  buttonCorner: sys.shape.corner.small,
-  popupCorner: sys.shape.corner.medium,
-});
 export const button = style([
   {
     vars: {
-      ...tooltipColorDefaults,
-      ...tooltipShapeDefaults,
+      ...tooltipDefaults,
     },
     selectors: {
       '&[data-popup-open]': {
-        backgroundColor: tooltipVars.color.buttonHoverBackground,
+        backgroundColor: tooltipVars.color.triggerOpenBackground,
       },
       '&:focus-visible': {
         backgroundColor: 'transparent',
@@ -74,8 +75,7 @@ export const button = style([
 export const positioner = style({
   ...createFloatingPositionerStyles(),
   vars: {
-    ...tooltipColorDefaults,
-    ...tooltipShapeDefaults,
+    ...tooltipDefaults,
   },
 });
 
@@ -83,13 +83,13 @@ export const popup = style([
   typography.body.medium,
   {
     ...createFloatingSurfaceStyles({
-      paddingBlock: sys.spacing[2],
-      paddingInline: sys.spacing[4],
+      paddingBlock: tooltipVars.spacing.popupPaddingBlock,
+      paddingInline: tooltipVars.spacing.popupPaddingInline,
       borderRadius: tooltipVars.shape.popupCorner,
       background: tooltipVars.color.popupBackground,
       foreground: tooltipVars.color.popupForeground,
-      outlineLight: tooltipVars.color.popupOutlineLight,
-      outlineDark: tooltipVars.color.popupOutlineDark,
+      outline: tooltipVars.color.popupOutline,
+      outlineInverse: tooltipVars.color.popupOutlineInverse,
       shadow: tooltipVars.color.popupShadow,
       selectors: {
         [`&[data-instant]`]: {
