@@ -102,6 +102,8 @@ export const popup = style({
         outlineInverse: previewCardVars.color.popupOutlineInverse,
         shadow: previewCardVars.color.popupShadow,
       }),
+      overflowX: 'clip',
+      overflowY: 'clip',
     },
   },
 });
