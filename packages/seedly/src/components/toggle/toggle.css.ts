@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const toggleVars = createThemeContract({
   color: {
@@ -18,19 +19,23 @@ const toggleDefaults = assignVars(toggleVars, {
 
 export const button = style([
   {
-    vars: {
-      ...toggleDefaults,
-    },
-    borderWidth: '0',
+    '@layer': {
+      [components]: {
+        vars: {
+          ...toggleDefaults,
+        },
+        borderWidth: '0',
 
-    selectors: {
-      '&[data-pressed]': {
-        color: toggleVars.color.rootPressedForeground,
-      },
-      '&:focus-visible': {
-        outline: `2px solid ${toggleVars.color.rootFocusRing}`,
-        outlineOffset: '-1px',
-        backgroundColor: 'transparent',
+        selectors: {
+          '&[data-pressed]': {
+            color: toggleVars.color.rootPressedForeground,
+          },
+          '&:focus-visible': {
+            outline: `2px solid ${toggleVars.color.rootFocusRing}`,
+            outlineOffset: '-1px',
+            backgroundColor: 'transparent',
+          },
+        },
       },
     },
   },

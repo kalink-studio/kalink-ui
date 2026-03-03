@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createDialogActionsStyles,
   createDialogBackdropStyles,
@@ -66,68 +67,84 @@ const dialogDefaults = assignVars(dialogVars, {
   },
 });
 
-export const button = style(
-  createDialogButtonStyles({
-    vars: dialogDefaults,
-  }),
-);
-
-export const backdrop = style(
-  createDialogBackdropStyles({
-    vars: dialogDefaults,
-
-    minBlockSize: dialogVars.layout.backdropMinBlockSize,
-
-    backdropColor: dialogVars.color.backdrop,
-
-    transition: transition('opacity', {
-      duration: 'short.4',
-      easing: 'decelerate.emphasized',
+export const button = style({
+  '@layer': {
+    [components]: createDialogButtonStyles({
+      vars: dialogDefaults,
     }),
-  }),
-);
+  },
+});
 
-export const popup = style(
-  createDialogPopupStyles({
-    vars: dialogDefaults,
+export const backdrop = style({
+  '@layer': {
+    [components]: createDialogBackdropStyles({
+      vars: dialogDefaults,
 
-    inlineSize: dialogVars.layout.popupInlineSize,
-    maxInlineSize: dialogVars.layout.popupMaxInlineSize,
-    marginBlockStart: dialogVars.spacing.popupMarginBlockStart,
-    paddingBlock: dialogVars.spacing.popupPaddingBlock,
-    paddingInline: dialogVars.spacing.popupPaddingInline,
+      minBlockSize: dialogVars.layout.backdropMinBlockSize,
 
-    popupForeground: dialogVars.color.popupForeground,
-    popupBackground: dialogVars.color.popupBackground,
-    popupCorner: dialogVars.shape.popupCorner,
-    outline: dialogVars.color.popupOutline,
+      backdropColor: dialogVars.color.backdrop,
 
-    transition: transition(['opacity', 'transform'], {
-      duration: 'short.4',
-      easing: 'decelerate.emphasized',
+      transition: transition('opacity', {
+        duration: 'short.4',
+        easing: 'decelerate.emphasized',
+      }),
     }),
-  }),
-);
+  },
+});
+
+export const popup = style({
+  '@layer': {
+    [components]: createDialogPopupStyles({
+      vars: dialogDefaults,
+
+      inlineSize: dialogVars.layout.popupInlineSize,
+      maxInlineSize: dialogVars.layout.popupMaxInlineSize,
+      marginBlockStart: dialogVars.spacing.popupMarginBlockStart,
+      paddingBlock: dialogVars.spacing.popupPaddingBlock,
+      paddingInline: dialogVars.spacing.popupPaddingInline,
+
+      popupForeground: dialogVars.color.popupForeground,
+      popupBackground: dialogVars.color.popupBackground,
+      popupCorner: dialogVars.shape.popupCorner,
+      outline: dialogVars.color.popupOutline,
+
+      transition: transition(['opacity', 'transform'], {
+        duration: 'short.4',
+        easing: 'decelerate.emphasized',
+      }),
+    }),
+  },
+});
 
 export const title = style([
   typography.title.large,
-  createDialogTitleStyles({
-    marginBlockStart: dialogVars.spacing.titleMarginBlockStart,
-    marginBlockEnd: dialogVars.spacing.titleMarginBlockEnd,
-  }),
+  {
+    '@layer': {
+      [components]: createDialogTitleStyles({
+        marginBlockStart: dialogVars.spacing.titleMarginBlockStart,
+        marginBlockEnd: dialogVars.spacing.titleMarginBlockEnd,
+      }),
+    },
+  },
 ]);
 
 export const description = style([
   typography.body.large,
-  createDialogDescriptionStyles({
-    descriptionColor: dialogVars.color.description,
-    marginBlock: dialogVars.spacing.descriptionMarginBlock,
-    marginInline: dialogVars.spacing.descriptionMarginInline,
-  }),
+  {
+    '@layer': {
+      [components]: createDialogDescriptionStyles({
+        descriptionColor: dialogVars.color.description,
+        marginBlock: dialogVars.spacing.descriptionMarginBlock,
+        marginInline: dialogVars.spacing.descriptionMarginInline,
+      }),
+    },
+  },
 ]);
 
-export const actions = style(
-  createDialogActionsStyles({
-    gap: dialogVars.spacing.actionsGap,
-  }),
-);
+export const actions = style({
+  '@layer': {
+    [components]: createDialogActionsStyles({
+      gap: dialogVars.spacing.actionsGap,
+    }),
+  },
+});

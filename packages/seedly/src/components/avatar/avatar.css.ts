@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const avatarVars = createThemeContract({
   color: {
@@ -31,37 +32,49 @@ const avatarDefaults = assignVars(avatarVars, {
 export const root = style([
   typography.label.large,
   {
-    vars: avatarDefaults,
+    '@layer': {
+      [components]: {
+        vars: avatarDefaults,
 
-    alignItems: 'center',
-    display: 'inline-flex',
-    justifyContent: 'center',
+        alignItems: 'center',
+        display: 'inline-flex',
+        justifyContent: 'center',
 
-    blockSize: avatarVars.size.rootSize,
-    inlineSize: avatarVars.size.rootSize,
-    overflow: 'hidden',
+        blockSize: avatarVars.size.rootSize,
+        inlineSize: avatarVars.size.rootSize,
+        overflow: 'hidden',
 
-    backgroundColor: avatarVars.color.rootBackground,
-    borderRadius: avatarVars.shape.rootCorner,
-    color: avatarVars.color.rootForeground,
+        backgroundColor: avatarVars.color.rootBackground,
+        borderRadius: avatarVars.shape.rootCorner,
+        color: avatarVars.color.rootForeground,
 
-    userSelect: 'none',
-    verticalAlign: 'middle',
+        userSelect: 'none',
+        verticalAlign: 'middle',
+      },
+    },
   },
 ]);
 
 export const image = style({
-  blockSize: '100%',
-  inlineSize: '100%',
+  '@layer': {
+    [components]: {
+      blockSize: '100%',
+      inlineSize: '100%',
 
-  objectFit: 'cover',
+      objectFit: 'cover',
+    },
+  },
 });
 
 export const fallback = style({
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
+  '@layer': {
+    [components]: {
+      alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'center',
 
-  blockSize: '100%',
-  inlineSize: '100%',
+      blockSize: '100%',
+      inlineSize: '100%',
+    },
+  },
 });

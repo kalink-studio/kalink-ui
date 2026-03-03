@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
@@ -58,33 +59,41 @@ const inputDefaults = assignVars(inputVars, {
 });
 
 export const label = style({
-  ...createFieldStackStyles({
-    alignItems: 'start',
-    gap: inputVars.spacing.stackGap,
-    inlineSize: inputVars.layout.inputInlineSize,
-  }),
-  ...createFieldLabelStyles({
-    color: inputVars.color.labelForeground,
-  }),
-  vars: {
-    ...inputDefaults,
+  '@layer': {
+    [components]: {
+      ...createFieldStackStyles({
+        alignItems: 'start',
+        gap: inputVars.spacing.stackGap,
+        inlineSize: inputVars.layout.inputInlineSize,
+      }),
+      ...createFieldLabelStyles({
+        color: inputVars.color.labelForeground,
+      }),
+      vars: {
+        ...inputDefaults,
+      },
+    },
   },
 });
 
 export const input = style([
   typography.body.large,
   {
-    ...createFieldTextInputStyles({
-      backgroundColor: inputVars.color.inputBackground,
-      blockSize: inputVars.size.inputBlockSize,
-      borderColor: inputVars.color.inputBorder,
-      borderRadius: inputVars.shape.inputCorner,
-      focusRingColor: inputVars.color.inputFocusRing,
-      focusRingOffset: inputVars.layout.inputFocusRingOffset,
-      foreground: inputVars.color.inputForeground,
-      inlineSize: inputVars.layout.inputInlineSize,
-      paddingInlineEnd: inputVars.spacing.inputPaddingInlineEnd,
-      paddingInlineStart: inputVars.spacing.inputPaddingInlineStart,
-    }),
+    '@layer': {
+      [components]: {
+        ...createFieldTextInputStyles({
+          backgroundColor: inputVars.color.inputBackground,
+          blockSize: inputVars.size.inputBlockSize,
+          borderColor: inputVars.color.inputBorder,
+          borderRadius: inputVars.shape.inputCorner,
+          focusRingColor: inputVars.color.inputFocusRing,
+          focusRingOffset: inputVars.layout.inputFocusRingOffset,
+          foreground: inputVars.color.inputForeground,
+          inlineSize: inputVars.layout.inputInlineSize,
+          paddingInlineEnd: inputVars.spacing.inputPaddingInlineEnd,
+          paddingInlineStart: inputVars.spacing.inputPaddingInlineStart,
+        }),
+      },
+    },
   },
 ]);

@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const accordionVars = createThemeContract({
   color: {
@@ -69,82 +70,102 @@ const accordionDefaults = assignVars(accordionVars, {
 });
 
 export const accordion = style({
-  vars: accordionDefaults,
+  '@layer': {
+    [components]: {
+      vars: accordionDefaults,
 
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
 
-  color: accordionVars.color.rootForeground,
+      color: accordionVars.color.rootForeground,
+    },
+  },
 });
 
 export const item = style({
-  borderBlockEnd: `${accordionVars.size.itemBorderBlockEndWidth} solid ${accordionVars.color.itemBorder}`,
-  transition: transition('border-color', {
-    duration: sys.motion.duration.short[2],
-    easing: sys.motion.easing.standard,
-  }),
-  selectors: {
-    '&:hover': {
-      '@media': {
-        '(hover: hover)': {
+  '@layer': {
+    [components]: {
+      borderBlockEnd: `${accordionVars.size.itemBorderBlockEndWidth} solid ${accordionVars.color.itemBorder}`,
+      transition: transition('border-color', {
+        duration: sys.motion.duration.short[2],
+        easing: sys.motion.easing.standard,
+      }),
+      selectors: {
+        '&:hover': {
+          '@media': {
+            '(hover: hover)': {
+              borderColor: accordionVars.color.itemBorderHover,
+            },
+          },
+        },
+        '&:focus-within': {
           borderColor: accordionVars.color.itemBorderHover,
         },
       },
-    },
-    '&:focus-within': {
-      borderColor: accordionVars.color.itemBorderHover,
     },
   },
 });
 
 export const header = style({
-  marginBlock: '0',
-  marginInline: '0',
+  '@layer': {
+    [components]: {
+      marginBlock: '0',
+      marginInline: '0',
+    },
+  },
 });
 
 export const trigger = style([
   {
-    position: 'relative',
+    '@layer': {
+      [components]: {
+        position: 'relative',
 
-    alignItems: 'baseline',
-    display: 'flex',
-    justifyContent: 'space-between',
+        alignItems: 'baseline',
+        display: 'flex',
+        justifyContent: 'space-between',
 
-    inlineSize: '100%',
-    paddingBlock: accordionVars.spacing.triggerPaddingBlock,
-    paddingInlineEnd: accordionVars.spacing.triggerPaddingInlineEnd,
-    paddingInlineStart: accordionVars.spacing.triggerPaddingInlineStart,
+        inlineSize: '100%',
+        paddingBlock: accordionVars.spacing.triggerPaddingBlock,
+        paddingInlineEnd: accordionVars.spacing.triggerPaddingInlineEnd,
+        paddingInlineStart: accordionVars.spacing.triggerPaddingInlineStart,
 
-    textAlign: 'start',
+        textAlign: 'start',
 
-    selectors: {
-      '&:focus-visible': {
-        zIndex: '1',
+        selectors: {
+          '&:focus-visible': {
+            zIndex: '1',
 
-        outline: `2px solid ${sys.color.tone.primary}`,
-        outlineOffset: accordionVars.layout.triggerFocusOutlineOffset,
-        borderRadius: sys.shape.corner.small,
+            outline: `2px solid ${sys.color.tone.primary}`,
+            outlineOffset: accordionVars.layout.triggerFocusOutlineOffset,
+            borderRadius: sys.shape.corner.small,
+          },
+        },
       },
     },
   },
 ]);
 
 export const triggerIcon = style({
-  flexShrink: '0',
+  '@layer': {
+    [components]: {
+      flexShrink: '0',
 
-  blockSize: accordionVars.size.triggerIconSize,
-  inlineSize: accordionVars.size.triggerIconSize,
-  marginInlineEnd: accordionVars.spacing.triggerIconMarginInlineEnd,
+      blockSize: accordionVars.size.triggerIconSize,
+      inlineSize: accordionVars.size.triggerIconSize,
+      marginInlineEnd: accordionVars.spacing.triggerIconMarginInlineEnd,
 
-  transition: transition('transform', {
-    duration: accordionVars.motion.iconTransformDuration,
-    easing: accordionVars.motion.iconTransformEasing,
-  }),
+      transition: transition('transform', {
+        duration: accordionVars.motion.iconTransformDuration,
+        easing: accordionVars.motion.iconTransformEasing,
+      }),
 
-  selectors: {
-    '[data-panel-open] > &': {
-      transform: 'rotate(45deg) scale(1.1)',
+      selectors: {
+        '[data-panel-open] > &': {
+          transform: 'rotate(45deg) scale(1.1)',
+        },
+      },
     },
   },
 });
@@ -152,31 +173,39 @@ export const triggerIcon = style({
 export const panel = style([
   typography.body.large,
   {
-    blockSize: 'var(--accordion-panel-height)',
-    overflow: 'hidden',
+    '@layer': {
+      [components]: {
+        blockSize: 'var(--accordion-panel-height)',
+        overflow: 'hidden',
 
-    color: accordionVars.color.panelForeground,
+        color: accordionVars.color.panelForeground,
 
-    transition: transition('block-size', {
-      duration: accordionVars.motion.panelSizeDuration,
-      easing: accordionVars.motion.panelSizeEasing,
-    }),
+        transition: transition('block-size', {
+          duration: accordionVars.motion.panelSizeDuration,
+          easing: accordionVars.motion.panelSizeEasing,
+        }),
 
-    selectors: {
-      '&[data-ending-style]': {
-        blockSize: '0',
-      },
+        selectors: {
+          '&[data-ending-style]': {
+            blockSize: '0',
+          },
 
-      '&[data-starting-style]': {
-        blockSize: '0',
+          '&[data-starting-style]': {
+            blockSize: '0',
+          },
+        },
       },
     },
   },
 ]);
 
 export const content = style({
-  paddingBlock: accordionVars.spacing.contentPaddingBlock,
-  paddingInline: accordionVars.spacing.contentPaddingInline,
+  '@layer': {
+    [components]: {
+      paddingBlock: accordionVars.spacing.contentPaddingBlock,
+      paddingInline: accordionVars.spacing.contentPaddingInline,
 
-  borderRadius: accordionVars.shape.contentCorner,
+      borderRadius: accordionVars.shape.contentCorner,
+    },
+  },
 });

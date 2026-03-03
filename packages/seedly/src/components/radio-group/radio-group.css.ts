@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const radioGroupVars = createThemeContract({
   color: {
@@ -21,11 +22,15 @@ const radioGroupDefaults = assignVars(radioGroupVars, {
 });
 
 export const radioGroup = style({
-  vars: radioGroupDefaults,
+  '@layer': {
+    [components]: {
+      vars: radioGroupDefaults,
 
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'start',
-  gap: radioGroupVars.spacing.groupGap,
-  color: radioGroupVars.color.rootForeground,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'start',
+      gap: radioGroupVars.spacing.groupGap,
+      color: radioGroupVars.color.rootForeground,
+    },
+  },
 });

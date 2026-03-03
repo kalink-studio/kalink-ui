@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const scrollAreaVars = createThemeContract({
   color: {
@@ -67,83 +68,103 @@ const scrollAreaDefaults = assignVars(scrollAreaVars, {
 });
 
 export const scrollArea = style({
-  vars: {
-    ...scrollAreaDefaults,
-  },
+  '@layer': {
+    [components]: {
+      vars: {
+        ...scrollAreaDefaults,
+      },
 
-  blockSize: scrollAreaVars.layout.rootBlockSize,
-  inlineSize: '100%',
+      blockSize: scrollAreaVars.layout.rootBlockSize,
+      inlineSize: '100%',
+    },
+  },
 });
 
 export const viewport = style({
-  blockSize: '100%',
+  '@layer': {
+    [components]: {
+      blockSize: '100%',
 
-  borderRadius: scrollAreaVars.shape.viewportCorner,
-  outline: `1px solid ${scrollAreaVars.color.viewportOutline}`,
-  outlineOffset: '-1px',
+      borderRadius: scrollAreaVars.shape.viewportCorner,
+      outline: `1px solid ${scrollAreaVars.color.viewportOutline}`,
+      outlineOffset: '-1px',
 
-  selectors: {
-    '&:focus-visible': {
-      outline: `2px solid ${scrollAreaVars.color.viewportFocusRing}`,
+      selectors: {
+        '&:focus-visible': {
+          outline: `2px solid ${scrollAreaVars.color.viewportFocusRing}`,
+        },
+      },
     },
   },
 });
 
 export const content = style({
-  display: 'flex',
-  flexDirection: 'column',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      flexDirection: 'column',
 
-  gap: scrollAreaVars.spacing.contentGap,
-  paddingBlock: scrollAreaVars.spacing.contentPaddingBlock,
-  paddingInlineEnd: scrollAreaVars.spacing.contentPaddingInlineEnd,
-  paddingInlineStart: scrollAreaVars.spacing.contentPaddingInlineStart,
+      gap: scrollAreaVars.spacing.contentGap,
+      paddingBlock: scrollAreaVars.spacing.contentPaddingBlock,
+      paddingInlineEnd: scrollAreaVars.spacing.contentPaddingInlineEnd,
+      paddingInlineStart: scrollAreaVars.spacing.contentPaddingInlineStart,
+    },
+  },
 });
 
 export const scrollbar = style({
-  display: 'flex',
-  justifyContent: 'center',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      justifyContent: 'center',
 
-  inlineSize: scrollAreaVars.size.scrollbarInlineSize,
-  marginBlock: scrollAreaVars.spacing.scrollbarMarginBlock,
-  marginInline: scrollAreaVars.spacing.scrollbarMarginInline,
+      inlineSize: scrollAreaVars.size.scrollbarInlineSize,
+      marginBlock: scrollAreaVars.spacing.scrollbarMarginBlock,
+      marginInline: scrollAreaVars.spacing.scrollbarMarginInline,
 
-  backgroundColor: scrollAreaVars.color.scrollbarBackground,
-  borderRadius: scrollAreaVars.shape.scrollbarCorner,
-  opacity: '0',
+      backgroundColor: scrollAreaVars.color.scrollbarBackground,
+      borderRadius: scrollAreaVars.shape.scrollbarCorner,
+      opacity: '0',
 
-  transition: transition('opacity', {
-    duration: scrollAreaVars.motion.scrollbarFadeDuration,
-    easing: scrollAreaVars.motion.scrollbarFadeEasing,
-  }),
+      transition: transition('opacity', {
+        duration: scrollAreaVars.motion.scrollbarFadeDuration,
+        easing: scrollAreaVars.motion.scrollbarFadeEasing,
+      }),
 
-  pointerEvents: 'none',
+      pointerEvents: 'none',
 
-  selectors: {
-    '&[data-hovering]': {
-      opacity: '1',
-      pointerEvents: 'auto',
-    },
+      selectors: {
+        '&[data-hovering]': {
+          opacity: '1',
+          pointerEvents: 'auto',
+        },
 
-    '&[data-scrolling]': {
-      opacity: '1',
-      pointerEvents: 'auto',
-      transition: 'none',
-    },
+        '&[data-scrolling]': {
+          opacity: '1',
+          pointerEvents: 'auto',
+          transition: 'none',
+        },
 
-    '&::before': {
-      position: 'absolute',
+        '&::before': {
+          position: 'absolute',
 
-      blockSize: '100%',
-      inlineSize: scrollAreaVars.size.scrollbarHitAreaInlineSize,
+          blockSize: '100%',
+          inlineSize: scrollAreaVars.size.scrollbarHitAreaInlineSize,
 
-      content: "''",
+          content: "''",
+        },
+      },
     },
   },
 });
 
 export const thumb = style({
-  inlineSize: '100%',
+  '@layer': {
+    [components]: {
+      inlineSize: '100%',
 
-  backgroundColor: scrollAreaVars.color.thumbBackground,
-  borderRadius: 'inherit',
+      backgroundColor: scrollAreaVars.color.thumbBackground,
+      borderRadius: 'inherit',
+    },
+  },
 });

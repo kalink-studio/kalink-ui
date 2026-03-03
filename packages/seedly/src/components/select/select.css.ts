@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
@@ -117,165 +118,214 @@ const selectDefaults = assignVars(selectVars, {
 export const select = style([
   typography.label.large,
   {
-    vars: {
-      ...selectDefaults,
-    },
-    ...createFieldTextInputTriggerStyles({
-      foreground: selectVars.color.triggerForeground,
-      borderColor: selectVars.color.triggerBorder,
-      backgroundColor: selectVars.color.triggerBackground,
-      borderRadius: selectVars.shape.triggerCorner,
-      focusRingColor: selectVars.color.triggerFocusRing,
-      focusRingOffset: selectVars.layout.triggerFocusRingOffset,
-      gap: selectVars.spacing.triggerGap,
-      paddingInlineStart: selectVars.spacing.triggerPaddingInlineStart,
-      paddingInlineEnd: selectVars.spacing.triggerPaddingInlineEnd,
-      inlineSize: selectVars.layout.triggerInlineSize,
-      blockSize: selectVars.size.triggerBlockSize,
-    }),
-    ...createInteractiveStateStyles({
-      hover: {
-        backgroundColor: selectVars.color.triggerHoverBackground,
-      },
-      popupOpen: {
-        styles: {
-          backgroundColor: selectVars.color.triggerOpenBackground,
-          borderColor: selectVars.color.triggerBorder,
+    '@layer': {
+      [components]: {
+        vars: {
+          ...selectDefaults,
         },
+        ...createFieldTextInputTriggerStyles({
+          foreground: selectVars.color.triggerForeground,
+          borderColor: selectVars.color.triggerBorder,
+          backgroundColor: selectVars.color.triggerBackground,
+          borderRadius: selectVars.shape.triggerCorner,
+          focusRingColor: selectVars.color.triggerFocusRing,
+          focusRingOffset: selectVars.layout.triggerFocusRingOffset,
+          gap: selectVars.spacing.triggerGap,
+          paddingInlineStart: selectVars.spacing.triggerPaddingInlineStart,
+          paddingInlineEnd: selectVars.spacing.triggerPaddingInlineEnd,
+          inlineSize: selectVars.layout.triggerInlineSize,
+          blockSize: selectVars.size.triggerBlockSize,
+        }),
+        ...createInteractiveStateStyles({
+          hover: {
+            backgroundColor: selectVars.color.triggerHoverBackground,
+          },
+          popupOpen: {
+            styles: {
+              backgroundColor: selectVars.color.triggerOpenBackground,
+              borderColor: selectVars.color.triggerBorder,
+            },
+          },
+        }),
       },
-    }),
+    },
   },
 ]);
 
 export const selectIcon = style({
-  display: 'flex',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+    },
+  },
 });
 
 export const value = style({
-  selectors: {
-    [`&[data-placeholder]`]: {
-      opacity: sys.state.muted.text,
+  '@layer': {
+    [components]: {
+      selectors: {
+        [`&[data-placeholder]`]: {
+          opacity: sys.state.muted.text,
+        },
+      },
     },
   },
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    zIndex: '1',
-    webkitUserSelect: 'none',
-    userSelect: 'none',
-  }),
-  vars: {
-    ...selectDefaults,
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles({
+        zIndex: '1',
+        webkitUserSelect: 'none',
+        userSelect: 'none',
+      }),
+      vars: {
+        ...selectDefaults,
+      },
+    },
   },
 });
 
 export const popup = style({
-  ...createFloatingAnchoredSurfaceStyles({
-    anchorWidth: 'min-inline',
-    borderRadius: selectVars.shape.popupCorner,
-    background: selectVars.color.popupBackground,
-    foreground: selectVars.color.popupForeground,
-    backgroundClip: 'padding-box',
-    outline: selectVars.color.popupOutline,
-    outlineInverse: selectVars.color.popupOutlineInverse,
-    shadow: selectVars.color.popupShadow,
-    motion: {
-      preset: 'scaleSoft',
+  '@layer': {
+    [components]: {
+      ...createFloatingAnchoredSurfaceStyles({
+        anchorWidth: 'min-inline',
+        borderRadius: selectVars.shape.popupCorner,
+        background: selectVars.color.popupBackground,
+        foreground: selectVars.color.popupForeground,
+        backgroundClip: 'padding-box',
+        outline: selectVars.color.popupOutline,
+        outlineInverse: selectVars.color.popupOutlineInverse,
+        shadow: selectVars.color.popupShadow,
+        motion: {
+          preset: 'scaleSoft',
+        },
+        selectors: {
+          [`&[data-side='none']`]: {
+            minInlineSize: 'var(--anchor-width)',
+          },
+        },
+      }),
     },
-    selectors: {
-      [`&[data-side='none']`]: {
-        minInlineSize: 'var(--anchor-width)',
-      },
-    },
-  }),
+  },
 });
 
 export const list = style({
-  ...createFloatingListStyles({
-    preset: 'listboxCompact',
-    maxBlockSize: selectVars.size.listMaxBlockSize,
-    paddingBlock: selectVars.spacing.listPaddingBlock,
-    scrollPaddingBlock: selectVars.spacing.listScrollPaddingBlock,
-  }),
+  '@layer': {
+    [components]: {
+      ...createFloatingListStyles({
+        preset: 'listboxCompact',
+        maxBlockSize: selectVars.size.listMaxBlockSize,
+        paddingBlock: selectVars.spacing.listPaddingBlock,
+        scrollPaddingBlock: selectVars.spacing.listScrollPaddingBlock,
+      }),
+    },
+  },
 });
 
 export const arrowOuterStroke = style({
-  ...createArrowOuterStrokeStyles(selectVars.color.arrowOuterStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowOuterStrokeStyles(selectVars.color.arrowOuterStroke),
+    },
+  },
 });
 
 export const arrowInnerStroke = style({
-  ...createArrowInnerStrokeStyles(selectVars.color.arrowInnerStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowInnerStrokeStyles(selectVars.color.arrowInnerStroke),
+    },
+  },
 });
 
 export const item = style([
   typography.body.large,
-  createFloatingHighlightedItemStyles({
-    preset: 'listboxWithIndicator',
-    paddingBlock: selectVars.spacing.itemPaddingBlock,
-    highlight: {
-      backgroundColor: selectVars.color.itemHighlightBackground,
-      borderRadius: selectVars.shape.itemHighlightCorner,
-      insetInline: selectVars.spacing.itemHighlightInsetInline,
-      textColor: selectVars.color.itemHighlightForeground,
+  {
+    '@layer': {
+      [components]: createFloatingHighlightedItemStyles({
+        preset: 'listboxWithIndicator',
+        paddingBlock: selectVars.spacing.itemPaddingBlock,
+        highlight: {
+          backgroundColor: selectVars.color.itemHighlightBackground,
+          borderRadius: selectVars.shape.itemHighlightCorner,
+          insetInline: selectVars.spacing.itemHighlightInsetInline,
+          textColor: selectVars.color.itemHighlightForeground,
+        },
+        paddingInlineStart: selectVars.spacing.itemPaddingInlineStart,
+        paddingInlineEnd: selectVars.spacing.itemPaddingInlineEnd,
+        webkitUserSelect: 'none',
+        media: {
+          '(pointer: coarse)': {
+            paddingBlock: selectVars.spacing.itemPaddingBlockCoarse,
+            fontSize: sys.typography.label.large.size,
+            lineHeight: sys.typography.label.large.lineHeight,
+          },
+        },
+        selectors: {
+          [`[data-side='none'] &`]: {
+            fontSize: sys.typography.label.large.size,
+            lineHeight: sys.typography.label.large.lineHeight,
+            paddingInlineEnd:
+              selectVars.spacing.itemPaddingInlineEndWithoutSide,
+          },
+        },
+      }),
     },
-    paddingInlineStart: selectVars.spacing.itemPaddingInlineStart,
-    paddingInlineEnd: selectVars.spacing.itemPaddingInlineEnd,
-    webkitUserSelect: 'none',
-    media: {
-      '(pointer: coarse)': {
-        paddingBlock: selectVars.spacing.itemPaddingBlockCoarse,
-        fontSize: sys.typography.label.large.size,
-        lineHeight: sys.typography.label.large.lineHeight,
-      },
-    },
-    selectors: {
-      [`[data-side='none'] &`]: {
-        fontSize: sys.typography.label.large.size,
-        lineHeight: sys.typography.label.large.lineHeight,
-        paddingInlineEnd: selectVars.spacing.itemPaddingInlineEndWithoutSide,
-      },
-    },
-  }),
+  },
 ]);
 
 export const itemIndicator = style({
-  gridColumnStart: '1',
+  '@layer': {
+    [components]: {
+      gridColumnStart: '1',
+    },
+  },
 });
 export const itemText = style({
-  gridColumnStart: '2',
+  '@layer': {
+    [components]: {
+      gridColumnStart: '2',
+    },
+  },
 });
 
 export const scrollArrow = style([
   typography.label.small,
   {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    inlineSize: '100%',
-    blockSize: selectVars.spacing.scrollArrowBlockSize,
-    zIndex: '1',
-    textAlign: 'center',
-    background: selectVars.color.scrollArrowBackground,
-    borderRadius: selectVars.shape.scrollArrowCorner,
-    cursor: 'default',
-
-    selectors: {
-      [`&::before`]: {
-        content: "''",
-        position: 'absolute',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         inlineSize: '100%',
-        blockSize: '100%',
-        insetInlineStart: '0',
-      },
-      [`&[data-direction='up'][data-side='none']::before`]: {
-        insetBlockStart: '-100%',
-      },
-      [`&[data-direction='down']`]: {
-        insetBlockEnd: '0',
-      },
-      [`&[data-direction='down'][data-side='none']::before`]: {
-        insetBlockEnd: '-100%',
+        blockSize: selectVars.spacing.scrollArrowBlockSize,
+        zIndex: '1',
+        textAlign: 'center',
+        background: selectVars.color.scrollArrowBackground,
+        borderRadius: selectVars.shape.scrollArrowCorner,
+        cursor: 'default',
+
+        selectors: {
+          [`&::before`]: {
+            content: "''",
+            position: 'absolute',
+            inlineSize: '100%',
+            blockSize: '100%',
+            insetInlineStart: '0',
+          },
+          [`&[data-direction='up'][data-side='none']::before`]: {
+            insetBlockStart: '-100%',
+          },
+          [`&[data-direction='down']`]: {
+            insetBlockEnd: '0',
+          },
+          [`&[data-direction='down'][data-side='none']::before`]: {
+            insetBlockEnd: '-100%',
+          },
+        },
       },
     },
   },

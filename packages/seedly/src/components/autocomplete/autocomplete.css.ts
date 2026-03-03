@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
@@ -110,99 +111,127 @@ const autocompleteItemHighlightSelectors =
 export const input = style([
   typography.body.large,
   {
-    ...createFieldTextInputStyles({
-      paddingInlineEnd: autocompleteVars.spacing.inputPaddingInlineEnd,
-      paddingInlineStart: autocompleteVars.spacing.inputPaddingInlineStart,
-      blockSize: autocompleteVars.size.inputBlockSize,
-      inlineSize: autocompleteVars.layout.inputInlineSize,
+    '@layer': {
+      [components]: {
+        ...createFieldTextInputStyles({
+          paddingInlineEnd: autocompleteVars.spacing.inputPaddingInlineEnd,
+          paddingInlineStart: autocompleteVars.spacing.inputPaddingInlineStart,
+          blockSize: autocompleteVars.size.inputBlockSize,
+          inlineSize: autocompleteVars.layout.inputInlineSize,
 
-      foreground: autocompleteVars.color.inputForeground,
-      backgroundColor: autocompleteVars.color.inputBackground,
-      borderColor: autocompleteVars.color.inputBorder,
-      borderRadius: autocompleteVars.shape.inputCorner,
-      focusRingColor: autocompleteVars.color.inputFocusRing,
-      focusRingOffset: autocompleteVars.layout.inputFocusRingOffset,
-    }),
+          foreground: autocompleteVars.color.inputForeground,
+          backgroundColor: autocompleteVars.color.inputBackground,
+          borderColor: autocompleteVars.color.inputBorder,
+          borderRadius: autocompleteVars.shape.inputCorner,
+          focusRingColor: autocompleteVars.color.inputFocusRing,
+          focusRingOffset: autocompleteVars.layout.inputFocusRingOffset,
+        }),
+      },
+    },
   },
 ]);
 
 export const label = style({
-  vars: {
-    ...autocompleteDefaults,
-  },
+  '@layer': {
+    [components]: {
+      vars: {
+        ...autocompleteDefaults,
+      },
 
-  ...createFieldStackStyles({
-    alignItems: 'start',
-    gap: autocompleteVars.spacing.stackGap,
-    inlineSize: autocompleteVars.layout.inputInlineSize,
-  }),
-  ...createFieldLabelStyles({
-    color: autocompleteVars.color.label,
-  }),
+      ...createFieldStackStyles({
+        alignItems: 'start',
+        gap: autocompleteVars.spacing.stackGap,
+        inlineSize: autocompleteVars.layout.inputInlineSize,
+      }),
+      ...createFieldLabelStyles({
+        color: autocompleteVars.color.label,
+      }),
+    },
+  },
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles(),
 
-  vars: {
-    ...autocompleteDefaults,
+      vars: {
+        ...autocompleteDefaults,
+      },
+    },
   },
 });
 
 export const popup = style({
-  ...createFloatingAnchoredSurfaceStyles({
-    background: autocompleteVars.color.popupBackground,
-    borderRadius: autocompleteVars.shape.popupCorner,
-    foreground: autocompleteVars.color.popupForeground,
-    outline: autocompleteVars.color.popupOutline,
-    shadow: autocompleteVars.color.popupShadow,
+  '@layer': {
+    [components]: {
+      ...createFloatingAnchoredSurfaceStyles({
+        background: autocompleteVars.color.popupBackground,
+        borderRadius: autocompleteVars.shape.popupCorner,
+        foreground: autocompleteVars.color.popupForeground,
+        outline: autocompleteVars.color.popupOutline,
+        shadow: autocompleteVars.color.popupShadow,
 
-    motion: {
-      preset: 'none',
+        motion: {
+          preset: 'none',
+        },
+      }),
+
+      overflow: 'hidden',
     },
-  }),
-
-  overflow: 'hidden',
+  },
 });
 
 export const list = style({
-  ...createFloatingListStyles({
-    maxBlockSize: autocompleteVars.size.listMaxBlockSize,
-    paddingBlock: autocompleteVars.spacing.listPaddingBlock,
-    scrollPaddingBlock: autocompleteVars.spacing.listScrollPaddingBlock,
+  '@layer': {
+    [components]: {
+      ...createFloatingListStyles({
+        maxBlockSize: autocompleteVars.size.listMaxBlockSize,
+        paddingBlock: autocompleteVars.spacing.listPaddingBlock,
+        scrollPaddingBlock: autocompleteVars.spacing.listScrollPaddingBlock,
 
-    selectors: {
-      [`&[data-empty]`]: {
-        paddingBlock: autocompleteVars.spacing.zero,
-        paddingInline: autocompleteVars.spacing.zero,
-      },
+        selectors: {
+          [`&[data-empty]`]: {
+            paddingBlock: autocompleteVars.spacing.zero,
+            paddingInline: autocompleteVars.spacing.zero,
+          },
+        },
+      }),
     },
-  }),
+  },
 });
 
 export const item = style([
   typography.body.medium,
-  createFloatingItemStyles({
-    paddingBlock: autocompleteVars.spacing.itemPaddingBlock,
-    paddingInline: autocompleteVars.spacing.itemPaddingInline,
-    overflowWrap: 'anywhere',
-    selectors: {
-      ...autocompleteItemHighlightSelectors,
+  {
+    '@layer': {
+      [components]: createFloatingItemStyles({
+        paddingBlock: autocompleteVars.spacing.itemPaddingBlock,
+        paddingInline: autocompleteVars.spacing.itemPaddingInline,
+        overflowWrap: 'anywhere',
+        selectors: {
+          ...autocompleteItemHighlightSelectors,
+        },
+      }),
     },
-  }),
+  },
 ]);
 
 export const empty = style([
   typography.body.medium,
   {
-    selectors: {
-      [`&:not(:empty)`]: {
-        paddingBlock: autocompleteVars.spacing.emptyPaddingBlock,
-        paddingInline: autocompleteVars.spacing.emptyPaddingInline,
+    '@layer': {
+      [components]: {
+        selectors: {
+          [`&:not(:empty)`]: {
+            paddingBlock: autocompleteVars.spacing.emptyPaddingBlock,
+            paddingInline: autocompleteVars.spacing.emptyPaddingInline,
 
-        fontSize: sys.typography.body.medium.size,
-        lineHeight: sys.typography.body.medium.lineHeight,
-        color: autocompleteVars.color.emptyForeground,
+            fontSize: sys.typography.body.medium.size,
+            lineHeight: sys.typography.body.medium.lineHeight,
+            color: autocompleteVars.color.emptyForeground,
+          },
+        },
       },
     },
   },

@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 import { createChoiceControlStyles } from '../_foundation';
 
 export const radioVars = createThemeContract({
@@ -46,30 +47,42 @@ const radioDefaults = assignVars(radioVars, {
 });
 
 export const label = style({
-  vars: radioDefaults,
+  '@layer': {
+    [components]: {
+      vars: radioDefaults,
 
-  display: 'flex',
-  alignItems: 'center',
+      display: 'flex',
+      alignItems: 'center',
 
-  gap: radioVars.spacing.labelGap,
+      gap: radioVars.spacing.labelGap,
 
-  color: radioVars.color.labelForeground,
+      color: radioVars.color.labelForeground,
+    },
+  },
 });
 
 export const radio = style({
-  ...createChoiceControlStyles({
-    borderRadius: radioVars.shape.controlCorner,
-    checkedBackgroundColor: radioVars.color.controlCheckedBackground,
-    focusOutlineOffset: radioVars.spacing.controlFocusOutlineOffset,
-    focusRingColor: radioVars.color.controlFocusRing,
-    size: radioVars.size.controlSize,
-    uncheckedBorderColor: radioVars.color.controlBorder,
-    animationType: 'fill-in',
-    indicatorSize: radioVars.size.indicatorSize,
-    indicatorColor: radioVars.color.indicatorForeground,
-  }),
+  '@layer': {
+    [components]: {
+      ...createChoiceControlStyles({
+        borderRadius: radioVars.shape.controlCorner,
+        checkedBackgroundColor: radioVars.color.controlCheckedBackground,
+        focusOutlineOffset: radioVars.spacing.controlFocusOutlineOffset,
+        focusRingColor: radioVars.color.controlFocusRing,
+        size: radioVars.size.controlSize,
+        uncheckedBorderColor: radioVars.color.controlBorder,
+        animationType: 'fill-in',
+        indicatorSize: radioVars.size.indicatorSize,
+        indicatorColor: radioVars.color.indicatorForeground,
+      }),
+    },
+  },
 });
 
 export const indicator = style({
-  display: 'none',
+  '@layer': {
+    [components]: {
+      display: 'none',
+    },
+  },
 });

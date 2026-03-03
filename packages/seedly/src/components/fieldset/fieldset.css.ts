@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const fieldsetVars = createThemeContract({
   color: {
@@ -31,27 +32,35 @@ const fieldsetDefaults = assignVars(fieldsetVars, {
 });
 
 export const fieldset = style({
-  vars: fieldsetDefaults,
+  '@layer': {
+    [components]: {
+      vars: fieldsetDefaults,
 
-  display: 'flex',
-  flexDirection: 'column',
+      display: 'flex',
+      flexDirection: 'column',
 
-  gap: fieldsetVars.spacing.rootGap,
-  inlineSize: '100%',
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
+      gap: fieldsetVars.spacing.rootGap,
+      inlineSize: '100%',
+      marginBlock: '0',
+      marginInline: '0',
+      paddingBlock: '0',
+      paddingInline: '0',
 
-  border: '0',
+      border: '0',
+    },
+  },
 });
 
 export const legend = style([
   typography.title.large,
   {
-    paddingBlockEnd: fieldsetVars.spacing.legendPaddingBlockEnd,
+    '@layer': {
+      [components]: {
+        paddingBlockEnd: fieldsetVars.spacing.legendPaddingBlockEnd,
 
-    borderBlockEnd: `${fieldsetVars.size.legendBorderBlockEndWidth} solid ${fieldsetVars.color.legendBorder}`,
-    color: fieldsetVars.color.legendForeground,
+        borderBlockEnd: `${fieldsetVars.size.legendBorderBlockEndWidth} solid ${fieldsetVars.color.legendBorder}`,
+        color: fieldsetVars.color.legendForeground,
+      },
+    },
   },
 ]);

@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const separatorVars = createThemeContract({
   color: {
@@ -51,19 +52,23 @@ const separatorDefaults = assignVars(separatorVars, {
 });
 
 export const separator = style({
-  vars: {
-    ...separatorDefaults,
-  },
+  '@layer': {
+    [components]: {
+      vars: {
+        ...separatorDefaults,
+      },
 
-  blockSize: separatorVars.size.rootBlockSize,
-  inlineSize: '100%',
+      blockSize: separatorVars.size.rootBlockSize,
+      inlineSize: '100%',
 
-  backgroundColor: separatorVars.color.rootBackground,
+      backgroundColor: separatorVars.color.rootBackground,
 
-  selectors: {
-    '&[data-orientation="vertical"]': {
-      blockSize: separatorVars.size.rootVerticalBlockSize,
-      inlineSize: separatorVars.size.rootVerticalInlineSize,
+      selectors: {
+        '&[data-orientation="vertical"]': {
+          blockSize: separatorVars.size.rootVerticalBlockSize,
+          inlineSize: separatorVars.size.rootVerticalInlineSize,
+        },
+      },
     },
   },
 });
@@ -71,28 +76,32 @@ export const separator = style({
 export const link = style([
   typography.body.medium,
   {
-    vars: {
-      ...separatorDefaults,
-    },
+    '@layer': {
+      [components]: {
+        vars: {
+          ...separatorDefaults,
+        },
 
-    textDecorationLine: 'none',
-    textDecorationThickness: separatorVars.size.linkUnderlineThickness,
-    textUnderlineOffset: separatorVars.spacing.linkUnderlineOffset,
-
-    color: separatorVars.color.linkForeground,
-    textDecorationColor: separatorVars.color.linkUnderline,
-
-    selectors: {
-      '&:focus-visible': {
-        borderRadius: separatorVars.shape.linkFocusCorner,
-        outline: `2px solid ${separatorVars.color.linkFocusRing}`,
         textDecorationLine: 'none',
-      },
+        textDecorationThickness: separatorVars.size.linkUnderlineThickness,
+        textUnderlineOffset: separatorVars.spacing.linkUnderlineOffset,
 
-      '&:hover': {
-        '@media': {
-          '(hover: hover)': {
-            textDecorationLine: 'underline',
+        color: separatorVars.color.linkForeground,
+        textDecorationColor: separatorVars.color.linkUnderline,
+
+        selectors: {
+          '&:focus-visible': {
+            borderRadius: separatorVars.shape.linkFocusCorner,
+            outline: `2px solid ${separatorVars.color.linkFocusRing}`,
+            textDecorationLine: 'none',
+          },
+
+          '&:hover': {
+            '@media': {
+              '(hover: hover)': {
+                textDecorationLine: 'underline',
+              },
+            },
           },
         },
       },

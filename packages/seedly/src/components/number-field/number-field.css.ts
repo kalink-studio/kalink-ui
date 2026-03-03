@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
@@ -76,68 +77,92 @@ const numberFieldDefaults = assignVars(numberFieldVars, {
 });
 
 export const field = style({
-  ...createFieldStackStyles({
-    alignItems: 'start',
-    gap: numberFieldVars.spacing.fieldGap,
-    inlineSize: numberFieldVars.layout.inputInlineSize,
-  }),
-  vars: {
-    ...numberFieldDefaults,
+  '@layer': {
+    [components]: {
+      ...createFieldStackStyles({
+        alignItems: 'start',
+        gap: numberFieldVars.spacing.fieldGap,
+        inlineSize: numberFieldVars.layout.inputInlineSize,
+      }),
+      vars: {
+        ...numberFieldDefaults,
+      },
+    },
   },
 });
 
 export const scrubArea = style({
-  fontWeight: numberFieldVars.typography.scrubAreaWeight,
-  cursor: 'ew-resize',
-  userSelect: 'none',
+  '@layer': {
+    [components]: {
+      fontWeight: numberFieldVars.typography.scrubAreaWeight,
+      cursor: 'ew-resize',
+      userSelect: 'none',
+    },
+  },
 });
 
 export const scrubAreaCursor = style({
-  filter: `drop-shadow(0 1px 1px ${numberFieldVars.color.scrubAreaCursorShadow})`,
+  '@layer': {
+    [components]: {
+      filter: `drop-shadow(0 1px 1px ${numberFieldVars.color.scrubAreaCursorShadow})`,
+    },
+  },
 });
 
 export const label = style({
-  ...createFieldLabelStyles({
-    color: numberFieldVars.color.labelForeground,
-    cursor: 'ew-resize',
-  }),
+  '@layer': {
+    [components]: {
+      ...createFieldLabelStyles({
+        color: numberFieldVars.color.labelForeground,
+        cursor: 'ew-resize',
+      }),
+    },
+  },
 });
 
 export const group = style({
-  display: 'flex',
-  inlineSize: '100%',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      inlineSize: '100%',
+    },
+  },
 });
 
 export const input = style([
   typography.body.large,
   {
-    ...createFieldTextInputStyles({
-      backgroundColor: numberFieldVars.color.inputBackground,
-      blockSize: numberFieldVars.size.controlSize,
-      borderColor: numberFieldVars.color.inputBorder,
-      borderRadius: numberFieldVars.shape.inputMergedCorner,
-      focusRingColor: numberFieldVars.color.inputFocusRing,
-      focusRingOffset: numberFieldVars.layout.inputFocusRingOffset,
-      foreground: numberFieldVars.color.inputForeground,
-      inlineSize: numberFieldVars.layout.inputInlineSize,
-      paddingInlineEnd: sys.spacing[0],
-      paddingInlineStart: sys.spacing[0],
-    }),
+    '@layer': {
+      [components]: {
+        ...createFieldTextInputStyles({
+          backgroundColor: numberFieldVars.color.inputBackground,
+          blockSize: numberFieldVars.size.controlSize,
+          borderColor: numberFieldVars.color.inputBorder,
+          borderRadius: numberFieldVars.shape.inputMergedCorner,
+          focusRingColor: numberFieldVars.color.inputFocusRing,
+          focusRingOffset: numberFieldVars.layout.inputFocusRingOffset,
+          foreground: numberFieldVars.color.inputForeground,
+          inlineSize: numberFieldVars.layout.inputInlineSize,
+          paddingInlineEnd: sys.spacing[0],
+          paddingInlineStart: sys.spacing[0],
+        }),
 
-    borderInlineStart: 'none',
-    borderInlineEnd: 'none',
+        borderInlineStart: 'none',
+        borderInlineEnd: 'none',
 
-    flex: '1 1 auto',
-    minInlineSize: '0',
+        flex: '1 1 auto',
+        minInlineSize: '0',
 
-    textAlign: 'center',
-    fontVariantNumeric: 'tabular-nums',
+        textAlign: 'center',
+        fontVariantNumeric: 'tabular-nums',
 
-    selectors: {
-      [`&:focus`]: {
-        zIndex: '1',
-        outline: `2px solid ${numberFieldVars.color.inputFocusRing}`,
-        outlineOffset: numberFieldVars.layout.inputFocusRingOffset,
+        selectors: {
+          [`&:focus`]: {
+            zIndex: '1',
+            outline: `2px solid ${numberFieldVars.color.inputFocusRing}`,
+            outlineOffset: numberFieldVars.layout.inputFocusRingOffset,
+          },
+        },
       },
     },
   },
@@ -160,27 +185,35 @@ const stepperButtonStyle = {
 } as const;
 
 export const decrement = style({
-  ...stepperButtonStyle,
-  borderStartEndRadius: numberFieldVars.shape.inputMergedCorner,
-  borderEndEndRadius: numberFieldVars.shape.inputMergedCorner,
-  backgroundColor: numberFieldVars.color.decrementBackground,
+  '@layer': {
+    [components]: {
+      ...stepperButtonStyle,
+      borderStartEndRadius: numberFieldVars.shape.inputMergedCorner,
+      borderEndEndRadius: numberFieldVars.shape.inputMergedCorner,
+      backgroundColor: numberFieldVars.color.decrementBackground,
+    },
+  },
 });
 
 export const increment = style({
-  ...stepperButtonStyle,
-  borderStartStartRadius: numberFieldVars.shape.inputMergedCorner,
-  borderEndStartRadius: numberFieldVars.shape.inputMergedCorner,
+  '@layer': {
+    [components]: {
+      ...stepperButtonStyle,
+      borderStartStartRadius: numberFieldVars.shape.inputMergedCorner,
+      borderEndStartRadius: numberFieldVars.shape.inputMergedCorner,
 
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: numberFieldVars.color.incrementHoverBackground,
+      selectors: {
+        [`&:hover`]: {
+          '@media': {
+            '(hover: hover)': {
+              backgroundColor: numberFieldVars.color.incrementHoverBackground,
+            },
+          },
+        },
+        [`&:active`]: {
+          backgroundColor: numberFieldVars.color.incrementActiveBackground,
         },
       },
-    },
-    [`&:active`]: {
-      backgroundColor: numberFieldVars.color.incrementActiveBackground,
     },
   },
 });

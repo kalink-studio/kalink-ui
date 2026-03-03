@@ -2,6 +2,7 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
 import { stateColor, sys, transition } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -167,350 +168,423 @@ const navigationMenuDefaults = assignVars(navigationMenuVars, {
 });
 
 export const root = style({
-  vars: {
-    ...navigationMenuDefaults,
-  },
+  '@layer': {
+    [components]: {
+      vars: {
+        ...navigationMenuDefaults,
+      },
 
-  minInlineSize: 'max-content',
+      minInlineSize: 'max-content',
+    },
+  },
 });
 
 export const list = style({
-  position: 'relative',
+  '@layer': {
+    [components]: {
+      position: 'relative',
 
-  display: 'flex',
+      display: 'flex',
 
-  listStyle: 'none',
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
+      listStyle: 'none',
+      marginBlock: '0',
+      marginInline: '0',
+      paddingBlock: '0',
+      paddingInline: '0',
+    },
+  },
 });
 
 export const trigger = style({
-  alignItems: 'center',
-  display: 'inline-flex',
-  justifyContent: 'center',
+  '@layer': {
+    [components]: {
+      alignItems: 'center',
+      display: 'inline-flex',
+      justifyContent: 'center',
 
-  blockSize: navigationMenuVars.size.triggerBlockSize,
-  gap: navigationMenuVars.spacing.triggerGap,
-  marginBlock: '0',
-  marginInline: '0',
-  paddingInline: navigationMenuVars.spacing.triggerPaddingInline,
+      blockSize: navigationMenuVars.size.triggerBlockSize,
+      gap: navigationMenuVars.spacing.triggerGap,
+      marginBlock: '0',
+      marginInline: '0',
+      paddingInline: navigationMenuVars.spacing.triggerPaddingInline,
 
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
+      textDecoration: 'none',
+      whiteSpace: 'nowrap',
 
-  backgroundColor: navigationMenuVars.color.triggerBackground,
-  borderRadius: navigationMenuVars.shape.triggerCorner,
-  outline: '0',
+      backgroundColor: navigationMenuVars.color.triggerBackground,
+      borderRadius: navigationMenuVars.shape.triggerCorner,
+      outline: '0',
 
-  userSelect: 'none',
+      userSelect: 'none',
 
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: navigationMenuVars.color.triggerHoverBackground,
+      selectors: {
+        [`&:hover`]: {
+          '@media': {
+            '(hover: hover)': {
+              backgroundColor: navigationMenuVars.color.triggerHoverBackground,
+            },
+          },
+        },
+
+        [`&[data-popup-open]`]: {
+          backgroundColor: navigationMenuVars.color.triggerOpenBackground,
+        },
+
+        [`&:focus-visible`]: {
+          outline: `2px solid ${navigationMenuVars.color.triggerFocusRing}`,
+          outlineOffset: '-1px',
+          position: 'relative',
         },
       },
-    },
 
-    [`&[data-popup-open]`]: {
-      backgroundColor: navigationMenuVars.color.triggerOpenBackground,
-    },
-
-    [`&:focus-visible`]: {
-      outline: `2px solid ${navigationMenuVars.color.triggerFocusRing}`,
-      outlineOffset: '-1px',
-      position: 'relative',
-    },
-  },
-
-  '@media': {
-    '(max-width: 500px)': {
-      fontSize: navigationMenuVars.typography.triggerMobileSize,
-      lineHeight: navigationMenuVars.typography.triggerMobileLineHeight,
-      paddingInline: navigationMenuVars.spacing.triggerPaddingInlineMobile,
+      '@media': {
+        '(max-width: 500px)': {
+          fontSize: navigationMenuVars.typography.triggerMobileSize,
+          lineHeight: navigationMenuVars.typography.triggerMobileLineHeight,
+          paddingInline: navigationMenuVars.spacing.triggerPaddingInlineMobile,
+        },
+      },
     },
   },
 });
 
 export const icon = style({
-  alignItems: 'center',
-  display: 'inline-flex',
-  justifyContent: 'center',
+  '@layer': {
+    [components]: {
+      alignItems: 'center',
+      display: 'inline-flex',
+      justifyContent: 'center',
 
-  transition: transition('transform', {
-    duration: navigationMenuVars.motion.iconRotationDuration,
-    easing: navigationMenuVars.motion.iconRotationEasing,
-  }),
+      transition: transition('transform', {
+        duration: navigationMenuVars.motion.iconRotationDuration,
+        easing: navigationMenuVars.motion.iconRotationEasing,
+      }),
 
-  selectors: {
-    [`&[data-popup-open]`]: {
-      transform: 'rotate(180deg)',
+      selectors: {
+        [`&[data-popup-open]`]: {
+          transform: 'rotate(180deg)',
+        },
+      },
     },
   },
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    zIndex: '1',
-  }),
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles({
+        zIndex: '1',
+      }),
 
-  vars: {
-    ...navigationMenuDefaults,
-  },
+      vars: {
+        ...navigationMenuDefaults,
+      },
 
-  blockSize: 'var(--positioner-height)',
-  inlineSize: 'var(--positioner-width)',
-  maxInlineSize: 'var(--available-width)',
+      blockSize: 'var(--positioner-height)',
+      inlineSize: 'var(--positioner-width)',
+      maxInlineSize: 'var(--available-width)',
 
-  transition: transition(['top', 'left', 'right', 'bottom'], {
-    duration: navigationMenuVars.motion.positionerTransitionDuration,
-    easing: navigationMenuVars.motion.positionerTransitionEasing,
-  }),
+      transition: transition(['top', 'left', 'right', 'bottom'], {
+        duration: navigationMenuVars.motion.positionerTransitionDuration,
+        easing: navigationMenuVars.motion.positionerTransitionEasing,
+      }),
 
-  selectors: {
-    [`&::before`]: {
-      content: "''",
-      position: 'absolute',
-    },
+      selectors: {
+        [`&::before`]: {
+          content: "''",
+          position: 'absolute',
+        },
 
-    [`&[data-side='top']::before`]: {
-      blockSize: navigationMenuVars.spacing.floatingPointerSize,
-      bottom: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
-      left: '0',
-      right: '0',
-    },
+        [`&[data-side='top']::before`]: {
+          blockSize: navigationMenuVars.spacing.floatingPointerSize,
+          bottom: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
+          left: '0',
+          right: '0',
+        },
 
-    [`&[data-side='bottom']::before`]: {
-      blockSize: navigationMenuVars.spacing.floatingPointerSize,
-      left: '0',
-      right: '0',
-      top: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
-    },
+        [`&[data-side='bottom']::before`]: {
+          blockSize: navigationMenuVars.spacing.floatingPointerSize,
+          left: '0',
+          right: '0',
+          top: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
+        },
 
-    [`&[data-side='left']::before`]: {
-      bottom: '0',
-      inlineSize: navigationMenuVars.spacing.floatingPointerSize,
-      right: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
-      top: '0',
-    },
+        [`&[data-side='left']::before`]: {
+          bottom: '0',
+          inlineSize: navigationMenuVars.spacing.floatingPointerSize,
+          right: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
+          top: '0',
+        },
 
-    [`&[data-side='right']::before`]: {
-      bottom: '0',
-      inlineSize: navigationMenuVars.spacing.floatingPointerSize,
-      left: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
-      top: '0',
-    },
+        [`&[data-side='right']::before`]: {
+          bottom: '0',
+          inlineSize: navigationMenuVars.spacing.floatingPointerSize,
+          left: calc.negate(navigationMenuVars.spacing.floatingPointerSize),
+          top: '0',
+        },
 
-    [`&[data-instant]`]: {
-      transition: 'none',
+        [`&[data-instant]`]: {
+          transition: 'none',
+        },
+      },
     },
   },
 });
 
 export const popup = style({
-  ...createFloatingSurfaceStyles({
-    background: navigationMenuVars.color.popupBackground,
-    blockSize: 'var(--popup-height)',
-    borderRadius: navigationMenuVars.shape.popupCorner,
-    foreground: navigationMenuVars.color.popupForeground,
-    inlineSize: 'var(--popup-width)',
-    outline: navigationMenuVars.color.popupOutline,
-    shadow: navigationMenuVars.color.popupShadow,
+  '@layer': {
+    [components]: {
+      ...createFloatingSurfaceStyles({
+        background: navigationMenuVars.color.popupBackground,
+        blockSize: 'var(--popup-height)',
+        borderRadius: navigationMenuVars.shape.popupCorner,
+        foreground: navigationMenuVars.color.popupForeground,
+        inlineSize: 'var(--popup-width)',
+        outline: navigationMenuVars.color.popupOutline,
+        shadow: navigationMenuVars.color.popupShadow,
 
-    motion: {
-      transition: transition(
-        ['opacity', 'transform', 'inline-size', 'block-size'],
-        {
-          duration: navigationMenuVars.motion.popupEnterDuration,
-          easing: navigationMenuVars.motion.popupEnterEasing,
+        motion: {
+          transition: transition(
+            ['opacity', 'transform', 'inline-size', 'block-size'],
+            {
+              duration: navigationMenuVars.motion.popupEnterDuration,
+              easing: navigationMenuVars.motion.popupEnterEasing,
+            },
+          ),
+
+          endingStyle: {
+            opacity: '0',
+            transform: 'scale(0.9)',
+            transition: transition(['opacity', 'transform'], {
+              duration: navigationMenuVars.motion.popupExitDuration,
+              easing: navigationMenuVars.motion.popupExitEasing,
+            }),
+          },
         },
-      ),
+      }),
 
-      endingStyle: {
-        opacity: '0',
-        transform: 'scale(0.9)',
-        transition: transition(['opacity', 'transform'], {
-          duration: navigationMenuVars.motion.popupExitDuration,
-          easing: navigationMenuVars.motion.popupExitEasing,
-        }),
-      },
+      position: 'relative',
     },
-  }),
-
-  position: 'relative',
+  },
 });
 
 export const content = style({
-  blockSize: '100%',
-  inlineSize: navigationMenuVars.layout.contentMobileInlineSize,
+  '@layer': {
+    [components]: {
+      blockSize: '100%',
+      inlineSize: navigationMenuVars.layout.contentMobileInlineSize,
 
-  paddingBlock: navigationMenuVars.spacing.contentPaddingBlock,
-  paddingInline: navigationMenuVars.spacing.contentPaddingInline,
+      paddingBlock: navigationMenuVars.spacing.contentPaddingBlock,
+      paddingInline: navigationMenuVars.spacing.contentPaddingInline,
 
-  color: navigationMenuVars.color.contentForeground,
+      color: navigationMenuVars.color.contentForeground,
 
-  transition: `${transition('opacity', {
-    duration: navigationMenuVars.motion.contentOpacityDuration,
-    easing: navigationMenuVars.motion.contentOpacityEasing,
-  })}, ${transition('transform', {
-    duration: navigationMenuVars.motion.contentTransformDuration,
-    easing: navigationMenuVars.motion.contentTransformEasing,
-  })}`,
+      transition: `${transition('opacity', {
+        duration: navigationMenuVars.motion.contentOpacityDuration,
+        easing: navigationMenuVars.motion.contentOpacityEasing,
+      })}, ${transition('transform', {
+        duration: navigationMenuVars.motion.contentTransformDuration,
+        easing: navigationMenuVars.motion.contentTransformEasing,
+      })}`,
 
-  selectors: {
-    [`&[data-starting-style]`]: {
-      opacity: '0',
-    },
+      selectors: {
+        [`&[data-starting-style]`]: {
+          opacity: '0',
+        },
 
-    [`&[data-ending-style]`]: {
-      opacity: '0',
-    },
+        [`&[data-ending-style]`]: {
+          opacity: '0',
+        },
 
-    [`&[data-starting-style][data-activation-direction='left']`]: {
-      transform: 'translateX(-50%)',
-    },
+        [`&[data-starting-style][data-activation-direction='left']`]: {
+          transform: 'translateX(-50%)',
+        },
 
-    [`&[data-starting-style][data-activation-direction='right']`]: {
-      transform: 'translateX(50%)',
-    },
+        [`&[data-starting-style][data-activation-direction='right']`]: {
+          transform: 'translateX(50%)',
+        },
 
-    [`&[data-ending-style][data-activation-direction='left']`]: {
-      transform: 'translateX(50%)',
-    },
+        [`&[data-ending-style][data-activation-direction='left']`]: {
+          transform: 'translateX(50%)',
+        },
 
-    [`&[data-ending-style][data-activation-direction='right']`]: {
-      transform: 'translateX(-50%)',
-    },
-  },
+        [`&[data-ending-style][data-activation-direction='right']`]: {
+          transform: 'translateX(-50%)',
+        },
+      },
 
-  '@media': {
-    '(min-width: 500px)': {
-      inlineSize: 'max-content',
-      minInlineSize: navigationMenuVars.layout.contentMinInlineSizeDesktop,
+      '@media': {
+        '(min-width: 500px)': {
+          inlineSize: 'max-content',
+          minInlineSize: navigationMenuVars.layout.contentMinInlineSizeDesktop,
+        },
+      },
     },
   },
 });
 
 export const viewport = style({
-  position: 'relative',
+  '@layer': {
+    [components]: {
+      position: 'relative',
 
-  blockSize: '100%',
-  inlineSize: '100%',
-  overflow: 'hidden',
+      blockSize: '100%',
+      inlineSize: '100%',
+      overflow: 'hidden',
+    },
+  },
 });
 
 export const gridLinkList = style({
-  display: 'grid',
+  '@layer': {
+    [components]: {
+      display: 'grid',
 
-  gridTemplateColumns: `${navigationMenuVars.layout.gridLinkColumnInlineSize} ${navigationMenuVars.layout.gridLinkColumnInlineSize}`,
+      gridTemplateColumns: `${navigationMenuVars.layout.gridLinkColumnInlineSize} ${navigationMenuVars.layout.gridLinkColumnInlineSize}`,
 
-  listStyle: 'none',
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
+      listStyle: 'none',
+      marginBlock: '0',
+      marginInline: '0',
+      paddingBlock: '0',
+      paddingInline: '0',
 
-  '@media': {
-    '(max-width: 500px)': {
-      gridTemplateColumns: '1fr',
+      '@media': {
+        '(max-width: 500px)': {
+          gridTemplateColumns: '1fr',
+        },
+      },
     },
   },
 });
 
 export const flexLinkList = style({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
 
-  maxInlineSize: navigationMenuVars.layout.flexLinkListMaxInlineSize,
+      maxInlineSize: navigationMenuVars.layout.flexLinkListMaxInlineSize,
 
-  listStyle: 'none',
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: '0',
-  paddingInline: '0',
+      listStyle: 'none',
+      marginBlock: '0',
+      marginInline: '0',
+      paddingBlock: '0',
+      paddingInline: '0',
+    },
+  },
 });
 
 export const linkCard = style({
-  display: 'block',
+  '@layer': {
+    [components]: {
+      display: 'block',
 
-  border: 'none',
+      border: 'none',
 
-  paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlock,
-  paddingInline: navigationMenuVars.spacing.linkCardPaddingInline,
+      paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlock,
+      paddingInline: navigationMenuVars.spacing.linkCardPaddingInline,
 
-  textDecoration: 'none',
+      textDecoration: 'none',
 
-  backgroundColor: 'transparent',
-  borderRadius: navigationMenuVars.shape.linkCardCorner,
-  color: 'inherit',
+      backgroundColor: 'transparent',
+      borderRadius: navigationMenuVars.shape.linkCardCorner,
+      color: 'inherit',
 
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
-          backgroundColor: navigationMenuVars.color.linkCardHoverBackground,
+      selectors: {
+        [`&:hover`]: {
+          '@media': {
+            '(hover: hover)': {
+              backgroundColor: navigationMenuVars.color.linkCardHoverBackground,
+            },
+          },
+        },
+
+        [`&:focus-visible`]: {
+          outline: `2px solid ${navigationMenuVars.color.linkCardFocusRing}`,
+          outlineOffset: '-1px',
+          position: 'relative',
         },
       },
-    },
 
-    [`&:focus-visible`]: {
-      outline: `2px solid ${navigationMenuVars.color.linkCardFocusRing}`,
-      outlineOffset: '-1px',
-      position: 'relative',
-    },
-  },
-
-  '@media': {
-    '(min-width: 425px)': {
-      paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlockDesktop,
-      paddingInline: navigationMenuVars.spacing.linkCardPaddingInlineDesktop,
+      '@media': {
+        '(min-width: 425px)': {
+          paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlockDesktop,
+          paddingInline:
+            navigationMenuVars.spacing.linkCardPaddingInlineDesktop,
+        },
+      },
     },
   },
 });
 
 export const linkTitle = style({
-  marginBlockEnd: navigationMenuVars.spacing.linkTitleMarginBlockEnd,
-  marginBlockStart: '0',
-  marginInline: '0',
+  '@layer': {
+    [components]: {
+      marginBlockEnd: navigationMenuVars.spacing.linkTitleMarginBlockEnd,
+      marginBlockStart: '0',
+      marginInline: '0',
 
-  fontSize: navigationMenuVars.typography.linkTitleSize,
-  fontWeight: navigationMenuVars.typography.linkTitleWeight,
-  lineHeight: navigationMenuVars.typography.linkTitleLineHeight,
+      fontSize: navigationMenuVars.typography.linkTitleSize,
+      fontWeight: navigationMenuVars.typography.linkTitleWeight,
+      lineHeight: navigationMenuVars.typography.linkTitleLineHeight,
+    },
+  },
 });
 
 export const linkDescription = style({
-  marginBlock: '0',
-  marginInline: '0',
+  '@layer': {
+    [components]: {
+      marginBlock: '0',
+      marginInline: '0',
 
-  fontSize: navigationMenuVars.typography.linkDescriptionSize,
-  lineHeight: navigationMenuVars.typography.linkDescriptionLineHeight,
+      fontSize: navigationMenuVars.typography.linkDescriptionSize,
+      lineHeight: navigationMenuVars.typography.linkDescriptionLineHeight,
 
-  color: navigationMenuVars.color.linkDescriptionForeground,
-  overflowWrap: 'anywhere',
-  whiteSpace: 'normal',
+      color: navigationMenuVars.color.linkDescriptionForeground,
+      overflowWrap: 'anywhere',
+      whiteSpace: 'normal',
+    },
+  },
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles(),
+  '@layer': {
+    [components]: {
+      ...createFloatingArrowPlacementStyles(),
 
-  transition: transition('left', {
-    duration: navigationMenuVars.motion.arrowPositionDuration,
-    easing: navigationMenuVars.motion.arrowPositionEasing,
-  }),
+      transition: transition('left', {
+        duration: navigationMenuVars.motion.arrowPositionDuration,
+        easing: navigationMenuVars.motion.arrowPositionEasing,
+      }),
+    },
+  },
 });
 
 export const arrowFill = style({
-  ...createArrowFillStyles(navigationMenuVars.color.popupBackground),
+  '@layer': {
+    [components]: {
+      ...createArrowFillStyles(navigationMenuVars.color.popupBackground),
+    },
+  },
 });
 
 export const arrowOuterStroke = style({
-  ...createArrowOuterStrokeStyles(navigationMenuVars.color.arrowOuterStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowOuterStrokeStyles(
+        navigationMenuVars.color.arrowOuterStroke,
+      ),
+    },
+  },
 });
 
 export const arrowInnerStroke = style({
-  ...createArrowInnerStrokeStyles(navigationMenuVars.color.arrowInnerStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowInnerStrokeStyles(
+        navigationMenuVars.color.arrowInnerStroke,
+      ),
+    },
+  },
 });

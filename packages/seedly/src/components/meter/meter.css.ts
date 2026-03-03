@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, transition, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createRangeIndicatorStyles,
   createRangeTrackRootVars,
@@ -62,56 +63,76 @@ const meterDefaults = assignVars(meterVars, {
 });
 
 export const meter = style({
-  vars: {
-    ...meterDefaults,
-    ...createRangeTrackRootVars({
-      trackBackground: meterVars.color.trackBackground,
-      trackBorder: meterVars.color.trackBorder,
-      indicator: meterVars.color.indicatorBackground,
-      corner: meterVars.shape.trackCorner,
-    }),
+  '@layer': {
+    [components]: {
+      vars: {
+        ...meterDefaults,
+        ...createRangeTrackRootVars({
+          trackBackground: meterVars.color.trackBackground,
+          trackBorder: meterVars.color.trackBorder,
+          indicator: meterVars.color.indicatorBackground,
+          corner: meterVars.shape.trackCorner,
+        }),
+      },
+
+      display: 'grid',
+      gridTemplateColumns: meterVars.layout.rootColumns,
+
+      inlineSize: '100%',
+      rowGap: meterVars.spacing.rootRowGap,
+    },
   },
-
-  display: 'grid',
-  gridTemplateColumns: meterVars.layout.rootColumns,
-
-  inlineSize: '100%',
-  rowGap: meterVars.spacing.rootRowGap,
 });
 
 export const label = style([
   typography.label.medium,
   {
-    color: meterVars.color.rootForeground,
+    '@layer': {
+      [components]: {
+        color: meterVars.color.rootForeground,
+      },
+    },
   },
 ]);
 
 export const value = style([
   typography.body.medium,
   {
-    gridColumnStart: meterVars.layout.valueColumnStart,
-    marginBlock: '0',
-    marginInline: '0',
+    '@layer': {
+      [components]: {
+        gridColumnStart: meterVars.layout.valueColumnStart,
+        marginBlock: '0',
+        marginInline: '0',
 
-    color: meterVars.color.rootForeground,
-    textAlign: 'right',
+        color: meterVars.color.rootForeground,
+        textAlign: 'right',
+      },
+    },
   },
 ]);
 
 export const track = style({
-  gridColumn: meterVars.layout.trackColumn,
+  '@layer': {
+    [components]: {
+      gridColumn: meterVars.layout.trackColumn,
 
-  ...createRangeTrackStyles({
-    blockSize: meterVars.size.trackBlockSize,
-    overflow: 'hidden',
-  }),
+      ...createRangeTrackStyles({
+        blockSize: meterVars.size.trackBlockSize,
+        overflow: 'hidden',
+      }),
+    },
+  },
 });
 
 export const indicator = style({
-  ...createRangeIndicatorStyles(),
+  '@layer': {
+    [components]: {
+      ...createRangeIndicatorStyles(),
 
-  transition: transition('width', {
-    duration: meterVars.motion.indicatorWidthDuration,
-    easing: meterVars.motion.indicatorWidthEasing,
-  }),
+      transition: transition('width', {
+        duration: meterVars.motion.indicatorWidthDuration,
+        easing: meterVars.motion.indicatorWidthEasing,
+      }),
+    },
+  },
 });

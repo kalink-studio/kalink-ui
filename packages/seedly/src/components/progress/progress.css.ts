@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, transition, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createRangeIndicatorStyles,
   createRangeTrackRootVars,
@@ -64,57 +65,77 @@ const progressDefaults = assignVars(progressVars, {
 });
 
 export const progress = style({
-  vars: {
-    ...progressDefaults,
-    ...createRangeTrackRootVars({
-      trackBackground: progressVars.color.trackBackground,
-      trackBorder: progressVars.color.trackBorder,
-      indicator: progressVars.color.indicatorBackground,
-      corner: progressVars.shape.trackCorner,
-    }),
+  '@layer': {
+    [components]: {
+      vars: {
+        ...progressDefaults,
+        ...createRangeTrackRootVars({
+          trackBackground: progressVars.color.trackBackground,
+          trackBorder: progressVars.color.trackBorder,
+          indicator: progressVars.color.indicatorBackground,
+          corner: progressVars.shape.trackCorner,
+        }),
+      },
+
+      display: 'grid',
+      gridTemplateColumns: progressVars.layout.rootColumns,
+
+      columnGap: progressVars.spacing.rootColumnGap,
+      inlineSize: '100%',
+      rowGap: progressVars.spacing.rootRowGap,
+    },
   },
-
-  display: 'grid',
-  gridTemplateColumns: progressVars.layout.rootColumns,
-
-  columnGap: progressVars.spacing.rootColumnGap,
-  inlineSize: '100%',
-  rowGap: progressVars.spacing.rootRowGap,
 });
 
 export const label = style([
   typography.label.medium,
   {
-    color: progressVars.color.rootForeground,
+    '@layer': {
+      [components]: {
+        color: progressVars.color.rootForeground,
+      },
+    },
   },
 ]);
 
 export const value = style([
   typography.body.medium,
   {
-    gridColumnStart: progressVars.layout.valueColumnStart,
-    marginBlock: '0',
-    marginInline: '0',
+    '@layer': {
+      [components]: {
+        gridColumnStart: progressVars.layout.valueColumnStart,
+        marginBlock: '0',
+        marginInline: '0',
 
-    color: progressVars.color.rootForeground,
-    textAlign: 'right',
+        color: progressVars.color.rootForeground,
+        textAlign: 'right',
+      },
+    },
   },
 ]);
 
 export const track = style({
-  gridColumn: progressVars.layout.trackColumn,
+  '@layer': {
+    [components]: {
+      gridColumn: progressVars.layout.trackColumn,
 
-  ...createRangeTrackStyles({
-    blockSize: progressVars.size.trackBlockSize,
-    overflow: 'hidden',
-  }),
+      ...createRangeTrackStyles({
+        blockSize: progressVars.size.trackBlockSize,
+        overflow: 'hidden',
+      }),
+    },
+  },
 });
 
 export const indicator = style({
-  ...createRangeIndicatorStyles(),
+  '@layer': {
+    [components]: {
+      ...createRangeIndicatorStyles(),
 
-  transition: transition('width', {
-    duration: progressVars.motion.indicatorWidthDuration,
-    easing: progressVars.motion.indicatorWidthEasing,
-  }),
+      transition: transition('width', {
+        duration: progressVars.motion.indicatorWidthDuration,
+        easing: progressVars.motion.indicatorWidthEasing,
+      }),
+    },
+  },
 });

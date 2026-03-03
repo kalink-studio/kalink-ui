@@ -6,6 +6,7 @@ import {
 } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const switchVars = createThemeContract({
   color: {
@@ -108,161 +109,179 @@ const switchDefaults = assignVars(switchVars, {
 });
 
 export const label = style({
-  vars: switchDefaults,
+  '@layer': {
+    [components]: {
+      vars: switchDefaults,
 
-  display: 'flex',
-  alignItems: 'center',
-  gap: switchVars.spacing.labelGap,
-  color: switchVars.color.labelForeground,
-  cursor: 'pointer',
-  userSelect: 'none',
-  WebkitTapHighlightColor: 'transparent',
-  selectors: {
-    '&:has([data-disabled])': {
-      color: switchVars.color.labelForegroundDisabled,
-      cursor: 'not-allowed',
-    },
-    '&:has([data-readonly]):not(:has([data-disabled]))': {
-      cursor: 'default',
+      display: 'flex',
+      alignItems: 'center',
+      gap: switchVars.spacing.labelGap,
+      color: switchVars.color.labelForeground,
+      cursor: 'pointer',
+      userSelect: 'none',
+      WebkitTapHighlightColor: 'transparent',
+      selectors: {
+        '&:has([data-disabled])': {
+          color: switchVars.color.labelForegroundDisabled,
+          cursor: 'not-allowed',
+        },
+        '&:has([data-readonly]):not(:has([data-disabled]))': {
+          cursor: 'default',
+        },
+      },
     },
   },
 });
 
 export const switchRoot = style({
-  boxSizing: 'border-box',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  flexShrink: 0,
-  inlineSize: switchVars.size.trackInlineSize,
-  blockSize: switchVars.size.trackBlockSize,
-  marginBlock: '0',
-  marginInline: '0',
-  paddingBlock: switchVars.spacing.trackPadding,
-  paddingInline: switchVars.spacing.trackPadding,
-  overflow: 'hidden',
-  position: 'relative',
-  appearance: 'none',
-  border: '0',
-  backgroundColor: 'transparent',
-  backgroundImage: `linear-gradient(
+  '@layer': {
+    [components]: {
+      boxSizing: 'border-box',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      flexShrink: 0,
+      inlineSize: switchVars.size.trackInlineSize,
+      blockSize: switchVars.size.trackBlockSize,
+      marginBlock: '0',
+      marginInline: '0',
+      paddingBlock: switchVars.spacing.trackPadding,
+      paddingInline: switchVars.spacing.trackPadding,
+      overflow: 'hidden',
+      position: 'relative',
+      appearance: 'none',
+      border: '0',
+      backgroundColor: 'transparent',
+      backgroundImage: `linear-gradient(
       105deg,
       ${switchVars.color.trackOnStart} 30%,
       ${switchVars.color.trackOnEnd} 48%,
       ${switchVars.color.trackOffStart} 60%,
       ${switchVars.color.trackOffEnd} 78%
     )`,
-  backgroundSize: '250% 100%',
-  backgroundPositionX: '100%',
-  backgroundRepeat: 'no-repeat',
-  borderRadius: switchVars.shape.trackCorner,
-  outline: '1px solid',
-  outlineOffset: '-1px',
-  outlineColor: switchVars.color.trackBorder,
-  boxShadow: switchVars.elevation.trackShadow,
-  transition: transition(
-    ['background-position', 'box-shadow', 'outline-color'],
-    {
-      duration: switchVars.motion.trackTransitionDuration,
-      easing: switchVars.motion.trackTransitionEasing,
-    },
-  ),
-  cursor: 'pointer',
-  touchAction: 'manipulation',
-  WebkitTapHighlightColor: 'transparent',
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      transition: 'none',
-    },
-  },
-  selectors: {
-    '&[data-checked]': {
-      backgroundPositionX: '0%',
-    },
-    '&[data-disabled], &[data-readonly]': {
-      boxShadow: switchVars.elevation.trackShadowDisabled,
-    },
-    '&[data-disabled]': {
-      outlineColor: switchVars.color.trackBorderDisabled,
-      backgroundImage: `linear-gradient(
+      backgroundSize: '250% 100%',
+      backgroundPositionX: '100%',
+      backgroundRepeat: 'no-repeat',
+      borderRadius: switchVars.shape.trackCorner,
+      outline: '1px solid',
+      outlineOffset: '-1px',
+      outlineColor: switchVars.color.trackBorder,
+      boxShadow: switchVars.elevation.trackShadow,
+      transition: transition(
+        ['background-position', 'box-shadow', 'outline-color'],
+        {
+          duration: switchVars.motion.trackTransitionDuration,
+          easing: switchVars.motion.trackTransitionEasing,
+        },
+      ),
+      cursor: 'pointer',
+      touchAction: 'manipulation',
+      WebkitTapHighlightColor: 'transparent',
+      '@media': {
+        '(prefers-reduced-motion: reduce)': {
+          transition: 'none',
+        },
+      },
+      selectors: {
+        '&[data-checked]': {
+          backgroundPositionX: '0%',
+        },
+        '&[data-disabled], &[data-readonly]': {
+          boxShadow: switchVars.elevation.trackShadowDisabled,
+        },
+        '&[data-disabled]': {
+          outlineColor: switchVars.color.trackBorderDisabled,
+          backgroundImage: `linear-gradient(
         105deg,
         ${switchVars.color.trackStartDisabled} 44%,
         ${switchVars.color.trackEndDisabled} 56%
       )`,
-      cursor: 'not-allowed',
-    },
-    '&[data-readonly]:not([data-disabled])': {
-      cursor: 'default',
-    },
-    '&:hover:not([data-disabled]):not([data-readonly])': {
-      '@media': {
-        '(hover: hover)': {
-          outlineColor: switchVars.color.trackBorderHover,
+          cursor: 'not-allowed',
+        },
+        '&[data-readonly]:not([data-disabled])': {
+          cursor: 'default',
+        },
+        '&:hover:not([data-disabled]):not([data-readonly])': {
+          '@media': {
+            '(hover: hover)': {
+              outlineColor: switchVars.color.trackBorderHover,
+            },
+          },
+        },
+        '&:active:not([data-disabled]):not([data-readonly])': {
+          outlineColor: switchVars.color.trackBorderActive,
+          boxShadow: switchVars.elevation.trackShadowActive,
+        },
+        '&[data-checked]:active:not([data-disabled]):not([data-readonly])': {
+          outlineColor: switchVars.color.trackBorderCheckedActive,
+        },
+        '&:focus-visible::before': {
+          insetBlock: '-1px',
+          insetInline: '-1px',
+          position: 'absolute',
+          borderRadius: 'inherit',
+          outline: `2px solid ${switchVars.color.trackFocusRing}`,
+          outlineOffset: switchVars.spacing.trackFocusRingOffset,
+          content: "''",
+          pointerEvents: 'none',
+        },
+        '&[data-disabled]:focus-visible::before': {
+          content: 'none',
+        },
+        '&[data-checked][data-disabled]': {
+          backgroundPositionX: '0%',
+        },
+        '&[data-unchecked][data-disabled]': {
+          backgroundPositionX: '100%',
         },
       },
-    },
-    '&:active:not([data-disabled]):not([data-readonly])': {
-      outlineColor: switchVars.color.trackBorderActive,
-      boxShadow: switchVars.elevation.trackShadowActive,
-    },
-    '&[data-checked]:active:not([data-disabled]):not([data-readonly])': {
-      outlineColor: switchVars.color.trackBorderCheckedActive,
-    },
-    '&:focus-visible::before': {
-      insetBlock: '-1px',
-      insetInline: '-1px',
-      position: 'absolute',
-      borderRadius: 'inherit',
-      outline: `2px solid ${switchVars.color.trackFocusRing}`,
-      outlineOffset: switchVars.spacing.trackFocusRingOffset,
-      content: "''",
-      pointerEvents: 'none',
-    },
-    '&[data-disabled]:focus-visible::before': {
-      content: 'none',
-    },
-    '&[data-checked][data-disabled]': {
-      backgroundPositionX: '0%',
-    },
-    '&[data-unchecked][data-disabled]': {
-      backgroundPositionX: '100%',
     },
   },
 });
 
 export const thumb = style({
-  boxSizing: 'border-box',
-  display: 'block',
-  inlineSize: switchVars.size.thumbSize,
-  blockSize: switchVars.size.thumbSize,
-  borderRadius: switchVars.shape.thumbCorner,
-  backgroundColor: switchVars.color.thumbBackground,
-  border: `1px solid ${switchVars.color.thumbBorder}`,
-  boxShadow: switchVars.elevation.thumbShadow,
-  willChange: 'translate',
-  transition: transition(
-    ['translate', 'scale', 'box-shadow', 'border-color', 'background-color'],
-    {
-      duration: switchVars.motion.thumbTransitionDuration,
-      easing: switchVars.motion.thumbTransitionEasing,
-    },
-  ),
+  '@layer': {
+    [components]: {
+      boxSizing: 'border-box',
+      display: 'block',
+      inlineSize: switchVars.size.thumbSize,
+      blockSize: switchVars.size.thumbSize,
+      borderRadius: switchVars.shape.thumbCorner,
+      backgroundColor: switchVars.color.thumbBackground,
+      border: `1px solid ${switchVars.color.thumbBorder}`,
+      boxShadow: switchVars.elevation.thumbShadow,
+      willChange: 'translate',
+      transition: transition(
+        [
+          'translate',
+          'scale',
+          'box-shadow',
+          'border-color',
+          'background-color',
+        ],
+        {
+          duration: switchVars.motion.thumbTransitionDuration,
+          easing: switchVars.motion.thumbTransitionEasing,
+        },
+      ),
 
-  '@media': {
-    '(prefers-reduced-motion: reduce)': {
-      transition: 'none',
-    },
-  },
-  selectors: {
-    '&[data-checked]': {
-      translate: `${switchVars.size.thumbTranslateChecked} 0`,
-    },
-    '&[data-disabled], &[data-readonly]': {
-      boxShadow: 'none',
-    },
-    '&[data-disabled]': {
-      backgroundColor: switchVars.color.thumbBackgroundDisabled,
-      borderColor: switchVars.color.thumbBorderDisabled,
+      '@media': {
+        '(prefers-reduced-motion: reduce)': {
+          transition: 'none',
+        },
+      },
+      selectors: {
+        '&[data-checked]': {
+          translate: `${switchVars.size.thumbTranslateChecked} 0`,
+        },
+        '&[data-disabled], &[data-readonly]': {
+          boxShadow: 'none',
+        },
+        '&[data-disabled]': {
+          backgroundColor: switchVars.color.thumbBackgroundDisabled,
+          borderColor: switchVars.color.thumbBorderDisabled,
+        },
+      },
     },
   },
 });

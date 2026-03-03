@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createDialogActionsStyles,
   createDialogBackdropStyles,
@@ -66,69 +67,85 @@ const alertDialogDefaults = assignVars(alertDialogVars, {
   },
 });
 
-export const button = style(
-  createDialogButtonStyles({
-    vars: alertDialogDefaults,
-  }),
-);
-
-export const backdrop = style(
-  createDialogBackdropStyles({
-    vars: alertDialogDefaults,
-
-    minBlockSize: alertDialogVars.layout.backdropMinBlockSize,
-
-    backdropColor: alertDialogVars.color.backdrop,
-
-    transition: transition('opacity', {
-      duration: 'short.4',
-      easing: 'standard',
+export const button = style({
+  '@layer': {
+    [components]: createDialogButtonStyles({
+      vars: alertDialogDefaults,
     }),
-  }),
-);
+  },
+});
 
-export const popup = style(
-  createDialogPopupStyles({
-    vars: alertDialogDefaults,
+export const backdrop = style({
+  '@layer': {
+    [components]: createDialogBackdropStyles({
+      vars: alertDialogDefaults,
 
-    inlineSize: alertDialogVars.layout.popupInlineSize,
-    maxInlineSize: alertDialogVars.layout.popupMaxInlineSize,
-    marginBlockStart: alertDialogVars.spacing.popupMarginBlockStart,
-    paddingBlock: alertDialogVars.spacing.popupPaddingBlock,
-    paddingInline: alertDialogVars.spacing.popupPaddingInline,
+      minBlockSize: alertDialogVars.layout.backdropMinBlockSize,
 
-    popupForeground: alertDialogVars.color.popupForeground,
-    popupBackground: alertDialogVars.color.popupBackground,
-    popupCorner: alertDialogVars.shape.popupCorner,
-    outline: alertDialogVars.color.popupOutline,
+      backdropColor: alertDialogVars.color.backdrop,
 
-    transition: transition(['opacity', 'transform'], {
-      duration: 'short.4',
-      easing: 'standard',
+      transition: transition('opacity', {
+        duration: 'short.4',
+        easing: 'standard',
+      }),
     }),
-  }),
-);
+  },
+});
+
+export const popup = style({
+  '@layer': {
+    [components]: createDialogPopupStyles({
+      vars: alertDialogDefaults,
+
+      inlineSize: alertDialogVars.layout.popupInlineSize,
+      maxInlineSize: alertDialogVars.layout.popupMaxInlineSize,
+      marginBlockStart: alertDialogVars.spacing.popupMarginBlockStart,
+      paddingBlock: alertDialogVars.spacing.popupPaddingBlock,
+      paddingInline: alertDialogVars.spacing.popupPaddingInline,
+
+      popupForeground: alertDialogVars.color.popupForeground,
+      popupBackground: alertDialogVars.color.popupBackground,
+      popupCorner: alertDialogVars.shape.popupCorner,
+      outline: alertDialogVars.color.popupOutline,
+
+      transition: transition(['opacity', 'transform'], {
+        duration: 'short.4',
+        easing: 'standard',
+      }),
+    }),
+  },
+});
 
 export const title = style([
   typography.title.large,
-  createDialogTitleStyles({
-    marginBlockStart: alertDialogVars.spacing.titleMarginBlockStart,
-    marginBlockEnd: alertDialogVars.spacing.titleMarginBlockEnd,
-  }),
+  {
+    '@layer': {
+      [components]: createDialogTitleStyles({
+        marginBlockStart: alertDialogVars.spacing.titleMarginBlockStart,
+        marginBlockEnd: alertDialogVars.spacing.titleMarginBlockEnd,
+      }),
+    },
+  },
 ]);
 
 export const description = style([
   typography.body.large,
-  createDialogDescriptionStyles({
-    marginBlock: alertDialogVars.spacing.descriptionMarginBlock,
-    marginInline: alertDialogVars.spacing.descriptionMarginInline,
+  {
+    '@layer': {
+      [components]: createDialogDescriptionStyles({
+        marginBlock: alertDialogVars.spacing.descriptionMarginBlock,
+        marginInline: alertDialogVars.spacing.descriptionMarginInline,
 
-    descriptionColor: alertDialogVars.color.description,
-  }),
+        descriptionColor: alertDialogVars.color.description,
+      }),
+    },
+  },
 ]);
 
-export const actions = style(
-  createDialogActionsStyles({
-    gap: alertDialogVars.spacing.actionsGap,
-  }),
-);
+export const actions = style({
+  '@layer': {
+    [components]: createDialogActionsStyles({
+      gap: alertDialogVars.spacing.actionsGap,
+    }),
+  },
+});

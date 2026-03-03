@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const toggleGroupVars = createThemeContract({
   color: {
@@ -25,25 +26,33 @@ const toggleGroupDefaults = assignVars(toggleGroupVars, {
 });
 
 export const panel = style({
-  vars: toggleGroupDefaults,
+  '@layer': {
+    [components]: {
+      vars: toggleGroupDefaults,
 
-  display: 'flex',
-  gap: toggleGroupVars.spacing.groupGap,
+      display: 'flex',
+      gap: toggleGroupVars.spacing.groupGap,
+    },
+  },
 });
 
 export const button = style([
   {
-    borderWidth: '0',
+    '@layer': {
+      [components]: {
+        borderWidth: '0',
 
-    selectors: {
-      '&[data-pressed]': {
-        backgroundColor: toggleGroupVars.color.itemPressedBackground,
-        color: toggleGroupVars.color.itemPressedForeground,
-      },
-      '&:focus-visible': {
-        outline: `2px solid ${toggleGroupVars.color.itemFocusRing}`,
-        outlineOffset: '-1px',
-        backgroundColor: 'transparent',
+        selectors: {
+          '&[data-pressed]': {
+            backgroundColor: toggleGroupVars.color.itemPressedBackground,
+            color: toggleGroupVars.color.itemPressedForeground,
+          },
+          '&:focus-visible': {
+            outline: `2px solid ${toggleGroupVars.color.itemFocusRing}`,
+            outlineOffset: '-1px',
+            backgroundColor: 'transparent',
+          },
+        },
       },
     },
   },

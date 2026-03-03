@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -70,78 +71,106 @@ const previewCardDefaults = assignVars(previewCardVars, {
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    zIndex: '1',
-  }),
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles({
+        zIndex: '1',
+      }),
 
-  vars: {
-    ...previewCardDefaults,
+      vars: {
+        ...previewCardDefaults,
+      },
+
+      blockSize: 'var(--positioner-height)',
+      inlineSize: 'var(--positioner-width)',
+      maxInlineSize: 'var(--available-width)',
+    },
   },
-
-  blockSize: 'var(--positioner-height)',
-  inlineSize: 'var(--positioner-width)',
-  maxInlineSize: 'var(--available-width)',
 });
 
 export const popup = style({
-  ...createFloatingSurfaceStyles({
-    background: previewCardVars.color.popupBackground,
-    blockSize: 'var(--popup-height, auto)',
-    borderRadius: previewCardVars.shape.popupCorner,
-    foreground: previewCardVars.color.popupForeground,
-    inlineSize: 'var(--popup-width, auto)',
-    maxInlineSize: previewCardVars.layout.popupMaxInlineSize,
-    outline: previewCardVars.color.popupOutline,
-    outlineInverse: previewCardVars.color.popupOutlineInverse,
-    shadow: previewCardVars.color.popupShadow,
-  }),
+  '@layer': {
+    [components]: {
+      ...createFloatingSurfaceStyles({
+        background: previewCardVars.color.popupBackground,
+        blockSize: 'var(--popup-height, auto)',
+        borderRadius: previewCardVars.shape.popupCorner,
+        foreground: previewCardVars.color.popupForeground,
+        inlineSize: 'var(--popup-width, auto)',
+        maxInlineSize: previewCardVars.layout.popupMaxInlineSize,
+        outline: previewCardVars.color.popupOutline,
+        outlineInverse: previewCardVars.color.popupOutlineInverse,
+        shadow: previewCardVars.color.popupShadow,
+      }),
+    },
+  },
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles(),
+  '@layer': {
+    [components]: {
+      ...createFloatingArrowPlacementStyles(),
+    },
+  },
 });
 
 export const arrowFill = style({
-  ...createArrowFillStyles(previewCardVars.color.popupBackground),
+  '@layer': {
+    [components]: {
+      ...createArrowFillStyles(previewCardVars.color.popupBackground),
+    },
+  },
 });
 
 export const arrowOuterStroke = style({
-  ...createArrowOuterStrokeStyles(previewCardVars.color.arrowOuterStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowOuterStrokeStyles(previewCardVars.color.arrowOuterStroke),
+    },
+  },
 });
 
 export const arrowInnerStroke = style({
-  ...createArrowInnerStrokeStyles(previewCardVars.color.arrowInnerStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowInnerStrokeStyles(previewCardVars.color.arrowInnerStroke),
+    },
+  },
 });
 
 export const link = style({
-  vars: {
-    ...previewCardDefaults,
-  },
+  '@layer': {
+    [components]: {
+      vars: {
+        ...previewCardDefaults,
+      },
 
-  textDecorationColor: previewCardVars.color.triggerUnderline,
-  textDecorationLine: 'none',
-  textDecorationThickness: '1px',
-  textUnderlineOffset: previewCardVars.spacing.triggerUnderlineOffset,
+      textDecorationColor: previewCardVars.color.triggerUnderline,
+      textDecorationLine: 'none',
+      textDecorationThickness: '1px',
+      textUnderlineOffset: previewCardVars.spacing.triggerUnderlineOffset,
 
-  color: previewCardVars.color.triggerForeground,
-  outline: '0',
+      color: previewCardVars.color.triggerForeground,
+      outline: '0',
 
-  selectors: {
-    [`&:hover`]: {
-      '@media': {
-        '(hover: hover)': {
+      selectors: {
+        [`&:hover`]: {
+          '@media': {
+            '(hover: hover)': {
+              textDecorationLine: 'underline',
+            },
+          },
+        },
+        [`&[data-popup-open]`]: {
           textDecorationLine: 'underline',
         },
-      },
-    },
-    [`&[data-popup-open]`]: {
-      textDecorationLine: 'underline',
-    },
-    [`&:focus-visible`]: {
-      borderRadius: previewCardVars.shape.triggerFocusCorner,
+        [`&:focus-visible`]: {
+          borderRadius: previewCardVars.shape.triggerFocusCorner,
 
-      textDecorationLine: 'none',
-      outline: `2px solid ${previewCardVars.color.triggerFocusRing}`,
+          textDecorationLine: 'none',
+          outline: `2px solid ${previewCardVars.color.triggerFocusRing}`,
+        },
+      },
     },
   },
 });

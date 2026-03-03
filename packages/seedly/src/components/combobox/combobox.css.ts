@@ -2,6 +2,7 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
@@ -114,25 +115,33 @@ const comboboxDefaults = assignVars(comboboxVars, {
 });
 
 export const label = style({
-  ...createFieldStackStyles({
-    alignItems: 'start',
-    gap: comboboxVars.spacing.stackGap,
-    inlineSize: comboboxVars.layout.inputInlineSize,
-  }),
-  ...createFieldLabelStyles({
-    color: comboboxVars.color.label,
-  }),
-  position: 'relative',
-  vars: {
-    ...comboboxDefaults,
+  '@layer': {
+    [components]: {
+      ...createFieldStackStyles({
+        alignItems: 'start',
+        gap: comboboxVars.spacing.stackGap,
+        inlineSize: comboboxVars.layout.inputInlineSize,
+      }),
+      ...createFieldLabelStyles({
+        color: comboboxVars.color.label,
+      }),
+      position: 'relative',
+      vars: {
+        ...comboboxDefaults,
+      },
+    },
   },
 });
 
 export const inputWrapper = style({
-  display: 'block',
-  inlineSize: '100%',
-  minInlineSize: '0',
-  position: 'relative',
+  '@layer': {
+    [components]: {
+      display: 'block',
+      inlineSize: '100%',
+      minInlineSize: '0',
+      position: 'relative',
+    },
+  },
 });
 
 const comboboxItemHighlightSelectors =
@@ -143,117 +152,154 @@ const comboboxItemHighlightSelectors =
     textColor: comboboxVars.color.itemHighlightedForeground,
   }).selectors ?? {};
 
-export const trigger = style({});
+export const trigger = style({ '@layer': { [components]: {} } });
 
-export const clear = style({});
+export const clear = style({ '@layer': { [components]: {} } });
 
 export const input = style([
   typography.body.large,
   {
-    ...createFieldTextInputStyles({
-      backgroundColor: comboboxVars.color.inputBackground,
-      blockSize: comboboxVars.size.inputBlockSize,
-      borderColor: comboboxVars.color.inputBorder,
-      borderRadius: comboboxVars.shape.inputCorner,
-      focusRingColor: comboboxVars.color.inputFocusRing,
-      focusRingOffset: comboboxVars.layout.inputFocusRingOffset,
-      foreground: comboboxVars.color.inputForeground,
-      inlineSize: comboboxVars.layout.inputInlineSize,
-      paddingInlineEnd: comboboxVars.spacing.inputPaddingInlineEnd,
-      paddingInlineStart: comboboxVars.spacing.inputPaddingInlineStart,
-      selectors: {
-        [`${inputWrapper}:has(${clear}) &`]: {
-          paddingInlineEnd: comboboxVars.spacing.inputPaddingInlineEndWithClear,
-        },
+    '@layer': {
+      [components]: {
+        ...createFieldTextInputStyles({
+          backgroundColor: comboboxVars.color.inputBackground,
+          blockSize: comboboxVars.size.inputBlockSize,
+          borderColor: comboboxVars.color.inputBorder,
+          borderRadius: comboboxVars.shape.inputCorner,
+          focusRingColor: comboboxVars.color.inputFocusRing,
+          focusRingOffset: comboboxVars.layout.inputFocusRingOffset,
+          foreground: comboboxVars.color.inputForeground,
+          inlineSize: comboboxVars.layout.inputInlineSize,
+          paddingInlineEnd: comboboxVars.spacing.inputPaddingInlineEnd,
+          paddingInlineStart: comboboxVars.spacing.inputPaddingInlineStart,
+          selectors: {
+            [`${inputWrapper}:has(${clear}) &`]: {
+              paddingInlineEnd:
+                comboboxVars.spacing.inputPaddingInlineEndWithClear,
+            },
+          },
+        }),
       },
-    }),
+    },
   },
 ]);
 
 export const empty = style([
   typography.body.medium,
   {
-    selectors: {
-      [`&:not(:empty)`]: {
-        paddingBlock: comboboxVars.spacing.emptyPaddingBlock,
-        paddingInline: comboboxVars.spacing.emptyPaddingInline,
-        fontSize: sys.typography.body.medium.size,
-        lineHeight: sys.typography.body.medium.lineHeight,
-        color: comboboxVars.color.emptyForeground,
+    '@layer': {
+      [components]: {
+        selectors: {
+          [`&:not(:empty)`]: {
+            paddingBlock: comboboxVars.spacing.emptyPaddingBlock,
+            paddingInline: comboboxVars.spacing.emptyPaddingInline,
+            fontSize: sys.typography.body.medium.size,
+            lineHeight: sys.typography.body.medium.lineHeight,
+            color: comboboxVars.color.emptyForeground,
+          },
+        },
       },
     },
   },
 ]);
 
 export const actionButtons = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  blockSize: comboboxVars.size.actionButtonSize,
-  paddingBlock: comboboxVars.spacing.zero,
-  paddingInline: comboboxVars.spacing.zero,
-  position: 'absolute',
-  insetBlockEnd: comboboxVars.spacing.zero,
-  insetInlineEnd: comboboxVars.spacing.actionButtonInsetInlineEnd,
-  color: comboboxVars.color.actionButtonForeground,
-  backgroundColor: 'transparent',
-  border: 'none',
-  borderRadius: comboboxVars.shape.actionButtonCorner,
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      blockSize: comboboxVars.size.actionButtonSize,
+      paddingBlock: comboboxVars.spacing.zero,
+      paddingInline: comboboxVars.spacing.zero,
+      position: 'absolute',
+      insetBlockEnd: comboboxVars.spacing.zero,
+      insetInlineEnd: comboboxVars.spacing.actionButtonInsetInlineEnd,
+      color: comboboxVars.color.actionButtonForeground,
+      backgroundColor: 'transparent',
+      border: 'none',
+      borderRadius: comboboxVars.shape.actionButtonCorner,
+    },
+  },
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
-  vars: {
-    ...comboboxDefaults,
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles(),
+      vars: {
+        ...comboboxDefaults,
+      },
+    },
   },
 });
 
 export const popup = style({
-  ...createFloatingAnchoredSurfaceStyles({
-    background: comboboxVars.color.popupBackground,
-    borderRadius: comboboxVars.shape.popupCorner,
-    foreground: comboboxVars.color.popupForeground,
-    motion: {
-      preset: 'scaleSoft',
+  '@layer': {
+    [components]: {
+      ...createFloatingAnchoredSurfaceStyles({
+        background: comboboxVars.color.popupBackground,
+        borderRadius: comboboxVars.shape.popupCorner,
+        foreground: comboboxVars.color.popupForeground,
+        motion: {
+          preset: 'scaleSoft',
+        },
+        outline: comboboxVars.color.popupOutline,
+        shadow: comboboxVars.color.popupShadow,
+      }),
+      overflow: 'hidden',
     },
-    outline: comboboxVars.color.popupOutline,
-    shadow: comboboxVars.color.popupShadow,
-  }),
-  overflow: 'hidden',
+  },
 });
 
 export const list = style({
-  ...createFloatingListStyles({
-    maxBlockSize: comboboxVars.size.listMaxBlockSize,
-    paddingBlock: comboboxVars.spacing.listPaddingBlock,
-    scrollPaddingBlock: comboboxVars.spacing.listScrollPaddingBlock,
-    selectors: {
-      [`&[data-empty]`]: {
-        paddingBlock: comboboxVars.spacing.zero,
-        paddingInline: comboboxVars.spacing.zero,
-      },
+  '@layer': {
+    [components]: {
+      ...createFloatingListStyles({
+        maxBlockSize: comboboxVars.size.listMaxBlockSize,
+        paddingBlock: comboboxVars.spacing.listPaddingBlock,
+        scrollPaddingBlock: comboboxVars.spacing.listScrollPaddingBlock,
+        selectors: {
+          [`&[data-empty]`]: {
+            paddingBlock: comboboxVars.spacing.zero,
+            paddingInline: comboboxVars.spacing.zero,
+          },
+        },
+      }),
     },
-  }),
+  },
 });
 
 export const item = style([
   typography.body.medium,
-  createFloatingItemStyles({
-    preset: 'listboxWithIndicator',
-    paddingBlock: comboboxVars.spacing.itemPaddingBlock,
-    paddingInline: comboboxVars.spacing.itemPaddingInline,
-    selectors: {
-      ...comboboxItemHighlightSelectors,
+  {
+    '@layer': {
+      [components]: createFloatingItemStyles({
+        preset: 'listboxWithIndicator',
+        paddingBlock: comboboxVars.spacing.itemPaddingBlock,
+        paddingInline: comboboxVars.spacing.itemPaddingInline,
+        selectors: {
+          ...comboboxItemHighlightSelectors,
+        },
+      }),
     },
-  }),
+  },
 ]);
 
 export const itemText = style({
-  gridColumnStart: '2',
-  minInlineSize: '0',
-  overflowWrap: 'anywhere',
+  '@layer': {
+    [components]: {
+      gridColumnStart: '2',
+      minInlineSize: '0',
+      overflowWrap: 'anywhere',
+    },
+  },
 });
 
 export const itemIndicator = style({
-  gridColumnStart: '1',
+  '@layer': {
+    [components]: {
+      gridColumnStart: '1',
+    },
+  },
 });

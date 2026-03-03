@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createFieldTextInputStyles,
   createFieldLabelStyles,
@@ -64,53 +65,73 @@ const fieldDefaults = assignVars(fieldVars, {
 });
 
 export const field = style({
-  vars: {
-    ...fieldDefaults,
-  },
+  '@layer': {
+    [components]: {
+      vars: {
+        ...fieldDefaults,
+      },
 
-  ...createFieldStackStyles({
-    alignItems: 'start',
-    gap: fieldVars.spacing.stackGap,
-    inlineSize: fieldVars.layout.inputInlineSize,
-  }),
+      ...createFieldStackStyles({
+        alignItems: 'start',
+        gap: fieldVars.spacing.stackGap,
+        inlineSize: fieldVars.layout.inputInlineSize,
+      }),
+    },
+  },
 });
 
 export const label = style({
-  ...createFieldLabelStyles({
-    color: fieldVars.color.labelForeground,
-  }),
+  '@layer': {
+    [components]: {
+      ...createFieldLabelStyles({
+        color: fieldVars.color.labelForeground,
+      }),
+    },
+  },
 });
 
 export const input = style([
   typography.body.large,
   {
-    ...createFieldTextInputStyles({
-      backgroundColor: fieldVars.color.inputBackground,
-      blockSize: fieldVars.size.inputBlockSize,
-      borderColor: fieldVars.color.inputBorder,
-      borderRadius: fieldVars.shape.inputCorner,
-      focusRingColor: fieldVars.color.inputFocusRing,
-      focusRingOffset: fieldVars.layout.inputFocusRingOffset,
-      foreground: fieldVars.color.inputForeground,
-      inlineSize: fieldVars.layout.inputInlineSize,
-      paddingInlineEnd: fieldVars.spacing.inputPaddingInlineEnd,
-      paddingInlineStart: fieldVars.spacing.inputPaddingInlineStart,
-    }),
+    '@layer': {
+      [components]: {
+        ...createFieldTextInputStyles({
+          backgroundColor: fieldVars.color.inputBackground,
+          blockSize: fieldVars.size.inputBlockSize,
+          borderColor: fieldVars.color.inputBorder,
+          borderRadius: fieldVars.shape.inputCorner,
+          focusRingColor: fieldVars.color.inputFocusRing,
+          focusRingOffset: fieldVars.layout.inputFocusRingOffset,
+          foreground: fieldVars.color.inputForeground,
+          inlineSize: fieldVars.layout.inputInlineSize,
+          paddingInlineEnd: fieldVars.spacing.inputPaddingInlineEnd,
+          paddingInlineStart: fieldVars.spacing.inputPaddingInlineStart,
+        }),
+      },
+    },
   },
 ]);
 
 export const error = style([
   typography.body.medium,
   {
-    color: fieldVars.color.errorForeground,
+    '@layer': {
+      [components]: {
+        color: fieldVars.color.errorForeground,
+      },
+    },
   },
 ]);
 
 export const description = style([
   typography.body.medium,
   {
-    marginBlock: fieldVars.spacing.zero,
-    marginInline: fieldVars.spacing.zero,
-    color: fieldVars.color.descriptionForeground,
+    '@layer': {
+      [components]: {
+        marginBlock: fieldVars.spacing.zero,
+        marginInline: fieldVars.spacing.zero,
+        color: fieldVars.color.descriptionForeground,
+      },
+    },
   },
 ]);

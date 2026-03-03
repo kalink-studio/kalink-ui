@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const checkboxGroupVars = createThemeContract({
   color: {
@@ -21,11 +22,15 @@ const checkboxGroupDefaults = assignVars(checkboxGroupVars, {
 });
 
 export const checkboxGroup = style({
-  vars: checkboxGroupDefaults,
+  '@layer': {
+    [components]: {
+      vars: checkboxGroupDefaults,
 
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'start',
-  gap: checkboxGroupVars.spacing.groupGap,
-  color: checkboxGroupVars.color.rootForeground,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'start',
+      gap: checkboxGroupVars.spacing.groupGap,
+      color: checkboxGroupVars.color.rootForeground,
+    },
+  },
 });

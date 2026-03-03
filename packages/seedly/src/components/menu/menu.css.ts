@@ -2,6 +2,7 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
 import { sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -95,87 +96,127 @@ const menuDefaults = assignVars(menuVars, {
 
 export const button = style([
   {
-    vars: {
-      ...menuDefaults,
-    },
+    '@layer': {
+      [components]: {
+        vars: {
+          ...menuDefaults,
+        },
 
-    selectors: {
-      '&[data-popup-open]': {
-        backgroundColor: menuVars.color.triggerOpenBackground,
+        selectors: {
+          '&[data-popup-open]': {
+            backgroundColor: menuVars.color.triggerOpenBackground,
+          },
+        },
       },
     },
   },
 ]);
 
 export const buttonIcon = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexShrink: '0',
-  marginInlineEnd: calc.negate(menuVars.spacing.triggerIconMarginInlineEnd),
+  '@layer': {
+    [components]: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: '0',
+      marginInlineEnd: calc.negate(menuVars.spacing.triggerIconMarginInlineEnd),
+    },
+  },
 });
 
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    zIndex: '1',
-    vars: {
-      ...menuDefaults,
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles({
+        zIndex: '1',
+        vars: {
+          ...menuDefaults,
+        },
+      }),
     },
-  }),
+  },
 });
 
 export const popup = style({
-  ...createFloatingSurfaceStyles({
-    background: menuVars.color.popupBackground,
-    borderRadius: menuVars.shape.popupCorner,
-    foreground: menuVars.color.popupForeground,
-    outline: menuVars.color.popupOutline,
-    outlineInverse: menuVars.color.popupOutlineInverse,
-    paddingBlock: menuVars.spacing.popupPaddingBlock,
-    shadow: menuVars.color.popupShadow,
-    minInlineSize: menuVars.size.minInlineSize,
-  }),
+  '@layer': {
+    [components]: {
+      ...createFloatingSurfaceStyles({
+        background: menuVars.color.popupBackground,
+        borderRadius: menuVars.shape.popupCorner,
+        foreground: menuVars.color.popupForeground,
+        outline: menuVars.color.popupOutline,
+        outlineInverse: menuVars.color.popupOutlineInverse,
+        paddingBlock: menuVars.spacing.popupPaddingBlock,
+        shadow: menuVars.color.popupShadow,
+        minInlineSize: menuVars.size.minInlineSize,
+      }),
+    },
+  },
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles(),
+  '@layer': {
+    [components]: {
+      ...createFloatingArrowPlacementStyles(),
+    },
+  },
 });
 
 export const arrowFill = style({
-  ...createArrowFillStyles(menuVars.color.popupBackground),
+  '@layer': {
+    [components]: {
+      ...createArrowFillStyles(menuVars.color.popupBackground),
+    },
+  },
 });
 
 export const arrowOuterStroke = style({
-  ...createArrowOuterStrokeStyles(menuVars.color.arrowOuterStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowOuterStrokeStyles(menuVars.color.arrowOuterStroke),
+    },
+  },
 });
 
 export const arrowInnerStroke = style({
-  ...createArrowInnerStrokeStyles(menuVars.color.arrowInnerStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowInnerStrokeStyles(menuVars.color.arrowInnerStroke),
+    },
+  },
 });
 
 export const item = style([
   typography.body.medium,
-  createFloatingHighlightedItemStyles({
-    preset: 'menu',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: menuVars.spacing.itemPaddingInline,
-    paddingBlock: menuVars.spacing.itemPaddingBlock,
-    paddingInline: menuVars.spacing.itemPaddingInline,
-    highlight: {
-      backgroundColor: menuVars.color.itemHighlightedBackground,
-      borderRadius: menuVars.shape.itemHighlightCorner,
-      insetInline: menuVars.spacing.itemHighlightInsetInline,
-      textColor: menuVars.color.itemHighlightedForeground,
+  {
+    '@layer': {
+      [components]: createFloatingHighlightedItemStyles({
+        preset: 'menu',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: menuVars.spacing.itemPaddingInline,
+        paddingBlock: menuVars.spacing.itemPaddingBlock,
+        paddingInline: menuVars.spacing.itemPaddingInline,
+        highlight: {
+          backgroundColor: menuVars.color.itemHighlightedBackground,
+          borderRadius: menuVars.shape.itemHighlightCorner,
+          insetInline: menuVars.spacing.itemHighlightInsetInline,
+          textColor: menuVars.color.itemHighlightedForeground,
+        },
+      }),
     },
-  }),
+  },
 ]);
 
 export const separator = style({
-  blockSize: menuVars.size.separatorBlockSize,
+  '@layer': {
+    [components]: {
+      blockSize: menuVars.size.separatorBlockSize,
 
-  marginBlock: menuVars.spacing.separatorMarginBlock,
-  marginInline: menuVars.spacing.separatorMarginInline,
+      marginBlock: menuVars.spacing.separatorMarginBlock,
+      marginInline: menuVars.spacing.separatorMarginInline,
 
-  backgroundColor: menuVars.color.separator,
+      backgroundColor: menuVars.color.separator,
+    },
+  },
 });

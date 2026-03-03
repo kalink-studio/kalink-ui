@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -67,73 +68,109 @@ const popoverDefaults = assignVars(popoverVars, {
 
 export const iconButton = style([
   {
-    vars: {
-      ...popoverDefaults,
-    },
-    selectors: {
-      '&[data-popup-open]': {
-        backgroundColor: popoverVars.color.triggerOpenBackground,
+    '@layer': {
+      [components]: {
+        vars: {
+          ...popoverDefaults,
+        },
+        selectors: {
+          '&[data-popup-open]': {
+            backgroundColor: popoverVars.color.triggerOpenBackground,
+          },
+        },
       },
     },
   },
 ]);
 export const positioner = style({
-  ...createFloatingPositionerStyles({
-    zIndex: '1',
-  }),
-  inlineSize: 'var(--positioner-width)',
-  blockSize: 'var(--positioner-height)',
-  maxInlineSize: 'var(--available-width)',
-  vars: {
-    ...popoverDefaults,
+  '@layer': {
+    [components]: {
+      ...createFloatingPositionerStyles({
+        zIndex: '1',
+      }),
+      inlineSize: 'var(--positioner-width)',
+      blockSize: 'var(--positioner-height)',
+      maxInlineSize: 'var(--available-width)',
+      vars: {
+        ...popoverDefaults,
+      },
+    },
   },
 });
 
 export const popup = style({
-  ...createFloatingSurfaceStyles({
-    paddingBlock: popoverVars.spacing.popupPaddingBlock,
-    paddingInline: popoverVars.spacing.popupPaddingInline,
-    borderRadius: popoverVars.shape.popupCorner,
-    background: popoverVars.color.popupBackground,
-    foreground: popoverVars.color.popupForeground,
-    inlineSize: 'var(--popup-width, auto)',
-    blockSize: 'var(--popup-height, auto)',
-    maxInlineSize: popoverVars.layout.popupMaxInlineSize,
-    outline: popoverVars.color.popupOutline,
-    outlineInverse: popoverVars.color.popupOutlineInverse,
-    shadow: popoverVars.color.popupShadow,
-  }),
+  '@layer': {
+    [components]: {
+      ...createFloatingSurfaceStyles({
+        paddingBlock: popoverVars.spacing.popupPaddingBlock,
+        paddingInline: popoverVars.spacing.popupPaddingInline,
+        borderRadius: popoverVars.shape.popupCorner,
+        background: popoverVars.color.popupBackground,
+        foreground: popoverVars.color.popupForeground,
+        inlineSize: 'var(--popup-width, auto)',
+        blockSize: 'var(--popup-height, auto)',
+        maxInlineSize: popoverVars.layout.popupMaxInlineSize,
+        outline: popoverVars.color.popupOutline,
+        outlineInverse: popoverVars.color.popupOutlineInverse,
+        shadow: popoverVars.color.popupShadow,
+      }),
+    },
+  },
 });
 
 export const arrow = style({
-  ...createFloatingArrowPlacementStyles(),
+  '@layer': {
+    [components]: {
+      ...createFloatingArrowPlacementStyles(),
+    },
+  },
 });
 
 export const arrowFill = style({
-  ...createArrowFillStyles(popoverVars.color.popupBackground),
+  '@layer': {
+    [components]: {
+      ...createArrowFillStyles(popoverVars.color.popupBackground),
+    },
+  },
 });
 
 export const arrowOuterStroke = style({
-  ...createArrowOuterStrokeStyles(popoverVars.color.arrowOuterStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowOuterStrokeStyles(popoverVars.color.arrowOuterStroke),
+    },
+  },
 });
 
 export const arrowInnerStroke = style({
-  ...createArrowInnerStrokeStyles(popoverVars.color.arrowInnerStroke),
+  '@layer': {
+    [components]: {
+      ...createArrowInnerStrokeStyles(popoverVars.color.arrowInnerStroke),
+    },
+  },
 });
 
 export const title = style([
   typography.title.medium,
   {
-    marginBlock: '0',
-    marginInline: '0',
+    '@layer': {
+      [components]: {
+        marginBlock: '0',
+        marginInline: '0',
+      },
+    },
   },
 ]);
 
 export const description = style([
   typography.body.large,
   {
-    marginBlock: '0',
-    marginInline: '0',
-    color: popoverVars.color.descriptionForeground,
+    '@layer': {
+      [components]: {
+        marginBlock: '0',
+        marginInline: '0',
+        color: popoverVars.color.descriptionForeground,
+      },
+    },
   },
 ]);

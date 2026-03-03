@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 import { createBarRootStyles } from '../_foundation';
 
 export const toolbarVars = createThemeContract({
@@ -84,92 +85,112 @@ const toolbarDefaults = assignVars(toolbarVars, {
 });
 
 export const toolbar = style({
-  ...createBarRootStyles({
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: toolbarVars.spacing.rootGap,
-    inlineSize: toolbarVars.layout.rootInlineSize,
-    rowGap: toolbarVars.spacing.rootRowGap,
-  }),
+  '@layer': {
+    [components]: {
+      ...createBarRootStyles({
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: toolbarVars.spacing.rootGap,
+        inlineSize: toolbarVars.layout.rootInlineSize,
+        rowGap: toolbarVars.spacing.rootRowGap,
+      }),
 
-  vars: {
-    ...toolbarDefaults,
+      vars: {
+        ...toolbarDefaults,
+      },
+    },
   },
 });
 
 export const group = style({
-  ...createBarRootStyles({
-    gap: toolbarVars.spacing.groupGap,
-  }),
+  '@layer': {
+    [components]: {
+      ...createBarRootStyles({
+        gap: toolbarVars.spacing.groupGap,
+      }),
+    },
+  },
 });
 
 export const button = style([
   {
-    borderWidth: '0',
-    vars: {
-      ...toolbarDefaults,
-    },
+    '@layer': {
+      [components]: {
+        borderWidth: '0',
+        vars: {
+          ...toolbarDefaults,
+        },
 
-    selectors: {
-      '&:hover:not(:disabled):not([data-disabled]):not([data-loading])': {
-        '@media': {
-          '(hover: hover)': {
-            backgroundColor: toolbarVars.color.buttonHoverBackground,
+        selectors: {
+          '&:hover:not(:disabled):not([data-disabled]):not([data-loading])': {
+            '@media': {
+              '(hover: hover)': {
+                backgroundColor: toolbarVars.color.buttonHoverBackground,
+              },
+            },
+          },
+          '&:active:not(:disabled):not([data-disabled]):not([data-loading])': {
+            backgroundColor: toolbarVars.color.buttonActiveBackground,
+          },
+          '&[data-pressed]': {
+            backgroundColor: toolbarVars.color.buttonPressedBackground,
+            color: toolbarVars.color.buttonPressedForeground,
+          },
+          '&:focus-visible': {
+            outline: `2px solid ${toolbarVars.color.buttonFocusRing}`,
+            outlineOffset: toolbarVars.layout.buttonFocusRingOffset,
+          },
+          [`&[aria-pressed]`]: {
+            paddingBlock: toolbarVars.spacing.buttonPressedPaddingBlock,
+            paddingInline: toolbarVars.spacing.buttonPressedPaddingInline,
           },
         },
-      },
-      '&:active:not(:disabled):not([data-disabled]):not([data-loading])': {
-        backgroundColor: toolbarVars.color.buttonActiveBackground,
-      },
-      '&[data-pressed]': {
-        backgroundColor: toolbarVars.color.buttonPressedBackground,
-        color: toolbarVars.color.buttonPressedForeground,
-      },
-      '&:focus-visible': {
-        outline: `2px solid ${toolbarVars.color.buttonFocusRing}`,
-        outlineOffset: toolbarVars.layout.buttonFocusRingOffset,
-      },
-      [`&[aria-pressed]`]: {
-        paddingBlock: toolbarVars.spacing.buttonPressedPaddingBlock,
-        paddingInline: toolbarVars.spacing.buttonPressedPaddingInline,
       },
     },
   },
 ]);
 
 export const separator = style({
-  vars: {
-    ...toolbarDefaults,
+  '@layer': {
+    [components]: {
+      vars: {
+        ...toolbarDefaults,
+      },
+      inlineSize: toolbarVars.size.separatorInlineSize,
+      blockSize: toolbarVars.size.separatorBlockSize,
+      marginBlock: toolbarVars.spacing.separatorMarginBlock,
+      marginInline: toolbarVars.spacing.separatorMarginInline,
+      backgroundColor: toolbarVars.color.separatorBackground,
+    },
   },
-  inlineSize: toolbarVars.size.separatorInlineSize,
-  blockSize: toolbarVars.size.separatorBlockSize,
-  marginBlock: toolbarVars.spacing.separatorMarginBlock,
-  marginInline: toolbarVars.spacing.separatorMarginInline,
-  backgroundColor: toolbarVars.color.separatorBackground,
 });
 
 export const link = style([
   typography.body.medium,
   {
-    vars: {
-      ...toolbarDefaults,
-    },
-    alignSelf: 'center',
-    flex: '0 0 auto',
-    marginInline: `auto ${toolbarVars.spacing.linkMarginInlineEnd}`,
-    color: toolbarVars.color.linkForeground,
-    textDecoration: 'none',
+    '@layer': {
+      [components]: {
+        vars: {
+          ...toolbarDefaults,
+        },
+        alignSelf: 'center',
+        flex: '0 0 auto',
+        marginInline: `auto ${toolbarVars.spacing.linkMarginInlineEnd}`,
+        color: toolbarVars.color.linkForeground,
+        textDecoration: 'none',
 
-    selectors: {
-      [`&:focus-visible`]: {
-        outline: `2px solid ${toolbarVars.color.linkFocusRing}`,
-        outlineOffset: toolbarVars.spacing.linkFocusRingOffset,
-        borderRadius: toolbarVars.shape.linkFocusCorner,
-      },
-      [`&:hover`]: {
-        '@media': {
-          '(hover: hover)': {
-            color: toolbarVars.color.linkHoverForeground,
+        selectors: {
+          [`&:focus-visible`]: {
+            outline: `2px solid ${toolbarVars.color.linkFocusRing}`,
+            outlineOffset: toolbarVars.spacing.linkFocusRingOffset,
+            borderRadius: toolbarVars.shape.linkFocusCorner,
+          },
+          [`&:hover`]: {
+            '@media': {
+              '(hover: hover)': {
+                color: toolbarVars.color.linkHoverForeground,
+              },
+            },
           },
         },
       },

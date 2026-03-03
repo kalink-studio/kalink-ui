@@ -6,6 +6,7 @@ import {
 } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
+import { components } from '../../styles/layers.css';
 import {
   createChoiceControlStyles,
   createChoiceIndicatorStyles,
@@ -54,26 +55,34 @@ const checkboxDefaults = assignVars(checkboxVars, {
 });
 
 export const label = style({
-  vars: checkboxDefaults,
+  '@layer': {
+    [components]: {
+      vars: checkboxDefaults,
 
-  alignItems: 'center',
-  display: 'flex',
+      alignItems: 'center',
+      display: 'flex',
 
-  gap: checkboxVars.spacing.labelGap,
+      gap: checkboxVars.spacing.labelGap,
 
-  color: checkboxVars.color.labelForeground,
+      color: checkboxVars.color.labelForeground,
+    },
+  },
 });
 
 export const checkbox = style({
-  ...createChoiceControlStyles({
-    borderRadius: checkboxVars.shape.controlCorner,
-    checkedBackgroundColor: checkboxVars.color.controlCheckedBackground,
-    focusOutlineOffset: checkboxVars.spacing.controlFocusOutlineOffset,
-    focusRingColor: checkboxVars.color.controlFocusRing,
-    size: checkboxVars.size.controlSize,
-    uncheckedBorderColor: checkboxVars.color.controlBorder,
-    animationType: 'fill-in',
-  }),
+  '@layer': {
+    [components]: {
+      ...createChoiceControlStyles({
+        borderRadius: checkboxVars.shape.controlCorner,
+        checkedBackgroundColor: checkboxVars.color.controlCheckedBackground,
+        focusOutlineOffset: checkboxVars.spacing.controlFocusOutlineOffset,
+        focusRingColor: checkboxVars.color.controlFocusRing,
+        size: checkboxVars.size.controlSize,
+        uncheckedBorderColor: checkboxVars.color.controlBorder,
+        animationType: 'fill-in',
+      }),
+    },
+  },
 });
 
 const checkboxIndicatorStyles = createChoiceIndicatorStyles({
@@ -81,26 +90,30 @@ const checkboxIndicatorStyles = createChoiceIndicatorStyles({
 });
 
 export const indicator = style({
-  ...checkboxIndicatorStyles,
-  clipPath: 'inset(0 0 0 0)',
-  transition:
-    'transform 250ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms, opacity 250ms ease 100ms, clip-path 250ms cubic-bezier(0.165, 0.84, 0.44, 1) 125ms',
-  selectors: {
-    ...checkboxIndicatorStyles.selectors,
-    '&[data-unchecked]': {
-      opacity: 0,
-      transform: 'scale(0.8)',
-      clipPath: 'inset(0 100% 0 0)',
-    },
-    '&[data-starting-style]': {
-      opacity: 0,
-      transform: 'scale(0.8)',
-      clipPath: 'inset(0 100% 0 0)',
-    },
-    '&[data-ending-style]': {
-      opacity: 0,
-      transform: 'scale(0.8)',
-      clipPath: 'inset(0 100% 0 0)',
+  '@layer': {
+    [components]: {
+      ...checkboxIndicatorStyles,
+      clipPath: 'inset(0 0 0 0)',
+      transition:
+        'transform 250ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms, opacity 250ms ease 100ms, clip-path 250ms cubic-bezier(0.165, 0.84, 0.44, 1) 125ms',
+      selectors: {
+        ...checkboxIndicatorStyles.selectors,
+        '&[data-unchecked]': {
+          opacity: 0,
+          transform: 'scale(0.8)',
+          clipPath: 'inset(0 100% 0 0)',
+        },
+        '&[data-starting-style]': {
+          opacity: 0,
+          transform: 'scale(0.8)',
+          clipPath: 'inset(0 100% 0 0)',
+        },
+        '&[data-ending-style]': {
+          opacity: 0,
+          transform: 'scale(0.8)',
+          clipPath: 'inset(0 100% 0 0)',
+        },
+      },
     },
   },
 });

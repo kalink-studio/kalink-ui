@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, transition, typography } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const collapsibleVars = createThemeContract({
   color: {
@@ -69,42 +70,54 @@ const collapsibleDefaults = assignVars(collapsibleVars, {
 });
 
 export const collapsible = style({
-  vars: collapsibleDefaults,
+  '@layer': {
+    [components]: {
+      vars: collapsibleDefaults,
 
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
 
-  minBlockSize: collapsibleVars.size.rootMinBlockSize,
+      minBlockSize: collapsibleVars.size.rootMinBlockSize,
 
-  color: collapsibleVars.color.rootForeground,
+      color: collapsibleVars.color.rootForeground,
+    },
+  },
 });
 
 export const trigger = style({
-  paddingBlock: collapsibleVars.spacing.triggerPaddingBlock,
-  paddingInline: collapsibleVars.spacing.triggerPaddingInline,
+  '@layer': {
+    [components]: {
+      paddingBlock: collapsibleVars.spacing.triggerPaddingBlock,
+      paddingInline: collapsibleVars.spacing.triggerPaddingInline,
 
-  borderRadius: collapsibleVars.shape.triggerCorner,
+      borderRadius: collapsibleVars.shape.triggerCorner,
 
-  selectors: {
-    '&:focus-visible': {
-      outlineOffset: collapsibleVars.layout.triggerFocusOutlineOffset,
+      selectors: {
+        '&:focus-visible': {
+          outlineOffset: collapsibleVars.layout.triggerFocusOutlineOffset,
+        },
+      },
     },
   },
 });
 
 export const icon = style({
-  blockSize: collapsibleVars.size.iconSize,
-  inlineSize: collapsibleVars.size.iconSize,
+  '@layer': {
+    [components]: {
+      blockSize: collapsibleVars.size.iconSize,
+      inlineSize: collapsibleVars.size.iconSize,
 
-  transition: transition('transform', {
-    duration: collapsibleVars.motion.iconTransformDuration,
-    easing: collapsibleVars.motion.iconTransformEasing,
-  }),
+      transition: transition('transform', {
+        duration: collapsibleVars.motion.iconTransformDuration,
+        easing: collapsibleVars.motion.iconTransformEasing,
+      }),
 
-  selectors: {
-    [`${trigger}[data-panel-open] &`]: {
-      transform: 'rotate(90deg)',
+      selectors: {
+        [`${trigger}[data-panel-open] &`]: {
+          transform: 'rotate(90deg)',
+        },
+      },
     },
   },
 });
@@ -112,46 +125,54 @@ export const icon = style({
 export const panel = style([
   typography.body.medium,
   {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'end',
+    '@layer': {
+      [components]: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'end',
 
-    blockSize: 'var(--collapsible-panel-height)',
-    overflow: 'hidden',
+        blockSize: 'var(--collapsible-panel-height)',
+        overflow: 'hidden',
 
-    transition: transition('block-size', {
-      duration: collapsibleVars.motion.panelSizeDuration,
-      easing: collapsibleVars.motion.panelSizeEasing,
-    }),
+        transition: transition('block-size', {
+          duration: collapsibleVars.motion.panelSizeDuration,
+          easing: collapsibleVars.motion.panelSizeEasing,
+        }),
 
-    selectors: {
-      "&[hidden]:not([hidden='until-found'])": {
-        display: 'none',
-      },
+        selectors: {
+          "&[hidden]:not([hidden='until-found'])": {
+            display: 'none',
+          },
 
-      '&[data-starting-style]': {
-        blockSize: '0',
-      },
+          '&[data-starting-style]': {
+            blockSize: '0',
+          },
 
-      '&[data-ending-style]': {
-        blockSize: '0',
+          '&[data-ending-style]': {
+            blockSize: '0',
+          },
+        },
       },
     },
   },
 ]);
 
 export const content = style({
-  display: 'flex',
-  flexDirection: 'column',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      flexDirection: 'column',
 
-  gap: collapsibleVars.spacing.contentGap,
-  marginBlockStart: collapsibleVars.spacing.contentMarginBlockStart,
-  paddingBlock: collapsibleVars.spacing.contentPaddingBlock,
-  paddingInlineEnd: collapsibleVars.spacing.contentPaddingInlineEnd,
-  paddingInlineStart: collapsibleVars.spacing.contentPaddingInlineStart,
+      gap: collapsibleVars.spacing.contentGap,
+      marginBlockStart: collapsibleVars.spacing.contentMarginBlockStart,
+      paddingBlock: collapsibleVars.spacing.contentPaddingBlock,
+      paddingInlineEnd: collapsibleVars.spacing.contentPaddingInlineEnd,
+      paddingInlineStart: collapsibleVars.spacing.contentPaddingInlineStart,
 
-  backgroundColor: collapsibleVars.color.contentBackground,
-  borderRadius: collapsibleVars.shape.contentCorner,
+      backgroundColor: collapsibleVars.color.contentBackground,
+      borderRadius: collapsibleVars.shape.contentCorner,
 
-  cursor: 'text',
+      cursor: 'text',
+    },
+  },
 });

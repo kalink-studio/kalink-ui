@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
+import { components } from '../../styles/layers.css';
 import { createBarRootStyles } from '../_foundation';
 
 export {
@@ -10,4 +11,6 @@ export {
   separator as menuSeparator,
 } from '../menu/menu.css';
 
-export const menubar = style(createBarRootStyles());
+export const menubar = style({
+  '@layer': { [components]: createBarRootStyles() },
+});

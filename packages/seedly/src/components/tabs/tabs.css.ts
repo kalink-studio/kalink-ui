@@ -1,6 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
+import { components } from '../../styles/layers.css';
 
 export const tabsVars = createThemeContract({
   color: {
@@ -61,108 +62,128 @@ const tabsDefaults = assignVars(tabsVars, {
 });
 
 export const tabs = style({
-  vars: {
-    ...tabsDefaults,
+  '@layer': {
+    [components]: {
+      vars: {
+        ...tabsDefaults,
+      },
+    },
   },
 });
 
 export const list = style({
-  display: 'flex',
-  gap: tabsVars.spacing.listGap,
-  paddingInline: tabsVars.spacing.listPaddingInline,
-  position: 'relative',
-  zIndex: '0',
-  boxShadow: `inset 0 -1px ${tabsVars.color.rootBorder}`,
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      gap: tabsVars.spacing.listGap,
+      paddingInline: tabsVars.spacing.listPaddingInline,
+      position: 'relative',
+      zIndex: '0',
+      boxShadow: `inset 0 -1px ${tabsVars.color.rootBorder}`,
+    },
+  },
 });
 
 export const tab = style([
   {
-    marginBlock: '0',
-    marginInline: '0',
+    '@layer': {
+      [components]: {
+        marginBlock: '0',
+        marginInline: '0',
 
-    whiteSpace: 'nowrap',
-    wordBreak: 'keep-all',
-    color: tabsVars.color.tabForeground,
+        whiteSpace: 'nowrap',
+        wordBreak: 'keep-all',
+        color: tabsVars.color.tabForeground,
 
-    borderWidth: '0',
-    appearance: 'none',
-    backgroundColor: 'transparent',
-    position: 'relative',
-
-    selectors: {
-      ['&::after']: {
-        content: "''",
-        position: 'absolute',
-        insetInline: '0',
-        insetBlockEnd: '0',
-        blockSize: '2px',
-        borderRadius: tabsVars.shape.indicatorCorner,
-        backgroundColor: tabsVars.color.rootBorder,
-        zIndex: 0,
-        opacity: 0,
-        transition: transition(['opacity'], {
-          duration: tabsVars.motion.indicatorTransitionDuration,
-          easing: tabsVars.motion.indicatorTransitionEasing,
-        }),
-      },
-      ['&:hover:not(:disabled):not([data-disabled]):not([data-loading])']: {
+        borderWidth: '0',
+        appearance: 'none',
         backgroundColor: 'transparent',
-      },
-      ['&:hover:not([data-active]):not(:disabled):not([data-disabled]):not([data-loading])::after']:
-        {
-          opacity: 1,
-        },
-      [`&[data-active]`]: {
-        color: tabsVars.color.tabForegroundActive,
-      },
-      [`&:focus-visible`]: {
         position: 'relative',
-      },
-      [`&:focus-visible::before`]: {
-        content: "''",
-        position: 'absolute',
-        insetBlock: tabsVars.spacing.tabFocusInsetBlock,
-        insetInline: '0',
-        borderRadius: tabsVars.shape.indicatorCorner,
-        outline: `2px solid ${tabsVars.color.tabFocusRing}`,
-        outlineOffset: tabsVars.spacing.tabFocusRingOffset,
+
+        selectors: {
+          ['&::after']: {
+            content: "''",
+            position: 'absolute',
+            insetInline: '0',
+            insetBlockEnd: '0',
+            blockSize: '2px',
+            borderRadius: tabsVars.shape.indicatorCorner,
+            backgroundColor: tabsVars.color.rootBorder,
+            zIndex: 0,
+            opacity: 0,
+            transition: transition(['opacity'], {
+              duration: tabsVars.motion.indicatorTransitionDuration,
+              easing: tabsVars.motion.indicatorTransitionEasing,
+            }),
+          },
+          ['&:hover:not(:disabled):not([data-disabled]):not([data-loading])']: {
+            backgroundColor: 'transparent',
+          },
+          ['&:hover:not([data-active]):not(:disabled):not([data-disabled]):not([data-loading])::after']:
+            {
+              opacity: 1,
+            },
+          [`&[data-active]`]: {
+            color: tabsVars.color.tabForegroundActive,
+          },
+          [`&:focus-visible`]: {
+            position: 'relative',
+          },
+          [`&:focus-visible::before`]: {
+            content: "''",
+            position: 'absolute',
+            insetBlock: tabsVars.spacing.tabFocusInsetBlock,
+            insetInline: '0',
+            borderRadius: tabsVars.shape.indicatorCorner,
+            outline: `2px solid ${tabsVars.color.tabFocusRing}`,
+            outlineOffset: tabsVars.spacing.tabFocusRingOffset,
+          },
+        },
       },
     },
   },
 ]);
 
 export const indicator = style({
-  inlineSize: 'var(--active-tab-width)',
-  blockSize: '2px',
-  position: 'absolute',
-  zIndex: '0',
-  insetInlineStart: '0',
-  insetBlockEnd: '0',
-  borderRadius: tabsVars.shape.indicatorCorner,
-  backgroundColor: tabsVars.color.indicatorBackground,
-  translate: 'var(--active-tab-left) 0',
-  transition: transition(['translate', 'inline-size', 'block-size'], {
-    duration: tabsVars.motion.indicatorTransitionDuration,
-    easing: tabsVars.motion.indicatorTransitionEasing,
-  }),
+  '@layer': {
+    [components]: {
+      inlineSize: 'var(--active-tab-width)',
+      blockSize: '2px',
+      position: 'absolute',
+      zIndex: '0',
+      insetInlineStart: '0',
+      insetBlockEnd: '0',
+      borderRadius: tabsVars.shape.indicatorCorner,
+      backgroundColor: tabsVars.color.indicatorBackground,
+      translate: 'var(--active-tab-left) 0',
+      transition: transition(['translate', 'inline-size', 'block-size'], {
+        duration: tabsVars.motion.indicatorTransitionDuration,
+        easing: tabsVars.motion.indicatorTransitionEasing,
+      }),
+    },
+  },
 });
 
 export const panel = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  blockSize: tabsVars.size.panelBlockSize,
-  position: 'relative',
-  outline: '0',
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      blockSize: tabsVars.size.panelBlockSize,
+      position: 'relative',
+      outline: '0',
 
-  selectors: {
-    [`&:focus-visible`]: {
-      outline: `2px solid ${tabsVars.color.tabFocusRing}`,
-      outlineOffset: tabsVars.spacing.panelFocusRingOffset,
-      borderRadius: tabsVars.shape.panelFocusCorner,
-    },
-    [`&[hidden]`]: {
-      display: 'none',
+      selectors: {
+        [`&:focus-visible`]: {
+          outline: `2px solid ${tabsVars.color.tabFocusRing}`,
+          outlineOffset: tabsVars.spacing.panelFocusRingOffset,
+          borderRadius: tabsVars.shape.panelFocusCorner,
+        },
+        [`&[hidden]`]: {
+          display: 'none',
+        },
+      },
     },
   },
 });
