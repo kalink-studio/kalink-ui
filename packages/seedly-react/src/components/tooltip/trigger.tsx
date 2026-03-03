@@ -20,7 +20,7 @@ export function Trigger({
   unstyled,
   variant = 'ghost',
   tone = 'neutral',
-  size = 'sm',
+  size = 'md',
   shape = 'small',
   flow,
   loading,

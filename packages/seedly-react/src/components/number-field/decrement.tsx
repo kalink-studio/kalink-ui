@@ -23,7 +23,7 @@ export function Decrement({
   unstyled,
   variant = 'bare',
   tone = 'neutral',
-  size = 'md',
+  size = 'sm',
   shape,
   flow,
   loading,
@@ -33,7 +33,7 @@ export function Decrement({
   return (
     <NumberField.Decrement
       {...props}
-      render={(decrementProps, state) => {
+      render={({ children, ...decrementProps }, state) => {
         const resolvedClassName = resolveStateClassName(className, state);
 
         return (

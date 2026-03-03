@@ -87,7 +87,7 @@ const menuDefaults = assignVars(menuVars, {
     itemHighlightInsetInline: sys.spacing[4],
     itemPaddingBlock: sys.spacing[2],
     itemPaddingInline: sys.spacing[8],
-    popupPaddingBlock: sys.spacing[2],
+    popupPaddingBlock: sys.spacing[4],
     separatorMarginBlock: sys.spacing[3],
     separatorMarginInline: sys.spacing[8],
     triggerIconMarginInlineEnd: sys.spacing[2],

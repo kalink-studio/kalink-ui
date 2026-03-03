@@ -48,8 +48,8 @@ export const toastVars = createThemeContract({
 const toastDefaults = assignVars(toastVars, {
   color: {
     closeHoverBackground: sys.color.container.low,
-    rootBackground: sys.color.container.base,
-    rootBorder: sys.color.border.base,
+    rootBackground: sys.color.container.top,
+    rootBorder: sys.color.border.high,
     rootForeground: sys.color.content.base,
     rootShadow: sys.elevation.low,
   },

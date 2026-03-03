@@ -20,7 +20,7 @@ export function Toggle({
   unstyled,
   variant = 'ghost',
   tone = 'neutral',
-  size = 'sm',
+  size = 'md',
   shape,
   flow,
   loading,

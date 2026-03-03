@@ -1,4 +1,5 @@
 import { Box } from '../box';
+import { Text } from '../text';
 
 import { ContextMenu } from '.';
 
@@ -29,7 +30,7 @@ function Example() {
           spacing={8}
           variant="outline"
         >
-          Right click here
+          <Text>Right click here</Text>
         </Box>
       </ContextMenu.Trigger>
       <ContextMenu.Portal>

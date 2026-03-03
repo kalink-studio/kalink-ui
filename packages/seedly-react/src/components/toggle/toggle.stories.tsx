@@ -23,19 +23,25 @@ function Example() {
   return (
     <Toggle
       aria-label="Favorite"
-      render={(props, state) => {
+      render={({ children, ...props }, state) => {
         if (state.pressed) {
           return (
-            <Button {...props} unstyled aria-label={undefined}>
-              <HeartFilledIcon />
-            </Button>
+            <Button
+              {...props}
+              variant="ghost"
+              tone="neutral"
+              icon={<HeartFilledIcon />}
+            />
           );
         }
 
         return (
-          <Button {...props} unstyled aria-label={undefined}>
-            <HeartOutlineIcon />
-          </Button>
+          <Button
+            {...props}
+            variant="ghost"
+            tone="neutral"
+            icon={<HeartOutlineIcon />}
+          />
         );
       }}
     />

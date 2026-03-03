@@ -10,18 +10,17 @@ import {
 
 export const numberFieldVars = createThemeContract({
   color: {
-    decrementBackground: null,
-    incrementActiveBackground: null,
-    incrementBackground: null,
-    incrementHoverBackground: null,
     inputBackground: null,
     inputBorder: null,
     inputFocusRing: null,
     inputForeground: null,
     labelForeground: null,
     scrubAreaCursorShadow: null,
+    stepperActiveBackground: null,
+    stepperBackground: null,
     stepperBorder: null,
     stepperForeground: null,
+    stepperHoverBackground: null,
   },
   layout: {
     inputFocusRingOffset: null,
@@ -44,18 +43,17 @@ export const numberFieldVars = createThemeContract({
 
 const numberFieldDefaults = assignVars(numberFieldVars, {
   color: {
-    decrementBackground: sys.color.container.low,
-    incrementActiveBackground: sys.color.container.low,
-    incrementBackground: sys.color.container.base,
-    incrementHoverBackground: sys.color.container.low,
     inputBackground: sys.color.surface.base,
     inputBorder: sys.color.border.base,
     inputFocusRing: sys.color.tone.primary,
     inputForeground: sys.color.content.base,
     labelForeground: sys.color.content.base,
     scrubAreaCursorShadow: stateColor.disabledContent,
+    stepperActiveBackground: sys.color.container.low,
+    stepperBackground: sys.color.container.base,
     stepperBorder: sys.color.border.base,
     stepperForeground: sys.color.content.base,
+    stepperHoverBackground: sys.color.container.low,
   },
   layout: {
     inputFocusRingOffset: '-1px',
@@ -175,13 +173,25 @@ const stepperButtonStyle = {
   marginBlock: sys.spacing[0],
   marginInline: sys.spacing[0],
   outline: '0',
-  paddingBlock: sys.spacing[0],
-  paddingInline: sys.spacing[0],
+  paddingBlock: sys.spacing[4],
+  paddingInline: sys.spacing[4],
   border: `1px solid ${numberFieldVars.color.stepperBorder}`,
   borderRadius: numberFieldVars.shape.stepperCorner,
-  backgroundColor: numberFieldVars.color.incrementBackground,
+  backgroundColor: numberFieldVars.color.stepperBackground,
   backgroundClip: 'padding-box',
   color: numberFieldVars.color.stepperForeground,
+  selectors: {
+    '&:hover:not(:disabled):not([data-disabled]):not([data-loading])': {
+      '@media': {
+        '(hover: hover)': {
+          backgroundColor: numberFieldVars.color.stepperHoverBackground,
+        },
+      },
+    },
+    '&:active:not(:disabled):not([data-disabled]):not([data-loading])': {
+      backgroundColor: numberFieldVars.color.stepperActiveBackground,
+    },
+  },
 } as const;
 
 export const decrement = style({
@@ -190,7 +200,6 @@ export const decrement = style({
       ...stepperButtonStyle,
       borderStartEndRadius: numberFieldVars.shape.inputMergedCorner,
       borderEndEndRadius: numberFieldVars.shape.inputMergedCorner,
-      backgroundColor: numberFieldVars.color.decrementBackground,
     },
   },
 });
@@ -201,19 +210,6 @@ export const increment = style({
       ...stepperButtonStyle,
       borderStartStartRadius: numberFieldVars.shape.inputMergedCorner,
       borderEndStartRadius: numberFieldVars.shape.inputMergedCorner,
-
-      selectors: {
-        [`&:hover`]: {
-          '@media': {
-            '(hover: hover)': {
-              backgroundColor: numberFieldVars.color.incrementHoverBackground,
-            },
-          },
-        },
-        [`&:active`]: {
-          backgroundColor: numberFieldVars.color.incrementActiveBackground,
-        },
-      },
     },
   },
 });

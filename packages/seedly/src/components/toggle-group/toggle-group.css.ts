@@ -7,6 +7,7 @@ export const toggleGroupVars = createThemeContract({
   color: {
     itemFocusRing: null,
     itemPressedBackground: null,
+    itemPressedHoverBackground: null,
     itemPressedForeground: null,
   },
   spacing: {
@@ -18,10 +19,11 @@ const toggleGroupDefaults = assignVars(toggleGroupVars, {
   color: {
     itemFocusRing: sys.color.tone.primary,
     itemPressedBackground: sys.color.container.high,
+    itemPressedHoverBackground: sys.color.container.top,
     itemPressedForeground: sys.color.content.base,
   },
   spacing: {
-    groupGap: '1px',
+    groupGap: sys.spacing[2],
   },
 });
 
@@ -47,6 +49,16 @@ export const button = style([
             backgroundColor: toggleGroupVars.color.itemPressedBackground,
             color: toggleGroupVars.color.itemPressedForeground,
           },
+          '&[data-pressed]:hover:not(:disabled):not([data-disabled]):not([data-loading])':
+            {
+              '@media': {
+                '(hover: hover)': {
+                  backgroundColor:
+                    toggleGroupVars.color.itemPressedHoverBackground,
+                  color: toggleGroupVars.color.itemPressedForeground,
+                },
+              },
+            },
           '&:focus-visible': {
             outline: `2px solid ${toggleGroupVars.color.itemFocusRing}`,
             outlineOffset: '-1px',

@@ -107,7 +107,7 @@ const comboboxDefaults = assignVars(comboboxVars, {
     itemHighlightInsetInline: sys.spacing[4],
     itemPaddingBlock: sys.spacing[2],
     itemPaddingInline: sys.spacing[8],
-    listPaddingBlock: sys.spacing[2],
+    listPaddingBlock: sys.spacing[4],
     listScrollPaddingBlock: sys.spacing[2],
     stackGap: sys.spacing[2],
     zero: sys.spacing[0],

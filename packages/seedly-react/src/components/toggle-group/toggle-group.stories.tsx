@@ -42,8 +42,8 @@ function Example() {
 function AlignLeftIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       viewBox="0 0 16 16"
       stroke="currentcolor"
       strokeLinecap="round"
@@ -60,8 +60,8 @@ function AlignLeftIcon(props: ComponentProps<'svg'>) {
 function AlignCenterIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       viewBox="0 0 16 16"
       stroke="currentcolor"
       strokeLinecap="round"
@@ -78,8 +78,8 @@ function AlignCenterIcon(props: ComponentProps<'svg'>) {
 function AlignRightIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
-      width="16"
-      height="16"
+      width="24"
+      height="24"
       viewBox="0 0 16 16"
       stroke="currentcolor"
       strokeLinecap="round"

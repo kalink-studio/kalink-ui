@@ -23,7 +23,7 @@ export function Increment({
   unstyled,
   variant = 'bare',
   tone = 'neutral',
-  size = 'md',
+  size = 'sm',
   shape,
   flow,
   loading,

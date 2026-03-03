@@ -91,133 +91,44 @@ const meta = {
       if: { arg: 'listType', eq: 'ordered' },
     },
   },
+
+  render: (args) => (
+    <List {...args}>
+      <ListItem>Item 1</ListItem>
+      <ListItem>Item 2</ListItem>
+      <ListItem>Item 3</ListItem>
+    </List>
+  ),
 } satisfies Meta<typeof List>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: ({
-    listType,
-    listStyle,
-    orientation,
-    itemSpacing,
-    itemInlineSpacing,
-    justify,
-    align,
-    markerPosition,
-  }) => (
-    <List
-      listType={listType}
-      listStyle={listStyle}
-      orientation={orientation}
-      itemSpacing={itemSpacing}
-      itemInlineSpacing={itemInlineSpacing}
-      justify={justify}
-      align={align}
-      markerPosition={markerPosition}
-    >
-      <ListItem>First item</ListItem>
-      <ListItem>Second item</ListItem>
-      <ListItem>Third item</ListItem>
-    </List>
-  ),
-};
+export const Default: Story = {};
 
 export const Ordered: Story = {
   args: {
     listType: 'ordered',
     start: 5,
-    reversed: true,
+    listStyle: 'decimal',
   },
-  render: (args) => (
-    <List
-      listType={args.listType}
-      listStyle={args.listStyle}
-      orientation={args.orientation}
-      itemSpacing={args.itemSpacing}
-      itemInlineSpacing={args.itemInlineSpacing}
-      justify={args.justify}
-      align={args.align}
-      markerPosition={args.markerPosition}
-      start={args.listType === 'ordered' ? args.start : undefined}
-      reversed={args.listType === 'ordered' ? args.reversed : undefined}
-      type={args.listType === 'ordered' ? args.type : undefined}
-    >
-      <ListItem>Item one</ListItem>
-      <ListItem>Item two</ListItem>
-      <ListItem>Item three</ListItem>
-    </List>
-  ),
 };
 
 export const Horizontal: Story = {
   args: {
-    listType: 'unordered',
     listStyle: 'none',
     orientation: 'horizontal',
     itemSpacing: 4,
-    itemInlineSpacing: 8,
   },
-  render: ({
-    listType,
-    listStyle,
-    orientation,
-    itemSpacing,
-    itemInlineSpacing,
-    justify,
-    align,
-    markerPosition,
-  }) => (
-    <List
-      listType={listType}
-      listStyle={listStyle}
-      orientation={orientation}
-      itemSpacing={itemSpacing}
-      itemInlineSpacing={itemInlineSpacing}
-      justify={justify}
-      align={align}
-      markerPosition={markerPosition}
-    >
-      <ListItem>Home</ListItem>
-      <ListItem>About</ListItem>
-      <ListItem>Contact</ListItem>
-    </List>
-  ),
 };
 
-export const ListStyleNone: Story = {
+export const ListStyle: Story = {
   args: {
     listType: 'unordered',
-    listStyle: 'none',
-    itemSpacing: 2,
+    listStyle: 'upper-alpha',
+    itemSpacing: 8,
   },
-  render: ({
-    listType,
-    listStyle,
-    orientation,
-    itemSpacing,
-    itemInlineSpacing,
-    justify,
-    align,
-    markerPosition,
-  }) => (
-    <List
-      listType={listType}
-      listStyle={listStyle}
-      orientation={orientation}
-      itemSpacing={itemSpacing}
-      itemInlineSpacing={itemInlineSpacing}
-      justify={justify}
-      align={align}
-      markerPosition={markerPosition}
-    >
-      <ListItem>No markers here</ListItem>
-      <ListItem>Padding is reset</ListItem>
-      <ListItem>Margins are zeroed</ListItem>
-    </List>
-  ),
 };
 
 export const Responsive: Story = {
@@ -229,29 +140,4 @@ export const Responsive: Story = {
     itemInlineSpacing: 8,
     justify: { md: 'center' },
   },
-  render: ({
-    listType,
-    listStyle,
-    orientation,
-    itemSpacing,
-    itemInlineSpacing,
-    justify,
-    align,
-    markerPosition,
-  }) => (
-    <List
-      listType={listType}
-      listStyle={listStyle}
-      orientation={orientation}
-      itemSpacing={itemSpacing}
-      itemInlineSpacing={itemInlineSpacing}
-      justify={justify}
-      align={align}
-      markerPosition={markerPosition}
-    >
-      <ListItem>Item 1</ListItem>
-      <ListItem>Item 2</ListItem>
-      <ListItem>Item 3</ListItem>
-    </List>
-  ),
 };

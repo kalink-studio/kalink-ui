@@ -1,3 +1,5 @@
+import { Text } from '../text';
+
 import { ScrollArea } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -21,7 +23,7 @@ function Example() {
     <ScrollArea.Root>
       <ScrollArea.Viewport>
         <ScrollArea.Content>
-          <p>
+          <Text>
             Vernacular architecture is building done outside any academic
             tradition, and without professional guidance. It is not a particular
             architectural movement or style, but rather a broad category,
@@ -32,8 +34,8 @@ function Example() {
             estimated in 1995 by Amos Rapoport, as measured against the small
             percentage of new buildings every year designed by architects and
             built by engineers.
-          </p>
-          <p>
+          </Text>
+          <Text>
             This type of architecture usually serves immediate, local needs, is
             constrained by the materials available in its particular region and
             reflects local traditions and cultural practices. The study of
@@ -44,7 +46,7 @@ function Example() {
             designers and the building industry in an effort to be more energy
             conscious with contemporary design and construction—part of a
             broader interest in sustainable design.
-          </p>
+          </Text>
         </ScrollArea.Content>
       </ScrollArea.Viewport>
       <ScrollArea.Scrollbar>
