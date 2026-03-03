@@ -21,7 +21,7 @@ function Example() {
   return (
     <Menubar>
       <MenubarMenu.Root>
-        <MenubarMenu.Trigger>
+        <MenubarMenu.Trigger variant="ghost">
           File
           <MenubarMenu.TriggerIcon>
             <ChevronDownIcon />
@@ -64,7 +64,7 @@ function Example() {
       </MenubarMenu.Root>
 
       <MenubarMenu.Root>
-        <MenubarMenu.Trigger>
+        <MenubarMenu.Trigger variant="ghost">
           Edit
           <MenubarMenu.TriggerIcon>
             <ChevronDownIcon />
@@ -82,7 +82,7 @@ function Example() {
       </MenubarMenu.Root>
 
       <MenubarMenu.Root>
-        <MenubarMenu.Trigger>
+        <MenubarMenu.Trigger variant="ghost">
           View
           <MenubarMenu.TriggerIcon>
             <ChevronDownIcon />
@@ -128,7 +128,7 @@ function Example() {
       </MenubarMenu.Root>
 
       <MenubarMenu.Root disabled>
-        <MenubarMenu.Trigger>
+        <MenubarMenu.Trigger variant="ghost">
           Help
           <MenubarMenu.TriggerIcon>
             <ChevronDownIcon />

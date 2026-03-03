@@ -20,7 +20,7 @@ export function Close({
   unstyled,
   variant = 'outline',
   tone = 'neutral',
-  size = 'lg',
+  size = 'sm',
   shape,
   flow,
   loading,

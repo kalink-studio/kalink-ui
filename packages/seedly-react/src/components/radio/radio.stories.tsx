@@ -1,4 +1,3 @@
-import { Fieldset } from '../fieldset';
 import { RadioGroup } from '../radio-group';
 
 import { Radio } from '.';
@@ -21,31 +20,13 @@ export const Default: Story = {
 
 function Example() {
   return (
-    <Fieldset.Root>
-      <Fieldset.Legend>Best apple</Fieldset.Legend>
-
-      <RadioGroup.Root defaultValue="fuji-apple">
-        <Radio.Label>
-          <Radio.Root value="fuji-apple">
-            <Radio.Indicator />
-          </Radio.Root>
-          Fuji
-        </Radio.Label>
-
-        <Radio.Label>
-          <Radio.Root value="gala-apple">
-            <Radio.Indicator />
-          </Radio.Root>
-          Gala
-        </Radio.Label>
-
-        <Radio.Label>
-          <Radio.Root value="granny-smith-apple">
-            <Radio.Indicator />
-          </Radio.Root>
-          Granny Smith
-        </Radio.Label>
-      </RadioGroup.Root>
-    </Fieldset.Root>
+    <RadioGroup.Root defaultValue="fuji-apple">
+      <Radio.Label>
+        <Radio.Root value="fuji-apple">
+          <Radio.Indicator />
+        </Radio.Root>
+        Fuji
+      </Radio.Label>
+    </RadioGroup.Root>
   );
 }

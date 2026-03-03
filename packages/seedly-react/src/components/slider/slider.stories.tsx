@@ -22,8 +22,8 @@ function Example() {
       <Slider.Control>
         <Slider.Track>
           <Slider.Indicator />
-          <Slider.Thumb aria-label="Volume" />
         </Slider.Track>
+        <Slider.Thumb aria-label="Volume" />
       </Slider.Control>
     </Slider.Root>
   );
