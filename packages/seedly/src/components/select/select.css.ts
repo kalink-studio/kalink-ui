@@ -104,7 +104,7 @@ const selectDefaults = assignVars(selectVars, {
     itemPaddingBlockCoarse: sys.spacing[5],
     itemPaddingInlineEnd: sys.spacing[8],
     itemPaddingInlineEndWithoutSide: sys.spacing[15],
-    itemPaddingInlineStart: sys.spacing[4],
+    itemPaddingInlineStart: sys.spacing[8],
     listPaddingBlock: sys.spacing[2],
     listScrollPaddingBlock: sys.spacing[2],
     popupMinInlineOffset: sys.spacing[0],
