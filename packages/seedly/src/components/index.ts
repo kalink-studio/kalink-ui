@@ -22,6 +22,7 @@ export * as gridStyles from './grid';
 export * as headingStyles from './heading';
 export * as inputStyles from './input';
 export * as labelStyles from './label';
+export * as listStyles from './list';
 export * as menuStyles from './menu';
 export * as menubarStyles from './menubar';
 export * as meterStyles from './meter';

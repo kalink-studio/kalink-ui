@@ -1,3 +1,6 @@
+import { List, ListItem } from '../list';
+import { Text } from '../text';
+
 import { Collapsible } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -25,11 +28,23 @@ function Example() {
         Recovery keys
       </Collapsible.Trigger>
       <Collapsible.Panel>
-        <Collapsible.Content>
-          <div>alien-bean-pasta</div>
-          <div>wild-irish-burrito</div>
-          <div>horse-battery-staple</div>
-        </Collapsible.Content>
+        <List
+          listStyle="disc"
+          listType="unordered"
+          markerPosition="inside"
+          itemSpacing={4}
+          itemInlineSpacing={5}
+        >
+          <ListItem>
+            <Text>alien-bean-pasta</Text>
+          </ListItem>
+          <ListItem>
+            <Text>wild-irish-burrito</Text>
+          </ListItem>
+          <ListItem>
+            <Text>horse-battery-staple</Text>
+          </ListItem>
+        </List>
       </Collapsible.Panel>
     </Collapsible.Root>
   );

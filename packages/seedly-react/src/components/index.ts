@@ -29,6 +29,8 @@ export type {
 } from './heading';
 export { Input, InputLabel } from './input';
 export { Label } from './label';
+export { List, ListItem } from './list';
+export type { ListProps, ListItemProps } from './list';
 export { Menu } from './menu';
 export { Menubar } from './menubar';
 export { Meter } from './meter';
