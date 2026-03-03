@@ -1,4 +1,4 @@
-import { Stack, Text } from '@kalink-ui/seedly';
+import { Stack, Text } from '@kalink-ui/seedly-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -17,10 +17,10 @@ export function Footer({ tint = 'primary' }: FooterProps) {
       <Container size="3xl">
         <Stack spacing={4} align="center">
           <Stack align="center" spacing={1}>
-            <Text use="span" variant="headline" size="small">
+            <Text variant="headline" size="small">
               KalinK Studio ©{new Date().getFullYear()}
             </Text>
-            <Text use="span" variant="body" size="medium">
+            <Text variant="body" size="medium">
               Bureau de communication
             </Text>
           </Stack>

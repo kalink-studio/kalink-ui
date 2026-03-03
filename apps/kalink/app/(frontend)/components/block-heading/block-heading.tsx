@@ -1,4 +1,4 @@
-import { Heading, type HeadingTypes } from '@kalink-ui/seedly';
+import { Heading, type HeadingLevel } from '@kalink-ui/seedly-react';
 import { clsx } from 'clsx';
 
 import type { AnchorFields } from '@/types/cms';
@@ -7,7 +7,7 @@ import { getAnchorId } from '@/utils/get-anchor-id';
 export interface BlockHeadingProps {
   title: string;
   anchor: AnchorFields;
-  as?: HeadingTypes;
+  as?: HeadingLevel;
   className?: string;
 }
 
@@ -20,13 +20,13 @@ export function BlockHeading({
   const id = getAnchorId(anchor, title);
 
   return (
-    <Heading
-      use={as ?? 'h2'}
+    <Heading.Root
+      level={as ?? 'h2'}
       wrap="balance"
       className={clsx(className)}
       {...(id ? { id } : {})}
     >
       {title}
-    </Heading>
+    </Heading.Root>
   );
 }

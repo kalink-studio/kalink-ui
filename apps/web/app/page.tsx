@@ -1,9 +1,9 @@
-import { Heading } from '@kalink-ui/seedly';
+import { Heading } from '@kalink-ui/seedly-react';
 
 export default function Home() {
   return (
-    <Heading variant="display" size="large">
+    <Heading.Root variant="display" size="large">
       Kalink UI
-    </Heading>
+    </Heading.Root>
   );
 }

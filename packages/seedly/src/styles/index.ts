@@ -7,5 +7,7 @@ export * from './tone';
 export * from './color-profile';
 export * from './transition';
 export * from './typography.css';
+export * from './typography.responsive.css';
+export * from './typography.responsive';
 export * from './state-color';
 export * from './scale';

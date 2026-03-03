@@ -1,4 +1,4 @@
-import { Heading, Stack, Text } from '@kalink-ui/seedly';
+import { Heading, Stack, Text } from '@kalink-ui/seedly-react';
 import {
   SerializedLinkNode,
   SerializedListItemNode,
@@ -117,8 +117,8 @@ function renderNode(node: SerializedLexicalNode, key: number): React.ReactNode {
 
       return (
         <Text
-          use="p"
           key={key}
+          render={<p />}
           wrap="balance"
           variant={variantValue}
           size={sizeValue}
@@ -129,7 +129,7 @@ function renderNode(node: SerializedLexicalNode, key: number): React.ReactNode {
     }
     case 'paragraph':
       return (
-        <Text use="p" key={key} wrap="balance">
+        <Text key={key} render={<p />} wrap="balance">
           {isElementNode(node) ? renderChildren(node.children) : null}
         </Text>
       );
@@ -142,19 +142,19 @@ function renderNode(node: SerializedLexicalNode, key: number): React.ReactNode {
         : 'h2';
 
       return (
-        <Heading
+        <Heading.Root
           key={key}
-          use={tag}
+          level={tag}
           wrap="balance"
           className={headingRichText({ level: tag })}
         >
           {renderChildren((node as SerializedElementNode).children)}
-        </Heading>
+        </Heading.Root>
       );
     }
     case 'quote':
       return (
-        <Text use="blockquote" key={key} wrap="balance">
+        <Text key={key} render={<blockquote />} wrap="balance">
           {isElementNode(node) ? renderChildren(node.children) : null}
         </Text>
       );
@@ -170,7 +170,7 @@ function renderNode(node: SerializedLexicalNode, key: number): React.ReactNode {
     case 'listitem':
     case 'list-item':
       return (
-        <Text use="li" key={key} wrap="balance">
+        <Text key={key} render={<li />} wrap="balance">
           {isElementNode(node)
             ? renderChildren((node as SerializedListItemNode).children)
             : null}

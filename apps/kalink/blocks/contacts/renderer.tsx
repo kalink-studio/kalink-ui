@@ -1,5 +1,5 @@
 import { isObject } from '@kalink-ui/dibbly';
-import { Stack, Text } from '@kalink-ui/seedly';
+import { Stack, Text } from '@kalink-ui/seedly-react';
 
 import { BlockHeading } from '@/app/(frontend)/components/block-heading';
 import { ContactForm } from '@/app/(frontend)/components/contact-form';
@@ -63,7 +63,7 @@ export async function ContactsSection({ block }: ContactsProps) {
             <Stack spacing={3}>
               <BlockHeading title={block.title} anchor={block} as="h3" />
               {block.subtitle ? (
-                <Text use="span" variant="title" size="small">
+                <Text variant="title" size="small">
                   {block.subtitle}
                 </Text>
               ) : null}

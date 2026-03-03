@@ -19,6 +19,14 @@ export { Fieldset } from './fieldset';
 export { Frame } from './frame';
 export { Form } from './form';
 export { Grid, GridChild } from './grid';
+export { Heading } from './heading';
+export type {
+  HeadingLevel,
+  HeadingPretitleProps,
+  HeadingRootProps,
+  HeadingSubtitleProps,
+  HeadingVariant,
+} from './heading';
 export { Input, InputLabel } from './input';
 export { Label } from './label';
 export { Menu } from './menu';
@@ -39,6 +47,7 @@ export { Slider } from './slider';
 export { Stack } from './stack';
 export { Switch } from './switch';
 export { Switcher } from './switcher';
+export { Text } from './text';
 export { Tabs } from './tabs';
 export { Toast } from './toast';
 export { Toggle } from './toggle';
