@@ -39,7 +39,7 @@ export const accordionVars = createThemeContract({
 const accordionDefaults = assignVars(accordionVars, {
   color: {
     itemBorder: sys.color.border.low,
-    itemBorderHover: sys.color.border.high,
+    itemBorderHover: sys.color.tone.primary,
     panelForeground: stateColor.mutedContent,
     rootForeground: sys.color.content.base,
   },

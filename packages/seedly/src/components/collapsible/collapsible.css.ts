@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { sys, transition, typography } from '../../styles';
+import { sys, transition } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const collapsibleVars = createThemeContract({
@@ -56,7 +56,7 @@ const collapsibleDefaults = assignVars(collapsibleVars, {
   },
   size: {
     iconSize: sys.spacing[6],
-    rootMinBlockSize: `calc(${sys.spacing[18]} * 2)`,
+    rootMinBlockSize: `initial`,
   },
   spacing: {
     contentGap: sys.spacing[4],
@@ -122,40 +122,37 @@ export const icon = style({
   },
 });
 
-export const panel = style([
-  typography.body.medium,
-  {
-    '@layer': {
-      [components]: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'end',
+export const panel = style({
+  '@layer': {
+    [components]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'end',
 
-        blockSize: 'var(--collapsible-panel-height)',
-        overflow: 'hidden',
+      blockSize: 'var(--collapsible-panel-height)',
+      overflow: 'hidden',
 
-        transition: transition('block-size', {
-          duration: collapsibleVars.motion.panelSizeDuration,
-          easing: collapsibleVars.motion.panelSizeEasing,
-        }),
+      transition: transition('block-size', {
+        duration: collapsibleVars.motion.panelSizeDuration,
+        easing: collapsibleVars.motion.panelSizeEasing,
+      }),
 
-        selectors: {
-          "&[hidden]:not([hidden='until-found'])": {
-            display: 'none',
-          },
+      selectors: {
+        "&[hidden]:not([hidden='until-found'])": {
+          display: 'none',
+        },
 
-          '&[data-starting-style]': {
-            blockSize: '0',
-          },
+        '&[data-starting-style]': {
+          blockSize: '0',
+        },
 
-          '&[data-ending-style]': {
-            blockSize: '0',
-          },
+        '&[data-ending-style]': {
+          blockSize: '0',
         },
       },
     },
   },
-]);
+});
 
 export const content = style({
   '@layer': {

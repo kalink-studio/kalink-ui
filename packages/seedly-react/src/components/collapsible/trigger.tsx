@@ -21,7 +21,7 @@ export function Trigger({
   className,
   render,
   unstyled,
-  variant = 'ghost',
+  variant = 'bare',
   tone = 'neutral',
   size = 'md',
   shape,
