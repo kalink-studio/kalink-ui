@@ -281,6 +281,9 @@ export const itemIndicator = style({
   '@layer': {
     [components]: {
       gridColumnStart: '1',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   },
 });

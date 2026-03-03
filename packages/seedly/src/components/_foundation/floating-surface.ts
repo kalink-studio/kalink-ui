@@ -224,7 +224,8 @@ const floatingItemPresets: Record<
   listboxWithIndicator: {
     display: 'grid',
     alignItems: 'center',
-    gridTemplateColumns: 'min-content 1fr',
+    gridTemplateColumns: `${sys.spacing[6]} 1fr`,
+    gap: sys.spacing[4],
     outline: '0',
     cursor: 'default',
     userSelect: 'none',
