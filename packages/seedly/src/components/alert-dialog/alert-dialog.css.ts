@@ -86,7 +86,7 @@ export const backdrop = style({
 
       transition: transition('opacity', {
         duration: 'short.4',
-        easing: 'standard',
+        easing: 'decelerate.emphasized',
       }),
     }),
   },

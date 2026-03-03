@@ -1,5 +1,7 @@
 import { type StyleRule } from '@vanilla-extract/css';
 
+import { createBackdropSurfaceStyles } from './backdrop-surface';
+
 interface DialogButtonStylesOptions {
   vars: Record<string, string>;
 }
@@ -53,38 +55,22 @@ export function createDialogBackdropStyles(
   options: DialogBackdropStylesOptions,
 ): StyleRule {
   return {
-    vars: options.vars,
+    ...createBackdropSurfaceStyles({
+      vars: options.vars,
 
-    minBlockSize: options.minBlockSize,
+      minBlockSize: options.minBlockSize,
+      position: 'fixed',
+      hideOnLifecycleStates: true,
+      includeWebkitFixedFallback: true,
 
-    position: 'fixed',
-    insetBlock: '0',
-    insetInline: '0',
+      backgroundColor: `color-mix(in srgb, ${options.backdropColor} 30%, transparent)`,
+      backdropFilter: 'blur(2px)',
 
-    backgroundColor: options.backdropColor,
-    opacity: '0.2',
-
-    transition: options.transition,
-
-    '@supports': {
-      '(-webkit-touch-callout: none)': {
-        position: 'absolute',
-      },
-    },
-
+      transition: options.transition,
+    }),
     '@media': {
       '(prefers-color-scheme: dark)': {
-        opacity: '0.35',
-      },
-    },
-
-    selectors: {
-      '&[data-starting-style]': {
-        opacity: '0',
-      },
-
-      '&[data-ending-style]': {
-        opacity: '0',
+        backgroundColor: `color-mix(in srgb, ${options.backdropColor} 50%, transparent)`,
       },
     },
   };
