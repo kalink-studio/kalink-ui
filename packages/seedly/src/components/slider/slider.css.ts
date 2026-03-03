@@ -64,6 +64,7 @@ export const control = style({
 
   display: 'flex',
   alignItems: 'center',
+  position: 'relative',
   inlineSize: '100%',
   paddingBlock: sliderVars.spacing.controlPaddingBlock,
   touchAction: 'none',
@@ -86,6 +87,7 @@ export const indicator = style({
 });
 
 export const thumb = style({
+  position: 'absolute',
   inlineSize: sliderVars.size.thumbSize,
   blockSize: sliderVars.size.thumbSize,
   borderRadius: sliderVars.shape.thumbCorner,

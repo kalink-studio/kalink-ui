@@ -5,6 +5,7 @@ import { stateColor, sys, transition, typography } from '../../styles';
 export const accordionVars = createThemeContract({
   color: {
     itemBorder: null,
+    itemBorderHover: null,
     panelForeground: null,
     rootForeground: null,
   },
@@ -37,6 +38,7 @@ export const accordionVars = createThemeContract({
 const accordionDefaults = assignVars(accordionVars, {
   color: {
     itemBorder: sys.color.border.low,
+    itemBorderHover: sys.color.border.high,
     panelForeground: stateColor.mutedContent,
     rootForeground: sys.color.content.base,
   },
@@ -78,6 +80,22 @@ export const accordion = style({
 
 export const item = style({
   borderBlockEnd: `${accordionVars.size.itemBorderBlockEndWidth} solid ${accordionVars.color.itemBorder}`,
+  transition: transition('border-color', {
+    duration: sys.motion.duration.short[2],
+    easing: sys.motion.easing.standard,
+  }),
+  selectors: {
+    '&:hover': {
+      '@media': {
+        '(hover: hover)': {
+          borderColor: accordionVars.color.itemBorderHover,
+        },
+      },
+    },
+    '&:focus-within': {
+      borderColor: accordionVars.color.itemBorderHover,
+    },
+  },
 });
 
 export const header = style({
@@ -104,7 +122,9 @@ export const trigger = style([
       '&:focus-visible': {
         zIndex: '1',
 
+        outline: `2px solid ${sys.color.tone.primary}`,
         outlineOffset: accordionVars.layout.triggerFocusOutlineOffset,
+        borderRadius: sys.shape.corner.small,
       },
     },
   },

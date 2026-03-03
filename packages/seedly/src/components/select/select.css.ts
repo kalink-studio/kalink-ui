@@ -1,5 +1,4 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 
 import { sys, typography } from '../../styles';
 import {
@@ -50,6 +49,7 @@ export const selectVars = createThemeContract({
   },
   spacing: {
     itemHighlightInsetInline: null,
+    itemPaddingBlock: null,
     itemPaddingBlockCoarse: null,
     itemPaddingInlineEnd: null,
     itemPaddingInlineEndWithoutSide: null,
@@ -73,7 +73,7 @@ const selectDefaults = assignVars(selectVars, {
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
-    popupOutlineInverse: sys.color.border.low,
+    popupOutlineInverse: 'transparent',
     popupShadow: sys.elevation.moderate,
     scrollArrowBackground: sys.color.surface.base,
     triggerBackground: sys.color.surface.base,
@@ -99,13 +99,14 @@ const selectDefaults = assignVars(selectVars, {
   },
   spacing: {
     itemHighlightInsetInline: sys.spacing[4],
+    itemPaddingBlock: sys.spacing[2],
     itemPaddingBlockCoarse: sys.spacing[5],
     itemPaddingInlineEnd: sys.spacing[8],
     itemPaddingInlineEndWithoutSide: sys.spacing[15],
-    itemPaddingInlineStart: sys.spacing[5],
-    listPaddingBlock: sys.spacing[0],
-    listScrollPaddingBlock: sys.spacing[0],
-    popupMinInlineOffset: sys.spacing[8],
+    itemPaddingInlineStart: sys.spacing[4],
+    listPaddingBlock: sys.spacing[2],
+    listScrollPaddingBlock: sys.spacing[2],
+    popupMinInlineOffset: sys.spacing[0],
     scrollArrowBlockSize: sys.spacing[8],
     triggerGap: sys.spacing[6],
     triggerPaddingInlineEnd: sys.spacing[6],
@@ -179,15 +180,12 @@ export const popup = style({
     outline: selectVars.color.popupOutline,
     outlineInverse: selectVars.color.popupOutlineInverse,
     shadow: selectVars.color.popupShadow,
+    motion: {
+      preset: 'scaleSoft',
+    },
     selectors: {
       [`&[data-side='none']`]: {
-        transition: 'none',
-        transform: 'none',
-        opacity: '1',
-        minInlineSize: calc.add(
-          'var(--anchor-width)',
-          selectVars.spacing.popupMinInlineOffset,
-        ),
+        minInlineSize: 'var(--anchor-width)',
       },
     },
   }),
@@ -211,9 +209,10 @@ export const arrowInnerStroke = style({
 });
 
 export const item = style([
-  typography.label.medium,
+  typography.body.large,
   createFloatingHighlightedItemStyles({
     preset: 'listboxWithIndicator',
+    paddingBlock: selectVars.spacing.itemPaddingBlock,
     highlight: {
       backgroundColor: selectVars.color.itemHighlightBackground,
       borderRadius: selectVars.shape.itemHighlightCorner,

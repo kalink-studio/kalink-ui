@@ -6,6 +6,7 @@ import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
   createFloatingArrowPlacementStyles,
+  createFloatingPositionerStyles,
   createFloatingSurfaceStyles,
   floatingSurfaceDarkOutlineColor,
 } from '../_foundation';
@@ -47,7 +48,7 @@ const previewCardDefaults = assignVars(previewCardVars, {
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
-    popupOutlineInverse: sys.color.border.low,
+    popupOutlineInverse: 'transparent',
     popupShadow: sys.elevation.moderate,
     triggerFocusRing: sys.color.tone.primary,
     triggerForeground: sys.color.tone.primary,
@@ -69,6 +70,10 @@ const previewCardDefaults = assignVars(previewCardVars, {
 });
 
 export const positioner = style({
+  ...createFloatingPositionerStyles({
+    zIndex: '1',
+  }),
+
   vars: {
     ...previewCardDefaults,
   },

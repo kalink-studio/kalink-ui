@@ -1,7 +1,7 @@
 import { type StyleRule } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
-import { sys } from '../../styles';
+import { sys, transition } from '../../styles';
 
 import { createInsetHighlightStyles } from './highlight-item';
 
@@ -169,6 +169,10 @@ const floatingMotionPresets: Record<
 > = {
   scale: {},
   scaleSoft: {
+    transition: transition(['opacity', 'transform'], {
+      duration: 'short.2',
+      easing: 'standard',
+    }),
     startingStyle: softFloatingStateStyle,
     endingStyle: softFloatingStateStyle,
   },
@@ -220,6 +224,7 @@ const floatingItemPresets: Record<
   listboxWithIndicator: {
     display: 'grid',
     alignItems: 'center',
+    gridTemplateColumns: 'min-content 1fr',
     outline: '0',
     cursor: 'default',
     userSelect: 'none',
@@ -259,7 +264,8 @@ export function createFloatingSurfaceStyles(
     transition:
       options.popup?.transition ??
       options.motion?.transition ??
-      options.transition,
+      options.transition ??
+      motionPreset.transition,
     inlineSize: options.popup?.inlineSize ?? options.inlineSize,
     blockSize: options.popup?.blockSize ?? options.blockSize,
     minInlineSize: options.popup?.minInlineSize ?? options.minInlineSize,
@@ -435,7 +441,14 @@ export function createFloatingPopupStyles(
     paddingBlock: options.paddingBlock,
     paddingInline: options.paddingInline,
     transformOrigin: options.transformOrigin ?? 'var(--transform-origin)',
-    transition: options.transition === null ? undefined : options.transition,
+    transition:
+      options.transition === null
+        ? undefined
+        : (options.transition ??
+          transition(['transform', 'opacity'], {
+            duration: 'short.4',
+            easing: 'standard',
+          })),
     inlineSize: options.inlineSize,
     blockSize: options.blockSize,
     minInlineSize: options.minInlineSize,
@@ -458,23 +471,29 @@ export interface FloatingArrowPlacementStylesOptions {
 export function createFloatingArrowPlacementStyles(
   options: FloatingArrowPlacementStylesOptions = {},
 ): StyleRule {
+  const defaultVerticalOffset = '-8px';
+  const defaultHorizontalOffset = '-13px';
+
   return {
     display: 'flex',
+    pointerEvents: 'none',
+    position: 'relative',
+    zIndex: '1',
     selectors: {
       [`&[data-side='top']`]: {
-        bottom: options.sideTopOffset ?? calc.negate(sys.spacing[4]),
+        bottom: options.sideTopOffset ?? defaultVerticalOffset,
         rotate: '180deg',
       },
       [`&[data-side='bottom']`]: {
-        top: options.sideBottomOffset ?? calc.negate(sys.spacing[4]),
+        top: options.sideBottomOffset ?? defaultVerticalOffset,
         rotate: '0deg',
       },
       [`&[data-side='left']`]: {
-        right: options.sideLeftOffset ?? calc.negate(sys.spacing[7]),
+        right: options.sideLeftOffset ?? defaultHorizontalOffset,
         rotate: '90deg',
       },
       [`&[data-side='right']`]: {
-        left: options.sideRightOffset ?? calc.negate(sys.spacing[7]),
+        left: options.sideRightOffset ?? defaultHorizontalOffset,
         rotate: '-90deg',
       },
     },

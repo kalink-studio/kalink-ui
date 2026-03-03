@@ -39,10 +39,13 @@ export const menuVars = createThemeContract({
 
   size: {
     separatorBlockSize: null,
+    minInlineSize: null,
   },
 
   spacing: {
     itemHighlightInsetInline: null,
+    itemPaddingBlock: null,
+    itemPaddingInline: null,
     popupPaddingBlock: null,
     separatorMarginBlock: null,
     separatorMarginInline: null,
@@ -61,7 +64,7 @@ const menuDefaults = assignVars(menuVars, {
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
-    popupOutlineInverse: sys.color.border.low,
+    popupOutlineInverse: 'transparent',
     popupShadow: sys.elevation.moderate,
 
     separator: sys.color.border.high,
@@ -76,10 +79,13 @@ const menuDefaults = assignVars(menuVars, {
 
   size: {
     separatorBlockSize: '1px',
+    minInlineSize: calc.divide(sys.layout.measure, 3),
   },
 
   spacing: {
     itemHighlightInsetInline: sys.spacing[4],
+    itemPaddingBlock: sys.spacing[2],
+    itemPaddingInline: sys.spacing[8],
     popupPaddingBlock: sys.spacing[2],
     separatorMarginBlock: sys.spacing[3],
     separatorMarginInline: sys.spacing[8],
@@ -111,6 +117,7 @@ export const buttonIcon = style({
 
 export const positioner = style({
   ...createFloatingPositionerStyles({
+    zIndex: '1',
     vars: {
       ...menuDefaults,
     },
@@ -126,6 +133,7 @@ export const popup = style({
     outlineInverse: menuVars.color.popupOutlineInverse,
     paddingBlock: menuVars.spacing.popupPaddingBlock,
     shadow: menuVars.color.popupShadow,
+    minInlineSize: menuVars.size.minInlineSize,
   }),
 });
 
@@ -146,9 +154,14 @@ export const arrowInnerStroke = style({
 });
 
 export const item = style([
-  typography.label.medium,
+  typography.body.medium,
   createFloatingHighlightedItemStyles({
     preset: 'menu',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: menuVars.spacing.itemPaddingInline,
+    paddingBlock: menuVars.spacing.itemPaddingBlock,
+    paddingInline: menuVars.spacing.itemPaddingInline,
     highlight: {
       backgroundColor: menuVars.color.itemHighlightedBackground,
       borderRadius: menuVars.shape.itemHighlightCorner,

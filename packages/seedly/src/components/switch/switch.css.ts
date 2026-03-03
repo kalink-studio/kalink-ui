@@ -79,16 +79,16 @@ const switchDefaults = assignVars(switchVars, {
     thumbBorderDisabled: `color-mix(in srgb, ${sys.color.content.base} 8%, transparent)`,
   },
   elevation: {
-    thumbShadow: sys.elevation.low,
-    trackShadow: `inset 0 1px 1px color-mix(in srgb, ${sys.color.content.base} 8%, transparent), ${sys.elevation.minimal}`,
-    trackShadowActive: `inset 0 1px 2px color-mix(in srgb, ${sys.color.content.base} 22%, transparent)`,
-    trackShadowDisabled: `inset 0 1px 1px color-mix(in srgb, ${sys.color.content.base} 8%, transparent)`,
+    thumbShadow: sys.elevation.minimal,
+    trackShadow: 'none',
+    trackShadowActive: 'none',
+    trackShadowDisabled: 'none',
   },
   motion: {
-    thumbTransitionDuration: 'short.4',
-    thumbTransitionEasing: 'standard',
-    trackTransitionDuration: 'short.4',
-    trackTransitionEasing: 'standard',
+    thumbTransitionDuration: sys.motion.duration.short[4],
+    thumbTransitionEasing: sys.motion.easing.standard,
+    trackTransitionDuration: sys.motion.duration.short[4],
+    trackTransitionEasing: sys.motion.easing.standard,
   },
   spacing: {
     labelGap: sys.spacing[4],
@@ -102,7 +102,7 @@ const switchDefaults = assignVars(switchVars, {
     thumbTranslateChecked: `calc(${switchVars.size.trackInlineSize} - ${switchVars.size.thumbSize} - (${switchVars.spacing.trackPadding} * 2))`,
   },
   shape: {
-    trackCorner: sys.shape.corner.circle,
+    trackCorner: '999px',
     thumbCorner: sys.shape.corner.circle,
   },
 });
@@ -129,6 +129,7 @@ export const label = style({
 });
 
 export const switchRoot = style({
+  boxSizing: 'border-box',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
@@ -230,6 +231,7 @@ export const switchRoot = style({
 });
 
 export const thumb = style({
+  boxSizing: 'border-box',
   display: 'block',
   inlineSize: switchVars.size.thumbSize,
   blockSize: switchVars.size.thumbSize,

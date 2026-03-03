@@ -37,7 +37,7 @@ const tabsDefaults = assignVars(tabsVars, {
     tabForeground: stateColor.mutedContent,
     tabForegroundActive: sys.color.content.base,
     tabFocusRing: sys.color.tone.primary,
-    indicatorBackground: sys.color.container.low,
+    indicatorBackground: sys.color.content.base,
   },
   motion: {
     indicatorTransitionDuration: sys.motion.duration.medium[1],
@@ -53,7 +53,7 @@ const tabsDefaults = assignVars(tabsVars, {
   },
   spacing: {
     listGap: sys.spacing[2],
-    listPaddingInline: sys.spacing[2],
+    listPaddingInline: '0',
     tabFocusInsetBlock: sys.spacing[2],
     tabFocusRingOffset: '-1px',
     panelFocusRingOffset: '-1px',
@@ -61,8 +61,6 @@ const tabsDefaults = assignVars(tabsVars, {
 });
 
 export const tabs = style({
-  border: `1px solid ${tabsVars.color.rootBorder}`,
-  borderRadius: tabsVars.shape.rootCorner,
   vars: {
     ...tabsDefaults,
   },
@@ -81,13 +79,39 @@ export const tab = style([
   {
     marginBlock: '0',
     marginInline: '0',
-    borderWidth: '0',
-    appearance: 'none',
+
     whiteSpace: 'nowrap',
     wordBreak: 'keep-all',
     color: tabsVars.color.tabForeground,
 
+    borderWidth: '0',
+    appearance: 'none',
+    backgroundColor: 'transparent',
+    position: 'relative',
+
     selectors: {
+      ['&::after']: {
+        content: "''",
+        position: 'absolute',
+        insetInline: '0',
+        insetBlockEnd: '0',
+        blockSize: '2px',
+        borderRadius: tabsVars.shape.indicatorCorner,
+        backgroundColor: tabsVars.color.rootBorder,
+        zIndex: 0,
+        opacity: 0,
+        transition: transition(['opacity'], {
+          duration: tabsVars.motion.indicatorTransitionDuration,
+          easing: tabsVars.motion.indicatorTransitionEasing,
+        }),
+      },
+      ['&:hover:not(:disabled):not([data-disabled]):not([data-loading])']: {
+        backgroundColor: 'transparent',
+      },
+      ['&:hover:not([data-active]):not(:disabled):not([data-disabled]):not([data-loading])::after']:
+        {
+          opacity: 1,
+        },
       [`&[data-active]`]: {
         color: tabsVars.color.tabForegroundActive,
       },
@@ -109,11 +133,11 @@ export const tab = style([
 
 export const indicator = style({
   inlineSize: 'var(--active-tab-width)',
-  blockSize: 'var(--active-tab-height)',
+  blockSize: '2px',
   position: 'absolute',
-  zIndex: '-1',
+  zIndex: '0',
   insetInlineStart: '0',
-  insetBlockStart: 'var(--active-tab-top)',
+  insetBlockEnd: '0',
   borderRadius: tabsVars.shape.indicatorCorner,
   backgroundColor: tabsVars.color.indicatorBackground,
   translate: 'var(--active-tab-left) 0',

@@ -49,7 +49,7 @@ const popoverDefaults = assignVars(popoverVars, {
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
-    popupOutlineInverse: sys.color.border.low,
+    popupOutlineInverse: 'transparent',
     popupShadow: sys.elevation.moderate,
     triggerOpenBackground: sys.color.container.low,
   },
@@ -60,8 +60,8 @@ const popoverDefaults = assignVars(popoverVars, {
     popupCorner: sys.shape.corner.rounded,
   },
   spacing: {
-    popupPaddingBlock: sys.spacing[8],
-    popupPaddingInline: sys.spacing[10],
+    popupPaddingBlock: sys.spacing[6],
+    popupPaddingInline: sys.spacing[8],
   },
 });
 
@@ -78,7 +78,9 @@ export const iconButton = style([
   },
 ]);
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
+  ...createFloatingPositionerStyles({
+    zIndex: '1',
+  }),
   inlineSize: 'var(--positioner-width)',
   blockSize: 'var(--positioner-height)',
   maxInlineSize: 'var(--available-width)',

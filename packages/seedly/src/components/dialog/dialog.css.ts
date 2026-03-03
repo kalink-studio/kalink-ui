@@ -59,10 +59,10 @@ const dialogDefaults = assignVars(dialogVars, {
     descriptionMarginBlock: `0 ${sys.spacing[10]}`,
     descriptionMarginInline: '0',
     popupMarginBlockStart: `calc(-1 * ${sys.spacing[12]})`,
-    popupPaddingBlock: sys.spacing[10],
-    popupPaddingInline: sys.spacing[10],
+    popupPaddingBlock: sys.spacing[6],
+    popupPaddingInline: sys.spacing[6],
     titleMarginBlockEnd: sys.spacing[2],
-    titleMarginBlockStart: `calc(-1 * ${sys.spacing[3]})`,
+    titleMarginBlockStart: sys.spacing[2],
   },
 });
 
@@ -101,6 +101,11 @@ export const popup = style(
     popupBackground: dialogVars.color.popupBackground,
     popupCorner: dialogVars.shape.popupCorner,
     outline: dialogVars.color.popupOutline,
+
+    transition: transition(['opacity', 'transform'], {
+      duration: 'short.4',
+      easing: 'decelerate.emphasized',
+    }),
   }),
 );
 

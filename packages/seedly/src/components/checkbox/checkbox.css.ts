@@ -72,6 +72,7 @@ export const checkbox = style({
     focusRingColor: checkboxVars.color.controlFocusRing,
     size: checkboxVars.size.controlSize,
     uncheckedBorderColor: checkboxVars.color.controlBorder,
+    animationType: 'fill-in',
   }),
 });
 
@@ -81,7 +82,27 @@ const checkboxIndicatorStyles = createChoiceIndicatorStyles({
 
 export const indicator = style({
   ...checkboxIndicatorStyles,
-  selectors: checkboxIndicatorStyles.selectors,
+  clipPath: 'inset(0 0 0 0)',
+  transition:
+    'transform 250ms cubic-bezier(0.165, 0.84, 0.44, 1) 100ms, opacity 250ms ease 100ms, clip-path 250ms cubic-bezier(0.165, 0.84, 0.44, 1) 125ms',
+  selectors: {
+    ...checkboxIndicatorStyles.selectors,
+    '&[data-unchecked]': {
+      opacity: 0,
+      transform: 'scale(0.8)',
+      clipPath: 'inset(0 100% 0 0)',
+    },
+    '&[data-starting-style]': {
+      opacity: 0,
+      transform: 'scale(0.8)',
+      clipPath: 'inset(0 100% 0 0)',
+    },
+    '&[data-ending-style]': {
+      opacity: 0,
+      transform: 'scale(0.8)',
+      clipPath: 'inset(0 100% 0 0)',
+    },
+  },
 });
 
 globalStyle(`${indicator} > svg`, {

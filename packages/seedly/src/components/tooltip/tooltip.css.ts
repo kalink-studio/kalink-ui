@@ -43,7 +43,7 @@ const tooltipDefaults = assignVars(tooltipVars, {
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
-    popupOutlineInverse: sys.color.border.low,
+    popupOutlineInverse: 'transparent',
     popupShadow: sys.elevation.moderate,
 
     triggerOpenBackground: sys.color.container.low,
@@ -73,7 +73,9 @@ export const button = style([
   },
 ]);
 export const positioner = style({
-  ...createFloatingPositionerStyles(),
+  ...createFloatingPositionerStyles({
+    zIndex: '1',
+  }),
   vars: {
     ...tooltipDefaults,
   },

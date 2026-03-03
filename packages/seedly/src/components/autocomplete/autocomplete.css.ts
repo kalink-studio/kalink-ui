@@ -47,6 +47,8 @@ export const autocompleteVars = createThemeContract({
     inputPaddingInlineEnd: null,
     inputPaddingInlineStart: null,
     itemHighlightInsetInline: null,
+    itemPaddingBlock: null,
+    itemPaddingInline: null,
     listPaddingBlock: null,
     listScrollPaddingBlock: null,
     stackGap: null,
@@ -88,8 +90,10 @@ const autocompleteDefaults = assignVars(autocompleteVars, {
     inputPaddingInlineEnd: sys.spacing[4],
     inputPaddingInlineStart: sys.spacing[4],
     itemHighlightInsetInline: sys.spacing[4],
-    listPaddingBlock: sys.spacing[0],
-    listScrollPaddingBlock: sys.spacing[0],
+    itemPaddingBlock: sys.spacing[2],
+    itemPaddingInline: sys.spacing[8],
+    listPaddingBlock: sys.spacing[2],
+    listScrollPaddingBlock: sys.spacing[2],
     stackGap: sys.spacing[2],
     zero: sys.spacing[0],
   },
@@ -138,11 +142,11 @@ export const label = style({
 });
 
 export const positioner = style({
+  ...createFloatingPositionerStyles(),
+
   vars: {
     ...autocompleteDefaults,
   },
-
-  ...createFloatingPositionerStyles(),
 });
 
 export const popup = style({
@@ -177,8 +181,10 @@ export const list = style({
 });
 
 export const item = style([
-  typography.body.large,
+  typography.body.medium,
   createFloatingItemStyles({
+    paddingBlock: autocompleteVars.spacing.itemPaddingBlock,
+    paddingInline: autocompleteVars.spacing.itemPaddingInline,
     overflowWrap: 'anywhere',
     selectors: {
       ...autocompleteItemHighlightSelectors,
@@ -186,15 +192,18 @@ export const item = style([
   }),
 ]);
 
-export const empty = style({
-  selectors: {
-    [`&:not(:empty)`]: {
-      paddingBlock: autocompleteVars.spacing.emptyPaddingBlock,
-      paddingInline: autocompleteVars.spacing.emptyPaddingInline,
+export const empty = style([
+  typography.body.medium,
+  {
+    selectors: {
+      [`&:not(:empty)`]: {
+        paddingBlock: autocompleteVars.spacing.emptyPaddingBlock,
+        paddingInline: autocompleteVars.spacing.emptyPaddingInline,
 
-      fontSize: sys.typography.body.medium.size,
-      lineHeight: sys.typography.body.medium.lineHeight,
-      color: autocompleteVars.color.emptyForeground,
+        fontSize: sys.typography.body.medium.size,
+        lineHeight: sys.typography.body.medium.lineHeight,
+        color: autocompleteVars.color.emptyForeground,
+      },
     },
   },
-});
+]);

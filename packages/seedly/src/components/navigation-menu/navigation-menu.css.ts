@@ -108,17 +108,17 @@ const navigationMenuDefaults = assignVars(navigationMenuVars, {
   },
 
   layout: {
-    contentMinInlineSizeDesktop: '400px',
+    contentMinInlineSizeDesktop: sys.layout.measure,
     contentMobileInlineSize: calc.subtract('100vw', sys.spacing[14]),
-    flexLinkListMaxInlineSize: '400px',
-    gridLinkColumnInlineSize: '12rem',
+    flexLinkListMaxInlineSize: sys.layout.measure,
+    gridLinkColumnInlineSize: calc.divide(sys.layout.measure, 2),
   },
 
   motion: {
     arrowPositionDuration: sys.motion.duration.medium[4],
     arrowPositionEasing: sys.motion.easing.decelerate.emphasized,
-    contentOpacityDuration: sys.motion.duration.long[3],
-    contentOpacityEasing: sys.motion.easing.standard,
+    contentOpacityDuration: sys.motion.duration.medium[3],
+    contentOpacityEasing: sys.motion.easing.decelerate.emphasized,
     contentTransformDuration: sys.motion.duration.medium[3],
     contentTransformEasing: sys.motion.easing.decelerate.emphasized,
     iconRotationDuration: sys.motion.duration.medium[3],
@@ -253,11 +253,13 @@ export const icon = style({
 });
 
 export const positioner = style({
+  ...createFloatingPositionerStyles({
+    zIndex: '1',
+  }),
+
   vars: {
     ...navigationMenuDefaults,
   },
-
-  ...createFloatingPositionerStyles(),
 
   blockSize: 'var(--positioner-height)',
   inlineSize: 'var(--positioner-width)',

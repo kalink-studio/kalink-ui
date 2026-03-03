@@ -42,6 +42,8 @@ export const comboboxVars = createThemeContract({
     inputPaddingInlineEndWithClear: null,
     inputPaddingInlineStart: null,
     itemHighlightInsetInline: null,
+    itemPaddingBlock: null,
+    itemPaddingInline: null,
     listPaddingBlock: null,
     listScrollPaddingBlock: null,
     stackGap: null,
@@ -102,8 +104,10 @@ const comboboxDefaults = assignVars(comboboxVars, {
     ),
     inputPaddingInlineStart: sys.spacing[4],
     itemHighlightInsetInline: sys.spacing[4],
-    listPaddingBlock: sys.spacing[0],
-    listScrollPaddingBlock: sys.spacing[0],
+    itemPaddingBlock: sys.spacing[2],
+    itemPaddingInline: sys.spacing[8],
+    listPaddingBlock: sys.spacing[2],
+    listScrollPaddingBlock: sys.spacing[2],
     stackGap: sys.spacing[2],
     zero: sys.spacing[0],
   },
@@ -166,17 +170,20 @@ export const input = style([
   },
 ]);
 
-export const empty = style({
-  selectors: {
-    [`&:not(:empty)`]: {
-      paddingBlock: comboboxVars.spacing.emptyPaddingBlock,
-      paddingInline: comboboxVars.spacing.emptyPaddingInline,
-      fontSize: sys.typography.body.medium.size,
-      lineHeight: sys.typography.body.medium.lineHeight,
-      color: comboboxVars.color.emptyForeground,
+export const empty = style([
+  typography.body.medium,
+  {
+    selectors: {
+      [`&:not(:empty)`]: {
+        paddingBlock: comboboxVars.spacing.emptyPaddingBlock,
+        paddingInline: comboboxVars.spacing.emptyPaddingInline,
+        fontSize: sys.typography.body.medium.size,
+        lineHeight: sys.typography.body.medium.lineHeight,
+        color: comboboxVars.color.emptyForeground,
+      },
     },
   },
-});
+]);
 
 export const actionButtons = style({
   display: 'flex',
@@ -230,9 +237,11 @@ export const list = style({
 });
 
 export const item = style([
-  typography.body.large,
+  typography.body.medium,
   createFloatingItemStyles({
     preset: 'listboxWithIndicator',
+    paddingBlock: comboboxVars.spacing.itemPaddingBlock,
+    paddingInline: comboboxVars.spacing.itemPaddingInline,
     selectors: {
       ...comboboxItemHighlightSelectors,
     },

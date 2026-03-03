@@ -104,7 +104,7 @@ const buttonSizeStyles = {
             }),
 
             ...assignVars(buttonVars.size, {
-              rootIcon: sys.spacing[5],
+              rootIcon: sys.spacing[6],
             }),
           },
         },
@@ -125,7 +125,7 @@ const buttonSizeStyles = {
             }),
 
             ...assignVars(buttonVars.size, {
-              rootIcon: sys.spacing[6],
+              rootIcon: sys.spacing[8],
             }),
           },
         },
@@ -146,7 +146,7 @@ const buttonSizeStyles = {
             }),
 
             ...assignVars(buttonVars.size, {
-              rootIcon: sys.spacing[7],
+              rootIcon: sys.spacing[10],
             }),
           },
         },

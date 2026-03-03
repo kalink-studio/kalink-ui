@@ -1,10 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import {
-  createChoiceControlStyles,
-  createChoiceIndicatorStyles,
-} from '../_foundation';
+import { createChoiceControlStyles } from '../_foundation';
 
 export const radioVars = createThemeContract({
   color: {
@@ -67,16 +64,12 @@ export const radio = style({
     focusRingColor: radioVars.color.controlFocusRing,
     size: radioVars.size.controlSize,
     uncheckedBorderColor: radioVars.color.controlBorder,
+    animationType: 'fill-in',
+    indicatorSize: radioVars.size.indicatorSize,
+    indicatorColor: radioVars.color.indicatorForeground,
   }),
 });
 
 export const indicator = style({
-  ...createChoiceIndicatorStyles({
-    alignCenter: true,
-    before: {
-      size: radioVars.size.indicatorSize,
-      borderRadius: radioVars.shape.controlCorner,
-      backgroundColor: radioVars.color.indicatorForeground,
-    },
-  }),
+  display: 'none',
 });
