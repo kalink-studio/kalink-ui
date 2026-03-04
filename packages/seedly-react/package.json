@@ -19,11 +19,16 @@
   "scripts": {
     "lint": "eslint --max-warnings 0",
     "lint:fix": "pnpm lint --fix",
-    "build-storybook": "storybook build",
-    "dev": "storybook dev -p 6006 --no-open",
+    "storybook:build": "storybook build",
+    "storybook:dev": "storybook dev -p 6006 --no-open",
+    "storybook:test": "vitest run --project=storybook",
+    "storybook:test:coverage": "vitest run --project=storybook --coverage",
+    "build-storybook": "pnpm -w run build-storybook:seedly-react",
+    "dev": "pnpm -w run dev:seedly-react",
     "test": "vitest run --project=unit",
     "test:watch": "vitest --project=unit",
-    "test-storybook": "vitest run --project=storybook",
+    "test-storybook": "pnpm -w run test-storybook:seedly-react",
+    "test-storybook:coverage": "pnpm -w run test-storybook:coverage:seedly-react",
     "tsc": "tsc -b"
   },
   "devDependencies": {
