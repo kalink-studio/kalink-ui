@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Select } from '../select';
 import { Toggle } from '../toggle';
 import { ToggleGroup } from '../toggle-group';
@@ -19,12 +21,29 @@ type Story = StoryObj<typeof Toolbar.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const formatButton = canvas.getByRole('button', {
+      name: /format as percent/i,
+    });
+    await userEvent.click(formatButton);
+    await expect(formatButton).toBeEnabled();
+  },
 };
 
 function Example() {
   return (
     <Toolbar.Root>
-      <ToggleGroup aria-label="Alignment" defaultValue={['align-left']}>
+      <Toolbar.Group
+        aria-label="Alignment"
+        render={
+          <ToggleGroup
+            aria-label="Alignment"
+            defaultValue={['align-right']}
+            render={<div />}
+          />
+        }
+      >
         <Toolbar.Button
           render={<Toggle />}
           aria-label="Align left"
@@ -39,39 +58,56 @@ function Example() {
         >
           Align Right
         </Toolbar.Button>
-      </ToggleGroup>
-      <Toolbar.Separator />
-      <Toolbar.Group aria-label="Numerical format">
-        <Toolbar.Button aria-label="Format as currency" icon="$" />
-        <Toolbar.Button aria-label="Format as percent">%</Toolbar.Button>
       </Toolbar.Group>
       <Toolbar.Separator />
-      <Select.Root defaultValue="Helvetica">
-        <Toolbar.Button render={<Select.Trigger />}>
-          <Select.Value />
-          <Select.Icon>
-            <ChevronUpDownIcon />
-          </Select.Icon>
-        </Toolbar.Button>
-        <Select.Portal>
-          <Select.Positioner sideOffset={8}>
-            <Select.Popup>
-              <Select.Item value="Helvetica">
-                <Select.ItemIndicator>
-                  <CheckIcon />
-                </Select.ItemIndicator>
-                <Select.ItemText>Helvetica</Select.ItemText>
-              </Select.Item>
-              <Select.Item value="Arial">
-                <Select.ItemIndicator>
-                  <CheckIcon />
-                </Select.ItemIndicator>
-                <Select.ItemText>Arial</Select.ItemText>
-              </Select.Item>
-            </Select.Popup>
-          </Select.Positioner>
-        </Select.Portal>
-      </Select.Root>
+      <Toolbar.Group
+        aria-label="Numerical format"
+        render={<ToggleGroup render={<div />} />}
+      >
+        <Toolbar.Button
+          render={<Toggle />}
+          aria-label="Format as currency"
+          icon="$"
+          value="currency"
+        />
+        <Toolbar.Button
+          render={<Toggle />}
+          aria-label="Format as percent"
+          icon="%"
+          value="percent"
+        />
+      </Toolbar.Group>
+      <Toolbar.Separator />
+      <Toolbar.Group>
+        <Select.Root defaultValue="Helvetica">
+          <Toolbar.Button render={<Select.Trigger />}>
+            <Select.Value />
+            <Select.Icon>
+              <ChevronUpDownIcon />
+            </Select.Icon>
+          </Toolbar.Button>
+          <Select.Portal>
+            <Select.Positioner sideOffset={8}>
+              <Select.Popup>
+                <Select.List>
+                  <Select.Item value="Helvetica">
+                    <Select.ItemIndicator>
+                      <CheckIcon />
+                    </Select.ItemIndicator>
+                    <Select.ItemText>Helvetica</Select.ItemText>
+                  </Select.Item>
+                  <Select.Item value="Arial">
+                    <Select.ItemIndicator>
+                      <CheckIcon />
+                    </Select.ItemIndicator>
+                    <Select.ItemText>Arial</Select.ItemText>
+                  </Select.Item>
+                </Select.List>
+              </Select.Popup>
+            </Select.Positioner>
+          </Select.Portal>
+        </Select.Root>
+      </Toolbar.Group>
       <Toolbar.Separator />
       <Toolbar.Link href="#">Edited 51m ago</Toolbar.Link>
     </Toolbar.Root>

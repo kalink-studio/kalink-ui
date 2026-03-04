@@ -18,6 +18,7 @@ export const toolbarVars = createThemeContract({
   },
 
   layout: {
+    buttonComboboxMaxInlineSize: null,
     buttonFocusRingOffset: null,
     rootInlineSize: null,
   },
@@ -58,6 +59,7 @@ const toolbarDefaults = assignVars(toolbarVars, {
   },
 
   layout: {
+    buttonComboboxMaxInlineSize: '12rem',
     buttonFocusRingOffset: '-1px',
     rootInlineSize: '100%',
   },
@@ -88,7 +90,7 @@ export const toolbar = style({
   '@layer': {
     [components]: {
       ...createBarRootStyles({
-        alignItems: 'center',
+        alignItems: 'stretch',
         flexWrap: 'wrap',
         gap: toolbarVars.spacing.rootGap,
         inlineSize: toolbarVars.layout.rootInlineSize,
@@ -136,6 +138,10 @@ export const button = style([
             backgroundColor: toolbarVars.color.buttonPressedBackground,
             color: toolbarVars.color.buttonPressedForeground,
           },
+          [`&[role='combobox']`]: {
+            inlineSize: `min(100%, ${toolbarVars.layout.buttonComboboxMaxInlineSize})`,
+            maxInlineSize: toolbarVars.layout.buttonComboboxMaxInlineSize,
+          },
           '&:focus-visible': {
             outline: `2px solid ${toolbarVars.color.buttonFocusRing}`,
             outlineOffset: toolbarVars.layout.buttonFocusRingOffset,
@@ -161,6 +167,7 @@ export const separator = style({
       marginBlock: toolbarVars.spacing.separatorMarginBlock,
       marginInline: toolbarVars.spacing.separatorMarginInline,
       backgroundColor: toolbarVars.color.separatorBackground,
+      alignSelf: 'center',
     },
   },
 });

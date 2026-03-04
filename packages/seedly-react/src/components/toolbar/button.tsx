@@ -28,18 +28,19 @@ export function Button({
   ...props
 }: ButtonProps) {
   const hasCustomRender = render != null;
+  const shouldApplyToolbarStyles = unstyled !== true;
+  const shouldUseButtonRootStyles = unstyled !== true && !hasCustomRender;
 
   return (
     <Toolbar.Button
       {...props}
       render={(toolbarButtonProps, state) => {
-        const shouldUseChildStyles = unstyled === true || hasCustomRender;
         const resolvedClassName = resolveStateClassName(className, state);
 
         return (
           <ButtonRoot
             {...toolbarButtonProps}
-            unstyled={shouldUseChildStyles}
+            unstyled={!shouldUseButtonRootStyles}
             variant={variant}
             tone={tone}
             size={size}
@@ -48,9 +49,9 @@ export function Button({
             loading={loading}
             icon={icon}
             className={
-              shouldUseChildStyles
-                ? resolvedClassName
-                : mergeClassName(buttonClassName, resolvedClassName)
+              shouldApplyToolbarStyles
+                ? mergeClassName(buttonClassName, resolvedClassName)
+                : resolvedClassName
             }
             render={resolveStateRender(render, state)}
           />

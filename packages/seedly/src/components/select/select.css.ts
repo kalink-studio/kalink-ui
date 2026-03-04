@@ -105,7 +105,7 @@ const selectDefaults = assignVars(selectVars, {
     itemPaddingInlineEnd: sys.spacing[8],
     itemPaddingInlineEndWithoutSide: sys.spacing[15],
     itemPaddingInlineStart: sys.spacing[8],
-    listPaddingBlock: sys.spacing[2],
+    listPaddingBlock: sys.spacing[4],
     listScrollPaddingBlock: sys.spacing[2],
     popupMinInlineOffset: sys.spacing[0],
     scrollArrowBlockSize: sys.spacing[8],
@@ -156,6 +156,7 @@ export const selectIcon = style({
   '@layer': {
     [components]: {
       display: 'flex',
+      flex: '0 0 auto',
     },
   },
 });
@@ -163,6 +164,14 @@ export const selectIcon = style({
 export const value = style({
   '@layer': {
     [components]: {
+      display: 'block',
+      flex: '1 1 auto',
+      minInlineSize: '0',
+      overflow: 'hidden',
+      textAlign: 'start',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+
       selectors: {
         [`&[data-placeholder]`]: {
           opacity: sys.state.muted.text,
