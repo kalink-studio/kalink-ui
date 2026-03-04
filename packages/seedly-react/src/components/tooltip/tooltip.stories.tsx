@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Cluster } from '../cluster';
 
 import { Tooltip } from '.';
@@ -17,6 +19,12 @@ type Story = StoryObj<typeof Tooltip.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /bold/i });
+    await userEvent.hover(trigger);
+    await expect(trigger).toBeInTheDocument();
+  },
 };
 
 function Example() {

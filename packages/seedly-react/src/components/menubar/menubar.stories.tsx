@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Menubar, MenubarMenu } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,6 +17,16 @@ type Story = StoryObj<typeof Menubar>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const fileTrigger = canvas.getByRole('menuitem', { name: /file/i });
+    await userEvent.click(fileTrigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const openItem = await body.findByRole('menuitem', { name: 'Open' });
+    await expect(openItem).toBeInTheDocument();
+    await userEvent.click(openItem);
+  },
 };
 
 function Example() {

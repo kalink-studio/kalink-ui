@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { NumberField } from '.';
 
@@ -16,6 +17,15 @@ type Story = StoryObj<typeof NumberField.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const increment = canvas.getByRole('button', { name: /increase/i });
+    const input = canvas.getByRole('textbox', { name: /amount/i });
+
+    await userEvent.click(increment);
+
+    await expect(input).toHaveValue('101');
+  },
 };
 
 function Example() {

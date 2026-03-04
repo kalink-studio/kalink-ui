@@ -1,3 +1,5 @@
+import { expect, within } from 'storybook/test';
+
 import { RadioGroup } from '../radio-group';
 
 import { Radio } from '.';
@@ -16,6 +18,11 @@ type Story = StoryObj<typeof Radio.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const radio = canvas.getByRole('radio');
+    await expect(radio).toBeChecked();
+  },
 };
 
 function Example() {

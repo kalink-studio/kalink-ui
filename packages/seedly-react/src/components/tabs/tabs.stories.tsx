@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Tabs } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,6 +17,12 @@ type Story = StoryObj<typeof Tabs.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const projectsTab = canvas.getByRole('tab', { name: /projects/i });
+    await userEvent.click(projectsTab);
+    await expect(projectsTab).toHaveAttribute('aria-selected', 'true');
+  },
 };
 
 function Example() {

@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Accordion } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,6 +17,19 @@ type Story = StoryObj<typeof Accordion.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', {
+      name: /what is base ui\?/i,
+    });
+    await userEvent.click(trigger);
+
+    const content = await within(canvasElement.ownerDocument.body).findByText(
+      /Base UI is a library of high-quality unstyled React components/i,
+    );
+
+    await expect(content).toBeVisible();
+  },
 };
 
 function Example() {

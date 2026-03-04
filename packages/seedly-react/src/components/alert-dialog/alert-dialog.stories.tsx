@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { AlertDialog } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,6 +16,17 @@ type Story = StoryObj<typeof AlertDialog.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /discard draft/i });
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const cancelButton = await body.findByRole('button', { name: /cancel/i });
+    await expect(cancelButton).toBeInTheDocument();
+
+    await userEvent.click(cancelButton);
+  },
 };
 
 function Example() {

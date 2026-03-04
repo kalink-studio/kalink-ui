@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { Button } from '../button';
 
@@ -18,6 +19,17 @@ type Story = StoryObj<typeof Toast.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const createToastButton = canvas.getByRole('button', {
+      name: /create toast/i,
+    });
+    await userEvent.click(createToastButton);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const title = await body.findByText(/toast 1 created/i);
+    await expect(title).toBeVisible();
+  },
 };
 
 function Example() {

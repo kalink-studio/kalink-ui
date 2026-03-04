@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Dialog } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,6 +16,17 @@ type Story = StoryObj<typeof Dialog.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /view notifications/i });
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const closeButton = await body.findByRole('button', { name: /close/i });
+    await expect(closeButton).toBeInTheDocument();
+
+    await userEvent.click(closeButton);
+  },
 };
 
 function Example() {

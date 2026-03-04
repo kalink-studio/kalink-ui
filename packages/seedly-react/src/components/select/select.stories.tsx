@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Field } from '../field';
 
 import { Select } from '.';
@@ -17,6 +19,17 @@ type Story = StoryObj<typeof Select.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('combobox', { name: /apple/i });
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const option = await body.findByRole('option', { name: 'Gala' });
+    await userEvent.click(option);
+
+    await expect(trigger).toHaveTextContent('Gala');
+  },
 };
 
 const apples = [

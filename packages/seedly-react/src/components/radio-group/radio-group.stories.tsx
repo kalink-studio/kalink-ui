@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Fieldset } from '../fieldset';
 import { Radio } from '../radio';
 
@@ -17,6 +19,17 @@ type Story = StoryObj<typeof RadioGroup.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const gala = canvas.getAllByRole('radio')[1];
+    await expect(gala).toBeDefined();
+    if (!gala) {
+      return;
+    }
+
+    await userEvent.click(gala);
+    await expect(gala).toBeChecked();
+  },
 };
 
 function Example() {

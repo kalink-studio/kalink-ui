@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Slider } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,6 +16,13 @@ type Story = StoryObj<typeof Slider.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const thumb = canvas.getByRole('slider', { name: /volume/i });
+    await userEvent.click(thumb);
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(thumb).toHaveAttribute('aria-valuenow', '26');
+  },
 };
 
 function Example() {

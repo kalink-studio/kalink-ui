@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Menu } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,6 +17,16 @@ type Story = StoryObj<typeof Menu.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /song/i });
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const menuItem = await body.findByRole('menuitem', { name: /play next/i });
+    await expect(menuItem).toBeInTheDocument();
+    await userEvent.click(menuItem);
+  },
 };
 
 function Example() {

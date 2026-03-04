@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Box } from '../box';
 import { Frame } from '../frame';
 import { Heading } from '../heading';
@@ -20,6 +22,15 @@ type Story = StoryObj<typeof PreviewCard.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('link', { name: /typography/i });
+    await userEvent.hover(trigger);
+    await expect(trigger).toHaveAttribute(
+      'href',
+      'https://en.wikipedia.org/wiki/Typography',
+    );
+  },
 };
 
 function Example() {

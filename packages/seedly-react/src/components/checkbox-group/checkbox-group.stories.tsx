@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { Checkbox } from '../checkbox';
 import { Fieldset } from '../fieldset';
@@ -19,6 +20,17 @@ type Story = StoryObj<typeof CheckboxGroup.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const gala = canvas.getAllByRole('checkbox')[1];
+    await expect(gala).toBeDefined();
+    if (!gala) {
+      return;
+    }
+
+    await userEvent.click(gala);
+    await expect(gala).toBeChecked();
+  },
 };
 
 function Example() {

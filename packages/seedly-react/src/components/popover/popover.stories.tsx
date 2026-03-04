@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Popover } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,6 +17,15 @@ type Story = StoryObj<typeof Popover.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /notifications/i });
+    await userEvent.click(trigger);
+
+    const body = within(canvasElement.ownerDocument.body);
+    const title = await body.findByText('Notifications');
+    await expect(title).toBeInTheDocument();
+  },
 };
 
 function Example() {

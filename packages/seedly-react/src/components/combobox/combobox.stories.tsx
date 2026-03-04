@@ -1,4 +1,5 @@
 import { useId, type ComponentProps } from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { Combobox } from '.';
 
@@ -16,6 +17,18 @@ type Story = StoryObj<typeof Combobox.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText(/choose a fruit/i);
+    const trigger = canvas.getByLabelText(/open popup/i);
+
+    await userEvent.click(trigger);
+    const body = within(canvasElement.ownerDocument.body);
+    const option = await body.findByRole('option', { name: 'Banana' });
+    await userEvent.click(option);
+
+    await expect(input).toHaveValue('Banana');
+  },
 };
 
 function Example() {

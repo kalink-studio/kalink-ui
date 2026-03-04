@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { ToggleGroup, ToggleGroupItem } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,6 +17,12 @@ type Story = StoryObj<typeof ToggleGroup>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const center = canvas.getByRole('button', { name: /align center/i });
+    await userEvent.click(center);
+    await expect(center).toHaveAttribute('aria-pressed', 'true');
+  },
 };
 
 function Example() {

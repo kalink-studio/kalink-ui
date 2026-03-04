@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Input, InputLabel } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,6 +16,12 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('textbox', { name: /name/i });
+    await userEvent.type(input, 'Ada Lovelace');
+    await expect(input).toHaveValue('Ada Lovelace');
+  },
 };
 
 function Example() {

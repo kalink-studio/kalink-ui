@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Autocomplete } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -14,6 +16,18 @@ type Story = StoryObj<typeof Autocomplete.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText(/search tags/i);
+
+    await userEvent.type(input, 'feat');
+
+    const body = within(canvasElement.ownerDocument.body);
+    const option = await body.findByRole('option', { name: 'feature' });
+    await userEvent.click(option);
+
+    await expect(input).toHaveValue('feature');
+  },
 };
 
 function Example() {

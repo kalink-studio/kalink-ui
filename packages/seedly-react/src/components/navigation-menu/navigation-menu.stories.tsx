@@ -5,6 +5,7 @@ import {
   linkDescription,
   linkTitle,
 } from '@kalink-ui/seedly/components/navigation-menu';
+import { expect, userEvent, within } from 'storybook/test';
 
 import { NavigationMenu } from '.';
 
@@ -23,6 +24,12 @@ type Story = StoryObj<typeof NavigationMenu.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const overviewTrigger = canvas.getByRole('button', { name: /overview/i });
+    await userEvent.click(overviewTrigger);
+    await expect(overviewTrigger).toBeInTheDocument();
+  },
 };
 
 function Example() {

@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { List, ListItem } from '../list';
 import { Text } from '../text';
 
@@ -18,6 +20,16 @@ type Story = StoryObj<typeof Collapsible.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /recovery keys/i });
+    await userEvent.click(trigger);
+
+    const content = await within(canvasElement.ownerDocument.body).findByText(
+      'alien-bean-pasta',
+    );
+    await expect(content).toBeVisible();
+  },
 };
 
 function Example() {

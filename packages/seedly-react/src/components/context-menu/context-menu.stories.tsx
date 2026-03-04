@@ -1,3 +1,5 @@
+import { expect, userEvent, within } from 'storybook/test';
+
 import { Box } from '../box';
 import { Text } from '../text';
 
@@ -17,6 +19,18 @@ type Story = StoryObj<typeof ContextMenu.Root>;
 
 export const Default: Story = {
   render: () => <Example />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByText(/right click here/i);
+
+    await userEvent.pointer({ target: trigger, keys: '[MouseRight]' });
+
+    const body = within(canvasElement.ownerDocument.body);
+    const menuItem = await body.findByRole('menuitem', {
+      name: /add to library/i,
+    });
+    await expect(menuItem).toBeInTheDocument();
+  },
 };
 
 function Example() {
