@@ -1,5 +1,7 @@
 import { expect, userEvent, within } from 'storybook/test';
 
+import { Text } from '../text';
+
 import { Accordion } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -44,8 +46,10 @@ function Example() {
         </Accordion.Header>
         <Accordion.Panel>
           <Accordion.Content>
-            Base UI is a library of high-quality unstyled React components for
-            design systems and web apps.
+            <Text>
+              Base UI is a library of high-quality unstyled React components for
+              design systems and web apps.
+            </Text>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion.Item>
@@ -59,8 +63,10 @@ function Example() {
         </Accordion.Header>
         <Accordion.Panel>
           <Accordion.Content>
-            Head to the “Quick start” guide in the docs. If you’ve used unstyled
-            libraries before, you’ll feel at home.
+            <Text>
+              Head to the “Quick start” guide in the docs. If you’ve used
+              unstyled libraries before, you’ll feel at home.
+            </Text>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion.Item>
@@ -74,7 +80,7 @@ function Example() {
         </Accordion.Header>
         <Accordion.Panel>
           <Accordion.Content>
-            Of course! Base UI is free and open source.
+            <Text>Of course! Base UI is free and open source.</Text>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion.Item>
