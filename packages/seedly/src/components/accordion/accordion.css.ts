@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys, transition, typography } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const accordionVars = createThemeContract({
@@ -170,34 +170,31 @@ export const triggerIcon = style({
   },
 });
 
-export const panel = style([
-  typography.body.large,
-  {
-    '@layer': {
-      [components]: {
-        blockSize: 'var(--accordion-panel-height)',
-        overflow: 'hidden',
+export const panel = style({
+  '@layer': {
+    [components]: {
+      blockSize: 'var(--accordion-panel-height)',
+      overflow: 'hidden',
 
-        color: accordionVars.color.panelForeground,
+      color: accordionVars.color.panelForeground,
 
-        transition: transition('block-size', {
-          duration: accordionVars.motion.panelSizeDuration,
-          easing: accordionVars.motion.panelSizeEasing,
-        }),
+      transition: transition('block-size', {
+        duration: accordionVars.motion.panelSizeDuration,
+        easing: accordionVars.motion.panelSizeEasing,
+      }),
 
-        selectors: {
-          '&[data-ending-style]': {
-            blockSize: '0',
-          },
+      selectors: {
+        '&[data-ending-style]': {
+          blockSize: '0',
+        },
 
-          '&[data-starting-style]': {
-            blockSize: '0',
-          },
+        '&[data-starting-style]': {
+          blockSize: '0',
         },
       },
     },
   },
-]);
+});
 
 export const content = style({
   '@layer': {

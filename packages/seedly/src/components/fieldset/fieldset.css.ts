@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { sys, typography } from '../../styles';
+import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const fieldsetVars = createThemeContract({
@@ -51,16 +51,13 @@ export const fieldset = style({
   },
 });
 
-export const legend = style([
-  typography.title.large,
-  {
-    '@layer': {
-      [components]: {
-        paddingBlockEnd: fieldsetVars.spacing.legendPaddingBlockEnd,
+export const legend = style({
+  '@layer': {
+    [components]: {
+      paddingBlockEnd: fieldsetVars.spacing.legendPaddingBlockEnd,
 
-        borderBlockEnd: `${fieldsetVars.size.legendBorderBlockEndWidth} solid ${fieldsetVars.color.legendBorder}`,
-        color: fieldsetVars.color.legendForeground,
-      },
+      borderBlockEnd: `${fieldsetVars.size.legendBorderBlockEndWidth} solid ${fieldsetVars.color.legendBorder}`,
+      color: fieldsetVars.color.legendForeground,
     },
   },
-]);
+});

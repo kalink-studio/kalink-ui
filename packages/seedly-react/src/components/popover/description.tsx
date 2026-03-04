@@ -1,13 +1,52 @@
 import { Popover, type PopoverDescriptionProps } from '@base-ui/react/popover';
 import { description as descriptionClassName } from '@kalink-ui/seedly/components/popover';
 
+import { Text, type TextProps } from '../text';
 import { mergeClassName } from '@/utils/merge-class-name';
+import {
+  resolveStateClassName,
+  resolveStateRender,
+} from '@/utils/resolve-state-props';
 
-export function Description({ className, ...props }: PopoverDescriptionProps) {
+type DescriptionProps = Omit<PopoverDescriptionProps, 'className' | 'render'> &
+  Pick<
+    TextProps,
+    'align' | 'lineClamp' | 'size' | 'truncate' | 'variant' | 'wrap'
+  > & {
+    className?: PopoverDescriptionProps['className'];
+    render?: PopoverDescriptionProps['render'];
+  };
+
+export function Description({
+  className,
+  render,
+  align,
+  lineClamp,
+  truncate,
+  wrap,
+  variant = 'body',
+  size = 'medium',
+  ...props
+}: DescriptionProps) {
   return (
     <Popover.Description
       {...props}
-      className={mergeClassName(descriptionClassName, className)}
+      render={(descriptionProps, state) => (
+        <Text
+          {...descriptionProps}
+          align={align}
+          lineClamp={lineClamp}
+          truncate={truncate}
+          wrap={wrap}
+          variant={variant}
+          size={size}
+          className={mergeClassName(
+            descriptionClassName,
+            resolveStateClassName(className, state),
+          )}
+          render={resolveStateRender(render, state) ?? <p />}
+        />
+      )}
     />
   );
 }

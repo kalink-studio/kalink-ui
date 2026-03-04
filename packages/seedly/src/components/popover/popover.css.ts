@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys, typography } from '../../styles';
+import { stateColor, sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
@@ -150,27 +150,21 @@ export const arrowInnerStroke = style({
   },
 });
 
-export const title = style([
-  typography.title.medium,
-  {
-    '@layer': {
-      [components]: {
-        marginBlock: '0',
-        marginInline: '0',
-      },
+export const title = style({
+  '@layer': {
+    [components]: {
+      marginBlock: '0',
+      marginInline: '0',
     },
   },
-]);
+});
 
-export const description = style([
-  typography.body.large,
-  {
-    '@layer': {
-      [components]: {
-        marginBlock: '0',
-        marginInline: '0',
-        color: popoverVars.color.descriptionForeground,
-      },
+export const description = style({
+  '@layer': {
+    [components]: {
+      marginBlock: '0',
+      marginInline: '0',
+      color: popoverVars.color.descriptionForeground,
     },
   },
-]);
+});

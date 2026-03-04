@@ -112,26 +112,20 @@ export const input = style([
   },
 ]);
 
-export const error = style([
-  typography.body.medium,
-  {
-    '@layer': {
-      [components]: {
-        color: fieldVars.color.errorForeground,
-      },
+export const error = style({
+  '@layer': {
+    [components]: {
+      color: fieldVars.color.errorForeground,
     },
   },
-]);
+});
 
-export const description = style([
-  typography.body.medium,
-  {
-    '@layer': {
-      [components]: {
-        marginBlock: fieldVars.spacing.zero,
-        marginInline: fieldVars.spacing.zero,
-        color: fieldVars.color.descriptionForeground,
-      },
+export const description = style({
+  '@layer': {
+    [components]: {
+      marginBlock: fieldVars.spacing.zero,
+      marginInline: fieldVars.spacing.zero,
+      color: fieldVars.color.descriptionForeground,
     },
   },
-]);
+});

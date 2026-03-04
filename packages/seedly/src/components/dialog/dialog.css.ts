@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys, transition, typography } from '../../styles';
+import { stateColor, sys, transition } from '../../styles';
 import { components } from '../../styles/layers.css';
 import {
   createDialogActionsStyles,
@@ -116,30 +116,24 @@ export const popup = style({
   },
 });
 
-export const title = style([
-  typography.title.large,
-  {
-    '@layer': {
-      [components]: createDialogTitleStyles({
-        marginBlockStart: dialogVars.spacing.titleMarginBlockStart,
-        marginBlockEnd: dialogVars.spacing.titleMarginBlockEnd,
-      }),
-    },
+export const title = style({
+  '@layer': {
+    [components]: createDialogTitleStyles({
+      marginBlockStart: dialogVars.spacing.titleMarginBlockStart,
+      marginBlockEnd: dialogVars.spacing.titleMarginBlockEnd,
+    }),
   },
-]);
+});
 
-export const description = style([
-  typography.body.large,
-  {
-    '@layer': {
-      [components]: createDialogDescriptionStyles({
-        descriptionColor: dialogVars.color.description,
-        marginBlock: dialogVars.spacing.descriptionMarginBlock,
-        marginInline: dialogVars.spacing.descriptionMarginInline,
-      }),
-    },
+export const description = style({
+  '@layer': {
+    [components]: createDialogDescriptionStyles({
+      descriptionColor: dialogVars.color.description,
+      marginBlock: dialogVars.spacing.descriptionMarginBlock,
+      marginInline: dialogVars.spacing.descriptionMarginInline,
+    }),
   },
-]);
+});
 
 export const actions = style({
   '@layer': {

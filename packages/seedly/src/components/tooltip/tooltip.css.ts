@@ -1,6 +1,6 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { sys, typography } from '../../styles';
+import { sys } from '../../styles';
 import { components } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
@@ -90,32 +90,29 @@ export const positioner = style({
   },
 });
 
-export const popup = style([
-  typography.body.medium,
-  {
-    '@layer': {
-      [components]: {
-        ...createFloatingSurfaceStyles({
-          paddingBlock: tooltipVars.spacing.popupPaddingBlock,
-          paddingInline: tooltipVars.spacing.popupPaddingInline,
-          borderRadius: tooltipVars.shape.popupCorner,
-          background: tooltipVars.color.popupBackground,
-          foreground: tooltipVars.color.popupForeground,
-          outline: tooltipVars.color.popupOutline,
-          outlineInverse: tooltipVars.color.popupOutlineInverse,
-          shadow: tooltipVars.color.popupShadow,
-          selectors: {
-            [`&[data-instant]`]: {
-              transition: 'none',
-            },
+export const popup = style({
+  '@layer': {
+    [components]: {
+      ...createFloatingSurfaceStyles({
+        paddingBlock: tooltipVars.spacing.popupPaddingBlock,
+        paddingInline: tooltipVars.spacing.popupPaddingInline,
+        borderRadius: tooltipVars.shape.popupCorner,
+        background: tooltipVars.color.popupBackground,
+        foreground: tooltipVars.color.popupForeground,
+        outline: tooltipVars.color.popupOutline,
+        outlineInverse: tooltipVars.color.popupOutlineInverse,
+        shadow: tooltipVars.color.popupShadow,
+        selectors: {
+          [`&[data-instant]`]: {
+            transition: 'none',
           },
-        }),
-        display: 'flex',
-        flexDirection: 'column',
-      },
+        },
+      }),
+      display: 'flex',
+      flexDirection: 'column',
     },
   },
-]);
+});
 
 export const arrow = style({
   '@layer': {

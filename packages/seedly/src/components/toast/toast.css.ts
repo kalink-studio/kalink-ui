@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
-import { sys, transition, typography } from '../../styles';
+import { sys, transition } from '../../styles';
 import { components } from '../../styles/layers.css';
 
 export const toastVars = createThemeContract({
@@ -220,29 +220,23 @@ export const content = style({
   },
 });
 
-export const title = style([
-  typography.title.small,
-  {
-    '@layer': {
-      [components]: {
-        marginBlock: '0',
-        marginInline: '0',
-      },
+export const title = style({
+  '@layer': {
+    [components]: {
+      marginBlock: '0',
+      marginInline: '0',
     },
   },
-]);
+});
 
-export const description = style([
-  typography.body.medium,
-  {
-    '@layer': {
-      [components]: {
-        marginBlock: '0',
-        marginInline: '0',
-      },
+export const description = style({
+  '@layer': {
+    [components]: {
+      marginBlock: '0',
+      marginInline: '0',
     },
   },
-]);
+});
 
 export const close = style({
   '@layer': {
