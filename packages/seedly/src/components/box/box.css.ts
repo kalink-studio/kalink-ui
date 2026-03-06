@@ -1,14 +1,20 @@
-import { assignVars, createThemeContract } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { resolveColorProfileValues } from '../../styles';
-import { components } from '../../styles/layers.css';
 import {
-  layoutRecipe,
-  layoutSpacingStyles,
-  layoutElevationStyles,
-  layoutCornerStyles,
-} from '../layout/layout.css';
+  createResponsiveVariants,
+  defaultMedia,
+  resolveColorProfileValues,
+  sys,
+} from '../../styles';
+import { atoms } from '../../styles/layers.css';
+import {
+  createLayoutBaseStyles,
+  createLayoutCornerStyles,
+  createLayoutElevationStyles,
+  createLayoutSpacingStyles,
+} from '../_foundation';
+import { layoutVars } from '../layout/layout.css';
 
 import type {
   StaticColorArgs,
@@ -96,6 +102,48 @@ const emptyColorKeyStyles = boxColorKeys.reduce(
   {} as Record<StaticColorKey, Record<string, never>>,
 );
 
+const boxLayoutBase = style(
+  createLayoutBaseStyles({
+    layer: atoms,
+    vars: layoutVars,
+    defaultValues: {
+      elevation: {
+        rootLevel: sys.elevation.none,
+      },
+      shape: {
+        rootCorner: sys.shape.corner.none,
+      },
+      spacing: {
+        rootPaddingBlock: sys.spacing[0],
+        rootPaddingInline: sys.spacing[0],
+      },
+    },
+  }),
+);
+
+const boxLayoutSpacingStyles = createLayoutSpacingStyles({
+  layer: atoms,
+  scale: sys.spacing,
+  vars: layoutVars.spacing,
+});
+
+const boxLayoutElevationStyles = createLayoutElevationStyles({
+  layer: atoms,
+  scale: sys.elevation,
+  vars: layoutVars.elevation,
+});
+
+const boxLayoutCornerStyles = createLayoutCornerStyles({
+  layer: atoms,
+  scale: sys.shape.corner,
+  vars: layoutVars.shape,
+});
+
+export const boxCornerAt = createResponsiveVariants({
+  styles: boxLayoutCornerStyles,
+  media: defaultMedia,
+});
+
 const assignBoxColorVars = (values: StaticColorValues) => {
   return assignVars(boxVars, {
     color: {
@@ -127,7 +175,7 @@ const createColorCompoundVariants = <TColorSource extends StaticColorSource>(
         },
         style: {
           '@layer': {
-            [components]: {
+            [atoms]: {
               vars: {
                 ...assignBoxColorVars(
                   resolveColorProfileValues(colorProfileArgs),
@@ -143,10 +191,10 @@ const createColorCompoundVariants = <TColorSource extends StaticColorSource>(
 
 export const boxRecipe = recipe({
   base: [
-    layoutRecipe.classNames.base,
+    boxLayoutBase,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             ...boxDefaults,
           },
@@ -174,9 +222,9 @@ export const boxRecipe = recipe({
     variant: boxVariants,
     colorSource: emptyColorSourceStyles,
     colorKey: emptyColorKeyStyles,
-    spacing: layoutSpacingStyles,
-    elevation: layoutElevationStyles,
-    corner: layoutCornerStyles,
+    spacing: boxLayoutSpacingStyles,
+    elevation: boxLayoutElevationStyles,
+    corner: boxLayoutCornerStyles,
   },
 
   defaultVariants: {

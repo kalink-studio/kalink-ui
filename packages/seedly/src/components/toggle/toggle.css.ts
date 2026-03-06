@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 export const toggleVars = createThemeContract({
   color: {
@@ -20,7 +20,7 @@ const toggleDefaults = assignVars(toggleVars, {
 export const button = style([
   {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           ...toggleDefaults,
         },

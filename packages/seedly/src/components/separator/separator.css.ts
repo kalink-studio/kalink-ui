@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 export const separatorVars = createThemeContract({
   color: {
@@ -53,7 +53,7 @@ const separatorDefaults = assignVars(separatorVars, {
 
 export const separator = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       vars: {
         ...separatorDefaults,
       },
@@ -77,7 +77,7 @@ export const link = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           ...separatorDefaults,
         },

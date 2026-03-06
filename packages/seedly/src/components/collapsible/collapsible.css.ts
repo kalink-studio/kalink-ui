@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const collapsibleVars = createThemeContract({
   color: {
@@ -71,7 +71,7 @@ const collapsibleDefaults = assignVars(collapsibleVars, {
 
 export const collapsible = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: collapsibleDefaults,
 
       display: 'flex',
@@ -87,7 +87,7 @@ export const collapsible = style({
 
 export const trigger = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       paddingBlock: collapsibleVars.spacing.triggerPaddingBlock,
       paddingInline: collapsibleVars.spacing.triggerPaddingInline,
 
@@ -104,7 +104,7 @@ export const trigger = style({
 
 export const icon = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       blockSize: collapsibleVars.size.iconSize,
       inlineSize: collapsibleVars.size.iconSize,
 
@@ -124,7 +124,7 @@ export const icon = style({
 
 export const panel = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'end',
@@ -156,7 +156,7 @@ export const panel = style({
 
 export const content = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       flexDirection: 'column',
 

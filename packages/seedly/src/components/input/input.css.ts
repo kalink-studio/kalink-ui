@@ -1,11 +1,11 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 import {
+  createFieldLabelStackStyles,
+  createFieldLabelTextStyles,
   createFieldTextInputStyles,
-  createFieldLabelStyles,
-  createFieldStackStyles,
 } from '../_foundation';
 
 export const inputVars = createThemeContract({
@@ -60,13 +60,12 @@ const inputDefaults = assignVars(inputVars, {
 
 export const label = style({
   '@layer': {
-    [components]: {
-      ...createFieldStackStyles({
-        alignItems: 'start',
+    [atoms]: {
+      ...createFieldLabelStackStyles({
         gap: inputVars.spacing.stackGap,
         inlineSize: inputVars.layout.inputInlineSize,
       }),
-      ...createFieldLabelStyles({
+      ...createFieldLabelTextStyles({
         color: inputVars.color.labelForeground,
       }),
       vars: {
@@ -80,7 +79,7 @@ export const input = style([
   typography.body.large,
   {
     '@layer': {
-      [components]: {
+      [atoms]: {
         ...createFieldTextInputStyles({
           backgroundColor: inputVars.color.inputBackground,
           blockSize: inputVars.size.inputBlockSize,

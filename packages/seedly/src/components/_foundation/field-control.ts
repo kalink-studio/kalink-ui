@@ -8,7 +8,7 @@ export interface FieldStackStylesOptions {
   position?: 'relative';
 }
 
-export function createFieldStackStyles(
+export function createFieldLabelStackStyles(
   options: FieldStackStylesOptions,
 ): StyleRule {
   return {
@@ -27,12 +27,33 @@ export interface FieldLabelStylesOptions {
   cursor?: 'default' | 'ew-resize';
 }
 
-export function createFieldLabelStyles(
+export function createFieldLabelTextStyles(
   options: FieldLabelStylesOptions,
 ): StyleRule {
   return {
     color: options.color,
     cursor: options.cursor,
+  };
+}
+
+export interface ChoiceLabelStylesOptions {
+  color: string;
+  gap: string;
+  selectors?: Record<string, StyleRule>;
+}
+
+export function createChoiceLabelStyles(
+  options: ChoiceLabelStylesOptions,
+): StyleRule {
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    gap: options.gap,
+    color: options.color,
+    cursor: 'pointer',
+    userSelect: 'none',
+    WebkitTapHighlightColor: 'transparent',
+    selectors: options.selectors,
   };
 }
 

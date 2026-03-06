@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
@@ -69,8 +69,8 @@ const selectDefaults = assignVars(selectVars, {
   color: {
     arrowInnerStroke: floatingSurfaceDarkOutlineColor,
     arrowOuterStroke: sys.color.border.low,
-    itemHighlightBackground: sys.color.content.base,
-    itemHighlightForeground: sys.color.container.base,
+    itemHighlightBackground: sys.color.tone.primary,
+    itemHighlightForeground: sys.color.tone.onPrimary,
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
@@ -119,7 +119,7 @@ export const select = style([
   typography.label.large,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         vars: {
           ...selectDefaults,
         },
@@ -154,7 +154,7 @@ export const select = style([
 
 export const selectIcon = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       flex: '0 0 auto',
     },
@@ -163,7 +163,7 @@ export const selectIcon = style({
 
 export const value = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'block',
       flex: '1 1 auto',
       minInlineSize: '0',
@@ -183,7 +183,7 @@ export const value = style({
 
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles({
         zIndex: '1',
         webkitUserSelect: 'none',
@@ -198,7 +198,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingAnchoredSurfaceStyles({
         anchorWidth: 'min-inline',
         borderRadius: selectVars.shape.popupCorner,
@@ -223,7 +223,7 @@ export const popup = style({
 
 export const list = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingListStyles({
         preset: 'listboxCompact',
         maxBlockSize: selectVars.size.listMaxBlockSize,
@@ -236,7 +236,7 @@ export const list = style({
 
 export const arrowOuterStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowOuterStrokeStyles(selectVars.color.arrowOuterStroke),
     },
   },
@@ -244,7 +244,7 @@ export const arrowOuterStroke = style({
 
 export const arrowInnerStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowInnerStrokeStyles(selectVars.color.arrowInnerStroke),
     },
   },
@@ -254,7 +254,7 @@ export const item = style([
   typography.body.large,
   {
     '@layer': {
-      [components]: createFloatingHighlightedItemStyles({
+      [organisms]: createFloatingHighlightedItemStyles({
         preset: 'listboxWithIndicator',
         paddingBlock: selectVars.spacing.itemPaddingBlock,
         highlight: {
@@ -288,7 +288,7 @@ export const item = style([
 
 export const itemIndicator = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       gridColumnStart: '1',
       display: 'flex',
       alignItems: 'center',
@@ -298,7 +298,7 @@ export const itemIndicator = style({
 });
 export const itemText = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       gridColumnStart: '2',
     },
   },
@@ -308,7 +308,7 @@ export const scrollArrow = style([
   typography.label.small,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

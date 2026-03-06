@@ -2,14 +2,14 @@ import { createVar, style, type StyleRule } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createResponsiveVariants, defaultMedia } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 export const lineClampNumber = createVar();
 export const textAlign = createVar();
 
 const lineClamp = {
   '@layer': {
-    [components]: {
+    [atoms]: {
       display: '-webkit-box',
       WebkitLineClamp: lineClampNumber,
       WebkitBoxOrient: 'vertical',
@@ -21,7 +21,7 @@ const lineClamp = {
 export const textAlignStyles = {
   start: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [textAlign]: 'start',
         },
@@ -30,7 +30,7 @@ export const textAlignStyles = {
   },
   center: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [textAlign]: 'center',
         },
@@ -39,7 +39,7 @@ export const textAlignStyles = {
   },
   end: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [textAlign]: 'end',
         },
@@ -48,7 +48,7 @@ export const textAlignStyles = {
   },
   justify: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [textAlign]: 'justify',
         },
@@ -60,28 +60,28 @@ export const textAlignStyles = {
 export const textWrapStyles = {
   true: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         textWrap: 'wrap',
       },
     },
   },
   false: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         textWrap: 'nowrap',
       },
     },
   },
   balance: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         textWrap: 'balance',
       },
     },
   },
   pretty: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         textWrap: 'pretty',
       },
     },
@@ -93,7 +93,7 @@ export const textLineClampStyles = {
     lineClamp,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             [lineClampNumber]: '2',
           },
@@ -105,7 +105,7 @@ export const textLineClampStyles = {
     lineClamp,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             [lineClampNumber]: '3',
           },
@@ -117,7 +117,7 @@ export const textLineClampStyles = {
     lineClamp,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             [lineClampNumber]: '4',
           },
@@ -129,7 +129,7 @@ export const textLineClampStyles = {
     lineClamp,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             [lineClampNumber]: '5',
           },
@@ -142,7 +142,7 @@ export const textLineClampStyles = {
 export const textRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         textAlign,
 
         vars: {
@@ -158,7 +158,7 @@ export const textRecipe = recipe({
     truncate: {
       true: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             display: 'inline-block',
             maxWidth: '100%',
             overflow: 'hidden',
@@ -177,7 +177,7 @@ export const textRecipe = recipe({
 
 export const textEllipsisWrapper = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       whiteSpace: 'nowrap',
     },
   },

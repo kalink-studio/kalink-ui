@@ -9,7 +9,7 @@ import {
   typography,
   transition,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 import type { ColorTone, ColorVariant, ProfileColorValues } from '../../styles';
 
@@ -95,12 +95,12 @@ const buttonSizeStyles = {
     typography.label.small,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             ...assignVars(buttonVars.spacing, {
               rootGap: sys.spacing[3],
-              rootPaddingBlock: sys.spacing[4],
-              rootPaddingInline: sys.spacing[6],
+              rootPaddingBlock: sys.spacing[3],
+              rootPaddingInline: sys.spacing[5],
             }),
 
             ...assignVars(buttonVars.size, {
@@ -116,11 +116,11 @@ const buttonSizeStyles = {
     typography.label.medium,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             ...assignVars(buttonVars.spacing, {
               rootGap: sys.spacing[4],
-              rootPaddingBlock: sys.spacing[6],
+              rootPaddingBlock: sys.spacing[4],
               rootPaddingInline: sys.spacing[8],
             }),
 
@@ -137,11 +137,11 @@ const buttonSizeStyles = {
     typography.label.large,
     {
       '@layer': {
-        [components]: {
+        [atoms]: {
           vars: {
             ...assignVars(buttonVars.spacing, {
               rootGap: sys.spacing[5],
-              rootPaddingBlock: sys.spacing[8],
+              rootPaddingBlock: sys.spacing[5],
               rootPaddingInline: sys.spacing[10],
             }),
 
@@ -157,7 +157,7 @@ const buttonSizeStyles = {
 
 export const buttonStyledVariantClass = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       justifyContent: 'center',
 
       paddingBlock: buttonVars.spacing.rootPaddingBlock,
@@ -218,7 +218,7 @@ export const buttonStyledVariantClass = style({
 
 export const buttonBaseClass = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       vars: {
         ...assignVars(buttonVars, {
           color: {
@@ -302,19 +302,19 @@ export const buttonRecipe = recipe({
 
     size: buttonSizeStyles,
 
-    shape: mapContractVars(sys.shape.corner, buttonVars.shape),
+    shape: mapContractVars(sys.shape.corner, buttonVars.shape, atoms),
 
     flow: {
       default: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             flexDirection: 'row',
           },
         },
       },
       reverse: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             flexDirection: 'row-reverse',
           },
         },
@@ -325,7 +325,7 @@ export const buttonRecipe = recipe({
       false: {},
       true: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             vars: {
               [buttonVars.spacing.rootGap]: sys.spacing[0],
             },
@@ -347,7 +347,7 @@ export const buttonRecipe = recipe({
           variants: { variant, tone },
           style: {
             '@layer': {
-              [components]: {
+              [atoms]: {
                 vars: {
                   ...assignButtonColorVars(
                     resolveColorProfileValues({
@@ -373,7 +373,7 @@ export const buttonRecipe = recipe({
         },
         style: {
           '@layer': {
-            [components]: {
+            [atoms]: {
               paddingInline: buttonVars.spacing.rootPaddingBlock,
             },
           },

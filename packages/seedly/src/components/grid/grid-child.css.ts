@@ -1,7 +1,7 @@
 import { type StyleRule } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
   createResponsiveVariants,
   defaultMedia,
@@ -19,7 +19,7 @@ const colSpanStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridColumn: `auto / span ${count}`,
         },
       },
@@ -32,7 +32,7 @@ const rowSpanStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridRow: `auto / span ${count}`,
         },
       },
@@ -45,7 +45,7 @@ const colStartStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridColumnStart: count,
         },
       },
@@ -61,7 +61,7 @@ const colEndStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridColumnEnd: count,
         },
       },
@@ -74,7 +74,7 @@ const rowStartStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridRowStart: count,
         },
       },
@@ -90,7 +90,7 @@ const rowEndStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridRowEnd: count,
         },
       },
@@ -100,38 +100,38 @@ const rowEndStyles = Object.fromEntries(
 
 const justifySelfStyles = {
   start: {
-    '@layer': { [components]: { justifySelf: 'start' } },
+    '@layer': { [layouts]: { justifySelf: 'start' } },
   },
   end: {
-    '@layer': { [components]: { justifySelf: 'end' } },
+    '@layer': { [layouts]: { justifySelf: 'end' } },
   },
   center: {
-    '@layer': { [components]: { justifySelf: 'center' } },
+    '@layer': { [layouts]: { justifySelf: 'center' } },
   },
   stretch: {
-    '@layer': { [components]: { justifySelf: 'stretch' } },
+    '@layer': { [layouts]: { justifySelf: 'stretch' } },
   },
 } as const;
 
 const alignSelfStyles = {
   start: {
-    '@layer': { [components]: { alignSelf: 'start' } },
+    '@layer': { [layouts]: { alignSelf: 'start' } },
   },
   end: {
-    '@layer': { [components]: { alignSelf: 'end' } },
+    '@layer': { [layouts]: { alignSelf: 'end' } },
   },
   center: {
-    '@layer': { [components]: { alignSelf: 'center' } },
+    '@layer': { [layouts]: { alignSelf: 'center' } },
   },
   stretch: {
-    '@layer': { [components]: { alignSelf: 'stretch' } },
+    '@layer': { [layouts]: { alignSelf: 'stretch' } },
   },
 } as const;
 
 export const gridChildRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   variants: {

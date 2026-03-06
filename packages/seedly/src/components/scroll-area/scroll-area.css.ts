@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const scrollAreaVars = createThemeContract({
   color: {
@@ -69,7 +69,7 @@ const scrollAreaDefaults = assignVars(scrollAreaVars, {
 
 export const scrollArea = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: {
         ...scrollAreaDefaults,
       },
@@ -82,7 +82,7 @@ export const scrollArea = style({
 
 export const viewport = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       blockSize: '100%',
 
       borderRadius: scrollAreaVars.shape.viewportCorner,
@@ -100,7 +100,7 @@ export const viewport = style({
 
 export const content = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       flexDirection: 'column',
 
@@ -114,7 +114,7 @@ export const content = style({
 
 export const scrollbar = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       justifyContent: 'center',
 
@@ -160,7 +160,7 @@ export const scrollbar = style({
 
 export const thumb = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       inlineSize: '100%',
 
       backgroundColor: scrollAreaVars.color.thumbBackground,

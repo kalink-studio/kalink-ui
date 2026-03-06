@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -61,7 +61,7 @@ const tooltipDefaults = assignVars(tooltipVars, {
 export const button = style([
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         vars: {
           ...tooltipDefaults,
         },
@@ -79,7 +79,7 @@ export const button = style([
 ]);
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles({
         zIndex: '1',
       }),
@@ -92,7 +92,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingSurfaceStyles({
         paddingBlock: tooltipVars.spacing.popupPaddingBlock,
         paddingInline: tooltipVars.spacing.popupPaddingInline,
@@ -116,7 +116,7 @@ export const popup = style({
 
 export const arrow = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingArrowPlacementStyles(),
     },
   },
@@ -124,7 +124,7 @@ export const arrow = style({
 
 export const arrowFill = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowFillStyles(tooltipVars.color.popupBackground),
     },
   },
@@ -132,7 +132,7 @@ export const arrowFill = style({
 
 export const arrowOuterStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowOuterStrokeStyles(tooltipVars.color.arrowOuterStroke),
     },
   },
@@ -140,7 +140,7 @@ export const arrowOuterStroke = style({
 
 export const arrowInnerStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowInnerStrokeStyles(tooltipVars.color.arrowInnerStroke),
     },
   },

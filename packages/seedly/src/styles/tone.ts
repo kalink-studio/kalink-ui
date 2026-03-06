@@ -1,6 +1,5 @@
 import { assignVars, type StyleRule } from '@vanilla-extract/css';
 
-import { components } from './layers.css';
 import { sys, type Tone } from './system-contract.css';
 
 export interface ToneTokens {
@@ -67,6 +66,7 @@ export const createToneAssignments = (toneVars: ToneVarContract) => {
 
 export const createToneStyles = (
   toneVars: ToneVarContract,
+  layer: string,
   getVars?: (tokens: ToneTokens, tone: Tone) => Record<string, string>,
 ) => {
   const toneAssignments = createToneAssignments(toneVars);
@@ -75,7 +75,7 @@ export const createToneStyles = (
   for (const tone of Object.keys(toneAssignments) as Tone[]) {
     styles[tone] = {
       '@layer': {
-        [components]: {
+        [layer]: {
           vars: {
             ...toneAssignments[tone],
             ...(getVars ? getVars(toneTokens[tone], tone) : {}),

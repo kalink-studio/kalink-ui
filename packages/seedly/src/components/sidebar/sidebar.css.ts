@@ -6,7 +6,7 @@ import {
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { mapContractVars, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const sidebarVars = createThemeContract({
   layout: {
@@ -31,12 +31,13 @@ const sidebarDefaults = assignVars(sidebarVars, {
 export const sidebarSpacingStyles = mapContractVars(
   sys.spacing,
   sidebarVars.spacing,
+  layouts,
 );
 
 export const sidebarRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: sidebarDefaults,
 
         display: 'flex',
@@ -52,7 +53,7 @@ export const sidebarRecipe = recipe({
     noStretch: {
       true: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             alignItems: 'flex-start',
           },
         },
@@ -72,7 +73,7 @@ export const sidebarRecipe = recipe({
 
 globalStyle(`${sidebarRecipe.classNames.base} > *`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexGrow: 1,
     },
   },
@@ -80,7 +81,7 @@ globalStyle(`${sidebarRecipe.classNames.base} > *`, {
 
 globalStyle(`${sidebarRecipe.classNames.variants.sideWidth.true} > *`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexBasis: sidebarVars.layout.sideInlineSize,
     },
   },
@@ -88,7 +89,7 @@ globalStyle(`${sidebarRecipe.classNames.variants.sideWidth.true} > *`, {
 
 globalStyle(`${sidebarRecipe.classNames.variants.side.left} > :last-child`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexBasis: 0,
       flexGrow: 999,
       minInlineSize: sidebarVars.layout.contentMinInlineSize,
@@ -98,7 +99,7 @@ globalStyle(`${sidebarRecipe.classNames.variants.side.left} > :last-child`, {
 
 globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexBasis: 0,
       flexGrow: 999,
       minInlineSize: sidebarVars.layout.contentMinInlineSize,

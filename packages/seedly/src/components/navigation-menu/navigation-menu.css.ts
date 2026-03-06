@@ -1,12 +1,13 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
-import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { sys, transition } from '../../styles';
+import { organisms } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
   createArrowOuterStrokeStyles,
+  createDialogBackdropStyles,
   createFloatingArrowPlacementStyles,
   createFloatingPositionerStyles,
   createFloatingSurfaceStyles,
@@ -17,10 +18,10 @@ export const navigationMenuVars = createThemeContract({
   color: {
     arrowInnerStroke: null,
     arrowOuterStroke: null,
+    backdrop: null,
     contentForeground: null,
     linkCardFocusRing: null,
     linkCardHoverBackground: null,
-    linkDescriptionForeground: null,
     popupBackground: null,
     popupForeground: null,
     popupOutline: null,
@@ -32,10 +33,9 @@ export const navigationMenuVars = createThemeContract({
   },
 
   layout: {
+    backdropMinBlockSize: null,
     contentMinInlineSizeDesktop: null,
     contentMobileInlineSize: null,
-    flexLinkListMaxInlineSize: null,
-    gridLinkColumnInlineSize: null,
   },
 
   motion: {
@@ -73,18 +73,12 @@ export const navigationMenuVars = createThemeContract({
     linkCardPaddingBlockDesktop: null,
     linkCardPaddingInline: null,
     linkCardPaddingInlineDesktop: null,
-    linkTitleMarginBlockEnd: null,
     triggerGap: null,
     triggerPaddingInline: null,
     triggerPaddingInlineMobile: null,
   },
 
   typography: {
-    linkDescriptionLineHeight: null,
-    linkDescriptionSize: null,
-    linkTitleLineHeight: null,
-    linkTitleSize: null,
-    linkTitleWeight: null,
     triggerMobileLineHeight: null,
     triggerMobileSize: null,
   },
@@ -94,10 +88,10 @@ const navigationMenuDefaults = assignVars(navigationMenuVars, {
   color: {
     arrowInnerStroke: floatingSurfaceDarkOutlineColor,
     arrowOuterStroke: sys.color.border.low,
+    backdrop: sys.color.content.base,
     contentForeground: sys.color.content.base,
     linkCardFocusRing: sys.color.tone.primary,
     linkCardHoverBackground: sys.color.container.low,
-    linkDescriptionForeground: stateColor.disabledContent,
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
@@ -109,10 +103,9 @@ const navigationMenuDefaults = assignVars(navigationMenuVars, {
   },
 
   layout: {
+    backdropMinBlockSize: '100dvh',
     contentMinInlineSizeDesktop: sys.layout.measure,
     contentMobileInlineSize: calc.subtract('100vw', sys.spacing[14]),
-    flexLinkListMaxInlineSize: sys.layout.measure,
-    gridLinkColumnInlineSize: calc.divide(sys.layout.measure, 2),
   },
 
   motion: {
@@ -150,18 +143,12 @@ const navigationMenuDefaults = assignVars(navigationMenuVars, {
     linkCardPaddingBlockDesktop: sys.spacing[6],
     linkCardPaddingInline: sys.spacing[4],
     linkCardPaddingInlineDesktop: sys.spacing[6],
-    linkTitleMarginBlockEnd: sys.spacing[2],
     triggerGap: sys.spacing[3],
     triggerPaddingInline: sys.spacing[7],
     triggerPaddingInlineMobile: sys.spacing[4],
   },
 
   typography: {
-    linkDescriptionLineHeight: '1.25rem',
-    linkDescriptionSize: sys.typography.body.medium.size,
-    linkTitleLineHeight: '1.25rem',
-    linkTitleSize: '1rem',
-    linkTitleWeight: '500',
     triggerMobileLineHeight: sys.typography.label.medium.lineHeight,
     triggerMobileSize: sys.typography.label.medium.size,
   },
@@ -169,7 +156,7 @@ const navigationMenuDefaults = assignVars(navigationMenuVars, {
 
 export const root = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: {
         ...navigationMenuDefaults,
       },
@@ -181,7 +168,7 @@ export const root = style({
 
 export const list = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       position: 'relative',
 
       display: 'flex',
@@ -197,7 +184,7 @@ export const list = style({
 
 export const trigger = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       alignItems: 'center',
       display: 'inline-flex',
       justifyContent: 'center',
@@ -250,7 +237,7 @@ export const trigger = style({
 
 export const icon = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       alignItems: 'center',
       display: 'inline-flex',
       justifyContent: 'center',
@@ -271,7 +258,7 @@ export const icon = style({
 
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles({
         zIndex: '1',
       }),
@@ -333,7 +320,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingSurfaceStyles({
         background: navigationMenuVars.color.popupBackground,
         blockSize: 'var(--popup-height)',
@@ -370,7 +357,7 @@ export const popup = style({
 
 export const content = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       blockSize: '100%',
       inlineSize: navigationMenuVars.layout.contentMobileInlineSize,
 
@@ -423,9 +410,26 @@ export const content = style({
   },
 });
 
+export const backdrop = style({
+  '@layer': {
+    [organisms]: createDialogBackdropStyles({
+      vars: navigationMenuDefaults,
+
+      minBlockSize: navigationMenuVars.layout.backdropMinBlockSize,
+
+      backdropColor: navigationMenuVars.color.backdrop,
+
+      transition: transition('opacity', {
+        duration: 'short.4',
+        easing: 'decelerate.emphasized',
+      }),
+    }),
+  },
+});
+
 export const viewport = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       position: 'relative',
 
       blockSize: '100%',
@@ -435,122 +439,20 @@ export const viewport = style({
   },
 });
 
-export const gridLinkList = style({
-  '@layer': {
-    [components]: {
-      display: 'grid',
-
-      gridTemplateColumns: `${navigationMenuVars.layout.gridLinkColumnInlineSize} ${navigationMenuVars.layout.gridLinkColumnInlineSize}`,
-
-      listStyle: 'none',
-      marginBlock: '0',
-      marginInline: '0',
-      paddingBlock: '0',
-      paddingInline: '0',
-
-      '@media': {
-        '(max-width: 500px)': {
-          gridTemplateColumns: '1fr',
-        },
-      },
-    },
-  },
-});
-
-export const flexLinkList = style({
-  '@layer': {
-    [components]: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-
-      maxInlineSize: navigationMenuVars.layout.flexLinkListMaxInlineSize,
-
-      listStyle: 'none',
-      marginBlock: '0',
-      marginInline: '0',
-      paddingBlock: '0',
-      paddingInline: '0',
-    },
-  },
-});
-
 export const linkCard = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'block',
 
-      border: 'none',
-
-      paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlock,
-      paddingInline: navigationMenuVars.spacing.linkCardPaddingInline,
-
       textDecoration: 'none',
-
-      backgroundColor: 'transparent',
-      borderRadius: navigationMenuVars.shape.linkCardCorner,
-      color: 'inherit',
-
-      selectors: {
-        [`&:hover`]: {
-          '@media': {
-            '(hover: hover)': {
-              backgroundColor: navigationMenuVars.color.linkCardHoverBackground,
-            },
-          },
-        },
-
-        [`&:focus-visible`]: {
-          outline: `2px solid ${navigationMenuVars.color.linkCardFocusRing}`,
-          outlineOffset: '-1px',
-          position: 'relative',
-        },
-      },
-
-      '@media': {
-        '(min-width: 425px)': {
-          paddingBlock: navigationMenuVars.spacing.linkCardPaddingBlockDesktop,
-          paddingInline:
-            navigationMenuVars.spacing.linkCardPaddingInlineDesktop,
-        },
-      },
-    },
-  },
-});
-
-export const linkTitle = style({
-  '@layer': {
-    [components]: {
-      marginBlockEnd: navigationMenuVars.spacing.linkTitleMarginBlockEnd,
-      marginBlockStart: '0',
-      marginInline: '0',
-
-      fontSize: navigationMenuVars.typography.linkTitleSize,
-      fontWeight: navigationMenuVars.typography.linkTitleWeight,
-      lineHeight: navigationMenuVars.typography.linkTitleLineHeight,
-    },
-  },
-});
-
-export const linkDescription = style({
-  '@layer': {
-    [components]: {
-      marginBlock: '0',
-      marginInline: '0',
-
-      fontSize: navigationMenuVars.typography.linkDescriptionSize,
-      lineHeight: navigationMenuVars.typography.linkDescriptionLineHeight,
-
-      color: navigationMenuVars.color.linkDescriptionForeground,
-      overflowWrap: 'anywhere',
-      whiteSpace: 'normal',
+      whiteSpace: 'wrap',
     },
   },
 });
 
 export const arrow = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingArrowPlacementStyles(),
 
       transition: transition('left', {
@@ -563,7 +465,7 @@ export const arrow = style({
 
 export const arrowFill = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowFillStyles(navigationMenuVars.color.popupBackground),
     },
   },
@@ -571,7 +473,7 @@ export const arrowFill = style({
 
 export const arrowOuterStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowOuterStrokeStyles(
         navigationMenuVars.color.arrowOuterStroke,
       ),
@@ -581,7 +483,7 @@ export const arrowOuterStroke = style({
 
 export const arrowInnerStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowInnerStrokeStyles(
         navigationMenuVars.color.arrowInnerStroke,
       ),

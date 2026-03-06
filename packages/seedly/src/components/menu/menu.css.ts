@@ -2,7 +2,7 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
 import { sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -59,8 +59,8 @@ const menuDefaults = assignVars(menuVars, {
     arrowInnerStroke: floatingSurfaceDarkOutlineColor,
     arrowOuterStroke: sys.color.border.low,
 
-    itemHighlightedBackground: sys.color.content.base,
-    itemHighlightedForeground: sys.color.container.base,
+    itemHighlightedBackground: sys.color.tone.primary,
+    itemHighlightedForeground: sys.color.tone.onPrimary,
 
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
@@ -97,7 +97,7 @@ const menuDefaults = assignVars(menuVars, {
 export const button = style([
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         vars: {
           ...menuDefaults,
         },
@@ -114,7 +114,7 @@ export const button = style([
 
 export const buttonIcon = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -126,7 +126,7 @@ export const buttonIcon = style({
 
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles({
         zIndex: '1',
         vars: {
@@ -139,7 +139,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingSurfaceStyles({
         background: menuVars.color.popupBackground,
         borderRadius: menuVars.shape.popupCorner,
@@ -156,7 +156,7 @@ export const popup = style({
 
 export const arrow = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingArrowPlacementStyles(),
     },
   },
@@ -164,7 +164,7 @@ export const arrow = style({
 
 export const arrowFill = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowFillStyles(menuVars.color.popupBackground),
     },
   },
@@ -172,7 +172,7 @@ export const arrowFill = style({
 
 export const arrowOuterStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowOuterStrokeStyles(menuVars.color.arrowOuterStroke),
     },
   },
@@ -180,7 +180,7 @@ export const arrowOuterStroke = style({
 
 export const arrowInnerStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowInnerStrokeStyles(menuVars.color.arrowInnerStroke),
     },
   },
@@ -190,7 +190,7 @@ export const item = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: createFloatingHighlightedItemStyles({
+      [organisms]: createFloatingHighlightedItemStyles({
         preset: 'menu',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -210,7 +210,7 @@ export const item = style([
 
 export const separator = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       blockSize: menuVars.size.separatorBlockSize,
 
       marginBlock: menuVars.spacing.separatorMarginBlock,

@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const tabsVars = createThemeContract({
   color: {
@@ -63,7 +63,7 @@ const tabsDefaults = assignVars(tabsVars, {
 
 export const tabs = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: {
         ...tabsDefaults,
       },
@@ -73,7 +73,7 @@ export const tabs = style({
 
 export const list = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       gap: tabsVars.spacing.listGap,
       paddingInline: tabsVars.spacing.listPaddingInline,
@@ -87,7 +87,7 @@ export const list = style({
 export const tab = style([
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         marginBlock: '0',
         marginInline: '0',
 
@@ -146,7 +146,7 @@ export const tab = style([
 
 export const indicator = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       inlineSize: 'var(--active-tab-width)',
       blockSize: '2px',
       position: 'absolute',
@@ -166,7 +166,7 @@ export const indicator = style({
 
 export const panel = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
   createDialogActionsStyles,
   createDialogBackdropStyles,
@@ -69,7 +69,7 @@ const alertDialogDefaults = assignVars(alertDialogVars, {
 
 export const button = style({
   '@layer': {
-    [components]: createDialogButtonStyles({
+    [organisms]: createDialogButtonStyles({
       vars: alertDialogDefaults,
     }),
   },
@@ -77,7 +77,7 @@ export const button = style({
 
 export const backdrop = style({
   '@layer': {
-    [components]: createDialogBackdropStyles({
+    [organisms]: createDialogBackdropStyles({
       vars: alertDialogDefaults,
 
       minBlockSize: alertDialogVars.layout.backdropMinBlockSize,
@@ -94,7 +94,7 @@ export const backdrop = style({
 
 export const popup = style({
   '@layer': {
-    [components]: createDialogPopupStyles({
+    [organisms]: createDialogPopupStyles({
       vars: alertDialogDefaults,
 
       inlineSize: alertDialogVars.layout.popupInlineSize,
@@ -118,7 +118,7 @@ export const popup = style({
 
 export const title = style({
   '@layer': {
-    [components]: createDialogTitleStyles({
+    [organisms]: createDialogTitleStyles({
       marginBlockStart: alertDialogVars.spacing.titleMarginBlockStart,
       marginBlockEnd: alertDialogVars.spacing.titleMarginBlockEnd,
     }),
@@ -127,7 +127,7 @@ export const title = style({
 
 export const description = style({
   '@layer': {
-    [components]: createDialogDescriptionStyles({
+    [organisms]: createDialogDescriptionStyles({
       marginBlock: alertDialogVars.spacing.descriptionMarginBlock,
       marginInline: alertDialogVars.spacing.descriptionMarginInline,
 
@@ -138,7 +138,7 @@ export const description = style({
 
 export const actions = style({
   '@layer': {
-    [components]: createDialogActionsStyles({
+    [organisms]: createDialogActionsStyles({
       gap: alertDialogVars.spacing.actionsGap,
     }),
   },

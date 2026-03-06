@@ -1,7 +1,5 @@
 import { assignVars, type StyleRule } from '@vanilla-extract/css';
 
-import { components } from './layers.css';
-
 type VarContract = Record<string, `var(--${string})`>;
 type ContractTokenValues<TContract extends VarContract> = Parameters<
   typeof assignVars<TContract>
@@ -22,6 +20,7 @@ export const mapContractVars = <
 >(
   scale: TScale,
   vars: TContract,
+  layer: string,
 ) => {
   const scaleKeys = Object.keys(scale) as (keyof TScale)[];
   const contractKeys = Object.keys(vars) as (keyof TContract)[];
@@ -38,7 +37,7 @@ export const mapContractVars = <
 
     mappedScaleStyles[scaleKey] = {
       '@layer': {
-        [components]: {
+        [layer]: {
           vars: assignVars(vars, mappedVars),
         },
       },

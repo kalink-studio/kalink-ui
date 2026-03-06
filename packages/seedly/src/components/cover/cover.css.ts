@@ -6,7 +6,7 @@ import {
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { mapContractVars, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const coverVars = createThemeContract({
   layout: {
@@ -29,12 +29,13 @@ const coverDefaults = assignVars(coverVars, {
 export const coverSpacingStyles = mapContractVars(
   sys.spacing,
   coverVars.spacing,
+  layouts,
 );
 
 export const coverRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: coverDefaults,
 
         display: 'flex',
@@ -52,7 +53,7 @@ export const coverRecipe = recipe({
 
 globalStyle(`${coverRecipe.classNames.base} > *`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       marginBlock: coverVars.spacing.rootGap,
     },
   },
@@ -62,7 +63,7 @@ globalStyle(
   `${coverRecipe.classNames.base} > :first-child:not([data-cover-center])`,
   {
     '@layer': {
-      [components]: {
+      [layouts]: {
         marginBlockStart: 0,
       },
     },
@@ -73,7 +74,7 @@ globalStyle(
   `${coverRecipe.classNames.base} > :last-child:not([data-cover-center])`,
   {
     '@layer': {
-      [components]: {
+      [layouts]: {
         marginBlockEnd: 0,
       },
     },
@@ -82,7 +83,7 @@ globalStyle(
 
 globalStyle(`${coverRecipe.classNames.base} > [data-cover-center]`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       marginBlock: 'auto',
     },
   },

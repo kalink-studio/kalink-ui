@@ -6,8 +6,9 @@ import {
 } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 import {
+  createChoiceLabelStyles,
   createChoiceControlStyles,
   createChoiceIndicatorStyles,
 } from '../_foundation';
@@ -36,9 +37,9 @@ export const checkboxVars = createThemeContract({
 const checkboxDefaults = assignVars(checkboxVars, {
   color: {
     controlBorder: sys.color.border.high,
-    controlCheckedBackground: sys.color.content.base,
+    controlCheckedBackground: sys.color.tone.primary,
     controlFocusRing: sys.color.tone.primary,
-    indicatorForeground: sys.color.container.base,
+    indicatorForeground: sys.color.tone.onPrimary,
     labelForeground: sys.color.content.base,
   },
   shape: {
@@ -56,22 +57,19 @@ const checkboxDefaults = assignVars(checkboxVars, {
 
 export const label = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: checkboxDefaults,
-
-      alignItems: 'center',
-      display: 'flex',
-
-      gap: checkboxVars.spacing.labelGap,
-
-      color: checkboxVars.color.labelForeground,
+      ...createChoiceLabelStyles({
+        color: checkboxVars.color.labelForeground,
+        gap: checkboxVars.spacing.labelGap,
+      }),
     },
   },
 });
 
 export const checkbox = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       ...createChoiceControlStyles({
         borderRadius: checkboxVars.shape.controlCorner,
         checkedBackgroundColor: checkboxVars.color.controlCheckedBackground,
@@ -91,7 +89,7 @@ const checkboxIndicatorStyles = createChoiceIndicatorStyles({
 
 export const indicator = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       ...checkboxIndicatorStyles,
       clipPath: 'inset(0 0 0 0)',
       transition:
@@ -119,6 +117,10 @@ export const indicator = style({
 });
 
 globalStyle(`${indicator} > svg`, {
-  blockSize: checkboxVars.size.indicatorSize,
-  inlineSize: checkboxVars.size.indicatorSize,
+  '@layer': {
+    [molecules]: {
+      blockSize: checkboxVars.size.indicatorSize,
+      inlineSize: checkboxVars.size.indicatorSize,
+    },
+  },
 });

@@ -2,7 +2,7 @@ import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 interface LabelTypographyStylesOptions {
   font: string;
@@ -14,11 +14,6 @@ interface LabelTypographyStylesOptions {
 
 export const labelVars = createThemeContract({
   typography: {
-    captionFont: null,
-    captionLineHeight: null,
-    captionSize: null,
-    captionTracking: null,
-    captionWeight: null,
     choiceFont: null,
     choiceLineHeight: null,
     choiceSize: null,
@@ -34,16 +29,11 @@ export const labelVars = createThemeContract({
 
 const labelDefaults = assignVars(labelVars, {
   typography: {
-    captionFont: sys.typography.label.large.font,
-    captionLineHeight: sys.typography.label.large.lineHeight,
-    captionSize: sys.typography.label.large.size,
-    captionTracking: sys.typography.label.large.tracking,
-    captionWeight: sys.typography.label.large.weight,
-    choiceFont: sys.typography.body.large.font,
-    choiceLineHeight: sys.typography.body.large.lineHeight,
-    choiceSize: sys.typography.body.large.size,
-    choiceTracking: sys.typography.body.large.tracking,
-    choiceWeight: sys.typography.body.large.weight,
+    choiceFont: sys.typography.label.medium.font,
+    choiceLineHeight: sys.typography.label.medium.lineHeight,
+    choiceSize: sys.typography.label.medium.size,
+    choiceTracking: sys.typography.label.medium.tracking,
+    choiceWeight: sys.typography.label.medium.weight,
     fieldFont: sys.typography.label.medium.font,
     fieldLineHeight: sys.typography.label.medium.lineHeight,
     fieldSize: sys.typography.label.medium.size,
@@ -55,7 +45,7 @@ const labelDefaults = assignVars(labelVars, {
 function createLabelTypographyStyles(options: LabelTypographyStylesOptions) {
   return {
     '@layer': {
-      [components]: {
+      [atoms]: {
         fontFamily: options.font,
         fontSize: options.size,
         fontWeight: options.weight,
@@ -69,7 +59,7 @@ function createLabelTypographyStyles(options: LabelTypographyStylesOptions) {
 export const labelRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: labelDefaults,
       },
     },
@@ -90,13 +80,6 @@ export const labelRecipe = recipe({
         size: labelVars.typography.choiceSize,
         tracking: labelVars.typography.choiceTracking,
         weight: labelVars.typography.choiceWeight,
-      }),
-      caption: createLabelTypographyStyles({
-        font: labelVars.typography.captionFont,
-        lineHeight: labelVars.typography.captionLineHeight,
-        size: labelVars.typography.captionSize,
-        tracking: labelVars.typography.captionTracking,
-        weight: labelVars.typography.captionWeight,
       }),
     },
   },

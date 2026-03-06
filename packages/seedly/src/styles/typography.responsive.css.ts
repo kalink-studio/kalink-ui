@@ -1,6 +1,6 @@
 import { type StyleRule } from '@vanilla-extract/css';
 
-import { components } from './layers.css';
+import { base } from './layers.css';
 import { createResponsiveVariants, defaultMedia } from './responsive';
 import { sys } from './system-contract.css';
 
@@ -11,7 +11,7 @@ const typographyComboEntries = Object.entries(sys.typography).flatMap(
 
       const rule: StyleRule = {
         '@layer': {
-          [components]: {
+          [base]: {
             fontFamily: value.font,
             fontWeight: value.weight,
             lineHeight: value.lineHeight,

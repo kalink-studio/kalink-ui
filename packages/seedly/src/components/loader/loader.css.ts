@@ -15,21 +15,21 @@ import {
   sys,
   transition,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 const loaderToneVars = createThemeContract({
   base: null,
   onBase: null,
 });
 
-const loaderToneStyles = createToneStyles(loaderToneVars);
+const loaderToneStyles = createToneStyles(loaderToneVars, atoms);
 
 export const loaderRecipe = recipe({
   variants: {
     active: {
       true: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             opacity: 1,
             visibility: 'visible',
             animationPlayState: 'running',
@@ -39,7 +39,7 @@ export const loaderRecipe = recipe({
       },
       false: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             opacity: 0,
             visibility: 'hidden',
             animationPlayState: 'paused',
@@ -72,7 +72,7 @@ const moonPulseAnimation = keyframes({
 const loaderWrapperSizeStyles = {
   sm: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [size]: sys.spacing[7],
         },
@@ -81,7 +81,7 @@ const loaderWrapperSizeStyles = {
   },
   md: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [size]: sys.spacing[9],
         },
@@ -90,7 +90,7 @@ const loaderWrapperSizeStyles = {
   },
   lg: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
           [size]: sys.spacing[11],
         },
@@ -102,7 +102,7 @@ const loaderWrapperSizeStyles = {
 export const loaderWrapperRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         overflow: 'hidden',
         width: size,
         height: size,
@@ -143,7 +143,7 @@ export const loaderWrapperRecipe = recipe({
 
 export const ellipse = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       width: size,
       height: size,
       position: 'absolute',
@@ -159,7 +159,7 @@ export const ellipse = style({
 
 export const moon = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       width: moonSize,
       height: moonSize,
       position: 'absolute',

@@ -1,11 +1,11 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
+  createFieldLabelStackStyles,
+  createFieldLabelTextStyles,
   createFieldTextInputStyles,
-  createFieldLabelStyles,
-  createFieldStackStyles,
   createFloatingItemStyles,
   createFloatingListStyles,
   createFloatingAnchoredSurfaceStyles,
@@ -64,8 +64,8 @@ const autocompleteDefaults = assignVars(autocompleteVars, {
     inputBorder: sys.color.border.base,
     inputFocusRing: sys.color.tone.primary,
     inputForeground: sys.color.content.base,
-    itemHighlightedBackground: sys.color.content.base,
-    itemHighlightedForeground: sys.color.container.base,
+    itemHighlightedBackground: sys.color.tone.primary,
+    itemHighlightedForeground: sys.color.tone.onPrimary,
     label: sys.color.content.base,
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
@@ -112,7 +112,7 @@ export const input = style([
   typography.body.large,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         ...createFieldTextInputStyles({
           paddingInlineEnd: autocompleteVars.spacing.inputPaddingInlineEnd,
           paddingInlineStart: autocompleteVars.spacing.inputPaddingInlineStart,
@@ -133,17 +133,16 @@ export const input = style([
 
 export const label = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: {
         ...autocompleteDefaults,
       },
 
-      ...createFieldStackStyles({
-        alignItems: 'start',
+      ...createFieldLabelStackStyles({
         gap: autocompleteVars.spacing.stackGap,
         inlineSize: autocompleteVars.layout.inputInlineSize,
       }),
-      ...createFieldLabelStyles({
+      ...createFieldLabelTextStyles({
         color: autocompleteVars.color.label,
       }),
     },
@@ -152,7 +151,7 @@ export const label = style({
 
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles(),
 
       vars: {
@@ -164,7 +163,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingAnchoredSurfaceStyles({
         background: autocompleteVars.color.popupBackground,
         borderRadius: autocompleteVars.shape.popupCorner,
@@ -184,7 +183,7 @@ export const popup = style({
 
 export const list = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingListStyles({
         maxBlockSize: autocompleteVars.size.listMaxBlockSize,
         paddingBlock: autocompleteVars.spacing.listPaddingBlock,
@@ -205,7 +204,7 @@ export const item = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: createFloatingItemStyles({
+      [organisms]: createFloatingItemStyles({
         paddingBlock: autocompleteVars.spacing.itemPaddingBlock,
         paddingInline: autocompleteVars.spacing.itemPaddingInline,
         overflowWrap: 'anywhere',
@@ -221,7 +220,7 @@ export const empty = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         selectors: {
           [`&:not(:empty)`]: {
             paddingBlock: autocompleteVars.spacing.emptyPaddingBlock,

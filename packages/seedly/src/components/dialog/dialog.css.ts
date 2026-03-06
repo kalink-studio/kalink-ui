@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
   createDialogActionsStyles,
   createDialogBackdropStyles,
@@ -69,7 +69,7 @@ const dialogDefaults = assignVars(dialogVars, {
 
 export const button = style({
   '@layer': {
-    [components]: createDialogButtonStyles({
+    [organisms]: createDialogButtonStyles({
       vars: dialogDefaults,
     }),
   },
@@ -77,7 +77,7 @@ export const button = style({
 
 export const backdrop = style({
   '@layer': {
-    [components]: createDialogBackdropStyles({
+    [organisms]: createDialogBackdropStyles({
       vars: dialogDefaults,
 
       minBlockSize: dialogVars.layout.backdropMinBlockSize,
@@ -94,7 +94,7 @@ export const backdrop = style({
 
 export const popup = style({
   '@layer': {
-    [components]: createDialogPopupStyles({
+    [organisms]: createDialogPopupStyles({
       vars: dialogDefaults,
 
       inlineSize: dialogVars.layout.popupInlineSize,
@@ -118,7 +118,7 @@ export const popup = style({
 
 export const title = style({
   '@layer': {
-    [components]: createDialogTitleStyles({
+    [organisms]: createDialogTitleStyles({
       marginBlockStart: dialogVars.spacing.titleMarginBlockStart,
       marginBlockEnd: dialogVars.spacing.titleMarginBlockEnd,
     }),
@@ -127,7 +127,7 @@ export const title = style({
 
 export const description = style({
   '@layer': {
-    [components]: createDialogDescriptionStyles({
+    [organisms]: createDialogDescriptionStyles({
       descriptionColor: dialogVars.color.description,
       marginBlock: dialogVars.spacing.descriptionMarginBlock,
       marginInline: dialogVars.spacing.descriptionMarginInline,
@@ -137,7 +137,7 @@ export const description = style({
 
 export const actions = style({
   '@layer': {
-    [components]: createDialogActionsStyles({
+    [organisms]: createDialogActionsStyles({
       gap: dialogVars.spacing.actionsGap,
     }),
   },

@@ -7,7 +7,7 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const centerVars = createThemeContract({
   layout: {
@@ -30,12 +30,13 @@ const centerDefaults = assignVars(centerVars, {
 export const centerGuttersStyles = mapContractVars(
   sys.spacing,
   centerVars.spacing,
+  layouts,
 );
 
 export const centerAndTextStyles = {
   true: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         textAlign: 'center',
       },
     },
@@ -45,7 +46,7 @@ export const centerAndTextStyles = {
 export const centerIntrinsicStyles = {
   true: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -57,7 +58,7 @@ export const centerIntrinsicStyles = {
 export const centerRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: centerDefaults,
 
         display: 'block',

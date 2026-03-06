@@ -1,12 +1,12 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 
 export const headingAlignStyles = {
   start: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'flex-start',
         textAlign: 'start',
       },
@@ -14,7 +14,7 @@ export const headingAlignStyles = {
   },
   center: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'center',
         textAlign: 'center',
       },
@@ -22,7 +22,7 @@ export const headingAlignStyles = {
   },
   end: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'flex-end',
         textAlign: 'end',
       },
@@ -30,7 +30,7 @@ export const headingAlignStyles = {
   },
   justify: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'stretch',
         textAlign: 'justify',
       },
@@ -41,7 +41,7 @@ export const headingAlignStyles = {
 export const headingRootRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         display: 'flex',
         flexDirection: 'column',
       },
@@ -58,7 +58,7 @@ export const pretitleSpacingStyles = Object.fromEntries(
       key,
       {
         '@layer': {
-          [components]: {
+          [molecules]: {
             marginBlockEnd: value,
           },
         },
@@ -79,7 +79,7 @@ export const subtitleSpacingStyles = Object.fromEntries(
       key,
       {
         '@layer': {
-          [components]: {
+          [molecules]: {
             marginBlockStart: value,
           },
         },

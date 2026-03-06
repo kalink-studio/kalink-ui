@@ -2,7 +2,7 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
 import { sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const toastVars = createThemeContract({
   color: {
@@ -88,7 +88,7 @@ const toastDefaults = assignVars(toastVars, {
 
 export const viewport = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: {
         ...toastDefaults,
       },
@@ -114,7 +114,7 @@ export const viewport = style({
 
 export const toast = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       inlineSize: '100%',
       blockSize: 'var(--height)',
       marginBlock: '0',
@@ -201,7 +201,7 @@ export const toast = style({
 
 export const content = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       overflow: 'hidden',
       transition: transition('opacity', {
         duration: toastVars.motion.contentOpacityDuration,
@@ -222,7 +222,7 @@ export const content = style({
 
 export const title = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       marginBlock: '0',
       marginInline: '0',
     },
@@ -231,7 +231,7 @@ export const title = style({
 
 export const description = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       marginBlock: '0',
       marginInline: '0',
     },
@@ -240,7 +240,7 @@ export const description = style({
 
 export const close = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

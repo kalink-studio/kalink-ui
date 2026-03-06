@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { sys } from '../../styles';
+import { organisms } from '../../styles/layers.css';
 import {
   createArrowFillStyles,
   createArrowInnerStrokeStyles,
@@ -46,8 +46,8 @@ const popoverDefaults = assignVars(popoverVars, {
   color: {
     arrowInnerStroke: floatingSurfaceDarkOutlineColor,
     arrowOuterStroke: sys.color.border.low,
-    descriptionForeground: stateColor.mutedContent,
-    popupBackground: sys.color.surface.base,
+    descriptionForeground: sys.color.content.base,
+    popupBackground: sys.color.container.high,
     popupForeground: sys.color.content.base,
     popupOutline: sys.color.border.low,
     popupOutlineInverse: 'transparent',
@@ -69,7 +69,7 @@ const popoverDefaults = assignVars(popoverVars, {
 export const iconButton = style([
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         vars: {
           ...popoverDefaults,
         },
@@ -84,7 +84,7 @@ export const iconButton = style([
 ]);
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles({
         zIndex: '1',
       }),
@@ -100,7 +100,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingSurfaceStyles({
         paddingBlock: popoverVars.spacing.popupPaddingBlock,
         paddingInline: popoverVars.spacing.popupPaddingInline,
@@ -120,7 +120,7 @@ export const popup = style({
 
 export const arrow = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingArrowPlacementStyles(),
     },
   },
@@ -128,7 +128,7 @@ export const arrow = style({
 
 export const arrowFill = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowFillStyles(popoverVars.color.popupBackground),
     },
   },
@@ -136,7 +136,7 @@ export const arrowFill = style({
 
 export const arrowOuterStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowOuterStrokeStyles(popoverVars.color.arrowOuterStroke),
     },
   },
@@ -144,7 +144,7 @@ export const arrowOuterStroke = style({
 
 export const arrowInnerStroke = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createArrowInnerStrokeStyles(popoverVars.color.arrowInnerStroke),
     },
   },
@@ -152,7 +152,7 @@ export const arrowInnerStroke = style({
 
 export const title = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       marginBlock: '0',
       marginInline: '0',
     },
@@ -161,7 +161,7 @@ export const title = style({
 
 export const description = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       marginBlock: '0',
       marginInline: '0',
       color: popoverVars.color.descriptionForeground,

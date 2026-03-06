@@ -2,7 +2,7 @@ import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { mapContractVars, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
   createResponsiveVariants,
   defaultMedia,
@@ -24,6 +24,7 @@ const stackDefaults = assignVars(stackVars, {
 export const stackSpacingStyles = mapContractVars(
   sys.spacing,
   stackVars.spacing,
+  layouts,
 );
 
 export const stackAlignStyles = flexAlignItemsStyles;
@@ -31,7 +32,7 @@ export const stackAlignStyles = flexAlignItemsStyles;
 export const stackRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',

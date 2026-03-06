@@ -1,10 +1,9 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, transition, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 import {
   createRangeIndicatorStyles,
-  createRangeTrackRootVars,
   createRangeTrackStyles,
 } from '../_foundation';
 
@@ -37,7 +36,7 @@ export const meterVars = createThemeContract({
 
 const meterDefaults = assignVars(meterVars, {
   color: {
-    indicatorBackground: sys.color.content.base,
+    indicatorBackground: sys.color.tone.primary,
     rootForeground: sys.color.content.base,
     trackBackground: sys.color.container.base,
     trackBorder: 'transparent',
@@ -64,15 +63,9 @@ const meterDefaults = assignVars(meterVars, {
 
 export const meter = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: {
         ...meterDefaults,
-        ...createRangeTrackRootVars({
-          trackBackground: meterVars.color.trackBackground,
-          trackBorder: meterVars.color.trackBorder,
-          indicator: meterVars.color.indicatorBackground,
-          corner: meterVars.shape.trackCorner,
-        }),
       },
 
       display: 'grid',
@@ -84,22 +77,19 @@ export const meter = style({
   },
 });
 
-export const label = style([
-  typography.label.medium,
-  {
-    '@layer': {
-      [components]: {
-        color: meterVars.color.rootForeground,
-      },
+export const label = style({
+  '@layer': {
+    [molecules]: {
+      color: meterVars.color.rootForeground,
     },
   },
-]);
+});
 
 export const value = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: {
+      [molecules]: {
         gridColumnStart: meterVars.layout.valueColumnStart,
         marginBlock: '0',
         marginInline: '0',
@@ -113,11 +103,14 @@ export const value = style([
 
 export const track = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       gridColumn: meterVars.layout.trackColumn,
 
       ...createRangeTrackStyles({
+        backgroundColor: meterVars.color.trackBackground,
         blockSize: meterVars.size.trackBlockSize,
+        borderColor: meterVars.color.trackBorder,
+        borderRadius: meterVars.shape.trackCorner,
         overflow: 'hidden',
       }),
     },
@@ -126,8 +119,11 @@ export const track = style({
 
 export const indicator = style({
   '@layer': {
-    [components]: {
-      ...createRangeIndicatorStyles(),
+    [molecules]: {
+      ...createRangeIndicatorStyles({
+        backgroundColor: meterVars.color.indicatorBackground,
+        borderRadius: meterVars.shape.trackCorner,
+      }),
 
       transition: transition('width', {
         duration: meterVars.motion.indicatorWidthDuration,

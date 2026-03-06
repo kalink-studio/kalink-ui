@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 
 export const toggleGroupVars = createThemeContract({
   color: {
@@ -29,7 +29,7 @@ const toggleGroupDefaults = assignVars(toggleGroupVars, {
 
 export const panel = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: toggleGroupDefaults,
 
       display: 'flex',
@@ -41,7 +41,7 @@ export const panel = style({
 export const button = style([
   {
     '@layer': {
-      [components]: {
+      [molecules]: {
         borderWidth: '0',
 
         selectors: {

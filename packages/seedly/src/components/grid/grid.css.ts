@@ -11,7 +11,7 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
   gridAlignContentStyles,
   gridAlignItemsStyles,
@@ -49,16 +49,22 @@ const gridDefaults = assignVars(gridVars, {
   },
 });
 
-export const gridSpacingStyles = mapContractVars(sys.spacing, gridVars.spacing);
+export const gridSpacingStyles = mapContractVars(
+  sys.spacing,
+  gridVars.spacing,
+  layouts,
+);
 
 export const gridColumnSpacingStyles = mapContractVars(
   sys.spacing,
   gridVars.columnSpacing,
+  layouts,
 );
 
 export const gridRowSpacingStyles = mapContractVars(
   sys.spacing,
   gridVars.rowSpacing,
+  layouts,
 );
 
 export {
@@ -76,7 +82,7 @@ const gridColumnsStyles = Object.fromEntries(
     count,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           gridTemplateColumns: `repeat(${count}, 1fr)`,
         },
       },
@@ -90,14 +96,14 @@ const gridColumnsStyles = Object.fromEntries(
 export const autoLayoutStyles = {
   fill: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         gridTemplateColumns: `repeat(auto-fill, minmax(min(${gridVars.layout.rootMinCellSize}, 100%), 1fr))`,
       },
     },
   },
   fit: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridVars.layout.rootMinCellSize}, 100%), 1fr))`,
       },
     },
@@ -107,7 +113,7 @@ export const autoLayoutStyles = {
 export const gridRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: gridDefaults,
 
         display: 'grid',

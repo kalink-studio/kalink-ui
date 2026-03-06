@@ -2,12 +2,12 @@ import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
+  layoutCornerStyles,
+  layoutElevationStyles,
   layoutRecipe,
   layoutSpacingStyles,
-  layoutElevationStyles,
-  layoutCornerStyles,
 } from '../layout/layout.css';
 
 const containerVars = createThemeContract({
@@ -33,7 +33,7 @@ const subtleContainerOutline = `color-mix(in srgb, ${sys.color.content.base} cal
 const createContainerLevelStyle = (rootLevelBackground: string) => {
   return {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           [containerVars.color.rootLevelBackground]: rootLevelBackground,
         },
@@ -48,7 +48,7 @@ const createContainerVariantStyle = (
 ) => {
   return {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           [containerVars.color.rootBackground]: rootBackground,
           [containerVars.color.rootOutline]: rootOutline,
@@ -58,28 +58,12 @@ const createContainerVariantStyle = (
   };
 };
 
-const containerLevelStyles = {
-  low: createContainerLevelStyle(sys.color.container.low),
-  base: createContainerLevelStyle(sys.color.container.base),
-  high: createContainerLevelStyle(sys.color.container.high),
-  top: createContainerLevelStyle(sys.color.container.top),
-} as const;
-
-const containerVariantStyles = {
-  solid: createContainerVariantStyle(
-    containerVars.color.rootLevelBackground,
-    'transparent',
-  ),
-  outline: createContainerVariantStyle('transparent', subtleContainerOutline),
-  bare: createContainerVariantStyle('transparent', 'transparent'),
-} as const;
-
 export const containerRecipe = recipe({
   base: [
     layoutRecipe.classNames.base,
     {
       '@layer': {
-        [components]: {
+        [layouts]: {
           vars: {
             ...containerDefaults,
           },
@@ -104,8 +88,23 @@ export const containerRecipe = recipe({
   ],
 
   variants: {
-    variant: containerVariantStyles,
-    level: containerLevelStyles,
+    variant: {
+      solid: createContainerVariantStyle(
+        containerVars.color.rootLevelBackground,
+        'transparent',
+      ),
+      outline: createContainerVariantStyle(
+        'transparent',
+        subtleContainerOutline,
+      ),
+      bare: createContainerVariantStyle('transparent', 'transparent'),
+    },
+    level: {
+      low: createContainerLevelStyle(sys.color.container.low),
+      base: createContainerLevelStyle(sys.color.container.base),
+      high: createContainerLevelStyle(sys.color.container.high),
+      top: createContainerLevelStyle(sys.color.container.top),
+    },
     spacing: layoutSpacingStyles,
     elevation: layoutElevationStyles,
     corner: layoutCornerStyles,

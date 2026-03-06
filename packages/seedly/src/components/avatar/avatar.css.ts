@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 
 export const avatarVars = createThemeContract({
   color: {
@@ -33,7 +33,7 @@ export const root = style([
   typography.label.large,
   {
     '@layer': {
-      [components]: {
+      [molecules]: {
         vars: avatarDefaults,
 
         alignItems: 'center',
@@ -57,7 +57,7 @@ export const root = style([
 
 export const image = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       blockSize: '100%',
       inlineSize: '100%',
 
@@ -68,7 +68,7 @@ export const image = style({
 
 export const fallback = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',

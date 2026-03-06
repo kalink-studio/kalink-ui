@@ -7,7 +7,7 @@ import {
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createResponsiveVariants, defaultMedia } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const frameVars = createThemeContract({
   layout: {
@@ -24,7 +24,7 @@ const frameDefaults = assignVars(frameVars, {
 export const frameRatioStyles = {
   '1:1': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           ...assignVars(frameVars, {
             layout: {
@@ -37,7 +37,7 @@ export const frameRatioStyles = {
   },
   '3:2': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           ...assignVars(frameVars, {
             layout: {
@@ -50,7 +50,7 @@ export const frameRatioStyles = {
   },
   '2:3': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           ...assignVars(frameVars, {
             layout: {
@@ -63,7 +63,7 @@ export const frameRatioStyles = {
   },
   '4:3': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           ...assignVars(frameVars, {
             layout: {
@@ -76,7 +76,7 @@ export const frameRatioStyles = {
   },
   '16:9': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           ...assignVars(frameVars, {
             layout: {
@@ -89,7 +89,7 @@ export const frameRatioStyles = {
   },
   '9:16': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
           ...assignVars(frameVars, {
             layout: {
@@ -104,7 +104,7 @@ export const frameRatioStyles = {
 
 const baseFrame = style({
   '@layer': {
-    [components]: {
+    [layouts]: {
       vars: frameDefaults,
 
       alignItems: 'center',
@@ -127,7 +127,7 @@ export const frameRecipe = recipe({
 
 globalStyle(`${baseFrame} > img, ${baseFrame} > video`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       blockSize: '100%',
       inlineSize: '100%',
       objectFit: 'cover',

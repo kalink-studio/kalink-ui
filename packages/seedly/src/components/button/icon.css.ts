@@ -1,12 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 import { buttonVars } from './root.css';
 
 export const buttonIcon = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -20,7 +20,7 @@ export const buttonIcon = style({
 
 globalStyle(`${buttonIcon} > svg`, {
   '@layer': {
-    [components]: {
+    [atoms]: {
       display: 'block',
       inlineSize: '100%',
       blockSize: '100%',

@@ -1,8 +1,11 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
-import { createChoiceControlStyles } from '../_foundation';
+import { molecules } from '../../styles/layers.css';
+import {
+  createChoiceControlStyles,
+  createChoiceLabelStyles,
+} from '../_foundation';
 
 export const radioVars = createThemeContract({
   color: {
@@ -28,9 +31,9 @@ export const radioVars = createThemeContract({
 const radioDefaults = assignVars(radioVars, {
   color: {
     controlBorder: sys.color.border.high,
-    controlCheckedBackground: sys.color.content.base,
+    controlCheckedBackground: sys.color.tone.primary,
     controlFocusRing: sys.color.tone.primary,
-    indicatorForeground: sys.color.container.base,
+    indicatorForeground: sys.color.tone.onPrimary,
     labelForeground: sys.color.content.base,
   },
   shape: {
@@ -48,22 +51,19 @@ const radioDefaults = assignVars(radioVars, {
 
 export const label = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: radioDefaults,
-
-      display: 'flex',
-      alignItems: 'center',
-
-      gap: radioVars.spacing.labelGap,
-
-      color: radioVars.color.labelForeground,
+      ...createChoiceLabelStyles({
+        color: radioVars.color.labelForeground,
+        gap: radioVars.spacing.labelGap,
+      }),
     },
   },
 });
 
 export const radio = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       ...createChoiceControlStyles({
         borderRadius: radioVars.shape.controlCorner,
         checkedBackgroundColor: radioVars.color.controlCheckedBackground,
@@ -81,7 +81,7 @@ export const radio = style({
 
 export const indicator = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       display: 'none',
     },
   },

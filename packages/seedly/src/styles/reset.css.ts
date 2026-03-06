@@ -1,11 +1,11 @@
 import { globalStyle } from '@vanilla-extract/css';
 
-import { base } from './layers.css';
+import { reset } from './layers.css';
 import { sys } from './system-contract.css';
 
 globalStyle('*, *::before, *::after', {
   '@layer': {
-    [base]: {
+    [reset]: {
       boxSizing: 'border-box',
     },
   },
@@ -13,7 +13,7 @@ globalStyle('*, *::before, *::after', {
 
 globalStyle('*', {
   '@layer': {
-    [base]: {
+    [reset]: {
       margin: 0,
 
       color: 'currentColor',
@@ -23,7 +23,7 @@ globalStyle('*', {
 
 globalStyle('body', {
   '@layer': {
-    [base]: {
+    [reset]: {
       position: 'relative',
 
       color: sys.color.content.base,
@@ -34,7 +34,7 @@ globalStyle('body', {
 
 globalStyle('img, picture, video, canvas, svg', {
   '@layer': {
-    [base]: {
+    [reset]: {
       display: 'block',
       maxWidth: '100%',
     },
@@ -43,7 +43,7 @@ globalStyle('img, picture, video, canvas, svg', {
 
 globalStyle('input, button, textarea, select', {
   '@layer': {
-    [base]: {
+    [reset]: {
       font: 'inherit',
     },
   },
@@ -51,7 +51,7 @@ globalStyle('input, button, textarea, select', {
 
 globalStyle('button', {
   '@layer': {
-    [base]: {
+    [reset]: {
       padding: '0',
 
       backgroundColor: 'transparent',

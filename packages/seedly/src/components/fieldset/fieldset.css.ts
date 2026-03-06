@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const fieldsetVars = createThemeContract({
   color: {
@@ -33,7 +33,7 @@ const fieldsetDefaults = assignVars(fieldsetVars, {
 
 export const fieldset = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: fieldsetDefaults,
 
       display: 'flex',
@@ -53,7 +53,7 @@ export const fieldset = style({
 
 export const legend = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       paddingBlockEnd: fieldsetVars.spacing.legendPaddingBlockEnd,
 
       borderBlockEnd: `${fieldsetVars.size.legendBorderBlockEndWidth} solid ${fieldsetVars.color.legendBorder}`,

@@ -2,11 +2,11 @@ import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 
 import { stateColor, sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import {
+  createFieldLabelStackStyles,
+  createFieldLabelTextStyles,
   createFieldTextInputStyles,
-  createFieldLabelStyles,
-  createFieldStackStyles,
   createFloatingItemStyles,
   createFloatingListStyles,
   createFloatingAnchoredSurfaceStyles,
@@ -71,8 +71,8 @@ const comboboxDefaults = assignVars(comboboxVars, {
     inputBorder: sys.color.border.base,
     inputFocusRing: sys.color.tone.primary,
     inputForeground: sys.color.content.base,
-    itemHighlightedBackground: sys.color.content.base,
-    itemHighlightedForeground: sys.color.container.base,
+    itemHighlightedBackground: sys.color.tone.primary,
+    itemHighlightedForeground: sys.color.tone.onPrimary,
     label: sys.color.content.base,
     popupBackground: sys.color.surface.base,
     popupForeground: sys.color.content.base,
@@ -116,16 +116,15 @@ const comboboxDefaults = assignVars(comboboxVars, {
 
 export const label = style({
   '@layer': {
-    [components]: {
-      ...createFieldStackStyles({
-        alignItems: 'start',
+    [organisms]: {
+      ...createFieldLabelStackStyles({
         gap: comboboxVars.spacing.stackGap,
         inlineSize: comboboxVars.layout.inputInlineSize,
+        position: 'relative',
       }),
-      ...createFieldLabelStyles({
+      ...createFieldLabelTextStyles({
         color: comboboxVars.color.label,
       }),
-      position: 'relative',
       vars: {
         ...comboboxDefaults,
       },
@@ -135,7 +134,7 @@ export const label = style({
 
 export const inputWrapper = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'block',
       inlineSize: '100%',
       minInlineSize: '0',
@@ -152,15 +151,15 @@ const comboboxItemHighlightSelectors =
     textColor: comboboxVars.color.itemHighlightedForeground,
   }).selectors ?? {};
 
-export const trigger = style({ '@layer': { [components]: {} } });
+export const trigger = style({ '@layer': { [organisms]: {} } });
 
-export const clear = style({ '@layer': { [components]: {} } });
+export const clear = style({ '@layer': { [organisms]: {} } });
 
 export const input = style([
   typography.body.large,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         ...createFieldTextInputStyles({
           backgroundColor: comboboxVars.color.inputBackground,
           blockSize: comboboxVars.size.inputBlockSize,
@@ -188,7 +187,7 @@ export const empty = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         selectors: {
           [`&:not(:empty)`]: {
             paddingBlock: comboboxVars.spacing.emptyPaddingBlock,
@@ -205,7 +204,7 @@ export const empty = style([
 
 export const actionButtons = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -225,7 +224,7 @@ export const actionButtons = style({
 
 export const positioner = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingPositionerStyles(),
       vars: {
         ...comboboxDefaults,
@@ -236,7 +235,7 @@ export const positioner = style({
 
 export const popup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingAnchoredSurfaceStyles({
         background: comboboxVars.color.popupBackground,
         borderRadius: comboboxVars.shape.popupCorner,
@@ -254,7 +253,7 @@ export const popup = style({
 
 export const list = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createFloatingListStyles({
         maxBlockSize: comboboxVars.size.listMaxBlockSize,
         paddingBlock: comboboxVars.spacing.listPaddingBlock,
@@ -274,7 +273,7 @@ export const item = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: createFloatingItemStyles({
+      [organisms]: createFloatingItemStyles({
         preset: 'listboxWithIndicator',
         paddingBlock: comboboxVars.spacing.itemPaddingBlock,
         paddingInline: comboboxVars.spacing.itemPaddingInline,
@@ -288,7 +287,7 @@ export const item = style([
 
 export const itemText = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       gridColumnStart: '2',
       minInlineSize: '0',
       overflowWrap: 'anywhere',
@@ -298,7 +297,7 @@ export const itemText = style({
 
 export const itemIndicator = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       gridColumnStart: '1',
       display: 'flex',
       alignItems: 'center',

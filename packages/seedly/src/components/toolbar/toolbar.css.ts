@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import { createBarRootStyles } from '../_foundation';
 
 export const toolbarVars = createThemeContract({
@@ -88,7 +88,7 @@ const toolbarDefaults = assignVars(toolbarVars, {
 
 export const toolbar = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createBarRootStyles({
         alignItems: 'stretch',
         flexWrap: 'wrap',
@@ -106,7 +106,7 @@ export const toolbar = style({
 
 export const group = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       ...createBarRootStyles({
         gap: toolbarVars.spacing.groupGap,
       }),
@@ -117,7 +117,7 @@ export const group = style({
 export const button = style([
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         borderWidth: '0',
         vars: {
           ...toolbarDefaults,
@@ -158,7 +158,7 @@ export const button = style([
 
 export const separator = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: {
         ...toolbarDefaults,
       },
@@ -176,7 +176,7 @@ export const link = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         vars: {
           ...toolbarDefaults,
         },

@@ -11,7 +11,7 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
   flexAlignItemsWithBaselineStyles,
   flexJustifyContentStyles,
@@ -37,25 +37,33 @@ const listDefaults = assignVars(listVars, {
   },
 });
 
-export const listItemSpacingStyles = mapContractVars(sys.spacing, {
-  itemSpacing: listVars.spacing.itemSpacing,
-});
+export const listItemSpacingStyles = mapContractVars(
+  sys.spacing,
+  {
+    itemSpacing: listVars.spacing.itemSpacing,
+  },
+  layouts,
+);
 
-export const listItemInlineSpacingStyles = mapContractVars(sys.spacing, {
-  itemInlineSpacing: listVars.spacing.itemInlineSpacing,
-});
+export const listItemInlineSpacingStyles = mapContractVars(
+  sys.spacing,
+  {
+    itemInlineSpacing: listVars.spacing.itemInlineSpacing,
+  },
+  layouts,
+);
 
 export const listOrientationStyles = {
   vertical: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         flexDirection: 'column',
       },
     },
   },
   horizontal: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         listStylePosition: 'inside',
@@ -70,32 +78,32 @@ export const listOrientationStyles = {
 export const listStyleStyles = {
   none: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         listStyle: 'none',
       },
     },
   },
-  disc: { '@layer': { [components]: { listStyle: 'disc' } } },
-  circle: { '@layer': { [components]: { listStyle: 'circle' } } },
-  square: { '@layer': { [components]: { listStyle: 'square' } } },
-  decimal: { '@layer': { [components]: { listStyle: 'decimal' } } },
-  'lower-alpha': { '@layer': { [components]: { listStyle: 'lower-alpha' } } },
-  'upper-alpha': { '@layer': { [components]: { listStyle: 'upper-alpha' } } },
-  'lower-roman': { '@layer': { [components]: { listStyle: 'lower-roman' } } },
-  'upper-roman': { '@layer': { [components]: { listStyle: 'upper-roman' } } },
+  disc: { '@layer': { [layouts]: { listStyle: 'disc' } } },
+  circle: { '@layer': { [layouts]: { listStyle: 'circle' } } },
+  square: { '@layer': { [layouts]: { listStyle: 'square' } } },
+  decimal: { '@layer': { [layouts]: { listStyle: 'decimal' } } },
+  'lower-alpha': { '@layer': { [layouts]: { listStyle: 'lower-alpha' } } },
+  'upper-alpha': { '@layer': { [layouts]: { listStyle: 'upper-alpha' } } },
+  'lower-roman': { '@layer': { [layouts]: { listStyle: 'lower-roman' } } },
+  'upper-roman': { '@layer': { [layouts]: { listStyle: 'upper-roman' } } },
 } as const;
 
 export const listMarkerPositionStyles = {
   inside: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         listStylePosition: 'inside',
       },
     },
   },
   outside: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         listStylePosition: 'outside',
       },
     },
@@ -105,7 +113,7 @@ export const listMarkerPositionStyles = {
 export const listRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: listDefaults,
 
         margin: 0,
@@ -135,7 +143,7 @@ export const listRecipe = recipe({
       },
       style: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             vars: {
               [listVars.spacing.rootPaddingInlineStart]:
                 listVars.spacing.itemInlineSpacing,
@@ -154,7 +162,7 @@ export const listRecipe = recipe({
       },
       style: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             vars: {
               [listVars.spacing.rootPaddingInlineStart]: sys.spacing[0],
               [listVars.spacing.itemPaddingBlock]: sys.spacing[0],
@@ -172,7 +180,7 @@ export const listRecipe = recipe({
       },
       style: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             vars: {
               [listVars.spacing.rootPaddingInlineStart]: sys.spacing[0],
               [listVars.spacing.itemPaddingBlock]: sys.spacing[0],
@@ -189,7 +197,7 @@ export const listRecipe = recipe({
       },
       style: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             listStylePosition: 'inside',
             vars: {
               [listVars.spacing.rootPaddingInlineStart]: sys.spacing[0],
@@ -208,7 +216,7 @@ export const listRecipe = recipe({
       },
       style: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             listStylePosition: 'inside',
             vars: {
               [listVars.spacing.rootPaddingInlineStart]: sys.spacing[0],
@@ -227,7 +235,7 @@ export const listRecipe = recipe({
       },
       style: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             vars: {
               [listVars.spacing.rootPaddingInlineStart]: sys.spacing[0],
               [listVars.spacing.itemPaddingBlock]: sys.spacing[4],
@@ -243,7 +251,7 @@ export const listRecipe = recipe({
 
 globalStyle(`${listRecipe.classNames.base} > li`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       paddingBlock: listVars.spacing.itemPaddingBlock,
       paddingInlineStart: listVars.spacing.itemPaddingInline,
     },

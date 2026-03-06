@@ -1,11 +1,11 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 import {
+  createFieldLabelStackStyles,
+  createFieldLabelTextStyles,
   createFieldTextInputStyles,
-  createFieldLabelStyles,
-  createFieldStackStyles,
 } from '../_foundation';
 
 export const numberFieldVars = createThemeContract({
@@ -76,9 +76,8 @@ const numberFieldDefaults = assignVars(numberFieldVars, {
 
 export const field = style({
   '@layer': {
-    [components]: {
-      ...createFieldStackStyles({
-        alignItems: 'start',
+    [molecules]: {
+      ...createFieldLabelStackStyles({
         gap: numberFieldVars.spacing.fieldGap,
         inlineSize: numberFieldVars.layout.inputInlineSize,
       }),
@@ -91,7 +90,7 @@ export const field = style({
 
 export const scrubArea = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       fontWeight: numberFieldVars.typography.scrubAreaWeight,
       cursor: 'ew-resize',
       userSelect: 'none',
@@ -101,7 +100,7 @@ export const scrubArea = style({
 
 export const scrubAreaCursor = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       filter: `drop-shadow(0 1px 1px ${numberFieldVars.color.scrubAreaCursorShadow})`,
     },
   },
@@ -109,8 +108,8 @@ export const scrubAreaCursor = style({
 
 export const label = style({
   '@layer': {
-    [components]: {
-      ...createFieldLabelStyles({
+    [molecules]: {
+      ...createFieldLabelTextStyles({
         color: numberFieldVars.color.labelForeground,
         cursor: 'ew-resize',
       }),
@@ -120,7 +119,7 @@ export const label = style({
 
 export const group = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       display: 'flex',
       inlineSize: '100%',
     },
@@ -131,7 +130,7 @@ export const input = style([
   typography.body.large,
   {
     '@layer': {
-      [components]: {
+      [molecules]: {
         ...createFieldTextInputStyles({
           backgroundColor: numberFieldVars.color.inputBackground,
           blockSize: numberFieldVars.size.controlSize,
@@ -196,7 +195,7 @@ const stepperButtonStyle = {
 
 export const decrement = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       ...stepperButtonStyle,
       borderStartEndRadius: numberFieldVars.shape.inputMergedCorner,
       borderEndEndRadius: numberFieldVars.shape.inputMergedCorner,
@@ -206,7 +205,7 @@ export const decrement = style({
 
 export const increment = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       ...stepperButtonStyle,
       borderStartStartRadius: numberFieldVars.shape.inputMergedCorner,
       borderEndStartRadius: numberFieldVars.shape.inputMergedCorner,

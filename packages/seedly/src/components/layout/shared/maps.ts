@@ -1,6 +1,6 @@
 import { type StyleRule } from '@vanilla-extract/css';
 
-import { components } from '../../../styles/layers.css';
+import { layouts } from '../../../styles/layers.css';
 
 const createLayeredStyleMap = <T extends string>(
   property: string,
@@ -11,7 +11,7 @@ const createLayeredStyleMap = <T extends string>(
       key,
       {
         '@layer': {
-          [components]: {
+          [layouts]: {
             [property]: value,
           },
         },

@@ -7,7 +7,7 @@ import {
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createToneStyles, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 import { createBackdropSurfaceStyles } from '../_foundation';
 
 const fadeIn = keyframes({
@@ -25,11 +25,14 @@ const loaderOverlayToneDefaults = assignVars(loaderOverlayToneVars, {
   onBase: sys.color.content.base,
 });
 
-const loaderOverlayToneStyles = createToneStyles(loaderOverlayToneVars);
+const loaderOverlayToneStyles = createToneStyles(
+  loaderOverlayToneVars,
+  organisms,
+);
 
 const absoluteBackdrop = style({
   '@layer': {
-    [components]: createBackdropSurfaceStyles({
+    [organisms]: createBackdropSurfaceStyles({
       position: 'absolute',
       zIndex: 1000,
 
@@ -42,7 +45,7 @@ const absoluteBackdrop = style({
 export const loaderOverlayRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [organisms]: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -73,7 +76,7 @@ export const loaderOverlayRecipe = recipe({
       absolute: absoluteBackdrop,
       relative: {
         '@layer': {
-          [components]: {
+          [organisms]: {
             position: 'relative',
           },
         },

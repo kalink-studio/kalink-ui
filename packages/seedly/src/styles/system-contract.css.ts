@@ -203,8 +203,24 @@ export type Duration = {
   >}`;
 }[keyof typeof sys.motion.duration];
 
+export type DurationValue = {
+  [K in keyof typeof sys.motion.duration]: (typeof sys.motion.duration)[K][Extract<
+    keyof (typeof sys.motion.duration)[K],
+    string | number
+  >];
+}[keyof typeof sys.motion.duration];
+
 export type Easing = {
   [K in keyof typeof sys.motion.easing]: (typeof sys.motion.easing)[K] extends string
     ? K
     : `${K}.${Extract<keyof (typeof sys.motion.easing)[K], string | number>}`;
+}[keyof typeof sys.motion.easing];
+
+export type EasingValue = {
+  [K in keyof typeof sys.motion.easing]: (typeof sys.motion.easing)[K] extends string
+    ? (typeof sys.motion.easing)[K]
+    : (typeof sys.motion.easing)[K][Extract<
+        keyof (typeof sys.motion.easing)[K],
+        string | number
+      >];
 }[keyof typeof sys.motion.easing];

@@ -11,7 +11,6 @@ export * as clusterStyles from './cluster';
 export * as collapsibleStyles from './collapsible';
 export * as comboboxStyles from './combobox';
 export * as containerStyles from './container';
-export * as contextMenuStyles from './context-menu';
 export * as coverStyles from './cover';
 export * as dialogStyles from './dialog';
 export * as fieldStyles from './field';

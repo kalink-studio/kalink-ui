@@ -7,7 +7,7 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
   flexAlignItemsWithBaselineStyles,
   flexJustifyContentStyles,
@@ -28,6 +28,7 @@ const clusterDefaults = assignVars(clusterVars, {
 export const clusterSpacingStyles = mapContractVars(
   sys.spacing,
   clusterVars.spacing,
+  layouts,
 );
 
 export const clusterJustifyStyles = flexJustifyContentStyles;
@@ -37,14 +38,14 @@ export const clusterAlignStyles = flexAlignItemsWithBaselineStyles;
 export const clusterDirectionStyles = {
   row: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         flexDirection: 'row',
       },
     },
   },
   rowReverse: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         flexDirection: 'row-reverse',
       },
     },
@@ -54,7 +55,7 @@ export const clusterDirectionStyles = {
 export const clusterRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: clusterDefaults,
 
         display: 'flex',

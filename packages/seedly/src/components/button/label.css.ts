@@ -1,10 +1,10 @@
 import { style } from '@vanilla-extract/css';
 
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 export const buttonLabel = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       display: 'inline-flex',
       alignItems: 'center',
       whiteSpace: 'nowrap',

@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
-import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { sys, transition } from '../../styles';
+import { organisms } from '../../styles/layers.css';
 
 export const accordionVars = createThemeContract({
   color: {
@@ -40,7 +40,7 @@ const accordionDefaults = assignVars(accordionVars, {
   color: {
     itemBorder: sys.color.border.low,
     itemBorderHover: sys.color.tone.primary,
-    panelForeground: stateColor.mutedContent,
+    panelForeground: sys.color.content.base,
     rootForeground: sys.color.content.base,
   },
   layout: {
@@ -71,7 +71,7 @@ const accordionDefaults = assignVars(accordionVars, {
 
 export const accordion = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: accordionDefaults,
 
       display: 'flex',
@@ -85,7 +85,7 @@ export const accordion = style({
 
 export const item = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       borderBlockEnd: `${accordionVars.size.itemBorderBlockEndWidth} solid ${accordionVars.color.itemBorder}`,
       transition: transition('border-color', {
         duration: sys.motion.duration.short[2],
@@ -109,7 +109,7 @@ export const item = style({
 
 export const header = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       marginBlock: '0',
       marginInline: '0',
     },
@@ -119,7 +119,7 @@ export const header = style({
 export const trigger = style([
   {
     '@layer': {
-      [components]: {
+      [organisms]: {
         position: 'relative',
 
         alignItems: 'baseline',
@@ -149,7 +149,7 @@ export const trigger = style([
 
 export const triggerIcon = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       flexShrink: '0',
 
       blockSize: accordionVars.size.triggerIconSize,
@@ -172,7 +172,7 @@ export const triggerIcon = style({
 
 export const panel = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       blockSize: 'var(--accordion-panel-height)',
       overflow: 'hidden',
 
@@ -198,7 +198,7 @@ export const panel = style({
 
 export const content = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       paddingBlock: accordionVars.spacing.contentPaddingBlock,
       paddingInline: accordionVars.spacing.contentPaddingInline,
 

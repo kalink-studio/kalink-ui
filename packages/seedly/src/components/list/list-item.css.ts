@@ -1,11 +1,11 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const listItemRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
 });

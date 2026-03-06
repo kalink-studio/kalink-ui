@@ -1,11 +1,11 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { stateColor, sys, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 import {
+  createFieldLabelStackStyles,
+  createFieldLabelTextStyles,
   createFieldTextInputStyles,
-  createFieldLabelStyles,
-  createFieldStackStyles,
 } from '../_foundation';
 
 export const fieldVars = createThemeContract({
@@ -66,13 +66,12 @@ const fieldDefaults = assignVars(fieldVars, {
 
 export const field = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: {
         ...fieldDefaults,
       },
 
-      ...createFieldStackStyles({
-        alignItems: 'start',
+      ...createFieldLabelStackStyles({
         gap: fieldVars.spacing.stackGap,
         inlineSize: fieldVars.layout.inputInlineSize,
       }),
@@ -82,8 +81,8 @@ export const field = style({
 
 export const label = style({
   '@layer': {
-    [components]: {
-      ...createFieldLabelStyles({
+    [molecules]: {
+      ...createFieldLabelTextStyles({
         color: fieldVars.color.labelForeground,
       }),
     },
@@ -94,7 +93,7 @@ export const input = style([
   typography.body.large,
   {
     '@layer': {
-      [components]: {
+      [molecules]: {
         ...createFieldTextInputStyles({
           backgroundColor: fieldVars.color.inputBackground,
           blockSize: fieldVars.size.inputBlockSize,
@@ -114,7 +113,7 @@ export const input = style([
 
 export const error = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       color: fieldVars.color.errorForeground,
     },
   },
@@ -122,7 +121,7 @@ export const error = style({
 
 export const description = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       marginBlock: fieldVars.spacing.zero,
       marginInline: fieldVars.spacing.zero,
       color: fieldVars.color.descriptionForeground,

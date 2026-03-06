@@ -1,10 +1,9 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys, transition, typography } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
 import {
   createRangeIndicatorStyles,
-  createRangeTrackRootVars,
   createRangeTrackStyles,
 } from '../_foundation';
 
@@ -38,7 +37,7 @@ export const progressVars = createThemeContract({
 
 const progressDefaults = assignVars(progressVars, {
   color: {
-    indicatorBackground: sys.color.content.base,
+    indicatorBackground: sys.color.tone.primary,
     rootForeground: sys.color.content.base,
     trackBackground: sys.color.container.base,
     trackBorder: 'transparent',
@@ -66,15 +65,9 @@ const progressDefaults = assignVars(progressVars, {
 
 export const progress = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: {
         ...progressDefaults,
-        ...createRangeTrackRootVars({
-          trackBackground: progressVars.color.trackBackground,
-          trackBorder: progressVars.color.trackBorder,
-          indicator: progressVars.color.indicatorBackground,
-          corner: progressVars.shape.trackCorner,
-        }),
       },
 
       display: 'grid',
@@ -87,22 +80,19 @@ export const progress = style({
   },
 });
 
-export const label = style([
-  typography.label.medium,
-  {
-    '@layer': {
-      [components]: {
-        color: progressVars.color.rootForeground,
-      },
+export const label = style({
+  '@layer': {
+    [molecules]: {
+      color: progressVars.color.rootForeground,
     },
   },
-]);
+});
 
 export const value = style([
   typography.body.medium,
   {
     '@layer': {
-      [components]: {
+      [molecules]: {
         gridColumnStart: progressVars.layout.valueColumnStart,
         marginBlock: '0',
         marginInline: '0',
@@ -116,11 +106,14 @@ export const value = style([
 
 export const track = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       gridColumn: progressVars.layout.trackColumn,
 
       ...createRangeTrackStyles({
+        backgroundColor: progressVars.color.trackBackground,
         blockSize: progressVars.size.trackBlockSize,
+        borderColor: progressVars.color.trackBorder,
+        borderRadius: progressVars.shape.trackCorner,
         overflow: 'hidden',
       }),
     },
@@ -129,8 +122,11 @@ export const track = style({
 
 export const indicator = style({
   '@layer': {
-    [components]: {
-      ...createRangeIndicatorStyles(),
+    [molecules]: {
+      ...createRangeIndicatorStyles({
+        backgroundColor: progressVars.color.indicatorBackground,
+        borderRadius: progressVars.shape.trackCorner,
+      }),
 
       transition: transition('width', {
         duration: progressVars.motion.indicatorWidthDuration,

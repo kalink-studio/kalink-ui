@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const formVars = createThemeContract({
   spacing: {
@@ -17,7 +17,7 @@ const formDefaults = assignVars(formVars, {
 
 export const form = style({
   '@layer': {
-    [components]: {
+    [layouts]: {
       display: 'flex',
       flexDirection: 'column',
       gap: formVars.spacing.rootGap,

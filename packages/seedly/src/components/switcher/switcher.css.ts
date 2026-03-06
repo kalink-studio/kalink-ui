@@ -11,7 +11,7 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const switcherVars = createThemeContract({
   layout: {
@@ -34,32 +34,33 @@ const switcherDefaults = assignVars(switcherVars, {
 export const switcherSpacingStyles = mapContractVars(
   sys.spacing,
   switcherVars.spacing,
+  layouts,
 );
 
 export const switcherLimitStyles = {
   2: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   3: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   4: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   5: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   6: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
 } as const;
@@ -67,7 +68,7 @@ export const switcherLimitStyles = {
 export const switcherRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: switcherDefaults,
 
         display: 'flex',
@@ -91,7 +92,7 @@ const limitSelector = (limitClass: string, limit: number) => {
 
 globalStyle(`${switcherRecipe.classNames.base} > *`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexBasis: `calc((${switcherVars.layout.rootThreshold} - 100%) * 999)`,
       flexGrow: 1,
     },
@@ -103,7 +104,7 @@ limitValues.forEach((limit) => {
 
   globalStyle(limitSelector(limitClass, limit), {
     '@layer': {
-      [components]: {
+      [layouts]: {
         flexBasis: '100%',
       },
     },
@@ -139,7 +140,7 @@ Object.entries(limitAt).forEach(([breakpoint, styles]) => {
       '@media': {
         [query]: {
           '@layer': {
-            [components]: {
+            [layouts]: {
               flexBasis: '100%',
             },
           },

@@ -6,7 +6,8 @@ import {
 } from '@vanilla-extract/css';
 
 import { stateColor, sys, transition } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { molecules } from '../../styles/layers.css';
+import { createChoiceLabelStyles } from '../_foundation';
 
 export const switchVars = createThemeContract({
   color: {
@@ -110,32 +111,28 @@ const switchDefaults = assignVars(switchVars, {
 
 export const label = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       vars: switchDefaults,
-
-      display: 'flex',
-      alignItems: 'center',
-      gap: switchVars.spacing.labelGap,
-      color: switchVars.color.labelForeground,
-      cursor: 'pointer',
-      userSelect: 'none',
-      WebkitTapHighlightColor: 'transparent',
-      selectors: {
-        '&:has([data-disabled])': {
-          color: switchVars.color.labelForegroundDisabled,
-          cursor: 'not-allowed',
+      ...createChoiceLabelStyles({
+        color: switchVars.color.labelForeground,
+        gap: switchVars.spacing.labelGap,
+        selectors: {
+          '&:has([data-disabled])': {
+            color: switchVars.color.labelForegroundDisabled,
+            cursor: 'not-allowed',
+          },
+          '&:has([data-readonly]):not(:has([data-disabled]))': {
+            cursor: 'default',
+          },
         },
-        '&:has([data-readonly]):not(:has([data-disabled]))': {
-          cursor: 'default',
-        },
-      },
+      }),
     },
   },
 });
 
 export const switchRoot = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       boxSizing: 'border-box',
       display: 'inline-flex',
       alignItems: 'center',
@@ -241,7 +238,7 @@ export const switchRoot = style({
 
 export const thumb = style({
   '@layer': {
-    [components]: {
+    [molecules]: {
       boxSizing: 'border-box',
       display: 'block',
       inlineSize: switchVars.size.thumbSize,
@@ -287,13 +284,25 @@ export const thumb = style({
 });
 
 globalStyle(`${switchRoot}:active ${thumb}`, {
-  scale: '1.16 1',
+  '@layer': {
+    [molecules]: {
+      scale: '1.16 1',
+    },
+  },
 });
 
 globalStyle(`${switchRoot}:active:not([data-checked]) ${thumb}`, {
-  transformOrigin: 'left center',
+  '@layer': {
+    [molecules]: {
+      transformOrigin: 'left center',
+    },
+  },
 });
 
 globalStyle(`${switchRoot}:active:is([data-checked]) ${thumb}`, {
-  transformOrigin: 'right center',
+  '@layer': {
+    [molecules]: {
+      transformOrigin: 'right center',
+    },
+  },
 });

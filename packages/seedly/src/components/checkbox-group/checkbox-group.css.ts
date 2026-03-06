@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const checkboxGroupVars = createThemeContract({
   color: {
@@ -23,7 +23,7 @@ const checkboxGroupDefaults = assignVars(checkboxGroupVars, {
 
 export const checkboxGroup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: checkboxGroupDefaults,
 
       display: 'flex',

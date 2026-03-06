@@ -1,12 +1,23 @@
-import { type Duration, type Easing, sys } from './system-contract.css';
+import {
+  type Duration,
+  type DurationValue,
+  type Easing,
+  type EasingValue,
+  sys,
+} from './system-contract.css';
+
+type TransitionDuration = Duration | DurationValue;
+type TransitionEasing = Easing | EasingValue;
+
+export interface CreateTransitionOptions {
+  duration?: TransitionDuration;
+  easing?: TransitionEasing;
+  delay?: string;
+}
 
 export type CreateTransitionFn = (
   props: string | string[],
-  options?: {
-    duration?: Duration | string;
-    easing?: Easing | string;
-    delay?: string;
-  },
+  options?: CreateTransitionOptions,
 ) => string;
 
 function getFromPath(source: unknown, path: string): string {

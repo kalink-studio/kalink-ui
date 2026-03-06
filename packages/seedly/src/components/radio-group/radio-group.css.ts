@@ -1,7 +1,7 @@
 import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 
 import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
 
 export const radioGroupVars = createThemeContract({
   color: {
@@ -23,7 +23,7 @@ const radioGroupDefaults = assignVars(radioGroupVars, {
 
 export const radioGroup = style({
   '@layer': {
-    [components]: {
+    [organisms]: {
       vars: radioGroupDefaults,
 
       display: 'flex',
