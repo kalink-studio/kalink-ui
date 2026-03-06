@@ -19,7 +19,9 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const thumb = canvas.getByRole('slider', { name: /volume/i });
-    await userEvent.click(thumb);
+
+    thumb.focus();
+
     await userEvent.keyboard('{ArrowRight}');
     await expect(thumb).toHaveAttribute('aria-valuenow', '26');
   },

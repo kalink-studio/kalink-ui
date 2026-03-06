@@ -1,10 +1,10 @@
-import { List, ListItem } from '.';
+import { List } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Data Display/List',
-  component: List,
+  component: List.Root,
   tags: ['autodocs'],
   parameters: {
     controls: { expanded: true },
@@ -93,13 +93,13 @@ const meta = {
   },
 
   render: (args) => (
-    <List {...args}>
-      <ListItem>Item 1</ListItem>
-      <ListItem>Item 2</ListItem>
-      <ListItem>Item 3</ListItem>
-    </List>
+    <List.Root {...args}>
+      <List.Item>Item 1</List.Item>
+      <List.Item>Item 2</List.Item>
+      <List.Item>Item 3</List.Item>
+    </List.Root>
   ),
-} satisfies Meta<typeof List>;
+} satisfies Meta<typeof List.Root>;
 
 export default meta;
 

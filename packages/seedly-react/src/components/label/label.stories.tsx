@@ -16,9 +16,13 @@ type Story = StoryObj<typeof Label>;
 
 export const Default: Story = {
   render: () => (
-    <Label>
+    <Label htmlFor="email">
       Email
-      <Input placeholder="you@example.com" />
+      <Input id="email" placeholder="you@example.com" />
     </Label>
   ),
+};
+
+export const Choice: Story = {
+  render: () => <Label variant="choice">Enable notifications</Label>,
 };

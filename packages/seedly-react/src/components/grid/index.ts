@@ -1,2 +1,2 @@
-export { Grid } from './grid';
+export { Grid } from './root';
 export { GridChild } from './grid-child';

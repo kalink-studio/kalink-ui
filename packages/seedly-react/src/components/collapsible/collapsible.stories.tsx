@@ -1,6 +1,6 @@
 import { expect, userEvent, within } from 'storybook/test';
 
-import { List, ListItem } from '../list';
+import { List } from '../list';
 import { Text } from '../text';
 
 import { Collapsible } from '.';
@@ -40,23 +40,23 @@ function Example() {
         Recovery keys
       </Collapsible.Trigger>
       <Collapsible.Panel>
-        <List
+        <List.Root
           listStyle="disc"
           listType="unordered"
           markerPosition="inside"
           itemSpacing={4}
           itemInlineSpacing={5}
         >
-          <ListItem>
+          <List.Item>
             <Text>alien-bean-pasta</Text>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Text>wild-irish-burrito</Text>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Text>horse-battery-staple</Text>
-          </ListItem>
-        </List>
+          </List.Item>
+        </List.Root>
       </Collapsible.Panel>
     </Collapsible.Root>
   );

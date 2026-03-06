@@ -1,4 +1,1 @@
-export { List } from './list';
-export type { ListProps } from './list';
-export { ListItem } from './list-item';
-export type { ListItemProps } from './list-item';
+export * as List from './list';
