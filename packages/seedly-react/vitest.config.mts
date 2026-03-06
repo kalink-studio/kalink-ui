@@ -20,6 +20,7 @@ export default mergeConfig(viteConfig, {
         'src/**/index.ts',
         'src/**/*.css.ts',
       ],
+      clean: true,
     },
     projects: [
       {

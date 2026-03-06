@@ -1,6 +1,8 @@
 import { expect, userEvent, within } from 'storybook/test';
 
-import { Menubar, MenubarMenu } from '.';
+import { Menu } from '../menu';
+
+import { Menubar } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ComponentProps, MouseEvent } from 'react';
@@ -32,121 +34,105 @@ export const Default: Story = {
 function Example() {
   return (
     <Menubar>
-      <MenubarMenu.Root>
-        <MenubarMenu.Trigger variant="ghost">
+      <Menu.Root>
+        <Menu.Trigger variant="ghost">
           File
-          <MenubarMenu.TriggerIcon>
+          <Menu.TriggerIcon>
             <ChevronDownIcon />
-          </MenubarMenu.TriggerIcon>
-        </MenubarMenu.Trigger>
-        <MenubarMenu.Portal>
-          <MenubarMenu.Positioner sideOffset={6} alignOffset={-2}>
-            <MenubarMenu.Popup>
-              <MenubarMenu.Item onClick={handleClick}>New</MenubarMenu.Item>
-              <MenubarMenu.Item onClick={handleClick}>Open</MenubarMenu.Item>
-              <MenubarMenu.Item onClick={handleClick}>Save</MenubarMenu.Item>
+          </Menu.TriggerIcon>
+        </Menu.Trigger>
+        <Menu.Portal>
+          <Menu.Positioner sideOffset={6} alignOffset={-2}>
+            <Menu.Popup>
+              <Menu.Item onClick={handleClick}>New</Menu.Item>
+              <Menu.Item onClick={handleClick}>Open</Menu.Item>
+              <Menu.Item onClick={handleClick}>Save</Menu.Item>
 
-              <MenubarMenu.SubmenuRoot>
-                <MenubarMenu.SubmenuTrigger>
+              <Menu.SubmenuRoot>
+                <Menu.SubmenuTrigger>
                   Export
                   <ChevronRightIcon />
-                </MenubarMenu.SubmenuTrigger>
-                <MenubarMenu.Portal>
-                  <MenubarMenu.Positioner alignOffset={-4}>
-                    <MenubarMenu.Popup>
-                      <MenubarMenu.Item onClick={handleClick}>
-                        PDF
-                      </MenubarMenu.Item>
-                      <MenubarMenu.Item onClick={handleClick}>
-                        PNG
-                      </MenubarMenu.Item>
-                      <MenubarMenu.Item onClick={handleClick}>
-                        SVG
-                      </MenubarMenu.Item>
-                    </MenubarMenu.Popup>
-                  </MenubarMenu.Positioner>
-                </MenubarMenu.Portal>
-              </MenubarMenu.SubmenuRoot>
+                </Menu.SubmenuTrigger>
+                <Menu.Portal>
+                  <Menu.Positioner alignOffset={-4}>
+                    <Menu.Popup>
+                      <Menu.Item onClick={handleClick}>PDF</Menu.Item>
+                      <Menu.Item onClick={handleClick}>PNG</Menu.Item>
+                      <Menu.Item onClick={handleClick}>SVG</Menu.Item>
+                    </Menu.Popup>
+                  </Menu.Positioner>
+                </Menu.Portal>
+              </Menu.SubmenuRoot>
 
-              <MenubarMenu.Separator />
-              <MenubarMenu.Item onClick={handleClick}>Print</MenubarMenu.Item>
-            </MenubarMenu.Popup>
-          </MenubarMenu.Positioner>
-        </MenubarMenu.Portal>
-      </MenubarMenu.Root>
+              <Menu.Separator />
+              <Menu.Item onClick={handleClick}>Print</Menu.Item>
+            </Menu.Popup>
+          </Menu.Positioner>
+        </Menu.Portal>
+      </Menu.Root>
 
-      <MenubarMenu.Root>
-        <MenubarMenu.Trigger variant="ghost">
+      <Menu.Root>
+        <Menu.Trigger variant="ghost">
           Edit
-          <MenubarMenu.TriggerIcon>
+          <Menu.TriggerIcon>
             <ChevronDownIcon />
-          </MenubarMenu.TriggerIcon>
-        </MenubarMenu.Trigger>
-        <MenubarMenu.Portal>
-          <MenubarMenu.Positioner sideOffset={6}>
-            <MenubarMenu.Popup>
-              <MenubarMenu.Item onClick={handleClick}>Cut</MenubarMenu.Item>
-              <MenubarMenu.Item onClick={handleClick}>Copy</MenubarMenu.Item>
-              <MenubarMenu.Item onClick={handleClick}>Paste</MenubarMenu.Item>
-            </MenubarMenu.Popup>
-          </MenubarMenu.Positioner>
-        </MenubarMenu.Portal>
-      </MenubarMenu.Root>
+          </Menu.TriggerIcon>
+        </Menu.Trigger>
+        <Menu.Portal>
+          <Menu.Positioner sideOffset={6}>
+            <Menu.Popup>
+              <Menu.Item onClick={handleClick}>Cut</Menu.Item>
+              <Menu.Item onClick={handleClick}>Copy</Menu.Item>
+              <Menu.Item onClick={handleClick}>Paste</Menu.Item>
+            </Menu.Popup>
+          </Menu.Positioner>
+        </Menu.Portal>
+      </Menu.Root>
 
-      <MenubarMenu.Root>
-        <MenubarMenu.Trigger variant="ghost">
+      <Menu.Root>
+        <Menu.Trigger variant="ghost">
           View
-          <MenubarMenu.TriggerIcon>
+          <Menu.TriggerIcon>
             <ChevronDownIcon />
-          </MenubarMenu.TriggerIcon>
-        </MenubarMenu.Trigger>
-        <MenubarMenu.Portal>
-          <MenubarMenu.Positioner sideOffset={6}>
-            <MenubarMenu.Popup>
-              <MenubarMenu.Item onClick={handleClick}>Zoom In</MenubarMenu.Item>
-              <MenubarMenu.Item onClick={handleClick}>
-                Zoom Out
-              </MenubarMenu.Item>
+          </Menu.TriggerIcon>
+        </Menu.Trigger>
+        <Menu.Portal>
+          <Menu.Positioner sideOffset={6}>
+            <Menu.Popup>
+              <Menu.Item onClick={handleClick}>Zoom In</Menu.Item>
+              <Menu.Item onClick={handleClick}>Zoom Out</Menu.Item>
 
-              <MenubarMenu.SubmenuRoot>
-                <MenubarMenu.SubmenuTrigger>
+              <Menu.SubmenuRoot>
+                <Menu.SubmenuTrigger>
                   Layout
                   <ChevronRightIcon />
-                </MenubarMenu.SubmenuTrigger>
-                <MenubarMenu.Portal>
-                  <MenubarMenu.Positioner alignOffset={-4}>
-                    <MenubarMenu.Popup>
-                      <MenubarMenu.Item onClick={handleClick}>
-                        Single Page
-                      </MenubarMenu.Item>
-                      <MenubarMenu.Item onClick={handleClick}>
-                        Two Pages
-                      </MenubarMenu.Item>
-                      <MenubarMenu.Item onClick={handleClick}>
-                        Continuous
-                      </MenubarMenu.Item>
-                    </MenubarMenu.Popup>
-                  </MenubarMenu.Positioner>
-                </MenubarMenu.Portal>
-              </MenubarMenu.SubmenuRoot>
+                </Menu.SubmenuTrigger>
+                <Menu.Portal>
+                  <Menu.Positioner alignOffset={-4}>
+                    <Menu.Popup>
+                      <Menu.Item onClick={handleClick}>Single Page</Menu.Item>
+                      <Menu.Item onClick={handleClick}>Two Pages</Menu.Item>
+                      <Menu.Item onClick={handleClick}>Continuous</Menu.Item>
+                    </Menu.Popup>
+                  </Menu.Positioner>
+                </Menu.Portal>
+              </Menu.SubmenuRoot>
 
-              <MenubarMenu.Separator />
-              <MenubarMenu.Item onClick={handleClick}>
-                Full Screen
-              </MenubarMenu.Item>
-            </MenubarMenu.Popup>
-          </MenubarMenu.Positioner>
-        </MenubarMenu.Portal>
-      </MenubarMenu.Root>
+              <Menu.Separator />
+              <Menu.Item onClick={handleClick}>Full Screen</Menu.Item>
+            </Menu.Popup>
+          </Menu.Positioner>
+        </Menu.Portal>
+      </Menu.Root>
 
-      <MenubarMenu.Root disabled>
-        <MenubarMenu.Trigger variant="ghost">
+      <Menu.Root disabled>
+        <Menu.Trigger variant="ghost">
           Help
-          <MenubarMenu.TriggerIcon>
+          <Menu.TriggerIcon>
             <ChevronDownIcon />
-          </MenubarMenu.TriggerIcon>
-        </MenubarMenu.Trigger>
-      </MenubarMenu.Root>
+          </Menu.TriggerIcon>
+        </Menu.Trigger>
+      </Menu.Root>
     </Menubar>
   );
 }

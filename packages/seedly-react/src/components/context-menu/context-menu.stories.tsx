@@ -1,6 +1,7 @@
 import { expect, userEvent, within } from 'storybook/test';
 
 import { Box } from '../box';
+import { Menu } from '../menu';
 import { Text } from '../text';
 
 import { ContextMenu } from '.';
@@ -47,20 +48,20 @@ function Example() {
           <Text>Right click here</Text>
         </Box>
       </ContextMenu.Trigger>
-      <ContextMenu.Portal>
-        <ContextMenu.Positioner>
-          <ContextMenu.Popup>
-            <ContextMenu.Item>Add to Library</ContextMenu.Item>
-            <ContextMenu.Item>Add to Playlist</ContextMenu.Item>
-            <ContextMenu.Separator />
-            <ContextMenu.Item>Play Next</ContextMenu.Item>
-            <ContextMenu.Item>Play Last</ContextMenu.Item>
-            <ContextMenu.Separator />
-            <ContextMenu.Item>Favorite</ContextMenu.Item>
-            <ContextMenu.Item>Share</ContextMenu.Item>
-          </ContextMenu.Popup>
-        </ContextMenu.Positioner>
-      </ContextMenu.Portal>
+      <Menu.Portal>
+        <Menu.Positioner>
+          <Menu.Popup>
+            <Menu.Item>Add to Library</Menu.Item>
+            <Menu.Item>Add to Playlist</Menu.Item>
+            <Menu.Separator />
+            <Menu.Item>Play Next</Menu.Item>
+            <Menu.Item>Play Last</Menu.Item>
+            <Menu.Separator />
+            <Menu.Item>Favorite</Menu.Item>
+            <Menu.Item>Share</Menu.Item>
+          </Menu.Popup>
+        </Menu.Positioner>
+      </Menu.Portal>
     </ContextMenu.Root>
   );
 }

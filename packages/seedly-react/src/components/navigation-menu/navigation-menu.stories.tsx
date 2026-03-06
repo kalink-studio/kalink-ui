@@ -1,11 +1,7 @@
-import {
-  flexLinkList,
-  gridLinkList,
-  linkCard,
-  linkDescription,
-  linkTitle,
-} from '@kalink-ui/seedly/components/navigation-menu';
 import { expect, userEvent, within } from 'storybook/test';
+
+import { Grid, GridChild } from '../grid';
+import { Text } from '../text';
 
 import { NavigationMenu } from '.';
 
@@ -16,6 +12,14 @@ const meta = {
   title: 'Components/Navigation Menu',
   component: NavigationMenu.Root,
   tags: ['autodocs'],
+  parameters: {
+    a11y: {
+      context: {
+        include: ['body'],
+        // exclude: ['[data-base-ui-focus-guard]'],
+      },
+    },
+  },
 } satisfies Meta<typeof NavigationMenu.Root>;
 
 export default meta;
@@ -44,7 +48,7 @@ function Example() {
             </NavigationMenu.Icon>
           </NavigationMenu.Trigger>
           <NavigationMenu.Content>
-            <LinkList links={overviewLinks} className={gridLinkList} />
+            <LinkList links={overviewLinks} columns={2} aria-label="Overview" />
           </NavigationMenu.Content>
         </NavigationMenu.Item>
 
@@ -56,7 +60,7 @@ function Example() {
             </NavigationMenu.Icon>
           </NavigationMenu.Trigger>
           <NavigationMenu.Content>
-            <LinkList links={handbookLinks} className={flexLinkList} />
+            <LinkList links={handbookLinks} columns={1} aria-label="Handbook" />
           </NavigationMenu.Content>
         </NavigationMenu.Item>
 
@@ -85,22 +89,28 @@ function Example() {
 
 function LinkList({
   links,
-  className,
+  columns,
+  ...props
 }: {
   links: readonly LinkData[];
-  className: string;
+  columns: 1 | 2;
+  'aria-label': string;
 }) {
   return (
-    <ul className={className}>
-      {links.map((item) => (
-        <li key={item.href}>
-          <NavigationMenu.Link href={item.href} className={linkCard}>
-            <h3 className={linkTitle}>{item.title}</h3>
-            <p className={linkDescription}>{item.description}</p>
-          </NavigationMenu.Link>
-        </li>
-      ))}
-    </ul>
+    <nav {...props}>
+      <Grid role="list" columns={columns === 2 ? { xs: 1, sm: 2 } : 1}>
+        {links.map((item) => (
+          <GridChild key={item.href} role="listitem">
+            <NavigationMenu.Link href={item.href}>
+              <Text render={<div />} variant="title" size="medium">
+                {item.title}
+              </Text>
+              <Text render={<div />}>{item.description}</Text>
+            </NavigationMenu.Link>
+          </GridChild>
+        ))}
+      </Grid>
+    </nav>
   );
 }
 

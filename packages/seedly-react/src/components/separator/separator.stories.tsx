@@ -1,3 +1,4 @@
+import { Button } from '../button';
 import { Cluster } from '../cluster';
 
 import { Separator } from '.';
@@ -21,15 +22,30 @@ export const Default: Story = {
 function Example() {
   return (
     <Cluster spacing={4} align="center" render={<nav />}>
-      <a href="#">Home</a>
-      <a href="#">Pricing</a>
-      <a href="#">Blog</a>
-      <a href="#">Support</a>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Home
+      </Button>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Pricing
+      </Button>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Docs
+      </Button>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Blog
+      </Button>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Support
+      </Button>
 
       <Separator orientation="vertical" />
 
-      <a href="#">Log in</a>
-      <a href="#">Sign up</a>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Log in
+      </Button>
+      <Button variant="bare" nativeButton={false} render={<a href="#" />}>
+        Sign up
+      </Button>
     </Cluster>
   );
 }

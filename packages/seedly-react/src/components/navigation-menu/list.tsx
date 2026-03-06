@@ -12,10 +12,11 @@ type ListProps = Omit<NavigationMenuListProps, 'ref'> & {
   ref?: Ref<HTMLDivElement>;
 };
 
-export function List({ className, ...props }: ListProps) {
+export function List({ className, role = 'menubar', ...props }: ListProps) {
   return (
     <NavigationMenu.List
       {...props}
+      role={role}
       className={mergeClassName(listClassName, className)}
     />
   );

@@ -1,15 +1,29 @@
 import { trigger as triggerClassName } from '@kalink-ui/seedly/components/navigation-menu';
 
+import { Button, ButtonRootProps } from '../button';
 import { mergeClassName } from '@/utils/merge-class-name';
 
-import { Link, type LinkProps } from './link';
+export interface TriggerLinkProps extends ButtonRootProps {
+  href: string;
+}
 
-export function TriggerLink({ className, size = 'lg', ...props }: LinkProps) {
+export function TriggerLink({
+  className,
+  size = 'lg',
+  variant = 'ghost',
+  tone = 'neutral',
+  nativeButton = false,
+  ...props
+}: TriggerLinkProps) {
   return (
-    <Link
+    <Button
       {...props}
+      nativeButton={nativeButton}
+      tone={tone}
+      variant={variant}
       size={size}
       className={mergeClassName(triggerClassName, className)}
+      render={<a />}
     />
   );
 }

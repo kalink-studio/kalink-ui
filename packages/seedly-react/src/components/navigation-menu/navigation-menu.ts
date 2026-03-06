@@ -1,4 +1,5 @@
 export { Arrow } from './arrow';
+export { Backdrop } from './backdrop';
 export { Content } from './content';
 export { Icon } from './icon';
 export { Item } from './item';

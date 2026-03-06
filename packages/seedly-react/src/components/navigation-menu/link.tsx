@@ -2,8 +2,10 @@ import {
   NavigationMenu,
   type NavigationMenuLinkProps,
 } from '@base-ui/react/navigation-menu';
+import { linkCard } from '@kalink-ui/seedly/components/navigation-menu';
 
 import { Button, type ButtonCompositionProps } from '../button';
+import { mergeClassName } from '@/utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
@@ -46,7 +48,7 @@ export function Link({
             flow={flow}
             loading={loading}
             icon={icon}
-            className={resolvedClassName}
+            className={mergeClassName(linkCard, resolvedClassName)}
             render={resolveStateRender(render, state) ?? <a />}
           />
         );
