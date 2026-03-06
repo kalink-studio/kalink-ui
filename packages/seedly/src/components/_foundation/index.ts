@@ -2,6 +2,7 @@ export * from './bar-root';
 export * from './backdrop-surface';
 export * from './choice-control';
 export * from './control';
+export * from './drawer-surface';
 export * from './dialog-surface';
 export * from './field-control';
 export * from './floating-surface';

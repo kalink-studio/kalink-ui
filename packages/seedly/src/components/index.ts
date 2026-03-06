@@ -13,6 +13,7 @@ export * as comboboxStyles from './combobox';
 export * as containerStyles from './container';
 export * as coverStyles from './cover';
 export * as dialogStyles from './dialog';
+export * as drawerStyles from './drawer';
 export * as fieldStyles from './field';
 export * as fieldsetStyles from './fieldset';
 export * as frameStyles from './frame';

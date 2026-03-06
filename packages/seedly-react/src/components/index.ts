@@ -14,6 +14,7 @@ export { Container } from './container';
 export { ContextMenu } from './context-menu';
 export { Cover } from './cover';
 export { Dialog } from './dialog';
+export { Drawer } from './drawer';
 export { Field } from './field';
 export { Fieldset } from './fieldset';
 export { Frame } from './frame';
