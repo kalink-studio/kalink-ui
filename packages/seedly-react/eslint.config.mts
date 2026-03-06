@@ -4,7 +4,7 @@ import { globalIgnores } from 'eslint/config';
 const tsconfigPath = new URL('./tsconfig.json', import.meta.url).pathname;
 
 export default [
-  globalIgnores(['storybook-static/**', 'turbo/**', '**/*.d.ts']),
+  globalIgnores(['.cache/**', 'storybook-static/**', 'turbo/**', '**/*.d.ts']),
   ...react,
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
