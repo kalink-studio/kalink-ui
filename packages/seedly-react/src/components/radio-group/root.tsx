@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/radio-group';
 import { radioGroup as radioGroupClassName } from '@kalink-ui/seedly/components/radio-group';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Root({ className, ...props }: RadioGroupProps) {
   return (

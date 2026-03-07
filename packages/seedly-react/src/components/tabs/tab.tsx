@@ -1,12 +1,12 @@
 import { Tabs, type TabsTabProps } from '@base-ui/react/tabs';
 import { tab as tabClassName } from '@kalink-ui/seedly/components/tabs';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TabProps = Omit<TabsTabProps, 'className' | 'render'> &
   ButtonCompositionProps & {

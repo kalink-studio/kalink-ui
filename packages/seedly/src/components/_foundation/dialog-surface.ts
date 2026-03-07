@@ -148,7 +148,7 @@ export function createDialogActionsStyles(
 ): StyleRule {
   return {
     display: 'flex',
-    justifyContent: 'end',
+    justifyContent: 'flex-end',
     gap: options.gap,
   };
 }

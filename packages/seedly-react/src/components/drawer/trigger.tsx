@@ -4,12 +4,12 @@ import {
 } from '@base-ui/react/drawer';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/drawer';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TriggerProps = Omit<DrawerTriggerProps, 'className' | 'render'> &
   ButtonCompositionProps & {

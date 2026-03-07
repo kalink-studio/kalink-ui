@@ -1,7 +1,7 @@
 import { Slider, type SliderControlProps } from '@base-ui/react/slider';
 import { control as controlClassName } from '@kalink-ui/seedly/components/slider';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Control({ className, ...props }: SliderControlProps) {
   return (

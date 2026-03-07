@@ -4,7 +4,7 @@ import {
   type ListVariants,
 } from '@kalink-ui/seedly/components/list';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 import type { Responsive } from '@kalink-ui/seedly/styles';
 

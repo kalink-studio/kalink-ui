@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/scroll-area';
 import { content as contentClassName } from '@kalink-ui/seedly/components/scroll-area';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Content({ className, ...props }: ScrollAreaContentProps) {
   return (

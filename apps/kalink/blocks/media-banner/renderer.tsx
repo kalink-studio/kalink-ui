@@ -1,4 +1,4 @@
-import { Stack } from '@kalink-ui/seedly';
+import { Stack } from '@kalink-ui/seedly-react';
 import Image from 'next/image';
 
 import { BlockHeading } from '@/app/(frontend)/components/block-heading';

@@ -28,7 +28,7 @@ export const radioGroup = style({
 
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'start',
+      alignItems: 'flex-start',
       gap: radioGroupVars.spacing.groupGap,
       color: radioGroupVars.color.rootForeground,
     },

@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/checkbox-group';
 import { checkboxGroup as checkboxGroupClassName } from '@kalink-ui/seedly/components/checkbox-group';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Root({ className, ...props }: CheckboxGroupProps) {
   return (

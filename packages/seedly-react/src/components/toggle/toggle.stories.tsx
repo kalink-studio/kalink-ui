@@ -4,6 +4,7 @@ import { Button } from '../button';
 
 import { Toggle } from '.';
 
+import type { ToggleRootProps } from './toggle';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ComponentProps } from 'react';
 
@@ -29,32 +30,32 @@ export const Default: Story = {
 };
 
 function Example() {
-  return (
-    <Toggle
-      aria-label="Favorite"
-      render={({ children, ...props }, state) => {
-        if (state.pressed) {
-          return (
-            <Button
-              {...props}
-              variant="ghost"
-              tone="neutral"
-              icon={<HeartFilledIcon />}
-            />
-          );
-        }
+  const renderToggle: ToggleRootProps['render'] = (
+    { children, ...props },
+    state,
+  ) => {
+    if (state.pressed) {
+      return (
+        <Button
+          {...props}
+          variant="ghost"
+          tone="neutral"
+          icon={<HeartFilledIcon />}
+        />
+      );
+    }
 
-        return (
-          <Button
-            {...props}
-            variant="ghost"
-            tone="neutral"
-            icon={<HeartOutlineIcon />}
-          />
-        );
-      }}
-    />
-  );
+    return (
+      <Button
+        {...props}
+        variant="ghost"
+        tone="neutral"
+        icon={<HeartOutlineIcon />}
+      />
+    );
+  };
+
+  return <Toggle aria-label="Favorite" render={renderToggle} />;
 }
 
 function HeartFilledIcon(props: ComponentProps<'svg'>) {

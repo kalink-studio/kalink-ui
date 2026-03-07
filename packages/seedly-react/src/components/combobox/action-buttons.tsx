@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { actionButtons as actionButtonsClassName } from '@kalink-ui/seedly/components/combobox';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type ActionButtonsProps = useRender.ComponentProps<'div'>;
 

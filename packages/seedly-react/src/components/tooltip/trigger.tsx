@@ -1,12 +1,12 @@
 import { Tooltip, type TooltipTriggerProps } from '@base-ui/react/tooltip';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/tooltip';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TriggerProps = Omit<TooltipTriggerProps, 'className' | 'render'> &
   ButtonCompositionProps & {

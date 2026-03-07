@@ -9,7 +9,7 @@ import {
   type ResponsiveButtonVariants,
 } from '@kalink-ui/seedly/components/button';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 import type { ReactNode } from 'react';
 

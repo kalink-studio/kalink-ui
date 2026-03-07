@@ -1,12 +1,12 @@
 import { Menu, type MenuTriggerProps } from '@base-ui/react/menu';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/menu';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TriggerProps = Omit<MenuTriggerProps, 'className' | 'render'> &
   ButtonCompositionProps & {

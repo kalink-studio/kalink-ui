@@ -1,12 +1,12 @@
 import { Combobox, type ComboboxClearProps } from '@base-ui/react/combobox';
 import { clear as clearClassName } from '@kalink-ui/seedly/components/combobox';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type ClearProps = Omit<
   ComboboxClearProps,

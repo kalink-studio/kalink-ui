@@ -2,8 +2,8 @@ import { Field, type FieldLabelProps } from '@base-ui/react/field';
 import { label as labelClassName } from '@kalink-ui/seedly/components/checkbox';
 import { labelRecipe } from '@kalink-ui/seedly/components/label';
 
+import { mergeClassName } from '../../utils/merge-class-name';
 import { Label as BaseLabel } from '../label';
-import { mergeClassName } from '@/utils/merge-class-name';
 
 export type CheckboxLabelProps = FieldLabelProps;
 

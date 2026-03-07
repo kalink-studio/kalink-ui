@@ -1,7 +1,7 @@
 import { Menu, type MenuPositionerProps } from '@base-ui/react/menu';
 import { positioner as positionerClassName } from '@kalink-ui/seedly/components/menu';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Positioner({ className, ...props }: MenuPositionerProps) {
   return (

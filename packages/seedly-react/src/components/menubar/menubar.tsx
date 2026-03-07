@@ -4,8 +4,8 @@ import {
 } from '@base-ui/react/menubar';
 import { menubar as menubarClassName } from '@kalink-ui/seedly/components/menubar';
 
-import { SolidShell } from '@/components/_internal/solid-shell';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
+import { SolidShell } from '../_internal/solid-shell';
 
 export function Menubar({ className, render, ...props }: MenubarProps) {
   return (

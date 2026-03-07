@@ -2,8 +2,8 @@ import { Field, type FieldLabelProps } from '@base-ui/react/field';
 import { labelRecipe } from '@kalink-ui/seedly/components/label';
 import { label as labelClassName } from '@kalink-ui/seedly/components/radio';
 
+import { mergeClassName } from '../../utils/merge-class-name';
 import { Label as BaseLabel } from '../label';
-import { mergeClassName } from '@/utils/merge-class-name';
 
 export type RadioLabelProps = FieldLabelProps;
 

@@ -127,7 +127,7 @@ export const panel = style({
     [organisms]: {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'end',
+      justifyContent: 'flex-end',
 
       blockSize: 'var(--collapsible-panel-height)',
       overflow: 'hidden',

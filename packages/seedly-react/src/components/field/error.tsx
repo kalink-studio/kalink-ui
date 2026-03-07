@@ -1,12 +1,12 @@
 import { Field, type FieldErrorProps } from '@base-ui/react/field';
 import { error as errorClassName } from '@kalink-ui/seedly/components/field';
 
-import { Text, type TextProps } from '../text';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Text, type TextProps } from '../text';
 
 type ErrorProps = Omit<FieldErrorProps, 'className' | 'render'> &
   Pick<

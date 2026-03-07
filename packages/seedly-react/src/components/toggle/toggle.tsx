@@ -1,17 +1,20 @@
 import { Toggle as BaseToggle, type ToggleProps } from '@base-ui/react/toggle';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/toggle';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
-export type ToggleRootProps = Omit<ToggleProps, 'className' | 'render'> &
+export type ToggleRootProps = Omit<
+  ToggleProps<string>,
+  'className' | 'render'
+> &
   ButtonCompositionProps & {
-    className?: ToggleProps['className'];
-    render?: ToggleProps['render'];
+    className?: ToggleProps<string>['className'];
+    render?: ToggleProps<string>['render'];
   };
 
 export function Toggle({

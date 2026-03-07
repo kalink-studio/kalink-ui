@@ -1,12 +1,12 @@
 import { Popover, type PopoverTitleProps } from '@base-ui/react/popover';
 import { title as titleClassName } from '@kalink-ui/seedly/components/popover';
 
-import { Heading, type HeadingRootProps } from '../heading';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Heading, type HeadingRootProps } from '../heading';
 
 type TitleProps = Omit<PopoverTitleProps, 'className' | 'render'> &
   Pick<HeadingRootProps, 'align' | 'size' | 'variant'> & {

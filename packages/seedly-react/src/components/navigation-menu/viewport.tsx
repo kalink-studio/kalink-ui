@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/navigation-menu';
 import { viewport as viewportClassName } from '@kalink-ui/seedly/components/navigation-menu';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Viewport({ className, ...props }: NavigationMenuViewportProps) {
   return (

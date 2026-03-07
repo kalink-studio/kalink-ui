@@ -1,12 +1,12 @@
 import { Fieldset, type FieldsetLegendProps } from '@base-ui/react/fieldset';
 import { legend as legendClassName } from '@kalink-ui/seedly/components/fieldset';
 
-import { Heading, type HeadingRootProps } from '../heading';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Heading, type HeadingRootProps } from '../heading';
 
 type LegendProps = Omit<FieldsetLegendProps, 'className' | 'render'> &
   Pick<HeadingRootProps, 'align' | 'size' | 'variant'> & {

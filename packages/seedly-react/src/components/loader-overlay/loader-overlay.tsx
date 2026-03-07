@@ -5,11 +5,11 @@ import {
 } from '@kalink-ui/seedly/components/loader-overlay';
 import { type Spacing } from '@kalink-ui/seedly/styles';
 
-import { Center } from '@/components/center';
-import { MoonLoader } from '@/components/loader';
-import { Stack } from '@/components/stack';
-import { Text } from '@/components/text';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
+import { Center } from '../center';
+import { MoonLoader } from '../loader';
+import { Stack } from '../stack';
+import { Text } from '../text';
 
 interface LoaderOverlayContentProps {
   text?: string;

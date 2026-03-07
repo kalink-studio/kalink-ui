@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/separator';
 import { separator as separatorClassName } from '@kalink-ui/seedly/components/separator';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Separator({ className, ...props }: SeparatorProps) {
   return (

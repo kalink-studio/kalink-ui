@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { inputWrapper as inputWrapperClassName } from '@kalink-ui/seedly/components/combobox';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type InputWrapperProps = useRender.ComponentProps<'div'>;
 

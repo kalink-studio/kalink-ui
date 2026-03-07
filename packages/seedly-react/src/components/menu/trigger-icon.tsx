@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { buttonIcon as buttonIconClassName } from '@kalink-ui/seedly/components/menu';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type TriggerIconProps = useRender.ComponentProps<'span'>;
 

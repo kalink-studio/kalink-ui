@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { actions as actionsClassName } from '@kalink-ui/seedly/components/alert-dialog';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type ActionsProps = useRender.ComponentProps<'div'>;
 

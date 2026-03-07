@@ -4,12 +4,12 @@ import {
 } from '@base-ui/react/number-field';
 import { increment as incrementClassName } from '@kalink-ui/seedly/components/number-field';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type IncrementProps = Omit<NumberFieldIncrementProps, 'className' | 'render'> &
   ButtonCompositionProps & {

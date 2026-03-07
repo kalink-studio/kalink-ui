@@ -1,12 +1,12 @@
 import { Toast, type ToastTitleProps } from '@base-ui/react/toast';
 import { title as titleClassName } from '@kalink-ui/seedly/components/toast';
 
-import { Heading, type HeadingRootProps } from '../heading';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Heading, type HeadingRootProps } from '../heading';
 
 type TitleProps = Omit<ToastTitleProps, 'className' | 'render'> &
   Pick<HeadingRootProps, 'align' | 'size' | 'variant'> & {

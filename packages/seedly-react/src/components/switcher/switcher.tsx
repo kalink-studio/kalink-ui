@@ -6,7 +6,7 @@ import {
 } from '@kalink-ui/seedly/components/switcher';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 import type { Responsive } from '@kalink-ui/seedly/styles';
 

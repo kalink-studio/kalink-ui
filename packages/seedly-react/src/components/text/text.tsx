@@ -13,7 +13,7 @@ import {
   type TypographyVariant,
 } from '@kalink-ui/seedly/styles';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type TextProps = useRender.ComponentProps<'span'> &
   Omit<TextVariants, 'align' | 'lineClamp' | 'wrap'> & {

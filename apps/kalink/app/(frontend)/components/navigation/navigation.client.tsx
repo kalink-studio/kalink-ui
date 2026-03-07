@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  ButtonIcon,
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from '@kalink-ui/seedly';
+import { Drawer } from '@kalink-ui/seedly-react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -76,36 +69,49 @@ export function NavigationClient({ entries }: NavigationClientProps) {
       </nav>
 
       <div className={mobileControls}>
-        <Sheet>
-          <SheetTrigger asChild>
-            <ButtonIcon
-              variant="ghost"
-              size="sm"
-              label="Ouvrir le menu de navigation"
-            >
-              <Menu size={20} />
-            </ButtonIcon>
-          </SheetTrigger>
-          <SheetContent side="right" size="md">
-            <div className={mobileMenuHeader}>
-              <SheetTitle use="h3">Menu</SheetTitle>
-              <SheetClose asChild>
-                <ButtonIcon variant="ghost" size="sm" label="Fermer le menu">
-                  <X size={20} />
-                </ButtonIcon>
-              </SheetClose>
-            </div>
-            <nav className={mobileMenuContent} aria-label="Navigation mobile">
-              {entries.map((entry) => (
-                <SheetClose asChild key={entry.id}>
-                  <Link href={entry.href} className={mobileMenuItem}>
-                    {entry.label}
-                  </Link>
-                </SheetClose>
-              ))}
-            </nav>
-          </SheetContent>
-        </Sheet>
+        <Drawer.Root swipeDirection="right">
+          <Drawer.Trigger
+            variant="ghost"
+            size="sm"
+            icon={<Menu size={20} />}
+            aria-label="Ouvrir le menu de navigation"
+          />
+          <Drawer.Portal>
+            <Drawer.Backdrop />
+            <Drawer.Viewport>
+              <Drawer.Popup>
+                <Drawer.Content>
+                  <div className={mobileMenuHeader}>
+                    <Drawer.Title render={<h3 />}>Menu</Drawer.Title>
+                    <Drawer.Close
+                      variant="ghost"
+                      size="sm"
+                      icon={<X size={20} />}
+                      aria-label="Fermer le menu"
+                    />
+                  </div>
+                  <nav
+                    className={mobileMenuContent}
+                    aria-label="Navigation mobile"
+                  >
+                    {entries.map((entry) => (
+                      <Drawer.Close
+                        key={entry.id}
+                        variant="bare"
+                        nativeButton={false}
+                        render={
+                          <Link href={entry.href} className={mobileMenuItem} />
+                        }
+                      >
+                        {entry.label}
+                      </Drawer.Close>
+                    ))}
+                  </nav>
+                </Drawer.Content>
+              </Drawer.Popup>
+            </Drawer.Viewport>
+          </Drawer.Portal>
+        </Drawer.Root>
       </div>
     </div>
   );

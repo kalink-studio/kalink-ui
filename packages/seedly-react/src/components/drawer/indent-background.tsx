@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/drawer';
 import { indentBackground as indentBackgroundClassName } from '@kalink-ui/seedly/components/drawer';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function IndentBackground({
   className,

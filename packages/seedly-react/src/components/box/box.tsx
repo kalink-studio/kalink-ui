@@ -4,7 +4,7 @@ import {
   type BoxVariants,
 } from '@kalink-ui/seedly/components/box';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 import type {
   ColorTone,

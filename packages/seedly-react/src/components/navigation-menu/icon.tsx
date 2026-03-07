@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/navigation-menu';
 import { icon as iconClassName } from '@kalink-ui/seedly/components/navigation-menu';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 import type { Ref } from 'react';
 

@@ -6,7 +6,7 @@ import {
 } from '@kalink-ui/seedly/components/sidebar';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type SidebarProps = useRender.ComponentProps<'div'> &
   Omit<SidebarVariants, 'sideWidth' | 'spacing'> & {

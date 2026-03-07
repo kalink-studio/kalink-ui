@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/autocomplete';
 import { positioner as positionerClassName } from '@kalink-ui/seedly/components/autocomplete';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Positioner({
   className,

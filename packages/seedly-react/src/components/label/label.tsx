@@ -4,7 +4,7 @@ import {
   type LabelVariants,
 } from '@kalink-ui/seedly/components/label';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type LabelProps = useRender.ComponentProps<'label'> & LabelVariants;
 

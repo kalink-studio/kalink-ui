@@ -1,12 +1,12 @@
 import { AlertDialog } from '@base-ui/react/alert-dialog';
 import { description as descriptionClassName } from '@kalink-ui/seedly/components/alert-dialog';
 
-import { Text, type TextProps } from '../text';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Text, type TextProps } from '../text';
 
 import type { DialogDescriptionProps } from '@base-ui/react/dialog';
 

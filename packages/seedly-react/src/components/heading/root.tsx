@@ -7,7 +7,7 @@ import {
   type TypographyVariant,
 } from '@kalink-ui/seedly/styles';
 
-import { Text, type TextProps } from '@/components/text';
+import { Text, type TextProps } from '../text';
 
 import type { ReactElement, ReactNode } from 'react';
 

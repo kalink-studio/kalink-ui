@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/scroll-area';
 import { thumb as thumbClassName } from '@kalink-ui/seedly/components/scroll-area';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function Thumb({ className, ...props }: ScrollAreaThumbProps) {
   return (

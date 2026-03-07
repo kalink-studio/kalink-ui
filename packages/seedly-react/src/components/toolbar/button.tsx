@@ -1,12 +1,12 @@
 import { Toolbar, type ToolbarButtonProps } from '@base-ui/react/toolbar';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/toolbar';
 
-import { Button as ButtonRoot, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button as ButtonRoot, type ButtonCompositionProps } from '../button';
 
 type ButtonProps = Omit<ToolbarButtonProps, 'className' | 'render'> &
   ButtonCompositionProps & {

@@ -4,12 +4,12 @@ import {
 } from '@base-ui/react/drawer';
 import { title as titleClassName } from '@kalink-ui/seedly/components/drawer';
 
-import { Heading, type HeadingRootProps } from '../heading';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Heading, type HeadingRootProps } from '../heading';
 
 type TitleProps = Omit<DrawerTitleProps, 'className' | 'render'> &
   Pick<HeadingRootProps, 'align' | 'size' | 'variant'> & {

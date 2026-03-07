@@ -4,12 +4,12 @@ import {
 } from '@base-ui/react/navigation-menu';
 import { trigger as triggerClassName } from '@kalink-ui/seedly/components/navigation-menu';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TriggerProps = Omit<NavigationMenuTriggerProps, 'className' | 'render'> &
   ButtonCompositionProps & {

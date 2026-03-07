@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/autocomplete';
 import { list as listClassName } from '@kalink-ui/seedly/components/autocomplete';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function List({ className, ...props }: AutocompleteListProps) {
   return (

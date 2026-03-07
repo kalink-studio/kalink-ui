@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { listItemRecipe } from '@kalink-ui/seedly/components/list';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type ListItemProps = useRender.ComponentProps<'li'>;
 

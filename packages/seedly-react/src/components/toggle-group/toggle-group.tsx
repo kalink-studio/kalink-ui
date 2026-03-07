@@ -4,10 +4,14 @@ import {
 } from '@base-ui/react/toggle-group';
 import { panel as panelClassName } from '@kalink-ui/seedly/components/toggle-group';
 
-import { SolidShell } from '@/components/_internal/solid-shell';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
+import { SolidShell } from '../_internal/solid-shell';
 
-export function ToggleGroup({ className, render, ...props }: ToggleGroupProps) {
+export function ToggleGroup({
+  className,
+  render,
+  ...props
+}: ToggleGroupProps<string>) {
   return (
     <BaseToggleGroup
       {...props}

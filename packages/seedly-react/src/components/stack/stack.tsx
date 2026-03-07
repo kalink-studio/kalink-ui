@@ -4,7 +4,7 @@ import {
   type StackVariants,
 } from '@kalink-ui/seedly/components/stack';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 import type { Responsive } from '@kalink-ui/seedly/styles';
 

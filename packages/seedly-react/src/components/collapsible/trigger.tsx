@@ -4,12 +4,12 @@ import {
 } from '@base-ui/react/collapsible';
 import { trigger as triggerClassName } from '@kalink-ui/seedly/components/collapsible';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TriggerProps = Omit<CollapsibleTriggerProps, 'className' | 'render'> &
   ButtonCompositionProps & {

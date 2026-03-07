@@ -1,12 +1,12 @@
 import { AlertDialog } from '@base-ui/react/alert-dialog';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/alert-dialog';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 import type { DialogTriggerProps } from '@base-ui/react/dialog';
 

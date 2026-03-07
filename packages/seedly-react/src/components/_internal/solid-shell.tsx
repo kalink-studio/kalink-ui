@@ -1,5 +1,6 @@
-import { Container } from '@/components/container';
-import type { ContainerProps } from '@/components/container/container';
+import { Container } from '../container';
+
+import type { ContainerProps } from '../container/container';
 
 export type SolidShellProps = Omit<
   ContainerProps,

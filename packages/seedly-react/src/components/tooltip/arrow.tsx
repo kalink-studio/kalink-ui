@@ -6,8 +6,8 @@ import {
   arrowOuterStroke as arrowOuterStrokeClassName,
 } from '@kalink-ui/seedly/components/tooltip';
 
-import { FloatingArrowGraphic } from '@/components/_internal/floating-arrow-graphic';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
+import { FloatingArrowGraphic } from '../_internal/floating-arrow-graphic';
 
 export function Arrow({ className, children, ...props }: TooltipArrowProps) {
   return (

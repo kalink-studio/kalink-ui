@@ -463,7 +463,7 @@ export const actions = style({
     [organisms]: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'end',
+      justifyContent: 'flex-end',
       gap: drawerVars.spacing.actionsGap,
 
       selectors: {

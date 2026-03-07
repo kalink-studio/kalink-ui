@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { content as contentClassName } from '@kalink-ui/seedly/components/accordion';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type ContentProps = useRender.ComponentProps<'div'>;
 

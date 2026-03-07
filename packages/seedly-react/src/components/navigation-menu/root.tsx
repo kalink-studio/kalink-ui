@@ -4,8 +4,8 @@ import {
 } from '@base-ui/react/navigation-menu';
 import { root as rootClassName } from '@kalink-ui/seedly/components/navigation-menu';
 
-import { SolidShell } from '@/components/_internal/solid-shell';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
+import { SolidShell } from '../_internal/solid-shell';
 
 export function Root({ className, render, ...props }: NavigationMenuRootProps) {
   return (

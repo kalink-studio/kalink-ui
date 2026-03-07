@@ -1,12 +1,12 @@
 import { Dialog, type DialogTitleProps } from '@base-ui/react/dialog';
 import { title as titleClassName } from '@kalink-ui/seedly/components/dialog';
 
-import { Heading, type HeadingRootProps } from '../heading';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Heading, type HeadingRootProps } from '../heading';
 
 type TitleProps = Omit<DialogTitleProps, 'className' | 'render'> &
   Pick<HeadingRootProps, 'align' | 'size' | 'variant'> & {

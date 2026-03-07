@@ -1,7 +1,7 @@
 import { trigger as triggerClassName } from '@kalink-ui/seedly/components/navigation-menu';
 
+import { mergeClassName } from '../../utils/merge-class-name';
 import { Button, ButtonRootProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
 
 export interface TriggerLinkProps extends ButtonRootProps {
   href: string;

@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react/use-render';
 import { icon as iconClassName } from '@kalink-ui/seedly/components/collapsible';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type IconProps = useRender.ComponentProps<'svg'>;
 

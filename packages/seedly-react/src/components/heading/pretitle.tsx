@@ -1,6 +1,6 @@
 import { pretitleResponsive } from '@kalink-ui/seedly/components/heading';
 
-import { Text } from '@/components/text';
+import { Text } from '../text';
 
 import type { HeadingPretitleProps } from './root';
 

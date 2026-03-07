@@ -12,7 +12,7 @@ import {
 } from '@kalink-ui/seedly/styles';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 interface GridVariantResponsive {
   spacing?: NonNullable<GridVariants['spacing']>;

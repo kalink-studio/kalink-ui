@@ -1,12 +1,12 @@
 import { AlertDialog } from '@base-ui/react/alert-dialog';
 import { title as titleClassName } from '@kalink-ui/seedly/components/alert-dialog';
 
-import { Heading, type HeadingRootProps } from '../heading';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Heading, type HeadingRootProps } from '../heading';
 
 import type { DialogTitleProps } from '@base-ui/react/dialog';
 

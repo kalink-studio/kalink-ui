@@ -1,12 +1,12 @@
 import { Popover, type PopoverTriggerProps } from '@base-ui/react/popover';
 import { iconButton as iconButtonClassName } from '@kalink-ui/seedly/components/popover';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 type TriggerProps = Omit<PopoverTriggerProps, 'className' | 'render'> &
   ButtonCompositionProps & {

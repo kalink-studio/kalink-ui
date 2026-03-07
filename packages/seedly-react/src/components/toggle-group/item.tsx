@@ -1,7 +1,7 @@
 import { button as buttonClassName } from '@kalink-ui/seedly/components/toggle-group';
 
+import { mergeClassName } from '../../utils/merge-class-name';
 import { Toggle } from '../toggle';
-import { mergeClassName } from '@/utils/merge-class-name';
 
 import type { ToggleRootProps } from '../toggle';
 

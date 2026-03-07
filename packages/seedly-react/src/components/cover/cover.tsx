@@ -6,7 +6,7 @@ import {
 } from '@kalink-ui/seedly/components/cover';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type CoverProps = useRender.ComponentProps<'div'> &
   Omit<CoverVariants, 'spacing'> & {

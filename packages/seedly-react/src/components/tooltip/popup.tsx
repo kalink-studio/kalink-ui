@@ -1,12 +1,12 @@
 import { Tooltip, type TooltipPopupProps } from '@base-ui/react/tooltip';
 import { popup as popupClassName } from '@kalink-ui/seedly/components/tooltip';
 
-import { Text, type TextProps } from '../text';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Text, type TextProps } from '../text';
 
 type PopupProps = Omit<TooltipPopupProps, 'className' | 'render'> &
   Pick<

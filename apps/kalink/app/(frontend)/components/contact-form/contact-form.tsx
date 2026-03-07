@@ -1,14 +1,8 @@
 'use client';
 
 import { isObject } from '@kalink-ui/dibbly';
-import {
-  Button,
-  Select,
-  SelectItem,
-  Stack,
-  TextField,
-  Textarea,
-} from '@kalink-ui/seedly';
+import { Button, Field, Select, Stack } from '@kalink-ui/seedly-react';
+import { ChevronDown } from 'lucide-react';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -28,6 +22,30 @@ export interface ContactFormProps {
   fields: FieldWithMeta[];
   type: 'message' | 'inscription';
   sessions: CourseSessions[];
+}
+
+interface FormFieldProps {
+  label: string;
+  name: string;
+  required?: boolean;
+  error?: string;
+  children: React.ReactNode;
+}
+
+function ContactField({
+  label,
+  name,
+  required,
+  error,
+  children,
+}: FormFieldProps) {
+  return (
+    <Field.Root name={name}>
+      <Field.Label>{required ? `${label} *` : label}</Field.Label>
+      {children}
+      {error ? <Field.Error>{error}</Field.Error> : null}
+    </Field.Root>
+  );
 }
 
 const resolveOptions = (
@@ -116,21 +134,45 @@ export function ContactForm({ fields, type, sessions }: ContactFormProps) {
                 }}
                 defaultValue={''}
                 render={({ field: controllerField, fieldState }) => (
-                  <Select
+                  <ContactField
                     label={field.fieldLabel}
                     name={field.fieldName}
                     required={field.required}
-                    placeholder="Sélectionnez une option"
-                    errors={fieldState.error?.message ?? ''}
-                    value={controllerField.value ?? ''}
-                    onValueChange={controllerField.onChange}
+                    error={fieldState.error?.message}
                   >
-                    {options.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
+                    <Select.Root
+                      name={field.fieldName}
+                      required={field.required}
+                      items={options}
+                      value={controllerField.value ?? ''}
+                      onValueChange={controllerField.onChange}
+                    >
+                      <Select.Trigger>
+                        <Select.Value placeholder="Selectionnez une option" />
+                        <Select.Icon>
+                          <ChevronDown size={16} />
+                        </Select.Icon>
+                      </Select.Trigger>
+                      <Select.Portal>
+                        <Select.Positioner sideOffset={8}>
+                          <Select.Popup>
+                            <Select.List>
+                              {options.map((option) => (
+                                <Select.Item
+                                  key={option.value}
+                                  value={option.value}
+                                >
+                                  <Select.ItemText>
+                                    {option.label}
+                                  </Select.ItemText>
+                                </Select.Item>
+                              ))}
+                            </Select.List>
+                          </Select.Popup>
+                        </Select.Positioner>
+                      </Select.Portal>
+                    </Select.Root>
+                  </ContactField>
                 )}
               />
             );
@@ -149,26 +191,36 @@ export function ContactForm({ fields, type, sessions }: ContactFormProps) {
               defaultValue={''}
               render={({ field: controllerField, fieldState }) =>
                 field.fieldType === 'textarea' ? (
-                  <Textarea
+                  <ContactField
                     label={field.fieldLabel}
                     name={field.fieldName}
                     required={field.required}
-                    errors={fieldState.error?.message ?? ''}
-                    rows={5}
-                    value={controllerField.value ?? ''}
-                    onChange={controllerField.onChange}
-                    onBlur={controllerField.onBlur}
-                  />
+                    error={fieldState.error?.message}
+                  >
+                    <Field.Control
+                      render={<textarea rows={5} />}
+                      name={field.fieldName}
+                      required={field.required}
+                      value={controllerField.value ?? ''}
+                      onChange={controllerField.onChange}
+                      onBlur={controllerField.onBlur}
+                    />
+                  </ContactField>
                 ) : (
-                  <TextField
+                  <ContactField
                     label={field.fieldLabel}
                     name={field.fieldName}
                     required={field.required}
-                    errors={fieldState.error?.message ?? ''}
-                    value={controllerField.value ?? ''}
-                    onChange={controllerField.onChange}
-                    onBlur={controllerField.onBlur}
-                  />
+                    error={fieldState.error?.message}
+                  >
+                    <Field.Control
+                      name={field.fieldName}
+                      required={field.required}
+                      value={controllerField.value ?? ''}
+                      onChange={controllerField.onChange}
+                      onBlur={controllerField.onBlur}
+                    />
+                  </ContactField>
                 )
               }
             />

@@ -28,7 +28,7 @@ export const checkboxGroup = style({
 
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'start',
+      alignItems: 'flex-start',
       gap: checkboxGroupVars.spacing.groupGap,
       color: checkboxGroupVars.color.rootForeground,
     },

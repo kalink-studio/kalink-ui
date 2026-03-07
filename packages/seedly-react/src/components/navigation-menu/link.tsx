@@ -4,12 +4,12 @@ import {
 } from '@base-ui/react/navigation-menu';
 import { linkCard } from '@kalink-ui/seedly/components/navigation-menu';
 
-import { Button, type ButtonCompositionProps } from '../button';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 import {
   resolveStateClassName,
   resolveStateRender,
-} from '@/utils/resolve-state-props';
+} from '../../utils/resolve-state-props';
+import { Button, type ButtonCompositionProps } from '../button';
 
 export type LinkProps = Omit<NavigationMenuLinkProps, 'className' | 'render'> &
   ButtonCompositionProps & {

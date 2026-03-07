@@ -4,7 +4,7 @@ import {
   type ContainerVariants,
 } from '@kalink-ui/seedly/components/container';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export type ContainerProps = useRender.ComponentProps<'div'> &
   Omit<ContainerVariants, 'spacing'> & {

@@ -4,7 +4,7 @@ import {
 } from '@base-ui/react/combobox';
 import { itemIndicator as itemIndicatorClassName } from '@kalink-ui/seedly/components/combobox';
 
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
 
 export function ItemIndicator({
   className,

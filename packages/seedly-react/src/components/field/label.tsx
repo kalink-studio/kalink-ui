@@ -5,8 +5,8 @@ import {
 import { label as labelClassName } from '@kalink-ui/seedly/components/field';
 import { labelRecipe } from '@kalink-ui/seedly/components/label';
 
+import { mergeClassName } from '../../utils/merge-class-name';
 import { Label as BaseLabel, type LabelProps } from '../label';
-import { mergeClassName } from '@/utils/merge-class-name';
 
 export type FieldLabelProps = BaseFieldLabelProps & Pick<LabelProps, 'variant'>;
 

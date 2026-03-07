@@ -1,8 +1,8 @@
 import { Toolbar, type ToolbarRootProps } from '@base-ui/react/toolbar';
 import { toolbar as toolbarClassName } from '@kalink-ui/seedly/components/toolbar';
 
-import { SolidShell } from '@/components/_internal/solid-shell';
-import { mergeClassName } from '@/utils/merge-class-name';
+import { mergeClassName } from '../../utils/merge-class-name';
+import { SolidShell } from '../_internal/solid-shell';
 
 export function Root({ className, render, ...props }: ToolbarRootProps) {
   return (
