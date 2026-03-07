@@ -36,7 +36,7 @@ export default mergeConfig(viteConfig, {
         plugins: [
           storybookTest({
             configDir: path.join(dirname, '.storybook'),
-            storybookScript: 'pnpm run dev',
+            storybookScript: 'pnpm run storybook:dev',
           }),
         ],
         test: {

@@ -5,6 +5,9 @@
     "overrides": {
       "@types/react": "19.2.7",
       "@types/react-dom": "19.2.3"
+    },
+    "patchedDependencies": {
+      "@storybook/addon-vitest@10.2.16": "patches/@storybook__addon-vitest@10.2.16.patch"
     }
   },
   "scripts": {

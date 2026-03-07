@@ -10,9 +10,10 @@ if (!command) {
 
 const cacheRoot = process.env.STORYBOOK_CACHE_DIR ?? '.cache';
 const absoluteCacheRoot = path.resolve(process.cwd(), cacheRoot);
+const absoluteStorybookCacheRoot = path.join(absoluteCacheRoot, 'storybook');
 
 await mkdir(absoluteCacheRoot, { recursive: true });
-await mkdir(path.join(absoluteCacheRoot, 'storybook', 'default', 'coverage'), {
+await mkdir(path.join(absoluteStorybookCacheRoot, 'default', 'coverage'), {
   recursive: true,
 });
 
