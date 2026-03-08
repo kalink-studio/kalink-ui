@@ -1,5 +1,144 @@
 # @kalink-ui/seedly-react
 
+## 1.0.0-beta.0
+
+### Major Changes
+
+- a91c2d7: Add Base UI parity React demos and collocated Storybook stories for all 35 components, wired to the new `@kalink-ui/seedly` style modules.
+- 0379b53: Replace demo-style component exports with Base UI parity primitives, splitting each styled primitive into its own file and exposing compound component APIs from component indexes.
+
+  Move composition examples out of package exports and into Storybook stories so published exports are primitive-only.
+
+### Minor Changes
+
+- 4da0b6b: Backport MoonLoader and LoaderOverlay primitives so loading states are available in both Seedly packages.
+- 2451427: Add responsive layout primitives and responsive prop support across Seedly layout components and their React wrappers.
+- f6f7311: Backport Text and Heading primitives with responsive Seedly styles and React wrapper APIs for richer typography composition.
+- 032d76a: Add Drawer primitives and React wrappers so overlay-based drawer interactions are available alongside the existing dialog system.
+- 4be815b: Add shared List primitives and story usage so Seedly and seedly-react expose a reusable list component API.
+- 4afd4e3: Refactor Base UI wrappers to explicit composition components and namespace module exports.
+
+### Patch Changes
+
+- f47b1f7: Update Switcher contract mappings and wrapper behavior so responsive layout tokens resolve consistently across both packages.
+- 264dc22: Update Menubar contract mappings and wrapper composition so shared menu tokens stay aligned across the bar primitives.
+- 9408d29: Align collapsible defaults and hover tokens so triggers and panels behave more consistently across Seedly and seedly-react.
+- d34940c: Update ContextMenu contract mappings and React menu wrappers so popup menu pieces share the same refreshed local tokens.
+- c14a96c: Stabilize the seedly-react Storybook cache setup so local development and CI runs are more reliable.
+- d2a65b0: Update CheckboxGroup contract mappings and wrapper composition so grouped controls stay aligned with the refreshed Seedly contracts.
+- 02001a7: Rename exported style class names to camelCase across Seedly styles and wrappers so the Base UI parity exports read consistently.
+- cc33254: Update Grid contract mappings and wrapper behavior so layout tokens resolve consistently across Seedly and seedly-react.
+- 81d2cc6: Upgrade the seedly-react Storybook test runner setup to improve compatibility with the current Storybook tooling stack.
+- 8694b7b: Update Sidebar contract mappings and wrapper behavior so responsive sidebar tokens resolve consistently across both packages.
+- f72a4a5: Refresh layout contract mappings for Box and Container and align their wrappers with the updated responsive layout tokens.
+- 7dc18d9: Migrate Kalink app usage onto seedly-react primitives and wrappers so downstream app integration matches the published component APIs.
+- cbafe0e: Route seedly-react Storybook workflows through Turbo so package-level CI and local tasks use the same orchestration path.
+- fd96c74: Unify label wrappers and namespace list primitives so seedly-react exports are easier to compose consistently.
+- 86eeaf9: Compose shared menu wrappers explicitly so related menu primitives reuse the same implementation patterns and exports.
+- fabfefc: Update Cover contract mappings and the React wrapper so layout tokens map consistently through the refreshed contracts.
+- 172dfd8: Add broader story interaction coverage so seedly-react stories exercise component behavior more reliably in tests.
+- 2ac6363: Prepare the Seedly foundation for the component contract refactor by consolidating shared contract and wrapper assumptions.
+- 18e0608: Update Menu and ContextMenu contract mappings so shared popup menu primitives resolve local tokens consistently.
+- 31bbc78: Apply small visual enhancements across interactive primitives and stories to improve polish and alignment.
+- 6733dbd: Update Toolbar contract mappings and shared bar primitives so toolbar wrappers stay aligned with the refreshed local tokens.
+- fb41ad4: Move typography primitives into slot wrappers so titles, descriptions, and related text slots compose more consistently.
+- fb24c3c: Align Radio composition with the CheckboxGroup structure by introducing a matching radio-group primitive and wrapper shape.
+- 4ab7ac9: Polish PreviewCard story composition and supporting styles so demos better reflect the intended component presentation.
+- f872f10: Align seedly-react wrappers with updated component defaults so triggers, arrows, and stories reflect the latest Seedly behavior.
+- cf96bc6: Keep Accordion panels structural and move text composition into dedicated content pieces for a cleaner wrapper API.
+- 9601d9c: Restructure seedly-react wrappers around explicit composition modules and namespace exports for a more consistent component API.
+- 5585550: Improve toolbar composition and Select trigger sizing so controls align more cleanly in complex toolbars.
+- 64d577b: Backport the previous system-contract styling approach by restoring full `sys` theme assignments, shared style helpers, and component-level vars contracts across Seedly Base UI parity styles.
+
+  Align portal-rendered popups and field controls so token vars are always defined (including popover/tooltip and combobox action buttons), and update Storybook backgrounds for clearer light/dark previews.
+
+- e037828: Use Seedly wrapper components consistently in stories and remove redundant story-level className props that wrappers already provide.
+  Add `Radio.Group` in `seedly-react` and tune dark-mode contrast for toggle-group, toolbar, and dialog overlays.
+- Updated dependencies [4da0b6b]
+- Updated dependencies [2dd75e2]
+- Updated dependencies [f47b1f7]
+- Updated dependencies [3abab4d]
+- Updated dependencies [fe6e40c]
+- Updated dependencies [d8e2b75]
+- Updated dependencies [264dc22]
+- Updated dependencies [b4062af]
+- Updated dependencies [07d65a8]
+- Updated dependencies [a00dcc3]
+- Updated dependencies [8a5ca4a]
+- Updated dependencies [fe38c46]
+- Updated dependencies [d8578dc]
+- Updated dependencies [9408d29]
+- Updated dependencies [d34940c]
+- Updated dependencies [d2a65b0]
+- Updated dependencies [2e57481]
+- Updated dependencies [f7897ac]
+- Updated dependencies [a7a2d8f]
+- Updated dependencies [a5999cf]
+- Updated dependencies [02001a7]
+- Updated dependencies [cc33254]
+- Updated dependencies [8bac2e5]
+- Updated dependencies [993e924]
+- Updated dependencies [2451427]
+- Updated dependencies [3e5f60e]
+- Updated dependencies [8694b7b]
+- Updated dependencies [d0e5229]
+- Updated dependencies [f72a4a5]
+- Updated dependencies [7dc18d9]
+- Updated dependencies [f6f7311]
+- Updated dependencies [3211078]
+- Updated dependencies [e95e2ab]
+- Updated dependencies [7d725e8]
+- Updated dependencies [a10cdc9]
+- Updated dependencies [1cbe0f4]
+- Updated dependencies [ed65c46]
+- Updated dependencies [032d76a]
+- Updated dependencies [919c363]
+- Updated dependencies [3df6d8f]
+- Updated dependencies [fabfefc]
+- Updated dependencies [01ca9b1]
+- Updated dependencies [43c07d5]
+- Updated dependencies [bacf5bd]
+- Updated dependencies [2ac6363]
+- Updated dependencies [5f7c10e]
+- Updated dependencies [18e0608]
+- Updated dependencies [699402d]
+- Updated dependencies [887577f]
+- Updated dependencies [9f0efcc]
+- Updated dependencies [31bbc78]
+- Updated dependencies [7ee323a]
+- Updated dependencies [6733dbd]
+- Updated dependencies [2c80d0d]
+- Updated dependencies [f9508dd]
+- Updated dependencies [def1a5f]
+- Updated dependencies [fb41ad4]
+- Updated dependencies [162e10f]
+- Updated dependencies [fb24c3c]
+- Updated dependencies [470bb48]
+- Updated dependencies [47ebf74]
+- Updated dependencies [7f37273]
+- Updated dependencies [e945f91]
+- Updated dependencies [7a137da]
+- Updated dependencies [0a67e74]
+- Updated dependencies [f2dfe73]
+- Updated dependencies [4ab7ac9]
+- Updated dependencies [298cd93]
+- Updated dependencies [86e76ca]
+- Updated dependencies [1a40232]
+- Updated dependencies [4be815b]
+- Updated dependencies [5585550]
+- Updated dependencies [168f4d9]
+- Updated dependencies [5490c6e]
+- Updated dependencies [cd930e9]
+- Updated dependencies [e06ff34]
+- Updated dependencies [928ecde]
+- Updated dependencies [89cc8dc]
+- Updated dependencies [64d577b]
+- Updated dependencies [eae06e2]
+- Updated dependencies [63a0911]
+- Updated dependencies [705d275]
+- Updated dependencies [e037828]
+  - @kalink-ui/seedly@1.0.0-beta.0
+
 ## 0.34.4
 
 ### Patch Changes
