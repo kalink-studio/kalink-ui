@@ -1,6 +1,6 @@
-export {
-  createHeadingField,
-  type CreateHeadingFieldOptions,
-  type HeadingField,
-  type HeadingLevel,
-} from './createHeadingField';
+export { createHeadingField } from './create-heading-field';
+export type {
+  CreateHeadingFieldOptions,
+  HeadingField,
+  HeadingLevel,
+} from './types';
