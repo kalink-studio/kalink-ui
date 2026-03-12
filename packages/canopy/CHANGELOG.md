@@ -1,5 +1,11 @@
 # @kalink-ui/canopy
 
+## 1.0.0-beta.0
+
+### Major Changes
+
+- d978276: Add reusable image transform tooling for Payload, including configurable field UI and derivative generation helpers for Canopy integrations.
+
 ## 0.1.3
 
 ### Patch Changes

@@ -12,6 +12,7 @@
     "@kalink-ui/typescript-config": "0.4.2"
   },
   "changesets": [
+    "canopy-image-transform-tooling",
     "seedly-02b363a-loader-primitives",
     "seedly-07ba92f-foundation-style-factories",
     "seedly-0967e29-switcher-contract-mapping",
