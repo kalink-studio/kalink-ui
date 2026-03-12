@@ -1,0 +1,130 @@
+/* ---- Track ---- */
+
+.slider {
+  flex: 1;
+
+  min-width: 0;
+  height: 6px;
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 3px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  appearance: none;
+  outline: none;
+}
+
+/* WebKit track */
+.slider::-webkit-slider-runnable-track {
+  height: 6px;
+
+  border: none;
+  border-radius: 3px;
+
+  background: var(--_slider-track-bg);
+}
+
+/* Firefox track */
+.slider::-moz-range-track {
+  height: 6px;
+
+  border: none;
+  border-radius: 3px;
+
+  background: var(--theme-elevation-200, #e5e5e5);
+}
+
+/* Firefox progress fill (left of thumb) */
+.slider::-moz-range-progress {
+  height: 6px;
+
+  border-radius: 3px 0 0 3px;
+
+  background: var(--theme-elevation-500, #888);
+}
+
+/* ---- Thumb ---- */
+
+/* WebKit thumb */
+.slider::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+
+  border: 2px solid #fff;
+  border-radius: 50%;
+
+  background: var(--theme-elevation-500, #888);
+  box-shadow:
+    0 0 0 1px var(--theme-elevation-250, #ddd),
+    0 1px 3px rgba(0, 0, 0, 0.12);
+
+  cursor: pointer;
+
+  appearance: none;
+  transition:
+    background 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+/* Firefox thumb */
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid #fff;
+  border-radius: 50%;
+
+  background: var(--theme-elevation-500, #888);
+  box-shadow:
+    0 0 0 1px var(--theme-elevation-250, #ddd),
+    0 1px 3px rgba(0, 0, 0, 0.12);
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+/* ---- Focus / hover ---- */
+
+.slider:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 1px var(--theme-elevation-400, #bbb),
+    0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.slider:focus-visible::-moz-range-thumb {
+  box-shadow:
+    0 0 0 1px var(--theme-elevation-400, #bbb),
+    0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+@media (hover: hover) {
+  .slider:hover::-webkit-slider-thumb {
+    background: var(--theme-elevation-600, #666);
+  }
+
+  .slider:hover::-moz-range-thumb {
+    background: var(--theme-elevation-600, #666);
+  }
+}
+
+/* ---- Number input spinner removal for a cleaner look ---- */
+
+.number::-webkit-inner-spin-button,
+.number::-webkit-outer-spin-button {
+  margin: 0;
+
+  appearance: none;
+}
+
+.number {
+  -moz-appearance: textfield;
+}

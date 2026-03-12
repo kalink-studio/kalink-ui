@@ -1,3 +1,5 @@
+import { createImageTransformField } from '@kalink-ui/canopy';
+
 import { anchorFields, backgroundTintField } from '../shared';
 
 import type { Block } from 'payload';
@@ -24,12 +26,23 @@ export const fiftyFifty: Block = {
       ...backgroundTintField,
       defaultValue: 'primary',
     },
-    {
+    createImageTransformField({
       name: 'image',
-      type: 'relationship',
+      presets: [
+        {
+          aspectRatio: '16:9',
+          key: 'landscape',
+          label: 'Landscape',
+        },
+        {
+          aspectRatio: '4:5',
+          key: 'portrait',
+          label: 'Portrait',
+        },
+      ],
       relationTo: 'media',
       required: true,
-    },
+    }),
     {
       name: 'direction',
       type: 'select',

@@ -1,1 +1,0 @@
-export { SlugField } from './SlugField';

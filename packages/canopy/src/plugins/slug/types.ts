@@ -1,26 +1,11 @@
-import type { CheckboxField, CollectionSlug, TextField } from 'payload';
+import type {
+  CreateSlugFieldsOptions,
+  SlugifyFn,
+} from '../../fields/slug/types';
+import type { CollectionSlug } from 'payload';
 
-export type SlugifyFn = (input: unknown) => string;
-
-export interface SlugAdminCustom {
-  readonly overrideDescription?: string;
-  readonly overrideFieldPath: string;
-  readonly overrideLabel: string;
-  readonly sourceFieldPath: string;
-}
-
-export interface SlugPluginCollectionConfig {
+export interface SlugPluginCollectionConfig extends CreateSlugFieldsOptions {
   readonly slug: CollectionSlug;
-  readonly name?: string;
-  readonly label?: string;
-  readonly description?: string;
-  readonly sourceFieldPath?: string;
-  readonly overrideFieldName?: string;
-  readonly overrideLabel?: string;
-  readonly overrideDescription?: string;
-  readonly slugify?: SlugifyFn;
-  readonly slugField?: Partial<TextField>;
-  readonly overrideField?: Partial<CheckboxField>;
 }
 
 export type SlugPluginCollectionOption =
