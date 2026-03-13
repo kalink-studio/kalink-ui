@@ -14,6 +14,7 @@
   "changesets": [
     "canopy-image-transform-tooling",
     "canopy-node-esm-fix",
+    "canopy-short-db-names",
     "seedly-02b363a-loader-primitives",
     "seedly-07ba92f-foundation-style-factories",
     "seedly-0967e29-switcher-contract-mapping",

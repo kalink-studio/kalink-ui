@@ -1,5 +1,11 @@
 # @kalink-ui/canopy
 
+## 1.0.0-beta.2
+
+### Patch Changes
+
+- d19d1a9: Shorten image transform field SQL identifiers by default so deeply nested Payload schemas avoid Postgres identifier-length failures while keeping public field names unchanged.
+
 ## 1.0.0-beta.1
 
 ### Patch Changes

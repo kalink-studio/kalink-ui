@@ -1,5 +1,12 @@
 # @kalink-ui/kalink
 
+## 0.3.5-beta.4
+
+### Patch Changes
+
+- Updated dependencies [d19d1a9]
+  - @kalink-ui/canopy@1.0.0-beta.2
+
 ## 0.3.5-beta.3
 
 ### Patch Changes
