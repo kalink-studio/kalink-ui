@@ -2,9 +2,9 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { SlugField } from './slug-field';
+import { SlugField } from './slug-field.js';
 
-import type { SlugAdminCustom } from './types';
+import type { SlugAdminCustom } from './types.js';
 
 /**
  * Lightweight mock for `@payloadcms/ui` that exposes controllable field values

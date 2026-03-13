@@ -1,1 +1,1 @@
-export { SlugField } from './slug-field';
+export { SlugField } from './slug-field.js';

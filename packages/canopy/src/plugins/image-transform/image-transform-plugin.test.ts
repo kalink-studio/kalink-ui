@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createImageTransformField } from '../../fields/image-transform';
+import { createImageTransformField } from '../../fields/image-transform/index.js';
 
-import { buildImageTransformFingerprint } from './fingerprint';
-import { generateDerivative } from './generate-derivative';
-import { imageTransformPlugin } from './image-transform-plugin';
+import { buildImageTransformFingerprint } from './fingerprint.js';
+import { generateDerivative } from './generate-derivative.js';
+import { imageTransformPlugin } from './image-transform-plugin.js';
 
-vi.mock('./generate-derivative', () => ({
+vi.mock('./generate-derivative.js', () => ({
   generateDerivative: vi.fn(),
 }));
 

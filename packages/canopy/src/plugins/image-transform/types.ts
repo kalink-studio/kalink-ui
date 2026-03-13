@@ -3,7 +3,7 @@ import type {
   ImageTransformFieldValue,
   ImageTransformPresetDefinition,
   ImageTransformRelationValue,
-} from '../../fields/image-transform';
+} from '../../fields/image-transform/index.js';
 import type { CollectionConfig, CollectionSlug } from 'payload';
 
 export const DEFAULT_IMAGE_TRANSFORM_ENDPOINT_PATH = '/image-transform';

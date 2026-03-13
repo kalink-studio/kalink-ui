@@ -5,14 +5,14 @@ import {
   getImageTransformSourceVersion,
   normalizeImageTransformCrop,
   unwrapImageTransformRelation,
-} from './fingerprint';
+} from './fingerprint.js';
 
-import type { ImageTransformOwnerKind } from './types';
+import type { ImageTransformOwnerKind } from './types.js';
 import type {
   ImageTransformPresetDefinition,
   ImageTransformPresetValue,
   ImageTransformRelationValue,
-} from '../../fields/image-transform';
+} from '../../fields/image-transform/index.js';
 import type { PayloadRequest } from 'payload';
 
 const isAbsoluteURL = (value: string): boolean => /^https?:\/\//.test(value);

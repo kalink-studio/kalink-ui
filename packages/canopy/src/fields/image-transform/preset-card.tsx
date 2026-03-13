@@ -8,16 +8,16 @@ import {
   cropsEqual,
   DEFAULT_CROP,
   parseAspectRatio,
-} from './crop-math';
-import { CropControls } from './crop-controls';
-import { CropPreview } from './crop-preview';
-import { HeaderThumbnail } from './header-thumbnail';
+} from './crop-math.js';
+import { CropControls } from './crop-controls.js';
+import { CropPreview } from './crop-preview.js';
+import { HeaderThumbnail } from './header-thumbnail.js';
 import styles from './image-transform-field.module.css';
-import { OverflowMenu } from './overflow-menu';
-import { getRelationID } from './relation-utils';
-import { StatusBadge } from './status-badge';
+import { OverflowMenu } from './overflow-menu.js';
+import { getRelationID } from './relation-utils.js';
+import { StatusBadge } from './status-badge.js';
 
-import type { ImageTransformCrop } from './types';
+import type { ImageTransformCrop } from './types.js';
 import type {
   GenerationResult,
   ImageTransformFieldValue,
@@ -25,7 +25,7 @@ import type {
   ImageTransformPresetValue,
   ImageTransformRelationValue,
   ImageTransformState,
-} from './types';
+} from './types.js';
 
 export interface PresetCardProps {
   readonly apiUrl: string;

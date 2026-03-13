@@ -1,6 +1,6 @@
-import { IMAGE_TRANSFORM_PENDING_SOURCE_RELATION } from '../../fields/image-transform/types';
+import { IMAGE_TRANSFORM_PENDING_SOURCE_RELATION } from '../../fields/image-transform/types.js';
 
-import type { CreateImageTransformDerivativeCollectionOptions } from './types';
+import type { CreateImageTransformDerivativeCollectionOptions } from './types.js';
 import type { CollectionConfig, RelationshipField, SelectField } from 'payload';
 
 const readonlyTextField = (name: string, label: string) => ({

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { createSlugFields } from './create-slug-fields';
+import { createSlugFields } from './create-slug-fields.js';
 
 describe('createSlugFields', () => {
   it('builds slug and override fields with merged admin config', () => {

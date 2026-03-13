@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { createImageTransformField } from '../../fields/image-transform';
+import { createImageTransformField } from '../../fields/image-transform/index.js';
 
 import {
   createImageTransformFieldPatch,
   getValueAtPath,
   resolveOwnerContext,
-} from './resolve-owner-context';
+} from './resolve-owner-context.js';
 
 describe('resolveOwnerContext', () => {
   const imageField = createImageTransformField({

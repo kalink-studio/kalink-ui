@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import { parseAspectRatio } from './crop-math';
+import { parseAspectRatio } from './crop-math.js';
 import styles from './image-transform-field.module.css';
-import { useDerivativeUrl } from './use-derivative-url';
+import { useDerivativeUrl } from './use-derivative-url.js';
 
-import type { ImageTransformRelationValue } from './types';
+import type { ImageTransformRelationValue } from './types.js';
 
 const THUMB_SLOT_W = 56;
 const THUMB_SLOT_H = 56;

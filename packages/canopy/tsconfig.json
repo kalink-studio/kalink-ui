@@ -10,8 +10,8 @@
     "emitDeclarationOnly": false,
     "rootDir": "src",
     "outDir": "dist",
-    "module": "ES2020",
+    "module": "NodeNext",
     "moduleDetection": "force",
-    "moduleResolution": "bundler"
+    "moduleResolution": "NodeNext"
   }
 }
