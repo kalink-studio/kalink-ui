@@ -1,5 +1,5 @@
 import {
-  DrawerPreview as Drawer,
+  Drawer,
   type DrawerIndentBackgroundProps,
 } from '@base-ui/react/drawer';
 import { indentBackground as indentBackgroundClassName } from '@kalink-ui/seedly/components/drawer';

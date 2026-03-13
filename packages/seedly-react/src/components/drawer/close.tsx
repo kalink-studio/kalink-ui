@@ -1,7 +1,4 @@
-import {
-  DrawerPreview as Drawer,
-  type DrawerCloseProps,
-} from '@base-ui/react/drawer';
+import { Drawer, type DrawerCloseProps } from '@base-ui/react/drawer';
 import { button as buttonClassName } from '@kalink-ui/seedly/components/drawer';
 
 import { mergeClassName } from '../../utils/merge-class-name';

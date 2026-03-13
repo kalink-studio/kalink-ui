@@ -1,7 +1,4 @@
-import {
-  DrawerPreview as Drawer,
-  type DrawerDescriptionProps,
-} from '@base-ui/react/drawer';
+import { Drawer, type DrawerDescriptionProps } from '@base-ui/react/drawer';
 import { description as descriptionClassName } from '@kalink-ui/seedly/components/drawer';
 
 import { mergeClassName } from '../../utils/merge-class-name';
