@@ -1,5 +1,12 @@
 # @kalink-ui/kalink
 
+## 0.3.5-beta.3
+
+### Patch Changes
+
+- Updated dependencies [9ab1679]
+  - @kalink-ui/seedly-react@1.0.0-beta.1
+
 ## 0.3.5-beta.2
 
 ### Patch Changes

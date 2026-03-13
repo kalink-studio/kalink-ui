@@ -1,6 +1,6 @@
 {
   "name": "@kalink-ui/seedly-react",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "Base UI component implementations with Seedly styles",
   "sideEffects": [
     "**/*.css.ts"

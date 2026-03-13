@@ -1,5 +1,11 @@
 # @kalink-ui/seedly-react
 
+## 1.0.0-beta.1
+
+### Patch Changes
+
+- 9ab1679: Update `@base-ui/react` to v1.3.0 and migrate drawer wrappers from the preview `DrawerPreview` API to the stable `Drawer` export.
+
 ## 1.0.0-beta.0
 
 ### Major Changes
