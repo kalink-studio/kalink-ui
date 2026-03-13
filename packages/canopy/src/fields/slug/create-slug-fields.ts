@@ -1,11 +1,12 @@
-import { formatSlug } from './formatSlug';
-import { getValueByPath } from './getValueByPath';
+import { formatSlug } from './format-slug.js';
+import { getValueByPath } from './get-value-by-path.js';
 
 import type {
+  CreateSlugFieldsOptions,
+  CreatedSlugFields,
   SlugAdminCustom,
-  SlugPluginCollectionConfig,
   SlugifyFn,
-} from './types';
+} from './types.js';
 import type {
   CheckboxField,
   FieldHook,
@@ -13,27 +14,13 @@ import type {
   TextField,
 } from 'payload';
 
-const CLIENT_COMPONENT_PATH = '@kalink-ui/canopy/plugins/slug/client#SlugField';
+const CLIENT_COMPONENT_PATH = '@kalink-ui/canopy/client#SlugField';
 
 interface BeforeValidateHookArgs {
   readonly overrideFieldPath: string;
   readonly slugFieldPath: string;
   readonly sourceFieldPath: string;
   readonly slugify: SlugifyFn;
-}
-
-interface CreateSlugFieldsArgs extends Omit<
-  SlugPluginCollectionConfig,
-  'slug'
-> {
-  readonly slugify: SlugifyFn;
-}
-
-export interface CreatedSlugFields {
-  readonly overrideField: CheckboxField;
-  readonly overrideFieldName: string;
-  readonly slugField: TextField;
-  readonly slugFieldName: string;
 }
 
 const isSlugAdminCustom = (
@@ -151,7 +138,7 @@ export const createSlugFields = ({
   slugify = formatSlug,
   slugField: slugFieldOverrides,
   overrideField: overrideFieldOverrides,
-}: CreateSlugFieldsArgs): CreatedSlugFields => {
+}: CreateSlugFieldsOptions): CreatedSlugFields => {
   const beforeValidateHook = createBeforeValidateHook({
     overrideFieldPath: overrideFieldName,
     slugFieldPath: name,

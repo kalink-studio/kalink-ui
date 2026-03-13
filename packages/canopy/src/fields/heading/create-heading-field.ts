@@ -1,26 +1,13 @@
 import { lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
 
+import { headingLevels } from './types.js';
+
 import type {
-  Field,
-  GroupField,
-  RadioField,
-  RichTextField,
-  TextField,
-} from 'payload';
-
-const headingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
-
-export type HeadingLevel = (typeof headingLevels)[number];
-
-export interface CreateHeadingFieldOptions {
-  readonly name?: string;
-  readonly label?: string;
-  readonly requiredTitle?: boolean;
-  readonly defaultLevel?: HeadingLevel;
-  readonly subtitlePlaceholder?: string;
-}
-
-export type HeadingField = GroupField;
+  CreateHeadingFieldOptions,
+  HeadingField,
+  HeadingLevel,
+} from './types.js';
+import type { Field, RadioField, RichTextField, TextField } from 'payload';
 
 const buildTitleField = (required: boolean): TextField => ({
   name: 'title',
@@ -62,17 +49,13 @@ const buildSubtitleField = (placeholder: string): RichTextField => ({
   }),
 });
 
-export const createHeadingField = (
-  options: CreateHeadingFieldOptions = {},
-): HeadingField => {
-  const {
-    name = 'heading',
-    label = 'Heading',
-    requiredTitle = true,
-    defaultLevel = 'h2',
-    subtitlePlaceholder = 'Add subtitle',
-  } = options;
-
+export const createHeadingField = ({
+  name = 'heading',
+  label = 'Heading',
+  requiredTitle = true,
+  defaultLevel = 'h2',
+  subtitlePlaceholder = 'Add subtitle',
+}: CreateHeadingFieldOptions = {}): HeadingField => {
   const fields: Field[] = [
     buildPretitleField(),
     buildTitleField(requiredTitle),

@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    mediaDerivatives: MediaDerivative;
     pages: Page;
     services: Service;
     serviceDescriptions: ServiceDescription;
@@ -84,6 +85,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    mediaDerivatives: MediaDerivativesSelect<false> | MediaDerivativesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     serviceDescriptions: ServiceDescriptionsSelect<false> | ServiceDescriptionsSelect<true>;
@@ -106,9 +108,10 @@ export interface Config {
     mainNavigation: MainNavigationSelect<false> | MainNavigationSelect<true>;
   };
   locale: null;
-  user: User & {
-    collection: 'users';
+  widgets: {
+    collections: CollectionsWidget;
   };
+  user: User;
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -155,6 +158,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -163,6 +167,36 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mediaDerivatives".
+ */
+export interface MediaDerivative {
+  id: number;
+  source: number | Media;
+  sourceCollection?: string | null;
+  sourceID?: string | null;
+  sourceVersion?: string | null;
+  ownerKind: 'collection' | 'global';
+  ownerSlug?: string | null;
+  ownerID?: string | null;
+  fieldPath?: string | null;
+  usagePath?: string | null;
+  presetKey?: string | null;
+  presetAspectRatio?: string | null;
+  fingerprint?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -303,7 +337,37 @@ export interface Page {
               [k: string]: unknown;
             };
             backgroundTint?: ('primary' | 'primaryContainer' | 'secondaryContainer') | null;
-            image: number | Media;
+            image: {
+              source: number | Media;
+              presets?: {
+                landscape?: {
+                  crop?: {
+                    x?: number | null;
+                    y?: number | null;
+                    zoom?: number | null;
+                  };
+                  derivative?: (number | null) | MediaDerivative;
+                  state?: ('unsaved' | 'missing' | 'ready' | 'stale' | 'generating' | 'failed') | null;
+                  fingerprint?: string | null;
+                  sourceVersion?: string | null;
+                  lastGeneratedAt?: string | null;
+                  lastError?: string | null;
+                };
+                portrait?: {
+                  crop?: {
+                    x?: number | null;
+                    y?: number | null;
+                    zoom?: number | null;
+                  };
+                  derivative?: (number | null) | MediaDerivative;
+                  state?: ('unsaved' | 'missing' | 'ready' | 'stale' | 'generating' | 'failed') | null;
+                  fingerprint?: string | null;
+                  sourceVersion?: string | null;
+                  lastGeneratedAt?: string | null;
+                  lastError?: string | null;
+                };
+              };
+            };
             direction?: ('start' | 'end') | null;
             id?: string | null;
             blockName?: string | null;
@@ -572,6 +636,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'mediaDerivatives';
+        value: number | MediaDerivative;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -679,6 +747,35 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mediaDerivatives_select".
+ */
+export interface MediaDerivativesSelect<T extends boolean = true> {
+  source?: T;
+  sourceCollection?: T;
+  sourceID?: T;
+  sourceVersion?: T;
+  ownerKind?: T;
+  ownerSlug?: T;
+  ownerID?: T;
+  fieldPath?: T;
+  usagePath?: T;
+  presetKey?: T;
+  presetAspectRatio?: T;
+  fingerprint?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -748,7 +845,49 @@ export interface PagesSelect<T extends boolean = true> {
               title?: T;
               body?: T;
               backgroundTint?: T;
-              image?: T;
+              image?:
+                | T
+                | {
+                    source?: T;
+                    presets?:
+                      | T
+                      | {
+                          landscape?:
+                            | T
+                            | {
+                                crop?:
+                                  | T
+                                  | {
+                                      x?: T;
+                                      y?: T;
+                                      zoom?: T;
+                                    };
+                                derivative?: T;
+                                state?: T;
+                                fingerprint?: T;
+                                sourceVersion?: T;
+                                lastGeneratedAt?: T;
+                                lastError?: T;
+                              };
+                          portrait?:
+                            | T
+                            | {
+                                crop?:
+                                  | T
+                                  | {
+                                      x?: T;
+                                      y?: T;
+                                      zoom?: T;
+                                    };
+                                derivative?: T;
+                                state?: T;
+                                fingerprint?: T;
+                                sourceVersion?: T;
+                                lastGeneratedAt?: T;
+                                lastError?: T;
+                              };
+                        };
+                  };
               direction?: T;
               id?: T;
               blockName?: T;
@@ -995,6 +1134,16 @@ export interface MainNavigationSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

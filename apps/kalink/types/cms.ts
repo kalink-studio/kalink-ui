@@ -1,3 +1,4 @@
+import type { ImageTransformFieldValue } from '@kalink-ui/canopy';
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 
 export type Tint =
@@ -55,7 +56,7 @@ export type FiftyFiftyBlock = AnchorFields & {
   title: string;
   body?: RichTextContent;
   backgroundTint: Tint;
-  image?: Media | string | null;
+  image?: ImageTransformFieldValue | Media | string | null;
   direction: 'start' | 'end';
 };
 

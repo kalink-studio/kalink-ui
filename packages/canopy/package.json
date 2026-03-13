@@ -10,35 +10,55 @@
     "type": "git",
     "url": "https://github.com/kalink-studio/kalink-ui"
   },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
-    "./*": "./dist/*"
+    "./client": {
+      "types": "./dist/exports/client.d.ts",
+      "import": "./dist/exports/client.js",
+      "default": "./dist/exports/client.js"
+    }
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "tsc -b --watch --preserveWatchOutput",
-    "build": "tsc -b",
-    "prepare": "pnpm run build",
+    "dev": "pnpm run build:assets && tsc -b --watch --preserveWatchOutput",
+    "build": "pnpm run build:tsc && pnpm run build:assets",
+    "rebuild": "pnpm run clean && pnpm run build",
+    "build:assets": "node ./scripts/copy-css-assets.mjs",
+    "build:tsc": "tsc -b",
+    "clean": "node ./scripts/clean-dist.mjs",
+    "prepare": "pnpm run rebuild",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "pnpm lint --fix",
+    "test": "vitest run --project=unit",
+    "test:browser": "vitest run --project=browser",
+    "test:watch": "vitest --project=unit",
     "tsc": "tsc -b"
   },
   "devDependencies": {
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
-    "@payloadcms/next": "^3.69.0",
-    "@payloadcms/richtext-lexical": "^3.69.0",
-    "@payloadcms/ui": "^3.69.0",
+    "@payloadcms/next": "^3.79.0",
+    "@payloadcms/richtext-lexical": "^3.79.0",
+    "@payloadcms/ui": "^3.79.0",
     "next": "15.5.9",
     "@types/node": "^24.6.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "@testing-library/react": "^16.3.0",
+    "@vitest/browser": "^4.0.16",
+    "@vitest/browser-playwright": "^4.0.16",
+    "@vitest/coverage-v8": "^4.0.16",
     "eslint": "^9.39.2",
-    "payload": "^3.69.0",
+    "payload": "^3.79.0",
+    "playwright": "^1.57.0",
     "react": "^19.2.3",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
@@ -53,6 +73,9 @@
     "react-dom": "^19.0.0",
     "typescript": "^5.8.2"
   },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   }

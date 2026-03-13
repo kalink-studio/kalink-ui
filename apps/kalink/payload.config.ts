@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { slugPlugin } from '@kalink-ui/canopy';
+import { imageTransformPlugin, slugPlugin } from '@kalink-ui/canopy';
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
@@ -11,6 +11,7 @@ import sharp from 'sharp';
 
 import { CourseSessions } from './collections/CourseSessions';
 import { Media } from './collections/Media';
+import { MediaDerivatives } from './collections/MediaDerivatives';
 import { Pages } from './collections/Pages';
 import { People } from './collections/People';
 import { ServiceDescriptions } from './collections/ServiceDescriptions';
@@ -21,6 +22,12 @@ import { MainNavigation } from './globals/MainNavigation';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+const serverURL =
+  process.env.PAYLOAD_SERVER_URL ??
+  process.env.NEXT_PUBLIC_SERVER_URL ??
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
+  `http://localhost:${process.env.PORT ?? '3000'}`;
 
 export default buildConfig({
   admin: {
@@ -32,6 +39,7 @@ export default buildConfig({
   collections: [
     Users,
     Media,
+    MediaDerivatives,
     Pages,
     Services,
     ServiceDescriptions,
@@ -42,6 +50,7 @@ export default buildConfig({
   globals: [MainNavigation],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
+  serverURL,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -55,6 +64,10 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
+    imageTransformPlugin({
+      defaultSourceRelationTo: 'media',
+      derivativeCollectionSlug: 'mediaDerivatives',
+    }),
     slugPlugin({
       collections: [
         {

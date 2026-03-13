@@ -6,15 +6,20 @@ import {
   TextInput,
   useField,
 } from '@payloadcms/ui';
-import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
-import { formatSlug } from './formatSlug';
+import { formatSlug, formatSlugLive } from './format-slug.js';
+import styles from './slug-field.module.css';
 
-import type { SlugAdminCustom } from './types';
+import type { SlugAdminCustom } from './types.js';
 import type { FieldType } from '@payloadcms/ui';
 import type { TextFieldClientProps } from 'payload';
-
-const baseClass = 'slug-field';
 
 interface SlugFieldProps extends TextFieldClientProps {
   readonly field: TextFieldClientProps['field'] & {
@@ -47,7 +52,6 @@ export const SlugField: React.FC<SlugFieldProps> = (props) => {
       localized,
       required,
     },
-    inputRef,
     onKeyDown,
     path: pathFromProps,
     readOnly,
@@ -96,23 +100,41 @@ export const SlugField: React.FC<SlugFieldProps> = (props) => {
     [normalizedSource],
   );
 
+  const localInputRef = useRef<HTMLInputElement>(
+    null,
+  ) as React.RefObject<HTMLInputElement>;
+
+  useEffect(() => {
+    const element = localInputRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const onBlur = () => {
+      if (!manualOverride) {
+        return;
+      }
+
+      const canonical = formatSlug(element.value);
+
+      if (canonical !== element.value) {
+        setValue(canonical);
+      }
+    };
+
+    element.addEventListener('blur', onBlur);
+
+    return () => {
+      element.removeEventListener('blur', onBlur);
+    };
+  }, [manualOverride, setValue]);
+
   useEffect(() => {
     if (!manualOverride && slugValue !== formattedTitleSlug) {
       setValue(formattedTitleSlug);
     }
   }, [formattedTitleSlug, manualOverride, setValue, slugValue]);
-
-  useEffect(() => {
-    if (!manualOverride) {
-      return;
-    }
-
-    const formattedOverride = formatSlug(slugValue);
-
-    if (formattedOverride !== slugValue) {
-      setValue(formattedOverride);
-    }
-  }, [manualOverride, setValue, slugValue]);
 
   const handleSlugChange = useCallback<
     React.ChangeEventHandler<HTMLInputElement>
@@ -122,7 +144,7 @@ export const SlugField: React.FC<SlugFieldProps> = (props) => {
         return;
       }
 
-      const nextValue = formatSlug(event.target.value);
+      const nextValue = formatSlugLive(event.target.value);
 
       setValue(nextValue);
     },
@@ -145,20 +167,16 @@ export const SlugField: React.FC<SlugFieldProps> = (props) => {
   );
 
   const classes = useMemo(
-    () => [baseClass, className].filter(Boolean).join(' '),
+    () => [className].filter(Boolean).join(' '),
     [className],
   );
 
   const afterInput = useMemo(
     () => (
       <Fragment>
-        <div
-          className={`${baseClass}__manual-toggle`}
-          style={{ marginTop: '0.75rem' }}
-        >
+        <div className={styles.manualToggle}>
           <CheckboxInput
             checked={manualOverride}
-            className={`${baseClass}__manual-toggle-input`}
             label={overrideLabel}
             onToggle={handleOverrideToggle}
             readOnly={disabled || readOnly}
@@ -196,7 +214,7 @@ export const SlugField: React.FC<SlugFieldProps> = (props) => {
       htmlAttributes={{
         autoComplete: autoComplete ?? undefined,
       }}
-      inputRef={inputRef}
+      inputRef={localInputRef}
       Label={Label}
       label={label}
       localized={localized}

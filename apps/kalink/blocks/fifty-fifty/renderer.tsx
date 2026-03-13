@@ -19,7 +19,7 @@ interface FiftyFiftyProps {
 }
 
 export function FiftyFiftySection({ block }: FiftyFiftyProps) {
-  const media = resolveMedia(block.image);
+  const media = resolveMedia(block.image, 'landscape');
   const tint = surfaceTint[block.backgroundTint];
 
   return (
