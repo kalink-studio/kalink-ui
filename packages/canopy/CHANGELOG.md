@@ -1,5 +1,11 @@
 # @kalink-ui/canopy
 
+## 1.0.0-beta.1
+
+### Patch Changes
+
+- 2f3ddc3: Switch Canopy to NodeNext module resolution and emit fully specified `.js` relative imports so direct Node ESM consumers like Payload CLI can load the package without resolution errors.
+
 ## 1.0.0-beta.0
 
 ### Major Changes
