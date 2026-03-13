@@ -6,6 +6,26 @@ import { createImageTransformField } from './create-image-transform-field.js';
 
 import type { ImageTransformFieldValue } from './types.js';
 
+interface DbNamedFieldLike {
+  readonly dbName?: string;
+  readonly enumName?: string;
+  readonly fields?: readonly DbNamedFieldLike[];
+  readonly name?: string;
+}
+
+const getFieldByName = (
+  fields: readonly DbNamedFieldLike[],
+  name: string,
+): DbNamedFieldLike => {
+  const field = fields.find((candidate) => candidate.name === name);
+
+  if (!field) {
+    throw new Error(`Field "${name}" not found.`);
+  }
+
+  return field;
+};
+
 const source = {
   id: 1,
   relationTo: 'media',
@@ -301,6 +321,143 @@ describe('createImageTransformField beforeChange hook', () => {
     expect(
       (result as ImageTransformFieldValue | undefined)?.presets,
     ).toBeUndefined();
+  });
+});
+
+describe('createImageTransformField db naming', () => {
+  it('adds short deterministic db names without changing public names', () => {
+    const field = createImageTransformField({
+      name: 'heroImage',
+      presets: [
+        { aspectRatio: '16:9', key: 'landscape' },
+        { aspectRatio: '1:1', key: 'marketing_banner_super_long' },
+      ],
+      relationTo: 'media',
+    }) as unknown as DbNamedFieldLike;
+
+    expect(field.name).toBe('heroImage');
+    expect(field.dbName).toMatch(/^it_[a-z0-9]+_[a-z0-9]{5}$/);
+    expect(field.dbName?.length).toBeLessThanOrEqual(18);
+
+    const sourceField = getFieldByName(field.fields ?? [], 'source');
+    const presetsField = getFieldByName(field.fields ?? [], 'presets');
+    const landscapeField = getFieldByName(
+      presetsField.fields ?? [],
+      'landscape',
+    );
+    const longPresetField = getFieldByName(
+      presetsField.fields ?? [],
+      'marketing_banner_super_long',
+    );
+    const cropField = getFieldByName(landscapeField.fields ?? [], 'crop');
+    const derivativeField = getFieldByName(
+      landscapeField.fields ?? [],
+      'derivative',
+    );
+    const stateField = getFieldByName(landscapeField.fields ?? [], 'state');
+    const fingerprintField = getFieldByName(
+      landscapeField.fields ?? [],
+      'fingerprint',
+    );
+    const sourceVersionField = getFieldByName(
+      landscapeField.fields ?? [],
+      'sourceVersion',
+    );
+    const lastGeneratedAtField = getFieldByName(
+      landscapeField.fields ?? [],
+      'lastGeneratedAt',
+    );
+    const lastErrorField = getFieldByName(
+      landscapeField.fields ?? [],
+      'lastError',
+    );
+    const zoomField = getFieldByName(cropField.fields ?? [], 'zoom');
+
+    expect(sourceField.dbName).toBe('src');
+    expect(presetsField.dbName).toBe('pr');
+    expect(landscapeField.dbName).toMatch(/^p_[a-z0-9]+_[a-z0-9]{5}$/);
+    expect(longPresetField.dbName).toMatch(/^p_[a-z0-9]+_[a-z0-9]{5}$/);
+    expect(landscapeField.dbName).not.toBe(longPresetField.dbName);
+    expect(cropField.dbName).toBe('cr');
+    expect(derivativeField.dbName).toBe('drv');
+    expect(stateField.dbName).toBe('st');
+    expect(stateField.enumName).toMatch(/^itst_[a-z0-9]+_[a-z0-9]{5}$/);
+    expect(fingerprintField.dbName).toBe('fp');
+    expect(sourceVersionField.dbName).toBe('sv');
+    expect(lastGeneratedAtField.dbName).toBe('lga');
+    expect(lastErrorField.dbName).toBe('le');
+    expect(zoomField.dbName).toBe('zm');
+  });
+
+  it('uses the caller provided root db name override', () => {
+    const field = createImageTransformField({
+      dbName: 'img',
+      name: 'heroImage',
+      presets: [{ aspectRatio: '16:9', key: 'landscape' }],
+      relationTo: 'media',
+    }) as unknown as DbNamedFieldLike;
+
+    expect(field.name).toBe('heroImage');
+    expect(field.dbName).toBe('img');
+  });
+
+  it('keeps deep nested image transform db names compact for versioned schemas', () => {
+    const screenshotField = createImageTransformField({
+      name: 'screenshot',
+      presets: [
+        { aspectRatio: '1:1', key: '1_1' },
+        { aspectRatio: '2:3', key: '2_3' },
+      ],
+      relationTo: 'media',
+    }) as unknown as DbNamedFieldLike;
+
+    const pagesCollection = {
+      fields: [
+        {
+          blocks: [
+            {
+              fields: [
+                {
+                  fields: [screenshotField],
+                  name: 'items',
+                  type: 'array',
+                },
+              ],
+              slug: 'linkList',
+            },
+          ],
+          name: 'layout',
+          type: 'blocks',
+        },
+      ],
+      slug: 'pages',
+      versions: { drafts: true },
+    } as const;
+
+    const screenshot = pagesCollection.fields[0].blocks[0].fields[0]
+      .fields[0] as DbNamedFieldLike;
+    const presetsField = getFieldByName(screenshot.fields ?? [], 'presets');
+    const oneToOneField = getFieldByName(presetsField.fields ?? [], '1_1');
+    const twoToThreeField = getFieldByName(presetsField.fields ?? [], '2_3');
+    const oneToOneStateField = getFieldByName(
+      oneToOneField.fields ?? [],
+      'state',
+    );
+    const twoToThreeStateField = getFieldByName(
+      twoToThreeField.fields ?? [],
+      'state',
+    );
+
+    expect(screenshot.name).toBe('screenshot');
+    expect(screenshot.dbName?.length).toBeLessThanOrEqual(18);
+    expect(presetsField.dbName).toBe('pr');
+    expect(oneToOneField.dbName?.length).toBeLessThanOrEqual(18);
+    expect(twoToThreeField.dbName?.length).toBeLessThanOrEqual(18);
+    expect(oneToOneStateField.dbName).toBe('st');
+    expect(twoToThreeStateField.dbName).toBe('st');
+    expect(oneToOneStateField.enumName?.length).toBeLessThanOrEqual(24);
+    expect(twoToThreeStateField.enumName?.length).toBeLessThanOrEqual(24);
+    expect(oneToOneStateField.enumName).not.toBe(twoToThreeStateField.enumName);
   });
 });
 
