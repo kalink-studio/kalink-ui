@@ -43,7 +43,92 @@ const imageTransformStates = [
   'failed',
 ] as const;
 
-type ImageTransformField = GroupField;
+interface DbNamedField {
+  readonly dbName?: string;
+  readonly enumName?: string;
+}
+
+type ImageTransformField = GroupField & DbNamedField;
+type DbNamedDateField = DateField & DbNamedField;
+type DbNamedGroupField = GroupField & DbNamedField;
+type DbNamedNumberField = NumberField & DbNamedField;
+type DbNamedRelationshipField = RelationshipField & DbNamedField;
+type DbNamedSelectField = SelectField & DbNamedField;
+type DbNamedTextField = TextField & DbNamedField;
+type DbNamedTextareaField = TextareaField & DbNamedField;
+type DbNamedUploadField = UploadField & DbNamedField;
+
+const sanitizeIdentifierSegment = (input: string): string => {
+  const sanitized = input
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_+|_+$/g, '');
+
+  return sanitized || 'x';
+};
+
+const createStableSuffix = (input: string, length = 5): string => {
+  let hash = 2166136261;
+
+  for (const character of input) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return (hash >>> 0).toString(36).slice(0, length).padStart(length, '0');
+};
+
+const compactDbIdentifier = (
+  input: string,
+  options: {
+    readonly bodyLength?: number;
+    readonly maxLength?: number;
+    readonly prefix: string;
+    readonly suffixLength?: number;
+  },
+): string => {
+  const { bodyLength = 8, maxLength = 24, prefix, suffixLength = 5 } = options;
+  const sanitizedPrefix = sanitizeIdentifierSegment(prefix);
+  const suffix = createStableSuffix(input, suffixLength);
+  const availableBodyLength = Math.max(
+    1,
+    Math.min(
+      bodyLength,
+      maxLength - sanitizedPrefix.length - suffix.length - 2,
+    ),
+  );
+  const body = sanitizeIdentifierSegment(input)
+    .replace(/_/g, '')
+    .slice(0, availableBodyLength);
+
+  return `${sanitizedPrefix}_${body || 'x'}_${suffix}`.slice(0, maxLength);
+};
+
+const createRootDbName = (name: string): string =>
+  compactDbIdentifier(name, {
+    bodyLength: 8,
+    maxLength: 18,
+    prefix: 'it',
+    suffixLength: 5,
+  });
+
+const createPresetDbName = (key: string): string =>
+  compactDbIdentifier(key, {
+    bodyLength: 8,
+    maxLength: 18,
+    prefix: 'p',
+    suffixLength: 5,
+  });
+
+const createStateEnumName = (scope: string): string =>
+  compactDbIdentifier(scope, {
+    bodyLength: 10,
+    maxLength: 24,
+    prefix: 'itst',
+    suffixLength: 5,
+  });
 
 const isObject = <T extends object>(value: unknown): value is T =>
   typeof value === 'object' && value !== null;
@@ -118,19 +203,23 @@ const getRelationMetadataString = (
 
 const createNumberField = (
   name: 'x' | 'y' | 'zoom',
+  dbName: 'x' | 'y' | 'zm',
   defaultValue: number,
-): NumberField => ({
+): DbNamedNumberField => ({
   name,
   type: 'number',
+  dbName,
   admin: {
     hidden: true,
   },
   defaultValue,
 });
 
-const createStateField = (): SelectField => ({
+const createStateField = (enumName: string): DbNamedSelectField => ({
   name: 'state',
   type: 'select',
+  dbName: 'st',
+  enumName,
   admin: {
     hidden: true,
   },
@@ -140,33 +229,37 @@ const createStateField = (): SelectField => ({
   })),
 });
 
-const createFingerprintField = (): TextField => ({
+const createFingerprintField = (): DbNamedTextField => ({
   name: 'fingerprint',
   type: 'text',
+  dbName: 'fp',
   admin: {
     hidden: true,
   },
 });
 
-const createLastGeneratedAtField = (): DateField => ({
+const createLastGeneratedAtField = (): DbNamedDateField => ({
   name: 'lastGeneratedAt',
   type: 'date',
+  dbName: 'lga',
   admin: {
     hidden: true,
   },
 });
 
-const createSourceVersionField = (): TextField => ({
+const createSourceVersionField = (): DbNamedTextField => ({
   name: 'sourceVersion',
   type: 'text',
+  dbName: 'sv',
   admin: {
     hidden: true,
   },
 });
 
-const createLastErrorField = (): TextareaField => ({
+const createLastErrorField = (): DbNamedTextareaField => ({
   name: 'lastError',
   type: 'textarea',
+  dbName: 'le',
   admin: {
     hidden: true,
   },
@@ -174,10 +267,12 @@ const createLastErrorField = (): TextareaField => ({
 
 const createPresetFields = (
   preset: ImageTransformPresetDefinition,
-): GroupField => ({
+  rootDbName: string,
+): DbNamedGroupField => ({
   name: preset.key,
   label: preset.label ?? preset.key,
   type: 'group',
+  dbName: createPresetDbName(preset.key),
   admin: {
     hidden: true,
   },
@@ -185,24 +280,28 @@ const createPresetFields = (
     {
       name: 'crop',
       type: 'group',
+      dbName: 'cr',
       admin: {
         hidden: true,
       },
       fields: [
-        createNumberField('x', 50),
-        createNumberField('y', 50),
-        createNumberField('zoom', 1),
+        createNumberField('x', 'x', 50),
+        createNumberField('y', 'y', 50),
+        createNumberField('zoom', 'zm', 1),
       ],
-    },
+    } as DbNamedGroupField,
     {
       name: 'derivative',
       type: 'relationship',
+      dbName: 'drv',
       relationTo: IMAGE_TRANSFORM_PENDING_DERIVATIVE_RELATION,
       admin: {
         hidden: true,
       },
-    } satisfies RelationshipField,
-    createStateField(),
+    } as DbNamedRelationshipField,
+    createStateField(
+      createStateEnumName(`${rootDbName}_${createPresetDbName(preset.key)}`),
+    ),
     createFingerprintField(),
     createSourceVersionField(),
     createLastGeneratedAtField(),
@@ -404,6 +503,7 @@ export const createImageTransformField = (
   options: CreateImageTransformFieldOptions,
 ): ImageTransformField => {
   const {
+    dbName,
     label = 'Image',
     name = 'image',
     presets: inputPresets,
@@ -412,6 +512,7 @@ export const createImageTransformField = (
   } = options;
 
   const presets = validatePresets(inputPresets);
+  const rootDbName = dbName ?? createRootDbName(name);
 
   const customConfig: ImageTransformFieldCustom = {
     presets,
@@ -421,6 +522,7 @@ export const createImageTransformField = (
 
   return {
     name,
+    dbName: rootDbName,
     label,
     type: 'group',
     hooks: {
@@ -443,6 +545,7 @@ export const createImageTransformField = (
     fields: [
       {
         name: 'source',
+        dbName: 'src',
         label: 'Source image',
         type: 'upload',
         relationTo: relationTo ?? IMAGE_TRANSFORM_PENDING_SOURCE_RELATION,
@@ -455,15 +558,16 @@ export const createImageTransformField = (
         admin: {
           hidden: true,
         },
-      } satisfies UploadField,
+      } as DbNamedUploadField,
       {
         name: 'presets',
         type: 'group',
+        dbName: 'pr',
         admin: {
           hidden: true,
         },
-        fields: presets.map(createPresetFields),
-      },
+        fields: presets.map((preset) => createPresetFields(preset, rootDbName)),
+      } as DbNamedGroupField,
     ],
   };
 };

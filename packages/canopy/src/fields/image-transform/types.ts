@@ -68,6 +68,7 @@ export interface ImageTransformFieldValue {
 }
 
 export interface CreateImageTransformFieldOptions {
+  readonly dbName?: string;
   readonly label?: string;
   readonly name?: string;
   readonly presets: ImageTransformPresetDefinition[];
