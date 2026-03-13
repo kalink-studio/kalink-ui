@@ -1,4 +1,4 @@
-import { DrawerPreview as BaseDrawer } from '@base-ui/react/drawer';
+import { Drawer as BaseDrawer } from '@base-ui/react/drawer';
 
 export { Provider } from './provider';
 export { IndentBackground } from './indent-background';
