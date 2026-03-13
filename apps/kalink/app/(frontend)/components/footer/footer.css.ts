@@ -10,12 +10,12 @@ export const footer = recipe({
   variants: {
     tint: {
       primary: {
-        backgroundColor: vars.system.color.primaryContainer,
         color: vars.system.color.onPrimaryContainer,
+        backgroundColor: vars.system.color.primaryContainer,
       },
       secondary: {
-        backgroundColor: vars.system.color.secondaryContainer,
         color: vars.system.color.onSecondaryContainer,
+        backgroundColor: vars.system.color.secondaryContainer,
       },
     },
   },

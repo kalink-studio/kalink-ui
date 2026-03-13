@@ -5,53 +5,66 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
 import {
-  createSpacingVarStyles,
+  createResponsiveVariants,
+  defaultMedia,
+  mapContractVars,
+  sys,
+} from '../../styles';
+import { layouts } from '../../styles/layers.css';
+import {
   gridAlignContentStyles,
   gridAlignItemsStyles,
   gridJustifyContentStyles,
   gridJustifyItemsStyles,
-} from '../layout-maps';
+} from '../layout/shared/maps';
 
 export const gridVars = createThemeContract({
-  spacing: {
-    gap: null,
-  },
   columnSpacing: {
-    gap: null,
-  },
-  rowSpacing: {
-    gap: null,
+    rootColumnGap: null,
   },
   layout: {
-    minCellSize: null,
+    rootMinCellSize: null,
+  },
+  rowSpacing: {
+    rootRowGap: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const gridSpacingDefaults = assignVars(gridVars.spacing, {
-  gap: sys.spacing[0],
+const gridDefaults = assignVars(gridVars, {
+  columnSpacing: {
+    rootColumnGap: gridVars.spacing.rootGap,
+  },
+  layout: {
+    rootMinCellSize: `calc(${sys.layout.measure} / 3)`,
+  },
+  rowSpacing: {
+    rootRowGap: gridVars.spacing.rootGap,
+  },
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
-const gridLayoutDefaults = assignVars(gridVars.layout, {
-  minCellSize: '250px',
-});
-
-// Shared variant style maps so we can reuse them for responsive overrides
-export const gridSpacingStyles = createSpacingVarStyles(
+export const gridSpacingStyles = mapContractVars(
+  sys.spacing,
   gridVars.spacing,
-  'gap',
+  layouts,
 );
 
-export const gridColumnSpacingStyles = createSpacingVarStyles(
+export const gridColumnSpacingStyles = mapContractVars(
+  sys.spacing,
   gridVars.columnSpacing,
-  'columnGap',
+  layouts,
 );
 
-export const gridRowSpacingStyles = createSpacingVarStyles(
+export const gridRowSpacingStyles = mapContractVars(
+  sys.spacing,
   gridVars.rowSpacing,
-  'rowGap',
+  layouts,
 );
 
 export {
@@ -65,12 +78,12 @@ const columnCountValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const;
 type ColumnCount = (typeof columnCountValues)[number];
 
 const gridColumnsStyles = Object.fromEntries(
-  columnCountValues.map((n) => [
-    n,
+  columnCountValues.map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridTemplateColumns: `repeat(${n}, 1fr)`,
+        [layouts]: {
+          gridTemplateColumns: `repeat(${count}, 1fr)`,
         },
       },
     },
@@ -83,15 +96,15 @@ const gridColumnsStyles = Object.fromEntries(
 export const autoLayoutStyles = {
   fill: {
     '@layer': {
-      [components]: {
-        gridTemplateColumns: `repeat(auto-fill, minmax(min(${gridVars.layout.minCellSize}, 100%), 1fr))`,
+      [layouts]: {
+        gridTemplateColumns: `repeat(auto-fill, minmax(min(${gridVars.layout.rootMinCellSize}, 100%), 1fr))`,
       },
     },
   },
   fit: {
     '@layer': {
-      [components]: {
-        gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridVars.layout.minCellSize}, 100%), 1fr))`,
+      [layouts]: {
+        gridTemplateColumns: `repeat(auto-fit, minmax(min(${gridVars.layout.rootMinCellSize}, 100%), 1fr))`,
       },
     },
   },
@@ -100,82 +113,32 @@ export const autoLayoutStyles = {
 export const gridRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
-        display: 'grid',
-        gap: gridVars.spacing.gap,
+      [layouts]: {
+        vars: gridDefaults,
 
-        vars: {
-          ...gridSpacingDefaults,
-          ...gridLayoutDefaults,
-        },
+        display: 'grid',
+
+        columnGap: gridVars.columnSpacing.rootColumnGap,
+        gap: gridVars.spacing.rootGap,
+        rowGap: gridVars.rowSpacing.rootRowGap,
       },
     },
   },
 
   variants: {
-    /**
-     * The spacing between the grid cell
-     */
     spacing: gridSpacingStyles,
-
-    /**
-     * The spacing between columns only
-     */
     columnSpacing: gridColumnSpacingStyles,
-
-    /**
-     * The spacing between rows only
-     */
     rowSpacing: gridRowSpacingStyles,
-
-    /**
-     * Force a fixed number of columns
-     */
     columns: gridColumnsStyles,
-
-    /**
-     * Whether to use auto-fill (default) or auto-fit
-     */
     autoLayout: autoLayoutStyles,
-
-    /**
-     * Grid item alignment along inline axis
-     */
     justifyItems: gridJustifyItemsStyles,
-
-    /**
-     * Grid item alignment along block axis
-     */
     alignItems: gridAlignItemsStyles,
-
-    /**
-     * Content alignment within the grid inline axis
-     */
     justifyContent: gridJustifyContentStyles,
-
-    /**
-     * Content alignment within the grid block axis
-     */
     alignContent: gridAlignContentStyles,
   },
 });
 
 export type GridVariants = NonNullable<RecipeVariants<typeof gridRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: gridSpacingStyles,
-  media: defaultMedia,
-});
-
-export const columnSpacingAt = createResponsiveVariants({
-  styles: gridColumnSpacingStyles,
-  media: defaultMedia,
-});
-
-export const rowSpacingAt = createResponsiveVariants({
-  styles: gridRowSpacingStyles,
-  media: defaultMedia,
-});
 
 export const columnsAt = createResponsiveVariants({
   styles: gridColumnsStyles as Record<ColumnCount, StyleRule | StyleRule[]>,

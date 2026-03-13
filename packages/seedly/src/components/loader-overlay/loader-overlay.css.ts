@@ -1,8 +1,19 @@
-import { assignVars, createThemeContract } from '@vanilla-extract/css';
+import {
+  assignVars,
+  createThemeContract,
+  keyframes,
+  style,
+} from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createToneStyles, sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { organisms } from '../../styles/layers.css';
+import { createBackdropSurfaceStyles } from '../_foundation';
+
+const fadeIn = keyframes({
+  '0%': { opacity: 0, transform: 'scale(0.95)' },
+  '100%': { opacity: 1, transform: 'scale(1)' },
+});
 
 const loaderOverlayToneVars = createThemeContract({
   base: null,
@@ -10,53 +21,67 @@ const loaderOverlayToneVars = createThemeContract({
 });
 
 const loaderOverlayToneDefaults = assignVars(loaderOverlayToneVars, {
-  base: sys.surface.foreground,
-  onBase: sys.surface.foreground,
+  base: sys.color.content.base,
+  onBase: sys.color.content.base,
 });
-const loaderOverlayToneStyles = createToneStyles(loaderOverlayToneVars);
+
+const loaderOverlayToneStyles = createToneStyles(
+  loaderOverlayToneVars,
+  organisms,
+);
+
+const absoluteBackdrop = style({
+  '@layer': {
+    [organisms]: createBackdropSurfaceStyles({
+      position: 'absolute',
+      zIndex: 1000,
+
+      backgroundColor: `color-mix(in srgb, ${loaderOverlayToneVars.base} 8%, transparent)`,
+      backdropFilter: 'blur(2px)',
+    }),
+  },
+});
 
 export const loaderOverlayRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [organisms]: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-
         height: '100%',
         width: '100%',
-
         zIndex: 1000,
-
-        backgroundColor: `color-mix(in srgb, ${loaderOverlayToneVars.base} 5%, transparent)`,
-
+        backgroundColor: `color-mix(in srgb, ${loaderOverlayToneVars.base} 8%, transparent)`,
+        backdropFilter: 'blur(2px)',
+        WebkitBackdropFilter: 'blur(2px)',
+        animationName: fadeIn,
+        animationDuration: sys.motion.duration.medium[1],
+        animationTimingFunction: sys.motion.easing.decelerate.standard,
+        animationFillMode: 'both',
+        willChange: 'transform, opacity',
+        '@media': {
+          '(prefers-reduced-motion: reduce)': {
+            animation: 'none',
+          },
+        },
         vars: {
           ...loaderOverlayToneDefaults,
         },
       },
     },
   },
-
   variants: {
     position: {
-      absolute: {
-        '@layer': {
-          [components]: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          },
-        },
-      },
+      absolute: absoluteBackdrop,
       relative: {
         '@layer': {
-          [components]: {
+          [organisms]: {
             position: 'relative',
           },
         },
       },
     },
-
     tone: loaderOverlayToneStyles,
   },
 });

@@ -10,11 +10,11 @@ export const anchorsContainer = style({
 });
 
 export const anchorLink = style({
-  textDecoration: 'none',
-  color: vars.system.color.onSurface,
-  fontSize: vars.ref.fontSize.sm,
   paddingInline: vars.ref.spacing.md,
   paddingBlock: vars.ref.spacing.xs,
+  fontSize: vars.ref.fontSize.sm,
+  textDecoration: 'none',
+  color: vars.system.color.onSurface,
   borderRadius: vars.ref.radius.rounded,
   backgroundColor: vars.system.color.surfaceContainer,
 });

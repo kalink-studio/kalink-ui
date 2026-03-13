@@ -46,10 +46,10 @@ export const mediaBannerText = recipe({
 
 export const mediaBannerFigure = recipe({
   base: {
+    flex: 1,
     width: '100%',
+    overflow: 'hidden',
     position: 'relative',
     borderRadius: vars.ref.radius.rounded,
-    overflow: 'hidden',
-    flex: 1,
   },
 });

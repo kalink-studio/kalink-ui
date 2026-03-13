@@ -2,7 +2,7 @@
 .changeset
 apps/**/(payload)
 apps/**/.next
+packages/**/.cache
 apps/**/payload-types.ts
 apps/**/payload-generated-schema.ts
 apps/**/migrations
-

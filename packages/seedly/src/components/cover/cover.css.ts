@@ -5,73 +5,56 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import {
-  createResponsiveVariants,
-  defaultMedia,
-  mapContractVars,
-  sys,
-} from '../../styles';
-import { components } from '../../styles/layers.css';
+import { mapContractVars, sys } from '../../styles';
+import { layouts } from '../../styles/layers.css';
 
 export const coverVars = createThemeContract({
-  spacing: {
-    block: null,
-  },
   layout: {
-    minBlockSize: null,
+    rootMinBlockSize: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const coverSpacingDefaults = assignVars(coverVars.spacing, {
-  block: sys.spacing[0],
-});
-
-const coverLayoutDefaults = assignVars(coverVars.layout, {
-  minBlockSize: '100vh',
-});
-
-// Shared variant style maps so we can reuse them for responsive overrides
-export const coverSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(coverVars.spacing, {
-          block: sys.spacing[key],
-        }),
-      },
-    },
+const coverDefaults = assignVars(coverVars, {
+  layout: {
+    rootMinBlockSize: '100vh',
   },
-}));
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
+});
+
+export const coverSpacingStyles = mapContractVars(
+  sys.spacing,
+  coverVars.spacing,
+  layouts,
+);
 
 export const coverRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
+        vars: coverDefaults,
+
         display: 'flex',
         flexDirection: 'column',
 
-        minBlockSize: coverVars.layout.minBlockSize,
-
-        vars: {
-          ...coverSpacingDefaults,
-          ...coverLayoutDefaults,
-        },
+        minBlockSize: coverVars.layout.rootMinBlockSize,
       },
     },
   },
 
   variants: {
-    /**
-     * The spacing between items
-     */
     spacing: coverSpacingStyles,
   },
 });
 
 globalStyle(`${coverRecipe.classNames.base} > *`, {
   '@layer': {
-    [components]: {
-      marginBlock: coverVars.spacing.block,
+    [layouts]: {
+      marginBlock: coverVars.spacing.rootGap,
     },
   },
 });
@@ -80,7 +63,7 @@ globalStyle(
   `${coverRecipe.classNames.base} > :first-child:not([data-cover-center])`,
   {
     '@layer': {
-      [components]: {
+      [layouts]: {
         marginBlockStart: 0,
       },
     },
@@ -91,7 +74,7 @@ globalStyle(
   `${coverRecipe.classNames.base} > :last-child:not([data-cover-center])`,
   {
     '@layer': {
-      [components]: {
+      [layouts]: {
         marginBlockEnd: 0,
       },
     },
@@ -100,15 +83,10 @@ globalStyle(
 
 globalStyle(`${coverRecipe.classNames.base} > [data-cover-center]`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       marginBlock: 'auto',
     },
   },
 });
 
 export type CoverVariants = NonNullable<RecipeVariants<typeof coverRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: coverSpacingStyles,
-  media: defaultMedia,
-});

@@ -40,7 +40,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Chromium
-        run: pnpm --filter @kalink-ui/seedly exec playwright install chromium --with-deps
+        run: pnpm --filter @kalink-ui/seedly-react exec playwright install chromium --with-deps
 
       - name: Run format check
         run: pnpm format
@@ -48,8 +48,8 @@ jobs:
       - name: Run Turborepo tasks
         run: pnpm turbo run lint test tsc
 
-      - name: Run Seedly Storybook tests
-        run: pnpm --filter @kalink-ui/seedly test-storybook
+      - name: Run Seedly React Storybook tests with coverage
+        run: pnpm --filter @kalink-ui/seedly-react test-storybook:coverage
 
       - name: Validate Changesets
         run: pnpm changeset status --since=origin/main

@@ -5,12 +5,19 @@
     "overrides": {
       "@types/react": "19.2.7",
       "@types/react-dom": "19.2.3"
+    },
+    "patchedDependencies": {
+      "@storybook/addon-vitest@10.2.16": "patches/@storybook__addon-vitest@10.2.16.patch"
     }
   },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "dev:seedly": "turbo run dev --filter=@kalink-ui/seedly...",
+    "dev:seedly-react": "turbo run storybook:dev --filter=@kalink-ui/seedly-react --",
+    "build-storybook:seedly-react": "turbo run storybook:build --filter=@kalink-ui/seedly-react --",
+    "test-storybook:seedly-react": "turbo run storybook:test --filter=@kalink-ui/seedly-react --",
+    "test-storybook:coverage:seedly-react": "turbo run storybook:test:coverage --filter=@kalink-ui/seedly-react --",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "tsc": "turbo tsc",

@@ -6,7 +6,7 @@ import type { NextConfig } from 'next';
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@kalink-ui/seedly'],
+  transpilePackages: ['@kalink-ui/seedly', '@kalink-ui/seedly-react'],
 
   webpack(config) {
     config.module.rules.push({

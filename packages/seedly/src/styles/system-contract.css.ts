@@ -1,5 +1,5 @@
 import { createThemeContract } from '@vanilla-extract/css';
-import { ArrayValues } from 'type-fest';
+import { type ArrayValues } from 'type-fest';
 
 export const typeContract = {
   font: null,
@@ -19,10 +19,24 @@ const typographyVariants = [
 
 const typographySizes = ['large', 'medium', 'small'] as const;
 
-const toneNames = ['neutral', 'primary', 'destructive', 'success'] as const;
+const toneNames = [
+  'neutral',
+  'primary',
+  'secondary',
+  'tertiary',
+  'error',
+] as const;
 
 export type Tone = ArrayValues<typeof toneNames>;
-type ToneOnName = `on${Capitalize<Tone>}`;
+export type ToneOnName = `on${Capitalize<Tone>}`;
+export type ToneContainerName = `${Tone}Container`;
+export type ToneOnContainerName = `on${Capitalize<Tone>}Container`;
+export type ToneKeys =
+  | Tone
+  | ToneOnName
+  | ToneContainerName
+  | ToneOnContainerName;
+export type ToneContract = Record<ToneKeys, null>;
 
 export const sys = createThemeContract({
   layout: {
@@ -30,19 +44,37 @@ export const sys = createThemeContract({
     measure: null,
   },
 
-  surface: {
-    background: null,
-    foreground: null,
+  color: {
+    surface: {
+      dim: null,
+      base: null,
+      bright: null,
+    },
+    container: {
+      low: null,
+      base: null,
+      high: null,
+      top: null,
+    },
+    content: {
+      base: null,
+    },
+    border: {
+      low: null,
+      base: null,
+      high: null,
+    },
+    tone: toneNames.reduce(
+      (acc, tone) => ({
+        ...acc,
+        [tone]: null,
+        [`on${tone[0]?.toUpperCase()}${tone.slice(1)}`]: null,
+        [`${tone}Container`]: null,
+        [`on${tone[0]?.toUpperCase()}${tone.slice(1)}Container`]: null,
+      }),
+      {} as ToneContract,
+    ),
   },
-
-  tone: toneNames.reduce(
-    (acc, tone) => ({
-      ...acc,
-      [tone]: null,
-      [`on${tone[0]?.toUpperCase()}${tone.slice(1)}`]: null,
-    }),
-    {} as Record<Tone | ToneOnName, null>,
-  ),
 
   state: {
     hovered: {
@@ -124,8 +156,8 @@ export const sys = createThemeContract({
     (acc, variant) => ({
       ...acc,
       [variant]: typographySizes.reduce(
-        (acc, size) => ({
-          ...acc,
+        (sizeAcc, size) => ({
+          ...sizeAcc,
           [size]: typeContract,
         }),
         {} as Record<TypographySize, typeof typeContract>,
@@ -165,11 +197,30 @@ export type TypographyVariant = ArrayValues<typeof typographyVariants>;
 export type TypographySize = ArrayValues<typeof typographySizes>;
 
 export type Duration = {
-  [K in keyof typeof sys.motion.duration]: `${K}.${Extract<keyof (typeof sys.motion.duration)[K], string | number>}`;
+  [K in keyof typeof sys.motion.duration]: `${K}.${Extract<
+    keyof (typeof sys.motion.duration)[K],
+    string | number
+  >}`;
+}[keyof typeof sys.motion.duration];
+
+export type DurationValue = {
+  [K in keyof typeof sys.motion.duration]: (typeof sys.motion.duration)[K][Extract<
+    keyof (typeof sys.motion.duration)[K],
+    string | number
+  >];
 }[keyof typeof sys.motion.duration];
 
 export type Easing = {
   [K in keyof typeof sys.motion.easing]: (typeof sys.motion.easing)[K] extends string
     ? K
     : `${K}.${Extract<keyof (typeof sys.motion.easing)[K], string | number>}`;
+}[keyof typeof sys.motion.easing];
+
+export type EasingValue = {
+  [K in keyof typeof sys.motion.easing]: (typeof sys.motion.easing)[K] extends string
+    ? (typeof sys.motion.easing)[K]
+    : (typeof sys.motion.easing)[K][Extract<
+        keyof (typeof sys.motion.easing)[K],
+        string | number
+      >];
 }[keyof typeof sys.motion.easing];

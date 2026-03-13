@@ -1,21 +1,25 @@
 import { styleVariants } from '@vanilla-extract/css';
 
 import { base } from './layers.css';
-import { sys, TypographySize, TypographyVariant } from './system-contract.css';
+import {
+  sys,
+  type TypographySize,
+  type TypographyVariant,
+} from './system-contract.css';
 
 export const typography = Object.entries(sys.typography).reduce(
-  (acc, [key, value]) => {
+  (acc, [variant, sizes]) => {
     return {
       ...acc,
-      [key]: styleVariants(value, (variant) => {
+      [variant]: styleVariants(sizes, (typeToken) => {
         return {
           '@layer': {
             [base]: {
-              fontFamily: variant.font,
-              fontWeight: variant.weight,
-              lineHeight: variant.lineHeight,
-              letterSpacing: variant.tracking,
-              fontSize: variant.size,
+              fontFamily: typeToken.font,
+              fontWeight: typeToken.weight,
+              lineHeight: typeToken.lineHeight,
+              letterSpacing: typeToken.tracking,
+              fontSize: typeToken.size,
             },
           },
         };

@@ -1,2 +1,2 @@
-export { MoonLoader, type LoaderProps } from './moon-loader';
-export type { LoaderVariants, MoonLoaderVariants } from './loader.css';
+export * from './loader.css';
+export * from './moon-loader.responsive';

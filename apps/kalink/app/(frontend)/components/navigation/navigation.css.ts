@@ -49,9 +49,9 @@ export const navList = style({
 
 export const navLink = styleVariants({
   default: {
-    color: vars.system.color.onSurface,
     textDecoration: 'none',
     fontWeight: 300,
+    color: vars.system.color.onSurface,
     transition: 'color 150ms ease',
     selectors: {
       '&:hover': {
@@ -60,9 +60,9 @@ export const navLink = styleVariants({
     },
   },
   active: {
-    color: vars.system.color.primary,
     textDecoration: 'none',
     fontWeight: 400,
+    color: vars.system.color.primary,
   },
 });
 
@@ -93,9 +93,9 @@ export const mobileMenuContent = style({
 
 export const mobileMenuItem = style({
   textDecoration: 'none',
-  color: vars.system.color.onSurface,
   fontSize: vars.ref.fontSize.xl,
   fontWeight: 300,
+  color: vars.system.color.onSurface,
 });
 
 export const mobileMenuHeader = style({

@@ -1,7 +1,7 @@
 import { type StyleRule } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 import {
   createResponsiveVariants,
   defaultMedia,
@@ -15,12 +15,12 @@ type OneToThirteen = (typeof oneToThirteen)[number];
 type LineIndex = OneToThirteen | -1;
 
 const colSpanStyles = Object.fromEntries(
-  oneToTwelve.map((n) => [
-    n,
+  oneToTwelve.map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridColumn: `auto / span ${n}`,
+        [layouts]: {
+          gridColumn: `auto / span ${count}`,
         },
       },
     },
@@ -28,12 +28,12 @@ const colSpanStyles = Object.fromEntries(
 ) as Record<OneToTwelve, { '@layer': Record<string, { gridColumn: string }> }>;
 
 const rowSpanStyles = Object.fromEntries(
-  oneToTwelve.map((n) => [
-    n,
+  oneToTwelve.map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridRow: `auto / span ${n}`,
+        [layouts]: {
+          gridRow: `auto / span ${count}`,
         },
       },
     },
@@ -41,12 +41,12 @@ const rowSpanStyles = Object.fromEntries(
 ) as Record<OneToTwelve, { '@layer': Record<string, { gridRow: string }> }>;
 
 const colStartStyles = Object.fromEntries(
-  oneToThirteen.map((n) => [
-    n,
+  oneToThirteen.map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridColumnStart: n,
+        [layouts]: {
+          gridColumnStart: count,
         },
       },
     },
@@ -57,12 +57,12 @@ const colStartStyles = Object.fromEntries(
 >;
 
 const colEndStyles = Object.fromEntries(
-  [...oneToThirteen, -1 as const].map((n) => [
-    n,
+  [...oneToThirteen, -1 as const].map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridColumnEnd: n,
+        [layouts]: {
+          gridColumnEnd: count,
         },
       },
     },
@@ -70,12 +70,12 @@ const colEndStyles = Object.fromEntries(
 ) as Record<LineIndex, { '@layer': Record<string, { gridColumnEnd: number }> }>;
 
 const rowStartStyles = Object.fromEntries(
-  oneToThirteen.map((n) => [
-    n,
+  oneToThirteen.map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridRowStart: n,
+        [layouts]: {
+          gridRowStart: count,
         },
       },
     },
@@ -86,12 +86,12 @@ const rowStartStyles = Object.fromEntries(
 >;
 
 const rowEndStyles = Object.fromEntries(
-  [...oneToThirteen, -1 as const].map((n) => [
-    n,
+  [...oneToThirteen, -1 as const].map((count) => [
+    count,
     {
       '@layer': {
-        [components]: {
-          gridRowEnd: n,
+        [layouts]: {
+          gridRowEnd: count,
         },
       },
     },
@@ -100,38 +100,38 @@ const rowEndStyles = Object.fromEntries(
 
 const justifySelfStyles = {
   start: {
-    '@layer': { [components]: { justifySelf: 'start' } },
+    '@layer': { [layouts]: { justifySelf: 'start' } },
   },
   end: {
-    '@layer': { [components]: { justifySelf: 'end' } },
+    '@layer': { [layouts]: { justifySelf: 'end' } },
   },
   center: {
-    '@layer': { [components]: { justifySelf: 'center' } },
+    '@layer': { [layouts]: { justifySelf: 'center' } },
   },
   stretch: {
-    '@layer': { [components]: { justifySelf: 'stretch' } },
+    '@layer': { [layouts]: { justifySelf: 'stretch' } },
   },
 } as const;
 
 const alignSelfStyles = {
   start: {
-    '@layer': { [components]: { alignSelf: 'start' } },
+    '@layer': { [layouts]: { alignSelf: 'start' } },
   },
   end: {
-    '@layer': { [components]: { alignSelf: 'end' } },
+    '@layer': { [layouts]: { alignSelf: 'end' } },
   },
   center: {
-    '@layer': { [components]: { alignSelf: 'center' } },
+    '@layer': { [layouts]: { alignSelf: 'center' } },
   },
   stretch: {
-    '@layer': { [components]: { alignSelf: 'stretch' } },
+    '@layer': { [layouts]: { alignSelf: 'stretch' } },
   },
 } as const;
 
 export const gridChildRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   variants: {

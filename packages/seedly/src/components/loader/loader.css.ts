@@ -9,41 +9,41 @@ import { calc } from '@vanilla-extract/css-utils';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 import {
-  createToneStyles,
   createResponsiveVariants,
+  createToneStyles,
   defaultMedia,
   sys,
   transition,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { atoms } from '../../styles/layers.css';
 
 const loaderToneVars = createThemeContract({
   base: null,
   onBase: null,
 });
 
-const loaderToneStyles = createToneStyles(loaderToneVars);
+const loaderToneStyles = createToneStyles(loaderToneVars, atoms);
 
 export const loaderRecipe = recipe({
   variants: {
     active: {
       true: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             opacity: 1,
             visibility: 'visible',
-
             animationPlayState: 'running',
+            scale: 1,
           },
         },
       },
       false: {
         '@layer': {
-          [components]: {
+          [atoms]: {
             opacity: 0,
             visibility: 'hidden',
-
             animationPlayState: 'paused',
+            scale: 0.95,
           },
         },
       },
@@ -60,31 +60,39 @@ const loaderAnimation = keyframes({
   },
 });
 
-// Shared size variant styles for responsive overrides
+const moonPulseAnimation = keyframes({
+  '0%, 100%': {
+    opacity: 1,
+  },
+  '50%': {
+    opacity: 0.3,
+  },
+});
+
 const loaderWrapperSizeStyles = {
   sm: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
-          [size]: sys.spacing[4],
+          [size]: sys.spacing[7],
         },
       },
     },
   },
   md: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
-          [size]: sys.spacing[5],
+          [size]: sys.spacing[9],
         },
       },
     },
   },
   lg: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         vars: {
-          [size]: sys.spacing[6],
+          [size]: sys.spacing[11],
         },
       },
     },
@@ -94,36 +102,40 @@ const loaderWrapperSizeStyles = {
 export const loaderWrapperRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [atoms]: {
         overflow: 'hidden',
         width: size,
         height: size,
-
         animationName: loaderAnimation,
         animationDuration: '1s',
         animationIterationCount: 'infinite',
         animationTimingFunction: 'linear',
         animationFillMode: 'forwards',
-
-        transition: transition(['opacity', 'visibility']),
+        willChange: 'transform, opacity, scale',
+        '@media': {
+          '(prefers-reduced-motion: reduce)': {
+            animation: 'none',
+            transition: 'none',
+          },
+        },
+        transition: transition(['opacity', 'visibility', 'scale'], {
+          easing: 'decelerate.standard',
+        }),
         pointerEvents: 'none',
-
         vars: {
           [moonSize]: calc.divide(size, 7),
           ...assignVars(loaderToneVars, {
-            base: sys.surface.foreground,
-            onBase: sys.surface.foreground,
+            base: sys.color.content.base,
+            onBase: sys.color.content.base,
           }),
         },
       },
     },
   },
-
   variants: {
     size: loaderWrapperSizeStyles,
     tone: loaderToneStyles,
   },
-
   defaultVariants: {
     size: 'md',
   },
@@ -131,14 +143,12 @@ export const loaderWrapperRecipe = recipe({
 
 export const ellipse = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       width: size,
       height: size,
-
       position: 'absolute',
       insetBlockStart: 0,
       insetInlineStart: 0,
-
       borderRadius: '100%',
       borderWidth: moonSize,
       borderStyle: 'solid',
@@ -149,20 +159,27 @@ export const ellipse = style({
 
 export const moon = style({
   '@layer': {
-    [components]: {
+    [atoms]: {
       width: moonSize,
       height: moonSize,
-
       position: 'absolute',
       insetBlockStart: calc.subtract(
         calc.divide(size, 2),
         calc.divide(moonSize, 2),
       ),
       insetInlineStart: 0,
-
       backgroundColor: loaderToneVars.base,
-
       borderRadius: '100%',
+      animationName: moonPulseAnimation,
+      animationDuration: '1.33s' /* Dephased from the 1s rotation */,
+      animationIterationCount: 'infinite',
+      animationTimingFunction: 'ease-in-out',
+      willChange: 'opacity',
+      '@media': {
+        '(prefers-reduced-motion: reduce)': {
+          animation: 'none',
+        },
+      },
     },
   },
 });

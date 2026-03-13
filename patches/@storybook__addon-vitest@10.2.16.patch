@@ -1,0 +1,31 @@
+diff --git a/dist/preset.js b/dist/preset.js
+index 67fd96bad5b87b77537fc5010247435b8e8ac802..712173f667e832916079fde9de12238f60050343 100644
+--- a/dist/preset.js
++++ b/dist/preset.js
+@@ -37,6 +37,7 @@ import {
+ 
+ // src/preset.ts
+ import { mkdir } from "node:fs/promises";
++import { dirname } from "node:path";
+ import {
+   createFileSystemCache,
+   getFrameworkName,
+@@ -551,7 +552,17 @@ var experimental_serverChannel = async (channel, options) => {
+   if (options.configType === "PRODUCTION")
+     return values;
+   let coverageDirectory = resolvePathInStorybookCache(COVERAGE_DIRECTORY);
+-  return await mkdir(coverageDirectory, { recursive: !0 }), [
++  try {
++    await mkdir(coverageDirectory, { recursive: !0 });
++  } catch (error) {
++    if (error && typeof error == "object" && "code" in error && error.code === "ENOENT") {
++      await mkdir(dirname(coverageDirectory), { recursive: !0 });
++      await mkdir(coverageDirectory, { recursive: !0 });
++    } else {
++      throw error;
++    }
++  }
++  return [
+     {
+       from: coverageDirectory,
+       to: "/coverage"

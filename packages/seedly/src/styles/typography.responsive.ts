@@ -10,55 +10,16 @@ import {
 } from './system-contract.css';
 import { typographyAt } from './typography.responsive.css';
 
-const sizeMap = {
-  sm: 'small',
-  md: 'medium',
-  lg: 'large',
-} as const;
-
-type TshirtSize = keyof typeof sizeMap;
-
-function mapResponsiveValue<T, U>(
-  value: Responsive<T> | undefined,
-  mapper: (input: T) => U,
-): Responsive<U> | undefined {
-  if (value == null) {
-    return undefined;
-  }
-
-  if (Array.isArray(value)) {
-    return value.map((entry) =>
-      entry == null ? entry : mapper(entry),
-    ) as Responsive<U>;
-  }
-
-  if (typeof value === 'object') {
-    const out: Partial<Record<string, U>> = {};
-
-    for (const [key, entry] of Object.entries(value)) {
-      if (entry != null) {
-        out[key] = mapper(entry as T);
-      }
-    }
-
-    return out as Responsive<U>;
-  }
-
-  return mapper(value as T) as Responsive<U>;
-}
-
-export function mapResponsiveSizeToTypography(
-  size: Responsive<TshirtSize> | undefined,
-): Responsive<TypographySize> | undefined {
-  return mapResponsiveValue(size, (entry) => sizeMap[entry]);
-}
-
-export function buildTypographyOverrides(opts: {
+export interface BuildTypographyOverridesOptions {
   variant?: Responsive<TypographyVariant>;
   size?: Responsive<TypographySize>;
-}) {
-  const { variant, size } = opts;
-  const varMap = resolveResponsive<TypographyVariant, BreakpointWithBase>(
+}
+
+export function buildTypographyOverrides(
+  options: BuildTypographyOverridesOptions,
+) {
+  const { variant, size } = options;
+  const variantMap = resolveResponsive<TypographyVariant, BreakpointWithBase>(
     variant,
     defaultOrder,
   );
@@ -67,35 +28,36 @@ export function buildTypographyOverrides(opts: {
     defaultOrder,
   );
 
-  let currentVariant = varMap.xs ?? (variant as TypographyVariant | undefined);
+  let currentVariant =
+    variantMap.xs ?? (variant as TypographyVariant | undefined);
   let currentSize = sizeMap.xs ?? (size as TypographySize | undefined);
 
   const classes: string[] = [];
 
-  for (const bp of defaultOrder) {
-    if (bp === 'xs') {
+  for (const breakpoint of defaultOrder) {
+    if (breakpoint === 'xs') {
       continue;
     }
 
-    if (varMap[bp] != null) {
-      currentVariant = varMap[bp];
+    if (variantMap[breakpoint] != null) {
+      currentVariant = variantMap[breakpoint];
     }
 
-    if (sizeMap[bp] != null) {
-      currentSize = sizeMap[bp];
+    if (sizeMap[breakpoint] != null) {
+      currentSize = sizeMap[breakpoint];
     }
 
-    if (currentVariant && currentSize) {
+    if (currentVariant != null && currentSize != null) {
       const key = `${String(currentVariant)}.${String(currentSize)}`;
-      const cls = (
+      const className = (
         typographyAt as Record<
           Exclude<BreakpointWithBase, 'xs'>,
           Record<string, string>
         >
-      )[bp]?.[key];
+      )[breakpoint]?.[key];
 
-      if (cls) {
-        classes.push(cls);
+      if (className != null) {
+        classes.push(className);
       }
     }
   }

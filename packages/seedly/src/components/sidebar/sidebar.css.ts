@@ -5,91 +5,65 @@ import {
 } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import {
-  createResponsiveVariants,
-  defaultMedia,
-  mapContractVars,
-  sys,
-} from '../../styles';
-import { components } from '../../styles/layers.css';
+import { mapContractVars, sys } from '../../styles';
+import { layouts } from '../../styles/layers.css';
 
 export const sidebarVars = createThemeContract({
-  spacing: {
-    gap: null,
-  },
   layout: {
-    sideWidth: null,
-    contentMinWidth: null,
+    contentMinInlineSize: null,
+    sideInlineSize: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const sidebarSpacingDefaults = assignVars(sidebarVars.spacing, {
-  gap: sys.spacing[0],
-});
-
-const sidebarLayoutDefaults = assignVars(sidebarVars.layout, {
-  sideWidth: 'auto',
-  contentMinWidth: '50%',
-});
-
-// Shared variant styles to support responsive overrides
-export const sidebarSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(sidebarVars.spacing, {
-          gap: sys.spacing[key],
-        }),
-      },
-    },
+const sidebarDefaults = assignVars(sidebarVars, {
+  layout: {
+    contentMinInlineSize: sys.layout.measure,
+    sideInlineSize: 'auto',
   },
-}));
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
+});
+
+export const sidebarSpacingStyles = mapContractVars(
+  sys.spacing,
+  sidebarVars.spacing,
+  layouts,
+);
 
 export const sidebarRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
+        vars: sidebarDefaults,
+
         display: 'flex',
         flexWrap: 'wrap',
-        gap: sidebarVars.spacing.gap,
-
-        vars: {
-          ...sidebarSpacingDefaults,
-          ...sidebarLayoutDefaults,
-        },
+        gap: sidebarVars.spacing.rootGap,
       },
     },
   },
 
   variants: {
-    /**
-     * The spacing between the sidebar and main content elements
-     */
     spacing: sidebarSpacingStyles,
 
-    /**
-     * Whether the sidebar should stretch to fill the available space
-     */
     noStretch: {
       true: {
         '@layer': {
-          [components]: {
+          [layouts]: {
             alignItems: 'flex-start',
           },
         },
       },
     },
 
-    /**
-     * The width of the sidebar (empty means not set; defaults to the content width)
-     */
     sideWidth: {
       true: {},
     },
 
-    /**
-     * Whether the sided element is the :last-child
-     */
     side: {
       right: {},
       left: {},
@@ -99,7 +73,7 @@ export const sidebarRecipe = recipe({
 
 globalStyle(`${sidebarRecipe.classNames.base} > *`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexGrow: 1,
     },
   },
@@ -107,35 +81,30 @@ globalStyle(`${sidebarRecipe.classNames.base} > *`, {
 
 globalStyle(`${sidebarRecipe.classNames.variants.sideWidth.true} > *`, {
   '@layer': {
-    [components]: {
-      flexBasis: sidebarVars.layout.sideWidth,
+    [layouts]: {
+      flexBasis: sidebarVars.layout.sideInlineSize,
     },
   },
 });
 
 globalStyle(`${sidebarRecipe.classNames.variants.side.left} > :last-child`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexBasis: 0,
       flexGrow: 999,
-      minInlineSize: sidebarVars.layout.contentMinWidth,
+      minInlineSize: sidebarVars.layout.contentMinInlineSize,
     },
   },
 });
 
 globalStyle(`${sidebarRecipe.classNames.variants.side.right} > :first-child`, {
   '@layer': {
-    [components]: {
+    [layouts]: {
       flexBasis: 0,
       flexGrow: 999,
-      minInlineSize: sidebarVars.layout.contentMinWidth,
+      minInlineSize: sidebarVars.layout.contentMinInlineSize,
     },
   },
 });
 
 export type SidebarVariants = NonNullable<RecipeVariants<typeof sidebarRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: sidebarSpacingStyles,
-  media: defaultMedia,
-});

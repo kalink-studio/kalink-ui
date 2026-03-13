@@ -18,12 +18,12 @@ export const testimonialsGrid = recipe({
 
 export const testimonialCard = recipe({
   base: {
-    borderRadius: vars.ref.radius.rounded,
-    padding: vars.ref.spacing['2xl'],
     display: 'grid',
     gap: vars.ref.spacing.md,
-    backgroundColor: vars.system.color.surfaceContainer,
+    padding: vars.ref.spacing['2xl'],
     color: vars.system.color.onSurface,
+    backgroundColor: vars.system.color.surfaceContainer,
+    borderRadius: vars.ref.radius.rounded,
   },
 });
 

@@ -20,6 +20,7 @@
     "@kalink-ui/canopy": "workspace:*",
     "@kalink-ui/dibbly": "workspace:*",
     "@kalink-ui/seedly": "workspace:*",
+    "@kalink-ui/seedly-react": "workspace:*",
     "@payloadcms/db-vercel-postgres": "^3.69.0",
     "@payloadcms/email-resend": "^3.69.0",
     "@payloadcms/next": "^3.69.0",

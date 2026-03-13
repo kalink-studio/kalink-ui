@@ -1,21 +1,17 @@
 {
-  "extends": "@kalink-ui/typescript-config/lib-react.json",
-  "include": [
-    "src",
-    ".storybook/**/*",
-    "eslint.config.mts",
-    "vite.config.mts",
-    "vitest.shims.d.ts"
-  ],
+  "extends": "@kalink-ui/typescript-config/base.json",
+  "include": ["src", "eslint.config.mts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "noEmit": false,
     "incremental": true,
     "composite": true,
-    "types": ["react"],
+    "baseUrl": ".",
     "declaration": true,
     "emitDeclarationOnly": true,
-    "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

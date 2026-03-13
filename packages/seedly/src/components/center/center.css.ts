@@ -7,42 +7,36 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const centerVars = createThemeContract({
-  spacing: {
-    gutters: null,
-  },
   layout: {
-    measure: null,
+    rootMeasure: null,
+  },
+  spacing: {
+    rootGutters: null,
   },
 });
 
-const centerSpacingDefaults = assignVars(centerVars.spacing, {
-  gutters: sys.spacing[0],
-});
-
-const centerLayoutDefaults = assignVars(centerVars.layout, {
-  measure: sys.layout.measure,
-});
-
-// Shared variant style maps to support responsive overrides
-export const centerGuttersStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(centerVars.spacing, {
-          gutters: sys.spacing[key],
-        }),
-      },
-    },
+const centerDefaults = assignVars(centerVars, {
+  layout: {
+    rootMeasure: sys.layout.measure,
   },
-}));
+  spacing: {
+    rootGutters: sys.spacing[0],
+  },
+});
+
+export const centerGuttersStyles = mapContractVars(
+  sys.spacing,
+  centerVars.spacing,
+  layouts,
+);
 
 export const centerAndTextStyles = {
   true: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         textAlign: 'center',
       },
     },
@@ -52,7 +46,7 @@ export const centerAndTextStyles = {
 export const centerIntrinsicStyles = {
   true: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -64,49 +58,31 @@ export const centerIntrinsicStyles = {
 export const centerRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
+        vars: centerDefaults,
+
         display: 'block',
+
         boxSizing: 'content-box',
         marginInline: 'auto',
-        maxInlineSize: centerVars.layout.measure,
-        paddingInline: centerVars.spacing.gutters,
-
-        vars: {
-          ...centerSpacingDefaults,
-          ...centerLayoutDefaults,
-        },
+        maxInlineSize: centerVars.layout.rootMeasure,
+        paddingInline: centerVars.spacing.rootGutters,
       },
     },
   },
 
   variants: {
-    /**
-     * Center align the text too with `text-align: center`
-     */
     andText: {
       ...centerAndTextStyles,
     },
-
-    /**
-     * Center child elements based on their content width
-     */
     intrinsic: {
       ...centerIntrinsicStyles,
     },
-
-    /**
-     * The minimum space on either side of the content
-     */
     gutters: centerGuttersStyles,
   },
 });
 
 export type CenterVariants = NonNullable<RecipeVariants<typeof centerRecipe>>;
-
-export const guttersAt = createResponsiveVariants({
-  styles: centerGuttersStyles,
-  media: defaultMedia,
-});
 
 export const andTextAt = createResponsiveVariants({
   styles: centerAndTextStyles,

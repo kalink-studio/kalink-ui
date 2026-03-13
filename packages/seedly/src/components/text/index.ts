@@ -1,7 +1,2 @@
-export { Text, type TextProps } from './text';
-export {
-  textRecipe,
-  textAlign,
-  lineClampNumber,
-  type TextVariants,
-} from './text.css';
+export * from './text.css';
+export * from './text.responsive';

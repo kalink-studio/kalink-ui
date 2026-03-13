@@ -1,5 +1,5 @@
 import { isObject } from '@kalink-ui/dibbly';
-import { Text } from '@kalink-ui/seedly';
+import { Text } from '@kalink-ui/seedly-react';
 
 import { BlockHeading } from '@/app/(frontend)/components/block-heading';
 import { Container } from '@/app/(frontend)/components/container';
@@ -52,11 +52,11 @@ export function ServicesGridSection({ block }: ServicesGridProps) {
 
             return (
               <li key={item.id} className={servicesGridCard}>
-                <Text use="span" variant="headline" size="small">
+                <Text variant="headline" size="small">
                   {resolved.title}
                 </Text>
                 {resolved.description ? (
-                  <Text use="p" variant="body" size="medium">
+                  <Text render={<p />} variant="body" size="medium">
                     {resolved.description}
                   </Text>
                 ) : null}

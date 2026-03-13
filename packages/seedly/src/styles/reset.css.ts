@@ -1,14 +1,11 @@
-/**
- * Minimal reset based on Josh's Custom CSS Reset
- * https://www.joshwcomeau.com/css/custom-css-reset/
- */
 import { globalStyle } from '@vanilla-extract/css';
 
-import { base } from './layers.css';
+import { reset } from './layers.css';
+import { sys } from './system-contract.css';
 
 globalStyle('*, *::before, *::after', {
   '@layer': {
-    [base]: {
+    [reset]: {
       boxSizing: 'border-box',
     },
   },
@@ -16,15 +13,20 @@ globalStyle('*, *::before, *::after', {
 
 globalStyle('*', {
   '@layer': {
-    [base]: {
+    [reset]: {
       margin: 0,
+
+      color: 'currentColor',
     },
   },
 });
 
 globalStyle('body', {
   '@layer': {
-    [base]: {
+    [reset]: {
+      position: 'relative',
+
+      color: sys.color.content.base,
       WebkitFontSmoothing: 'antialiased',
     },
   },
@@ -32,7 +34,7 @@ globalStyle('body', {
 
 globalStyle('img, picture, video, canvas, svg', {
   '@layer': {
-    [base]: {
+    [reset]: {
       display: 'block',
       maxWidth: '100%',
     },
@@ -41,78 +43,21 @@ globalStyle('img, picture, video, canvas, svg', {
 
 globalStyle('input, button, textarea, select', {
   '@layer': {
-    [base]: {
+    [reset]: {
       font: 'inherit',
-    },
-  },
-});
-
-globalStyle('p, h1, h2, h3, h4, h5, h6', {
-  '@layer': {
-    [base]: {
-      overflowWrap: 'break-word',
-    },
-  },
-});
-
-globalStyle('p', {
-  '@layer': {
-    [base]: {
-      textWrap: 'pretty',
-    },
-  },
-});
-
-globalStyle('h1, h2, h3, h4, h5, h6', {
-  '@layer': {
-    [base]: {
-      textWrap: 'balance',
     },
   },
 });
 
 globalStyle('button', {
   '@layer': {
-    [base]: {
-      border: 'none',
+    [reset]: {
+      padding: '0',
+
       backgroundColor: 'transparent',
+      border: 'none',
 
       cursor: 'pointer',
-    },
-  },
-});
-
-globalStyle('a', {
-  '@layer': {
-    [base]: {
-      color: 'currentColor',
-      textDecoration: 'none',
-    },
-  },
-});
-
-globalStyle('fieldset', {
-  '@layer': {
-    [base]: {
-      padding: 0,
-
-      border: 'none',
-    },
-  },
-});
-
-globalStyle('legend', {
-  '@layer': {
-    [base]: {
-      width: '100%',
-    },
-  },
-});
-
-globalStyle('pre', {
-  '@layer': {
-    [base]: {
-      whiteSpace: 'pre-wrap',
     },
   },
 });

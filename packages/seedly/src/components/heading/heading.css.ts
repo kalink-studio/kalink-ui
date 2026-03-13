@@ -1,17 +1,12 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import {
-  createResponsiveVariants,
-  defaultMedia,
-  mapContractVars,
-  sys,
-} from '../../styles';
-import { components } from '../../styles/layers.css';
+import { createResponsiveVariants, defaultMedia, sys } from '../../styles';
+import { molecules } from '../../styles/layers.css';
 
 export const headingAlignStyles = {
   start: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'flex-start',
         textAlign: 'start',
       },
@@ -19,7 +14,7 @@ export const headingAlignStyles = {
   },
   center: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'center',
         textAlign: 'center',
       },
@@ -27,7 +22,7 @@ export const headingAlignStyles = {
   },
   end: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'flex-end',
         textAlign: 'end',
       },
@@ -35,7 +30,7 @@ export const headingAlignStyles = {
   },
   justify: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         alignItems: 'stretch',
         textAlign: 'justify',
       },
@@ -46,25 +41,31 @@ export const headingAlignStyles = {
 export const headingRootRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [molecules]: {
         display: 'flex',
         flexDirection: 'column',
       },
     },
   },
-
   variants: {
     align: headingAlignStyles,
   },
 });
 
-export const pretitleSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      marginBlockEnd: sys.spacing[key],
-    },
-  },
-}));
+export const pretitleSpacingStyles = Object.fromEntries(
+  Object.entries(sys.spacing).map(([key, value]) => {
+    return [
+      key,
+      {
+        '@layer': {
+          [molecules]: {
+            marginBlockEnd: value,
+          },
+        },
+      },
+    ];
+  }),
+);
 
 export const pretitleRecipe = recipe({
   variants: {
@@ -72,13 +73,20 @@ export const pretitleRecipe = recipe({
   },
 });
 
-export const subtitleSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      marginBlockStart: sys.spacing[key],
-    },
-  },
-}));
+export const subtitleSpacingStyles = Object.fromEntries(
+  Object.entries(sys.spacing).map(([key, value]) => {
+    return [
+      key,
+      {
+        '@layer': {
+          [molecules]: {
+            marginBlockStart: value,
+          },
+        },
+      },
+    ];
+  }),
+);
 
 export const subtitleRecipe = recipe({
   variants: {

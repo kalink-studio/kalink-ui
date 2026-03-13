@@ -11,62 +11,56 @@ import {
   mapContractVars,
   sys,
 } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const switcherVars = createThemeContract({
-  spacing: {
-    gap: null,
-  },
   layout: {
-    threshold: null,
+    rootThreshold: null,
+  },
+  spacing: {
+    rootGap: null,
   },
 });
 
-const switcherSpacingDefaults = assignVars(switcherVars.spacing, {
-  gap: sys.spacing[0],
-});
-
-const switcherLayoutDefaults = assignVars(switcherVars.layout, {
-  threshold: sys.layout.measure,
-});
-
-// Shared variant styles to support responsive overrides
-export const switcherSpacingStyles = mapContractVars(sys.spacing, (key) => ({
-  '@layer': {
-    [components]: {
-      vars: {
-        ...assignVars(switcherVars.spacing, {
-          gap: sys.spacing[key],
-        }),
-      },
-    },
+const switcherDefaults = assignVars(switcherVars, {
+  layout: {
+    rootThreshold: sys.layout.measure,
   },
-}));
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
+});
+
+export const switcherSpacingStyles = mapContractVars(
+  sys.spacing,
+  switcherVars.spacing,
+  layouts,
+);
 
 export const switcherLimitStyles = {
   2: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   3: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   4: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   5: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
   6: {
     '@layer': {
-      [components]: {},
+      [layouts]: {},
     },
   },
 } as const;
@@ -74,41 +68,32 @@ export const switcherLimitStyles = {
 export const switcherRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
+        vars: switcherDefaults,
+
         display: 'flex',
         flexWrap: 'wrap',
-        gap: switcherVars.spacing.gap,
-
-        vars: {
-          ...switcherSpacingDefaults,
-          ...switcherLayoutDefaults,
-        },
+        gap: switcherVars.spacing.rootGap,
       },
     },
   },
 
   variants: {
-    /**
-     * The space (margin) between the child elements
-     */
     spacing: switcherSpacingStyles,
-
-    /**
-     * The maximum number of elements allowed to appear in the horizontal configuration
-     */
     limit: switcherLimitStyles,
   },
 });
 
 const limitValues = [2, 3, 4, 5, 6] as const;
 
-const limitSelector = (limitClass: string, limit: number) =>
-  `${limitClass} > :nth-last-child(n+${limit + 1}), ${limitClass} > :nth-last-child(n+${limit + 1}) ~ *`;
+const limitSelector = (limitClass: string, limit: number) => {
+  return `${limitClass} > :nth-last-child(n+${limit + 1}), ${limitClass} > :nth-last-child(n+${limit + 1}) ~ *`;
+};
 
 globalStyle(`${switcherRecipe.classNames.base} > *`, {
   '@layer': {
-    [components]: {
-      flexBasis: `calc((${switcherVars.layout.threshold} - 100%) * 999)`,
+    [layouts]: {
+      flexBasis: `calc((${switcherVars.layout.rootThreshold} - 100%) * 999)`,
       flexGrow: 1,
     },
   },
@@ -119,7 +104,7 @@ limitValues.forEach((limit) => {
 
   globalStyle(limitSelector(limitClass, limit), {
     '@layer': {
-      [components]: {
+      [layouts]: {
         flexBasis: '100%',
       },
     },
@@ -129,11 +114,6 @@ limitValues.forEach((limit) => {
 export type SwitcherVariants = NonNullable<
   RecipeVariants<typeof switcherRecipe>
 >;
-
-export const spacingAt = createResponsiveVariants({
-  styles: switcherSpacingStyles,
-  media: defaultMedia,
-});
 
 export const limitAt = createResponsiveVariants({
   styles: switcherLimitStyles,
@@ -160,7 +140,7 @@ Object.entries(limitAt).forEach(([breakpoint, styles]) => {
       '@media': {
         [query]: {
           '@layer': {
-            [components]: {
+            [layouts]: {
               flexBasis: '100%',
             },
           },

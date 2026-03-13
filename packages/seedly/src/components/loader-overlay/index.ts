@@ -1,1 +1,1 @@
-export { LoaderOverlay } from './loader-overlay';
+export * from './loader-overlay.css';

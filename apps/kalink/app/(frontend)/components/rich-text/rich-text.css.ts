@@ -12,32 +12,32 @@ export const headingRichText = recipe({
     level: {
       h1: {
         vars: {
-          [spacingAfter]: sys.spacing[8],
+          [spacingAfter]: sys.spacing[12],
         },
       },
       h2: {
         vars: {
-          [spacingAfter]: sys.spacing[8],
+          [spacingAfter]: sys.spacing[12],
         },
       },
       h3: {
         vars: {
-          [spacingAfter]: sys.spacing[4],
+          [spacingAfter]: sys.spacing[8],
         },
       },
       h4: {
         vars: {
-          [spacingAfter]: sys.spacing[4],
+          [spacingAfter]: sys.spacing[8],
         },
       },
       h5: {
         vars: {
-          [spacingAfter]: sys.spacing[2],
+          [spacingAfter]: sys.spacing[4],
         },
       },
       h6: {
         vars: {
-          [spacingAfter]: sys.spacing[2],
+          [spacingAfter]: sys.spacing[4],
         },
       },
     },

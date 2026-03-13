@@ -7,25 +7,29 @@ import {
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
 import { createResponsiveVariants, defaultMedia } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { layouts } from '../../styles/layers.css';
 
 export const frameVars = createThemeContract({
   layout: {
-    ratio: null,
+    rootAspectRatio: null,
   },
 });
 
-const frameLayoutDefaults = assignVars(frameVars.layout, {
-  ratio: 'auto',
+const frameDefaults = assignVars(frameVars, {
+  layout: {
+    rootAspectRatio: 'auto',
+  },
 });
 
 export const frameRatioStyles = {
   '1:1': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '1 / 1',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '1 / 1',
+            },
           }),
         },
       },
@@ -33,10 +37,12 @@ export const frameRatioStyles = {
   },
   '3:2': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '3 / 2',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '3 / 2',
+            },
           }),
         },
       },
@@ -44,10 +50,12 @@ export const frameRatioStyles = {
   },
   '2:3': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '2 / 3',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '2 / 3',
+            },
           }),
         },
       },
@@ -55,10 +63,12 @@ export const frameRatioStyles = {
   },
   '4:3': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '4 / 3',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '4 / 3',
+            },
           }),
         },
       },
@@ -66,10 +76,12 @@ export const frameRatioStyles = {
   },
   '16:9': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '16 / 9',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '16 / 9',
+            },
           }),
         },
       },
@@ -77,10 +89,12 @@ export const frameRatioStyles = {
   },
   '9:16': {
     '@layer': {
-      [components]: {
+      [layouts]: {
         vars: {
-          ...assignVars(frameVars.layout, {
-            ratio: '9 / 16',
+          ...assignVars(frameVars, {
+            layout: {
+              rootAspectRatio: '9 / 16',
+            },
           }),
         },
       },
@@ -90,18 +104,15 @@ export const frameRatioStyles = {
 
 const baseFrame = style({
   '@layer': {
-    [components]: {
+    [layouts]: {
+      vars: frameDefaults,
+
+      alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
 
+      aspectRatio: frameVars.layout.rootAspectRatio,
       overflow: 'hidden',
-
-      aspectRatio: frameVars.layout.ratio,
-
-      vars: {
-        ...frameLayoutDefaults,
-      },
     },
   },
 });
@@ -110,18 +121,15 @@ export const frameRecipe = recipe({
   base: baseFrame,
 
   variants: {
-    /**
-     * The ratio of the frame
-     */
     ratio: frameRatioStyles,
   },
 });
 
 globalStyle(`${baseFrame} > img, ${baseFrame} > video`, {
   '@layer': {
-    [components]: {
-      inlineSize: '100%',
+    [layouts]: {
       blockSize: '100%',
+      inlineSize: '100%',
       objectFit: 'cover',
     },
   },

@@ -19,6 +19,7 @@
     "@kalink-ui/dibbly": "workspace:*",
     "@kalink-ui/eslint-config": "workspace:*",
     "@kalink-ui/seedly": "workspace:*",
+    "@kalink-ui/seedly-react": "workspace:*",
     "@kalink-ui/typescript-config": "workspace:*",
     "@types/node": "^24.6.2",
     "@types/react": "19.2.7",

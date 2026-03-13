@@ -1,5 +1,5 @@
 import { isObject } from '@kalink-ui/dibbly';
-import { Text } from '@kalink-ui/seedly';
+import { Text } from '@kalink-ui/seedly-react';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 
@@ -63,11 +63,11 @@ export function TeamSection({ block }: TeamProps) {
                   </div>
                 ) : null}
                 <div className={teamCardBody()}>
-                  <Text use="span" variant="headline" size="small">
+                  <Text variant="headline" size="small">
                     {fullName}
                   </Text>
                   {person.jobTitle ? (
-                    <Text use="span" variant="title" size="small">
+                    <Text variant="title" size="small">
                       {person.jobTitle}
                     </Text>
                   ) : null}

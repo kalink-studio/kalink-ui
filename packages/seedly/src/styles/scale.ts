@@ -1,13 +1,11 @@
 export type Interval = [number, number];
 
 /**
- * Common easing/rounding options used by the interpolation helpers.
- * Note: `minStep` is ignored in single-value mapping but kept for backward
- * compatibility of the public types.
+ * Common easing and rounding options used by interpolation helpers.
  */
 export interface ExponentialScaleOptions {
-  exponent?: number; // 1 = linear, >1 = ease-in, <1 = ease-out
-  minStep?: number; // kept for compatibility; not used by per-value mapping
+  exponent?: number;
+  minStep?: number;
   rounding?: 'none' | 'round' | 'floor' | 'ceil';
 }
 
@@ -16,25 +14,17 @@ export interface DynamicInterpolationOptions extends ExponentialScaleOptions {
   lowMax: number;
   highMin: number;
   highMax: number;
-  clampInput?: boolean; // clamp input inside [lowMin, lowMax]
-  ensureGteInput?: boolean; // ensure output >= input
+  clampInput?: boolean;
+  ensureGteInput?: boolean;
 }
 
 export interface FluidClampOptions {
   unit?: 'rem' | 'px';
-  baseFontSize?: number; // px per rem when unit is 'rem'
-  interpolateFrom?: number; // defaults to 23.5 (in `unit`)
-  interpolateTo?: number; // defaults to 80 (in `unit`)
+  baseFontSize?: number;
+  interpolateFrom?: number;
+  interpolateTo?: number;
 }
 
-/**
- * Format a `[min, max]` pair into a CSS clamp() with viewport-based interpolation:
- * clamp(min, calc(min + (max - min) * ((100vw - from) / (to - from))), max)
- *
- * - `from`/`to` default to 23.5 and 80 (in the selected `unit`).
- * - `unit` may be 'rem' (default) or 'px'. When 'rem', values are converted from px
- *   using `baseFontSize` (default 16).
- */
 export function toFluidClamp(
   [min, max]: Interval,
   options: FluidClampOptions = {},
@@ -61,13 +51,6 @@ export function toFluidClamp(
   return `clamp(${minU}${unit}, calc(${minU}${unit} + (${diffU} * ${interp})), ${maxU}${unit})`;
 }
 
-// Batch scale helpers were removed in favor of per-value mapping.
-
-/**
- * Map a single `value` from [lowMin, lowMax] to [highMin, highMax] using
- * exponential easing. Optionally rounds, clamps input, and ensures the output
- * is not below the input (enabled by default).
- */
 export function getInterpolationFor(
   value: number,
   {
@@ -131,11 +114,6 @@ export function getInterpolationFor(
 export interface FluidClampForOptions
   extends DynamicInterpolationOptions, FluidClampOptions {}
 
-/**
- * Convenience to produce a CSS clamp() for a single `value` by first computing
- * its mapped high value via `getInterpolationFor`, then formatting with
- * `toFluidClamp` using viewport interpolation.
- */
 export function toFluidClampFor(
   value: number,
   { unit = 'rem', baseFontSize = 16, ...opts }: FluidClampForOptions,

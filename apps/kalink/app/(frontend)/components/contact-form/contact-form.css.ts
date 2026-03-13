@@ -9,7 +9,7 @@ export const contactFormWrapper = style({
 
 export const statusMessage = style({
   padding: vars.ref.spacing.md,
-  borderRadius: vars.ref.radius.rounded,
-  backgroundColor: vars.system.color.surfaceContainer,
   color: vars.system.color.onSurface,
+  backgroundColor: vars.system.color.surfaceContainer,
+  borderRadius: vars.ref.radius.rounded,
 });

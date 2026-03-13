@@ -1,5 +1,4 @@
 import { styleVariants, type StyleRule } from '@vanilla-extract/css';
-import { clsx } from 'clsx';
 
 import { screen, type BreakpointKey } from './breakpoints';
 
@@ -15,6 +14,18 @@ export type Responsive<T, B extends string = BreakpointWithBase> =
   | T
   | ResponsiveObject<T, B>
   | ResponsiveArray<T>;
+
+type MakeResponsiveAtKeys<
+  V extends Record<string, unknown>,
+  A extends Partial<Record<keyof V, unknown>>,
+  B extends string,
+> = {
+  [K in keyof V]: K extends keyof A
+    ? V[K] extends string | number
+      ? Responsive<V[K], B>
+      : V[K]
+    : V[K];
+};
 
 function entriesOf<K extends string | number, V>(
   record: Partial<Record<K, V>>,
@@ -88,7 +99,7 @@ export function createResponsiveVariants<
 >(args: CreateResponsiveVariantsArgs<VariantValues, Bps>) {
   const { styles, media } = args;
 
-  const at = recordFromEntries(
+  return recordFromEntries(
     entriesOf(media).map(([bp, query]) => {
       const styleMap = recordFromEntries(
         entriesOf<VariantValues, StyleRule | StyleRule[]>(styles).map(
@@ -99,8 +110,6 @@ export function createResponsiveVariants<
       return [bp, styleVariantsWithArrays(styleMap)];
     }),
   );
-
-  return at;
 }
 
 function applyMedia(
@@ -108,37 +117,50 @@ function applyMedia(
   rule: StyleRule | StyleRule[],
 ): StyleRule | StyleRule[] {
   if (Array.isArray(rule)) {
-    return rule.map((r) => ({ '@media': { [query]: r } }));
+    return rule.map((singleRule) => ({ '@media': { [query]: singleRule } }));
   }
 
   return { '@media': { [query]: rule } };
 }
 
-type MakeResponsive<V, B extends string> = {
-  [K in keyof V]: V[K] extends string | number ? Responsive<V[K], B> : V[K];
-};
+function joinClassNames(classNames: (string | undefined)[]): string {
+  const classes = classNames.filter(
+    (className) => className != null && className !== '',
+  ) as string[];
 
-export interface ResponsiveRecipeArgs<V, Bps extends string> {
+  return classes.join(' ');
+}
+
+export interface ResponsiveRecipeArgs<
+  V extends Record<string, unknown>,
+  Bps extends string,
+  A extends Partial<
+    Record<keyof V, Partial<Record<Bps, Record<string, string>>>>
+  >,
+> {
   recipe: (props: V) => string;
-  at: Partial<Record<keyof V, Partial<Record<Bps, Record<string, string>>>>>;
+  at: A;
   order: readonly Bps[];
 }
 
 export function responsiveRecipe<
   V extends Record<string, unknown>,
   const Bps extends string,
->(args: ResponsiveRecipeArgs<V, Bps>) {
+  A extends Partial<
+    Record<keyof V, Partial<Record<Bps, Record<string, string>>>>
+  >,
+>(args: ResponsiveRecipeArgs<V, Bps, A>) {
   const { recipe, at, order } = args;
-  type ClassValue = Parameters<typeof clsx>[number];
 
-  return (props: MakeResponsive<V, Bps>, ...classNames: ClassValue[]) => {
-    const responsiveRest = props as MakeResponsive<V, Bps>;
-    const keys = Object.keys(responsiveRest) as (keyof V)[];
-
+  return (
+    props: MakeResponsiveAtKeys<V, A, Bps>,
+    ...classNames: (string | undefined)[]
+  ) => {
+    const keys = Object.keys(props) as (keyof V)[];
     const baseProps: Partial<V> = {};
 
     for (const key of keys) {
-      const value = responsiveRest[key];
+      const value = props[key];
       const map = resolveResponsive<unknown, Bps>(
         value as Responsive<unknown, Bps> | undefined,
         order,
@@ -154,7 +176,7 @@ export function responsiveRecipe<
     const overrides: string[] = [];
 
     for (const key of keys) {
-      const value = responsiveRest[key];
+      const value = props[key];
       const variantAt = at[key];
       const map = resolveResponsive<unknown, Bps>(
         value as Responsive<unknown, Bps> | undefined,
@@ -170,21 +192,21 @@ export function responsiveRecipe<
           continue;
         }
 
-        const val = map[bp];
+        const variantValue = map[bp];
 
-        if (val == null) {
+        if (variantValue == null) {
           continue;
         }
 
-        const cls = variantAt[bp]?.[String(val)];
+        const className = variantAt[bp]?.[String(variantValue)];
 
-        if (cls) {
-          overrides.push(cls);
+        if (className) {
+          overrides.push(className);
         }
       }
     }
 
-    return clsx(base, ...overrides, ...classNames);
+    return joinClassNames([base, ...overrides, ...classNames]);
   };
 }
 

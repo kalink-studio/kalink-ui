@@ -1,0 +1,14 @@
+**/*.stories.tsx
+**/*.test.tsx
+**/*.test.ts
+**/*.mdx
+**/*config.*
+
+.storybook
+storybook-static
+.turbo
+dist
+turbo
+
+
+.DS_Store

@@ -1,0 +1,89 @@
+{
+  "name": "@kalink-ui/seedly-react",
+  "version": "0.34.4",
+  "description": "Base UI component implementations with Seedly styles",
+  "sideEffects": [
+    "**/*.css.ts"
+  ],
+  "license": "MIT",
+  "author": "Louis Gollut",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kalink-studio/kalink-ui"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts",
+    "./components/*": "./src/components/*/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "pnpm lint --fix",
+    "storybook:build": "cross-env STORYBOOK_CACHE_DIR=.cache node ./scripts/run-with-storybook-cache.mjs storybook build",
+    "storybook:dev": "cross-env STORYBOOK_CACHE_DIR=.cache node ./scripts/run-with-storybook-cache.mjs storybook dev -p 6006 --no-open",
+    "storybook:test": "cross-env STORYBOOK_CACHE_DIR=.cache node ./scripts/run-with-storybook-cache.mjs vitest run --project=storybook",
+    "storybook:test:coverage": "cross-env STORYBOOK_CACHE_DIR=.cache node ./scripts/run-with-storybook-cache.mjs vitest run --project=storybook --coverage",
+    "build-storybook": "pnpm -w run build-storybook:seedly-react",
+    "dev": "pnpm -w run dev:seedly-react",
+    "test": "vitest run --project=unit",
+    "test:watch": "vitest --project=unit",
+    "test-storybook": "pnpm -w run test-storybook:seedly-react",
+    "test-storybook:coverage": "pnpm -w run test-storybook:coverage:seedly-react",
+    "tsc": "tsc -b"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@kalink-ui/eslint-config": "workspace:*",
+    "@kalink-ui/typescript-config": "workspace:*",
+    "@liip/storybook-addon-resizr": "^0.1.6",
+    "@storybook/addon-a11y": "^10.2.16",
+    "@storybook/addon-docs": "^10.2.16",
+    "@storybook/addon-onboarding": "^10.2.16",
+    "@storybook/addon-vitest": "^10.2.16",
+    "@storybook/react-vite": "^10.2.16",
+    "@turbo/gen": "^2.7.1",
+    "@types/node": "^24.6.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vanilla-extract/css": "^1.18.0",
+    "@vanilla-extract/css-utils": "^0.1.6",
+    "@vanilla-extract/dynamic": "^2.1.5",
+    "@vanilla-extract/recipes": "^0.5.7",
+    "@vanilla-extract/sprinkles": "^1.6.5",
+    "@vanilla-extract/vite-plugin": "^5.1.4",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/browser": "^4.0.16",
+    "@vitest/browser-playwright": "^4.0.16",
+    "@vitest/coverage-v8": "^4.0.16",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-storybook": "10.2.16",
+    "playwright": "^1.57.0",
+    "react": "^19.2.3",
+    "react-docgen-typescript": "^2.4.0",
+    "react-dom": "^19.2.3",
+    "storybook": "^10.2.16",
+    "type-fest": "^5.3.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0",
+    "vite-tsconfig-paths": "^6.0.3",
+    "vitest": "^4.0.16"
+  },
+  "peerDependencies": {
+    "@vanilla-extract/css": "^1.17.4",
+    "@vanilla-extract/css-utils": "^0.1.6",
+    "@vanilla-extract/dynamic": "^2.1.5",
+    "@vanilla-extract/recipes": "^0.5.7",
+    "@vanilla-extract/sprinkles": "^1.6.5",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.3.0",
+    "@kalink-ui/seedly": "workspace:^"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -5,6 +5,7 @@
     { "path": "./apps/kalink" },
     { "path": "./packages/canopy" },
     { "path": "./packages/seedly" },
+    { "path": "./packages/seedly-react" },
     { "path": "./packages/dibbly" }
   ]
 }

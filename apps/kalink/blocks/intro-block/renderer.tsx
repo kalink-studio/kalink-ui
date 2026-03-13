@@ -1,4 +1,4 @@
-import { Button, Cluster, Stack } from '@kalink-ui/seedly';
+import { Button, Cluster, Stack } from '@kalink-ui/seedly-react';
 import { clsx } from 'clsx';
 
 import { BlockHeading } from '@/app/(frontend)/components/block-heading';
@@ -14,9 +14,9 @@ type IntroCta = NonNullable<IntroBlock['ctas']>[number];
 
 const ctaVariantMap: Record<
   IntroCta['variant'],
-  'plain' | 'outline' | 'ghost' | 'bare'
+  'solid' | 'outline' | 'ghost' | 'bare'
 > = {
-  filled: 'plain',
+  filled: 'solid',
   outlined: 'outline',
   ghost: 'ghost',
   bare: 'bare',
@@ -47,11 +47,11 @@ export function IntroBlockSection({ block }: IntroBlockProps) {
                 return (
                   <Button
                     key={cta.id ?? cta.label}
-                    use="a"
-                    href={media.url}
                     variant={ctaVariantMap[cta.variant]}
-                    target="_blank"
-                    rel="noreferrer"
+                    nativeButton={false}
+                    render={
+                      <a href={media.url} target="_blank" rel="noreferrer" />
+                    }
                     size="md"
                   >
                     {cta.label}

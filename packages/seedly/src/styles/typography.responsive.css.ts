@@ -1,22 +1,22 @@
 import { type StyleRule } from '@vanilla-extract/css';
 
-import { components } from './layers.css';
+import { base } from './layers.css';
 import { createResponsiveVariants, defaultMedia } from './responsive';
 import { sys } from './system-contract.css';
 
 const typographyComboEntries = Object.entries(sys.typography).flatMap(
   ([variantKey, sizes]) => {
-    return Object.entries(sizes).map(([sizeKey, v]) => {
+    return Object.entries(sizes).map(([sizeKey, value]) => {
       const key = `${variantKey}.${sizeKey}`;
 
       const rule: StyleRule = {
         '@layer': {
-          [components]: {
-            fontFamily: v.font,
-            fontWeight: v.weight,
-            lineHeight: v.lineHeight,
-            letterSpacing: v.tracking,
-            fontSize: v.size,
+          [base]: {
+            fontFamily: value.font,
+            fontWeight: value.weight,
+            lineHeight: value.lineHeight,
+            letterSpacing: value.tracking,
+            fontSize: value.size,
           },
         },
       };

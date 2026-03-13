@@ -1,9 +1,9 @@
 import { defaultOrder, responsiveRecipe } from '../../styles/responsive';
 
-import { alignAt, spacingAt, stackRecipe } from './stack.css';
+import { alignAt, stackRecipe } from './stack.css';
 
 export const stackResponsive = responsiveRecipe({
   recipe: stackRecipe,
-  at: { spacing: spacingAt, align: alignAt },
+  at: { align: alignAt },
   order: defaultOrder,
 });

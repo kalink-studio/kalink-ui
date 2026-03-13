@@ -1,64 +1,55 @@
 import { assignVars, createThemeContract } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 
-import { sys } from '../../styles';
-import { components } from '../../styles/layers.css';
+import { mapContractVars, sys } from '../../styles';
+import { layouts } from '../../styles/layers.css';
 import {
   createResponsiveVariants,
   defaultMedia,
 } from '../../styles/responsive';
-import { createSpacingVarStyles, flexAlignItemsStyles } from '../layout-maps';
+import { flexAlignItemsStyles } from '../layout/shared/maps';
 
 export const stackVars = createThemeContract({
   spacing: {
-    gap: null,
+    rootGap: null,
   },
 });
 
-const stackSpacingDefaults = assignVars(stackVars.spacing, {
-  gap: sys.spacing[0],
+const stackDefaults = assignVars(stackVars, {
+  spacing: {
+    rootGap: sys.spacing[0],
+  },
 });
 
-// Shared variant style maps so we can reuse them for responsive overrides
-export const stackSpacingStyles = createSpacingVarStyles(stackVars.spacing);
+export const stackSpacingStyles = mapContractVars(
+  sys.spacing,
+  stackVars.spacing,
+  layouts,
+);
 
 export const stackAlignStyles = flexAlignItemsStyles;
 
 export const stackRecipe = recipe({
   base: {
     '@layer': {
-      [components]: {
+      [layouts]: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: stackVars.spacing.gap,
+        gap: stackVars.spacing.rootGap,
 
-        vars: {
-          ...stackSpacingDefaults,
-        },
+        vars: stackDefaults,
       },
     },
   },
 
   variants: {
-    /**
-     * The spacing between items
-     */
     spacing: stackSpacingStyles,
-
-    /**
-     * The alignment of items along the cross axis
-     */
     align: stackAlignStyles,
   },
 });
 
 export type StackVariants = NonNullable<RecipeVariants<typeof stackRecipe>>;
-
-export const spacingAt = createResponsiveVariants({
-  styles: stackSpacingStyles,
-  media: defaultMedia,
-});
 
 export const alignAt = createResponsiveVariants({
   styles: stackAlignStyles,

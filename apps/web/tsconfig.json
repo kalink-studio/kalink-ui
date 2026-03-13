@@ -14,11 +14,22 @@
     "incremental": true,
     "baseUrl": ".",
     "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@kalink-ui/dibbly": ["../../packages/dibbly/src/index.ts"],
+      "@kalink-ui/dibbly/*": ["../../packages/dibbly/src/*"],
+      "@kalink-ui/seedly": ["../../packages/seedly/src/index.ts"],
+      "@kalink-ui/seedly/*": ["../../packages/seedly/src/*"],
+      "@kalink-ui/seedly-react": ["../../packages/seedly-react/src/index.ts"],
+      "@kalink-ui/seedly-react/*": ["../../packages/seedly-react/src/*"]
+    }
   },
   "references": [
     {
       "path": "../../packages/seedly"
+    },
+    {
+      "path": "../../packages/seedly-react"
     },
     {
       "path": "../../packages/dibbly"

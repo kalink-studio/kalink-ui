@@ -8,18 +8,18 @@ export const servicesGridSection = style({
 
 export const servicesGridList = style({
   display: 'grid',
-  gap: vars.ref.spacing['3xl'],
   gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-  listStyle: 'none',
+  gap: vars.ref.spacing['3xl'],
   margin: 0,
   padding: 0,
+  listStyle: 'none',
 });
 
 export const servicesGridCard = style({
-  padding: vars.ref.spacing['2xl'],
-  borderRadius: vars.ref.radius.rounded,
-  backgroundColor: vars.system.color.surfaceContainer,
-  color: vars.system.color.onSurface,
   display: 'grid',
   gap: vars.ref.spacing.md,
+  padding: vars.ref.spacing['2xl'],
+  color: vars.system.color.onSurface,
+  backgroundColor: vars.system.color.surfaceContainer,
+  borderRadius: vars.ref.radius.rounded,
 });

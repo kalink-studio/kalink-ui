@@ -1,5 +1,5 @@
 import { isObject } from '@kalink-ui/dibbly';
-import { Text } from '@kalink-ui/seedly';
+import { Text } from '@kalink-ui/seedly-react';
 import { clsx } from 'clsx';
 
 import { BlockHeading } from '@/app/(frontend)/components/block-heading';
@@ -44,10 +44,10 @@ export function TestimonialsRowSection({ block }: TestimonialsRowProps) {
                 key={item.id}
                 className={clsx(testimonialCard({}), tint)}
               >
-                <Text use="blockquote" variant="body" size="medium">
+                <Text render={<blockquote />} variant="body" size="medium">
                   “{testimonial.text}”
                 </Text>
-                <Text use="span" variant="title" size="small">
+                <Text variant="title" size="small">
                   {testimonial.givenName}
                 </Text>
               </article>
