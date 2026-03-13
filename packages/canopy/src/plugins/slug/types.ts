@@ -1,7 +1,7 @@
 import type {
   CreateSlugFieldsOptions,
   SlugifyFn,
-} from '../../fields/slug/types';
+} from '../../fields/slug/types.js';
 import type { CollectionSlug } from 'payload';
 
 export interface SlugPluginCollectionConfig extends CreateSlugFieldsOptions {

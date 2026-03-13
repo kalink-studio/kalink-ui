@@ -1,12 +1,12 @@
-import { formatSlug } from './format-slug';
-import { getValueByPath } from './get-value-by-path';
+import { formatSlug } from './format-slug.js';
+import { getValueByPath } from './get-value-by-path.js';
 
 import type {
   CreateSlugFieldsOptions,
   CreatedSlugFields,
   SlugAdminCustom,
   SlugifyFn,
-} from './types';
+} from './types.js';
 import type {
   CheckboxField,
   FieldHook,

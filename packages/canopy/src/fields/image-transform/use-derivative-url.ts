@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
-import { getRelationID, unwrapRelationValue } from './relation-utils';
+import { getRelationID, unwrapRelationValue } from './relation-utils.js';
 
-import type { ImageTransformRelationValue } from './types';
+import type { ImageTransformRelationValue } from './types.js';
 
 export const useDerivativeUrl = (
   derivative: ImageTransformRelationValue | undefined,

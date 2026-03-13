@@ -1,4 +1,4 @@
-import { DEFAULT_CROP } from './crop-math';
+import { DEFAULT_CROP } from './crop-math.js';
 
 import type {
   ImageTransformAdminCustom,
@@ -6,7 +6,7 @@ import type {
   ImageTransformPresetDefinition,
   ImageTransformRelationValue,
   ImageTransformState,
-} from './types';
+} from './types.js';
 
 export const isImageTransformAdminCustom = (
   value: unknown,

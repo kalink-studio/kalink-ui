@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { slugPlugin } from './slug-plugin';
+import { slugPlugin } from './slug-plugin.js';
 
 describe('slugPlugin', () => {
   it('inserts slug fields after the top-level source field and replaces duplicates', () => {

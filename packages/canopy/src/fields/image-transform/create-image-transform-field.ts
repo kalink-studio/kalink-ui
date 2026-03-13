@@ -2,13 +2,13 @@ import {
   buildImageTransformFingerprint,
   getImageTransformSourceVersion,
   normalizeImageTransformCrop,
-} from '../../plugins/image-transform/fingerprint';
+} from '../../plugins/image-transform/fingerprint.js';
 
 import {
   IMAGE_TRANSFORM_FIELD_CUSTOM_KEY,
   IMAGE_TRANSFORM_PENDING_DERIVATIVE_RELATION,
   IMAGE_TRANSFORM_PENDING_SOURCE_RELATION,
-} from './types';
+} from './types.js';
 
 import type {
   CreateImageTransformFieldOptions,
@@ -18,7 +18,7 @@ import type {
   ImageTransformPresetValue,
   ImageTransformRelationValue,
   ImageTransformState,
-} from './types';
+} from './types.js';
 import type {
   DateField,
   FieldHook,

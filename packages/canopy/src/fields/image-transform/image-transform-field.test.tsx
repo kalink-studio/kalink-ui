@@ -16,8 +16,8 @@ import {
   vi,
 } from 'vitest';
 
-import { ImageTransformField } from './image-transform-field';
-import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from './types';
+import { ImageTransformField } from './image-transform-field.js';
+import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from './types.js';
 
 type MockFieldState = {
   addedByServer?: boolean;

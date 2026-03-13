@@ -1,12 +1,12 @@
 import { lexicalEditor, ParagraphFeature } from '@payloadcms/richtext-lexical';
 
-import { headingLevels } from './types';
+import { headingLevels } from './types.js';
 
 import type {
   CreateHeadingFieldOptions,
   HeadingField,
   HeadingLevel,
-} from './types';
+} from './types.js';
 import type { Field, RadioField, RichTextField, TextField } from 'payload';
 
 const buildTitleField = (required: boolean): TextField => ({

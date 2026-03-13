@@ -1,13 +1,13 @@
-import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from '../../fields/image-transform/types';
+import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from '../../fields/image-transform/types.js';
 
 import type {
   ImageTransformOwnerContext,
   ImageTransformOwnerKind,
-} from './types';
+} from './types.js';
 import type {
   ImageTransformFieldCustom,
   ImageTransformFieldValue,
-} from '../../fields/image-transform';
+} from '../../fields/image-transform/index.js';
 import type {
   ArrayField,
   Block,
@@ -453,7 +453,12 @@ const resolveOwnerContextFromFields = ({
         ownerKind,
         ownerSlug,
         presetByKey: new Map(
-          imageTransformCustom.presets.map((preset) => [preset.key, preset]),
+          imageTransformCustom.presets.map(
+            (preset: ImageTransformFieldCustom['presets'][number]) => [
+              preset.key,
+              preset,
+            ],
+          ),
         ),
         presets: imageTransformCustom.presets,
         relationTo,

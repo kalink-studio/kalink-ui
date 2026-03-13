@@ -2,11 +2,11 @@
 
 import React, { useCallback, useMemo } from 'react';
 
-import { computeCropBounds } from './crop-math';
+import { computeCropBounds } from './crop-math.js';
 import cropSliderStyles from './crop-slider.module.css';
 import styles from './image-transform-field.module.css';
 
-import type { ImageTransformCrop } from './types';
+import type { ImageTransformCrop } from './types.js';
 
 export interface CropControlsProps {
   readonly aspectRatio: number;

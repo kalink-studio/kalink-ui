@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildImageTransformFingerprint } from '../../plugins/image-transform/fingerprint';
+import { buildImageTransformFingerprint } from '../../plugins/image-transform/fingerprint.js';
 
-import { createImageTransformField } from './create-image-transform-field';
+import { createImageTransformField } from './create-image-transform-field.js';
 
-import type { ImageTransformFieldValue } from './types';
+import type { ImageTransformFieldValue } from './types.js';
 
 const source = {
   id: 1,

@@ -10,13 +10,13 @@ export {
   type ImageTransformOwnerContext,
   type ImageTransformOwnerKind,
   type ImageTransformPluginOptions,
-} from './plugins/image-transform';
+} from './plugins/image-transform/index.js';
 export {
   slugPlugin,
   type SlugPluginCollectionConfig,
   type SlugPluginCollectionOption,
   type SlugPluginOptions,
-} from './plugins/slug';
+} from './plugins/slug/index.js';
 export {
   createSlugFields,
   formatSlug,
@@ -24,7 +24,7 @@ export {
   type CreatedSlugFields,
   type SlugAdminCustom,
   type SlugifyFn,
-} from './fields/slug';
+} from './fields/slug/index.js';
 export {
   createImageTransformField,
   resolveImageTransformPreset,
@@ -39,10 +39,10 @@ export {
   type ImageTransformRelationValue,
   type ImageTransformResolvedAsset,
   type ImageTransformState,
-} from './fields/image-transform';
+} from './fields/image-transform/index.js';
 export {
   createHeadingField,
   type CreateHeadingFieldOptions,
   type HeadingField,
   type HeadingLevel,
-} from './fields/heading';
+} from './fields/heading/index.js';

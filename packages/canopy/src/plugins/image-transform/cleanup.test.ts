@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { createImageTransformField } from '../../fields/image-transform';
+import { createImageTransformField } from '../../fields/image-transform/index.js';
 
 import {
   cleanupOwnerDerivatives,
   cleanupReplacedDerivatives,
   cleanupSourceDerivatives,
   deleteDerivativeByID,
-} from './cleanup';
+} from './cleanup.js';
 
 describe('image transform cleanup helpers', () => {
   it('deletes removed derivatives when owner docs change', async () => {

@@ -1,35 +1,35 @@
-import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from '../../fields/image-transform/types';
+import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from '../../fields/image-transform/types.js';
 
 import {
   deleteDerivativeByID,
   cleanupOwnerDerivatives,
   cleanupReplacedDerivatives,
   cleanupSourceDerivatives,
-} from './cleanup';
+} from './cleanup.js';
 import {
   buildImageTransformFingerprint,
   getImageTransformRelationID,
   getImageTransformRelationScalarID,
   getImageTransformSourceVersion,
-} from './fingerprint';
-import { generateDerivative } from './generate-derivative';
+} from './fingerprint.js';
+import { generateDerivative } from './generate-derivative.js';
 import {
   createImageTransformFieldPatch,
   getValueAtPath,
   resolveOwnerContext,
-} from './resolve-owner-context';
-import { DEFAULT_IMAGE_TRANSFORM_ENDPOINT_PATH } from './types';
+} from './resolve-owner-context.js';
+import { DEFAULT_IMAGE_TRANSFORM_ENDPOINT_PATH } from './types.js';
 
 import type {
   ImageTransformAction,
   ImageTransformGenerateRequest,
   ImageTransformGenerationResult,
   ImageTransformPluginOptions,
-} from './types';
+} from './types.js';
 import type {
   ImageTransformFieldCustom,
   ImageTransformFieldValue,
-} from '../../fields/image-transform';
+} from '../../fields/image-transform/index.js';
 import type {
   CollectionConfig,
   Config,

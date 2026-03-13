@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { createHeadingField } from './create-heading-field';
+import { createHeadingField } from './create-heading-field.js';
 
 describe('createHeadingField', () => {
   it('builds the default heading field shape', () => {

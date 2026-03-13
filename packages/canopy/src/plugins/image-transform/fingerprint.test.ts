@@ -5,7 +5,7 @@ import {
   getImageTransformRelationID,
   getImageTransformRelationScalarID,
   getImageTransformSourceVersion,
-} from './fingerprint';
+} from './fingerprint.js';
 
 const preset = {
   aspectRatio: '16:9',

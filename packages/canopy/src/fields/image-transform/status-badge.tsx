@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './image-transform-field.module.css';
 
-import type { ImageTransformState } from './types';
+import type { ImageTransformState } from './types.js';
 
 const STATE_LABELS: Record<ImageTransformState, string> = {
   failed: 'Failed',

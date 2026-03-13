@@ -21,20 +21,20 @@ import {
   buildFieldValueFromFormState,
   isImageTransformAdminCustom,
   removePresetFormFields,
-} from './form-state';
+} from './form-state.js';
 import styles from './image-transform-field.module.css';
-import { PresetCard } from './preset-card';
-import { getRelationID, isObject } from './relation-utils';
-import { useSourceUrl } from './use-source-url';
+import { PresetCard } from './preset-card.js';
+import { getRelationID, isObject } from './relation-utils.js';
+import { useSourceUrl } from './use-source-url.js';
 
 import type {
   GenerationResult,
   ImageTransformFieldCustom,
   ImageTransformFieldValue,
-} from './types';
+} from './types.js';
 import type { ClientField, GroupFieldClientProps } from 'payload';
 
-import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from './types';
+import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from './types.js';
 
 export const ImageTransformField: React.FC<GroupFieldClientProps> = (props) => {
   const {

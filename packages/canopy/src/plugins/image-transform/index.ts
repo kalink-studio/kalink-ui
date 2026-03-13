@@ -3,17 +3,17 @@ export {
   cleanupOwnerDerivatives,
   cleanupReplacedDerivatives,
   cleanupSourceDerivatives,
-} from './cleanup';
-export { createImageTransformDerivativeCollection } from './create-image-transform-derivative-collection';
-export { buildImageTransformFingerprint } from './fingerprint';
-export { generateDerivative } from './generate-derivative';
-export { imageTransformPlugin } from './image-transform-plugin';
+} from './cleanup.js';
+export { createImageTransformDerivativeCollection } from './create-image-transform-derivative-collection.js';
+export { buildImageTransformFingerprint } from './fingerprint.js';
+export { generateDerivative } from './generate-derivative.js';
+export { imageTransformPlugin } from './image-transform-plugin.js';
 export {
   createImageTransformFieldPatch,
   getValueAtPath,
   resolveOwnerContext,
   splitImageTransformFieldPath,
-} from './resolve-owner-context';
+} from './resolve-owner-context.js';
 export type {
   CreateImageTransformDerivativeCollectionOptions,
   ImageTransformAction,
@@ -24,4 +24,4 @@ export type {
   ImageTransformOwnerContext,
   ImageTransformOwnerKind,
   ImageTransformPluginOptions,
-} from './types';
+} from './types.js';

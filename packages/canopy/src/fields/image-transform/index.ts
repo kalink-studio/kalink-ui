@@ -1,8 +1,8 @@
 export {
   createImageTransformField,
   type ImageTransformField,
-} from './create-image-transform-field';
-export { resolveImageTransformPreset } from './resolve-image-transform-preset';
+} from './create-image-transform-field.js';
+export { resolveImageTransformPreset } from './resolve-image-transform-preset.js';
 export type {
   CreateImageTransformFieldOptions,
   ImageTransformAdminCustom,
@@ -14,4 +14,4 @@ export type {
   ImageTransformRelationValue,
   ImageTransformResolvedAsset,
   ImageTransformState,
-} from './types';
+} from './types.js';

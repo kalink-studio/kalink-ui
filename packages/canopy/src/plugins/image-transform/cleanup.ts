@@ -1,12 +1,12 @@
-import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from '../../fields/image-transform/types';
+import { IMAGE_TRANSFORM_FIELD_CUSTOM_KEY } from '../../fields/image-transform/types.js';
 
-import { getImageTransformRelationScalarID } from './fingerprint';
+import { getImageTransformRelationScalarID } from './fingerprint.js';
 
-import type { ImageTransformOwnerKind } from './types';
+import type { ImageTransformOwnerKind } from './types.js';
 import type {
   ImageTransformFieldCustom,
   ImageTransformFieldValue,
-} from '../../fields/image-transform';
+} from '../../fields/image-transform/index.js';
 import type { Block, Field, Tab, PayloadRequest, Where } from 'payload';
 
 const isObject = <T extends object>(value: unknown): value is T =>
@@ -163,7 +163,9 @@ const collectDerivativeIDs = (
   const ids = new Set<number | string>();
 
   for (const value of values) {
-    for (const presetValue of Object.values(value.presets ?? {})) {
+    const presets = value.presets ?? {};
+
+    for (const presetValue of Object.values(presets)) {
       const derivativeID = getImageTransformRelationScalarID(
         presetValue?.derivative,
       );

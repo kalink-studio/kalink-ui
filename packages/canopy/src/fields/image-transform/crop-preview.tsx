@@ -15,11 +15,11 @@ import {
   ZOOM_MAX,
   ZOOM_MIN,
   ZOOM_STEP,
-} from './crop-math';
-import { GridOverlay } from './grid-overlay';
+} from './crop-math.js';
+import { GridOverlay } from './grid-overlay.js';
 import styles from './image-transform-field.module.css';
 
-import type { ImageTransformCrop } from './types';
+import type { ImageTransformCrop } from './types.js';
 
 export interface CropPreviewProps {
   readonly aspectRatio: string;

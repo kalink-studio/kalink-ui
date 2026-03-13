@@ -1,6 +1,6 @@
-export { slugPlugin } from './slug-plugin';
+export { slugPlugin } from './slug-plugin.js';
 export type {
   SlugPluginCollectionConfig,
   SlugPluginCollectionOption,
   SlugPluginOptions,
-} from './types';
+} from './types.js';

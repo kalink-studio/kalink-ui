@@ -1,4 +1,4 @@
-import type { ImageTransformCrop } from './types';
+import type { ImageTransformCrop } from './types.js';
 
 export const ZOOM_MIN = 1;
 export const ZOOM_MAX = 5;

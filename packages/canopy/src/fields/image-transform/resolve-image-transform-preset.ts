@@ -2,7 +2,7 @@ import type {
   ImageTransformFieldValue,
   ImageTransformRelationValue,
   ImageTransformResolvedAsset,
-} from './types';
+} from './types.js';
 
 const isObject = <T extends Record<string, unknown>>(
   value: unknown,

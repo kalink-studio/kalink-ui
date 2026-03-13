@@ -1,11 +1,11 @@
-import { createSlugFields, formatSlug } from '../../fields/slug';
+import { createSlugFields, formatSlug } from '../../fields/slug/index.js';
 
 import type {
   SlugPluginCollectionConfig,
   SlugPluginCollectionOption,
   SlugPluginOptions,
-} from './types';
-import type { CreatedSlugFields } from '../../fields/slug';
+} from './types.js';
+import type { CreatedSlugFields } from '../../fields/slug/index.js';
 import type { CollectionConfig, CollectionSlug, Config, Field } from 'payload';
 
 const isNamedField = (

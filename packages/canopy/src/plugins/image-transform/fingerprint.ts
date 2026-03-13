@@ -5,7 +5,7 @@ import type {
   ImageTransformPresetDefinition,
   ImageTransformRelationValue,
   ImageTransformResolvedAsset,
-} from '../../fields/image-transform';
+} from '../../fields/image-transform/index.js';
 
 const isObject = <T extends Record<string, unknown>>(
   value: unknown,

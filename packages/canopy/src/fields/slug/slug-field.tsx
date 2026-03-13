@@ -14,10 +14,10 @@ import React, {
   useRef,
 } from 'react';
 
-import { formatSlug, formatSlugLive } from './format-slug';
+import { formatSlug, formatSlugLive } from './format-slug.js';
 import styles from './slug-field.module.css';
 
-import type { SlugAdminCustom } from './types';
+import type { SlugAdminCustom } from './types.js';
 import type { FieldType } from '@payloadcms/ui';
 import type { TextFieldClientProps } from 'payload';
 
